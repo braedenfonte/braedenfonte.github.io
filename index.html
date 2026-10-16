@@ -2101,7 +2101,7 @@ let FIN = null;
 const usd = v => (v < 0 ? "−$" : "$") + Math.abs(v).toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2});
 /* finance.enc: AES-GCM data whose key is wrapped with RSA-OAEP; the private key lives in the password-locked data */
 /* Live source: your Cloudflare Worker (tools/worker/worker.js). Leave "" to use only the daily snapshot. */
-const FIN_LIVE = "";
+const FIN_LIVE = "https://bf-finance.bfonte18.workers.dev";
 let finKey = null, finTimer = 0;
 async function openFin(blob){
   const priv = await crypto.subtle.importKey("jwk", finKey, {name: "RSA-OAEP", hash: "SHA-256"}, false, ["decrypt"]);
