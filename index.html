@@ -245,6 +245,11 @@ main{margin-left:var(--side);min-height:100vh;padding-block:44px 0;padding-left:
 .res-row .w{color:var(--c-break)}.res-row .l{color:var(--c-due)}.res-row b{font:700 15px var(--mono)}
 .news-i h4{font-size:16px;margin-bottom:4px}.news-i p{color:var(--muted);font-size:14px}
 .list-tight{margin:10px 0 0;padding-left:18px;color:var(--muted);font-size:14px;display:grid;gap:4px}
+.todo{margin-top:16px;padding:20px 22px;border-left:4px solid var(--c-exam)}
+.todo label{display:flex;gap:12px;align-items:flex-start;padding:9px 0;cursor:pointer;border-top:1px solid var(--line)}
+.todo label:first-of-type{border-top:0}
+.todo input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent);flex:none}
+.todo input:checked+span{color:var(--faint);text-decoration:line-through}
 /* study */
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .tabs button{border:1px solid var(--line);background:var(--surface);color:var(--muted);padding:8px 14px;border-radius:999px;font:600 13.5px var(--body)}
@@ -719,6 +724,7 @@ body.gate-open{overflow:hidden}
 <section class="view" id="v-brief">
   <div class="page-h"><span class="eyebrow" id="briefDate">Today</span><h2 id="briefHello">Good morning, Braeden.</h2><p id="briefSub">Here's your day at a glance.</p></div>
   <div class="panel quote" id="quoteCard"><span class="eyebrow">Quote of the day</span><blockquote id="quoteText">…</blockquote><cite id="quoteBy"></cite></div>
+  <div class="panel todo" id="todoCard" hidden><div class="sec-h" style="margin:0 0 10px"><h3>To do</h3><span class="chip" id="todoCount"></span></div><div id="todoList"></div></div>
   <div class="brief-grid sec" style="margin-top:16px">
     <div class="panel wx" id="wxCard">
       <span class="eyebrow">West Point weather</span>
@@ -1117,7 +1123,7 @@ function paintAuth(){
 }
 function applyPrivate(P){
   PRIVATE = P;
-  SCHED = P.sched; RES = P.res; COURSES = P.courses; MAP.places = P.places; VISITED_STATES = P.visited; STUDY = P.study || {};
+  SCHED = P.sched; RES = P.res; COURSES = P.courses; MAP.places = P.places; VISITED_STATES = P.visited; STUDY = P.study || {}; TODO = P.todo || [];
   buildEvents();
   hubs = MAP.places.filter(p => p.type === "hub");
   ZOOMS = { all:[0,0,MAP.W,MAP.H], ne:fitBox(["New York","Northeast","Mid-Atlantic"], 40), ny:fitBox(["New York"], 22) };
@@ -1817,6 +1823,23 @@ function renderFootball(){
 }
 
 
+/* ---------- to-do checklist (items live in the encrypted data) ---------- */
+let TODO = [];
+const todoDone = () => new Set(store.get("bf-todo-done", []));
+function renderTodo(){
+  const card = $("#todoCard"); if (!card) return;
+  const today = key(new Date()), done = todoDone();
+  const items = (TODO||[]).filter(t => t.date <= today);
+  card.hidden = !items.length; if (!items.length) return;
+  $("#todoCount").textContent = items.filter(t => done.has(t.id)).length+" / "+items.length;
+  $("#todoList").innerHTML = items.map(t => '<label><input type="checkbox" data-todo="'+esc(t.id)+'"'+(done.has(t.id)?' checked':'')+'><span>'+esc(t.t)+'</span></label>').join("");
+}
+document.addEventListener("change", e => {
+  const c = e.target.closest("[data-todo]"); if (!c) return;
+  const d = todoDone(); c.checked ? d.add(c.dataset.todo) : d.delete(c.dataset.todo);
+  store.set("bf-todo-done", [...d]); renderTodo();
+});
+
 /* ---------- bills / nfl ---------- */
 let BILLS = null;
 const nextBills = () => BILLS && (BILLS.schedule||[]).find(g => new Date(g.kick) > new Date());
@@ -2029,6 +2052,7 @@ function renderBrief(){
   if (f){ $("#bFlight").textContent = "$"+f.price+" to "+f.city.split(",")[0]; $("#bFlightSub").textContent = fitL.length ? f.from+" · "+fmtDay(f.depart)+" · fits your pass" : "Closest deal today · see weekend options"; }
   renderBillsTile();
   renderQuote();
+  renderTodo();
   if (DAILY.location){ $("#bPlace").textContent = DAILY.location.name; $("#bPlaceSub").textContent = DAILY.location.tagline || DAILY.location.region; }
   const wk = new Date(now); wk.setDate(wk.getDate()+7);
   const due = upcoming(now).filter(e => (e.cat==="due"||e.cat==="exam") && e.s < wk);
