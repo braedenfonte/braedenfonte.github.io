@@ -505,7 +505,7 @@ footer p{max-width:70ch}
 .chips button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 11px;font-size:13px;font-weight:600;color:var(--muted)}
 .chips button.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
 .flight .legs{display:grid;gap:2px;margin-top:4px;font-size:13.5px;color:var(--muted)}
-.flight .why{font:500 11.5px var(--mono);color:var(--c-exam);margin-top:4px}
+.flight .why{font:600 11.5px var(--mono);color:var(--c-exam);margin-top:4px}
 .flight.near{opacity:.75;border-style:dashed}
 .live-search{padding:20px;display:flex;flex-direction:column;gap:12px}
 .live-search h3{font-size:22px;font-weight:700;margin-top:4px}
@@ -535,6 +535,26 @@ footer p{max-width:70ch}
 .place-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .place-gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;display:block}
 .place-gallery .ph{aspect-ratio:4/3}
+
+/* countdowns + song + football tabs */
+.cd-pair .panel{padding:22px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
+.cd-pair h3{font-size:20px;font-weight:700}
+.cd-pair p{color:var(--muted);font-size:14px;margin-top:2px}
+.cd-pair .pr{background:linear-gradient(135deg,color-mix(in srgb,#1aa6b7 18%,var(--surface)),var(--surface) 60%)}
+.cd-pair .n500{background:linear-gradient(135deg,color-mix(in srgb,#c9a23a 20%,var(--surface)),var(--surface) 60%)}
+.cd-pair .tag{position:absolute;top:18px;right:18px;font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.cd-mini{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.cd-mini a{display:inline-flex;gap:8px;align-items:center;padding:7px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:13.5px;text-decoration:none}
+.cd-mini b{font:700 14px var(--display);font-variant-numeric:tabular-nums}
+.song{padding:20px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:center}
+.song .disc{width:84px;height:84px;border-radius:50%;background:radial-gradient(circle,var(--surface) 0 14%,var(--accent) 15% 20%,#111 21% 100%);box-shadow:inset 0 0 0 6px rgba(255,255,255,.04);animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.song h3{font-size:24px;font-weight:800;margin:4px 0 2px}
+.song .meta{color:var(--muted);font-size:14px}
+.song p.fact{font-size:14.5px;margin-top:8px}
+.song .acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.fb-seg{margin-bottom:20px}
+.fb-seg button{padding:9px 20px;font-size:15px}
 
 /* ---------- responsive ---------- */
 @media (max-width:1020px){
@@ -707,6 +727,8 @@ body.gate-open{overflow:hidden}
     </div>
   </div>
 
+  <div class="grid g2 sec cd-pair" id="cdPair"></div>
+
   <div class="stats stagger">
     <div class="panel stat"><b id="stDays">—</b><span>Days to Winter Leave</span></div>
     <div class="panel stat"><b id="stWeek">—</b><span>Events this week</span></div>
@@ -723,6 +745,7 @@ body.gate-open{overflow:hidden}
 <!-- BRIEF -->
 <section class="view" id="v-brief">
   <div class="page-h"><span class="eyebrow" id="briefDate">Today</span><h2 id="briefHello">Good morning, Braeden.</h2><p id="briefSub">Here's your day at a glance.</p></div>
+  <div class="cd-mini" id="cdMini"></div>
   <div class="panel quote" id="quoteCard"><span class="eyebrow">Quote of the day</span><blockquote id="quoteText">…</blockquote><cite id="quoteBy"></cite></div>
   <div class="panel todo" id="todoCard" hidden><div class="sec-h" style="margin:0 0 10px"><h3>To do</h3><span class="chip" id="todoCount"></span></div><div id="todoList"></div></div>
   <div class="brief-grid sec" style="margin-top:16px">
@@ -741,6 +764,7 @@ body.gate-open{overflow:hidden}
     <a class="panel brief-tile" href="#football"><span class="eyebrow">Bills countdown</span><b id="bBills">—</b><span id="bBillsSub"></span></a>
     <a class="panel brief-tile" href="#place"><span class="eyebrow">Place of the day</span><b id="bPlace">—</b><span id="bPlaceSub"></span></a>
   </div>
+  <div class="panel song sec" id="songCard"></div>
   <div class="sec">
     <div class="sec-h"><h3>Due this week</h3><span class="chip" id="bDueCount">0</span></div>
     <div class="up-list" id="briefDue"></div>
@@ -749,32 +773,35 @@ body.gate-open{overflow:hidden}
 
 <!-- FLIGHTS -->
 <section class="view" id="v-flights">
-  <div class="page-h"><span class="eyebrow">JFK · LGA · EWR</span><h2>Weekend Flights</h2><p>Cheapest weekend getaways that fit a cadet's pass: leave Friday after 3 PM or Saturday before 3 PM, and land back in New York by 4 PM Sunday, or 4 PM Monday when that Monday is off.</p></div>
+  <div class="page-h"><span class="eyebrow">JFK · LGA · EWR · US &amp; Puerto Rico</span><h2>Weekend Flights</h2><p>Real round trips that fit a cadet's pass: leave Friday after 3 PM or Saturday before 3 PM, and land back in New York by 4 PM Sunday, or 4 PM Monday when that Monday is off. Every trip here fits; the only question is price.</p></div>
   <div class="wk-strip" id="wkStrip" role="tablist" aria-label="Choose a weekend"></div>
   <div class="panel wk-info" id="wkInfo"></div>
   <div class="fl-controls">
     <div class="fl-group"><span class="gg-lbl">Airports</span><div class="chips" id="apChips"></div></div>
-    <div class="fl-group"><span class="gg-lbl">Max price <span id="maxPVal">$400</span></span><input type="range" id="maxP" min="75" max="600" step="25" value="400"></div>
+    <div class="fl-group"><span class="gg-lbl">Budget <span id="maxPVal">$350</span></span><input type="range" id="maxP" min="150" max="700" step="25" value="350"></div>
     <div class="fl-group"><span class="gg-lbl">Vibe</span><div class="chips" id="tagChips"></div></div>
     <div class="fl-group"><span class="gg-lbl">Sort</span><select id="flSort"><option value="price">Cheapest first</option><option value="depart">Earliest departure</option><option value="city">Destination A–Z</option></select></div>
   </div>
-  <div class="sec-h"><h3 id="flHead">Fits your pass</h3><label class="toggle"><input type="checkbox" id="showNear"> Show near misses</label></div>
+  <div class="sec-h"><h3 id="flHead">Fits your pass</h3><label class="toggle"><input type="checkbox" id="showNear" checked> Show just over budget</label></div>
   <div class="flight-list" id="flightList"></div>
   <div class="sec panel live-search">
     <div><span class="eyebrow">Search live</span><h3>Check this weekend yourself</h3><p class="meta" id="lsDates"></p></div>
     <div class="ls-row">
       <select id="lsDest" aria-label="Destination"></select>
-      <a class="btn primary" id="lsGoogle" target="_blank" rel="noopener" href="#">Google Flights ↗</a>
-      <a class="btn" id="lsKayak" target="_blank" rel="noopener" href="#">Kayak ↗</a>
+      <a class="btn primary" id="lsKayak" target="_blank" rel="noopener" href="#">Leave Friday ↗</a>
+      <a class="btn" id="lsKayakSat" target="_blank" rel="noopener" href="#">Leave Saturday ↗</a>
+      <a class="btn" id="lsGoogle" target="_blank" rel="noopener" href="#">Google Flights ↗</a>
     </div>
-    <p class="fine" style="margin:0">Dates are filled in for you. Set the time filters on the site to match your window.</p>
+    <p class="fine" style="margin:0">The Kayak buttons open with your pass window already set: JFK, LGA or EWR only, leaving Friday after 3 PM or Saturday before 3 PM, and landing back by 4 PM.</p>
   </div>
   <p class="fine" id="flightUpdated"></p>
 </section>
 
 <!-- FOOTBALL -->
 <section class="view" id="v-football">
-  <div class="page-h"><span class="eyebrow">Go Bills</span><h2>Football</h2><p>Your Bills first, then the college scoreboard.</p></div>
+  <div class="page-h"><span class="eyebrow">Go Bills</span><h2>Football</h2><p>Switch between the Bills and the college scoreboard.</p></div>
+  <div class="seg fb-seg" id="fbSeg" role="tablist" aria-label="Football section"><button type="button" data-fbt="bills" class="on">Bills</button><button type="button" data-fbt="college">College</button></div>
+  <div id="fbBills">
   <div class="panel bills-strip" id="billsStrip"></div>
   <div class="grid g2 sec">
     <div class="panel"><span class="eyebrow">Season</span><div class="rec" id="billsRec"></div><div class="stand" id="billsStand"></div></div>
@@ -783,7 +810,9 @@ body.gate-open{overflow:hidden}
   <div class="sec"><div class="sec-h"><h3>Bills results</h3></div><div class="grid g3" id="billsResults"></div></div>
   <div class="sec"><div class="sec-h"><h3>Bills news</h3></div><div class="grid g2" id="billsNews"></div></div>
   <div class="sec"><div class="sec-h"><h3>Bills schedule</h3></div><div class="up-list" id="billsSched"></div><p class="fine" id="billsSrc"></p></div>
-  <div class="sec-h" style="margin-top:40px"><h3 id="fbLabel">College football</h3></div>
+  </div>
+  <div id="fbCollege" hidden>
+  <div class="sec-h"><h3 id="fbLabel">College football</h3></div>
   <div class="sec">
     <div class="sec-h"><h3>Results</h3></div>
     <div class="grid g2" id="fbResults"></div>
@@ -791,6 +820,7 @@ body.gate-open{overflow:hidden}
   <div class="sec">
     <div class="sec-h"><h3>Coming up</h3></div>
     <div class="up-list" id="fbUpcoming"></div>
+  </div>
   </div>
 </section>
 
@@ -1714,8 +1744,10 @@ function loadDaily(){
 
 /* flights */
 const AIRPORTS = ["JFK","LGA","EWR"];
-let apOn = new Set(AIRPORTS), tagOn = "All", wkSel = 0, showNear = false;
-const DESTS = [["MCO","Orlando"],["FLL","Fort Lauderdale"],["MIA","Miami"],["TPA","Tampa"],["SJU","San Juan, Puerto Rico"],["CHS","Charleston"],["SAV","Savannah"],["MYR","Myrtle Beach"],["BNA","Nashville"],["MSY","New Orleans"],["ATL","Atlanta"],["ORD","Chicago"],["BOS","Boston"],["DCA","Washington, DC"],["DEN","Denver"],["AUS","Austin"],["YUL","Montreal"],["CUN","Cancún"]];
+let apOn = new Set(AIRPORTS), tagOn = "All", wkSel = -1, showNear = true;
+const DESTS = [["MCO","Orlando"],["FLL","Fort Lauderdale"],["MIA","Miami"],["TPA","Tampa"],["SJU","San Juan, Puerto Rico"],["BQN","Aguadilla, Puerto Rico"],["CHS","Charleston"],["SAV","Savannah"],["MYR","Myrtle Beach"],["BNA","Nashville"],["MSY","New Orleans"],["ATL","Atlanta"],["CLT","Charlotte"],["ORD","Chicago"],["BOS","Boston"],["DEN","Denver"],["AUS","Austin"],["LAS","Las Vegas"],["SAN","San Diego"],["LAX","Los Angeles"]];
+const KFS_FRI = "takeoff=1500,2359__;landing=__0000,1600", KFS_SAT = "takeoff=0000,1500__;landing=__0000,1600";
+const kayakURL = (dest, out, back, fs) => "https://www.kayak.com/flights/EWR,JFK,LGA-"+dest+"/"+out+"/"+back+"?sort=price_a&fs="+fs;
 const ymd = d => key(d);
 const atTime = (dateStr, hhmm) => { const d = parseD(dateStr); const [h,m] = hhmm.split(":").map(Number); d.setHours(h, m, 0, 0); return d; };
 const fmt12 = hhmm => { if (!hhmm) return "time TBD"; let [h,m] = hhmm.split(":").map(Number); const ap = h >= 12 ? "PM" : "AM"; h = h % 12 || 12; return h+":"+String(m).padStart(2,"0")+" "+ap; };
@@ -1761,17 +1793,24 @@ function checkFare(f){
   return {fits: !why.length && !unknown, why: why.length ? why : (unknown ? ["Times not listed, check before booking"] : []), fri: ymd(fri)};
 }
 function renderWeekends(){
-  $("#wkStrip").innerHTML = WKS.map((w,i) => '<button type="button" class="wk'+(i===wkSel?' on':'')+'" data-wk="'+i+'"><b>'+MON[w.fri.getMonth()]+' '+w.fri.getDate()+'–'+(w.back.getMonth()!==w.fri.getMonth()?MON[w.back.getMonth()]+' ':'')+w.back.getDate()+'</b><small>'+(i===0?'This weekend':i===1?'Next weekend':'In '+i+' weeks')+'</small>'+
-    (w.long ? '<span class="badge">Mon off</span>' : w.busy.length ? '<span class="badge busy">'+w.busy.length+' event'+(w.busy.length>1?'s':'')+'</span>' : '')+'</button>').join("");
-  const w = WKS[wkSel];
-  const ev = w.busy.map(e => esc(e.t)+' ('+DOW[e.s.getDay()]+')');
-  $("#wkInfo").innerHTML = '<span><b>Leave:</b> Fri '+MON[w.fri.getMonth()]+' '+w.fri.getDate()+' after 3 PM or Sat before 3 PM</span><span><b>Back by:</b> '+DOW[w.back.getDay()]+' '+MON[w.back.getMonth()]+' '+w.back.getDate()+', 4 PM'+(w.long?' (Monday off)':'')+'</span>'+
-    (ev.length ? '<span class="warn"><b>Heads up:</b> '+ev.join(", ")+'</span>' : '<span>No events on your schedule this weekend.</span>');
+  const lbl = (w,i) => '<b>'+MON[w.fri.getMonth()]+' '+w.fri.getDate()+'–'+(w.back.getMonth()!==w.fri.getMonth()?MON[w.back.getMonth()]+' ':'')+w.back.getDate()+'</b><small>'+(i===0?'This weekend':i===1?'Next weekend':'In '+i+' weeks')+'</small>'+
+    (w.long ? '<span class="badge">Mon off</span>' : w.busy.length ? '<span class="badge busy">'+w.busy.length+' event'+(w.busy.length>1?'s':'')+'</span>' : '');
+  $("#wkStrip").innerHTML = '<button type="button" class="wk'+(wkSel<0?' on':'')+'" data-wk="-1"><b>All weekends</b><small>Next 8</small></button>' + WKS.map((w,i) => '<button type="button" class="wk'+(i===wkSel?' on':'')+'" data-wk="'+i+'">'+lbl(w,i)+'</button>').join("");
+  const w = WKS[Math.max(0, wkSel)];
+  if (wkSel < 0){
+    const longs = WKS.filter(x => x.long).map(x => MON[x.fri.getMonth()]+' '+x.fri.getDate());
+    $("#wkInfo").innerHTML = '<span><b>Leave:</b> Fri after 3 PM or Sat before 3 PM</span><span><b>Back by:</b> Sun 4 PM, or Mon 4 PM on long weekends'+(longs.length ? ' ('+longs.join(", ")+')' : '')+'</span><span>Pick a weekend to see what\'s on your schedule.</span>';
+  } else {
+    const ev = w.busy.map(e => esc(e.t)+' ('+DOW[e.s.getDay()]+')');
+    $("#wkInfo").innerHTML = '<span><b>Leave:</b> Fri '+MON[w.fri.getMonth()]+' '+w.fri.getDate()+' after 3 PM or Sat before 3 PM</span><span><b>Back by:</b> '+DOW[w.back.getDay()]+' '+MON[w.back.getMonth()]+' '+w.back.getDate()+', 4 PM'+(w.long?' (Monday off)':'')+'</span>'+
+      (ev.length ? '<span class="warn"><b>Heads up:</b> '+ev.join(", ")+'</span>' : '<span>No events on your schedule this weekend.</span>');
+  }
   const dest = $("#lsDest").value || "MCO", name = (DESTS.find(d => d[0]===dest)||["","there"])[1];
-  const out = ymd(w.fri), back = ymd(w.back);
-  $("#lsDates").textContent = "New York to "+name+", "+DOW[w.fri.getDay()]+" "+MON[w.fri.getMonth()]+" "+w.fri.getDate()+" to "+DOW[w.back.getDay()]+" "+MON[w.back.getMonth()]+" "+w.back.getDate();
+  const out = ymd(w.fri), sat = ymd(w.sat), back = ymd(w.back);
+  $("#lsDates").textContent = "New York to "+name+", "+MON[w.fri.getMonth()]+" "+w.fri.getDate()+" weekend, back "+DOW[w.back.getDay()]+" "+MON[w.back.getMonth()]+" "+w.back.getDate()+(wkSel<0?" (pick a weekend above to change dates)":"");
+  $("#lsKayak").href = kayakURL(dest, out, back, KFS_FRI);
+  $("#lsKayakSat").href = kayakURL(dest, sat, back, KFS_SAT);
   $("#lsGoogle").href = "https://www.google.com/travel/flights?q="+encodeURIComponent("Flights from NYC to "+dest+" on "+out+" through "+back);
-  $("#lsKayak").href = "https://www.kayak.com/flights/NYC-"+dest+"/"+out+"/"+back+"?sort=price_a";
 }
 function renderFlights(){
   if (!$("#lsDest").options.length) $("#lsDest").innerHTML = DESTS.map(d => '<option value="'+d[0]+'">'+d[1]+' ('+d[0]+')</option>').join("");
@@ -1780,22 +1819,22 @@ function renderFlights(){
   $("#tagChips").innerHTML = tags.map(g => '<button type="button" data-tag="'+esc(g)+'" class="'+(g===tagOn?'on':'')+'">'+esc(g)+'</button>').join("");
   renderWeekends();
   const max = +$("#maxP").value; $("#maxPVal").textContent = "$"+max;
-  const wk = ymd(WKS[wkSel].fri), sort = $("#flSort").value;
+  const wk = wkSel < 0 ? null : ymd(WKS[wkSel].fri), sort = $("#flSort").value;
   const all = (DAILY.flights||[]).map(f => ({...f, chk: checkFare(f)}))
-    .filter(f => apOn.has(f.from) && (tagOn==="All" || f.tag===tagOn) && f.price <= max);
-  const fits = all.filter(f => f.chk.fits && f.chk.fri === wk);
-  const near = all.filter(f => !f.chk.fits);
+    .filter(f => f.chk.fits && apOn.has(f.from) && (tagOn==="All" || f.tag===tagOn) && (!wk || f.chk.fri === wk));
+  const fits = all.filter(f => f.price <= max);
+  const near = all.filter(f => f.price > max && f.price <= max + 150).map(f => ({...f, chk: {...f.chk, why: ["$"+(f.price - max)+" over your budget"]}}));
   const srt = l => l.sort((a,b) => sort==="price" ? a.price-b.price : sort==="city" ? a.city.localeCompare(b.city) : (a.depart+(a.departTime||"")).localeCompare(b.depart+(b.departTime||"")));
   const card = (f,i,isNear) => '<a class="panel flight'+(isNear?' near':'')+'" href="'+esc(f.url)+'" target="_blank" rel="noopener"><span class="rank">'+(isNear?'~':i+1)+'</span>'+
     '<div style="min-width:0"><div class="route">'+f.from+' <i>→</i> '+esc(f.city)+'</div><div class="legs">'+
     '<span>Out: '+fmtDay(f.depart)+' · '+fmt12(f.departTime)+' · '+esc(f.airline)+(f.stops?' · '+esc(f.stops):'')+'</span>'+
-    (f.returnDate ? '<span>Back: '+fmtDay(f.returnDate)+' · '+(f.returnArrive ? 'lands '+fmt12(f.returnArrive) : 'departs '+fmt12(f.returnDepart))+'</span>' : '')+'</div>'+
-    (isNear ? '<div class="why">✕ '+f.chk.why.map(esc).join(" · ")+'</div>' : '')+'</div>'+
+    (f.returnDate ? '<span>Back: '+fmtDay(f.returnDate)+' · '+fmt12(f.returnDepart)+' → lands '+fmt12(f.returnArrive)+(f.returnTo && f.returnTo!==f.from ? ' at '+f.returnTo : '')+(f.returnAirline && f.returnAirline!==f.airline ? ' · '+esc(f.returnAirline) : '')+(f.returnStops?' · '+esc(f.returnStops):'')+'</span>' : '')+'</div>'+
+    (isNear ? '<div class="why">'+f.chk.why.map(esc).join(" · ")+'</div>' : '')+'</div>'+
     '<div class="price"><b>$'+f.price+'</b><small>'+(f.returnDate?'round-trip':'one-way')+'</small></div></a>';
-  $("#flHead").textContent = "Fits your pass · "+fits.length;
+  $("#flHead").textContent = "In budget · "+fits.length;
   $("#flightList").innerHTML = (fits.length ? srt(fits).map((f,i) => card(f,i,false)).join("") :
-      '<div class="panel empty-state">No fare found this morning fits every rule for this weekend. Try the live search below'+(near.length && !showNear ? ', or turn on near misses.' : '.')+'</div>')
-    + (showNear && near.length ? '<div class="mini-h" style="margin-top:14px">Near misses · any weekend</div>'+srt(near).map((f,i) => card(f,i,true)).join("") : "");
+      '<div class="panel empty-state">Nothing under $'+max+(wk ? ' this weekend' : '')+' yet. '+(near.length ? 'A few trips are just over budget below.' : 'Raise your budget or try the live search below.')+'</div>')
+    + (showNear && near.length ? '<div class="mini-h" style="margin-top:14px">Just over budget · up to $'+(max+150)+'</div>'+srt(near).map((f,i) => card(f,i,true)).join("") : "");
   const u = new Date(DAILY.updated);
   $("#flightUpdated").textContent = (DAILY.flightsNote ? DAILY.flightsNote+" " : "")+"Updated "+DOW[u.getDay()]+" "+MON[u.getMonth()]+" "+u.getDate()+", "+u.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})+". Prices change fast, so tap a fare to check it live.";
 }
@@ -2061,6 +2100,94 @@ function renderBrief(){
   $("#dailyDate").textContent = "Daily · "+MON[now.getMonth()]+" "+now.getDate();
 }
 
+/* ---------- countdowns ---------- */
+const TRIPS = [
+  {id:"pr", cls:"pr", eyebrow:"Puerto Rico · with the boys", title:"Puerto Rico trip", start:new Date(2026,11,27,6,0,0), end:new Date(2027,0,2,23,59,0), sub:"Dec 27 – Jan 2", tag:"Trip"},
+  {id:"n500", cls:"n500", eyebrow:"Class of 2028", title:"500th Night", start:new Date(2027,0,22,18,0,0), end:new Date(2027,0,22,23,59,0), sub:"Friday, Jan 22, 2027", tag:"Event"}
+];
+function renderCountdowns(){
+  const now = new Date();
+  $("#cdPair").innerHTML = TRIPS.map(c => {
+    const live = now >= c.start && now <= c.end, past = now > c.end;
+    return '<div class="panel '+c.cls+'"><span class="tag">'+c.tag+'</span><div><span class="eyebrow">'+esc(c.eyebrow)+'</span><h3>'+esc(c.title)+'</h3><p>'+esc(c.sub)+'</p></div>'+
+      (live ? '<p style="font:700 22px var(--display);color:var(--fg)">'+(c.id==="pr"?"You're in Puerto Rico. Enjoy it.":"Tonight's the night.")+'</p>' : past ? '<p>Done. Hope it was a great one.</p>' :
+      '<div class="clock" data-target="'+(+c.start)+'">'+clockHTML(c.start - now, true)+'</div>')+'</div>';
+  }).join("");
+  $("#cdMini").innerHTML = TRIPS.filter(c => now <= c.end).map(c => { const d = Math.max(0, Math.ceil((c.start - now)/864e5)); return '<a href="#home"><span>'+esc(c.title)+'</span><b>'+(now >= c.start ? "Now" : d+" day"+(d===1?"":"s"))+'</b></a>'; }).join("");
+}
+
+/* ---------- song of the day (title, artist, links only; lyrics stay on licensed sites) ---------- */
+const SONGS = [
+  ["HUMBLE.","Kendrick Lamar",2017,"DAMN.","Kendrick's first No. 1 on the Hot 100 as a lead artist."],
+  ["God's Plan","Drake",2018,"Scorpion","Spent 11 weeks at No. 1. In the video, Drake gave away the music video's budget, about $1 million, to people in Miami."],
+  ["SICKO MODE","Travis Scott ft. Drake",2018,"Astroworld","A three-part song with multiple beat switches that still reached No. 1."],
+  ["rockstar","Post Malone ft. 21 Savage",2017,"beerbongs & bentleys","Held No. 1 on the Hot 100 for eight weeks."],
+  ["Hotline Bling","Drake",2015,"Views","The dance moves in the video became one of the biggest memes of 2015."],
+  ["Love the Way You Lie","Eminem ft. Rihanna",2010,"Recovery","Spent seven weeks at No. 1 in 2010."],
+  ["Not Afraid","Eminem",2010,"Recovery","Debuted at No. 1 on the Hot 100."],
+  ["Old Town Road","Lil Nas X ft. Billy Ray Cyrus",2019,"7","Spent 19 weeks at No. 1, a record at the time."],
+  ["Alright","Kendrick Lamar",2015,"To Pimp a Butterfly","Its hook became a chant at protests across the country."],
+  ["Started From the Bottom","Drake",2013,"Nothing Was the Same",""],
+  ["Bad and Boujee","Migos ft. Lil Uzi Vert",2016,"Culture","Went to No. 1 after blowing up online in late 2016."],
+  ["Bodak Yellow","Cardi B",2017,"Invasion of Privacy","Made Cardi the first solo female rapper to hit No. 1 without a feature since Lauryn Hill in 1998."],
+  ["Lucid Dreams","Juice WRLD",2018,"Goodbye & Good Riddance","Built on a sample of Sting's \"Shape of My Heart.\""],
+  ["goosebumps","Travis Scott ft. Kendrick Lamar",2016,"Birds in the Trap Sing McKnight",""],
+  ["XO Tour Llif3","Lil Uzi Vert",2017,"Luv Is Rage 2","Started as a SoundCloud loosie before becoming his biggest hit."],
+  ["Mask Off","Future",2017,"FUTURE","That flute loop is sampled from \"Prison Song\" from the 1970s musical Selma."],
+  ["Black Beatles","Rae Sremmurd ft. Gucci Mane",2016,"SremmLife 2","The soundtrack to the Mannequin Challenge, which pushed it to No. 1."],
+  ["Thrift Shop","Macklemore & Ryan Lewis ft. Wanz",2012,"The Heist","Hit No. 1 without a major record label behind it."],
+  ["Can't Hold Us","Macklemore & Ryan Lewis ft. Ray Dalton",2011,"The Heist","Their second straight No. 1."],
+  ["Swimming Pools (Drank)","Kendrick Lamar",2012,"good kid, m.A.A.d city",""],
+  ["No Role Modelz","J. Cole",2014,"2014 Forest Hills Drive","The album went platinum with no features, which became a running joke."],
+  ["See You Again","Wiz Khalifa ft. Charlie Puth",2015,"Furious 7 soundtrack","Written as a tribute to Paul Walker; spent 12 weeks at No. 1."],
+  ["Black and Yellow","Wiz Khalifa",2010,"Rolling Papers","A tribute to Pittsburgh that became a Steelers anthem."],
+  ["All of the Lights","Kanye West",2010,"My Beautiful Dark Twisted Fantasy","Features a long list of guests, including Rihanna, Kid Cudi and Elton John."],
+  ["Power","Kanye West",2010,"My Beautiful Dark Twisted Fantasy",""],
+  ["Super Bass","Nicki Minaj",2011,"Pink Friday","Went viral when Taylor Swift and Selena Gomez rapped it on video."],
+  ["Bounce Back","Big Sean",2016,"I Decided",""],
+  ["ROCKSTAR","DaBaby ft. Roddy Ricch",2020,"Blame It on Baby","Spent seven weeks at No. 1 in 2020."],
+  ["The Box","Roddy Ricch",2019,"Please Excuse Me for Being Antisocial","Spent 11 weeks at No. 1, helped by that \"eee-err\" sound."],
+  ["First Class","Jack Harlow",2022,"Come Home the Kids Miss You","Built on Fergie's \"Glamorous\" and debuted at No. 1."],
+  ["One Dance","Drake ft. Wizkid & Kyla",2016,"Views","Drake's first No. 1 as a lead artist."],
+  ["HIGHEST IN THE ROOM","Travis Scott",2019,"JACKBOYS","Debuted at No. 1."],
+  ["Dior","Pop Smoke",2019,"Meet the Woo","Brought Brooklyn drill into the mainstream."],
+  ["a lot","21 Savage ft. J. Cole",2018,"i am > i was","Won the Grammy for Best Rap Song."],
+  ["Rack City","Tyga",2011,"Careless World",""],
+  ["6 Foot 7 Foot","Lil Wayne ft. Cory Gunz",2010,"Tha Carter IV",""],
+  ["Dreams and Nightmares (Intro)","Meek Mill",2012,"Dreams and Nightmares","The Philadelphia Eagles played it during their Super Bowl LII run."],
+  ["King Kunta","Kendrick Lamar",2015,"To Pimp a Butterfly",""],
+  ["Panda","Desiigner",2016,"New English","Went to No. 1 after Kanye sampled it on \"Pt. 2.\""],
+  ["Congratulations","Post Malone ft. Quavo",2016,"Stoney",""],
+  ["Jumpman","Drake & Future",2015,"What a Time to Be Alive",""],
+  ["Godzilla","Eminem ft. Juice WRLD",2020,"Music to Be Murdered By","Eminem's closing verse is one of the fastest ever on a hit song."],
+  ["All the Stars","Kendrick Lamar & SZA",2018,"Black Panther: The Album",""],
+  ["Trap Queen","Fetty Wap",2014,"Fetty Wap",""],
+  ["RAPSTAR","Polo G",2021,"Hall of Fame","Debuted at No. 1."],
+  ["INDUSTRY BABY","Lil Nas X & Jack Harlow",2021,"Montero",""],
+  ["Savage Remix","Megan Thee Stallion ft. Beyoncé",2020,"Suga","Megan's first No. 1."],
+  ["DNA.","Kendrick Lamar",2017,"DAMN.",""],
+  ["Antidote","Travis Scott",2015,"Rodeo",""],
+  ["Middle Child","J. Cole",2019,"Revenge of the Dreamers III",""],
+  ["Drip Too Hard","Lil Baby & Gunna",2018,"Drip Harder",""],
+  ["Nonstop","Drake",2018,"Scorpion",""],
+  ["Self Care","Mac Miller",2018,"Swimming",""]
+].filter(s => s[2] >= 2010 && s[2] <= 2023);
+function renderSong(){
+  const now = new Date(), day = Math.floor((new Date(now.getFullYear(), now.getMonth(), now.getDate()) - new Date(2026,0,1)) / 864e5);
+  const s = SONGS[((day % SONGS.length) + SONGS.length) % SONGS.length], q = encodeURIComponent(s[0]+" "+s[1].split(" ft.")[0]);
+  $("#songCard").innerHTML = '<div class="disc" aria-hidden="true"></div><div style="min-width:0"><span class="eyebrow">Song of the day</span><h3>'+esc(s[0])+'</h3><div class="meta">'+esc(s[1])+' · '+s[2]+' · '+esc(s[3])+'</div>'+
+    (s[4] ? '<p class="fact">'+esc(s[4])+'</p>' : '')+
+    '<div class="acts"><a class="small-btn" href="https://open.spotify.com/search/'+q+'" target="_blank" rel="noopener">Spotify ↗</a><a class="small-btn" href="https://music.apple.com/us/search?term='+q+'" target="_blank" rel="noopener">Apple Music ↗</a><a class="small-btn" href="https://www.youtube.com/results?search_query='+q+'" target="_blank" rel="noopener">YouTube ↗</a><a class="small-btn" href="https://genius.com/search?q='+q+'" target="_blank" rel="noopener">Chorus lyrics on Genius ↗</a></div></div>';
+}
+
+/* ---------- football sub-tabs ---------- */
+function setFbTab(k){
+  document.querySelectorAll("[data-fbt]").forEach(b => b.classList.toggle("on", b.dataset.fbt === k));
+  $("#fbBills").hidden = k !== "bills"; $("#fbCollege").hidden = k !== "college";
+  store.set("bf-fbtab", k);
+}
+document.addEventListener("click", e => { const b = e.target.closest("[data-fbt]"); if (b) setFbTab(b.dataset.fbt); });
+
 /* ---------- golf mini-game ---------- */
 const GG = (function(){
   const now = new Date(), dayKey = key(now);
@@ -2228,6 +2355,7 @@ function tick(){
   });
 }
 
+renderCountdowns(); renderSong(); setFbTab(store.get("bf-fbtab", "bills"));
 renderHome(); renderSched(); renderResume(); renderCourses(); renderProjects(); renderDaily(); loadDaily(); loadWeather(); loadBills(); renderFinance(); renderQuote(); bootAuth().then(route, route);
 addEventListener("resize", () => GG.draw());
 setInterval(tick, 1000);
