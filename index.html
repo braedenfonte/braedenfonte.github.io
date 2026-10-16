@@ -2100,15 +2100,23 @@ let WL = store.get("bf-watch", []);
 let FIN = null;
 const usd = v => (v < 0 ? "−$" : "$") + Math.abs(v).toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2});
 /* finance.enc: AES-GCM data whose key is wrapped with RSA-OAEP; the private key lives in the password-locked data */
+/* Live source: your Cloudflare Worker (tools/worker/worker.js). Leave "" to use only the daily snapshot. */
+const FIN_LIVE = "";
+let finKey = null, finTimer = 0;
+async function openFin(blob){
+  const priv = await crypto.subtle.importKey("jwk", finKey, {name: "RSA-OAEP", hash: "SHA-256"}, false, ["decrypt"]);
+  const raw = await crypto.subtle.decrypt({name: "RSA-OAEP"}, priv, b64d(blob.k));
+  const key = await crypto.subtle.importKey("raw", raw, "AES-GCM", false, ["decrypt"]);
+  const pt = await crypto.subtle.decrypt({name: "AES-GCM", iv: b64d(blob.iv)}, key, b64d(blob.ct));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
 async function loadFinance(jwk){
-  try{
-    const blob = await (await fetch("data/finance.enc", {cache: "no-store"})).json();
-    const priv = await crypto.subtle.importKey("jwk", jwk, {name: "RSA-OAEP", hash: "SHA-256"}, false, ["decrypt"]);
-    const raw = await crypto.subtle.decrypt({name: "RSA-OAEP"}, priv, b64d(blob.k));
-    const key = await crypto.subtle.importKey("raw", raw, "AES-GCM", false, ["decrypt"]);
-    const pt = await crypto.subtle.decrypt({name: "AES-GCM", iv: b64d(blob.iv)}, key, b64d(blob.ct));
-    FIN = JSON.parse(new TextDecoder().decode(pt)); renderFinance();
-  }catch(e){}
+  if (jwk) finKey = jwk; if (!finKey) return;
+  let got = null;
+  if (FIN_LIVE){ try{ const r = await fetch(FIN_LIVE.replace(/\/+$/,"")+"/live", {cache: "no-store"}); if (r.ok) got = await openFin(await r.json()); }catch(e){} }
+  if (!got || !got.accounts || !got.accounts.length){ try{ got = await openFin(await (await fetch("data/finance.enc", {cache: "no-store"})).json()); }catch(e){} }
+  if (got){ FIN = got; renderFinance(); }
+  clearTimeout(finTimer); if (FIN_LIVE) finTimer = setTimeout(() => loadFinance(), 5*60*1000);
 }
 function renderFinance(){
   const F = FIN;
@@ -2119,7 +2127,7 @@ function renderFinance(){
     $("#finCats").innerHTML = '<p class="fine">Unlock to see.</p>'; $("#finCmp").innerHTML = ""; $("#finFlagSec").hidden = true;
   } else {
     const d = new Date(F.asOf+"T12:00:00");
-    $("#finAsOf").textContent = "Updated "+MON[d.getMonth()]+" "+d.getDate();
+    $("#finAsOf").textContent = F.live && F.at ? "Live · "+new Date(F.at).toLocaleTimeString("en-US", {hour: "numeric", minute: "2-digit"}) : "Updated "+MON[d.getMonth()]+" "+d.getDate();
     $("#acctGrid").innerHTML = F.accounts.map(a => '<div class="panel acct"><b>'+esc(a.inst)+'</b><span class="st">'+esc(a.name)+' ··'+esc(a.mask)+'</span><span class="bal">'+usd(a.bal)+'</span><span class="st">'+(a.debt ? "Owed on card" : esc(a.type))+'</span></div>').join("") +
       (F.pending||[]).map(n => '<div class="panel acct"><b>'+esc(n)+'</b><span class="st">Not linked yet</span><span class="bal">—</span></div>').join("");
     const m = F.month, l = F.lastMonth;
@@ -2132,7 +2140,7 @@ function renderFinance(){
     $("#finCats").innerHTML = F.categories.map(c => '<div class="fin-cat"><span>'+esc(c[0])+'</span><b>'+usd(c[1])+'</b><div class="bar"><i style="width:'+(c[1]/top*100).toFixed(1)+'%"></i></div></div>').join("");
     const mx = Math.max(m.income, m.spending, l.income, l.spending, 1);
     const row = (lbl, v, col) => '<span>'+lbl+'</span><div class="bar"><i style="width:'+(v/mx*100).toFixed(1)+'%;background:'+col+'"></i></div><b>'+usd(v)+'</b>';
-    $("#finCmp").innerHTML = '<div class="fin-cmp">'+row(esc(m.label)+" in", m.income, "var(--c-break)")+row(esc(m.label)+" out", m.spending, "var(--accent)")+row(esc(l.label)+" in", l.income, "var(--c-break)")+row(esc(l.label)+" out", l.spending, "var(--accent)")+'</div><p class="fine" style="margin-top:12px">Spending includes card payments and transfers, so some money is counted twice.</p>';
+    $("#finCmp").innerHTML = '<div class="fin-cmp">'+row(esc(m.label)+" in", m.income, "var(--c-break)")+row(esc(m.label)+" out", m.spending, "var(--accent)")+row(esc(l.label)+" in", l.income, "var(--c-break)")+row(esc(l.label)+" out", l.spending, "var(--accent)")+'</div><p class="fine" style="margin-top:12px">'+esc(F.spendNote || "Spending includes card payments and transfers, so some money is counted twice.")+'</p>';
     $("#finFlagSec").hidden = !(F.flags||[]).length;
     $("#finFlags").innerHTML = (F.flags||[]).map(f => '<li>'+esc(f)+'</li>').join("");
   }
