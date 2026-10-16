@@ -1,0 +1,263 @@
+{
+ "updated": "2026-10-15T14:30:00-04:00",
+ "flights": [
+  {
+   "from": "LGA",
+   "to": "CHS",
+   "city": "Charleston, SC",
+   "tag": "City",
+   "price": 229,
+   "airline": "American",
+   "depart": "2026-11-14",
+   "departTime": "10:40",
+   "returnDate": "2026-11-16",
+   "returnDepart": "07:00",
+   "returnArrive": null,
+   "stops": "Nonstop",
+   "url": "https://www.kayak.com/flights/LGA-CHS/2026-11-14/2026-11-16?sort=price_a"
+  },
+  {
+   "from": "JFK",
+   "to": "MIA",
+   "city": "Miami, FL",
+   "tag": "Beach",
+   "price": 248,
+   "airline": "Delta",
+   "depart": "2026-11-14",
+   "departTime": "14:00",
+   "returnDate": "2026-11-16",
+   "returnDepart": "07:19",
+   "returnArrive": "10:14",
+   "stops": "1 stop out, nonstop back",
+   "url": "https://www.kayak.com/flights/JFK-MIA/2026-11-14/2026-11-16?sort=price_a"
+  },
+  {
+   "from": "JFK",
+   "to": "BNA",
+   "city": "Nashville, TN",
+   "tag": "City",
+   "price": 213,
+   "airline": "Delta",
+   "depart": "2026-10-31",
+   "departTime": "19:00",
+   "returnDate": "2026-11-02",
+   "returnDepart": "07:15",
+   "returnArrive": null,
+   "stops": "Nonstop",
+   "url": "https://www.kayak.com/flights/JFK-BNA/2026-10-31/2026-11-02?sort=price_a"
+  },
+  {
+   "from": "LGA",
+   "to": "BNA",
+   "city": "Nashville, TN",
+   "tag": "City",
+   "price": 247,
+   "airline": "American",
+   "depart": "2026-10-30",
+   "departTime": "19:59",
+   "returnDate": "2026-11-02",
+   "returnDepart": "18:41",
+   "returnArrive": null,
+   "stops": "Nonstop",
+   "url": "https://www.kayak.com/flights/LGA-BNA/2026-10-30/2026-11-02?sort=price_a"
+  },
+  {
+   "from": "EWR",
+   "to": "ORD",
+   "city": "Chicago, IL",
+   "tag": "City",
+   "price": 277,
+   "airline": "United",
+   "depart": "2026-10-24",
+   "departTime": "10:22",
+   "returnDate": "2026-10-26",
+   "returnDepart": "06:59",
+   "returnArrive": "10:07",
+   "stops": "Nonstop",
+   "url": "https://www.kayak.com/flights/EWR-ORD/2026-10-24/2026-10-26?sort=price_a"
+  },
+  {
+   "from": "JFK",
+   "to": "CHS",
+   "city": "Charleston, SC",
+   "tag": "City",
+   "price": 230,
+   "airline": "JetBlue",
+   "depart": "2026-11-14",
+   "departTime": "06:30",
+   "returnDate": "2026-11-16",
+   "returnDepart": "20:25",
+   "returnArrive": null,
+   "stops": "Nonstop",
+   "url": "https://www.kayak.com/flights/JFK-CHS/2026-11-14/2026-11-16?sort=price_a"
+  },
+  {
+   "from": "LGA",
+   "to": "FLL",
+   "city": "Fort Lauderdale, FL",
+   "tag": "Beach",
+   "price": 197,
+   "airline": "Frontier",
+   "depart": "2026-10-31",
+   "departTime": null,
+   "returnDate": "2026-11-03",
+   "returnDepart": null,
+   "returnArrive": null,
+   "stops": "",
+   "url": "https://www.kayak.com/flights/LGA-FLL/2026-10-31/2026-11-03?sort=price_a"
+  }
+ ],
+ "football": {
+  "label": "Week 7 recap",
+  "results": [
+   {
+    "away": "Georgia",
+    "home": "Alabama",
+    "as": 20,
+    "hs": 17,
+    "blurb": "Georgia escaped Tuscaloosa on Woodring's 23-yard field goal with 5:27 left.",
+    "stats": [
+     "Stockton: 18/22, 249 yds, TD + 14-yd TD run",
+     "UGA outgained ALA 455-346",
+     "4 sacks for Georgia's defense"
+    ]
+   },
+   {
+    "away": "USC",
+    "home": "Penn State",
+    "as": 31,
+    "hs": 23,
+    "blurb": "USC won in Happy Valley behind three Maiava touchdown passes.",
+    "stats": [
+     "Maiava: 3 pass TD, 301 team pass yds",
+     "PSU held to 68 rushing yds",
+     "Barker 3/3 on field goals for PSU"
+    ]
+   },
+   {
+    "away": "LSU",
+    "home": "Kentucky",
+    "as": 34,
+    "hs": 35,
+    "blurb": "Kentucky went for two in overtime and won it on Minchey's conversion.",
+    "stats": [
+     "Coffman 55-yd punt return TD",
+     "Baxter: 2 rush TD incl. OT score",
+     "LSU: 26/35, 316 pass yds, 3 TD"
+    ]
+   },
+   {
+    "away": "Air Force",
+    "home": "Northern Illinois",
+    "as": 28,
+    "hs": 7,
+    "blurb": "Service-academy rival Air Force rolled on the road.",
+    "stats": []
+   },
+   {
+    "away": "Kansas",
+    "home": "Utah",
+    "as": 24,
+    "hs": 41,
+    "blurb": "Utah pulled away at home.",
+    "stats": []
+   },
+   {
+    "away": "Minnesota",
+    "home": "Purdue",
+    "as": 13,
+    "hs": 41,
+    "blurb": "Purdue's biggest Big Ten win of the year.",
+    "stats": []
+   },
+   {
+    "away": "Syracuse",
+    "home": "Virginia",
+    "as": 25,
+    "hs": 28,
+    "blurb": "Virginia held on in a one-score game.",
+    "stats": []
+   },
+   {
+    "away": "Boise State",
+    "home": "Fresno State",
+    "as": 38,
+    "hs": 31,
+    "blurb": "Boise State won a Mountain West shootout.",
+    "stats": []
+   }
+  ],
+  "upcoming": [
+   {
+    "away": "FAU",
+    "home": "Army",
+    "kick": "2026-10-17T16:00:00Z",
+    "note": "Home at Michie Stadium",
+    "army": true
+   },
+   {
+    "away": "Washington",
+    "home": "Purdue",
+    "kick": "2026-10-17T00:00:00Z",
+    "note": "Purdue 63% to win"
+   },
+   {
+    "away": "Florida",
+    "home": "Texas",
+    "kick": "2026-10-17T16:00:00Z",
+    "note": ""
+   },
+   {
+    "away": "Kansas",
+    "home": "Kansas State",
+    "kick": "2026-10-17T16:00:00Z",
+    "note": "Sunflower Showdown, K-State 65%"
+   },
+   {
+    "away": "Mississippi State",
+    "home": "LSU",
+    "kick": "2026-10-17T16:00:00Z",
+    "note": "LSU bounces back from OT loss?"
+   }
+  ]
+ },
+ "location": {
+  "name": "Petra",
+  "wiki": "Petra",
+  "country": "Jordan",
+  "region": "Ma'an Governorate, southern Jordan",
+  "lat": 30.3285,
+  "lon": 35.4444,
+  "tagline": "A whole city carved into rose-red cliffs.",
+  "intro": "Petra was the capital of the Nabataeans, desert traders who got rich controlling the incense routes between Arabia and the Mediterranean. Instead of building with stone, they carved temples, tombs and a theater straight into the sandstone canyon walls.",
+  "stats": [
+   {
+    "label": "Country",
+    "value": "Jordan"
+   },
+   {
+    "label": "Built by",
+    "value": "Nabataeans"
+   },
+   {
+    "label": "UNESCO site since",
+    "value": "1985"
+   },
+   {
+    "label": "New 7 Wonders",
+    "value": "Named 2007"
+   }
+  ],
+  "facts": [
+   "You reach the city through the Siq, a narrow gorge about 1.2 km long with walls that tower overhead.",
+   "The famous Treasury (Al-Khazneh) is a tomb, not a treasury. The name comes from a legend that pirates hid gold in the urn on top, and you can still see the bullet marks from people shooting at it.",
+   "The West lost track of Petra for centuries until the Swiss explorer Johann Ludwig Burckhardt reached it in disguise in 1812.",
+   "The Nabataeans engineered dams, cisterns and channels to collect flash-flood water, which let a large city survive in the desert.",
+   "The Treasury's facade is the temple at the end of Indiana Jones and the Last Crusade (1989)."
+  ],
+  "bestTime": "March to May or September to November, when it's warm but not scorching.",
+  "gettingThere": "Fly JFK to Amman (Royal Jordanian flies nonstop), then about a 3-hour drive south.",
+  "tip": "Hike the 800-plus steps up to the Monastery (Ad Deir). It's bigger than the Treasury and far less crowded."
+ },
+ "flightsNote": "Fares spotted Oct 15 on Kayak route pages. None matched every rule today, so the closest ones are shown as near misses."
+}

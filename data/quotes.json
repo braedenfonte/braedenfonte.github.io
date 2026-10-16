@@ -1,0 +1,256 @@
+{
+ "quotes": [
+  {
+   "q": "The only way to do great work is to love what you do.",
+   "a": "Steve Jobs"
+  },
+  {
+   "q": "What stands in the way becomes the way.",
+   "a": "Marcus Aurelius"
+  },
+  {
+   "q": "It is not that we have a short time to live, but that we waste much of it.",
+   "a": "Seneca"
+  },
+  {
+   "q": "Plans are useless, but planning is indispensable.",
+   "a": "Dwight D. Eisenhower"
+  },
+  {
+   "q": "The supreme art of war is to subdue the enemy without fighting.",
+   "a": "Sun Tzu"
+  },
+  {
+   "q": "The price of greatness is responsibility.",
+   "a": "Winston Churchill"
+  },
+  {
+   "q": "Never give in, never, never, never.",
+   "a": "Winston Churchill"
+  },
+  {
+   "q": "Do what you can, with what you have, where you are.",
+   "a": "Theodore Roosevelt"
+  },
+  {
+   "q": "The credit belongs to the man who is actually in the arena.",
+   "a": "Theodore Roosevelt"
+  },
+  {
+   "q": "I attribute my success to this: I never gave or took any excuse.",
+   "a": "Florence Nightingale"
+  },
+  {
+   "q": "A journey of a thousand miles begins with a single step.",
+   "a": "Lao Tzu"
+  },
+  {
+   "q": "Fall seven times, stand up eight.",
+   "a": "Japanese proverb"
+  },
+  {
+   "q": "Discipline is the bridge between goals and accomplishment.",
+   "a": "Jim Rohn"
+  },
+  {
+   "q": "Do not pray for easy lives. Pray to be stronger men.",
+   "a": "John F. Kennedy"
+  },
+  {
+   "q": "Duty, honor, country.",
+   "a": "Douglas MacArthur"
+  },
+  {
+   "q": "Make no little plans; they have no magic to stir men's blood.",
+   "a": "Daniel Burnham"
+  },
+  {
+   "q": "Courage is not the absence of fear, but the triumph over it.",
+   "a": "Nelson Mandela"
+  },
+  {
+   "q": "Genius is one percent inspiration and ninety-nine percent perspiration.",
+   "a": "Thomas Edison"
+  },
+  {
+   "q": "If I have seen further, it is by standing on the shoulders of giants.",
+   "a": "Isaac Newton"
+  },
+  {
+   "q": "The important thing is not to stop questioning.",
+   "a": "Albert Einstein"
+  },
+  {
+   "q": "Imagination is more important than knowledge.",
+   "a": "Albert Einstein"
+  },
+  {
+   "q": "All models are wrong, but some are useful.",
+   "a": "George Box"
+  },
+  {
+   "q": "Premature optimization is the root of all evil.",
+   "a": "Donald Knuth"
+  },
+  {
+   "q": "Far better an approximate answer to the right question than an exact answer to the wrong question.",
+   "a": "John Tukey"
+  },
+  {
+   "q": "Do not save what is left after spending, but spend what is left after saving.",
+   "a": "Warren Buffett"
+  },
+  {
+   "q": "Be fearful when others are greedy, and greedy when others are fearful.",
+   "a": "Warren Buffett"
+  },
+  {
+   "q": "Risk comes from not knowing what you're doing.",
+   "a": "Warren Buffett"
+  },
+  {
+   "q": "Perfection is not attainable, but if we chase perfection we can catch excellence.",
+   "a": "Vince Lombardi"
+  },
+  {
+   "q": "Winning isn't everything, but wanting to win is.",
+   "a": "Vince Lombardi"
+  },
+  {
+   "q": "You miss 100% of the shots you don't take.",
+   "a": "Wayne Gretzky"
+  },
+  {
+   "q": "Hard work beats talent when talent doesn't work hard.",
+   "a": "Tim Notke"
+  },
+  {
+   "q": "I can accept failure, everyone fails at something. But I can't accept not trying.",
+   "a": "Michael Jordan"
+  },
+  {
+   "q": "The more difficult the victory, the greater the happiness in winning.",
+   "a": "Pelé"
+  },
+  {
+   "q": "Champions keep playing until they get it right.",
+   "a": "Billie Jean King"
+  },
+  {
+   "q": "He who has a why to live can bear almost any how.",
+   "a": "Friedrich Nietzsche"
+  },
+  {
+   "q": "The unexamined life is not worth living.",
+   "a": "Socrates"
+  },
+  {
+   "q": "What you do speaks so loudly that I cannot hear what you say.",
+   "a": "Ralph Waldo Emerson"
+  },
+  {
+   "q": "Nothing great was ever achieved without enthusiasm.",
+   "a": "Ralph Waldo Emerson"
+  },
+  {
+   "q": "I am a slow walker, but I never walk back.",
+   "a": "Abraham Lincoln"
+  },
+  {
+   "q": "The way to get started is to quit talking and begin doing.",
+   "a": "Walt Disney"
+  },
+  {
+   "q": "Great things are done by a series of small things brought together.",
+   "a": "Vincent van Gogh"
+  },
+  {
+   "q": "Energy and persistence conquer all things.",
+   "a": "Benjamin Franklin"
+  },
+  {
+   "q": "Well done is better than well said.",
+   "a": "Benjamin Franklin"
+  },
+  {
+   "q": "An investment in knowledge pays the best interest.",
+   "a": "Benjamin Franklin"
+  },
+  {
+   "q": "Success is the sum of small efforts, repeated day in and day out.",
+   "a": "Robert Collier"
+  },
+  {
+   "q": "Motivation gets you going, but discipline keeps you growing.",
+   "a": "John C. Maxwell"
+  },
+  {
+   "q": "Leadership is the art of getting someone else to do something you want done because he wants to do it.",
+   "a": "Dwight D. Eisenhower"
+  },
+  {
+   "q": "Never tell people how to do things. Tell them what to do and they will surprise you with their ingenuity.",
+   "a": "George S. Patton"
+  },
+  {
+   "q": "A good plan violently executed now is better than a perfect plan executed next week.",
+   "a": "George S. Patton"
+  },
+  {
+   "q": "Be so good they can't ignore you.",
+   "a": "Steve Martin"
+  },
+  {
+   "q": "Stay hungry. Stay foolish.",
+   "a": "Steve Jobs"
+  },
+  {
+   "q": "The only thing we have to fear is fear itself.",
+   "a": "Franklin D. Roosevelt"
+  },
+  {
+   "q": "The best way out is always through.",
+   "a": "Robert Frost"
+  },
+  {
+   "q": "Whatever the mind of man can conceive and believe, it can achieve.",
+   "a": "Napoleon Hill"
+  },
+  {
+   "q": "Don't count the days; make the days count.",
+   "a": "Muhammad Ali"
+  },
+  {
+   "q": "We are what we repeatedly do. Excellence, then, is not an act, but a habit.",
+   "a": "Will Durant"
+  },
+  {
+   "q": "Hard choices, easy life. Easy choices, hard life.",
+   "a": "Jerzy Gregorek"
+  },
+  {
+   "q": "Ask not what your country can do for you; ask what you can do for your country.",
+   "a": "John F. Kennedy"
+  },
+  {
+   "q": "The stock market is a device for transferring money from the impatient to the patient.",
+   "a": "Warren Buffett"
+  },
+  {
+   "q": "Action is the foundational key to all success.",
+   "a": "Pablo Picasso"
+  },
+  {
+   "q": "Talent wins games, but teamwork and intelligence win championships.",
+   "a": "Michael Jordan"
+  },
+  {
+   "q": "Success is where preparation and opportunity meet.",
+   "a": "Bobby Unser"
+  },
+  {
+   "q": "Strength and growth come only through continuous effort and struggle.",
+   "a": "Napoleon Hill"
+  }
+ ]
+}

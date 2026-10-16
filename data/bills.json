@@ -1,0 +1,193 @@
+{
+ "updated": "2026-10-15T22:30:00-04:00",
+ "team": "Buffalo Bills",
+ "record": {
+  "w": 4,
+  "l": 1
+ },
+ "standing": "Leads the AFC East",
+ "pf": 164,
+ "pa": 141,
+ "results": [
+  {
+   "wk": 1,
+   "date": "Sep 13",
+   "opp": "at Houston",
+   "bs": 36,
+   "os": 31,
+   "res": "W"
+  },
+  {
+   "wk": 2,
+   "date": "Sep 17",
+   "opp": "vs Detroit",
+   "bs": 41,
+   "os": 31,
+   "res": "W",
+   "note": "Thursday night"
+  },
+  {
+   "wk": 3,
+   "date": "Sep 27",
+   "opp": "vs LA Chargers",
+   "bs": 24,
+   "os": 16,
+   "res": "W"
+  },
+  {
+   "wk": 4,
+   "date": "Oct 4",
+   "opp": "vs New England",
+   "bs": 26,
+   "os": 29,
+   "res": "L"
+  },
+  {
+   "wk": 5,
+   "date": "Oct 12",
+   "opp": "at LA Rams",
+   "bs": 37,
+   "os": 34,
+   "res": "W",
+   "note": "OT, Monday night"
+  }
+ ],
+ "afcEast": [
+  {
+   "team": "Buffalo Bills",
+   "w": 4,
+   "l": 1,
+   "me": true
+  },
+  {
+   "team": "New England Patriots",
+   "w": 3,
+   "l": 2
+  },
+  {
+   "team": "New York Jets",
+   "w": 2,
+   "l": 3
+  },
+  {
+   "team": "Miami Dolphins",
+   "w": 0,
+   "l": 5
+  }
+ ],
+ "lastGame": {
+  "title": "Bills 37, Rams 34 (OT)",
+  "stats": [
+   "436 total yards, 234 on the ground (37 carries, 6.3 per carry)",
+   "Three rushing touchdowns: James Cook twice, Josh Allen once",
+   "Allen 7-yard TD pass to Keon Coleman in the third quarter",
+   "Tyler Bass kicked three field goals, including the 45-yarder in overtime",
+   "13 penalties for 112 yards and one lost fumble"
+  ]
+ },
+ "news": [
+  {
+   "h": "Bills outlast Rams in overtime",
+   "b": "Buffalo won 37-34 on Monday Night Football at SoFi Stadium, a Bass field goal deciding it in overtime. The Bills are 4-1 and lead the AFC East."
+  },
+  {
+   "h": "Raiders next, then a bye",
+   "b": "Buffalo visits Las Vegas on Sunday, Oct 18 (4:25 PM ET) and is off in Week 7 before hosting Baltimore on Nov 1."
+  },
+  {
+   "h": "Division picture",
+   "b": "New England is 3-2 (it beat the Bills 29-26 on Oct 4), the Jets are 2-3 and Miami is 0-5."
+  },
+  {
+   "h": "Big games ahead",
+   "b": "Monday night at 5-0 Minnesota on Nov 9, Thanksgiving night vs. Kansas City, and Christmas Day at Denver."
+  }
+ ],
+ "schedule": [
+  {
+   "kick": "2026-10-18T16:25-04:00",
+   "opp": "Las Vegas Raiders",
+   "home": false,
+   "venue": "Allegiant Stadium",
+   "note": "Bye week follows"
+  },
+  {
+   "kick": "2026-11-01T13:00-05:00",
+   "opp": "Baltimore Ravens",
+   "home": true,
+   "venue": "",
+   "note": ""
+  },
+  {
+   "kick": "2026-11-09T20:15-05:00",
+   "opp": "Minnesota Vikings",
+   "home": false,
+   "venue": "",
+   "note": "Monday Night Football"
+  },
+  {
+   "kick": "2026-11-15T13:00-05:00",
+   "opp": "New York Jets",
+   "home": false,
+   "venue": "",
+   "note": ""
+  },
+  {
+   "kick": "2026-11-22T13:00-05:00",
+   "opp": "Miami Dolphins",
+   "home": true,
+   "venue": "",
+   "note": ""
+  },
+  {
+   "kick": "2026-11-26T20:20-05:00",
+   "opp": "Kansas City Chiefs",
+   "home": true,
+   "venue": "",
+   "note": "Thanksgiving night"
+  },
+  {
+   "kick": "2026-12-06T16:25-05:00",
+   "opp": "New England Patriots",
+   "home": false,
+   "venue": "",
+   "note": ""
+  },
+  {
+   "kick": "2026-12-13T20:20-05:00",
+   "opp": "Green Bay Packers",
+   "home": false,
+   "venue": "",
+   "note": "Sunday Night Football"
+  },
+  {
+   "kick": "2026-12-19T20:20-05:00",
+   "opp": "Chicago Bears",
+   "home": true,
+   "venue": "",
+   "note": ""
+  },
+  {
+   "kick": "2026-12-25T16:30-05:00",
+   "opp": "Denver Broncos",
+   "home": false,
+   "venue": "",
+   "note": "Christmas Day"
+  },
+  {
+   "kick": "2027-01-03T13:00-05:00",
+   "opp": "Miami Dolphins",
+   "home": false,
+   "venue": "",
+   "note": ""
+  },
+  {
+   "kick": "2027-01-10T13:00-05:00",
+   "opp": "New York Jets",
+   "home": true,
+   "venue": "",
+   "note": "Date and time may flex"
+  }
+ ],
+ "source": "NFL data feed and news roundup, Oct 15, 2026. Refreshes when the daily update runs."
+}
