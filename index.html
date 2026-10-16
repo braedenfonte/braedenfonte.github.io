@@ -660,6 +660,19 @@ body.gate-open{overflow:hidden}
 @keyframes gateOk{40%{transform:scale(1.03);box-shadow:0 0 60px -10px var(--accent)}to{opacity:0;transform:scale(.9);filter:blur(10px)}}
 @keyframes gateFade{to{opacity:0}}
 
+/* finance */
+.fin-p{padding:20px 22px}
+.fin-big{font:800 30px var(--display);display:block;margin:6px 0 2px}
+.fin-cats{display:grid;gap:12px;margin-top:14px}
+.fin-cat{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;font-size:14px}
+.fin-cat b{font:600 13px var(--mono)}
+.fin-cat .bar{grid-column:1/3;height:8px;border-radius:8px;background:var(--surface-2);overflow:hidden}
+.fin-cat .bar i{display:block;height:100%;background:var(--accent);transform-origin:0 50%;animation:growX 1s cubic-bezier(.2,.7,.2,1) both}
+.fin-cmp{display:grid;grid-template-columns:90px minmax(0,1fr) 90px;gap:10px;align-items:center;margin-top:14px;font-size:14px}
+.fin-cmp .bar{height:12px;border-radius:8px;background:var(--surface-2);overflow:hidden}
+.fin-cmp .bar i{display:block;height:100%;transform-origin:0 50%;animation:growX 1s cubic-bezier(.2,.7,.2,1) both}
+.fin-cmp b{font:600 13px var(--mono);text-align:right}
+.acct .bal{font:800 24px var(--display)}
 /* markets & lines */
 .mk{padding:20px 22px}
 .mk-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
@@ -981,27 +994,23 @@ body.gate-open{overflow:hidden}
 
 <!-- FINANCE -->
 <section class="view" id="v-finance">
-  <div class="page-h"><span class="eyebrow">Money</span><h2>Finance</h2><p>Your accounts, spending and money moves in one place. Everything below is a placeholder until your accounts are linked.</p></div>
-  <div class="sec-h"><h3>Accounts</h3><span class="chip">Not linked</span></div>
+  <div class="page-h"><span class="eyebrow">Money</span><h2>Finance</h2><p>Your linked accounts, refreshed each morning. Numbers are encrypted and only show after you unlock.</p></div>
+  <div class="sec-h"><h3>Accounts</h3><span class="chip" id="finAsOf">Not linked</span></div>
   <div class="grid g4 stagger" id="acctGrid"></div>
   <div class="sec">
-    <div class="sec-h"><h3>Morning snapshot</h3></div>
-    <div class="grid g3">
-      <div class="panel"><span class="eyebrow">Net worth</span><b style="font:800 30px var(--display)">—</b><p class="fine">Fills in each morning once accounts are linked.</p></div>
-      <div class="panel"><span class="eyebrow">Spent this month</span><b style="font:800 30px var(--display)">—</b><p class="fine">Compared with last month.</p></div>
-      <div class="panel"><span class="eyebrow">Cash flow</span><b style="font:800 30px var(--display)">—</b><p class="fine">Income minus spending.</p></div>
-    </div>
+    <div class="sec-h"><h3>Snapshot</h3></div>
+    <div class="grid g3" id="finSnap"></div>
   </div>
   <div class="sec">
-    <div class="sec-h"><h3>Analysis</h3></div>
+    <div class="sec-h"><h3>Where it went</h3></div>
     <div class="grid g2">
-      <div class="panel"><span class="eyebrow">Spending by category</span><div class="chart-ph">Chart appears here</div></div>
-      <div class="panel"><span class="eyebrow">Balance over time</span><div class="chart-ph">Chart appears here</div></div>
+      <div class="panel fin-p"><span class="eyebrow" id="finCatLbl">Spending by category</span><div id="finCats" class="fin-cats"></div></div>
+      <div class="panel fin-p"><span class="eyebrow">This month vs. last</span><div id="finCmp"></div></div>
     </div>
   </div>
-  <div class="sec">
-    <div class="sec-h"><h3>Money moves</h3></div>
-    <div class="panel"><p>Suggestions on saving, investing and paying down balances will show here, each with the plain-language reasoning and a chart. They need your real numbers, so they stay empty until accounts are linked.</p></div>
+  <div class="sec" id="finFlagSec" hidden>
+    <div class="sec-h"><h3>Worth a look</h3></div>
+    <div class="panel fin-p"><ul class="list-tight" id="finFlags"></ul><p class="fine">Flags come from your bank data. Check them in your bank app.</p></div>
   </div>
   <div class="sec">
     <div class="sec-h"><h3>Watchlist</h3></div>
@@ -1210,6 +1219,7 @@ function applyPrivate(P){
   $("#privPersonal").innerHTML = P.html.personal;
   paintAuth();
   renderHome(); renderSched(); renderResume(); renderCourses(); renderTravel(); renderDaily(); renderStudy(); renderFinance();
+  if (P.finKey) loadFinance(P.finKey);
 }
 async function bootAuth(){
   let k = null;
@@ -2087,8 +2097,45 @@ document.addEventListener("click", e => { const g = e.target.closest("[data-grad
 
 /* ---------- finance (placeholders until accounts are linked) ---------- */
 let WL = store.get("bf-watch", []);
+let FIN = null;
+const usd = v => (v < 0 ? "−$" : "$") + Math.abs(v).toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2});
+/* finance.enc: AES-GCM data whose key is wrapped with RSA-OAEP; the private key lives in the password-locked data */
+async function loadFinance(jwk){
+  try{
+    const blob = await (await fetch("data/finance.enc", {cache: "no-store"})).json();
+    const priv = await crypto.subtle.importKey("jwk", jwk, {name: "RSA-OAEP", hash: "SHA-256"}, false, ["decrypt"]);
+    const raw = await crypto.subtle.decrypt({name: "RSA-OAEP"}, priv, b64d(blob.k));
+    const key = await crypto.subtle.importKey("raw", raw, "AES-GCM", false, ["decrypt"]);
+    const pt = await crypto.subtle.decrypt({name: "AES-GCM", iv: b64d(blob.iv)}, key, b64d(blob.ct));
+    FIN = JSON.parse(new TextDecoder().decode(pt)); renderFinance();
+  }catch(e){}
+}
 function renderFinance(){
-  $("#acctGrid").innerHTML = ["Robinhood","Chase","American Express","Capital One"].map(n => '<div class="panel acct"><b>'+n+'</b><span class="st">Not linked yet</span><span style="font:800 22px var(--display)">—</span></div>').join("");
+  const F = FIN;
+  if (!F){
+    $("#finAsOf").textContent = PRIVATE ? "Loading…" : "Locked";
+    $("#acctGrid").innerHTML = ["Chase","Capital One","Robinhood","American Express"].map(n => '<div class="panel acct"><b>'+n+'</b><span class="st">'+(PRIVATE ? "Loading" : "Unlock to see")+'</span><span class="bal">—</span></div>').join("");
+    $("#finSnap").innerHTML = ["Net worth","Spent this month","Cash flow"].map(n => '<div class="panel fin-p"><span class="eyebrow">'+n+'</span><span class="fin-big">—</span></div>').join("");
+    $("#finCats").innerHTML = '<p class="fine">Unlock to see.</p>'; $("#finCmp").innerHTML = ""; $("#finFlagSec").hidden = true;
+  } else {
+    const d = new Date(F.asOf+"T12:00:00");
+    $("#finAsOf").textContent = "Updated "+MON[d.getMonth()]+" "+d.getDate();
+    $("#acctGrid").innerHTML = F.accounts.map(a => '<div class="panel acct"><b>'+esc(a.inst)+'</b><span class="st">'+esc(a.name)+' ··'+esc(a.mask)+'</span><span class="bal">'+usd(a.bal)+'</span><span class="st">'+(a.debt ? "Owed on card" : esc(a.type))+'</span></div>').join("") +
+      (F.pending||[]).map(n => '<div class="panel acct"><b>'+esc(n)+'</b><span class="st">Not linked yet</span><span class="bal">—</span></div>').join("");
+    const m = F.month, l = F.lastMonth;
+    $("#finSnap").innerHTML =
+      '<div class="panel fin-p"><span class="eyebrow">Net worth</span><span class="fin-big">'+usd(F.netWorth)+'</span><p class="fine">Linked cash minus card balances.</p></div>'+
+      '<div class="panel fin-p"><span class="eyebrow">Spent '+esc(m.label)+'</span><span class="fin-big">'+usd(m.spending)+'</span><p class="fine">'+esc(l.label)+': '+usd(l.spending)+'</p></div>'+
+      '<div class="panel fin-p"><span class="eyebrow">Cash flow '+esc(m.label)+'</span><span class="fin-big" style="color:'+(m.net >= 0 ? 'var(--c-break)' : 'var(--c-due)')+'">'+usd(m.net)+'</span><p class="fine">Income '+usd(m.income)+' minus spending.</p></div>';
+    const top = Math.max(...F.categories.map(c => c[1]), 1);
+    $("#finCatLbl").textContent = "Spending by category · "+m.label;
+    $("#finCats").innerHTML = F.categories.map(c => '<div class="fin-cat"><span>'+esc(c[0])+'</span><b>'+usd(c[1])+'</b><div class="bar"><i style="width:'+(c[1]/top*100).toFixed(1)+'%"></i></div></div>').join("");
+    const mx = Math.max(m.income, m.spending, l.income, l.spending, 1);
+    const row = (lbl, v, col) => '<span>'+lbl+'</span><div class="bar"><i style="width:'+(v/mx*100).toFixed(1)+'%;background:'+col+'"></i></div><b>'+usd(v)+'</b>';
+    $("#finCmp").innerHTML = '<div class="fin-cmp">'+row(esc(m.label)+" in", m.income, "var(--c-break)")+row(esc(m.label)+" out", m.spending, "var(--accent)")+row(esc(l.label)+" in", l.income, "var(--c-break)")+row(esc(l.label)+" out", l.spending, "var(--accent)")+'</div><p class="fine" style="margin-top:12px">Spending includes card payments and transfers, so some money is counted twice.</p>';
+    $("#finFlagSec").hidden = !(F.flags||[]).length;
+    $("#finFlags").innerHTML = (F.flags||[]).map(f => '<li>'+esc(f)+'</li>').join("");
+  }
   $("#wlList").innerHTML = WL.length ? WL.map(t => '<div class="wl-i"><a href="https://www.google.com/finance/quote/'+encodeURIComponent(t)+'" target="_blank" rel="noopener">'+esc(t)+' ↗</a><button type="button" data-wlx="'+esc(t)+'" aria-label="Remove '+esc(t)+'">×</button></div>').join("") : '<p class="fine">Nothing on your watchlist yet.</p>';
 }
 document.addEventListener("submit", e => {
