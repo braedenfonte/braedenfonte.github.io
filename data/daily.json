@@ -410,5 +410,108 @@
   "gettingThere": "Fly JFK to Santiago (nonstop overnight), connect to Punta Arenas or Puerto Natales, then it's about 112 km by road from Puerto Natales to the park.",
   "tip": "Book refugios or campsites before you go; you need reservations for overnight stays on the W and O treks, and they sell out months ahead."
  },
- "flightsNote": "Real fares from Kayak searches run Oct 16 with your exact pass window, JFK/LGA/EWR only."
+ "flightsNote": "Real fares from Kayak searches run Oct 16 with your exact pass window, JFK/LGA/EWR only.",
+ "markets": {
+  "asOf": "Wed Oct 15 close",
+  "story": "The Dow rose 1% while the Nasdaq was flat. Money rotated out of AI and chip stocks into healthcare and other defensive names, and Treasury yields fell.",
+  "indices": [
+   {
+    "name": "Dow",
+    "value": "52,177",
+    "chg": 1.08
+   },
+   {
+    "name": "S&P 500",
+    "value": "7,744",
+    "chg": 0.33
+   },
+   {
+    "name": "Nasdaq",
+    "value": "26,713",
+    "chg": 0.08
+   },
+   {
+    "name": "Russell 2000",
+    "value": "2,767",
+    "chg": 1.38
+   }
+  ],
+  "movers": [
+   {
+    "sym": "NKE",
+    "move": "+5%",
+    "dir": 1,
+    "why": "One of the top gainers in the S&P 500 and Dow."
+   },
+   {
+    "sym": "LRCX",
+    "move": "−7% intraday",
+    "dir": -1,
+    "why": "Ninth straight drop as chip-equipment stocks sold off on higher borrowing costs."
+   },
+   {
+    "sym": "RKLB",
+    "move": "Down",
+    "dir": -1,
+    "why": "First Neutron rocket launch pushed to next year."
+   },
+   {
+    "sym": "SCHW",
+    "move": "Down",
+    "dir": -1,
+    "why": "Revenue up 17% but just missed estimates."
+   },
+   {
+    "sym": "WMT",
+    "move": "Upgrade",
+    "dir": 1,
+    "why": "Deutsche Bank upgraded to Buy with a $136 target."
+   }
+  ],
+  "lines": [
+   {
+    "game": "Bills @ Raiders",
+    "kick": "2026-10-18T20:25:00Z",
+    "spread": "BUF −5.5",
+    "total": "53.5",
+    "ml": "BUF −275 · LV +225",
+    "bills": true
+   },
+   {
+    "game": "Ohio State @ Indiana",
+    "kick": "2026-10-17T16:00:00Z",
+    "spread": "OSU −3.5",
+    "total": "50.5",
+    "ml": "OSU −166 · IND +138"
+   }
+  ],
+  "probs": [
+   {
+    "game": "Florida @ Texas",
+    "fav": "Texas",
+    "p": 81
+   },
+   {
+    "game": "Chargers @ Chiefs",
+    "fav": "Chiefs",
+    "p": 78
+   },
+   {
+    "game": "Jets @ Patriots",
+    "fav": "Patriots",
+    "p": 76
+   },
+   {
+    "game": "Kansas @ Kansas State",
+    "fav": "Kansas State",
+    "p": 65
+   },
+   {
+    "game": "Washington @ Purdue",
+    "fav": "Purdue",
+    "p": 62
+   }
+  ],
+  "sources": "Market data: Investrade market review. Lines: FanDuel via SI. Win odds: Sportradar."
+ }
 }

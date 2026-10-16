@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js" onload="window.renderStudy&&renderStudy()"></script>
 <style>
 /* Layout: fixed left sidebar (drawer on phones) + one scrolling content column; each tab is a view swapped by hash. */
 :root{
@@ -658,7 +660,53 @@ body.gate-open{overflow:hidden}
 @keyframes gateOk{40%{transform:scale(1.03);box-shadow:0 0 60px -10px var(--accent)}to{opacity:0;transform:scale(.9);filter:blur(10px)}}
 @keyframes gateFade{to{opacity:0}}
 
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+/* markets & lines */
+.mk{padding:20px 22px}
+.mk-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.mk-h h3{font-size:22px;font-weight:800}
+.mk-idx{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:12px 0}
+.mk-idx div{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.mk-idx small{display:block;font:500 11px var(--mono);color:var(--faint);text-transform:uppercase;letter-spacing:.08em}
+.mk-idx b{font:700 19px var(--display)}.mk-idx span{font:600 13px var(--mono);margin-left:6px}
+.mk-up{color:var(--c-break)}.mk-dn{color:var(--c-due)}
+.mk-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:6px}
+.mk-row{display:grid;grid-template-columns:62px minmax(0,1fr);gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+.mk-row:first-of-type{border-top:0}
+.mk-row b{font:700 13px var(--mono)}
+.mk-row p{color:var(--muted);margin:0}.mk-row em{font-style:normal;font:600 12px var(--mono);margin-right:6px}
+.mk-line{padding:10px 0;border-top:1px solid var(--line);font-size:14px}.mk-line:first-of-type{border-top:0}
+.mk-line b{display:block}.mk-line span{font:500 12.5px var(--mono);color:var(--muted)}
+.mk-line.bills b::after{content:"Bills";margin-left:8px;font:700 10px var(--mono);padding:2px 6px;border-radius:6px;background:#00338d;color:#fff;vertical-align:2px}
+.prob-bar{height:6px;border-radius:6px;background:var(--surface-2);overflow:hidden;margin-top:5px}
+.prob-bar i{display:block;height:100%;background:var(--accent);transform-origin:0 50%;animation:growX 1s cubic-bezier(.2,.7,.2,1) both}
+@keyframes growX{from{transform:scaleX(0)}}
+/* study: 3D flip + math */
+.flash3d{perspective:1400px;cursor:pointer;outline:none}
+.flash3d .fi{display:grid;transition:transform .7s cubic-bezier(.2,.75,.2,1);transform-style:preserve-3d}
+.flash3d .fi.flipped{transform:rotateY(180deg)}
+.flash3d .face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.flash3d .face.back{transform:rotateY(180deg)}
+.flash3d:focus-visible .face{box-shadow:0 0 0 2px var(--accent)}
+.flash .katex-display,.prob .katex-display{margin:.55em 0;overflow-x:auto;overflow-y:hidden;padding:2px 0}
+.flash .katex,.prob .katex{font-size:1.08em}
+.flash code,.prob code{font:500 .86em var(--mono);background:var(--line);padding:2px 6px;border-radius:6px;white-space:pre-wrap;word-break:break-word}
+.flash.back code,.prob .a code{background:var(--bg)}
+/* button ripple */
+.rip-host{position:relative;overflow:hidden}
+.rip{position:absolute;border-radius:50%;pointer-events:none;background:currentColor;opacity:.22;transform:scale(0);animation:rip .6s ease-out forwards}
+@keyframes rip{to{transform:scale(1);opacity:0}}
+/* 3D tilt */
+.tilt{transition:transform .35s cubic-bezier(.2,.7,.2,1);will-change:transform}
+/* scroll progress */
+#sprog{position:fixed;top:0;left:0;right:0;height:3px;z-index:70;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--accent),var(--accent-strong),#ffb36b);pointer-events:none}
+/* to-do check pop + all-done glow */
+.todo input:checked{animation:pop .35s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{40%{transform:scale(1.35)}}
+.todo.all-done{animation:doneGlow 1.6s ease-out}
+@keyframes doneGlow{30%{box-shadow:0 0 0 2px var(--c-break),0 0 50px -6px var(--c-break)}}
+.confetti{position:fixed;width:8px;height:12px;z-index:80;pointer-events:none;border-radius:2px;animation:conf 1.4s cubic-bezier(.2,.6,.4,1) forwards}
+@keyframes conf{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.flash3d .fi{transform:none!important}.flash3d .face.back{display:none}.flash3d .fi.flipped .face.front{display:none}.flash3d .fi.flipped .face.back{display:grid;transform:none}}
 </style>
 </head>
 <body>
@@ -764,6 +812,7 @@ body.gate-open{overflow:hidden}
     <a class="panel brief-tile" href="#football"><span class="eyebrow">Bills countdown</span><b id="bBills">—</b><span id="bBillsSub"></span></a>
     <a class="panel brief-tile" href="#place"><span class="eyebrow">Place of the day</span><b id="bPlace">—</b><span id="bPlaceSub"></span></a>
   </div>
+  <div class="panel mk sec" id="mkCard" hidden></div>
   <div class="panel song sec" id="songCard"></div>
   <div class="sec">
     <div class="sec-h"><h3>Due this week</h3><span class="chip" id="bDueCount">0</span></div>
@@ -1738,7 +1787,7 @@ function renderDaily(){
 }
 function loadDaily(){
   try {
-    fetch("data/daily.json", {cache:"no-store"}).then(r => r.ok ? r.json() : null).then(j => { if (j && j.updated) { DAILY = j; renderDaily(); } }).catch(() => {});
+    fetch("data/daily.json", {cache:"no-store"}).then(r => r.ok ? r.json() : null).then(j => { if (j && j.updated) { DAILY = j; renderDaily(); renderMarkets(); } }).catch(() => {});
   } catch(e){}
 }
 
@@ -1877,6 +1926,8 @@ document.addEventListener("change", e => {
   const c = e.target.closest("[data-todo]"); if (!c) return;
   const d = todoDone(); c.checked ? d.add(c.dataset.todo) : d.delete(c.dataset.todo);
   store.set("bf-todo-done", [...d]); renderTodo();
+  const items = (TODO||[]).filter(t => t.date <= key(new Date()));
+  if (c.checked && items.length && items.every(t => d.has(t.id))) celebrate($("#todoCard"));
 });
 
 /* ---------- bills / nfl ---------- */
@@ -1917,6 +1968,15 @@ function renderQuote(){
 try { fetch("data/quotes.json").then(r => r.json()).then(j => { if (j.quotes && j.quotes.length){ QUOTES = j.quotes; renderQuote(); } }).catch(() => {}); } catch(e){}
 
 /* ---------- study ---------- */
+/* text with \( inline \) and \[ display \] math (KaTeX) and `code` */
+function rich(s){
+  const km = (t, disp) => window.katex ? katex.renderToString(t, {displayMode: disp, throwOnError: false}) : '<span class="mono">'+esc(t)+'</span>';
+  return String(s).split(/(\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)|`[^`]+`)/).map(p =>
+    p.startsWith("\\[") ? km(p.slice(2,-2), true) :
+    p.startsWith("\\(") ? km(p.slice(2,-2), false) :
+    (p.length > 1 && p[0] === "`" && p.endsWith("`")) ? '<code>'+esc(p.slice(1,-1))+'</code>' :
+    esc(p).replace(/\\\$/g, "$")).join("");
+}
 let STUDY = {};
 let stCode = store.get("bf-stcode", ""), stMode = store.get("bf-stmode", "cards");
 const stState = {};   // per course: {order, i, flip}
@@ -1940,14 +2000,16 @@ function renderStudy(){
     if (!(S.cards||[]).length) html += '<div class="panel empty-state">No cards yet.</div>';
     else {
       const idx = st.order[st.i], c = S.cards[idx];
-      html += '<div class="panel flash'+(st.flip?' back':'')+'" id="flash" tabindex="0" role="button" aria-label="Flip card">'+
-        '<div><small>'+(st.flip?'Answer':'Question')+' · '+(st.i+1)+' / '+st.order.length+(known.has(idx)?' · got it':'')+'</small>'+esc(st.flip ? c[1] : c[0])+'</div></div>'+
+      const tag = ' · '+(st.i+1)+' / '+st.order.length+(known.has(idx)?' · got it':'');
+      html += '<div class="flash3d" id="flash" tabindex="0" role="button" aria-label="Flip card"><div class="fi'+(st.flip?' flipped':'')+'">'+
+        '<div class="panel flash face front"><div><small>Question'+tag+'</small>'+rich(c[0])+'</div></div>'+
+        '<div class="panel flash back face"><div><small>Answer'+tag+'</small>'+rich(c[1])+'</div></div></div></div>'+
         '<div class="fc-bar"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="small-btn" type="button" data-fc="prev">← Prev</button><button class="small-btn" type="button" data-fc="flip">Flip</button><button class="small-btn" type="button" data-fc="next">Next →</button></div>'+
         '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="small-btn" type="button" data-fc="again">Again</button><button class="btn primary" type="button" data-fc="got">Got it</button></div></div>'+
         '<div class="fc-bar"><span class="mono">'+known.size+' of '+S.cards.length+' marked got it</span><div style="display:flex;gap:8px"><button class="link-btn" type="button" data-fc="shuffle">Shuffle</button><button class="link-btn" type="button" data-fc="reset">Reset progress</button></div></div>';
     }
   } else if (stMode === "probs"){
-    html += (S.problems||[]).length ? '<div class="up-list">'+S.problems.map((p,i) => '<div class="panel prob"><span class="eyebrow">Problem '+(i+1)+'</span><p class="q">'+esc(p.q)+'</p><button class="small-btn" type="button" data-prob="'+i+'" style="margin-top:10px">Show answer</button><div class="a" id="pa'+i+'" hidden>'+esc(p.a)+'</div></div>').join("")+'</div>' : '<div class="panel empty-state">No problems yet.</div>';
+    html += (S.problems||[]).length ? '<div class="up-list">'+S.problems.map((p,i) => '<div class="panel prob"><span class="eyebrow">Problem '+(i+1)+'</span><p class="q">'+rich(p.q)+'</p><button class="small-btn" type="button" data-prob="'+i+'" style="margin-top:10px">Show answer</button><div class="a" id="pa'+i+'" hidden>'+rich(p.a)+'</div></div>').join("")+'</div>' : '<div class="panel empty-state">No problems yet.</div>';
   } else {
     html += '<div class="grid g2"><div class="panel recap"><span class="eyebrow">What you just covered</span><ul class="list-tight">'+(S.recap||[]).map(x => '<li>'+esc(x)+'</li>').join("")+'</ul></div>'+
       '<div class="panel recap"><span class="eyebrow">What you need to know next</span><ul class="list-tight">'+((S.prep||[]).length ? S.prep.map(x => '<li>'+esc(x)+'</li>').join("") : '<li>Nothing flagged yet.</li>')+'</ul>'+
@@ -1971,7 +2033,7 @@ document.addEventListener("click", e => {
 function stFc(act){
   const st = stState[stCode]; if (!st) return;
   const n = st.order.length, idx = st.order[st.i], known = stKnown(stCode);
-  if (act === "flip") st.flip = !st.flip;
+  if (act === "flip"){ st.flip = !st.flip; const fi = $("#flash .fi"); if (fi){ fi.classList.toggle("flipped", st.flip); return; } }
   else if (act === "next"){ st.i = (st.i+1) % n; st.flip = false; }
   else if (act === "prev"){ st.i = (st.i-1+n) % n; st.flip = false; }
   else if (act === "got"){ known.add(idx); store.set("bf-known-"+stCode, [...known]); st.i = (st.i+1) % n; st.flip = false; }
@@ -2354,6 +2416,64 @@ function tick(){
     else el.innerHTML = c.main+'<small>'+c.sub+'</small>';
   });
 }
+
+/* ---------- markets & game lines (info only, no picks) ---------- */
+function renderMarkets(){
+  const m = DAILY && DAILY.markets, card = $("#mkCard"); if (!card) return;
+  if (!m){ card.hidden = true; return; }
+  card.hidden = false;
+  const pct = v => '<span class="'+(v >= 0 ? 'mk-up' : 'mk-dn')+'">'+(v >= 0 ? '▲ ' : '▼ ')+Math.abs(v).toFixed(2)+'%</span>';
+  const when = iso => new Date(iso).toLocaleString("en-US", {weekday:"short", hour:"numeric", minute:"2-digit", timeZone:"America/New_York"});
+  card.innerHTML = '<div class="mk-h"><div><span class="eyebrow">Markets &amp; lines</span><h3>Stocks and games to watch</h3></div><span class="chip">'+esc(m.asOf||"")+'</span></div>'+
+    (m.story ? '<p class="meta">'+esc(m.story)+'</p>' : '')+
+    '<div class="mk-idx">'+(m.indices||[]).map(x => '<div><small>'+esc(x.name)+'</small><b>'+esc(x.value)+'</b>'+pct(x.chg)+'</div>').join("")+'</div>'+
+    '<div class="mk-cols"><div><span class="eyebrow">Stocks in the news</span>'+(m.movers||[]).map(x => '<div class="mk-row"><b>'+esc(x.sym)+'</b><p><em class="'+(x.dir > 0 ? 'mk-up' : 'mk-dn')+'">'+esc(x.move)+'</em>'+esc(x.why)+'</p></div>').join("")+'</div>'+
+    '<div><span class="eyebrow">Lines</span>'+(m.lines||[]).map(x => '<div class="mk-line'+(x.bills ? ' bills' : '')+'"><b>'+esc(x.game)+'</b><span>'+when(x.kick)+' · '+esc(x.spread)+' · O/U '+esc(x.total)+' · '+esc(x.ml)+'</span></div>').join("")+
+      ((m.probs||[]).length ? '<span class="eyebrow" style="display:block;margin-top:14px">Biggest favorites</span>'+m.probs.map(x => '<div class="mk-line"><b>'+esc(x.game)+'</b><span>'+esc(x.fav)+' '+x.p+'% to win</span><div class="prob-bar"><i style="width:'+x.p+'%"></i></div></div>').join("") : '')+
+    '</div></div>'+
+    '<p class="fine">Info only, not picks or advice. '+esc(m.sources||"")+'</p>';
+}
+
+/* ---------- motion extras ---------- */
+function celebrate(card){
+  if (reduce.matches || !card) return;
+  card.classList.remove("all-done"); void card.offsetWidth; card.classList.add("all-done");
+  const r = card.getBoundingClientRect(), cols = ["var(--accent)","var(--c-break)","var(--c-exam)","var(--c-game)","var(--c-corps)"];
+  for (let i = 0; i < 46; i++){
+    const c = document.createElement("i"); c.className = "confetti";
+    c.style.left = (r.left + r.width/2)+"px"; c.style.top = (r.top + 30)+"px"; c.style.background = cols[i % cols.length];
+    const a = Math.random()*Math.PI*2, v = 120 + Math.random()*260;
+    c.style.setProperty("--dx", Math.cos(a)*v+"px"); c.style.setProperty("--dy", (Math.sin(a)*v - 120 + Math.random()*400)+"px");
+    c.style.setProperty("--r", (Math.random()*900-450)+"deg");
+    document.body.appendChild(c); setTimeout(() => c.remove(), 1500);
+  }
+}
+document.addEventListener("pointerdown", e => {
+  if (reduce.matches) return;
+  const b = e.target.closest(".btn,.small-btn,.seg button,.tabs button,.link-btn"); if (!b) return;
+  const r = b.getBoundingClientRect(), d = Math.max(r.width, r.height)*2.2, s = document.createElement("span");
+  b.classList.add("rip-host"); s.className = "rip";
+  s.style.width = s.style.height = d+"px"; s.style.left = (e.clientX - r.left - d/2)+"px"; s.style.top = (e.clientY - r.top - d/2)+"px";
+  b.appendChild(s); setTimeout(() => s.remove(), 650);
+});
+if (matchMedia("(hover:hover)").matches){
+  const TILT = ".course,.cd-pair>*,.song,.place-hero";
+  document.addEventListener("pointermove", e => {
+    if (reduce.matches) return;
+    const el = e.target.closest && e.target.closest(TILT); if (!el) return;
+    const r = el.getBoundingClientRect(), x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5;
+    el.classList.add("tilt"); el.style.transform = "perspective(900px) rotateX("+(-y*5).toFixed(2)+"deg) rotateY("+(x*6).toFixed(2)+"deg) translateY(-3px)";
+  });
+  document.addEventListener("pointerout", e => {
+    const el = e.target.closest && e.target.closest(TILT); if (!el || el.contains(e.relatedTarget)) return;
+    el.style.transform = "";
+  });
+}
+(() => {
+  const bar = document.createElement("div"); bar.id = "sprog"; document.body.appendChild(bar);
+  let q = 0; const upd = () => { q = 0; const h = document.documentElement.scrollHeight - innerHeight; bar.style.transform = "scaleX("+(h > 0 ? Math.min(1, scrollY/h) : 0)+")"; };
+  addEventListener("scroll", () => { if (!q) q = requestAnimationFrame(upd); }, {passive: true}); addEventListener("resize", upd);
+})();
 
 renderCountdowns(); renderSong(); setFbTab(store.get("bf-fbtab", "bills"));
 renderHome(); renderSched(); renderResume(); renderCourses(); renderProjects(); renderDaily(); loadDaily(); loadWeather(); loadBills(); renderFinance(); renderQuote(); bootAuth().then(route, route);
