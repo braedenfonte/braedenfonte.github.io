@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Link Accounts</title>
+<script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+<style>
+:root{--bg:#0e0c0d;--surface:#171415;--line:#2d2728;--fg:#f4efef;--muted:#a2989a;--accent:#e0243c;--ok:#35c7a5}
+@media (prefers-color-scheme:light){:root{--bg:#f4f2f1;--surface:#fff;--line:#e2dcdc;--fg:#1a1617;--muted:#6b6264}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;padding:40px 16px}
+main{max-width:560px;margin:0 auto;display:grid;gap:16px}
+h1{font-size:30px;margin:0}
+p{color:var(--muted);margin:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:12px}
+label{font-size:13px;color:var(--muted);display:grid;gap:6px}
+input{background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:14px ui-monospace,Menlo,monospace;width:100%}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+button{border:0;border-radius:999px;padding:11px 18px;font-weight:600;font-size:15px;background:var(--accent);color:#fff;cursor:pointer}
+button.alt{background:transparent;color:var(--fg);border:1px solid var(--line)}
+button:disabled{opacity:.5;cursor:default}
+ul{margin:0;padding-left:20px}
+#msg{min-height:1.5em;font-size:14px}
+.ok{color:var(--ok)}.err{color:var(--accent)}
+a{color:inherit}
+</style>
+</head>
+<body>
+<main>
+  <h1>Link accounts</h1>
+  <p>Connect Chase, Capital One, Amex and Robinhood to the Finance tab. You sign in to each bank inside Plaid's secure window. Your bank password never touches this site.</p>
+
+  <div class="card">
+    <label>Worker URL<input id="url" placeholder="https://bf-finance.yourname.workers.dev" autocomplete="off"></label>
+    <label>Admin token<input id="tok" type="password" placeholder="The ADMIN_TOKEN you set in Cloudflare" autocomplete="off"></label>
+    <div class="row"><button class="alt" id="save">Save on this device</button><button class="alt" id="check">Check what's linked</button></div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <button id="bank">Link a bank or card</button>
+      <button id="invest">Link Robinhood</button>
+    </div>
+    <p>Use "Link a bank or card" for Chase, Capital One and American Express (one at a time). Use "Link Robinhood" for Robinhood.</p>
+    <div id="msg"></div>
+    <ul id="linked"></ul>
+  </div>
+  <p><a href="/#finance">← Back to Finance</a></p>
+</main>
+<script>
+const $ = s => document.querySelector(s);
+const get = k => { try { return localStorage.getItem(k) || ""; } catch(e){ return ""; } };
+const put = (k, v) => { try { localStorage.setItem(k, v); } catch(e){} };
+$("#url").value = get("bf-worker"); $("#tok").value = get("bf-admin");
+const base = () => $("#url").value.trim().replace(/\/+$/, "");
+const say = (t, cls) => { $("#msg").textContent = t; $("#msg").className = cls || ""; };
+async function call(path, body){
+  const r = await fetch(base() + path, { method: body ? "POST" : "GET", headers: { "Content-Type": "application/json", "X-Admin": $("#tok").value.trim() }, body: body ? JSON.stringify(body) : undefined });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error || ("Error " + r.status));
+  return j;
+}
+async function list(){
+  try { const j = await call("/items"); $("#linked").innerHTML = j.linked.length ? j.linked.map(i => "<li>" + i.inst.replace(/</g, "&lt;") + "</li>").join("") : "<li>Nothing linked yet</li>"; say("Connected to your worker.", "ok"); }
+  catch(e){ say(e.message, "err"); }
+}
+$("#save").onclick = () => { put("bf-worker", base()); put("bf-admin", $("#tok").value.trim()); say("Saved on this device.", "ok"); };
+$("#check").onclick = list;
+async function link(kind){
+  if (!base()) return say("Paste your Worker URL first.", "err");
+  say("Opening Plaid…");
+  try {
+    const { link_token } = await call("/link-token", { kind });
+    const h = Plaid.create({
+      token: link_token,
+      onSuccess: async (public_token, meta) => {
+        say("Saving " + ((meta.institution && meta.institution.name) || "account") + "…");
+        try { await call("/exchange", { public_token, institution: meta.institution && meta.institution.name, invest: kind === "invest" }); say("Linked! It shows on the Finance tab now.", "ok"); list(); }
+        catch(e){ say(e.message, "err"); }
+      },
+      onExit: err => { if (err) say(err.display_message || err.error_message || "Closed.", "err"); else say(""); },
+    });
+    h.open();
+  } catch(e){ say(e.message, "err"); }
+}
+$("#bank").onclick = () => link("bank");
+$("#invest").onclick = () => link("invest");
+if (base() && $("#tok").value) list();
+</script>
+</body>
+</html>
