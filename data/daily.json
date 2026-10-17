@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-16T07:01:34-04:00",
+ "updated": "2026-10-17T06:50:00-04:00",
  "flights": [
   {
    "from": "EWR",
@@ -373,99 +373,99 @@
   ]
  },
  "location": {
-  "name": "Torres del Paine National Park",
-  "wiki": "Torres_del_Paine_National_Park",
-  "country": "Chile",
-  "region": "Magallanes Region, Chilean Patagonia",
-  "lat": -51.0,
-  "lon": -73.0,
-  "tagline": "Granite towers, blue icebergs and pumas at the bottom of the world.",
-  "intro": "Torres del Paine is Chile's showpiece of Patagonia: three sheer granite towers, the jagged Cuernos del Paine, and turquoise lakes fed by the Southern Patagonian Ice Field. Guanacos graze the steppe while condors ride the wind overhead, and trekkers come from everywhere to walk the famous W route.",
+  "name": "Victoria Falls",
+  "wiki": "Victoria_Falls",
+  "country": "Zambia / Zimbabwe",
+  "region": "Zambezi River, southern Africa",
+  "lat": -17.9243,
+  "lon": 25.8572,
+  "tagline": "A mile-wide curtain of the Zambezi, and spray you can see from 30 miles away.",
+  "intro": "Victoria Falls is where the Zambezi River drops into a narrow chasm on the border of Zambia and Zimbabwe, forming the largest sheet of falling water on Earth. Locals call it Mosi-oa-Tunya, \"the smoke that thunders\", for the towering column of mist that rises above it.",
   "stats": [
    {
-    "label": "Established",
-    "value": "1959"
+    "label": "Width",
+    "value": "1,708 m (5,604 ft)"
    },
    {
-    "label": "Area",
-    "value": "181,414 ha (~700 sq mi)"
+    "label": "Height",
+    "value": "108 m (355 ft)"
    },
    {
-    "label": "Highest peak",
-    "value": "Paine Grande, ~2,884 m"
+    "label": "Mean flow",
+    "value": "1,088 m³/s"
    },
    {
-    "label": "UNESCO Biosphere Reserve",
-    "value": "Since 1978"
+    "label": "UNESCO World Heritage",
+    "value": "Since 1989"
    }
   ],
   "facts": [
-   "\"Paine\" means \"blue\" in the language of the Tehuelche (Aonikenk) people, fitting for a park full of glacier-blue lakes.",
-   "The lakes get their unreal colors mostly from rock flour, fine sediment ground up by glaciers and suspended in the water.",
-   "In 2014, scientists found fossils of at least 46 ichthyosaurs, dolphin-like marine reptiles, after retreating glacier ice exposed new rock in the park.",
-   "Grey Glacier, the park's largest at about 15 km long, is split into two arms by an island of rock in the middle of the ice.",
-   "Three big wildfires, in 1985, 2005 and 2011-12, were all blamed on visitors and together burned roughly 480 square kilometers of the park."
+   "The spray usually climbs more than 400 m into the air and can be seen from as far as 48 km (30 mi) away.",
+   "On full-moon nights the mist can form a lunar rainbow, or \"moonbow\".",
+   "The zigzag Batoka Gorges below the falls each mark an earlier position of the waterfall, which has been eating its way upstream for at least 100,000 years.",
+   "In the low-water months (roughly September to December), swimmers can sit in Devil's Pool on Livingstone Island, a few feet from the edge of the drop.",
+   "The falls split the Zambezi's fish life: 89 species live above them but only 39 below."
   ],
-  "bestTime": "November to March, the southern summer, when days are long and the trails and refugios are open (expect wind any month).",
-  "gettingThere": "Fly JFK to Santiago (nonstop overnight), connect to Punta Arenas or Puerto Natales, then it's about 112 km by road from Puerto Natales to the park.",
-  "tip": "Book refugios or campsites before you go; you need reservations for overnight stays on the W and O treks, and they sell out months ahead."
+  "bestTime": "March to May for the full thundering flood (peak around April, though spray can hide the view); September to December for clear views and Devil's Pool.",
+  "gettingThere": "Fly New York to Johannesburg (nonstop, about 15–16 hours), then connect to Victoria Falls Airport (Zimbabwe) or Livingstone (Zambia), each a short drive from the falls.",
+  "tip": "Visit both sides: Zimbabwe has most of the classic front-on viewpoints, while Zambia lets you walk the Knife-Edge Bridge and reach Livingstone Island."
  },
  "flightsNote": "Real fares from Kayak searches run Oct 16 with your exact pass window, JFK/LGA/EWR only.",
  "markets": {
-  "asOf": "Wed Oct 15 close",
-  "story": "The Dow rose 1% while the Nasdaq was flat. Money rotated out of AI and chip stocks into healthcare and other defensive names, and Treasury yields fell.",
+  "asOf": "Fri Oct 16 close",
+  "story": "Tech led a broad sell-off as hotter CPI data pushed Treasury yields higher and revived worries about how the AI build-out is financed, with CoreWeave's debt in focus. Energy rose as oil prices climbed.",
   "indices": [
    {
     "name": "Dow",
-    "value": "52,177",
-    "chg": 1.08
+    "value": "52,002",
+    "chg": -0.34
    },
    {
     "name": "S&P 500",
-    "value": "7,744",
-    "chg": 0.33
+    "value": "7,659",
+    "chg": -1.09
    },
    {
     "name": "Nasdaq",
-    "value": "26,713",
-    "chg": 0.08
+    "value": "26,140",
+    "chg": -2.14
    },
    {
     "name": "Russell 2000",
-    "value": "2,767",
-    "chg": 1.38
+    "value": "2,720",
+    "chg": -1.72
    }
   ],
   "movers": [
    {
-    "sym": "NKE",
-    "move": "+5%",
+    "sym": "CRWV",
+    "move": "−12% intraday",
+    "dir": -1,
+    "why": "Its roughly $50 billion debt load became the focus of AI-financing worries."
+   },
+   {
+    "sym": "TWLO",
+    "move": "−13% intraday",
+    "dir": -1,
+    "why": "Profit-taking after its S&P 500 inclusion plus valuation concerns."
+   },
+   {
+    "sym": "MRNA",
+    "move": "−10%",
+    "dir": -1,
+    "why": "Investors trimmed ahead of Phase 3 data on its mRNA cancer vaccine."
+   },
+   {
+    "sym": "HST",
+    "move": "+3.4%",
     "dir": 1,
-    "why": "One of the top gainers in the S&P 500 and Dow."
+    "why": "REITs rallied broadly as money rotated out of tech."
    },
    {
-    "sym": "LRCX",
-    "move": "−7% intraday",
-    "dir": -1,
-    "why": "Ninth straight drop as chip-equipment stocks sold off on higher borrowing costs."
-   },
-   {
-    "sym": "RKLB",
-    "move": "Down",
-    "dir": -1,
-    "why": "First Neutron rocket launch pushed to next year."
-   },
-   {
-    "sym": "SCHW",
-    "move": "Down",
-    "dir": -1,
-    "why": "Revenue up 17% but just missed estimates."
-   },
-   {
-    "sym": "WMT",
-    "move": "Upgrade",
+    "sym": "NUE",
+    "move": "+2.6%",
     "dir": 1,
-    "why": "Deutsche Bank upgraded to Buy with a $136 target."
+    "why": "Rising U.S. steel prices and optimism ahead of Oct. 26 earnings."
    }
   ],
   "lines": [
@@ -512,6 +512,6 @@
     "p": 62
    }
   ],
-  "sources": "Market data: Investrade market review. Lines: FanDuel via SI. Win odds: Sportradar."
+  "sources": "Market data: TheStreet market wrap (Oct 16). Lines: FanDuel via SI. Win odds: Sportradar."
  }
 }
