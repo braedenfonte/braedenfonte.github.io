@@ -766,6 +766,7 @@ body.gate-open{overflow:hidden}
     <a href="#study" data-v="study"><svg viewBox="0 0 24 24"><path d="M4 5h7a3 3 0 013 3v12a2 2 0 00-2-2H4z"/><path d="M20 5h-6a3 3 0 00-3 3"/><path d="M20 5v13h-5"/></svg>Study</a>
     <a href="#projects" data-v="projects"><svg viewBox="0 0 24 24"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg>Projects</a>
     <div class="nav-group">More</div>
+    <a href="#jarvis" data-v="jarvis"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.5"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></svg>Jarvis</a>
     <a href="#finance" data-v="finance"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>Finance</a>
     <a href="#memory" data-v="memory"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.5"/><circle cx="5" cy="6" r="1.2"/><circle cx="19" cy="7" r="1.5"/><circle cx="17" cy="18" r="1.2"/><circle cx="6" cy="17" r="1.5"/><path d="M6 7l4 3.5M18 8l-4 2.5M16.5 17l-3-3M7 16l3-2.5"/></svg>Memory</a>
     <a href="#personal" data-v="personal"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/></svg>Personal</a>
@@ -1063,6 +1064,24 @@ body.gate-open{overflow:hidden}
       <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Answers questions and promotes your services</li>
       <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Setup and support included</li>
     </ul>
+  </div>
+</section>
+
+<!-- JARVIS -->
+<section class="view" id="v-jarvis">
+  <style>#v-jarvis .panel{padding:22px} #v-jarvis h3{margin:0 0 .3em}</style>
+  <div class="page-h"><span class="eyebrow">Personal AI</span><h2>J.A.R.V.I.S.</h2><p>My voice-run command center: schedule, inbox, school, business and finance agents, with the same memory bank as this site.</p></div>
+  <div class="panel" style="display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px"><span id="jvDot" style="width:10px;height:10px;border-radius:50%;background:var(--muted,#888);display:inline-block"></span><b id="jvState">Checking…</b></div>
+      <p id="jvInfo" style="margin:.5em 0 0;color:var(--muted,#888);font-size:14px">Looks for Jarvis running on this laptop.</p>
+    </div>
+    <div class="hero-cta" style="margin:0"><a class="btn primary" id="jvOpen" href="http://localhost:3000" target="_blank" rel="noopener">Open Jarvis</a></div>
+  </div>
+  <div class="grid g2" style="margin-top:18px">
+    <div class="panel"><h3>Try saying</h3><ul style="margin:.4em 0 0;padding-left:1.1em;line-height:1.8">
+      <li>“Jarvis, what do I have today?”</li><li>“Jarvis, when is my Amex due?”</li><li>“Jarvis, any new emails from Canvas?”</li><li>“Jarvis, how are the Bills doing?”</li></ul></div>
+    <div class="panel"><h3>If it says offline</h3><p style="margin:.4em 0 0;line-height:1.6">Double-click <b>Jarvis</b> on the laptop desktop. It starts automatically at login after that. Jarvis only runs on the laptop for now.</p></div>
   </div>
 </section>
 
@@ -1376,7 +1395,7 @@ if (matchMedia("(hover:hover)").matches) {
 }
 
 /* ---------- routing ---------- */
-const VIEWS = ["home","brief","flights","football","daily","place","schedule","about","resume","courses","study","projects","business","finance","memory","personal","contact"];
+const VIEWS = ["home","brief","flights","football","daily","place","schedule","about","resume","courses","study","projects","business","jarvis","finance","memory","personal","contact"];
 let curView = null;
 function showView(v){
   curView = v;
@@ -1387,7 +1406,26 @@ function showView(v){
   if (v === "projects") drawArt();
   if (v === "daily") GG.draw();
   if (v === "memory") GX.open(); else GX.close();
+  if (v === "jarvis") jarvisCheck();
   revealView($("#v-"+v));
+}
+
+/* ---------- Jarvis tab: is Jarvis running on this laptop? ---------- */
+async function jarvisCheck(){
+  const dot = document.getElementById("jvDot"), st = document.getElementById("jvState"), info = document.getElementById("jvInfo");
+  if (!dot) return;
+  st.textContent = "Checking…";
+  try {
+    const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 2500);
+    const r = await fetch("http://localhost:3000/healthz", { signal: ctl.signal, cache: "no-store" });
+    clearTimeout(t);
+    const j = await r.json();
+    dot.style.background = "#2ecc71"; st.textContent = "Online";
+    info.textContent = "Brain: " + (j.brain || "ready") + ". Open it, click Initialize, and say \u201cJarvis\u201d.";
+  } catch(e){
+    dot.style.background = "var(--accent)"; st.textContent = "Offline (or on another device)";
+    info.textContent = "Jarvis runs on the laptop. Double-click Jarvis on the desktop to start it.";
+  }
 }
 function route(){
   let v = (location.hash || "#home").slice(1);
