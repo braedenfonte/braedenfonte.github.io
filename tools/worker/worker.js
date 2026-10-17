@@ -41,6 +41,9 @@ export default {
     if (req.method === "OPTIONS") return new Response(null, { headers: cors });
     const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { ...cors, "Content-Type": "application/json", "Cache-Control": "no-store" } });
     const path = new URL(req.url).pathname;
+    // No OAuth here: answer discovery probes with 404 so MCP clients connect without sign-in
+    if (path.startsWith("/.well-known/") || path === "/register" || path === "/authorize" || path === "/token")
+      return new Response("Not found", { status: 404, headers: { "Access-Control-Allow-Origin": "*" } });
     // Shared memory bank (MCP server for Claude + ChatGPT). URL: /mcp/<MEMORY_KEY>
     if (path.startsWith("/mcp/")) {
       if (!env.MEMORY_KEY || path !== "/mcp/" + env.MEMORY_KEY) return new Response("Not found", { status: 404 });
@@ -60,6 +63,7 @@ export default {
         return json(blob);
       }
       // everything below changes or reveals what is linked: admin only
+      if (!["/link-token", "/exchange", "/items", "/remove"].includes(path)) return json({ error: "Not found" }, 404);
       if (!env.ADMIN_TOKEN || req.headers.get("X-Admin") !== env.ADMIN_TOKEN) return json({ error: "Wrong admin token" }, 401);
       const body = req.method === "POST" ? await req.json().catch(() => ({})) : {};
       if (path === "/link-token") {
