@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-18T06:45:00-04:00",
+ "updated": "2026-10-19T06:50:00-04:00",
  "flights": [
   {
    "from": "LGA",
@@ -575,42 +575,42 @@
   ]
  },
  "location": {
-  "name": "Hạ Long Bay",
-  "wiki": "Hạ_Long_Bay",
-  "country": "Vietnam",
-  "region": "Quảng Ninh province, Gulf of Tonkin",
-  "lat": 20.9,
-  "lon": 107.2,
-  "tagline": "Two thousand limestone towers rising out of an emerald sea.",
-  "intro": "Hạ Long Bay is a drowned karst landscape in northeast Vietnam, where well over a thousand limestone islands and islets jut straight out of the Gulf of Tonkin. UNESCO calls it the most extensive and best-known example of marine-invaded tower karst on Earth, and its grottoes, floating villages and junk-rigged cruise boats make it Vietnam's signature sight.",
+  "name": "Uluru",
+  "wiki": "Uluru",
+  "country": "Australia",
+  "region": "Uluṟu-Kata Tjuṯa National Park, Northern Territory",
+  "lat": -25.345,
+  "lon": 131.036,
+  "tagline": "A sandstone monolith that glows red in the middle of the Australian outback.",
+  "intro": "Uluru, also known as Ayers Rock, is a huge sandstone monolith rising from the flat desert of central Australia, about 335 km south-west of Alice Springs. Sacred to the Aṉangu people, it is the centerpiece of Uluṟu-Kata Tjuṯa National Park, a UNESCO World Heritage Site, and famous for turning a fiery red at sunrise and sunset.",
   "stats": [
    {
-    "label": "Bay area",
-    "value": "≈1,553 km² (600 sq mi)"
+    "label": "Height above plain",
+    "value": "≈348 m (1,142 ft)"
    },
    {
-    "label": "Islands & islets",
-    "value": "1,133 in the UNESCO site"
+    "label": "Perimeter",
+    "value": "9.4 km (5.8 mi)"
    },
    {
-    "label": "Limestone age",
-    "value": "≈500 million years"
+    "label": "Rock age",
+    "value": "≈550–530 million years"
    },
    {
     "label": "UNESCO World Heritage",
-    "value": "Since 1994 (Cat Ba added 2023)"
+    "value": "Since 1987"
    }
   ],
   "facts": [
-   "Hạ Long means \"descending dragon\": legend says the gods sent a family of dragons to defend Vietnam, and the jewels they spat out became the islands.",
-   "Around 1,600 people live right on the bay in four floating fishing villages, in homes on rafts buoyed by tires and plastic jugs.",
-   "Late-19th-century French visitors left graffiti inside Hang Đầu Gỗ, the largest grotto in the Hạ Long area.",
-   "People have lived here for roughly 20,000 years: the prehistoric Soi Nhụ culture dates to about 18,000–7,000 BC.",
-   "The bay is still giving up new species: a previously unknown sponge, Cladocroce pansinii, was described from its underwater caves in 2023."
+   "Most of Uluru is hidden: the rock layers continue below the surrounding plain, and their full underground extent is unknown.",
+   "Its red glow comes from iron oxide — essentially rust — in the outer layer of the feldspar-rich sandstone.",
+   "Some visitors who took pieces of the rock have mailed them back, convinced the souvenirs brought them bad luck.",
+   "Climbing Uluru has been banned since 26 October 2019, exactly 34 years after the land was handed back to its traditional owners in 1985.",
+   "During rare heavy rain, temporary waterfalls pour down the sides of the rock."
   ],
-  "bestTime": "Spring (March–May) and autumn (September–November) for milder weather and calmer seas; winters are cool and misty, summers hot and rainy.",
-  "gettingThere": "No nonstop from New York: fly one-stop to Hanoi (via Tokyo, Seoul, Doha or similar), then take the expressway east to Hạ Long, or connect to Vân Đồn International Airport right on the bay.",
-  "tip": "Book an overnight cruise that heads into Lan Ha Bay or Bái Tử Long Bay — same karst scenery, far fewer boats than the main Hạ Long routes."
+  "bestTime": "May–September (the southern winter) for mild days; summer often brings extreme heat and some trails close early in the day.",
+  "gettingThere": "No nonstop from New York: fly to Sydney or Melbourne (usually one stop via the West Coast), then take a domestic flight to Ayers Rock Airport near Yulara, a short drive from the park.",
+  "tip": "Save time for Kata Tjuṯa, 25 km west — its domed rock formations are just as striking and see far fewer visitors than Uluru."
  },
  "flightsNote": "Real fares from Kayak searches run Oct 18 with your exact pass window, JFK/LGA/EWR only.",
  "markets": {
@@ -672,14 +672,6 @@
   ],
   "lines": [
    {
-    "game": "Bills @ Raiders",
-    "kick": "2026-10-18T20:25:00Z",
-    "spread": "BUF −5.5",
-    "total": "53.5",
-    "ml": "BUF −275 · LV +225",
-    "bills": true
-   },
-   {
     "game": "Indiana @ Michigan",
     "kick": "2026-10-24T16:00:00Z",
     "spread": "IND −8.5",
@@ -689,16 +681,11 @@
   ],
   "probs": [
    {
-    "game": "Chargers @ Chiefs",
-    "fav": "Chiefs",
-    "p": 78
-   },
-   {
-    "game": "Jets @ Patriots",
-    "fav": "Patriots",
-    "p": 76
+    "game": "Indiana @ Michigan",
+    "fav": "Indiana",
+    "p": 72
    }
   ],
-  "sources": "Market data: TheStreet market wrap (Oct 16). Lines: FanDuel via SI and VegasInsider. Win odds: Sportradar (Oct 17 pull)."
+  "sources": "Market data: TheStreet market wrap (Oct 16). Lines: FanDuel via SI (Oct 17). Win odds: Dimers model (Oct 18). Bills are on their bye this week."
  }
 }
