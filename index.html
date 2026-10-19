@@ -1176,10 +1176,27 @@ const STAR_SVG = '<svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 
 
 /* events with ids and dates (filled in after the private data is unlocked) */
 let EVENTS = [];
+/* AY27-1 class periods (24h "HHMM" start-end). Course events get their class time,
+   so the countdown runs to the start of class instead of flipping to "Now" at midnight. */
+const CLASS_TIMES = {
+  MA376:["0740","0835"], SS388:["0905","1020"], EM481:["1410","1525"],
+  MA486:["0740","0835"], MA481X:["0845","0940"], MA481:["0845","0940"], MS300:["1035","1150"]
+};
+const atHM = (d, hm) => new Date(d.getFullYear(), d.getMonth(), d.getDate(), +hm.slice(0,2), +hm.slice(2,4), 0);
+function eventTime(e){
+  const t = (e.time || "").replace(":", "");
+  if (/^\d{4}$/.test(t)) return [t, (e.endTime || "").replace(":", "") || null];
+  if (e.end && e.end !== e.start) return null;
+  const m = String(e.t).toUpperCase().match(/\b(MA481X|MA481|MA376|SS388|EM481|MA486|MS300)\b/);
+  return m ? CLASS_TIMES[m[1]] : null;
+}
 function buildEvents(){
   EVENTS = SCHED.events.map((e,i) => {
-    const s = parseD(e.start), en = e.end ? parseD(e.end) : parseD(e.start);
-    return { id: e.start+"-"+i, t: e.t, cat: e.cat, s, e: en, endT: new Date(en.getFullYear(), en.getMonth(), en.getDate(), 23, 59, 59) };
+    let s = parseD(e.start), en = e.end ? parseD(e.end) : parseD(e.start);
+    let endT = new Date(en.getFullYear(), en.getMonth(), en.getDate(), 23, 59, 59), timed = false;
+    const tm = eventTime(e);
+    if (tm) { timed = true; s = atHM(s, tm[0]); endT = tm[1] ? atHM(en, tm[1]) : new Date(+s + 60*6e4); en = new Date(endT); }
+    return { id: e.start+"-"+i, t: e.t, cat: e.cat, s, e: en, endT, timed };
   });
 }
 let stars = new Set(store.get("bf-stars", []));
@@ -1188,6 +1205,7 @@ const saveStars = () => store.set("bf-stars", [...stars]);
 function fmtRange(ev){
   const a = ev.s, b = ev.e;
   const d1 = DOW[a.getDay()]+", "+MON[a.getMonth()]+" "+a.getDate();
+  if (ev.timed) return d1+" · "+a.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
   if (+a === +b) return d1;
   return d1+" – "+(a.getMonth()===b.getMonth() ? b.getDate() : MON[b.getMonth()]+" "+b.getDate());
 }
@@ -1197,7 +1215,7 @@ function parts(ms){
 }
 function cdText(ev, now){
   if (now > ev.endT) return {main:"Done", sub:"past"};
-  if (now >= ev.s) return {main:"Now", sub:"happening"};
+  if (now >= ev.s) return {main:"Now", sub: ev.timed ? "in class" : "happening"};
   const p = parts(ev.s - now);
   if (p.d >= 1) return {main: p.d+"d "+p.h+"h", sub: p.d===1 ? "tomorrow" : "to go"};
   return {main: p.h+"h "+p.m+"m", sub:"today"};

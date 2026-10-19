@@ -1,13 +1,13 @@
 {
- "updated": "2026-10-15T22:30:00-04:00",
+ "updated": "2026-10-19T07:30:00-04:00",
  "team": "Buffalo Bills",
  "record": {
-  "w": 4,
+  "w": 5,
   "l": 1
  },
  "standing": "Leads the AFC East",
- "pf": 164,
- "pa": 141,
+ "pf": 197,
+ "pa": 171,
  "results": [
   {
    "wk": 1,
@@ -50,24 +50,33 @@
    "os": 34,
    "res": "W",
    "note": "OT, Monday night"
+  },
+  {
+   "wk": 6,
+   "date": "Oct 18",
+   "opp": "at Las Vegas",
+   "bs": 33,
+   "os": 30,
+   "res": "W",
+   "note": "Recovered the onside kick"
   }
  ],
  "afcEast": [
   {
    "team": "Buffalo Bills",
-   "w": 4,
+   "w": 5,
    "l": 1,
    "me": true
   },
   {
    "team": "New England Patriots",
-   "w": 3,
+   "w": 4,
    "l": 2
   },
   {
    "team": "New York Jets",
    "w": 2,
-   "l": 3
+   "l": 4
   },
   {
    "team": "Miami Dolphins",
@@ -76,47 +85,40 @@
   }
  ],
  "lastGame": {
-  "title": "Bills 37, Rams 34 (OT)",
+  "title": "Bills 33, Raiders 30",
   "stats": [
-   "436 total yards, 234 on the ground (37 carries, 6.3 per carry)",
-   "Three rushing touchdowns: James Cook twice, Josh Allen once",
-   "Allen 7-yard TD pass to Keon Coleman in the third quarter",
-   "Tyler Bass kicked three field goals, including the 45-yarder in overtime",
-   "13 penalties for 112 yards and one lost fumble"
+   "Josh Allen: 255 pass yds, 2 TD — his 258th career TD pass ties Jim Kelly's Bills record",
+   "James Cook: 22 carries, 95 yds, TD + 3 catches for 58 yds",
+   "TD catches for Keon Coleman (shovel pass) and Khalil Shakir (9-yd screen)",
+   "Dorian Williams: first career interception, off Kirk Cousins",
+   "Tyler Bass 38-yd FG made it 33-23; Bills recovered the onside kick to close it"
   ]
  },
  "news": [
   {
-   "h": "Bills outlast Rams in overtime",
-   "b": "Buffalo won 37-34 on Monday Night Football at SoFi Stadium, a Bass field goal deciding it in overtime. The Bills are 4-1 and lead the AFC East."
+   "h": "Bills hold off Raiders in Vegas",
+   "b": "Buffalo won 33-30 at Allegiant Stadium, then recovered Las Vegas's onside kick to seal it. The Bills are 5-1."
   },
   {
-   "h": "Raiders next, then a bye",
-   "b": "Buffalo visits Las Vegas on Sunday, Oct 18 (4:25 PM ET) and is off in Week 7 before hosting Baltimore on Nov 1."
+   "h": "Allen ties Jim Kelly",
+   "b": "Allen's touchdown pass to Keon Coleman was his 258th in the regular season and playoffs, tying Kelly for the most in franchise history."
+  },
+  {
+   "h": "Bye week, then Baltimore",
+   "b": "Buffalo is off this week and hosts the Ravens on Sunday, Nov 1 at 1 PM ET."
   },
   {
    "h": "Division picture",
-   "b": "New England is 3-2 (it beat the Bills 29-26 on Oct 4), the Jets are 2-3 and Miami is 0-5."
-  },
-  {
-   "h": "Big games ahead",
-   "b": "Monday night at 5-0 Minnesota on Nov 9, Thanksgiving night vs. Kansas City, and Christmas Day at Denver."
+   "b": "New England beat the Jets 26-19 to reach 4-2, a game back of Buffalo. The Jets are 2-4 and Miami is 0-5."
   }
  ],
  "schedule": [
-  {
-   "kick": "2026-10-18T16:25-04:00",
-   "opp": "Las Vegas Raiders",
-   "home": false,
-   "venue": "Allegiant Stadium",
-   "note": "Bye week follows"
-  },
   {
    "kick": "2026-11-01T13:00-05:00",
    "opp": "Baltimore Ravens",
    "home": true,
    "venue": "",
-   "note": ""
+   "note": "Home after the bye"
   },
   {
    "kick": "2026-11-09T20:15-05:00",
@@ -189,5 +191,5 @@
    "note": "Date and time may flex"
   }
  ],
- "source": "NFL data feed and news roundup, Oct 15, 2026. Refreshes when the daily update runs."
+ "source": "Buffalobills.com recap and Fox Sports standings, Oct 19, 2026. Refreshes with the daily update."
 }
