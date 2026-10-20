@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-19T07:30:00-04:00",
+ "updated": "2026-10-20T06:55:00-04:00",
  "team": "Buffalo Bills",
  "record": {
   "w": 5,
@@ -96,12 +96,12 @@
  },
  "news": [
   {
-   "h": "Bills hold off Raiders in Vegas",
-   "b": "Buffalo won 33-30 at Allegiant Stadium, then recovered Las Vegas's onside kick to seal it. The Bills are 5-1."
+   "h": "Gardner-Johnson suspended",
+   "b": "The NFL suspended safety C.J. Gardner-Johnson one game for spitting at an opponent in Las Vegas. He is set to miss the Ravens game unless an appeal succeeds."
   },
   {
-   "h": "Allen ties Jim Kelly",
-   "b": "Allen's touchdown pass to Keon Coleman was his 258th in the regular season and playoffs, tying Kelly for the most in franchise history."
+   "h": "Moore and Oliver eye return",
+   "b": "WR DJ Moore (shoulder) and DT Ed Oliver (knee) have missed two games; Joe Brady hopes both are back after the bye."
   },
   {
    "h": "Bye week, then Baltimore",
@@ -191,5 +191,5 @@
    "note": "Date and time may flex"
   }
  ],
- "source": "Buffalobills.com recap and Fox Sports standings, Oct 19, 2026. Refreshes with the daily update."
+ "source": "Buffalobills.com (Oct 19) and Fox Sports standings, Oct 20, 2026. Refreshes with the daily update."
 }

@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-19T06:50:00-04:00",
+ "updated": "2026-10-20T06:55:00-04:00",
  "flights": [
   {
    "from": "LGA",
@@ -485,102 +485,110 @@
   ]
  },
  "location": {
-  "name": "Uluru",
-  "wiki": "Uluru",
-  "country": "Australia",
-  "region": "Uluṟu-Kata Tjuṯa National Park, Northern Territory",
-  "lat": -25.345,
-  "lon": 131.036,
-  "tagline": "A sandstone monolith that glows red in the middle of the Australian outback.",
-  "intro": "Uluru, also known as Ayers Rock, is a huge sandstone monolith rising from the flat desert of central Australia, about 335 km south-west of Alice Springs. Sacred to the Aṉangu people, it is the centerpiece of Uluṟu-Kata Tjuṯa National Park, a UNESCO World Heritage Site, and famous for turning a fiery red at sunrise and sunset.",
+  "name": "Mont-Saint-Michel",
+  "wiki": "Mont-Saint-Michel",
+  "country": "France",
+  "region": "Manche, Normandy",
+  "lat": 48.636,
+  "lon": -1.511,
+  "tagline": "A medieval abbey crowning a tidal island that the sea surrounds twice a day.",
+  "intro": "Mont-Saint-Michel is a rocky tidal island about a kilometre off the Normandy coast, topped by a Benedictine abbey whose spire rises to 92 m above sea level. Legend says the archangel Michael told Bishop Aubert of Avranches to build a church here in 708. Today it draws more than three million visitors a year, making it France's most-visited attraction outside Paris.",
   "stats": [
    {
-    "label": "Height above plain",
-    "value": "≈348 m (1,142 ft)"
+    "label": "Highest point",
+    "value": "92 m (302 ft)"
    },
    {
-    "label": "Perimeter",
-    "value": "9.4 km (5.8 mi)"
+    "label": "Tidal range",
+    "value": "≈14 m (46 ft)"
    },
    {
-    "label": "Rock age",
-    "value": "≈550–530 million years"
+    "label": "Residents",
+    "value": "23 (2023)"
    },
    {
     "label": "UNESCO World Heritage",
-    "value": "Since 1987"
+    "value": "Since 1979"
    }
   ],
   "facts": [
-   "Most of Uluru is hidden: the rock layers continue below the surrounding plain, and their full underground extent is unknown.",
-   "Its red glow comes from iron oxide — essentially rust — in the outer layer of the feldspar-rich sandstone.",
-   "Some visitors who took pieces of the rock have mailed them back, convinced the souvenirs brought them bad luck.",
-   "Climbing Uluru has been banned since 26 October 2019, exactly 34 years after the land was handed back to its traditional owners in 1985.",
-   "During rare heavy rain, temporary waterfalls pour down the sides of the rock."
+   "During the Hundred Years' War the English besieged it twice (1423 and 1433) and failed both times; in 1434 they left behind two wrought-iron bombards.",
+   "After the French Revolution the abbey became a prison until 1863, and in 1944 it briefly held collaborators after the liberation.",
+   "The light footbridge to the island, opened in 2014 for €209 million, lets the tide flow freely around it; a 'supertide' on 21 March 2015 submerged it completely.",
+   "Medieval pilgrims called it 'St. Michael in peril of the sea' because the incoming tide could trap those crossing the sands.",
+   "Artist Alan Lee drew on the mount when designing Minas Tirith for The Lord of the Rings."
   ],
-  "bestTime": "May–September (the southern winter) for mild days; summer often brings extreme heat and some trails close early in the day.",
-  "gettingThere": "No nonstop from New York: fly to Sydney or Melbourne (usually one stop via the West Coast), then take a domestic flight to Ayers Rock Airport near Yulara, a short drive from the park.",
-  "tip": "Save time for Kata Tjuṯa, 25 km west — its domed rock formations are just as striking and see far fewer visitors than Uluru."
+  "bestTime": "April–June or September–October for fewer crowds; check the tide calendar to catch a high spring tide surrounding the island.",
+  "gettingThere": "Fly nonstop from New York to Paris, take the TGV to Rennes, then a shuttle bus to the mount — or drive about four hours from Paris.",
+  "tip": "Stay overnight on or near the island: once the day-trippers leave in the evening, the lanes and ramparts are nearly empty. Only cross the bay sands with a certified guide."
  },
  "flightsNote": "Real fares from Kayak searches run Oct 19 with your exact pass window, JFK/LGA/EWR only.",
  "markets": {
-  "asOf": "Fri Oct 16 close",
-  "story": "Tech led a broad sell-off as hotter CPI data pushed Treasury yields higher and revived worries about how the AI build-out is financed, with CoreWeave's debt in focus. Energy rose as oil prices climbed.",
+  "asOf": "Mon Oct 19 close",
+  "story": "AI and chip stocks recovered part of last week's steep losses, with semiconductors snapping an eight-day losing streak, while blue chips lagged ahead of a busy earnings week. Oil rose after Houthi claims of attacks on Saudi facilities.",
   "indices": [
    {
     "name": "Dow",
-    "value": "52,002",
-    "chg": -0.34
+    "value": "51,966",
+    "chg": -0.07
    },
    {
     "name": "S&P 500",
-    "value": "7,659",
-    "chg": -1.09
+    "value": "7,691",
+    "chg": 0.41
    },
    {
     "name": "Nasdaq",
-    "value": "26,140",
-    "chg": -2.14
+    "value": "26,431",
+    "chg": 1.11
    },
    {
     "name": "Russell 2000",
-    "value": "2,720",
-    "chg": -1.72
+    "value": "2,728",
+    "chg": 0.25
    }
   ],
   "movers": [
    {
+    "sym": "AMZN",
+    "move": "+4.95%",
+    "dir": 1,
+    "why": "Led the megacap tech rebound after Friday's AI sell-off."
+   },
+   {
+    "sym": "DDOG",
+    "move": "+5.48%",
+    "dir": 1,
+    "why": "Bernstein upgraded it to Outperform."
+   },
+   {
+    "sym": "WDC",
+    "move": "+5.20%",
+    "dir": 1,
+    "why": "Memory stocks bounced as yields eased and it drew an upgrade before earnings."
+   },
+   {
     "sym": "CRWV",
-    "move": "−12% intraday",
-    "dir": -1,
-    "why": "Its roughly $50 billion debt load became the focus of AI-financing worries."
-   },
-   {
-    "sym": "TWLO",
-    "move": "−13% intraday",
-    "dir": -1,
-    "why": "Profit-taking after its S&P 500 inclusion plus valuation concerns."
-   },
-   {
-    "sym": "MRNA",
-    "move": "−10%",
-    "dir": -1,
-    "why": "Investors trimmed ahead of Phase 3 data on its mRNA cancer vaccine."
-   },
-   {
-    "sym": "HST",
-    "move": "+3.4%",
+    "move": "Upgrade",
     "dir": 1,
-    "why": "REITs rallied broadly as money rotated out of tech."
+    "why": "Goldman Sachs upgraded CoreWeave to Buy after a steep slide on financing worries."
    },
    {
-    "sym": "NUE",
-    "move": "+2.6%",
-    "dir": 1,
-    "why": "Rising U.S. steel prices and optimism ahead of Oct. 26 earnings."
+    "sym": "AMP",
+    "move": "−3.20%",
+    "dir": -1,
+    "why": "BofA Securities downgraded it two notches to Underperform."
    }
   ],
   "lines": [
+   {
+    "game": "Baltimore Ravens @ Buffalo Bills",
+    "kick": "2026-11-01T18:00:00Z",
+    "spread": "BUF −2.5",
+    "total": "51.5",
+    "ml": "BUF −135 · BAL +125",
+    "bills": true
+   },
    {
     "game": "Indiana @ Michigan",
     "kick": "2026-10-24T16:00:00Z",
@@ -596,6 +604,6 @@
     "p": 72
    }
   ],
-  "sources": "Market data: TheStreet market wrap (Oct 16). Lines: FanDuel via SI (Oct 17). Win odds: Dimers model (Oct 18). Bills are on their bye this week."
+  "sources": "Market data: Investrade market review and AP index table (Oct 19); movers: TheStreet (Oct 19). Lines: Bills–Ravens via Dimers best odds (Oct 20); Indiana–Michigan FanDuel via SI (Oct 17). Win odds: Dimers model (Oct 18)."
  }
 }
