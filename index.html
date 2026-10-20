@@ -247,11 +247,6 @@ main{margin-left:var(--side);min-height:100vh;padding-block:44px 0;padding-left:
 .res-row .w{color:var(--c-break)}.res-row .l{color:var(--c-due)}.res-row b{font:700 15px var(--mono)}
 .news-i h4{font-size:16px;margin-bottom:4px}.news-i p{color:var(--muted);font-size:14px}
 .list-tight{margin:10px 0 0;padding-left:18px;color:var(--muted);font-size:14px;display:grid;gap:4px}
-.todo{margin-top:16px;padding:20px 22px;border-left:4px solid var(--c-exam)}
-.todo label{display:flex;gap:12px;align-items:flex-start;padding:9px 0;cursor:pointer;border-top:1px solid var(--line)}
-.todo label:first-of-type{border-top:0}
-.todo input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent);flex:none}
-.todo input:checked+span{color:var(--faint);text-decoration:line-through}
 /* study */
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .tabs button{border:1px solid var(--line);background:var(--surface);color:var(--muted);padding:8px 14px;border-radius:999px;font:600 13.5px var(--body)}
@@ -473,6 +468,13 @@ footer p{max-width:70ch}
 .gg-wind{font-size:14px;color:var(--muted);display:flex;align-items:center;gap:8px}
 .gg-wind svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:2.2;transition:transform .3s}
 .gg-msg{font-size:14.5px;min-height:2.6em}
+.gg-meter{position:relative;height:30px;border-radius:8px;background:var(--surface-2);border:1px solid var(--line);overflow:hidden;cursor:pointer;touch-action:manipulation}
+.gg-meter .gg-fill{position:absolute;top:0;bottom:0;left:9.09%;width:0;background:color-mix(in srgb,var(--accent) 30%,transparent)}
+.gg-meter .gg-sweet{position:absolute;top:0;bottom:0;left:12.27%;width:4.1%;background:color-mix(in srgb,var(--c-break) 55%,transparent);border-left:1px solid var(--c-break);border-right:1px solid var(--c-break)}
+.gg-meter .gg-target{position:absolute;top:0;bottom:0;width:3px;margin-left:-1.5px;background:var(--c-exam)}
+.gg-meter .gg-needle{position:absolute;top:-2px;bottom:-2px;width:3px;margin-left:-1.5px;background:var(--fg);left:9.09%;box-shadow:0 0 0 1px var(--surface)}
+.gg-meter .gg-pmark{position:absolute;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--accent)}
+.gg-help{font-size:12.5px;color:var(--muted);line-height:1.45}
 .gg-msg b{color:var(--accent)}
 
 /* ---------- place ---------- */
@@ -732,9 +734,7 @@ body.gate-open{overflow:hidden}
 /* scroll progress */
 #sprog{position:fixed;top:0;left:0;right:0;height:3px;z-index:70;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--accent),var(--accent-strong),#ffb36b);pointer-events:none}
 /* to-do check pop + all-done glow */
-.todo input:checked{animation:pop .35s cubic-bezier(.3,1.6,.5,1)}
 @keyframes pop{40%{transform:scale(1.35)}}
-.todo.all-done{animation:doneGlow 1.6s ease-out}
 @keyframes doneGlow{30%{box-shadow:0 0 0 2px var(--c-break),0 0 50px -6px var(--c-break)}}
 .confetti{position:fixed;width:8px;height:12px;z-index:80;pointer-events:none;border-radius:2px;animation:conf 1.4s cubic-bezier(.2,.6,.4,1) forwards}
 @keyframes conf{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
@@ -829,7 +829,6 @@ body.gate-open{overflow:hidden}
   <div class="page-h"><span class="eyebrow" id="briefDate">Today</span><h2 id="briefHello">Good morning, Braeden.</h2><p id="briefSub">Here's your day at a glance.</p></div>
   <div class="cd-mini" id="cdMini"></div>
   <div class="panel quote" id="quoteCard"><span class="eyebrow">Quote of the day</span><blockquote id="quoteText">…</blockquote><cite id="quoteBy"></cite></div>
-  <div class="panel todo" id="todoCard" hidden><div class="sec-h" style="margin:0 0 10px"><h3>To do</h3><span class="chip" id="todoCount"></span></div><div id="todoList"></div></div>
   <div class="brief-grid sec" style="margin-top:16px">
     <div class="panel wx" id="wxCard">
       <span class="eyebrow">West Point weather</span>
@@ -922,8 +921,9 @@ body.gate-open{overflow:hidden}
         <div class="clubs" id="ggClubs"></div>
         <label class="gg-lbl" for="ggAim">Aim <span id="ggAimVal">0°</span></label>
         <input type="range" id="ggAim" min="-45" max="45" value="0">
-        <label class="gg-lbl" for="ggPow">Power <span id="ggPowVal">100%</span></label>
-        <input type="range" id="ggPow" min="40" max="100" value="100">
+        <span class="gg-lbl">Swing meter <span id="ggPowVal">ready</span></span>
+        <div class="gg-meter" id="ggMeter" role="button" tabindex="0" aria-label="Swing meter: tap to start, tap to set power, tap in the green zone to strike"><div class="gg-fill" id="ggFill"></div><div class="gg-sweet"></div><div class="gg-pmark" id="ggPMark" hidden></div><div class="gg-target" id="ggTarget" hidden></div><div class="gg-needle" id="ggNeedle"></div></div>
+        <p class="gg-help">Tap <b>Swing</b> (or Space) three times: start, set power as the needle climbs, then strike as it comes back through the green zone. Early pushes right, late pulls left. The line ignores wind, so play it yourself.</p>
         <span class="gg-lbl">Shot shape</span>
         <div class="seg" id="ggShape"><button type="button" data-shape="-1">Draw</button><button type="button" data-shape="0" class="on">Straight</button><button type="button" data-shape="1">Fade</button></div>
         <div class="gg-wind" id="ggWind"></div>
@@ -1281,7 +1281,7 @@ function paintAuth(){
 }
 function applyPrivate(P){
   PRIVATE = P;
-  SCHED = P.sched; RES = P.res; COURSES = P.courses; MAP.places = P.places; VISITED_STATES = P.visited; STUDY = P.study || {}; TODO = P.todo || [];
+  SCHED = P.sched; RES = P.res; COURSES = P.courses; MAP.places = P.places; VISITED_STATES = P.visited; STUDY = P.study || {};
   buildEvents();
   hubs = MAP.places.filter(p => p.type === "hub");
   ZOOMS = { all:[0,0,MAP.W,MAP.H], ne:fitBox(["New York","Northeast","Mid-Atlantic"], 40), ny:fitBox(["New York"], 22) };
@@ -1289,7 +1289,7 @@ function applyPrivate(P){
   $("#privPersonal").innerHTML = P.html.personal;
   paintAuth();
   renderHome(); renderSched(); renderResume(); renderCourses(); renderTravel(); renderDaily(); renderStudy(); renderFinance();
-  if (P.finKey) loadFinance(P.finKey);
+  if (P.finKey){ loadFinance(P.finKey); loadStudy(); }
 }
 async function bootAuth(){
   let k = null;
@@ -2011,24 +2011,6 @@ function renderFootball(){
 }
 
 
-/* ---------- to-do checklist (items live in the encrypted data) ---------- */
-let TODO = [];
-const todoDone = () => new Set(store.get("bf-todo-done", []));
-function renderTodo(){
-  const card = $("#todoCard"); if (!card) return;
-  const today = key(new Date()), done = todoDone();
-  const items = (TODO||[]).filter(t => t.date <= today);
-  card.hidden = !items.length; if (!items.length) return;
-  $("#todoCount").textContent = items.filter(t => done.has(t.id)).length+" / "+items.length;
-  $("#todoList").innerHTML = items.map(t => '<label><input type="checkbox" data-todo="'+esc(t.id)+'"'+(done.has(t.id)?' checked':'')+'><span>'+esc(t.t)+'</span></label>').join("");
-}
-document.addEventListener("change", e => {
-  const c = e.target.closest("[data-todo]"); if (!c) return;
-  const d = todoDone(); c.checked ? d.add(c.dataset.todo) : d.delete(c.dataset.todo);
-  store.set("bf-todo-done", [...d]); renderTodo();
-  const items = (TODO||[]).filter(t => t.date <= key(new Date()));
-  if (c.checked && items.length && items.every(t => d.has(t.id))) celebrate($("#todoCard"));
-});
 
 /* ---------- bills / nfl ---------- */
 let BILLS = null;
@@ -2077,24 +2059,39 @@ function rich(s){
     (p.length > 1 && p[0] === "`" && p.endsWith("`")) ? '<code>'+esc(p.slice(1,-1))+'</code>' :
     esc(p).replace(/\\\$/g, "$")).join("");
 }
-let STUDY = {};
+let STUDY = {}, STUDY_DAILY = null;
+/* data/study.enc: today's lesson decks, refreshed every morning by the daily task (sealed with the same public key as finance.enc) */
+async function loadStudy(){
+  if (!finKey) return;
+  try{
+    const r = await fetch("data/study.enc", {cache: "no-store"}); if (!r.ok) return;
+    const D = await openFin(await r.json()); if (!D || !D.courses) return;
+    STUDY_DAILY = D; STUDY = {...STUDY, ...D.courses};
+    const today = key(new Date()), first = Object.keys(D.courses).find(c => D.courses[c].lessonDate === today) || Object.keys(D.courses)[0];
+    if (first && store.get("bf-stday", "") !== today){ stCode = first; store.set("bf-stday", today); }
+    Object.keys(D.courses).forEach(c => { delete stState[c]; });
+    renderStudy();
+  }catch(e){}
+}
 let stCode = store.get("bf-stcode", ""), stMode = store.get("bf-stmode", "cards");
 const stState = {};   // per course: {order, i, flip}
-const stKnown = code => new Set(store.get("bf-known-"+code, []));
+const knKey = code => "bf-known-"+code+(STUDY[code] && STUDY[code].lessonDate ? "-"+STUDY[code].lessonDate : "");
+const stKnown = code => new Set(store.get(knKey(code), []));
 function stOrder(code, shuffle){
   const n = (STUDY[code].cards||[]).length, o = [...Array(n).keys()];
   if (shuffle) for (let i = n-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [o[i],o[j]] = [o[j],o[i]]; }
   return o;
 }
 function renderStudy(){
-  const codes = Object.keys(STUDY);
+  const today = key(new Date()), rank = c => { const d = STUDY[c].lessonDate || ""; return d === today ? 0 : d > today ? 1 : 2; };
+  const codes = Object.keys(STUDY).sort((a,b) => rank(a) - rank(b) || (STUDY[a].lessonDate||"9").localeCompare(STUDY[b].lessonDate||"9"));
   if (!codes.length){ $("#studyTabs").innerHTML = ""; $("#studyBody").innerHTML = '<div class="panel empty-state">Unlock to see your decks.</div>'; return; }
   if (!STUDY[stCode]) stCode = codes[0];
-  $("#studyTabs").innerHTML = codes.map(c => '<button type="button" role="tab" class="'+(c===stCode?'on':'')+'" data-stc="'+c+'">'+esc(c)+' · '+esc(STUDY[c].short)+'</button>').join("");
+  $("#studyTabs").innerHTML = codes.map(c => '<button type="button" role="tab" class="'+(c===stCode?'on':'')+'" data-stc="'+c+'">'+esc(c)+' · '+esc(STUDY[c].short)+(STUDY[c].lessonDate===today?' · today':'')+'</button>').join("");
   const S = STUDY[stCode];
   if (!stState[stCode]) stState[stCode] = {order: stOrder(stCode, false), i: 0, flip: false};
   const modes = [["cards","Flashcards ("+(S.cards||[]).length+")"],["probs","Practice problems ("+(S.problems||[]).length+")"],["recap","Recap &amp; coming up"]];
-  let html = '<div class="st-head"><div><span class="eyebrow">'+esc(S.term)+'</span><h3>'+esc(S.title)+'</h3></div><div class="seg">'+modes.map(m => '<button type="button" data-stm="'+m[0]+'" class="'+(m[0]===stMode?'on':'')+'">'+m[1]+'</button>').join("")+'</div></div>';
+  let html = '<div class="st-head"><div><span class="eyebrow">'+esc(S.lesson ? S.lesson+(S.lessonDate===today?' · Today':'') : S.term)+'</span><h3>'+esc(S.title)+'</h3>'+(S.lesson && S.term ? '<p class="fine" style="margin:4px 0 0">'+esc(S.term)+(STUDY_DAILY && STUDY_DAILY.updated ? ' · refreshed '+esc(STUDY_DAILY.updated.slice(0,10)) : '')+'</p>' : '')+'</div><div class="seg">'+modes.map(m => '<button type="button" data-stm="'+m[0]+'" class="'+(m[0]===stMode?'on':'')+'">'+m[1]+'</button>').join("")+'</div></div>';
   if (stMode === "cards"){
     const st = stState[stCode], known = stKnown(stCode);
     if (!(S.cards||[]).length) html += '<div class="panel empty-state">No cards yet.</div>';
@@ -2136,10 +2133,10 @@ function stFc(act){
   if (act === "flip"){ st.flip = !st.flip; const fi = $("#flash .fi"); if (fi){ fi.classList.toggle("flipped", st.flip); return; } }
   else if (act === "next"){ st.i = (st.i+1) % n; st.flip = false; }
   else if (act === "prev"){ st.i = (st.i-1+n) % n; st.flip = false; }
-  else if (act === "got"){ known.add(idx); store.set("bf-known-"+stCode, [...known]); st.i = (st.i+1) % n; st.flip = false; }
-  else if (act === "again"){ known.delete(idx); store.set("bf-known-"+stCode, [...known]); st.i = (st.i+1) % n; st.flip = false; }
+  else if (act === "got"){ known.add(idx); store.set(knKey(stCode), [...known]); st.i = (st.i+1) % n; st.flip = false; }
+  else if (act === "again"){ known.delete(idx); store.set(knKey(stCode), [...known]); st.i = (st.i+1) % n; st.flip = false; }
   else if (act === "shuffle"){ st.order = stOrder(stCode, true); st.i = 0; st.flip = false; }
-  else if (act === "reset"){ store.set("bf-known-"+stCode, []); }
+  else if (act === "reset"){ store.set(knKey(stCode), []); }
   renderStudy();
 }
 addEventListener("keydown", e => {
@@ -2298,7 +2295,6 @@ function renderBrief(){
   if (f){ $("#bFlight").textContent = "$"+f.price+" to "+f.city.split(",")[0]; $("#bFlightSub").textContent = fitL.length ? f.from+" · "+fmtDay(f.depart)+" · fits your pass" : "Closest deal today · see weekend options"; }
   renderBillsTile();
   renderQuote();
-  renderTodo();
   if (DAILY.location){ $("#bPlace").textContent = DAILY.location.name; $("#bPlaceSub").textContent = DAILY.location.tagline || DAILY.location.region; }
   const wk = new Date(now); wk.setDate(wk.getDate()+7);
   const due = upcoming(now).filter(e => (e.cat==="due"||e.cat==="exam") && e.s < wk);
@@ -2448,7 +2444,7 @@ const GG = (function(){
     if (st.trail.length > 1){ for (let i = 0; i+1 < st.trail.length; i += 2){ ctx.beginPath(); ctx.moveTo(st.trail[i].x, st.trail[i].y); ctx.lineTo(st.trail[i+1].x, st.trail[i+1].y); ctx.stroke(); } }
     if (!st.done){
       const ang = Math.atan2(pin.y - st.ball.y, pin.x - st.ball.x) + aimDeg*Math.PI/180, c = CLUBS[st.club];
-      const dist = (c[1] || Math.max(10, ydsTo(st.ball))) * (+$("#ggPow").value/100) * ypy;
+      const dist = (c[1] || Math.max(10, ydsTo(st.ball))) * prevPow() * ypy;
       const ex = st.ball.x + Math.cos(ang)*dist, ey = st.ball.y + Math.sin(ang)*dist;
       const lat = c[1] ? shape * dist * .12 : 0, mx = (st.ball.x+ex)/2 - Math.sin(ang)*lat*1.6, my = (st.ball.y+ey)/2 + Math.cos(ang)*lat*1.6;
       ctx.strokeStyle = css("--accent"); ctx.beginPath(); ctx.moveTo(st.ball.x, st.ball.y); ctx.quadraticCurveTo(mx, my, ex - Math.sin(ang)*lat, ey + Math.cos(ang)*lat); ctx.stroke();
@@ -2477,53 +2473,91 @@ const GG = (function(){
     $("#ggWeek").innerHTML = html;
     $("#ggStreak").textContent = played ? played+" played · "+(tot===0?"E":(tot>0?"+":"")+tot) : "Play today's hole";
   }
-  function finish(){
-    st.done = true; const best = getDay(dayKey);
+  function finish(word){
+    st.done = true; cancelAnimationFrame(mt.raf); mt.phase = "idle"; const best = getDay(dayKey);
     if (!best || st.strokes < best.s) store.set("bf-golf2-"+dayKey, {s: st.strokes, p: par});
     $("#ggBest").textContent = getDay(dayKey).s;
-    msg("<b>"+scoreName(st.strokes)+"!</b> You holed out in "+st.strokes+". New hole tomorrow."); renderWeek(); draw();
+    msg((word ? word+". " : "")+"<b>"+scoreName(st.strokes)+"!</b> You holed out in "+st.strokes+". New hole tomorrow."); renderWeek(); draw();
   }
   function penalty(){ st.strokes++; $("#ggStrokes").textContent = st.strokes; }
-  function swing(){
+  /* --- swing meter: start, power, strike. Outcome is fully determined by the player's timing --- */
+  const MIN = -10, MAX = 100, IMPACT = 6, SWEET = 2.25;
+  const mt = {phase:"idle", p:IMPACT, pow:0, raf:0, t0:0};
+  const pct = v => ((v - MIN) / (MAX - MIN) * 100) + "%";
+  const putting = () => CLUBS[st.club][0] === "Putt";
+  const puttMax = () => Math.max(20, ydsTo(st.ball)*3*1.5);
+  const puttNeed = () => Math.min(1, (ydsTo(st.ball)*3 + 1) / puttMax());
+  function prevPow(){ if (mt.phase === "up") return Math.max(.05, mt.p/100); if (mt.phase === "down") return mt.pow; return putting() ? puttNeed() : 1; }
+  function paintMeter(){
+    $("#ggNeedle").style.left = pct(mt.p);
+    const f = $("#ggFill"); f.style.left = pct(0); f.style.width = (mt.phase==="up" ? Math.max(0,mt.p) : mt.phase==="down" ? mt.pow*100 : 0) / (MAX-MIN) * 100 + "%";
+    const pm = $("#ggPMark"); pm.hidden = mt.phase !== "down"; pm.style.left = pct(mt.pow*100);
+    const tg = $("#ggTarget"); tg.hidden = !putting() || st.done; tg.style.left = pct(puttNeed()*100);
+    $("#ggPowVal").textContent = mt.phase==="up" ? Math.round(Math.max(0,mt.p))+"%" : mt.phase==="down" ? Math.round(mt.pow*100)+"% · strike!" : putting() ? "match the orange mark" : "ready";
+    $("#ggSwing").textContent = mt.phase==="idle" ? "Swing" : mt.phase==="up" ? "Set power" : "Strike";
+  }
+  function loop(ts){
+    if (!mt.t0) mt.t0 = ts; const dt = Math.min(50, ts - mt.t0); mt.t0 = ts;
+    if (mt.phase === "up"){ mt.p += dt * (putting() ? .085 : .11); if (mt.p >= MAX){ mt.p = MAX; mt.pow = 1; mt.phase = "down"; } }
+    else if (mt.phase === "down"){ mt.p -= dt * (putting() ? .1 : .14); if (mt.p <= MIN){ mt.p = MIN; return strike(MIN - IMPACT); } }
+    paintMeter(); draw(); mt.raf = requestAnimationFrame(loop);
+  }
+  function meterTap(){
     if (st.done) return;
-    const c = CLUBS[st.club], pow = +$("#ggPow").value/100;
+    if (mt.phase === "idle"){ mt.phase = "up"; mt.p = 0; mt.t0 = 0; cancelAnimationFrame(mt.raf); mt.raf = requestAnimationFrame(loop); msg("Backswing… tap to set power."); }
+    else if (mt.phase === "up"){ mt.pow = Math.max(.02, mt.p/100); mt.phase = "down"; msg("Now strike it in the green zone."); }
+    else if (mt.phase === "down") strike(mt.p - IMPACT);
+  }
+  function strikeWord(e){ const a = Math.abs(e); return a <= SWEET*.5 ? "Pure strike" : a <= SWEET ? "Good contact" : a <= 6 ? (e>0?"A touch early":"A touch late") : (e>0?"Way early":"Way late"); }
+  function strike(e){
+    cancelAnimationFrame(mt.raf); const pow = mt.pow; mt.phase = "idle"; mt.p = IMPACT; paintMeter();
+    const ce = Math.abs(e) <= SWEET*.5 ? 0 : e;      // inside the pure band = dead straight
+    shoot(pow, ce, strikeWord(e));
+  }
+  function shoot(pow, e, word){
+    const c = CLUBS[st.club];
     st.strokes++; $("#ggStrokes").textContent = st.strokes;
     if (c[0]==="Putt"){
-      const ft = ydsTo(st.ball)*3, base = ft < 3 ? 1 : ft < 8 ? .75 : ft < 20 ? .4 : ft < 40 ? .18 : .06;
-      const powErr = Math.abs(pow - Math.min(1, .4 + ft/80)), aimErr = Math.abs(aimDeg - idealBreak());
-      const p = base * (powErr < .08 ? 1.15 : powErr < .18 ? .85 : .5) * (aimErr <= 2 ? 1.15 : aimErr <= 5 ? .75 : .3);
-      if (ft < 2.5 || Math.random() < p){ st.trail.push({...st.ball}, {...pin}); st.ball = {...pin}; return finish(); }
-      const long = pow > Math.min(1, .4 + ft/80);
-      const left = Math.max(1, ft * (.1 + powErr*1.2 + Math.random()*.15)), a = Math.atan2(st.ball.y-pin.y, st.ball.x-pin.x) + (long ? Math.PI : 0) + (aimDeg - idealBreak())*Math.PI/90;
-      const prev = {...st.ball}; st.ball = {x: pin.x + Math.cos(a)*left/3*ypy, y: pin.y + Math.sin(a)*left/3*ypy}; st.trail.push(prev, {...st.ball});
-      aimDeg = 0; $("#ggAim").value = 0; $("#ggAimVal").textContent = "0°"; lieText(); draw();
-      return msg((long ? "Ran it by" : "Left it short")+". "+Math.round(left)+" ft coming back.");
+      const ft = ydsTo(st.ball)*3, roll = pow * puttMax();
+      const a = Math.atan2(pin.y - st.ball.y, pin.x - st.ball.x);
+      const defl = Math.sin(slope.dir - a) * slope.pct * 2.5;
+      const errDeg = aimDeg + defl + e*.35, er = errDeg*Math.PI/180;
+      const miss = Math.abs(ft * Math.sin(er)), reach = roll * Math.cos(er);
+      if (ft < 1.2 || (miss < .45 && reach >= ft - .2 && roll <= ft + 4.5)){ st.trail.push({...st.ball}, {...pin}); st.ball = {...pin}; return finish(word); }
+      const prev = {...st.ball}, ang = a + er;
+      st.ball = {x: prev.x + Math.cos(ang)*roll/3*ypy, y: prev.y + Math.sin(ang)*roll/3*ypy}; st.trail.push(prev, {...st.ball});
+      const left = ydsTo(st.ball)*3, long = reach > ft, side = Math.sin(er) > 0 ? "right" : "left";
+      aimDeg = 0; $("#ggAim").value = 0; $("#ggAimVal").textContent = "0°"; lieText(); paintMeter(); draw();
+      const why = (long && roll > ft + 4.5 && miss < .45) ? "Right line, but too firm — it lipped out" : (long ? "Ran it by" : "Left it short") + (miss >= .45 ? ", missed "+side : "");
+      return msg(word+". "+why+". "+(left<1?"Tap-in":Math.round(left)+" ft")+" coming back.");
     }
-    const lieMult = st.lie==="sand" ? .7 : st.lie==="rough" ? .85 : 1;
-    const ang = Math.atan2(pin.y - st.ball.y, pin.x - st.ball.x) + aimDeg*Math.PI/180 + (Math.random()-.5)*.08;
-    const carry = c[1] * pow * lieMult * (1 - shape*.04) * (.95 + Math.random()*.08) * ypy;
-    const drift = wind.mph * .9 * (c[1]/250), lat = shape * carry * .12;
+    const lieMult = st.lie==="sand" ? .7 : st.lie==="rough" ? .85 : 1, lieErr = st.lie==="sand" ? 1.8 : st.lie==="rough" ? 1.35 : 1;
+    const errDeg = e * .75 * lieErr;
+    const ang = Math.atan2(pin.y - st.ball.y, pin.x - st.ball.x) + (aimDeg + errDeg)*Math.PI/180;
+    const solid = Math.max(.7, 1 - Math.max(0, Math.abs(e) - SWEET) * .02);
+    const carry = c[1] * pow * lieMult * solid * (1 - shape*.04) * ypy;
+    const drift = wind.mph * .9 * (c[1]/250) * pow, lat = shape * carry * .12;
     const prev = {...st.ball};
     let land = {x: st.ball.x + Math.cos(ang)*carry - Math.sin(ang)*lat + Math.cos(wind.dir)*drift, y: st.ball.y + Math.sin(ang)*carry + Math.cos(ang)*lat + Math.sin(wind.dir)*drift};
     const tree = trees.find(tr => { for (let k = .55; k <= 1; k += .05){ const p = {x: prev.x + (land.x-prev.x)*k, y: prev.y + (land.y-prev.y)*k}; if (k > .85 && inside(p, tr)) return true; } return false; });
-    let note = "";
-    if (tree){ land = {x: tree.x + (Math.random()-.5)*10, y: tree.y + tree.r + 4}; note = "Clipped a tree and dropped straight down. "; }
+    let note = word + (Math.abs(errDeg) >= 1 ? " — "+(errDeg>0?"pushed ":"pulled ")+Math.abs(Math.round(errDeg))+"° "+(errDeg>0?"right":"left") : "") + ". ";
+    if (tree){ land = {x: tree.x, y: tree.y + tree.r + 4}; note += "Clipped a tree and dropped straight down. "; }
     else {
       const l0 = lieOf(land), rf = {fairway:.09, green:.04, rough:.02, sand:0}[l0] || 0, roll = carry * rf;
       const dx = land.x - prev.x, dy = land.y - prev.y, dl = Math.hypot(dx,dy) || 1;
       land = {x: land.x + dx/dl*roll, y: land.y + dy/dl*roll};
     }
     st.ball = land; st.trail.push(prev, {...land});
-    if (land.x < 8 || land.x > W-8 || land.y < 8 || land.y > H-8){ penalty(); st.ball = prev; draw(); return msg("Out of bounds. Stroke and distance, hit again."); }
+    if (land.x < 8 || land.x > W-8 || land.y < 8 || land.y > H-8){ penalty(); st.ball = prev; paintMeter(); draw(); return msg(note+"Out of bounds. Stroke and distance, hit again."); }
     const water = hazards.find(h => h.type==="water" && inside(land,h));
-    if (water){ penalty(); st.ball = {x: water.x + (water.x < W/2 ? water.r+12 : -water.r-12), y: water.y + 10}; st.lie = "rough"; lieText(); draw(); return msg("Splash. One-stroke penalty, dropped beside the water."); }
-    if (Math.hypot(land.x-pin.x, land.y-pin.y) < 3.5){ return finish(); }
+    if (water){ penalty(); st.ball = {x: water.x + (water.x < W/2 ? water.r+12 : -water.r-12), y: water.y + 10}; st.lie = "rough"; lieText(); paintMeter(); draw(); return msg(note+"Splash. One-stroke penalty, dropped beside the water."); }
+    if (Math.hypot(land.x-pin.x, land.y-pin.y) < 3.5){ return finish(word); }
     st.lie = lieOf(land);
-    st.club = suggest(); paintClubs(); aimDeg = 0; $("#ggAim").value = 0; $("#ggAimVal").textContent = "0°"; lieText(); draw();
-    msg(note + ({sand:"In the bunker. "+Math.round(ydsTo(land))+" yds left.", green:"On the green, "+Math.round(ydsTo(land)*3)+" ft away. Read the break and set your power.", fairway:"Fairway. "+Math.round(ydsTo(land))+" yds left.", rough:"In the rough. "+Math.round(ydsTo(land))+" yds left."}[st.lie]));
+    st.club = suggest(); paintClubs(); aimDeg = 0; $("#ggAim").value = 0; $("#ggAimVal").textContent = "0°"; lieText(); paintMeter(); draw();
+    msg(note + ({sand:"In the bunker (harder to strike clean). "+Math.round(ydsTo(land))+" yds left.", green:"On the green, "+Math.round(ydsTo(land)*3)+" ft away. Read the break, then match the orange mark.", fairway:"Fairway. "+Math.round(ydsTo(land))+" yds left.", rough:"In the rough (smaller margin for error). "+Math.round(ydsTo(land))+" yds left."}[st.lie]));
   }
   function paintClubs(){ $("#ggClubs").innerHTML = CLUBS.map((c,i) => '<button type="button" data-club="'+i+'" class="'+(i===st.club?'on':'')+'">'+c[0]+'<small>'+(c[1]?c[1]+'y':'green')+'</small></button>').join(""); }
-  function reset(){ st.ball = {...tee}; st.strokes = 0; st.done = false; st.trail = []; st.lie = "tee"; st.club = suggest(); aimDeg = 0; $("#ggAim").value = 0; $("#ggAimVal").textContent = "0°"; $("#ggStrokes").textContent = 0; paintClubs(); lieText(); draw(); msg("Pick a club, aim, shape it, and swing. Wind and trees matter."); }
+  function reset(){ st.ball = {...tee}; st.strokes = 0; st.done = false; st.trail = []; st.lie = "tee"; st.club = suggest(); aimDeg = 0; $("#ggAim").value = 0; $("#ggAimVal").textContent = "0°"; $("#ggStrokes").textContent = 0; cancelAnimationFrame(mt.raf); mt.phase = "idle"; mt.p = IMPACT; paintClubs(); lieText(); paintMeter(); draw(); msg("Pick a club, aim for the wind, then time your swing."); }
   function init(){
     cv = $("#ggCanvas");
     $("#ggTitle").textContent = name + " · Par "+par;
@@ -2531,11 +2565,12 @@ const GG = (function(){
     $("#ggPar").textContent = par; $("#ggBest").textContent = getDay(dayKey) ? getDay(dayKey).s : "—";
     const compass = ["E","SE","S","SW","W","NW","N","NE"][Math.round(((wind.dir % (2*Math.PI)) / (Math.PI/4))) % 8];
     $("#ggWind").innerHTML = '<svg viewBox="0 0 24 24" style="transform:rotate('+(wind.dir*180/Math.PI)+'deg)"><path d="M4 12h15M14 7l5 5-5 5"/></svg> Wind '+wind.mph+' mph, blowing '+compass;
-    $("#ggClubs").addEventListener("click", e => { const b = e.target.closest("[data-club]"); if (!b) return; st.club = +b.dataset.club; paintClubs(); draw(); });
+    $("#ggClubs").addEventListener("click", e => { const b = e.target.closest("[data-club]"); if (!b || mt.phase !== "idle") return; st.club = +b.dataset.club; paintClubs(); paintMeter(); draw(); });
     $("#ggShape").addEventListener("click", e => { const b = e.target.closest("[data-shape]"); if (!b) return; shape = +b.dataset.shape; document.querySelectorAll("[data-shape]").forEach(x => x.classList.toggle("on", x===b)); draw(); });
     $("#ggAim").addEventListener("input", e => { aimDeg = +e.target.value; $("#ggAimVal").textContent = aimDeg+"°"; draw(); });
-    $("#ggPow").addEventListener("input", e => { $("#ggPowVal").textContent = e.target.value+"%"; draw(); });
-    $("#ggSwing").addEventListener("click", swing);
+    $("#ggSwing").addEventListener("click", meterTap);
+    $("#ggMeter").addEventListener("pointerdown", e => { e.preventDefault(); meterTap(); });
+    addEventListener("keydown", e => { if (e.code !== "Space" || !cv.offsetParent || /INPUT|TEXTAREA|SELECT|BUTTON/.test(document.activeElement.tagName)) return; e.preventDefault(); meterTap(); });
     $("#ggReset").addEventListener("click", reset);
     cv.addEventListener("pointerdown", e => {
       const r = cv.getBoundingClientRect(), x = (e.clientX - r.left) * W / r.width, y = (e.clientY - r.top) * W / r.width;
