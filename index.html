@@ -2053,11 +2053,13 @@ try { fetch("data/quotes.json").then(r => r.json()).then(j => { if (j.quotes && 
 /* text with \( inline \) and \[ display \] math (KaTeX) and `code` */
 function rich(s){
   const km = (t, disp) => window.katex ? katex.renderToString(t, {displayMode: disp, throwOnError: false}) : '<span class="mono">'+esc(t)+'</span>';
-  return String(s).split(/(\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)|`[^`]+`)/).map(p =>
+  return String(s).split(/(\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)|\$\$[\s\S]+?\$\$|(?<!\\)\$(?![\s\d])[^$\n]+?(?<![\s\\])\$(?!\d)|`[^`]+`)/).map((p, i) =>
+    i % 2 === 0 ? esc(p).replace(/\\\$/g, "$") :
     p.startsWith("\\[") ? km(p.slice(2,-2), true) :
     p.startsWith("\\(") ? km(p.slice(2,-2), false) :
-    (p.length > 1 && p[0] === "`" && p.endsWith("`")) ? '<code>'+esc(p.slice(1,-1))+'</code>' :
-    esc(p).replace(/\\\$/g, "$")).join("");
+    p.startsWith("$$") ? km(p.slice(2,-2), true) :
+    p[0] === "$" ? km(p.slice(1,-1), false) :
+    '<code>'+esc(p.slice(1,-1))+'</code>').join("");
 }
 let STUDY = {}, STUDY_DAILY = null;
 /* data/study.enc: today's lesson decks, refreshed every morning by the daily task (sealed with the same public key as finance.enc) */
