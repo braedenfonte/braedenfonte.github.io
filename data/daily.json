@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-20T06:55:00-04:00",
+ "updated": "2026-10-21T06:42:17-04:00",
  "flights": [
   {
    "from": "LGA",
@@ -575,99 +575,99 @@
   ]
  },
  "location": {
-  "name": "Mont-Saint-Michel",
-  "wiki": "Mont-Saint-Michel",
-  "country": "France",
-  "region": "Manche, Normandy",
-  "lat": 48.636,
-  "lon": -1.511,
-  "tagline": "A medieval abbey crowning a tidal island that the sea surrounds twice a day.",
-  "intro": "Mont-Saint-Michel is a rocky tidal island about a kilometre off the Normandy coast, topped by a Benedictine abbey whose spire rises to 92 m above sea level. Legend says the archangel Michael told Bishop Aubert of Avranches to build a church here in 708. Today it draws more than three million visitors a year, making it France's most-visited attraction outside Paris.",
+  "name": "Banff National Park",
+  "wiki": "Banff_National_Park",
+  "country": "Canada",
+  "region": "Alberta, Canadian Rockies",
+  "lat": 51.5,
+  "lon": -116.0,
+  "tagline": "Canada's first national park: glacier-fed turquoise lakes under a wall of Rocky Mountain peaks.",
+  "intro": "Banff National Park covers 6,641 km² of the Canadian Rockies about 128 km west of Calgary. It began in 1885 as a small reserve around a set of hot springs and grew into a park of icefields, glacial lakes like Lake Louise and Moraine Lake, and the resort town of Banff. It is part of the Canadian Rocky Mountain Parks UNESCO World Heritage Site.",
   "stats": [
    {
-    "label": "Highest point",
-    "value": "92 m (302 ft)"
+    "label": "Established",
+    "value": "1885"
    },
    {
-    "label": "Tidal range",
-    "value": "≈14 m (46 ft)"
+    "label": "Area",
+    "value": "6,641 km² (2,564 sq mi)"
    },
    {
-    "label": "Residents",
-    "value": "23 (2023)"
+    "label": "Visitors",
+    "value": "≈4.56 million (2025–26)"
    },
    {
     "label": "UNESCO World Heritage",
-    "value": "Since 1979"
+    "value": "Since 1984"
    }
   ],
   "facts": [
-   "During the Hundred Years' War the English besieged it twice (1423 and 1433) and failed both times; in 1434 they left behind two wrought-iron bombards.",
-   "After the French Revolution the abbey became a prison until 1863, and in 1944 it briefly held collaborators after the liberation.",
-   "The light footbridge to the island, opened in 2014 for €209 million, lets the tide flow freely around it; a 'supertide' on 21 March 2015 submerged it completely.",
-   "Medieval pilgrims called it 'St. Michael in peril of the sea' because the incoming tide could trap those crossing the sands.",
-   "Artist Alan Lee drew on the mount when designing Minas Tirith for The Lord of the Rings."
+   "The park exists because of a dispute over hot springs: railway workers found the Cave and Basin springs in 1883, and in 1885 Prime Minister John A. Macdonald set aside 26 km² around them for the public.",
+   "Originally called Rocky Mountains Park, it was Canada's first national park and only the third in North America, after Yellowstone and Mackinac.",
+   "The Icefields Parkway toward Jasper crosses Bow Summit at 2,088 m (6,850 ft), the highest point on any public road in Canada.",
+   "Six wildlife overpasses plus underpasses cross the Trans-Canada Highway; with fencing along 82 km, they have cut wildlife–vehicle collisions by more than 80%.",
+   "Mount Assiniboine (3,618 m) is taller, but it straddles the park boundary, so the highest peak entirely inside Banff is Mount Forbes at 3,612 m."
   ],
-  "bestTime": "April–June or September–October for fewer crowds; check the tide calendar to catch a high spring tide surrounding the island.",
-  "gettingThere": "Fly nonstop from New York to Paris, take the TGV to Rennes, then a shuttle bus to the mount — or drive about four hours from Paris.",
-  "tip": "Stay overnight on or near the island: once the day-trippers leave in the evening, the lanes and ramparts are nearly empty. Only cross the bay sands with a certified guide."
+  "bestTime": "June to September for hiking and the brightest turquoise lakes; December to April for skiing at Banff's three resorts.",
+  "gettingThere": "Fly from New York to Calgary (YYC), then drive about 128 km (80 mi) west on the Trans-Canada Highway to the town of Banff.",
+  "tip": "You can't drive your own car to Moraine Lake; book a Parks Canada shuttle early, and take the first one of the day for calm, mirror-like water."
  },
  "flightsNote": "Real fares from Kayak searches run Oct 20 with your exact pass window, JFK/LGA/EWR only.",
  "markets": {
-  "asOf": "Mon Oct 19 close",
-  "story": "AI and chip stocks recovered part of last week's steep losses, with semiconductors snapping an eight-day losing streak, while blue chips lagged ahead of a busy earnings week. Oil rose after Houthi claims of attacks on Saudi facilities.",
+  "asOf": "Tue Oct 20 close",
+  "story": "The Dow jumped more than 500 points as health care stocks hit a record high and 3M rallied on earnings, while small caps led and tech lagged. Oil eased from multi-month highs and weak housing data kept the 10-year yield above 5.1%.",
   "indices": [
    {
     "name": "Dow",
-    "value": "51,966",
-    "chg": -0.07
+    "value": "52,497",
+    "chg": 1.02
    },
    {
     "name": "S&P 500",
-    "value": "7,691",
-    "chg": 0.41
+    "value": "7,712",
+    "chg": 0.29
    },
    {
     "name": "Nasdaq",
-    "value": "26,431",
-    "chg": 1.11
+    "value": "26,424",
+    "chg": -0.02
    },
    {
     "name": "Russell 2000",
-    "value": "2,728",
-    "chg": 0.25
+    "value": "2,773",
+    "chg": 1.65
    }
   ],
   "movers": [
    {
-    "sym": "AMZN",
-    "move": "+4.95%",
+    "sym": "EFX",
+    "move": "+11.3%",
     "dir": 1,
-    "why": "Led the megacap tech rebound after Friday's AI sell-off."
+    "why": "Equifax rallied after third-quarter results, despite trimming its 2026 revenue outlook on weak mortgage activity."
    },
    {
-    "sym": "DDOG",
-    "move": "+5.48%",
+    "sym": "HAS",
+    "move": "+10.6%",
     "dir": 1,
-    "why": "Bernstein upgraded it to Outperform."
+    "why": "Hasbro beat on Q3 revenue and raised its annual growth forecast."
    },
    {
-    "sym": "WDC",
-    "move": "+5.20%",
+    "sym": "MMM",
+    "move": "+5%",
     "dir": 1,
-    "why": "Memory stocks bounced as yields eased and it drew an upgrade before earnings."
+    "why": "3M led the Dow after raising guidance and announcing a data-center deal with Amazon."
    },
    {
-    "sym": "CRWV",
-    "move": "Upgrade",
-    "dir": 1,
-    "why": "Goldman Sachs upgraded CoreWeave to Buy after a steep slide on financing worries."
-   },
-   {
-    "sym": "AMP",
-    "move": "−3.20%",
+    "sym": "GM",
+    "move": "−7%",
     "dir": -1,
-    "why": "BofA Securities downgraded it two notches to Underperform."
+    "why": "GM beat Q3 estimates but its full-year profit guidance came in below expectations."
+   },
+   {
+    "sym": "NOC",
+    "move": "+4.5%",
+    "dir": 1,
+    "why": "Northrop Grumman beat estimates and raised guidance."
    }
   ],
   "lines": [
@@ -675,25 +675,45 @@
     "game": "Baltimore Ravens @ Buffalo Bills",
     "kick": "2026-11-01T18:00:00Z",
     "spread": "BUF −2.5",
-    "total": "51.5",
-    "ml": "BUF −135 · BAL +125",
+    "total": "53",
+    "ml": "BUF −148 · BAL +130",
     "bills": true
    },
    {
     "game": "Indiana @ Michigan",
     "kick": "2026-10-24T16:00:00Z",
-    "spread": "IND −8.5",
+    "spread": "IND −7.5",
     "total": "41.5",
-    "ml": "IND −330 · MICH +260"
+    "ml": "IND −300 · MICH +240"
    }
   ],
   "probs": [
    {
-    "game": "Indiana @ Michigan",
-    "fav": "Indiana",
-    "p": 72
+    "game": "Pittsburgh @ Miami",
+    "fav": "Miami",
+    "p": 94
+   },
+   {
+    "game": "California @ SMU",
+    "fav": "SMU",
+    "p": 92
+   },
+   {
+    "game": "Rutgers @ Northwestern",
+    "fav": "Northwestern",
+    "p": 88
+   },
+   {
+    "game": "Sacramento State @ Ball State",
+    "fav": "Ball State",
+    "p": 87
+   },
+   {
+    "game": "Louisiana-Monroe @ Troy",
+    "fav": "Troy",
+    "p": 87
    }
   ],
-  "sources": "Market data: Investrade market review and AP index table (Oct 19); movers: TheStreet (Oct 19). Lines: Bills–Ravens via Dimers best odds (Oct 20); Indiana–Michigan FanDuel via SI (Oct 17). Win odds: Dimers model (Oct 18)."
+  "sources": "Market data: Investrade market review (Oct 20); movers: BBN Times, Yahoo Finance and Investrade (Oct 20). Lines: Bills–Ravens via Dimers (Oct 21); Indiana–Michigan FanDuel via GBMWolverine (Oct 21). Win odds: Dimers model (Oct 21)."
  }
 }
