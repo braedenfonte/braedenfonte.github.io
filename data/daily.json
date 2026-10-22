@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-21T06:42:17-04:00",
+ "updated": "2026-10-22T06:41:29-04:00",
  "flights": [
   {
    "from": "LGA",
@@ -575,99 +575,99 @@
   ]
  },
  "location": {
-  "name": "Banff National Park",
-  "wiki": "Banff_National_Park",
-  "country": "Canada",
-  "region": "Alberta, Canadian Rockies",
-  "lat": 51.5,
-  "lon": -116.0,
-  "tagline": "Canada's first national park: glacier-fed turquoise lakes under a wall of Rocky Mountain peaks.",
-  "intro": "Banff National Park covers 6,641 km² of the Canadian Rockies about 128 km west of Calgary. It began in 1885 as a small reserve around a set of hot springs and grew into a park of icefields, glacial lakes like Lake Louise and Moraine Lake, and the resort town of Banff. It is part of the Canadian Rocky Mountain Parks UNESCO World Heritage Site.",
+  "name": "Cappadocia",
+  "wiki": "Cappadocia",
+  "country": "Turkey",
+  "region": "Central Anatolia (Nevşehir Province)",
+  "lat": 38.65,
+  "lon": 34.86,
+  "tagline": "A volcanic dreamscape of fairy chimneys, cave churches and cities carved deep underground.",
+  "intro": "Cappadocia is a historical region of Central Anatolia, where millions of years of erosion carved thick volcanic tuff into cliffs, pillars and 'fairy chimneys.' People have hollowed homes, monasteries and entire underground cities out of the soft rock, and at sunrise the valleys around Göreme fill with hot-air balloons. Its heart is protected as the UNESCO site Göreme National Park and the Rock Sites of Cappadocia.",
   "stats": [
    {
-    "label": "Established",
-    "value": "1885"
+    "label": "UNESCO World Heritage",
+    "value": "Since 1985 (mixed site)"
    },
    {
-    "label": "Area",
-    "value": "6,641 km² (2,564 sq mi)"
+    "label": "Göreme park area",
+    "value": "9,884 ha (≈99 km²)"
+   },
+   {
+    "label": "Tallest peak nearby",
+    "value": "Mount Erciyes, 3,916 m"
    },
    {
     "label": "Visitors",
-    "value": "≈4.56 million (2025–26)"
-   },
-   {
-    "label": "UNESCO World Heritage",
-    "value": "Since 1984"
+    "value": "≈2–4 million a year"
    }
   ],
   "facts": [
-   "The park exists because of a dispute over hot springs: railway workers found the Cave and Basin springs in 1883, and in 1885 Prime Minister John A. Macdonald set aside 26 km² around them for the public.",
-   "Originally called Rocky Mountains Park, it was Canada's first national park and only the third in North America, after Yellowstone and Mackinac.",
-   "The Icefields Parkway toward Jasper crosses Bow Summit at 2,088 m (6,850 ft), the highest point on any public road in Canada.",
-   "Six wildlife overpasses plus underpasses cross the Trans-Canada Highway; with fencing along 82 km, they have cut wildlife–vehicle collisions by more than 80%.",
-   "Mount Assiniboine (3,618 m) is taller, but it straddles the park boundary, so the highest peak entirely inside Banff is Mount Forbes at 3,612 m."
+   "The landscape was built by eruptions of Mount Erciyes, Mount Hasan and Göllüdağ, whose ash hardened into tuff roughly 9 to 3 million years ago; harder caps of rock protect the chimneys beneath them from erosion.",
+   "The underground city of Derinkuyu was rediscovered in 1963 when a resident knocked down a basement wall; it reaches about 280 feet down across at least 18 levels and could shelter up to 20,000 people.",
+   "Derinkuyu breathed through a main shaft plus more than 50 ventilation shafts, and huge stone doors could seal off its passages during attacks.",
+   "About 400 rock-cut churches lie around Göreme, and the Göreme Open Air Museum alone holds more than 30, some with frescoes from the 9th to 11th centuries.",
+   "The name first appears in the late 6th century BC as Old Persian 'Katpatuka' in inscriptions of Darius the Great and Xerxes I."
   ],
-  "bestTime": "June to September for hiking and the brightest turquoise lakes; December to April for skiing at Banff's three resorts.",
-  "gettingThere": "Fly from New York to Calgary (YYC), then drive about 128 km (80 mi) west on the Trans-Canada Highway to the town of Banff.",
-  "tip": "You can't drive your own car to Moraine Lake; book a Parks Canada shuttle early, and take the first one of the day for calm, mirror-like water."
+  "bestTime": "April to June and September to October for mild days, wildflowers or fall colors, and the most reliable balloon-flying weather.",
+  "gettingThere": "Fly from New York to Istanbul (about 10 hours nonstop), then take a short domestic flight to Nevşehir Kapadokya (NAV) or Kayseri (ASR) and transfer about an hour by road to Göreme.",
+  "tip": "Balloon flights are often canceled for wind, so book one for your first morning; if it's scrubbed, you still have later mornings to rebook."
  },
  "flightsNote": "Real fares from Kayak searches run Oct 20 with your exact pass window, JFK/LGA/EWR only.",
  "markets": {
-  "asOf": "Tue Oct 20 close",
-  "story": "The Dow jumped more than 500 points as health care stocks hit a record high and 3M rallied on earnings, while small caps led and tech lagged. Oil eased from multi-month highs and weak housing data kept the 10-year yield above 5.1%.",
+  "asOf": "Wed Oct 21 close",
+  "story": "Stocks rose as investors rotated back into tech and industrials, with SpaceX and Super Micro lifting AI names after strong results. Gains faded in the final hour as oil stocks jumped and yields edged higher, while Netflix slid on weak guidance.",
   "indices": [
    {
     "name": "Dow",
-    "value": "52,497",
-    "chg": 1.02
+    "value": "52,857",
+    "chg": 0.69
    },
    {
     "name": "S&P 500",
-    "value": "7,712",
-    "chg": 0.29
+    "value": "7,757",
+    "chg": 0.59
    },
    {
     "name": "Nasdaq",
-    "value": "26,424",
-    "chg": -0.02
+    "value": "26,702",
+    "chg": 1.05
    },
    {
     "name": "Russell 2000",
-    "value": "2,773",
-    "chg": 1.65
+    "value": "2,781",
+    "chg": 0.27
    }
   ],
   "movers": [
    {
-    "sym": "EFX",
-    "move": "+11.3%",
+    "sym": "SMCI",
+    "move": "+9.6%",
     "dir": 1,
-    "why": "Equifax rallied after third-quarter results, despite trimming its 2026 revenue outlook on weak mortgage activity."
+    "why": "Super Micro raised its quarterly revenue guidance on AI server demand."
    },
    {
-    "sym": "HAS",
-    "move": "+10.6%",
+    "sym": "SPCX",
+    "move": "+7.8%",
     "dir": 1,
-    "why": "Hasbro beat on Q3 revenue and raised its annual growth forecast."
+    "why": "SpaceX posted 161% Q3 revenue growth and its first profit as a public company, and floated a possible Tesla merger."
    },
    {
-    "sym": "MMM",
-    "move": "+5%",
+    "sym": "ZS",
+    "move": "+7.8%",
     "dir": 1,
-    "why": "3M led the Dow after raising guidance and announcing a data-center deal with Amazon."
+    "why": "Zscaler and other security software rallied after a severe PHP vulnerability took some websites offline."
    },
    {
-    "sym": "GM",
-    "move": "−7%",
+    "sym": "NFLX",
+    "move": "−5.3%",
     "dir": -1,
-    "why": "GM beat Q3 estimates but its full-year profit guidance came in below expectations."
+    "why": "Netflix beat on Q3 but its Q4 profit outlook came in below expectations and it cut ad-revenue guidance."
    },
    {
-    "sym": "NOC",
-    "move": "+4.5%",
-    "dir": 1,
-    "why": "Northrop Grumman beat estimates and raised guidance."
+    "sym": "T",
+    "move": "−6.5%",
+    "dir": -1,
+    "why": "AT&T fell despite a Q3 beat and raised EPS forecast, as fiber ARPU dropped."
    }
   ],
   "lines": [
@@ -684,7 +684,7 @@
     "kick": "2026-10-24T16:00:00Z",
     "spread": "IND −7.5",
     "total": "41.5",
-    "ml": "IND −300 · MICH +240"
+    "ml": "IND −295 · MICH +235"
    }
   ],
   "probs": [
@@ -714,6 +714,6 @@
     "p": 87
    }
   ],
-  "sources": "Market data: Investrade market review (Oct 20); movers: BBN Times, Yahoo Finance and Investrade (Oct 20). Lines: Bills–Ravens via Dimers (Oct 21); Indiana–Michigan FanDuel via GBMWolverine (Oct 21). Win odds: Dimers model (Oct 21)."
+  "sources": "Market data: Investrade market review and TradingKey (Oct 21); movers: Capp Notes closing look and Investrade (Oct 21). Lines: Bills–Ravens via Dimers (Oct 21); Indiana–Michigan FanDuel via SI Betting (Oct 19). Win odds: Dimers model (Oct 21)."
  }
 }

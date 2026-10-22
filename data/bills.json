@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-21T06:42:17-04:00",
+ "updated": "2026-10-22T06:41:29-04:00",
  "team": "Buffalo Bills",
  "record": {
   "w": 5,
@@ -96,20 +96,20 @@
  },
  "news": [
   {
-   "h": "Gardner-Johnson suspended",
-   "b": "The NFL suspended safety C.J. Gardner-Johnson one game for spitting at an opponent in Las Vegas. Brady called it inexcusable; he is set to miss the Ravens game unless an appeal succeeds."
+   "h": "Gardner-Johnson out vs. Baltimore",
+   "b": "The NFL suspended safety C.J. Gardner-Johnson one game without pay for spitting toward Raiders players; the ban runs Oct 26–Nov 2, covering the Ravens game, though he can appeal. Brady said it was addressed within the team and there will be no further team punishment."
   },
   {
-   "h": "Tre'Davious White is back",
-   "b": "Buffalo signed CB Tre'Davious White to the practice squad and released CB A.J. Woods; it is White's third stint with the Bills. Leonhard says rookie Davison Igbinosun has earned most of the boundary-corner snaps."
+   "h": "Moore, Oliver eye post-bye return",
+   "b": "Joe Brady hopes WR DJ Moore (shoulder) and DT Ed Oliver (knee) are back for the Ravens. Kincaid and Chubb returned from rib injuries in Vegas, and DB Jordan Hancock (calf) is eligible to come off IR on Nov 1."
   },
   {
-   "h": "Moore and Oliver eye return",
-   "b": "WR DJ Moore (shoulder) and DT Ed Oliver (knee) have missed two games; Joe Brady hopes both are back after the bye. Kincaid and Chubb returned from rib injuries in Vegas."
+   "h": "Fourth-quarter defense under scrutiny",
+   "b": "Buffalo is allowing 1.5 fourth-quarter TDs per game, the worst rate since at least 1977, and ranks 28th in points allowed. The offense leads the NFL at 32.8 points per game."
   },
   {
    "h": "Bye week, then Baltimore",
-   "b": "Buffalo is off this week and hosts the Ravens on Sunday, Nov 1 at 1 PM ET. New England (4-2) trails by a game in the East; the Jets are 2-4 and Miami is 0-5."
+   "b": "Buffalo is off this week and hosts the Ravens on Sunday, Nov 1 at 1 PM ET, listed as a 2.5-point favorite. New England (4-2) trails by a game in the East; the Jets are 2-4 and Miami is 0-5."
   }
  ],
  "schedule": [
@@ -191,5 +191,5 @@
    "note": "Date and time may flex"
   }
  ],
- "source": "Buffalobills.com (Oct 19) and Fox Sports standings; checked Oct 21, 2026. Refreshes with the daily update."
+ "source": "Buffalobills.com, AP, Yahoo Sports, Athlon and Yardbarker (Oct 19–21) and Fox Sports standings; checked Oct 22, 2026. Refreshes with the daily update."
 }
