@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-22T06:41:29-04:00",
+ "updated": "2026-10-23T06:58:00-04:00",
  "flights": [
   {
    "from": "LGA",
@@ -545,7 +545,7 @@
     "away": "Army",
     "home": "Tulsa",
     "kick": "2026-10-24T00:30:00Z",
-    "note": "Away — Friday night (ESPN2)",
+    "note": "Away \u2014 Friday night (ESPN2)",
     "army": true
    },
    {
@@ -575,116 +575,116 @@
   ]
  },
  "location": {
-  "name": "Cappadocia",
-  "wiki": "Cappadocia",
-  "country": "Turkey",
-  "region": "Central Anatolia (Nevşehir Province)",
-  "lat": 38.65,
-  "lon": 34.86,
-  "tagline": "A volcanic dreamscape of fairy chimneys, cave churches and cities carved deep underground.",
-  "intro": "Cappadocia is a historical region of Central Anatolia, where millions of years of erosion carved thick volcanic tuff into cliffs, pillars and 'fairy chimneys.' People have hollowed homes, monasteries and entire underground cities out of the soft rock, and at sunrise the valleys around Göreme fill with hot-air balloons. Its heart is protected as the UNESCO site Göreme National Park and the Rock Sites of Cappadocia.",
+  "name": "Sossusvlei",
+  "wiki": "Sossusvlei",
+  "country": "Namibia",
+  "region": "Namib-Naukluft National Park (Hardap Region)",
+  "lat": -24.73,
+  "lon": 15.34,
+  "tagline": "Some of the tallest dunes on Earth, glowing red around a dead-end clay pan.",
+  "intro": "Sossusvlei is a salt and clay pan in the southern Namib Desert, ringed by towering star dunes whose sand has rusted to deep orange and red. Nearby Deadvlei holds a grove of centuries-dead camel thorn trees standing on white clay, one of the most photographed scenes in Africa. The area sits inside the Namib Sand Sea, a UNESCO World Heritage Site.",
   "stats": [
    {
     "label": "UNESCO World Heritage",
-    "value": "Since 1985 (mixed site)"
+    "value": "Namib Sand Sea, since 2013"
    },
    {
-    "label": "Göreme park area",
-    "value": "9,884 ha (≈99 km²)"
+    "label": "Big Daddy dune",
+    "value": "\u2248325 m tall"
    },
    {
-    "label": "Tallest peak nearby",
-    "value": "Mount Erciyes, 3,916 m"
+    "label": "Sand sea area",
+    "value": "\u22483.08 million ha"
    },
    {
-    "label": "Visitors",
-    "value": "≈2–4 million a year"
+    "label": "Desert rainfall",
+    "value": "Under 10 mm a year"
    }
   ],
   "facts": [
-   "The landscape was built by eruptions of Mount Erciyes, Mount Hasan and Göllüdağ, whose ash hardened into tuff roughly 9 to 3 million years ago; harder caps of rock protect the chimneys beneath them from erosion.",
-   "The underground city of Derinkuyu was rediscovered in 1963 when a resident knocked down a basement wall; it reaches about 280 feet down across at least 18 levels and could shelter up to 20,000 people.",
-   "Derinkuyu breathed through a main shaft plus more than 50 ventilation shafts, and huge stone doors could seal off its passages during attacks.",
-   "About 400 rock-cut churches lie around Göreme, and the Göreme Open Air Museum alone holds more than 30, some with frescoes from the 9th to 11th centuries.",
-   "The name first appears in the late 6th century BC as Old Persian 'Katpatuka' in inscriptions of Darius the Great and Xerxes I."
+   "The name roughly means 'dead-end marsh': 'vlei' is Afrikaans for marsh and 'sossus' is Nama for 'no return,' because the Tsauchab River's water drains into the pan and never flows out.",
+   "The dead camel thorn trees of Deadvlei are believed to have died 600\u2013700 years ago, yet they haven't rotted because the air is too dry for the wood to decompose.",
+   "The dunes' orange-red color is iron oxide \u2014 the sand has literally rusted over time, so older dunes are redder.",
+   "Much of the sand traveled thousands of kilometers: eroded in the Orange River's headwaters, carried to the Atlantic, pushed north by currents, then blown inland \u2014 a conveyor that has run for more than 5 million years.",
+   "With almost no rain, fog rolling in from the Atlantic is the area's main water source, and some Namib beetles survive by catching droplets on their backs."
   ],
-  "bestTime": "April to June and September to October for mild days, wildflowers or fall colors, and the most reliable balloon-flying weather.",
-  "gettingThere": "Fly from New York to Istanbul (about 10 hours nonstop), then take a short domestic flight to Nevşehir Kapadokya (NAV) or Kayseri (ASR) and transfer about an hour by road to Göreme.",
-  "tip": "Balloon flights are often canceled for wind, so book one for your first morning; if it's scrubbed, you still have later mornings to rebook."
+  "bestTime": "May to September (the cool, dry winter) for comfortable hikes; arrive at sunrise or late afternoon for the deepest colors and long shadows.",
+  "gettingThere": "Fly from New York to Johannesburg (about 16 hours nonstop), connect to Windhoek, then drive roughly 5 hours southwest to the Sesriem gate; it's 60 km of paved road to the 2x4 parking, and the last 6 km of sand need a 4WD or the park shuttle.",
+  "tip": "Stay inside the park gate at Sesriem so you can be on the road before the public is let in and catch sunrise from a dune like Dune 45 before the crowds."
  },
  "flightsNote": "Real fares from Kayak searches run Oct 20 with your exact pass window, JFK/LGA/EWR only.",
  "markets": {
-  "asOf": "Wed Oct 21 close",
-  "story": "Stocks rose as investors rotated back into tech and industrials, with SpaceX and Super Micro lifting AI names after strong results. Gains faded in the final hour as oil stocks jumped and yields edged higher, while Netflix slid on weak guidance.",
+  "asOf": "Thu Oct 22 close",
+  "story": "The Nasdaq had its biggest one-day drop since June as Meta's spending disclosures and a supply warning from Lam Research revived worries about AI costs, sending chip stocks sharply lower. Investors rotated into defensive names and Treasuries, leaving the Dow and small caps slightly higher while oil jumped on fresh Gulf attacks.",
   "indices": [
    {
     "name": "Dow",
-    "value": "52,857",
-    "chg": 0.69
+    "value": "52,868",
+    "chg": 0.02
    },
    {
     "name": "S&P 500",
-    "value": "7,757",
-    "chg": 0.59
+    "value": "7,663",
+    "chg": -1.21
    },
    {
     "name": "Nasdaq",
-    "value": "26,702",
-    "chg": 1.05
+    "value": "26,009",
+    "chg": -2.6
    },
    {
     "name": "Russell 2000",
-    "value": "2,781",
-    "chg": 0.27
+    "value": "2,784",
+    "chg": 0.11
    }
   ],
   "movers": [
    {
-    "sym": "SMCI",
-    "move": "+9.6%",
-    "dir": 1,
-    "why": "Super Micro raised its quarterly revenue guidance on AI server demand."
-   },
-   {
-    "sym": "SPCX",
-    "move": "+7.8%",
-    "dir": 1,
-    "why": "SpaceX posted 161% Q3 revenue growth and its first profit as a public company, and floated a possible Tesla merger."
-   },
-   {
-    "sym": "ZS",
-    "move": "+7.8%",
-    "dir": 1,
-    "why": "Zscaler and other security software rallied after a severe PHP vulnerability took some websites offline."
-   },
-   {
-    "sym": "NFLX",
-    "move": "−5.3%",
+    "sym": "META",
+    "move": "\u22127.0%",
     "dir": -1,
-    "why": "Netflix beat on Q3 but its Q4 profit outlook came in below expectations and it cut ad-revenue guidance."
+    "why": "Meta beat estimates but posted its first cash outflow in over a decade and about $825 billion in future lease and contract commitments."
    },
    {
-    "sym": "T",
-    "move": "−6.5%",
+    "sym": "LRCX",
+    "move": "\u221211.8%",
     "dir": -1,
-    "why": "AT&T fell despite a Q3 beat and raised EPS forecast, as fiber ARPU dropped."
+    "why": "Lam Research warned of supply-chain and clean-room constraints into 2027, dragging chip stocks."
+   },
+   {
+    "sym": "SPOT",
+    "move": "+11.1%",
+    "dir": 1,
+    "why": "Spotify guided Q4 revenue above estimates."
+   },
+   {
+    "sym": "PG",
+    "move": "+5.6%",
+    "dir": 1,
+    "why": "Procter & Gamble grew organic sales 4% and kept its full-year guidance."
+   },
+   {
+    "sym": "BHVN",
+    "move": "+25%",
+    "dir": 1,
+    "why": "Biohaven jumped after the FDA accepted its resubmitted application."
    }
   ],
   "lines": [
    {
     "game": "Baltimore Ravens @ Buffalo Bills",
     "kick": "2026-11-01T18:00:00Z",
-    "spread": "BUF −2.5",
-    "total": "53",
-    "ml": "BUF −148 · BAL +130",
+    "spread": "BUF \u22122.5",
+    "total": "52.5",
+    "ml": "BUF \u2212155 \u00b7 BAL +130",
     "bills": true
    },
    {
     "game": "Indiana @ Michigan",
     "kick": "2026-10-24T16:00:00Z",
-    "spread": "IND −7.5",
+    "spread": "IND \u22127.5",
     "total": "41.5",
-    "ml": "IND −295 · MICH +235"
+    "ml": "IND \u2212295 \u00b7 MICH +235"
    }
   ],
   "probs": [
@@ -714,6 +714,6 @@
     "p": 87
    }
   ],
-  "sources": "Market data: Investrade market review and TradingKey (Oct 21); movers: Capp Notes closing look and Investrade (Oct 21). Lines: Bills–Ravens via Dimers (Oct 21); Indiana–Michigan FanDuel via SI Betting (Oct 19). Win odds: Dimers model (Oct 21)."
+  "sources": "Market data: AP via Yahoo Finance, Capp Notes closing look and TradingKey (Oct 22). Lines: Bills\u2013Ravens DraftKings via ESPN (Oct 23); Indiana\u2013Michigan FanDuel via SI Betting (Oct 19). Win odds: Dimers model (Oct 21)."
  }
 }
