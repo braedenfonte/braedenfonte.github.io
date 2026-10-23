@@ -1906,19 +1906,31 @@ async function renderPrep(){
   const today = key(new Date()), next = list.find(p => p.date >= today);
   const body = $("#prepBody");
   const hasLinks = linkCount(prepCode) > 0;
-  body.innerHTML = '<div class="fold-sec"><h3>Prep sheets <span>'+list.length+' · in lesson order</span></h3>'+
-    (list.length ? '<div class="prep-head"><input class="prep-search" id="prepSearch" type="search" placeholder="Search '+esc(prepCode)+' sheets" aria-label="Search prep sheets" value="'+esc(prepQ)+'"></div><div class="panel prep-list" id="prepList"><p class="fine" style="padding:12px 14px">Opening sheets…</p></div>'
+  body.innerHTML = '<div class="prep-head"><input class="prep-search" id="prepSearch" type="search" placeholder="Search this class folder" aria-label="Search prep sheets and files in '+esc(prepCode)+'" value="'+esc(prepQ)+'"></div><div class="fold-sec"><h3>Prep sheets <span>'+list.length+' · in lesson order</span></h3>'+
+    (list.length ? '<div class="panel prep-list" id="prepList"><p class="fine" style="padding:12px 14px">Opening sheets…</p></div>'
       : '<div class="panel empty-state">No prep sheets yet. They are added each night the class-prep task runs for '+esc(prepCode)+'.</div>')+'</div>'+
     (hasLinks ? '<div class="fold-sec"><h3>Files &amp; study help <span>'+linkCount(prepCode)+'</span></h3><div class="panel lk-list" id="prepLinks"><p class="fine" style="padding:12px 14px">Opening…</p></div></div>' : '');
-  if (hasLinks) renderLinks(prepCode, $("#prepLinks"));
-  if (!list.length) return;
-  $("#prepSearch").addEventListener("input", e => { prepQ = e.target.value; drawRows(); });
-  const got = await Promise.all(list.map(p => prepSheet(p).catch(() => null)));
-  if (cView !== "prep" || prepOpen) return;
-  function drawRows(){
+  const search = $("#prepSearch"), rowsEl = $("#prepList"), linksEl = $("#prepLinks");
+  let got = list.map(() => null);
+  function drawLinks(){
+    if (!search.isConnected || !linksEl) return;
     const q = prepQ.trim().toLowerCase();
-    const rows = list.map((p,i) => ({p, s: got[i]})).filter(({p,s}) => !q || ("l"+p.lesson+" lesson "+p.lesson+" "+(s ? s.title : "")).toLowerCase().includes(q));
-    $("#prepList").innerHTML = rows.length ? rows.map(({p,s}) =>
+    const links = [...linksEl.querySelectorAll(".lk")];
+    links.forEach(a => { a.hidden = !!q && !a.textContent.toLowerCase().includes(q); a.style.display = a.hidden ? "none" : ""; });
+    let empty = linksEl.querySelector("[data-search-empty]");
+    if (!empty){ empty = document.createElement("p"); empty.className = "fine"; empty.style.padding = "12px 14px"; empty.dataset.searchEmpty = ""; linksEl.appendChild(empty); }
+    empty.textContent = "No files match your search.";
+    empty.hidden = !q || !links.length || links.some(a => !a.hidden);
+  }
+  if (hasLinks) renderLinks(prepCode, linksEl).then(drawLinks);
+  $("#prepSearch").addEventListener("input", e => { prepQ = e.target.value; drawRows(); drawLinks(); });
+  got = await Promise.all(list.map(p => prepSheet(p).catch(() => null)));
+  if (!search.isConnected || cView !== "prep" || prepOpen) return;
+  function drawRows(){
+    if (!rowsEl || !search.isConnected) return;
+    const q = prepQ.trim().toLowerCase();
+    const rows = list.map((p,i) => ({p, s: got[i]})).filter(({p,s}) => !q || ("l"+p.lesson+" lesson "+p.lesson+" "+p.date+" "+prepFmt(p.date)+" "+(s ? s.title+" "+(s.day || "") : "")).toLowerCase().includes(q));
+    rowsEl.innerHTML = rows.length ? rows.map(({p,s}) =>
       '<button type="button" class="prep-row'+(next && p.file===next.file?' next':'')+'" data-prepf="'+esc(p.file)+'"><span class="prep-l">L'+p.lesson+'</span><span class="prep-t">'+esc(s ? s.title : "Couldn't open this sheet")+'</span><span class="prep-d">'+(next && p.file===next.file ? 'Next · ' : '')+prepFmt(p.date)+(s && s.day ? ' · '+esc(s.day) : '')+'</span></button>'
     ).join("") : '<p class="fine" style="padding:12px 14px">No sheets match “'+esc(prepQ)+'”.</p>';
   }
