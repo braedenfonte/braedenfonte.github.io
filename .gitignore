@@ -2,3 +2,4 @@ private.json
 *.private.json
 finance.json
 study.json
+__pycache__/
