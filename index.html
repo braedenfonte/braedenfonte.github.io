@@ -311,6 +311,30 @@ a.folder{color:var(--accent);border-style:solid;text-decoration:none}
 .group-h h3{font-size:22px;font-weight:700}
 .group-h span{font:500 12px var(--mono);color:var(--muted)}
 
+/* ---------- folders (class folders + project folders) ---------- */
+#courseWrap[hidden],#prepWrap[hidden],#cGroupSeg[hidden],#projFolder[hidden]{display:none}
+.fold-sec{display:flex;flex-direction:column;gap:10px;margin-bottom:26px}
+.fold-sec h3{font-size:18px;font-weight:700;display:flex;align-items:baseline;gap:10px}
+.fold-sec h3 span{font:500 12px var(--mono);color:var(--muted)}
+.lk-list{display:flex;flex-direction:column;padding:6px}
+.lk{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:12px;align-items:center;padding:11px 12px;border-radius:10px;color:var(--fg);text-decoration:none}
+.lk+.lk{border-top:1px solid var(--line);border-radius:0}
+.lk:hover,.lk:focus-visible{background:var(--surface-2);border-radius:10px}
+.lk:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.lk-ic{width:38px;height:38px;border-radius:10px;background:var(--accent-soft);display:grid;place-items:center}
+.lk-ic svg{width:18px;height:18px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.lk-tx{min-width:0;display:flex;flex-direction:column;gap:2px}
+.lk-tx b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lk-tx span{font-size:13px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lk-k{font:500 11.5px var(--mono);color:var(--faint);white-space:nowrap}
+.proj{cursor:pointer}
+.proj:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.proj-open{align-self:flex-start;margin-top:4px}
+#projFolder{margin-top:22px;padding:clamp(18px,3vw,28px);scroll-margin-top:80px}
+.pf-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+.pf-head h3{font-size:24px;font-weight:800}
+@media (max-width:560px){.lk{grid-template-columns:34px minmax(0,1fr)}.lk-k{display:none}.lk-ic{width:34px;height:34px}}
+
 /* ---------- prep sheets (Courses -> Prep sheets) ---------- */
 .prep-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px}
 .prep-search{flex:1 1 220px;max-width:340px;padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:14px var(--body)}
@@ -1015,11 +1039,11 @@ body.gate-open{overflow:hidden}
 
 <!-- COURSES -->
 <section class="view" id="v-courses">
-  <div class="page-h"><span class="eyebrow">Academics</span><h2>Courses</h2><p>Each class links to its folder of notes and files. Upcoming deadlines are pulled straight from the schedule. Prep sheets keeps every pre-class sheet, filed by course and lesson.</p></div>
+  <div class="page-h"><span class="eyebrow">Academics</span><h2>Courses</h2><p>Each class links to its folder of notes and files. Upcoming deadlines are pulled straight from the schedule. Class folders keep every pre-class sheet and study help, filed by course and lesson.</p></div>
   <div class="toolbar">
     <div class="seg" aria-label="Courses section">
       <button type="button" id="cvCourses" class="on">Courses</button>
-      <button type="button" id="cvPrep">Prep sheets</button>
+      <button type="button" id="cvPrep">Class folders</button>
     </div>
     <div class="seg" aria-label="Group courses by" id="cGroupSeg">
       <button type="button" id="gSem" class="on">By semester</button>
@@ -1077,6 +1101,7 @@ body.gate-open{overflow:hidden}
 <section class="view" id="v-projects">
   <div class="page-h"><span class="eyebrow">Work</span><h2>Projects</h2><p>Selected work in optimization, simulation, research, and AI.</p></div>
   <div class="grid g2 stagger" id="projGrid"></div>
+  <div class="panel" id="projFolder" hidden></div>
 </section>
 
 <!-- BUSINESS -->
@@ -1319,7 +1344,7 @@ function applyPrivate(P){
   $("#privPersonal").innerHTML = P.html.personal;
   paintAuth();
   renderHome(); renderSched(); renderResume(); renderCourses(); renderTravel(); renderDaily(); renderStudy(); renderFinance();
-  if (P.finKey){ loadFinance(P.finKey); loadStudy(); if (cView === "prep") renderPrep(); }
+  if (P.finKey){ loadFinance(P.finKey); loadStudy(); if (cView === "prep") renderPrep(); if (projOpen){ const f = projOpen; projOpen = ""; openProjFolder(f); } }
 }
 async function bootAuth(){
   let k = null;
@@ -1721,6 +1746,51 @@ $("#subFilters").addEventListener("click", e => { const b = e.target.closest("[d
    data/prep/manifest.json lists every archived pre-class sheet (course, lesson, date, file).
    Each sheet is its own data/prep/<COURSE>/<date>-L<N>.enc, sealed with the finance public key
    by tools/prep.py, so titles and pages open only after unlock. The nightly class-prep task adds them. */
+const FOLDER_COURSES = ["MA376","SS388","EM481","MA486","MA481X"];   // class folders (MS300 left out on purpose)
+/* data/links/manifest.json lists files and links filed into class and project folders.
+   Each one is its own data/links/<folder>/<id>.enc, sealed by tools/links.py (opens after unlock). */
+let LINKS = [];
+const LINK_CACHE = {};
+const linkCount = f => LINKS.filter(x => x.folder === f).length;
+async function loadLinksManifest(){
+  try{ const r = await fetch("data/links/manifest.json", {cache: "no-store"}); if (!r.ok) return;
+    LINKS = ((await r.json()).items || []); renderProjects(); if (cView === "prep") renderPrep(); }catch(e){}
+}
+async function linkItem(x){
+  if (LINK_CACHE[x.file]) return LINK_CACHE[x.file];
+  const r = await fetch("data/links/"+x.file, {cache: "no-store"}); if (!r.ok) throw new Error("fetch");
+  return (LINK_CACHE[x.file] = await openFin(await r.json()));
+}
+const LK_IC = {
+  artifact: '<path d="M4 5h16v14H4z"/><path d="M4 9h16"/>',
+  folder: '<path d="M3 6h6l2 2h10v11H3z"/>',
+  file: '<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/>',
+  drive: '<path d="M6 3h8l4 4v14H6z"/><path d="M9 13h6M9 17h6"/>',
+  link: '<path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1"/><path d="M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1"/>'};
+const LK_KIND = {artifact:"Claude page", folder:"Drive folder", file:"File", drive:"Drive", link:"Link"};
+async function renderLinks(folder, el){
+  const items = LINKS.filter(x => x.folder === folder).sort((a,b) => a.order - b.order);
+  if (!finKey){ el.innerHTML = '<p class="fine" style="padding:12px 14px">Unlock the site to see these files.</p>'; return; }
+  const got = await Promise.all(items.map(x => linkItem(x).catch(() => null)));
+  el.innerHTML = got.map(L => L ? '<a class="lk" href="'+esc(L.url)+'" target="_blank" rel="noopener"><span class="lk-ic"><svg viewBox="0 0 24 24">'+(LK_IC[L.kind]||LK_IC.link)+'</svg></span><span class="lk-tx"><b>'+esc(L.title)+'</b>'+(L.note?'<span>'+esc(L.note)+'</span>':'')+'</span><span class="lk-k">'+(LK_KIND[L.kind]||"Link")+' ↗</span></a>'
+    : '<p class="fine" style="padding:12px 14px">Couldn\'t open one item.</p>').join("") || '<p class="fine" style="padding:12px 14px">Empty folder.</p>';
+}
+let projOpen = "";
+function openProjFolder(f){
+  const P = PROJ.find(p => p.folder === f), box = $("#projFolder"); if (!P) return;
+  if (projOpen === f && !box.hidden){ box.hidden = true; projOpen = ""; return; }
+  projOpen = f; box.hidden = false;
+  box.innerHTML = '<div class="pf-head"><div><span class="eyebrow">'+esc(P.course)+' · Folder</span><h3>'+esc(P.t)+'</h3></div><button class="small-btn" type="button" id="pfClose">Close</button></div>'+
+    (linkCount(f) ? '<div class="lk-list" id="pfList"><p class="fine" style="padding:12px 14px">Opening…</p></div>' : '<p class="fine">Nothing filed here yet.</p>')+
+    (!finKey && linkCount(f) ? '<div style="margin-top:12px"><button class="btn primary" type="button" id="pfUnlock">Unlock to see files</button></div>' : '');
+  $("#pfClose").addEventListener("click", e => { e.stopPropagation(); box.hidden = true; projOpen = ""; });
+  const u = $("#pfUnlock"); if (u) u.addEventListener("click", () => openGate("projects"));
+  if (linkCount(f)) renderLinks(f, $("#pfList"));
+  box.scrollIntoView({behavior: "smooth", block: "start"});
+}
+document.addEventListener("click", e => { const c = e.target.closest("[data-projf]"); if (c) openProjFolder(c.dataset.projf); });
+document.addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && e.target.matches && e.target.matches("[data-projf]")){ e.preventDefault(); openProjFolder(e.target.dataset.projf); } });
+
 let PREP = [], prepCode = store.get("bf-prepc", ""), prepOpen = null, prepQ = "", cView = "courses";
 const PREP_CACHE = {};   // file -> decrypted sheet
 const prepCount = code => PREP.filter(p => p.course === code).length;
@@ -1740,12 +1810,11 @@ function setCView(v){
 }
 const prepFmt = d => new Date(d+"T12:00:00").toLocaleDateString("en-US", {weekday:"short", day:"numeric", month:"short"});
 async function renderPrep(){
-  const codes = [...new Set(PREP.map(p => p.course))].sort();
-  if (!codes.length){ $("#prepTabs").innerHTML = ""; $("#prepBody").innerHTML = '<div class="panel empty-state">No prep sheets yet. They are added each night when the class-prep task runs.</div>'; return; }
+  const codes = FOLDER_COURSES;
   if (!codes.includes(prepCode)) prepCode = codes[0];
   $("#prepTabs").innerHTML = codes.map(c => {
-    const t = (COURSES.find(x => x.code === c) || {}).title;
-    return '<button type="button" role="tab" class="'+(c===prepCode?'on':'')+'" data-prept="'+c+'"'+(t?' title="'+esc(t)+'"':'')+'>'+esc(c)+' · '+prepCount(c)+'</button>';
+    const t = (COURSES.find(x => x.code === c) || {}).title, n = prepCount(c) + linkCount(c);
+    return '<button type="button" role="tab" class="'+(c===prepCode?'on':'')+'" data-prept="'+c+'"'+(t?' title="'+esc(t)+'"':'')+'>'+esc(c)+(n?' · '+n:'')+'</button>';
   }).join("");
   if (!finKey){ $("#prepBody").innerHTML = '<div class="panel empty-state">Unlock to read your prep sheets.</div>'; return; }
   const list = PREP.filter(p => p.course === prepCode).sort((a,b) => a.lesson - b.lesson || a.date.localeCompare(b.date));
@@ -1753,7 +1822,13 @@ async function renderPrep(){
   prepOpen = null;
   const today = key(new Date()), next = list.find(p => p.date >= today);
   const body = $("#prepBody");
-  body.innerHTML = '<div class="prep-head"><input class="prep-search" id="prepSearch" type="search" placeholder="Search '+esc(prepCode)+' sheets" aria-label="Search prep sheets" value="'+esc(prepQ)+'"><span class="fine" id="prepMeta">'+list.length+' sheet'+(list.length===1?'':'s')+', in lesson order</span></div><div class="panel prep-list" id="prepList"><p class="fine" style="padding:12px 14px">Opening sheets…</p></div>';
+  const hasLinks = linkCount(prepCode) > 0;
+  body.innerHTML = '<div class="fold-sec"><h3>Prep sheets <span>'+list.length+' · in lesson order</span></h3>'+
+    (list.length ? '<div class="prep-head"><input class="prep-search" id="prepSearch" type="search" placeholder="Search '+esc(prepCode)+' sheets" aria-label="Search prep sheets" value="'+esc(prepQ)+'"></div><div class="panel prep-list" id="prepList"><p class="fine" style="padding:12px 14px">Opening sheets…</p></div>'
+      : '<div class="panel empty-state">No prep sheets yet. They are added each night the class-prep task runs for '+esc(prepCode)+'.</div>')+'</div>'+
+    (hasLinks ? '<div class="fold-sec"><h3>Files &amp; study help <span>'+linkCount(prepCode)+'</span></h3><div class="panel lk-list" id="prepLinks"><p class="fine" style="padding:12px 14px">Opening…</p></div></div>' : '');
+  if (hasLinks) renderLinks(prepCode, $("#prepLinks"));
+  if (!list.length) return;
   $("#prepSearch").addEventListener("input", e => { prepQ = e.target.value; drawRows(); });
   const got = await Promise.all(list.map(p => prepSheet(p).catch(() => null)));
   if (cView !== "prep" || prepOpen) return;
@@ -1771,8 +1846,8 @@ async function renderPrepSheet(list){
   if (!p){ prepOpen = null; return renderPrep(); }
   const prev = list[i-1], nxt = list[i+1];
   $("#prepBody").innerHTML = '<div class="prep-view"><div class="prep-bar"><div class="grp"><button class="small-btn" type="button" id="prepBack">← All '+esc(p.course)+' sheets</button></div><div class="grp">'+
-    '<button class="small-btn" type="button" data-prepf="'+(prev?esc(prev.file):'')+'"'+(prev?'':' disabled')+'>← L'+(prev?prev.lesson:'')+'</button>'+
-    '<button class="small-btn" type="button" data-prepf="'+(nxt?esc(nxt.file):'')+'"'+(nxt?'':' disabled')+'>L'+(nxt?nxt.lesson:'')+' →</button>'+
+    (prev ? '<button class="small-btn" type="button" data-prepf="'+esc(prev.file)+'">← L'+prev.lesson+'</button>' : '')+
+    (nxt ? '<button class="small-btn" type="button" data-prepf="'+esc(nxt.file)+'">L'+nxt.lesson+' →</button>' : '')+
     '<button class="small-btn" type="button" id="prepNew">Open in new tab ↗</button></div>'+
     '<h3 id="prepTitle">Lesson '+p.lesson+'</h3><p class="fine" id="prepSub" style="margin:0">'+prepFmt(p.date)+'</p></div>'+
     '<iframe class="prep-frame" id="prepFrame" title="Prep sheet" sandbox="allow-popups allow-popups-to-escape-sandbox"></iframe></div>';
@@ -1794,16 +1869,16 @@ document.addEventListener("click", e => { const b = e.target.closest("[data-prep
 
 /* ---------- projects ---------- */
 const PROJ = [
-  {t:"TSP Optimization Dashboard", course:"MA481X", art:"tsp", status:"In progress", d:"An interactive simulation that shows an optimization method solving the Traveling Salesman Problem step by step, built for Optimization II.", tags:["Optimization","Heuristics","JavaScript"]},
-  {t:"Combat Field Test Simulation", course:"EM481", art:"sim", status:"In progress", d:"A ProModel discrete-event model of the Combat Field Test, used to study flow, bottlenecks, and throughput.", tags:["Simulation","ProModel","Systems"]},
-  {t:"NFL Travel Effect", course:"Research", art:"nfl", status:"Research", d:"A study of whether travel distance and time zones affect NFL team performance.", tags:["Statistics","Sports analytics","Research"]},
-  {t:"Website AI Assistant", course:"Business", art:"bot", status:"Live", d:"An AI assistant powered by Claude that plugs into any website to answer visitors and promote what the site offers.", tags:["AI","Claude","Web"]}
+  {t:"TSP Optimization Dashboard", folder:"proj-tsp", course:"MA481X", art:"tsp", status:"In progress", d:"An interactive simulation that shows an optimization method solving the Traveling Salesman Problem step by step, built for Optimization II.", tags:["Optimization","Heuristics","JavaScript"]},
+  {t:"Combat Field Test Simulation", folder:"proj-cft", course:"EM481", art:"sim", status:"In progress", d:"A ProModel discrete-event model of the Combat Field Test, used to study flow, bottlenecks, and throughput.", tags:["Simulation","ProModel","Systems"]},
+  {t:"NFL Travel Effect", folder:"proj-nfl", course:"Research", art:"nfl", status:"Research", d:"A study of whether travel distance and time zones affect NFL team performance.", tags:["Statistics","Sports analytics","Research"]},
+  {t:"Website AI Assistant", folder:"proj-bot", course:"Business", art:"bot", status:"Live", d:"An AI assistant powered by Claude that plugs into any website to answer visitors and promote what the site offers.", tags:["AI","Claude","Web"]}
 ];
 function renderProjects(){
   $("#projGrid").innerHTML = PROJ.map(p =>
-    '<article class="panel proj"><div class="proj-art"><canvas data-art="'+p.art+'"></canvas></div>'+
+    '<article class="panel proj" data-projf="'+p.folder+'" role="button" tabindex="0" aria-label="Open the '+esc(p.t)+' folder"><div class="proj-art"><canvas data-art="'+p.art+'"></canvas></div>'+
     '<span class="status'+(p.status==="Live"?' live':'')+'">'+p.status+'</span>'+
-    '<span class="eyebrow">'+p.course+'</span><h3>'+p.t+'</h3><p>'+p.d+'</p><div class="tags">'+p.tags.map(t => '<span class="chip">'+t+'</span>').join("")+'</div></article>'
+    '<span class="eyebrow">'+p.course+'</span><h3>'+p.t+'</h3><p>'+p.d+'</p><div class="tags">'+p.tags.map(t => '<span class="chip">'+t+'</span>').join("")+'</div><span class="small-btn proj-open"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h6l2 2h10v11H3z"/></svg>Open folder'+(linkCount(p.folder)?' · '+linkCount(p.folder):'')+'</span></article>'
   ).join("");
 }
 function css(v){ return getComputedStyle(root).getPropertyValue(v).trim(); }
@@ -2827,7 +2902,7 @@ if (matchMedia("(hover:hover)").matches){
 })();
 
 renderCountdowns(); renderSong(); setFbTab(store.get("bf-fbtab", "bills"));
-renderHome(); renderSched(); renderResume(); renderCourses(); renderProjects(); renderDaily(); loadDaily(); loadPrepManifest(); loadWeather(); loadBills(); renderFinance(); renderQuote(); bootAuth().then(route, route);
+renderHome(); renderSched(); renderResume(); renderCourses(); renderProjects(); renderDaily(); loadDaily(); loadPrepManifest(); loadLinksManifest(); loadWeather(); loadBills(); renderFinance(); renderQuote(); bootAuth().then(route, route);
 addEventListener("resize", () => GG.draw());
 setInterval(tick, 1000);
 })();
