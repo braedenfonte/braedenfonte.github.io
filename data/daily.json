@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-23T06:58:00-04:00",
+ "updated": "2026-10-24T06:50:00-04:00",
  "flights": [
   {
    "from": "LGA",
@@ -453,8 +453,20 @@
   }
  ],
  "football": {
-  "label": "Week 7 recap",
+  "label": "Week 7 recap + Army Friday",
   "results": [
+   {
+    "away": "Army",
+    "home": "Tulsa",
+    "as": 38,
+    "hs": 35,
+    "blurb": "Dawson Jones hit a 50-yard field goal on the final play as Army rallied to win in Tulsa.",
+    "stats": [
+     "Hellums: 30 carries, 121 yds, 3 TD",
+     "Nwawuihe: 12 carries, 135 yds, 66-yd TD run",
+     "Jones: FGs of 51, 34 and 50 yds"
+    ]
+   },
    {
     "away": "Auburn",
     "home": "Georgia",
@@ -489,18 +501,6 @@
      "Hoover: 20/40, 296 pass yds for IND",
      "Sayin: TD passes to Bo Jackson and Jeremiah Smith",
      "Sayin left in the 4th with a shoulder injury"
-    ]
-   },
-   {
-    "away": "Florida Atlantic",
-    "home": "Army",
-    "as": 24,
-    "hs": 56,
-    "blurb": "Army scored touchdowns on its first seven possessions and rolled at Michie Stadium.",
-    "stats": [
-     "Hellums: 25 carries, 195 yds, 5 TD (ties school record)",
-     "Army: 479 rush yds, 8 rush TD",
-     "Rendina: career-long 61-yd TD run"
     ]
    },
    {
@@ -542,13 +542,6 @@
   ],
   "upcoming": [
    {
-    "away": "Army",
-    "home": "Tulsa",
-    "kick": "2026-10-24T00:30:00Z",
-    "note": "Away \u2014 Friday night (ESPN2)",
-    "army": true
-   },
-   {
     "away": "Indiana",
     "home": "Michigan",
     "kick": "2026-10-24T16:00:00Z",
@@ -571,103 +564,110 @@
     "home": "Texas",
     "kick": "2026-10-24T23:30:00Z",
     "note": "Primetime in Austin (ABC)"
+   },
+   {
+    "away": "Army",
+    "home": "Memphis",
+    "kick": "2026-11-01T00:00:00Z",
+    "note": "Away \u2014 Saturday night (ESPNU)",
+    "army": true
    }
   ]
  },
  "location": {
-  "name": "Sossusvlei",
-  "wiki": "Sossusvlei",
-  "country": "Namibia",
-  "region": "Namib-Naukluft National Park (Hardap Region)",
-  "lat": -24.73,
-  "lon": 15.34,
-  "tagline": "Some of the tallest dunes on Earth, glowing red around a dead-end clay pan.",
-  "intro": "Sossusvlei is a salt and clay pan in the southern Namib Desert, ringed by towering star dunes whose sand has rusted to deep orange and red. Nearby Deadvlei holds a grove of centuries-dead camel thorn trees standing on white clay, one of the most photographed scenes in Africa. The area sits inside the Namib Sand Sea, a UNESCO World Heritage Site.",
+  "name": "Gal\u00e1pagos Islands",
+  "wiki": "Gal\u00e1pagos_Islands",
+  "country": "Ecuador",
+  "region": "Gal\u00e1pagos Province, eastern Pacific Ocean",
+  "lat": -0.5,
+  "lon": -90.5,
+  "tagline": "Volcanic islands on the equator where the wildlife still doesn't run away.",
+  "intro": "The Gal\u00e1pagos are a chain of volcanic islands straddling the equator roughly 1,000 km west of mainland Ecuador. Isolation produced animals found nowhere else \u2014 giant tortoises, sea-going iguanas, tropical penguins \u2014 and their variations helped shape Charles Darwin's thinking on natural selection after his 1835 visit. Nearly all of the land is national park, and the islands were among the first places named a UNESCO World Heritage Site.",
   "stats": [
    {
     "label": "UNESCO World Heritage",
-    "value": "Namib Sand Sea, since 2013"
+    "value": "Since 1978"
    },
    {
-    "label": "Big Daddy dune",
-    "value": "\u2248325 m tall"
+    "label": "Islands, islets & rocks",
+    "value": "127"
    },
    {
-    "label": "Sand sea area",
-    "value": "\u22483.08 million ha"
+    "label": "Land area",
+    "value": "\u22488,000 km\u00b2"
    },
    {
-    "label": "Desert rainfall",
-    "value": "Under 10 mm a year"
+    "label": "Highest point",
+    "value": "Volc\u00e1n Wolf, 1,707 m"
    }
   ],
   "facts": [
-   "The name roughly means 'dead-end marsh': 'vlei' is Afrikaans for marsh and 'sossus' is Nama for 'no return,' because the Tsauchab River's water drains into the pan and never flows out.",
-   "The dead camel thorn trees of Deadvlei are believed to have died 600\u2013700 years ago, yet they haven't rotted because the air is too dry for the wood to decompose.",
-   "The dunes' orange-red color is iron oxide \u2014 the sand has literally rusted over time, so older dunes are redder.",
-   "Much of the sand traveled thousands of kilometers: eroded in the Orange River's headwaters, carried to the Atlantic, pushed north by currents, then blown inland \u2014 a conveyor that has run for more than 5 million years.",
-   "With almost no rain, fog rolling in from the Atlantic is the area's main water source, and some Namib beetles survive by catching droplets on their backs."
+   "The islands are named for their giant tortoises: 'gal\u00e1pago' is an old Spanish word for tortoise, and the name already appears on Ortelius's map published in 1570.",
+   "The marine iguana is the only iguana in the world that feeds in the sea \u2014 and during the 1982\u201383 El Ni\u00f1o, about 70% of them starved when their algae died back.",
+   "The Gal\u00e1pagos penguin is the only penguin species that lives in the tropics, surviving thanks to cold, upwelling ocean currents.",
+   "Darwin spent only about five weeks there: HMS Beagle arrived on 15 September 1835 and left on 20 October.",
+   "Whalers ran an informal 'post office' here from about 1818, leaving letters in a barrel for passing ships heading home to carry on."
   ],
-  "bestTime": "May to September (the cool, dry winter) for comfortable hikes; arrive at sunrise or late afternoon for the deepest colors and long shadows.",
-  "gettingThere": "Fly from New York to Johannesburg (about 16 hours nonstop), connect to Windhoek, then drive roughly 5 hours southwest to the Sesriem gate; it's 60 km of paved road to the 2x4 parking, and the last 6 km of sand need a 4WD or the park shuttle.",
-  "tip": "Stay inside the park gate at Sesriem so you can be on the road before the public is let in and catch sunrise from a dune like Dune 45 before the crowds."
+  "bestTime": "December to May brings warm water, calmer seas and sunshine; June to November is cooler and misty but the colder, nutrient-rich water means livelier marine life for snorkeling and diving.",
+  "gettingThere": "Fly from New York to Quito or Guayaquil in mainland Ecuador, then take a domestic flight of roughly two hours to Seymour Airport on Baltra or to San Crist\u00f3bal \u2014 the only two islands with airports.",
+  "tip": "Every visitor site requires a licensed naturalist guide, so a small-boat cruise or well-planned island-hopping lets you reach far more of the 116 land and snorkel sites than staying on one island."
  },
  "flightsNote": "Real fares from Kayak searches run Oct 20 with your exact pass window, JFK/LGA/EWR only.",
  "markets": {
-  "asOf": "Thu Oct 22 close",
-  "story": "The Nasdaq had its biggest one-day drop since June as Meta's spending disclosures and a supply warning from Lam Research revived worries about AI costs, sending chip stocks sharply lower. Investors rotated into defensive names and Treasuries, leaving the Dow and small caps slightly higher while oil jumped on fresh Gulf attacks.",
+  "asOf": "Fri Oct 23 close",
+  "story": "Stocks slipped to end a rocky week as Houthi attacks on Saudi Arabia pushed Brent crude to a six-month high above $116 and revived inflation worries, with the 10-year yield near 5%. Selling spread from tech into consumer and healthcare names, though chip stocks steadied after Thursday's rout.",
   "indices": [
    {
     "name": "Dow",
-    "value": "52,868",
-    "chg": 0.02
+    "value": "52,215",
+    "chg": -1.23
    },
    {
     "name": "S&P 500",
-    "value": "7,663",
-    "chg": -1.21
+    "value": "7,624",
+    "chg": -0.52
    },
    {
     "name": "Nasdaq",
-    "value": "26,009",
-    "chg": -2.6
+    "value": "25,955",
+    "chg": -0.21
    },
    {
     "name": "Russell 2000",
-    "value": "2,784",
-    "chg": 0.11
+    "value": "2,776",
+    "chg": -0.29
    }
   ],
   "movers": [
    {
-    "sym": "META",
-    "move": "\u22127.0%",
+    "sym": "RHI",
+    "move": "+21.7%",
+    "dir": 1,
+    "why": "Robert Half beat earnings estimates and its Talent Solutions unit returned to growth."
+   },
+   {
+    "sym": "LKQ",
+    "move": "\u221222.5%",
     "dir": -1,
-    "why": "Meta beat estimates but posted its first cash outflow in over a decade and about $825 billion in future lease and contract commitments."
+    "why": "LKQ's preliminary results missed, it withdrew guidance and replaced leadership."
    },
    {
-    "sym": "LRCX",
-    "move": "\u221211.8%",
+    "sym": "CRWD",
+    "move": "+8.3%",
+    "dir": 1,
+    "why": "CrowdStrike jumped as a critical PHP security flaw that disrupted services drew attention to cybersecurity demand."
+   },
+   {
+    "sym": "TMUS",
+    "move": "\u22127.7%",
     "dir": -1,
-    "why": "Lam Research warned of supply-chain and clean-room constraints into 2027, dragging chip stocks."
+    "why": "T-Mobile and AT&T fell on a report that SpaceX is in talks to lease about 80,000 U.S. cell towers."
    },
    {
-    "sym": "SPOT",
-    "move": "+11.1%",
-    "dir": 1,
-    "why": "Spotify guided Q4 revenue above estimates."
-   },
-   {
-    "sym": "PG",
-    "move": "+5.6%",
-    "dir": 1,
-    "why": "Procter & Gamble grew organic sales 4% and kept its full-year guidance."
-   },
-   {
-    "sym": "BHVN",
-    "move": "+25%",
-    "dir": 1,
-    "why": "Biohaven jumped after the FDA accepted its resubmitted application."
+    "sym": "AXP",
+    "move": "\u22123%",
+    "dir": -1,
+    "why": "American Express slipped after Q3 results and plans to cut about 5% of its workforce."
    }
   ],
   "lines": [
@@ -714,6 +714,6 @@
     "p": 87
    }
   ],
-  "sources": "Market data: AP via Yahoo Finance, Capp Notes closing look and TradingKey (Oct 22). Lines: Bills\u2013Ravens DraftKings via ESPN (Oct 23); Indiana\u2013Michigan FanDuel via SI Betting (Oct 19). Win odds: Dimers model (Oct 21)."
+  "sources": "Market data: AP via Yahoo Finance, Capp Notes closing look and TradingKey (Oct 23). Lines: Bills\u2013Ravens DraftKings via ESPN (Oct 24); Indiana\u2013Michigan FanDuel via SI Betting (Oct 19). Win odds: Dimers model (Oct 21)."
  }
 }
