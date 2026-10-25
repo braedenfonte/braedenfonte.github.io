@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-24T06:50:00-04:00",
+ "updated": "2026-10-25T06:55:00-04:00",
  "team": "Buffalo Bills",
  "record": {
   "w": 5,
@@ -96,20 +96,20 @@
  },
  "news": [
   {
-   "h": "Gardner-Johnson's suspension upheld",
-   "b": "Appeals officer Jordy Nelson upheld C.J. Gardner-Johnson's one-game ban for spitting toward Raiders players, so he is ineligible for the Ravens game. Joe Brady has indicated the Bills don't plan to release him."
+   "h": "Gardner-Johnson fined on top of ban",
+   "b": "The NFL fined C.J. Gardner-Johnson $11,194 for unnecessary roughness against the Raiders, on top of his upheld one-game suspension for spitting. He will sit out the Ravens game on Nov. 1."
   },
   {
-   "h": "Moore, Oliver eye post-bye return",
-   "b": "Brady said WR DJ Moore (shoulder) and DT Ed Oliver (knee) were both 'close' to playing in Vegas and he hopes they're near full health for Baltimore. With Gardner-Johnson out, Damar Hamlin is expected to start at safety alongside Cole Bishop."
+   "h": "Sam Franklin appealing his suspension",
+   "b": "Safety Sam Franklin also drew a one-game ban for allegedly spitting toward a Raiders player; he and his agent deny it, and his appeal is set to be heard by former player James Thrash with no ruling date yet."
   },
   {
-   "h": "Allen, Cook lead bye-week report card",
-   "b": "Josh Allen leads the NFL with 17 total touchdowns (9 passing, 8 rushing) through six games, and James Cook ranks third in the league with 627 rushing yards. Greg Rousseau has six sacks and a league-high 39 pressures per PFF, while Tyler Bass is 13-for-13 on field goals."
+   "h": "Lamar Jackson 'day to day' before Buffalo",
+   "b": "Ravens QB Lamar Jackson has missed two games with an ankle injury and was limited in practice midweek; coach Jesse Minter calls him day to day. Baltimore faces Jacksonville on Sunday before coming to Orchard Park."
   },
   {
-   "h": "Patriots fall, Bills' lead grows",
-   "b": "New England lost 30-24 at Chicago on Thursday night, dropping to 4-3 and leaving Buffalo (5-1) a game and a half up in the AFC East during its bye. The Jets (2-4) host winless Miami on Sunday."
+   "h": "Tough road ahead after the bye",
+   "b": "Buffalo leads the NFL in scoring but ranks 31st in yards allowed and faces the fourth-toughest remaining schedule. The Jets (2-4) host winless Miami on Sunday while the Bills (5-1) sit on a game-and-a-half AFC East lead."
   }
  ],
  "schedule": [
@@ -191,5 +191,5 @@
    "note": "Date and time may flex"
   }
  ],
- "source": "Buffalobills.com (Oct 19), Yahoo Sports/Athlon and Bills On SI (Oct 20–21), Heavy (Oct 22), ESPN odds; checked Oct 24, 2026. Refreshes with the daily update."
+ "source": "Heavy (Oct 22–24), Yahoo Sports/Bills On SI (Oct 24), ESPN odds and schedule; checked Oct 25, 2026. Refreshes with the daily update."
 }

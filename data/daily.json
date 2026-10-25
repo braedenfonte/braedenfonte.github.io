@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-24T06:50:00-04:00",
+ "updated": "2026-10-25T06:55:00-04:00",
  "flights": [
   {
    "from": "LGA",
@@ -453,117 +453,126 @@
   }
  ],
  "football": {
-  "label": "Week 7 recap + Army Friday",
+  "label": "Week 8 recap",
   "results": [
    {
-    "away": "Army",
-    "home": "Tulsa",
-    "as": 38,
-    "hs": 35,
-    "blurb": "Dawson Jones hit a 50-yard field goal on the final play as Army rallied to win in Tulsa.",
-    "stats": [
-     "Hellums: 30 carries, 121 yds, 3 TD",
-     "Nwawuihe: 12 carries, 135 yds, 66-yd TD run",
-     "Jones: FGs of 51, 34 and 50 yds"
-    ]
-   },
-   {
-    "away": "Auburn",
-    "home": "Georgia",
-    "as": 27,
-    "hs": 24,
-    "blurb": "Auburn stunned No. 1 Georgia in Athens on Alex McPherson's 34-yard field goal as time expired.",
-    "stats": [
-     "Byrum Brown: 115 rush yds, TD + 150 pass yds, TD",
-     "Stockton: 272 pass yds, 2 TD, 2 INT",
-     "Georgia outgained Auburn with 440 total yds"
-    ]
-   },
-   {
-    "away": "Alabama",
-    "home": "Tennessee",
-    "as": 10,
-    "hs": 26,
-    "blurb": "No. 14 Tennessee handed No. 6 Alabama its first back-to-back regular-season losses since 2007.",
-    "stats": [
-     "DeSean Bishop: 159 rush yds, 2 TD",
-     "Alabama held to 201 total yds, 54 rushing",
-     "Vols forced 4 turnovers; Ranvier 4 FGs"
-    ]
-   },
-   {
-    "away": "Ohio State",
-    "home": "Indiana",
-    "as": 19,
-    "hs": 15,
-    "blurb": "Ohio State snapped Indiana's 22-game win streak when a late fourth-down TD catch landed out of bounds.",
-    "stats": [
-     "Hoover: 20/40, 296 pass yds for IND",
-     "Sayin: TD passes to Bo Jackson and Jeremiah Smith",
-     "Sayin left in the 4th with a shoulder injury"
-    ]
-   },
-   {
-    "away": "Navy",
-    "home": "UTSA",
-    "as": 34,
-    "hs": 38,
-    "blurb": "UTSA won it on McCown's 41-yard TD pass with 2:45 left in San Antonio.",
-    "stats": [
-     "Gutierrez: 139 rush yds, 4 total TD",
-     "Collins: school-record 92-yd TD catch",
-     "Collins: 2 catches, 117 yds, 2 TD"
-    ]
-   },
-   {
-    "away": "Florida",
-    "home": "Texas",
-    "as": 27,
-    "hs": 24,
-    "blurb": "Florida knocked off No. 7 Texas in Austin.",
-    "stats": []
-   },
-   {
-    "away": "UNLV",
-    "home": "Air Force",
+    "away": "BYU",
+    "home": "UCF",
     "as": 31,
-    "hs": 41,
-    "blurb": "Air Force beat UNLV in a Mountain West shootout.",
-    "stats": []
+    "hs": 39,
+    "blurb": "UCF beat No. 2 BYU in double overtime for the first win over an AP top-five team in program history.",
+    "stats": [
+     "Keyone Jenkins: 2-yd TD pass to Grayson Brousseau in 2OT",
+     "UCF's 47-yd FG try was blocked at the end of regulation",
+     "BYU's last 4th-down pass from the UCF 4 fell incomplete"
+    ]
    },
-   {
-    "away": "Penn State",
-    "home": "Michigan",
-    "as": 18,
-    "hs": 21,
-    "blurb": "Michigan edged Penn State behind Tommy Carr.",
-    "stats": []
-   }
-  ],
-  "upcoming": [
    {
     "away": "Indiana",
     "home": "Michigan",
-    "kick": "2026-10-24T16:00:00Z",
-    "note": "Big Ten noon kick (FOX)"
-   },
-   {
-    "away": "LSU",
-    "home": "Auburn",
-    "kick": "2026-10-24T16:00:00Z",
-    "note": "Auburn's first game after the Georgia upset (ABC/ESPN)"
-   },
-   {
-    "away": "Texas A&M",
-    "home": "Alabama",
-    "kick": "2026-10-24T19:30:00Z",
-    "note": "Bama tries to stop a two-game skid (ABC)"
+    "as": 13,
+    "hs": 6,
+    "blurb": "No. 6 Indiana won a defensive slugfest in Ann Arbor on Josh Hoover's overtime TD run.",
+    "stats": [
+     "Hoover: 4-yd TD run in OT",
+     "Nico Radicic: FGs of 22 and 34 yds",
+     "Tommy Carr: 20/32, 167 yds, INT for Michigan"
+    ]
    },
    {
     "away": "Ole Miss",
     "home": "Texas",
-    "kick": "2026-10-24T23:30:00Z",
-    "note": "Primetime in Austin (ABC)"
+    "as": 27,
+    "hs": 34,
+    "blurb": "No. 19 Texas blew a 24-3 halftime lead but held off No. 7 Ole Miss with an end-zone interception on the last play.",
+    "stats": [
+     "Arch Manning: 212 pass yds, 3 total TD, 2 INT",
+     "Raleek Brown: 157 rush yds",
+     "Trinidad Chambliss: 250 pass yds, 2 TD, 3 INT"
+    ]
+   },
+   {
+    "away": "Tennessee",
+    "home": "South Carolina",
+    "as": 24,
+    "hs": 27,
+    "blurb": "Malik Orsan's 48-yard field goal at the gun beat No. 11 Tennessee after a late strip-sack.",
+    "stats": [
+     "LaNorris Sellers: 210 pass yds, 96 rush yds, 3 total TD",
+     "DeSean Bishop: 130 rush yds, TD"
+    ]
+   },
+   {
+    "away": "Texas A&M",
+    "home": "Alabama",
+    "as": 20,
+    "hs": 31,
+    "blurb": "No. 13 Alabama snapped a two-game skid behind Keelon Russell and an opening pick-six.",
+    "stats": [
+     "Russell: 19/30, 311 yds, 3 TD",
+     "Rico Scott: 6 catches, 156 yds",
+     "Dijon Lee Jr.: 39-yd INT return TD"
+    ]
+   },
+   {
+    "away": "LSU",
+    "home": "Auburn",
+    "as": 38,
+    "hs": 17,
+    "blurb": "No. 18 LSU scored on five of six first-half drives to rout Auburn a week after its Georgia upset.",
+    "stats": [
+     "Sam Leavitt: 32/45, career-high 387 yds, 3 TD",
+     "Jackson Harris: 9 catches, 178 yds, 2 TD"
+    ]
+   },
+   {
+    "away": "North Texas",
+    "home": "Navy",
+    "as": 49,
+    "hs": 39,
+    "blurb": "North Texas scored on offense, defense and special teams to win in Annapolis.",
+    "stats": [
+     "Jackson Gutierrez: 3 rush TD for Navy",
+     "Jahiem White: 174 rush yds, 2 TD",
+     "Justin Stevenson: 8 catches, 209 yds, 2 TD"
+    ]
+   },
+   {
+    "away": "Air Force",
+    "home": "Wyoming",
+    "as": 14,
+    "hs": 28,
+    "blurb": "Wyoming beat Air Force in Laramie on Friday night.",
+    "stats": [
+     "Tyler Hughes: 146 rush yds, 3 total TD",
+     "Evan Medders: 115 rush yds, TD for AFA"
+    ]
+   }
+  ],
+  "upcoming": [
+   {
+    "away": "Baylor",
+    "home": "UCF",
+    "kick": "2026-10-30T23:30:00Z",
+    "note": "UCF's first game after the BYU upset (ESPN)"
+   },
+   {
+    "away": "Notre Dame",
+    "home": "Navy",
+    "kick": "2026-10-31T16:00:00Z",
+    "note": "Neutral site in Foxborough (ABC or ESPN)"
+   },
+   {
+    "away": "Florida",
+    "home": "Georgia",
+    "kick": "2026-10-31T19:30:00Z",
+    "note": "Neutral site in Atlanta (ABC)"
+   },
+   {
+    "away": "Ohio State",
+    "home": "USC",
+    "kick": "2026-10-31T23:30:00Z",
+    "note": "Halloween night in LA (NBC)"
    },
    {
     "away": "Army",
@@ -575,42 +584,42 @@
   ]
  },
  "location": {
-  "name": "Gal\u00e1pagos Islands",
-  "wiki": "Gal\u00e1pagos_Islands",
-  "country": "Ecuador",
-  "region": "Gal\u00e1pagos Province, eastern Pacific Ocean",
-  "lat": -0.5,
-  "lon": -90.5,
-  "tagline": "Volcanic islands on the equator where the wildlife still doesn't run away.",
-  "intro": "The Gal\u00e1pagos are a chain of volcanic islands straddling the equator roughly 1,000 km west of mainland Ecuador. Isolation produced animals found nowhere else \u2014 giant tortoises, sea-going iguanas, tropical penguins \u2014 and their variations helped shape Charles Darwin's thinking on natural selection after his 1835 visit. Nearly all of the land is national park, and the islands were among the first places named a UNESCO World Heritage Site.",
+  "name": "Plitvice Lakes National Park",
+  "wiki": "Plitvice_Lakes_National_Park",
+  "country": "Croatia",
+  "region": "Lika-Senj and Karlovac counties, central Croatia",
+  "lat": 44.8806,
+  "lon": 15.6161,
+  "tagline": "Sixteen turquoise lakes stacked down a limestone valley, joined by waterfalls that build themselves.",
+  "intro": "Plitvice is Croatia's oldest and largest national park, a forested karst valley where sixteen terraced lakes spill into one another over natural travertine dams. Wooden boardwalks thread right across the water and past dozens of falls, ending at the 78-metre Veliki slap. It became one of the first UNESCO World Heritage Sites in 1979 and now draws about 1.5 million visitors a year.",
   "stats": [
    {
+    "label": "National park since",
+    "value": "1949"
+   },
+   {
     "label": "UNESCO World Heritage",
-    "value": "Since 1978"
+    "value": "Since 1979"
    },
    {
-    "label": "Islands, islets & rocks",
-    "value": "127"
+    "label": "Area",
+    "value": "296.85 km\u00b2"
    },
    {
-    "label": "Land area",
-    "value": "\u22488,000 km\u00b2"
-   },
-   {
-    "label": "Highest point",
-    "value": "Volc\u00e1n Wolf, 1,707 m"
+    "label": "Tallest waterfall",
+    "value": "Veliki slap, 78 m"
    }
   ],
   "facts": [
-   "The islands are named for their giant tortoises: 'gal\u00e1pago' is an old Spanish word for tortoise, and the name already appears on Ortelius's map published in 1570.",
-   "The marine iguana is the only iguana in the world that feeds in the sea \u2014 and during the 1982\u201383 El Ni\u00f1o, about 70% of them starved when their algae died back.",
-   "The Gal\u00e1pagos penguin is the only penguin species that lives in the tropics, surviving thanks to cold, upwelling ocean currents.",
-   "Darwin spent only about five weeks there: HMS Beagle arrived on 15 September 1835 and left on 20 October.",
-   "Whalers ran an informal 'post office' here from about 1818, leaving letters in a barrel for passing ships heading home to carry on."
+   "The lake dams are alive in a sense: calcium carbonate from the water settles on mosses and hardens into travertine, and the barriers at Lake Kozjak grow by up to 13 mm a year.",
+   "In March 1991 the park was the scene of the first deadly armed clash of the Croatian War of Independence, and its hotels were later used as barracks.",
+   "Because of the war, UNESCO kept Plitvice on its List of World Heritage in Danger from 1992 to 1997.",
+   "Between 1962 and 1968 it stood in for the American Wild West in German Karl May films \u2014 the lake Kalu\u0111erovac played the 'Silver Lake' in Treasure of Silver Lake.",
+   "Brown bears, grey wolves and lynx roam the park's forests, yet swimming in the lakes has been strictly banned since 2006."
   ],
-  "bestTime": "December to May brings warm water, calmer seas and sunshine; June to November is cooler and misty but the colder, nutrient-rich water means livelier marine life for snorkeling and diving.",
-  "gettingThere": "Fly from New York to Quito or Guayaquil in mainland Ecuador, then take a domestic flight of roughly two hours to Seymour Airport on Baltra or to San Crist\u00f3bal \u2014 the only two islands with airports.",
-  "tip": "Every visitor site requires a licensed naturalist guide, so a small-boat cruise or well-planned island-hopping lets you reach far more of the 116 land and snorkel sites than staying on one island."
+  "bestTime": "Late spring brings the strongest waterfalls after the snowmelt, and October's fall colors are spectacular with thinner crowds; July and August are the busiest months.",
+  "gettingThere": "Fly from New York to Zagreb (usually with one connection), then take a bus from Zagreb's main bus station to the park \u2014 about 2 hours 20 minutes \u2014 or rent a car for the roughly 140 km drive. Zadar, about 130 km away, is technically the closest airport.",
+  "tip": "Buses stop outside both Entrance 1 and Entrance 2 with no real terminal, so check the posted return times at the wooden huts by the entrance as soon as you arrive."
  },
  "flightsNote": "Real fares from Kayak searches run Oct 20 with your exact pass window, JFK/LGA/EWR only.",
  "markets": {
@@ -680,40 +689,40 @@
     "bills": true
    },
    {
-    "game": "Indiana @ Michigan",
-    "kick": "2026-10-24T16:00:00Z",
-    "spread": "IND \u22127.5",
-    "total": "41.5",
-    "ml": "IND \u2212295 \u00b7 MICH +235"
+    "game": "Ohio State @ USC",
+    "kick": "2026-10-31T23:30:00Z",
+    "spread": "OSU \u22127.5",
+    "total": "51.5",
+    "ml": "OSU \u2212260 \u00b7 USC +210"
    }
   ],
   "probs": [
    {
-    "game": "Pittsburgh @ Miami",
-    "fav": "Miami",
-    "p": 94
+    "game": "Giants @ Texans",
+    "fav": "Texans",
+    "p": 79
    },
    {
-    "game": "California @ SMU",
-    "fav": "SMU",
-    "p": 92
+    "game": "Colts @ Vikings",
+    "fav": "Vikings",
+    "p": 72
    },
    {
-    "game": "Rutgers @ Northwestern",
-    "fav": "Northwestern",
-    "p": 88
+    "game": "Cowboys @ Eagles",
+    "fav": "Cowboys",
+    "p": 68
    },
    {
-    "game": "Sacramento State @ Ball State",
-    "fav": "Ball State",
-    "p": 87
+    "game": "Rams @ Raiders",
+    "fav": "Rams",
+    "p": 67
    },
    {
-    "game": "Louisiana-Monroe @ Troy",
-    "fav": "Troy",
-    "p": 87
+    "game": "Dolphins @ Jets",
+    "fav": "Jets",
+    "p": 65
    }
   ],
-  "sources": "Market data: AP via Yahoo Finance, Capp Notes closing look and TradingKey (Oct 23). Lines: Bills\u2013Ravens DraftKings via ESPN (Oct 24); Indiana\u2013Michigan FanDuel via SI Betting (Oct 19). Win odds: Dimers model (Oct 21)."
+  "sources": "Market data: AP via Yahoo Finance, Capp Notes closing look and TradingKey (Oct 23). Lines: Bills\u2013Ravens DraftKings via ESPN; Ohio State\u2013USC FanDuel via Covers (both Oct 25). Win odds: Dimers NFL Week 7 model (Oct 25)."
  }
 }
