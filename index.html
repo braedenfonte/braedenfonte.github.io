@@ -95,7 +95,7 @@ main{margin-left:var(--side);min-height:100vh;padding-block:44px 0;padding-left:
 .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .chip{display:inline-flex;align-items:center;gap:6px;font:500 12px var(--mono);letter-spacing:.03em;padding:4px 10px;border-radius:999px;background:var(--surface-2);color:var(--muted);white-space:nowrap}
 .dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--c)}
-[data-cat="due"]{--c:var(--c-due)}[data-cat="exam"]{--c:var(--c-exam)}[data-cat="game"]{--c:var(--c-game)}[data-cat="corps"]{--c:var(--c-corps)}[data-cat="break"]{--c:var(--c-break)}[data-cat="personal"]{--c:var(--c-personal)}[data-cat="practice"]{--c:var(--c-practice)}
+[data-cat="due"]{--c:var(--c-due)}[data-cat="exam"]{--c:var(--c-exam)}[data-cat="game"]{--c:var(--c-game)}[data-cat="corps"]{--c:var(--c-corps)}[data-cat="break"]{--c:var(--c-break)}[data-cat="personal"]{--c:var(--c-personal)}[data-cat="practice"]{--c:var(--c-practice)}[data-cat="soccer"]{--c:var(--c-practice)}
 
 /* ---------- home ---------- */
 .hero{padding:8px 0 6px}
@@ -832,6 +832,13 @@ body.gate-open{overflow:hidden}
 /* scroll progress */
 #sprog{position:fixed;top:0;left:0;right:0;height:3px;z-index:70;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--accent),var(--accent-strong),#ffb36b);pointer-events:none}
 /* to-do check pop + all-done glow */
+.todo{margin-top:16px;padding:20px 22px;border-left:4px solid var(--c-exam)}
+.todo label{display:flex;gap:12px;align-items:flex-start;padding:9px 0;cursor:pointer;border-top:1px solid var(--line)}
+.todo label:first-of-type{border-top:0}
+.todo input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent);flex:none}
+.todo input:checked+span{color:var(--faint);text-decoration:line-through}
+.todo input:checked{animation:pop .35s cubic-bezier(.3,1.6,.5,1)}
+.todo.all-done{animation:doneGlow 1.6s ease-out}
 @keyframes pop{40%{transform:scale(1.35)}}
 @keyframes doneGlow{30%{box-shadow:0 0 0 2px var(--c-break),0 0 50px -6px var(--c-break)}}
 .confetti{position:fixed;width:8px;height:12px;z-index:80;pointer-events:none;border-radius:2px;animation:conf 1.4s cubic-bezier(.2,.6,.4,1) forwards}
@@ -927,6 +934,7 @@ body.gate-open{overflow:hidden}
   <div class="page-h"><span class="eyebrow" id="briefDate">Today</span><h2 id="briefHello">Good morning, Braeden.</h2><p id="briefSub">Here's your day at a glance.</p></div>
   <div class="cd-mini" id="cdMini"></div>
   <div class="panel quote" id="quoteCard"><span class="eyebrow">Quote of the day</span><blockquote id="quoteText">…</blockquote><cite id="quoteBy"></cite></div>
+  <div class="panel todo" id="todoCard" hidden><div class="sec-h" style="margin:0 0 10px"><h3>To do</h3><span class="chip" id="todoCount"></span></div><div id="todoList"></div></div>
   <div class="brief-grid sec" style="margin-top:16px">
     <div class="panel wx" id="wxCard">
       <span class="eyebrow">West Point weather</span>
@@ -1307,8 +1315,8 @@ const DOW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 const parseD = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y, m-1, d); };
 const key = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 const CATS = {
-  due:{label:"Due dates"}, exam:{label:"Quizzes & exams"}, game:{label:"Games"},
-  corps:{label:"Corps events"}, break:{label:"Breaks & leave"}, personal:{label:"Personal"}, practice:{label:"Practice"}
+  due:{label:"Due dates"}, exam:{label:"Quizzes & exams"}, soccer:{label:"Soccer"}, game:{label:"Football games"},
+  corps:{label:"Corps events"}, break:{label:"Breaks & leave"}, personal:{label:"Personal"}
 };
 const STAR_SVG = '<svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg>';
 
@@ -1371,7 +1379,7 @@ function toast(msg){
   const t = document.createElement("div"); t.className = "toast"; t.textContent = msg; document.body.appendChild(t);
   setTimeout(() => t.remove(), 1800);
 }
-function upcoming(now){ return EVENTS.filter(e => e.cat !== "practice" && e.endT >= now).sort((a,b) => a.s - b.s); }
+function upcoming(now){ return EVENTS.filter(e => !(e.cat === "soccer" && /^Practice/.test(e.t)) && e.endT >= now).sort((a,b) => a.s - b.s); }
 
 /* ---------- theme ---------- */
 const root = document.documentElement;
@@ -1419,7 +1427,7 @@ function paintAuth(){
 }
 function applyPrivate(P){
   PRIVATE = P;
-  SCHED = P.sched; RES = P.res; COURSES = P.courses; MAP.places = P.places; VISITED_STATES = P.visited; STUDY = P.study || {};
+  SCHED = P.sched; RES = P.res; COURSES = P.courses; MAP.places = P.places; VISITED_STATES = P.visited; STUDY = P.study || {}; TODO = P.todo || [];
   buildEvents();
   hubs = MAP.places.filter(p => p.type === "hub");
   ZOOMS = { all:[0,0,MAP.W,MAP.H], ne:fitBox(["New York","Northeast","Mid-Atlantic"], 40), ny:fitBox(["New York"], 22) };
@@ -2274,6 +2282,24 @@ $("#lsDest").addEventListener("change", renderWeekends);
 
 /* football */
 function kickText(iso){ const d = new Date(iso); return DOW[d.getDay()]+" "+MON[d.getMonth()]+" "+d.getDate()+" · "+d.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"}); }
+/* ---------- to-do checklist (items live in the encrypted data) ---------- */
+let TODO = [];
+const todoDone = () => new Set(store.get("bf-todo-done", []));
+function renderTodo(){
+  const card = $("#todoCard"); if (!card) return;
+  const today = key(new Date()), done = todoDone();
+  const items = (TODO||[]).filter(t => t.date <= today);
+  card.hidden = !items.length; if (!items.length) return;
+  $("#todoCount").textContent = items.filter(t => done.has(t.id)).length+" / "+items.length;
+  $("#todoList").innerHTML = items.map(t => '<label><input type="checkbox" data-todo="'+esc(t.id)+'"'+(done.has(t.id)?' checked':'')+'><span>'+esc(t.t)+'</span></label>').join("");
+}
+document.addEventListener("change", e => {
+  const c = e.target.closest("[data-todo]"); if (!c) return;
+  const d = todoDone(); c.checked ? d.add(c.dataset.todo) : d.delete(c.dataset.todo);
+  store.set("bf-todo-done", [...d]); renderTodo();
+  const items = (TODO||[]).filter(t => t.date <= key(new Date()));
+  if (c.checked && items.length && items.every(t => d.has(t.id))) celebrate($("#todoCard"));
+});
 function renderFootball(){
   const fb = DAILY.football || {results:[], upcoming:[]};
   $("#fbLabel").textContent = "College football · "+(fb.label || "");
@@ -2572,6 +2598,7 @@ function renderBrief(){
   if (f){ $("#bFlight").textContent = "$"+f.price+" to "+f.city.split(",")[0]; $("#bFlightSub").textContent = fitL.length ? f.from+" · "+fmtDay(f.depart)+" · fits your pass" : "Closest deal today · see weekend options"; }
   renderBillsTile();
   renderQuote();
+  renderTodo();
   if (DAILY.location){ $("#bPlace").textContent = DAILY.location.name; $("#bPlaceSub").textContent = DAILY.location.tagline || DAILY.location.region; }
   const wk = new Date(now); wk.setDate(wk.getDate()+7);
   const due = upcoming(now).filter(e => (e.cat==="due"||e.cat==="exam") && e.s < wk);
