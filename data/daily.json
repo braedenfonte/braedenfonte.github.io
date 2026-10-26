@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-25T06:55:00-04:00",
+ "updated": "2026-10-26T06:55:00-04:00",
  "flights": [
   {
    "from": "LGA",
@@ -479,17 +479,6 @@
     ]
    },
    {
-    "away": "LSU",
-    "home": "Auburn",
-    "as": 38,
-    "hs": 17,
-    "blurb": "No. 18 LSU scored on five of six first-half drives to rout Auburn a week after its Georgia upset.",
-    "stats": [
-     "Sam Leavitt: 32/45, career-high 387 yds, 3 TD",
-     "Jackson Harris: 9 catches, 178 yds, 2 TD"
-    ]
-   },
-   {
     "away": "North Texas",
     "home": "Navy",
     "as": 49,
@@ -499,6 +488,18 @@
      "Jackson Gutierrez: 3 rush TD for Navy",
      "Jahiem White: 174 rush yds, 2 TD",
      "Justin Stevenson: 8 catches, 209 yds, 2 TD"
+    ]
+   },
+   {
+    "away": "Army",
+    "home": "Tulsa",
+    "as": 38,
+    "hs": 35,
+    "blurb": "Dawson Jones hit a 50-yard field goal on the final play to win it on Friday night in Tulsa.",
+    "stats": [
+     "Cale Hellums: 30 rushes, 121 yds, 3 TD",
+     "Godspower Nwawuihe: 12 rushes, 135 yds, TD",
+     "Army improves to 5-2, 4-1 in the American"
     ]
    },
    {
@@ -548,42 +549,42 @@
   ]
  },
  "location": {
-  "name": "Plitvice Lakes National Park",
-  "wiki": "Plitvice_Lakes_National_Park",
-  "country": "Croatia",
-  "region": "Lika-Senj and Karlovac counties, central Croatia",
-  "lat": 44.8806,
-  "lon": 15.6161,
-  "tagline": "Sixteen turquoise lakes stacked down a limestone valley, joined by waterfalls that build themselves.",
-  "intro": "Plitvice is Croatia's oldest and largest national park, a forested karst valley where sixteen terraced lakes spill into one another over natural travertine dams. Wooden boardwalks thread right across the water and past dozens of falls, ending at the 78-metre Veliki slap. It became one of the first UNESCO World Heritage Sites in 1979 and now draws about 1.5 million visitors a year.",
+  "name": "Zhangjiajie National Forest Park",
+  "wiki": "Zhangjiajie_National_Forest_Park",
+  "country": "China",
+  "region": "Wulingyuan, Zhangjiajie, Hunan Province",
+  "lat": 29.35,
+  "lon": 110.4353,
+  "tagline": "A forest of sandstone pillars so otherworldly that one of them was renamed after Avatar.",
+  "intro": "Zhangjiajie became China's first national forest park in 1982, a maze of thousands of slender quartz-sandstone pillars rising out of mist-filled ravines in northwest Hunan. It is the heart of the Wulingyuan Scenic Area, a UNESCO World Heritage Site since 1992. Cable cars, a monorail and a cliffside glass elevator carry visitors up to the summits.",
   "stats": [
    {
-    "label": "National park since",
-    "value": "1949"
+    "label": "Established",
+    "value": "1982 (China's first national forest park)"
    },
    {
     "label": "UNESCO World Heritage",
-    "value": "Since 1979"
+    "value": "Since 1992 (Wulingyuan)"
    },
    {
     "label": "Area",
-    "value": "296.85 km²"
+    "value": "4,810 hectares"
    },
    {
-    "label": "Tallest waterfall",
-    "value": "Veliki slap, 78 m"
+    "label": "Bailong Elevator",
+    "value": "326 m tall"
    }
   ],
   "facts": [
-   "The lake dams are alive in a sense: calcium carbonate from the water settles on mosses and hardens into travertine, and the barriers at Lake Kozjak grow by up to 13 mm a year.",
-   "In March 1991 the park was the scene of the first deadly armed clash of the Croatian War of Independence, and its hotels were later used as barracks.",
-   "Because of the war, UNESCO kept Plitvice on its List of World Heritage in Danger from 1992 to 1997.",
-   "Between 1962 and 1968 it stood in for the American Wild West in German Karl May films — the lake Kaluđerovac played the 'Silver Lake' in Treasure of Silver Lake.",
-   "Brown bears, grey wolves and lynx roam the park's forests, yet swimming in the lakes has been strictly banned since 2006."
+   "In January 2010 the pillar known as the Southern Sky Column was officially renamed 'Avatar Hallelujah Mountain' after the film's floating mountains, which designers reportedly based partly on this landscape.",
+   "The Bailong Elevator, opened in 2002, rises 326 metres up a cliff face and is billed as the world's tallest outdoor lift; each of its three glass cars carries up to 50 people in under two minutes.",
+   "The pillars look like limestone karst but aren't: they are quartz sandstone, carved mainly by physical erosion such as winter ice expanding in cracks and plant roots prying rock apart.",
+   "The nearby Zhangjiajie Grand Canyon Glass Bridge, 430 metres long and 300 metres above the canyon floor, opened in August 2016 and had to close just 13 days later because of the crowds.",
+   "The area is also a UNESCO Global Geopark, listed in 2004, and its pillar forms show up in many ancient Chinese paintings."
   ],
-  "bestTime": "Late spring brings the strongest waterfalls after the snowmelt, and October's fall colors are spectacular with thinner crowds; July and August are the busiest months.",
-  "gettingThere": "Fly from New York to Zagreb (usually with one connection), then take a bus from Zagreb's main bus station to the park — about 2 hours 20 minutes — or rent a car for the roughly 140 km drive. Zadar, about 130 km away, is technically the closest airport.",
-  "tip": "Buses stop outside both Entrance 1 and Entrance 2 with no real terminal, so check the posted return times at the wooden huts by the entrance as soon as you arrive."
+  "bestTime": "Spring and autumn, when the weather is mild and mist drifts between the peaks. Summer is rainy and cloudy, and cable cars can close in winter. Avoid China's National Day week (Oct 1–8) and May 1–5.",
+  "gettingThere": "Fly from New York to a Chinese hub such as Beijing or Shanghai, then connect to Zhangjiajie Hehua airport. From downtown Zhangjiajie, buses to the park and Wulingyuan run about every 10 minutes and take around 40 minutes.",
+  "tip": "The main ticket is good for 4 days, so stay in Wulingyuan right by the park, and use the quieter Yangjiajie or Tianzi Mountain entrances (bring your passport for Tianzi Mountain)."
  },
  "flightsNote": "Oct 30 weekend fares re-checked on Kayak Oct 25; Nov weekends are from the Oct 20 searches. Your exact pass window, JFK/LGA/EWR only.",
  "markets": {
@@ -647,9 +648,9 @@
    {
     "game": "Baltimore Ravens @ Buffalo Bills",
     "kick": "2026-11-01T18:00:00Z",
-    "spread": "BUF −2.5",
+    "spread": "BUF −3",
     "total": "52.5",
-    "ml": "BUF −155 · BAL +130",
+    "ml": "BUF −174 · BAL +150",
     "bills": true
    },
    {
@@ -662,31 +663,31 @@
   ],
   "probs": [
    {
-    "game": "Giants @ Texans",
-    "fav": "Texans",
-    "p": 79
+    "game": "Titans @ Bengals",
+    "fav": "Bengals",
+    "p": 83
    },
    {
-    "game": "Colts @ Vikings",
-    "fav": "Vikings",
-    "p": 72
+    "game": "Chargers @ Rams",
+    "fav": "Rams",
+    "p": 76
+   },
+   {
+    "game": "Colts @ Jaguars",
+    "fav": "Jaguars",
+    "p": 75
+   },
+   {
+    "game": "Patriots @ Dolphins",
+    "fav": "Patriots",
+    "p": 74
    },
    {
     "game": "Cowboys @ Eagles",
     "fav": "Cowboys",
     "p": 68
-   },
-   {
-    "game": "Rams @ Raiders",
-    "fav": "Rams",
-    "p": 67
-   },
-   {
-    "game": "Dolphins @ Jets",
-    "fav": "Jets",
-    "p": 65
    }
   ],
-  "sources": "Market data: AP via Yahoo Finance, Capp Notes closing look and TradingKey (Oct 23). Lines: Bills–Ravens DraftKings via ESPN; Ohio State–USC FanDuel via Covers (both Oct 25). Win odds: Dimers NFL Week 7 model (Oct 25)."
+  "sources": "Market data: AP via Yahoo Finance, Capp Notes closing look and TradingKey (Oct 23). Lines: Bills–Ravens consensus via SportsBettingDime (Oct 25); Ohio State–USC FanDuel via Covers (Oct 25). Win odds: Dimers NFL model (Oct 25–26)."
  }
 }

@@ -1,11 +1,11 @@
 {
- "updated": "2026-10-25T06:55:00-04:00",
+ "updated": "2026-10-26T06:55:00-04:00",
  "team": "Buffalo Bills",
  "record": {
   "w": 5,
   "l": 1
  },
- "standing": "Leads the AFC East",
+ "standing": "Leads the AFC East by 1.5 games",
  "pf": 197,
  "pa": 171,
  "results": [
@@ -76,11 +76,11 @@
   {
    "team": "New York Jets",
    "w": 2,
-   "l": 4
+   "l": 5
   },
   {
    "team": "Miami Dolphins",
-   "w": 0,
+   "w": 1,
    "l": 5
   }
  ],
@@ -96,20 +96,20 @@
  },
  "news": [
   {
-   "h": "Gardner-Johnson fined on top of ban",
-   "b": "The NFL fined C.J. Gardner-Johnson $11,194 for unnecessary roughness against the Raiders, on top of his upheld one-game suspension for spitting. He will sit out the Ravens game on Nov. 1."
+   "h": "Franklin wins appeal, cleared for Ravens",
+   "b": "The NFL reduced Sam Franklin Jr.'s one-game spitting suspension to a $14,926 fine after hearing officer James Thrash ruled on his appeal on Oct. 23. He is eligible to face Baltimore on Nov. 1."
   },
   {
-   "h": "Sam Franklin appealing his suspension",
-   "b": "Safety Sam Franklin also drew a one-game ban for allegedly spitting toward a Raiders player; he and his agent deny it, and his appeal is set to be heard by former player James Thrash with no ruling date yet."
+   "h": "Gardner-Johnson still out vs. Baltimore",
+   "b": "C.J. Gardner-Johnson's one-game suspension was upheld on appeal, and he was also fined $11,194 for unnecessary roughness against the Raiders. He will sit out the Ravens game."
   },
   {
-   "h": "Lamar Jackson 'day to day' before Buffalo",
-   "b": "Ravens QB Lamar Jackson has missed two games with an ankle injury and was limited in practice midweek; coach Jesse Minter calls him day to day. Baltimore hosted Cincinnati on Sunday (Oct. 25) and comes to Orchard Park next, then hosts Jacksonville on Thursday, Nov. 5."
+   "h": "Ravens routed without Lamar",
+   "b": "With Lamar Jackson out again and Tyler Huntley at QB, Baltimore was outscored 35-0 in the second half of a 35-13 home loss to Cincinnati on Sunday and falls to 4-3 before visiting Orchard Park."
   },
   {
-   "h": "Tough road ahead after the bye",
-   "b": "Buffalo leads the NFL in scoring but ranks 31st in yards allowed and faces the fourth-toughest remaining schedule. The Jets (2-4) host winless Miami on Sunday while the Bills (5-1) sit on a game-and-a-half AFC East lead."
+   "h": "Bills open as Week 8 favorites; Dolphins win first",
+   "b": "Buffalo opened as about a 3- to 3.5-point home favorite over Baltimore. In the division, Miami got its first win, 28-25 over the Jets, leaving New York 2-5 and the Dolphins 1-5."
   }
  ],
  "schedule": [
@@ -191,5 +191,5 @@
    "note": "Date and time may flex"
   }
  ],
- "source": "Heavy (Oct 22–24), Yahoo Sports/Bills On SI (Oct 24), ESPN odds and schedule; checked Oct 25, 2026. Refreshes with the daily update."
+ "source": "Spectrum News Buffalo (Oct 23), NFL.com Week 7 recap, NY Jets recap, FootballDB scores, SI/FanDuel and SportsBettingDime odds; checked Oct 26, 2026."
 }
