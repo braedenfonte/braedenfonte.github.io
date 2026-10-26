@@ -74,24 +74,6 @@
    "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ORD/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
   },
   {
-   "from": "LGA",
-   "to": "ATL",
-   "city": "Atlanta, GA",
-   "tag": "City",
-   "price": 287,
-   "airline": "Frontier",
-   "depart": "2026-10-30",
-   "departTime": "17:30",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-01",
-   "returnDepart": "06:19",
-   "returnArrive": "08:34",
-   "returnTo": "LGA",
-   "returnAirline": "Frontier",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ATL/2026-10-30/2026-11-01?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
    "from": "JFK",
    "to": "BOS",
    "city": "Boston, MA",
@@ -326,42 +308,6 @@
    "url": "https://www.kayak.com/flights/EWR,JFK,LGA-MIA/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
   },
   {
-   "from": "JFK",
-   "to": "ATL",
-   "city": "Atlanta, GA",
-   "tag": "City",
-   "price": 362,
-   "airline": "JetBlue",
-   "depart": "2026-10-23",
-   "departTime": "15:30",
-   "stops": "1 stop",
-   "returnDate": "2026-10-25",
-   "returnDepart": "06:20",
-   "returnArrive": "08:34",
-   "returnTo": "LGA",
-   "returnAirline": "Frontier",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ATL/2026-10-23/2026-10-25?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "EWR",
-   "to": "ORD",
-   "city": "Chicago, IL",
-   "tag": "City",
-   "price": 365,
-   "airline": "American Airlines",
-   "depart": "2026-10-30",
-   "departTime": "17:29",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-01",
-   "returnDepart": "06:45",
-   "returnArrive": "10:04",
-   "returnTo": "EWR",
-   "returnAirline": "American Airlines",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ORD/2026-10-30/2026-11-01?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
    "from": "LGA",
    "to": "MCO",
    "city": "Orlando, FL",
@@ -398,24 +344,6 @@
    "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BNA/2026-11-06/2026-11-08?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
   },
   {
-   "from": "JFK",
-   "to": "MCO",
-   "city": "Orlando, FL",
-   "tag": "Beach",
-   "price": 379,
-   "airline": "JetBlue",
-   "depart": "2026-10-30",
-   "departTime": "17:48",
-   "stops": "1 stop",
-   "returnDate": "2026-11-01",
-   "returnDepart": "07:05",
-   "returnArrive": "11:37",
-   "returnTo": "EWR",
-   "returnAirline": "Breeze Airways",
-   "returnStops": "1 stop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-MCO/2026-10-30/2026-11-01?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
    "from": "EWR",
    "to": "CLT",
    "city": "Charlotte, NC",
@@ -434,22 +362,58 @@
    "url": "https://www.kayak.com/flights/EWR,JFK,LGA-CLT/2026-11-06/2026-11-08?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
   },
   {
-   "from": "LGA",
-   "to": "BNA",
-   "city": "Nashville, TN",
+   "from": "EWR",
+   "to": "MCO",
+   "city": "Orlando, FL",
    "tag": "City",
-   "price": 387,
-   "airline": "Delta",
+   "price": 461,
+   "airline": "JetBlue",
    "depart": "2026-10-30",
-   "departTime": "17:30",
+   "departTime": "19:55",
    "stops": "Nonstop",
    "returnDate": "2026-11-01",
-   "returnDepart": "06:00",
-   "returnArrive": "09:10",
-   "returnTo": "LGA",
-   "returnAirline": "Delta",
+   "returnDepart": "07:05",
+   "returnArrive": "11:37",
+   "returnTo": "EWR",
+   "returnAirline": "Breeze Airways",
+   "returnStops": "1 stop",
+   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-MCO/2026-10-30/2026-11-01?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+  },
+  {
+   "from": "JFK",
+   "to": "SJU",
+   "city": "San Juan, PR",
+   "tag": "Island",
+   "price": 503,
+   "airline": "JetBlue",
+   "depart": "2026-10-30",
+   "departTime": "16:50",
+   "stops": "Nonstop",
+   "returnDate": "2026-11-01",
+   "returnDepart": "06:01",
+   "returnArrive": "11:51",
+   "returnTo": "JFK",
+   "returnAirline": "JetBlue",
+   "returnStops": "1 stop",
+   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-SJU/2026-10-30/2026-11-01?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+  },
+  {
+   "from": "EWR",
+   "to": "MIA",
+   "city": "Miami, FL",
+   "tag": "Beach",
+   "price": 547,
+   "airline": "United Airlines",
+   "depart": "2026-10-30",
+   "departTime": "16:28",
+   "stops": "Nonstop",
+   "returnDate": "2026-11-01",
+   "returnDepart": "11:16",
+   "returnArrive": "14:20",
+   "returnTo": "EWR",
+   "returnAirline": "United Airlines",
    "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BNA/2026-10-30/2026-11-01?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-MIA/2026-10-30/2026-11-01?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
   }
  ],
  "football": {
@@ -578,7 +542,7 @@
     "away": "Army",
     "home": "Memphis",
     "kick": "2026-11-01T00:00:00Z",
-    "note": "Away \u2014 Saturday night (ESPNU)",
+    "note": "Away — Saturday night (ESPNU)",
     "army": true
    }
   ]
@@ -603,7 +567,7 @@
    },
    {
     "label": "Area",
-    "value": "296.85 km\u00b2"
+    "value": "296.85 km²"
    },
    {
     "label": "Tallest waterfall",
@@ -614,14 +578,14 @@
    "The lake dams are alive in a sense: calcium carbonate from the water settles on mosses and hardens into travertine, and the barriers at Lake Kozjak grow by up to 13 mm a year.",
    "In March 1991 the park was the scene of the first deadly armed clash of the Croatian War of Independence, and its hotels were later used as barracks.",
    "Because of the war, UNESCO kept Plitvice on its List of World Heritage in Danger from 1992 to 1997.",
-   "Between 1962 and 1968 it stood in for the American Wild West in German Karl May films \u2014 the lake Kalu\u0111erovac played the 'Silver Lake' in Treasure of Silver Lake.",
+   "Between 1962 and 1968 it stood in for the American Wild West in German Karl May films — the lake Kaluđerovac played the 'Silver Lake' in Treasure of Silver Lake.",
    "Brown bears, grey wolves and lynx roam the park's forests, yet swimming in the lakes has been strictly banned since 2006."
   ],
   "bestTime": "Late spring brings the strongest waterfalls after the snowmelt, and October's fall colors are spectacular with thinner crowds; July and August are the busiest months.",
-  "gettingThere": "Fly from New York to Zagreb (usually with one connection), then take a bus from Zagreb's main bus station to the park \u2014 about 2 hours 20 minutes \u2014 or rent a car for the roughly 140 km drive. Zadar, about 130 km away, is technically the closest airport.",
+  "gettingThere": "Fly from New York to Zagreb (usually with one connection), then take a bus from Zagreb's main bus station to the park — about 2 hours 20 minutes — or rent a car for the roughly 140 km drive. Zadar, about 130 km away, is technically the closest airport.",
   "tip": "Buses stop outside both Entrance 1 and Entrance 2 with no real terminal, so check the posted return times at the wooden huts by the entrance as soon as you arrive."
  },
- "flightsNote": "Real fares from Kayak searches run Oct 20 with your exact pass window, JFK/LGA/EWR only.",
+ "flightsNote": "Oct 30 weekend fares re-checked on Kayak Oct 25; Nov weekends are from the Oct 20 searches. Your exact pass window, JFK/LGA/EWR only.",
  "markets": {
   "asOf": "Fri Oct 23 close",
   "story": "Stocks slipped to end a rocky week as Houthi attacks on Saudi Arabia pushed Brent crude to a six-month high above $116 and revived inflation worries, with the 10-year yield near 5%. Selling spread from tech into consumer and healthcare names, though chip stocks steadied after Thursday's rout.",
@@ -656,7 +620,7 @@
    },
    {
     "sym": "LKQ",
-    "move": "\u221222.5%",
+    "move": "−22.5%",
     "dir": -1,
     "why": "LKQ's preliminary results missed, it withdrew guidance and replaced leadership."
    },
@@ -668,13 +632,13 @@
    },
    {
     "sym": "TMUS",
-    "move": "\u22127.7%",
+    "move": "−7.7%",
     "dir": -1,
     "why": "T-Mobile and AT&T fell on a report that SpaceX is in talks to lease about 80,000 U.S. cell towers."
    },
    {
     "sym": "AXP",
-    "move": "\u22123%",
+    "move": "−3%",
     "dir": -1,
     "why": "American Express slipped after Q3 results and plans to cut about 5% of its workforce."
    }
@@ -683,17 +647,17 @@
    {
     "game": "Baltimore Ravens @ Buffalo Bills",
     "kick": "2026-11-01T18:00:00Z",
-    "spread": "BUF \u22122.5",
+    "spread": "BUF −2.5",
     "total": "52.5",
-    "ml": "BUF \u2212155 \u00b7 BAL +130",
+    "ml": "BUF −155 · BAL +130",
     "bills": true
    },
    {
     "game": "Ohio State @ USC",
     "kick": "2026-10-31T23:30:00Z",
-    "spread": "OSU \u22127.5",
+    "spread": "OSU −7.5",
     "total": "51.5",
-    "ml": "OSU \u2212260 \u00b7 USC +210"
+    "ml": "OSU −260 · USC +210"
    }
   ],
   "probs": [
@@ -723,6 +687,6 @@
     "p": 65
    }
   ],
-  "sources": "Market data: AP via Yahoo Finance, Capp Notes closing look and TradingKey (Oct 23). Lines: Bills\u2013Ravens DraftKings via ESPN; Ohio State\u2013USC FanDuel via Covers (both Oct 25). Win odds: Dimers NFL Week 7 model (Oct 25)."
+  "sources": "Market data: AP via Yahoo Finance, Capp Notes closing look and TradingKey (Oct 23). Lines: Bills–Ravens DraftKings via ESPN; Ohio State–USC FanDuel via Covers (both Oct 25). Win odds: Dimers NFL Week 7 model (Oct 25)."
  }
 }
