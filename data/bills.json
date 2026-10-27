@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-26T06:55:00-04:00",
+ "updated": "2026-10-27T08:51:53-04:00",
  "team": "Buffalo Bills",
  "record": {
   "w": 5,
@@ -96,20 +96,20 @@
  },
  "news": [
   {
+   "h": "Lamar Jackson trending toward a return",
+   "b": "Ravens coach Jesse Minter said Monday that Jackson (high ankle sprain, three straight games missed) is in a \"decent spot\" to play Sunday in Buffalo, with more known after Wednesday's practice."
+  },
+  {
+   "h": "Post-bye streak on the line",
+   "b": "Buffalo has won 11 straight games coming off its bye, a run dating to 2015, and Josh Allen has never lost after a bye. Sunday is Joe Brady's first post-bye game as head coach."
+  },
+  {
    "h": "Franklin wins appeal, cleared for Ravens",
    "b": "The NFL reduced Sam Franklin Jr.'s one-game spitting suspension to a $14,926 fine after hearing officer James Thrash ruled on his appeal on Oct. 23. He is eligible to face Baltimore on Nov. 1."
   },
   {
    "h": "Gardner-Johnson still out vs. Baltimore",
    "b": "C.J. Gardner-Johnson's one-game suspension was upheld on appeal, and he was also fined $11,194 for unnecessary roughness against the Raiders. He will sit out the Ravens game."
-  },
-  {
-   "h": "Ravens routed without Lamar",
-   "b": "With Lamar Jackson out again and Tyler Huntley at QB, Baltimore was outscored 35-0 in the second half of a 35-13 home loss to Cincinnati on Sunday and falls to 4-3 before visiting Orchard Park."
-  },
-  {
-   "h": "Bills open as Week 8 favorites; Dolphins win first",
-   "b": "Buffalo opened as about a 3- to 3.5-point home favorite over Baltimore. In the division, Miami got its first win, 28-25 over the Jets, leaving New York 2-5 and the Dolphins 1-5."
   }
  ],
  "schedule": [
@@ -191,5 +191,5 @@
    "note": "Date and time may flex"
   }
  ],
- "source": "Spectrum News Buffalo (Oct 23), NFL.com Week 7 recap, NY Jets recap, FootballDB scores, SI/FanDuel and SportsBettingDime odds; checked Oct 26, 2026."
+ "source": "Bills record, standings and schedule: buffalobills.com, ESPN and Fox Sports (Oct 25–26). News: NBC Sports, Heavy/Yahoo, SI and Yahoo Sports (Oct 26–27)."
 }
