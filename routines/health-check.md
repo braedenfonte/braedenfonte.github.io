@@ -4,12 +4,13 @@ Makes sure the other routines worked, and re-runs one ONCE if it didn't. Routine
 Follow `routines/common.md` for the run log, alerts and committing (allowed file: `routines/runs.log` only).
 
 It runs twice a day. Which routine to check depends on the time:
-- **Evening run (after 6 PM)** -> check `nightly-prep` (task name "Nightly class prep").
-- **Morning run (before noon)** -> check `morning-update` (task name "Morning website update").
+- **Evening run (after 6 PM)** -> check `nightly-prep` (the task whose name starts with "Nightly class prep").
+- **Morning run (before noon)** -> check `morning-update` (the task whose name starts with "Morning website update").
 
 ## Steps
 1. List scheduled tasks with `list_triggers` (Claude_Code_Remote connector). Find the task for the routine
-   you're checking. If there are several with that name, use the one that is turned ON.
+   you're checking. Old paused copies with the same name may exist: always use the one that is turned ON
+   (the cloud one, labeled Code). Ignore paused ones.
    If none is on, note "<name> is turned off" and skip to step 5. Never turn a task on or off yourself.
 2. Read the newest lines of `routines/runs.log` and decide if the routine worked:
    - Evening: there should be a `nightly-prep` line written after 6 PM today.
