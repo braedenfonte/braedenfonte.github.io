@@ -6,6 +6,9 @@ Read this file first, then the routine's own file.
 Get the current date/time from the clock tool first. Use America/New_York for everything.
 Nobody is watching these runs: never stop to ask a question. Make the best call and note gaps.
 
+## Python
+Install packages with `python3 -m pip install <name>` (not plain `pip`, which can install for a different Python).
+
 ## Canvas (no browser needed)
 - Read Canvas with `python3 tools/canvas.py` from the repo root (see the top of that file for commands).
 - Wherever a class-prep skill says "use Claude in Chrome for Canvas", use `tools/canvas.py` instead.
