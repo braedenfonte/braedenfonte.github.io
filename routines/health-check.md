@@ -8,19 +8,20 @@ It runs twice a day. Which routine to check depends on the time:
 - **Morning run (before noon)** -> check `morning-update` (the task whose name starts with "Morning website update").
 
 ## Steps
-1. List scheduled tasks with `list_triggers` (Claude Code Remote connector; load it with ToolSearch).
-   If `list_triggers` or `fire_trigger` doesn't exist in this session, you can't retry: note
-   "Health check can't re-run tasks: add the Claude Code Remote connector to this check task (Edit > Connectors)"
-   and still do steps 2, 4, 5 and 6. Find the task for the routine
-   you're checking. Old paused copies with the same name may exist: always use the one that is turned ON
-   (the cloud one, labeled Code). Ignore paused ones.
-   If none is on, note "<name> is turned off" and skip to step 5. Never turn a task on or off yourself.
+1. The re-run uses each task's API trigger. Its address and key are environment variables in the
+   Routines environment: `NIGHTLY_FIRE_URL` + `NIGHTLY_FIRE_TOKEN` (nightly-prep) and
+   `MORNING_FIRE_URL` + `MORNING_FIRE_TOKEN` (morning-update). Never print the token.
+   If the pair for the routine you're checking is missing, you can't retry: note
+   "Can't re-run <routine>: add its API trigger URL and token to the Routines environment" and skip step 3's re-run.
 2. Read the newest lines of `routines/runs.log` and decide if the routine worked:
    - Evening: there should be a `nightly-prep` line written after 3 PM today.
    - Morning: there should be a `morning-update` line from today, AND `data/daily.json` "updated" is from today.
    It worked if that line exists and says OK. It did NOT work if the line is missing or says FAIL.
 3. If it did not work, and the log has NO `health-check | RETRY <routine>` line from today:
-   - Re-run it now with `fire_trigger` on that task's id.
+   - Re-run it now:
+     `curl -sS -X POST "$NIGHTLY_FIRE_URL" -H "Authorization: Bearer $NIGHTLY_FIRE_TOKEN" -H "anthropic-beta: experimental-cc-routine-2026-04-01" -H "anthropic-version: 2023-06-01" -H "Content-Type: application/json" -d '{"text":"Re-run by the health check"}'`
+     (use the MORNING_ pair for morning-update). A reply with "claude_code_session_url" means it started.
+     If it errors, note "Re-run of <routine> failed: <short error>".
    - Write the log line `<time> | health-check | RETRY <routine> | <why: missing or the FAIL reason> |`, commit and push.
    - Then finish WITHOUT an alert. The retried routine sends its own alert if it fails again.
 4. If it did not work and a retry already happened today, don't retry again: note "<routine> failed twice: <reason>".
@@ -29,4 +30,4 @@ It runs twice a day. Which routine to check depends on the time:
 5. If you noted anything, send ONE phone notification (PushNotification) with the notes. If all is fine, send nothing.
 6. Append the log line (`OK` if the routine worked, otherwise `FAIL` with the notes), commit and push.
 
-Never change a scheduled task's prompt, schedule, model or on/off state. The only action allowed is one re-run per routine per day.
+Never change any scheduled task. The only action allowed is one re-run per routine per day.
