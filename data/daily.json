@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-27T08:51:53-04:00",
+ "updated": "2026-10-28T09:20:00-04:00",
  "flights": [
   {
    "from": "LGA",
@@ -585,42 +585,42 @@
   ]
  },
  "location": {
-  "name": "Milford Sound",
-  "wiki": "Milford_Sound",
-  "country": "New Zealand",
-  "region": "Fiordland National Park, Southland, South Island",
-  "lat": -44.6481,
-  "lon": 167.9056,
-  "tagline": "A fiord where the cliffs drop straight into the sea and the rain never really stops.",
-  "intro": "Milford Sound, Piopiotahi in Māori, is a fiord in the southwest of New Zealand's South Island, cutting about 15 km inland from the Tasman Sea inside Fiordland National Park. Mitre Peak rises 1,692 m straight above the water, and the sound is part of the Te Wāhipounamu World Heritage Area. Between 550,000 and 1 million people visit every year.",
+  "name": "Socotra",
+  "wiki": "Socotra",
+  "country": "Yemen",
+  "region": "Arabian Sea, off the Horn of Africa",
+  "lat": 12.51,
+  "lon": 53.92,
+  "tagline": "An island Wikipedia calls \"the most alien-looking place on Earth.\"",
+  "intro": "Socotra is the largest island of a six-island archipelago in the Indian Ocean, about 380 km south of the Arabian Peninsula and 232 km east of the Horn of Africa. It is politically part of Yemen but geologically a fragment linked to the Somali plate. It was recognised as a UNESCO World Heritage Site in 2008.",
   "stats": [
    {
     "label": "Length",
-    "value": "15.1 km"
+    "value": "132 km"
    },
    {
-    "label": "Mitre Peak",
-    "value": "1,692 m"
+    "label": "Main island area",
+    "value": "3,665 km²"
    },
    {
-    "label": "Max depth",
-    "value": "291 m"
+    "label": "Highest peak range",
+    "value": "Hajhir, 1,503 m"
    },
    {
-    "label": "Rainfall",
-    "value": "About 6,400 mm a year"
+    "label": "Population",
+    "value": "About 50,000"
    }
   ],
   "facts": [
-   "It is one of the wettest places in New Zealand: average rainfall is around 6.4 metres a year, and up to 250 mm can fall in a single day.",
-   "Rainwater stained brown by forest tannins sits on top of the seawater, blocking light so well that black coral grows as shallow as 10 metres.",
-   "The sound is home to the southernmost wild population of bottlenose dolphins, along with seals and a breeding site for Fiordland penguins.",
-   "Its Māori name, Piopiotahi, refers to the piopio, a thrush-like bird that is now extinct; since a 1998 settlement law the official name has been Milford Sound / Piopiotahi.",
-   "Rudyard Kipling is said to have called it the 'eighth Wonder of the World.'"
+   "A third of its plant life is found nowhere else on Earth.",
+   "About 95% of its land snail species exist nowhere else.",
+   "The Dragon's Blood Tree, Dracaena cinnabari, has an umbrella-shaped crown and a bright red sap that is used commercially.",
+   "The cucumber tree, Dendrosicyos socotranus, is the only tree in the cucumber family and stores water in swollen stems.",
+   "Hoq Cave holds inscriptions and drawings left by sailors who visited between the first century and the 6th century CE."
   ],
-  "bestTime": "The southern summer (December to March) is easiest. The Milford Road is prone to avalanches and closures during the winter half of the year.",
-  "gettingThere": "Fly from New York to Queenstown, usually connecting through Auckland. Milford Sound is 291 km from Queenstown by coach or car on State Highway 94, through the 1.2 km Homer Tunnel; scenic flights from Queenstown are the fast option.",
-  "tip": "Stay in Te Anau instead of Queenstown: it is 121 km from the sound instead of 291 km, so you can reach the boats before the Queenstown coaches arrive."
+  "bestTime": "The northeast monsoon (October to December) brings rain to the interior mountains; the southwest monsoon from June to September brings strong winds and high seas.",
+  "gettingThere": "From New York there is no direct route: fly to Cairo or Abu Dhabi, the places with weekly scheduled flights to Socotra, and check the current security situation first.",
+  "tip": "Check flight schedules and travel advisories well ahead: services have been cancelled before (all flights stopped in March 2015)."
  },
  "flightsNote": "Real fares from Kayak searches run Oct 27 with your exact pass window, JFK/LGA/EWR only.",
  "markets": {
