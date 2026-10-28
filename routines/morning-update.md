@@ -57,7 +57,8 @@ the repo, /tmp/finance.json:
  "categories":[["Category", amount], ...top_categories in order], "flags":[short strings; omit zero counts]}
 Short names: "Chase", "Capital One", "Robinhood", "American Express". Round to cents.
 Run `python3 tools/finance.py seal /tmp/finance.json`, then delete /tmp/finance.json. If Era fails or
-returns no accounts, leave data/finance.enc unchanged. Never print balances in the commit or summary.
+returns no accounts (for example its plan hides them), leave data/finance.enc unchanged and log finance as
+"skipped (Era returned no accounts)". That is not a failure. Never print balances in the commit or summary.
 
 ## 6) Study decks (data/study.enc)
 Courses: MA486 ("Python"), MA481X ("Optimization"), MA376 ("Stats"), EM481 ("Simulation"), SS388 ("Macro").

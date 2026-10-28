@@ -6,6 +6,9 @@ Read this file first, then the routine's own file.
 Get the current date/time from the clock tool first. Use America/New_York for everything.
 Nobody is watching these runs: never stop to ask a question. Make the best call and note gaps.
 
+## Web searches
+Always put the current month and year in search queries (e.g. "Bills news October 2026"), or results come back from old seasons.
+
 ## Python
 Install packages with `python3 -m pip install <name>` (not plain `pip`, which can install for a different Python).
 
@@ -32,7 +35,10 @@ says so. If it can't be reached, skip that part quietly (it is NOT a failure, lo
 At the very end, append exactly one line to `routines/runs.log`:
 `<ISO time> | <routine name> | OK or FAIL | <what was done, short> | <what failed and why, or blank>`
 Example: `2026-10-28T18:52-04:00 | nightly-prep | OK | MA376 L24, SS388 L20, EM481 skipped (drop) |`
-A run is FAIL if any part that should have worked did not (a skipped Chrome part is not a failure).
+A run is FAIL if any part that should have worked did not. A part that can't run because of an outside
+limit is "skipped", not a failure: Chrome/laptop off, Era plan hiding accounts, no class tomorrow.
+If a website is blocked (error mentions "not allowed", 403 or host_not_allowed), say so in the log line with
+the website name and add: "fix: set Routines environment network access to Full".
 Keep only the newest 200 lines (delete the oldest).
 
 ## Alerts

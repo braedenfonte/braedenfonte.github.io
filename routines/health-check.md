@@ -8,7 +8,10 @@ It runs twice a day. Which routine to check depends on the time:
 - **Morning run (before noon)** -> check `morning-update` (the task whose name starts with "Morning website update").
 
 ## Steps
-1. List scheduled tasks with `list_triggers` (Claude_Code_Remote connector). Find the task for the routine
+1. List scheduled tasks with `list_triggers` (Claude Code Remote connector; load it with ToolSearch).
+   If `list_triggers` or `fire_trigger` doesn't exist in this session, you can't retry: note
+   "Health check can't re-run tasks: add the Claude Code Remote connector to this check task (Edit > Connectors)"
+   and still do steps 2, 4, 5 and 6. Find the task for the routine
    you're checking. Old paused copies with the same name may exist: always use the one that is turned ON
    (the cloud one, labeled Code). Ignore paused ones.
    If none is on, note "<name> is turned off" and skip to step 5. Never turn a task on or off yourself.
