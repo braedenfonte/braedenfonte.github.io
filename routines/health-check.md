@@ -4,7 +4,7 @@ Makes sure the other routines worked, and re-runs one ONCE if it didn't. Routine
 Follow `routines/common.md` for the run log, alerts and committing (allowed file: `routines/runs.log` only).
 
 It runs twice a day. Which routine to check depends on the time:
-- **Evening run (after 6 PM)** -> check `nightly-prep` (task name "Nightly class prep"). Only on Sun-Thu.
+- **Evening run (after 6 PM)** -> check `nightly-prep` (task name "Nightly class prep").
 - **Morning run (before noon)** -> check `morning-update` (task name "Morning website update").
 
 ## Steps
