@@ -18,6 +18,9 @@ Install packages with `python3 -m pip install <name>` (not plain `pip`, which ca
   Calendar/assignments: `/courses/<id>/assignments?bucket=upcoming`, `/calendar_events?context_codes[]=course_<id>&start_date=...`.
 - Run `python3 tools/canvas.py check` once at the start. If it exits with code 2, the Canvas key
   expired: skip every Canvas part, and the alert must say "Canvas key expired, make a new one".
+- To find a file by name (schedules, syllabi, calendars):
+  `python3 tools/canvas.py get "/courses/<id>/files?search_term=<word>"` (e.g. search_term=schedule), then download it.
+  The SS388 course schedule spreadsheet is NOT reachable from the cloud through a Project: always find it on Canvas this way.
 - Known course ids: MA376 = 12755, EM481 = 12497. For others, run `python3 tools/canvas.py courses`.
 - Never submit, post or change anything in Canvas. Read only.
 
