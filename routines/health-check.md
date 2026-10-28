@@ -4,7 +4,7 @@ Makes sure the other routines worked, and re-runs one ONCE if it didn't. Routine
 Follow `routines/common.md` for the run log, alerts and committing (allowed file: `routines/runs.log` only).
 
 It runs twice a day. Which routine to check depends on the time:
-- **Evening run (after 6 PM)** -> check `nightly-prep` (the task whose name starts with "Nightly class prep").
+- **Evening run (after noon)** -> check `nightly-prep` (the task whose name starts with "Nightly class prep").
 - **Morning run (before noon)** -> check `morning-update` (the task whose name starts with "Morning website update").
 
 ## Steps
@@ -13,7 +13,7 @@ It runs twice a day. Which routine to check depends on the time:
    (the cloud one, labeled Code). Ignore paused ones.
    If none is on, note "<name> is turned off" and skip to step 5. Never turn a task on or off yourself.
 2. Read the newest lines of `routines/runs.log` and decide if the routine worked:
-   - Evening: there should be a `nightly-prep` line written after 6 PM today.
+   - Evening: there should be a `nightly-prep` line written after 3 PM today.
    - Morning: there should be a `morning-update` line from today, AND `data/daily.json` "updated" is from today.
    It worked if that line exists and says OK. It did NOT work if the line is missing or says FAIL.
 3. If it did not work, and the log has NO `health-check | RETRY <routine>` line from today:
