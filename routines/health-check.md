@@ -1,22 +1,28 @@
-# Daily health check
+# Health check
 
-Make sure the other routines are alive and working. Routine name for the log: `health-check`.
+Makes sure the other routines worked, and re-runs one ONCE if it didn't. Routine name for the log: `health-check`.
 Follow `routines/common.md` for the run log, alerts and committing (allowed file: `routines/runs.log` only).
 
-1. List the scheduled tasks with `list_triggers` (Claude_Code_Remote connector).
-   Find "Nightly class prep" and "Morning website update".
-2. For each one:
-   - If it is turned off (enabled = false) but NOT ended for good, turn it back on with
-     `update_trigger` (enabled: true) and note "re-enabled <name>".
-   - If its last_run status is not SUCCEEDED, note it with the failure reason.
-3. Read the newest lines of `routines/runs.log`:
-   - `morning-update` should have a line from today. `nightly-prep` should have a line from last night
-     whenever last night was Sun-Thu. Missing line = note "<name> didn't finish".
-   - Any FAIL line from the last 24 hours = note it.
-   - Any line saying the Canvas key expired = note "Canvas key expired: make a new token in Canvas
-     (Account > Settings > New Access Token) and replace the 'Canvas' secret in the Routines environment".
-4. Check the site actually updated: `data/daily.json` "updated" is from today.
-5. If you noted anything: send ONE phone notification (PushNotification) listing the notes, shortest first.
-   If everything is fine, send nothing.
-6. Append the log line, commit routines/runs.log and push.
-Never change a scheduled task's prompt, schedule or model. Only turn paused ones back on.
+It runs twice a day. Which routine to check depends on the time:
+- **Evening run (after 6 PM)** -> check `nightly-prep` (task name "Nightly class prep"). Only on Sun-Thu.
+- **Morning run (before noon)** -> check `morning-update` (task name "Morning website update").
+
+## Steps
+1. List scheduled tasks with `list_triggers` (Claude_Code_Remote connector). Find the task for the routine
+   you're checking. If there are several with that name, use the one that is turned ON.
+   If none is on, note "<name> is turned off" and skip to step 5. Never turn a task on or off yourself.
+2. Read the newest lines of `routines/runs.log` and decide if the routine worked:
+   - Evening: there should be a `nightly-prep` line written after 6 PM today.
+   - Morning: there should be a `morning-update` line from today, AND `data/daily.json` "updated" is from today.
+   It worked if that line exists and says OK. It did NOT work if the line is missing or says FAIL.
+3. If it did not work, and the log has NO `health-check | RETRY <routine>` line from today:
+   - Re-run it now with `fire_trigger` on that task's id.
+   - Write the log line `<time> | health-check | RETRY <routine> | <why: missing or the FAIL reason> |`, commit and push.
+   - Then finish WITHOUT an alert. The retried routine sends its own alert if it fails again.
+4. If it did not work and a retry already happened today, don't retry again: note "<routine> failed twice: <reason>".
+   If the reason mentions the Canvas key expiring, note: "Canvas key expired: make a new token in Canvas
+   (Account > Settings > New Access Token) and replace the 'Canvas' secret in the Routines environment".
+5. If you noted anything, send ONE phone notification (PushNotification) with the notes. If all is fine, send nothing.
+6. Append the log line (`OK` if the routine worked, otherwise `FAIL` with the notes), commit and push.
+
+Never change a scheduled task's prompt, schedule, model or on/off state. The only action allowed is one re-run per routine per day.
