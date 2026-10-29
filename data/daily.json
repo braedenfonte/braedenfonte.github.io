@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T09:20:00-04:00",
+ "updated": "2026-10-29T06:50:00-04:00",
  "flights": [
   {
    "from": "LGA",
@@ -585,94 +585,94 @@
   ]
  },
  "location": {
-  "name": "Socotra",
-  "wiki": "Socotra",
-  "country": "Yemen",
-  "region": "Arabian Sea, off the Horn of Africa",
-  "lat": 12.51,
-  "lon": 53.92,
-  "tagline": "An island Wikipedia calls \"the most alien-looking place on Earth.\"",
-  "intro": "Socotra is the largest island of a six-island archipelago in the Indian Ocean, about 380 km south of the Arabian Peninsula and 232 km east of the Horn of Africa. It is politically part of Yemen but geologically a fragment linked to the Somali plate. It was recognised as a UNESCO World Heritage Site in 2008.",
+  "name": "Lençóis Maranhenses National Park",
+  "wiki": "Lençóis_Maranhenses_National_Park",
+  "country": "Brazil",
+  "region": "Maranhão, northeastern Brazil",
+  "lat": -2.53,
+  "lon": -43.12,
+  "tagline": "A white-sand dune field that fills with rainwater lagoons every year.",
+  "intro": "Lençóis Maranhenses looks like a desert, but it gets about 1,200 mm of rain a year. Each rainy season, water collects between the dunes and an impermeable rock layer under the sand keeps it from draining, creating thousands of blue-green freshwater lagoons. It was declared a UNESCO World Heritage Site in July 2024.",
   "stats": [
    {
-    "label": "Length",
-    "value": "132 km"
+    "label": "Area",
+    "value": "About 1,550 km²"
    },
    {
-    "label": "Main island area",
-    "value": "3,665 km²"
+    "label": "Dune height",
+    "value": "Up to 40 m"
    },
    {
-    "label": "Highest peak range",
-    "value": "Hajhir, 1,503 m"
+    "label": "Coastline",
+    "value": "70 km"
    },
    {
-    "label": "Population",
-    "value": "About 50,000"
+    "label": "Established",
+    "value": "June 2, 1981"
    }
   ],
   "facts": [
-   "A third of its plant life is found nowhere else on Earth.",
-   "About 95% of its land snail species exist nowhere else.",
-   "The Dragon's Blood Tree, Dracaena cinnabari, has an umbrella-shaped crown and a bright red sap that is used commercially.",
-   "The cucumber tree, Dendrosicyos socotranus, is the only tree in the cucumber family and stores water in swollen stems.",
-   "Hoq Cave holds inscriptions and drawings left by sailors who visited between the first century and the 6th century CE."
+   "Lagoons can cover as much as 41% of the park at their fullest.",
+   "Wind pushes sand carried by the Parnaíba and Preguiças rivers up to 50 km inland.",
+   "About 70% of the yearly rainfall comes from January to May.",
+   "In the dry season, lagoons can lose as much as 1 m of depth per month.",
+   "Wolf fish survive the dry season by burrowing into wet mud and staying dormant."
   ],
-  "bestTime": "The northeast monsoon (October to December) brings rain to the interior mountains; the southwest monsoon from June to September brings strong winds and high seas.",
-  "gettingThere": "From New York there is no direct route: fly to Cairo or Abu Dhabi, the places with weekly scheduled flights to Socotra, and check the current security situation first.",
-  "tip": "Check flight schedules and travel advisories well ahead: services have been cancelled before (all flights stopped in March 2015)."
+  "bestTime": "The lagoons form during the rainy season (January to June) and shrink through the dry season, so the months just after the rains are when they are fullest.",
+  "gettingThere": "From New York there is no direct flight; connect through a Brazilian hub such as São Paulo to São Luís, then continue by road to the park's gateway town of Barreirinhas.",
+  "tip": "Plan around the water: the lagoons are seasonal, so check recent rainfall before booking a trip focused on swimming."
  },
  "flightsNote": "Real fares from Kayak searches run Oct 27 with your exact pass window, JFK/LGA/EWR only.",
  "markets": {
-  "asOf": "Mon Oct 26 close",
-  "story": "Stocks rebounded as Anthropic's IPO filing lifted chip and AI stocks, and oil eased from last week's highs, with Brent settling near $116. Investors are heading into the peak week of earnings and a Fed decision on Wednesday.",
+  "asOf": "Wed Oct 28 close",
+  "story": "Stocks edged up for a third straight day after the Fed held rates at 3.75%–4% with two officials dissenting in favor of a hike; tech and energy led while utilities and real estate lagged as long-term yields rose. Microsoft and Alphabet reported after the close.",
   "indices": [
    {
     "name": "Dow",
-    "value": "52,362",
-    "chg": 0.28
+    "value": "52,475",
+    "chg": 0.19
    },
    {
     "name": "S&P 500",
-    "value": "7,677",
-    "chg": 0.7
+    "value": "7,744",
+    "chg": 0.28
    },
    {
     "name": "Nasdaq",
-    "value": "26,169",
-    "chg": 0.82
+    "value": "26,550",
+    "chg": 0.27
    }
   ],
   "movers": [
    {
-    "sym": "AKAM",
-    "move": "+9.3%",
+    "sym": "VRT",
+    "move": "+16.6%",
     "dir": 1,
-    "why": "Akamai led the S&P 500 as tech rallied after the Anthropic filing."
+    "why": "Vertiv's Q3 sales rose 61% and it raised its full-year sales forecast by $650M."
    },
    {
-    "sym": "INTC",
-    "move": "+6.5%",
+    "sym": "WEN",
+    "move": "+15.1%",
     "dir": 1,
-    "why": "Intel led a jump in chip stocks lifted by the Anthropic IPO news."
+    "why": "Wendy's confirmed a non-binding $7.35-per-share cash proposal from Trian and partners."
    },
    {
-    "sym": "NVDA",
-    "move": "+2.4%",
+    "sym": "ORCL",
+    "move": "+10.7%",
     "dir": 1,
-    "why": "Nvidia gave the market its biggest lift, bouncing after three straight losing weeks."
+    "why": "Oracle set a fiscal 2030 revenue target of $225 billion."
    },
    {
-    "sym": "NFLX",
-    "move": "−4.7%",
+    "sym": "ENPH",
+    "move": "−16.0%",
     "dir": -1,
-    "why": "Netflix was among the Nasdaq 100's bigger decliners on an up day."
+    "why": "Enphase guided Q4 sales to $225M–$255M, citing soft residential solar demand."
    },
    {
-    "sym": "MRK",
-    "move": "−3.2%",
+    "sym": "FFIV",
+    "move": "−20.4%",
     "dir": -1,
-    "why": "Merck was one of the Dow's biggest losers."
+    "why": "F5 forecast fiscal 2027 revenue growth of 8%–9%, down from 11%."
    }
   ],
   "lines": [
@@ -680,45 +680,45 @@
     "game": "Baltimore Ravens @ Buffalo Bills",
     "kick": "2026-11-01T18:00:00Z",
     "spread": "BUF −3",
-    "total": "52.5",
-    "ml": "BUF −174 · BAL +150",
+    "total": "54.5",
+    "ml": "BUF −175 · BAL +145",
     "bills": true
    },
    {
     "game": "Ohio State @ USC",
     "kick": "2026-10-31T23:30:00Z",
-    "spread": "OSU −7.5",
+    "spread": "OSU −6.5",
     "total": "51.5",
-    "ml": "OSU −260 · USC +210"
+    "ml": "OSU −245 · USC +200"
    }
   ],
   "probs": [
    {
-    "game": "Titans @ Bengals",
-    "fav": "Bengals",
-    "p": 83
+    "game": "Nevada @ UCLA",
+    "fav": "UCLA",
+    "p": 93
    },
    {
-    "game": "Chargers @ Rams",
-    "fav": "Rams",
-    "p": 76
+    "game": "New Mexico @ San José State",
+    "fav": "New Mexico",
+    "p": 90
    },
    {
-    "game": "Colts @ Jaguars",
-    "fav": "Jaguars",
-    "p": 75
+    "game": "Arizona State @ BYU",
+    "fav": "BYU",
+    "p": 90
    },
    {
-    "game": "Patriots @ Dolphins",
-    "fav": "Patriots",
-    "p": 74
+    "game": "Mississippi State @ Texas",
+    "fav": "Texas",
+    "p": 90
    },
    {
-    "game": "Cowboys @ Eagles",
-    "fav": "Cowboys",
-    "p": 68
+    "game": "Miami @ North Carolina",
+    "fav": "Miami",
+    "p": 90
    }
   ],
-  "sources": "Market data: Sharecast US close, CNBC and AP (Oct 26); Russell 2000 close not published in these sources, so it's left off. Lines: Bills–Ravens consensus via SportsBettingDime (Oct 25); Ohio State–USC FanDuel via Covers (Oct 25). Win odds: Dimers NFL model (Oct 25–26)."
+  "sources": "Closes: Xinhua and CNBC (Oct 28); movers: StockTitan and Xinhua. Russell 2000 close not published in these sources, so it's left off. Lines: DraftKings via ESPN (Oct 29). Win odds: ESPN Matchup Predictor (Oct 29)."
  }
 }
