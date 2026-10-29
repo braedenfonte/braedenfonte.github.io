@@ -4,7 +4,7 @@ Refresh the daily data, the study decks and the weekend flight deals, then commi
 Follow `routines/common.md` (Canvas, run log, alerts, committing). Routine name for the log: `morning-update`.
 
 Edit ONLY: `data/daily.json`, `data/places_history.json`, `data/bills.json`, `data/finance.enc`,
-`data/study.enc`, `routines/runs.log`. Keep every field name exactly as in the current files (read them
+`data/study.enc`, `data/trip.enc`, `routines/runs.log`. Keep every field name exactly as in the current files (read them
 first and use them as templates). Set "updated" in daily.json to the current ISO time with offset.
 If one part fails, keep that part's previous content, finish the others, and log which part failed.
 
@@ -14,8 +14,12 @@ CBS, Fox Sports, school sites). Get scores, then game stats for the 3 biggest ga
 - "label": e.g. "Week 8 recap".
 - "results": up to 8 notable finished games of the latest week, each {away, home, as, hs, blurb (one
   short sentence), stats (0-3 short verified stat strings)}. Always include any Army, Navy or Air Force result.
-- "upcoming": up to 5 games in the next 7 days, each {away, home, kick (ISO UTC), note}; include Army's
-  next game with "army": true and a note like "Home at Michie Stadium" or "Away".
+- "upcoming": every game this coming weekend (Thursday through Saturday night) that has an AP Top 25 team, plus
+  Army, Navy and Air Force, sorted by kickoff (up to 20). Each {away, home, kick (ISO UTC), note (TV and/or site),
+  awayRank, homeRank}. awayRank/homeRank = the team's number in the CURRENT AP Top 25 poll (leave the field out
+  if unranked). Army's game also gets "army": true and a note like "Home at Michie Stadium" or "Away".
+- "poll": e.g. "AP Top 25, Week 9 (Oct 25)". Get the poll from a reliable source (AP, ESPN, SI, On3) dated this week.
+- results may also carry awayRank/homeRank (the poll the game was played under) when you can verify them.
 
 ## 2) Bills (data/bills.json), every day, including bye weeks
 Keep its structure exactly: updated, team, record {w,l}, standing, pf, pa, results
@@ -37,7 +41,7 @@ bestTime, gettingThere (from New York), tip. Verify every fact. Append the name 
 ## 4) Markets & lines ("markets" in daily.json): information only, never picks or advice
 - asOf: e.g. "Thu Oct 16 close" (most recent completed US trading day).
 - story: 1-2 plain sentences on what drove the market.
-- indices: Dow, S&P 500, Nasdaq, Russell 2000 as {name, value (string, commas, whole number), chg (%, 2 decimals)}.
+- indices: ONLY the S&P 500, as [{name: "S&P 500", value (string, commas, whole number), chg (%, 2 decimals)}]. No Dow, Nasdaq or Russell.
 - movers: 4-5 notable stocks {sym, move ("+5%", "−7%", "Upgrade"), dir (1 or -1), why}.
   Use a reliable market recap (WebSearch, then WebFetch). Only numbers stated in the source.
 - lines: up to 3 upcoming games {game ("Away @ Home"), kick (ISO UTC), spread, total, ml}. Always include
@@ -85,6 +89,9 @@ Return lands in NY by 4:00 PM Sunday (Monday by 4:00 PM if that Monday is off: 2
 Winter leave starts 2026-12-20: skip weekends from Dec 18 on. No +1 arrivals. Destinations (US + PR only):
 MCO, FLL, MIA, TPA, SJU, BQN, CHS, SAV, MYR, BNA, MSY, ATL, CLT, ORD, BOS, DEN, AUS, LAS, SAN, LAX.
 Weekends: the next 5 upcoming weekends (Friday dates) after today.
+ALWAYS search SJU (San Juan, PR, tag "Island") and BQN (Aguadilla, PR, tag "Island") Friday-leave for all 5
+weekends first, then the other destinations. Every SJU and BQN fare found is kept in "flights" (it counts toward the 25), even if it is not
+in the 25 cheapest.
 SEARCH (one Chrome tab, reused): Friday-leave:
 https://www.kayak.com/flights/EWR,JFK,LGA-DEST/FRI/RET?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600
 Saturday-leave: https://www.kayak.com/flights/EWR,JFK,LGA-DEST/SAT/RET?sort=price_a&fs=takeoff=0000,1500__;landing=__0000,1600
@@ -99,10 +106,34 @@ WRITE: replace only "flights" and "flightsNote". Cheapest fare per destination p
 Keep fares over $350 too. flightsNote: "Real fares from Kayak searches run <Mon D> with your exact pass window,
 JFK/LGA/EWR only." If zero valid fares, keep the existing flights. Close your Chrome tab when done.
 
+## 7b) San Juan return tracker (data/trip.enc, sealed)
+Braeden already bought BWI → SJU on Sun Dec 27, 2026 (Frontier) for $385. He still needs a ONE-WAY flight back,
+SJU → BWI on Sat Jan 2, 2027. He tracks the round trip on Google Flights (emails from noreply-travel@google.com).
+1. Gmail: search `from:noreply-travel@google.com San Juan newer_than:3d`, read the newest one in full (get_thread).
+   Write the alert as one plain line, e.g. "your tracked Frontier round trip (Dec 27–Jan 2) rose to $1,308 from $961",
+   with "when" like "Oct 29, 6:46 AM" (ET). No new email: keep the previous alert.
+2. Chrome (laptop needed; skip this step quietly if it can't be reached and keep the previous prices):
+   - Google Flights: https://www.google.com/travel/flights?q=Flights%20to%20BWI%20from%20SJU%20on%202027-01-02%20one%20way&curr=USD
+     Check the page says One way and Sat, Jan 2. Read the result list (li elements with a $ price).
+   - Expedia: https://www.expedia.com/Flights-Search?trip=oneway&leg1=from:SJU,to:BWI,departure:1/2/2027TANYT&passengers=adults:1&options=cabinclass:economy&mode=search&sortOrder=INCREASING&sortType=PRICE
+     Read [data-test-id="offer-listing"] cards.
+   - "tracked" = the Frontier NONSTOP SJU → BWI that day (the return on his tracked trip), price on each site.
+   - "best" = the cheapest SJU → BWI one-way on each site (any airline, any stops).
+   Never click Book, sign in or accept anything. Close the tab.
+3. Write OUTSIDE the repo /tmp/trip.json (same shape as before):
+   {"checked":"<now ISO>","paid":{"leg":"BWI → SJU, Sun Dec 27 (Frontier)","price":385},
+    "ret":{"date":"2027-01-02","from":"SJU","to":"BWI"},
+    "tracked":{"google":{price,airline,stops,depart "HH:MM",arrive "HH:MM"},"expedia":{...}},
+    "best":{"google":{...,"nextDay":true if it lands the next day},"expedia":{...}},
+    "alert":{"text":...,"when":...},"links":{"google":<url above>,"expedia":<url above>}}
+   The site adds $385 to each price to show the trip total. Run `python3 tools/sealjson.py trip /tmp/trip.json`,
+   then delete /tmp/trip.json. Never put these prices in daily.json, the commit message or the run log.
+   Include the tracked and best totals (385 + price) in the final summary.
+
 ## 8) Validate and publish
-Run `python3 -c "import json;[json.load(open(f)) for f in ['data/daily.json','data/bills.json','data/places_history.json','data/finance.enc','data/study.enc']]"`
+Run `python3 -c "import json;[json.load(open(f)) for f in ['data/daily.json','data/bills.json','data/places_history.json','data/finance.enc','data/study.enc','data/trip.enc']]"`
 and fix any error. `git status`: only the allowed files changed, no plain finance/study JSON staged.
 Append the run log line (common.md), then commit everything ONCE with message "Morning update YYYY-MM-DD"
 (name any skipped or failed part) and push as in common.md. Alert only on failure.
 Finish with a short summary: Army's next game, the Bills' record and next game, today's place, S&P 500 change,
-the study-deck lessons, and the number of fares plus the cheapest (or "flights skipped").
+the study-deck lessons, the number of fares plus the cheapest (or "flights skipped"), and the San Juan return totals (tracked and best).

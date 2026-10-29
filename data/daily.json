@@ -290,6 +290,24 @@
    "url": "https://www.kayak.com/flights/EWR,JFK,LGA-FLL/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
   },
   {
+   "from": "EWR",
+   "to": "BQN",
+   "city": "Aguadilla, PR",
+   "tag": "Island",
+   "price": 420,
+   "airline": "United Airlines",
+   "depart": "2026-11-20",
+   "departTime": "19:00",
+   "stops": "Nonstop",
+   "returnDate": "2026-11-22",
+   "returnDepart": "01:09",
+   "returnArrive": "04:12",
+   "returnTo": "EWR",
+   "returnAirline": "United Airlines",
+   "returnStops": "Nonstop",
+   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BQN/2026-11-20/2026-11-22?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+  },
+  {
    "from": "JFK",
    "to": "TPA",
    "city": "Tampa, FL",
@@ -308,148 +326,130 @@
    "url": "https://www.kayak.com/flights/EWR,JFK,LGA-TPA/2026-11-20/2026-11-22?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
   },
   {
-   "from": "LGA",
-   "to": "BNA",
-   "city": "Nashville, TN",
-   "tag": "City",
-   "price": 447,
-   "airline": "American Airlines",
-   "depart": "2026-11-27",
-   "departTime": "18:13",
-   "stops": "1 stop",
-   "returnDate": "2026-11-30",
-   "returnDepart": "05:15",
-   "returnArrive": "11:05",
-   "returnTo": "JFK",
-   "returnAirline": "American Airlines",
-   "returnStops": "1 stop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BNA/2026-11-27/2026-11-30?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "LGA",
-   "to": "ORD",
-   "city": "Chicago, IL",
-   "tag": "City",
-   "price": 477,
-   "airline": "Delta",
-   "depart": "2026-11-27",
-   "departTime": "17:35",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-30",
-   "returnDepart": "06:00",
-   "returnArrive": "09:07",
-   "returnTo": "LGA",
-   "returnAirline": "Delta",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ORD/2026-11-27/2026-11-30?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "LGA",
-   "to": "TPA",
-   "city": "Tampa, FL",
-   "tag": "Beach",
-   "price": 477,
-   "airline": "Southwest",
-   "depart": "2026-10-30",
-   "departTime": "16:40",
-   "stops": "1 stop",
-   "returnDate": "2026-11-01",
-   "returnDepart": "08:55",
-   "returnArrive": "14:25",
-   "returnTo": "LGA",
-   "returnAirline": "Southwest",
-   "returnStops": "1 stop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-TPA/2026-10-30/2026-11-01?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
    "from": "EWR",
-   "to": "CLT",
-   "city": "Charlotte, NC",
-   "tag": "City",
-   "price": 479,
+   "to": "BQN",
+   "city": "Aguadilla, PR",
+   "tag": "Island",
+   "price": 459,
    "airline": "United Airlines",
    "depart": "2026-11-13",
-   "departTime": "19:29",
+   "departTime": "19:00",
    "stops": "Nonstop",
    "returnDate": "2026-11-15",
-   "returnDepart": "06:00",
-   "returnArrive": "07:55",
+   "returnDepart": "01:09",
+   "returnArrive": "04:12",
    "returnTo": "EWR",
    "returnAirline": "United Airlines",
    "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-CLT/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BQN/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
   },
   {
    "from": "JFK",
-   "to": "TPA",
-   "city": "Tampa, FL",
-   "tag": "Beach",
-   "price": 485,
-   "airline": "American Airlines",
-   "depart": "2026-11-06",
-   "departTime": "17:33",
-   "stops": "1 stop",
-   "returnDate": "2026-11-08",
-   "returnDepart": "05:35",
-   "returnArrive": "11:23",
-   "returnTo": "LGA",
-   "returnAirline": "American Airlines",
-   "returnStops": "1 stop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-TPA/2026-11-06/2026-11-08?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "JFK",
-   "to": "TPA",
-   "city": "Tampa, FL",
-   "tag": "Beach",
-   "price": 487,
+   "to": "SJU",
+   "city": "San Juan, PR",
+   "tag": "Island",
+   "price": 475,
    "airline": "JetBlue",
-   "depart": "2026-11-27",
-   "departTime": "18:40",
+   "depart": "2026-11-20",
+   "departTime": "15:40",
    "stops": "Nonstop",
-   "returnDate": "2026-11-30",
-   "returnDepart": "06:15",
-   "returnArrive": "08:55",
+   "returnDate": "2026-11-22",
+   "returnDepart": "03:29",
+   "returnArrive": "06:30",
    "returnTo": "JFK",
    "returnAirline": "JetBlue",
    "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-TPA/2026-11-27/2026-11-30?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-SJU/2026-11-20/2026-11-22?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
   },
   {
    "from": "JFK",
-   "to": "MCO",
-   "city": "Orlando, FL",
-   "tag": "Beach",
-   "price": 488,
-   "airline": "American Airlines",
-   "depart": "2026-10-30",
-   "departTime": "15:26",
-   "stops": "1 stop",
-   "returnDate": "2026-11-01",
-   "returnDepart": "06:00",
-   "returnArrive": "11:00",
+   "to": "SJU",
+   "city": "San Juan, PR",
+   "tag": "Island",
+   "price": 574,
+   "airline": "JetBlue",
+   "depart": "2026-11-13",
+   "departTime": "16:16",
+   "stops": "Nonstop",
+   "returnDate": "2026-11-15",
+   "returnDepart": "06:30",
+   "returnArrive": "09:33",
    "returnTo": "JFK",
-   "returnAirline": "American Airlines",
-   "returnStops": "1 stop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-MCO/2026-10-30/2026-11-01?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+   "returnAirline": "JetBlue",
+   "returnStops": "Nonstop",
+   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-SJU/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
   },
   {
-   "from": "EWR",
-   "to": "ORD",
-   "city": "Chicago, IL",
-   "tag": "City",
-   "price": 491,
-   "airline": "American Airlines",
+   "from": "JFK",
+   "to": "BQN",
+   "city": "Aguadilla, PR",
+   "tag": "Island",
+   "price": 585,
+   "airline": "JetBlue",
    "depart": "2026-10-30",
-   "departTime": "17:29",
+   "departTime": "18:30",
    "stops": "Nonstop",
    "returnDate": "2026-11-01",
-   "returnDepart": "06:45",
-   "returnArrive": "10:04",
-   "returnTo": "EWR",
-   "returnAirline": "American Airlines",
+   "returnDepart": "07:30",
+   "returnArrive": "10:28",
+   "returnTo": "JFK",
+   "returnAirline": "JetBlue",
    "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ORD/2026-10-30/2026-11-01?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BQN/2026-10-30/2026-11-01?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+  },
+  {
+   "from": "JFK",
+   "to": "BQN",
+   "city": "Aguadilla, PR",
+   "tag": "Island",
+   "price": 589,
+   "airline": "JetBlue",
+   "depart": "2026-11-06",
+   "departTime": "18:59",
+   "stops": "Nonstop",
+   "returnDate": "2026-11-08",
+   "returnDepart": "07:01",
+   "returnArrive": "09:59",
+   "returnTo": "JFK",
+   "returnAirline": "JetBlue",
+   "returnStops": "Nonstop",
+   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BQN/2026-11-06/2026-11-08?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+  },
+  {
+   "from": "JFK",
+   "to": "SJU",
+   "city": "San Juan, PR",
+   "tag": "Island",
+   "price": 606,
+   "airline": "JetBlue",
+   "depart": "2026-10-30",
+   "departTime": "16:50",
+   "stops": "Nonstop",
+   "returnDate": "2026-11-01",
+   "returnDepart": "07:30",
+   "returnArrive": "10:33",
+   "returnTo": "JFK",
+   "returnAirline": "JetBlue",
+   "returnStops": "Nonstop",
+   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-SJU/2026-10-30/2026-11-01?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+  },
+  {
+   "from": "JFK",
+   "to": "SJU",
+   "city": "San Juan, PR",
+   "tag": "Island",
+   "price": 801,
+   "airline": "JetBlue",
+   "depart": "2026-11-06",
+   "departTime": "16:16",
+   "stops": "Nonstop",
+   "returnDate": "2026-11-08",
+   "returnDepart": "07:00",
+   "returnArrive": "14:16",
+   "returnTo": "JFK",
+   "returnAirline": "JetBlue",
+   "returnStops": "1 stop",
+   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-SJU/2026-11-06/2026-11-08?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
   }
  ],
  "football": {
@@ -555,34 +555,138 @@
     "away": "Baylor",
     "home": "UCF",
     "kick": "2026-10-30T23:30:00Z",
-    "note": "UCF's first game after the BYU upset (ESPN)"
+    "note": "Friday night (ESPN)"
    },
    {
     "away": "Notre Dame",
     "home": "Navy",
     "kick": "2026-10-31T16:00:00Z",
-    "note": "Neutral site in Foxborough (ABC or ESPN)"
+    "note": "Neutral site in Foxborough (ABC)",
+    "awayRank": 5
+   },
+   {
+    "away": "Arizona",
+    "home": "Texas Tech",
+    "kick": "2026-10-31T16:00:00Z",
+    "note": "ESPN",
+    "awayRank": 22,
+    "homeRank": 13
+   },
+   {
+    "away": "SMU",
+    "home": "Syracuse",
+    "kick": "2026-10-31T16:00:00Z",
+    "note": "ESPN2",
+    "awayRank": 19
+   },
+   {
+    "away": "Wisconsin",
+    "home": "Iowa",
+    "kick": "2026-10-31T16:00:00Z",
+    "note": "FOX",
+    "awayRank": 25
+   },
+   {
+    "away": "Auburn",
+    "home": "Ole Miss",
+    "kick": "2026-10-31T16:45:00Z",
+    "note": "SEC Network",
+    "homeRank": 12
    },
    {
     "away": "Florida",
     "home": "Georgia",
     "kick": "2026-10-31T19:30:00Z",
-    "note": "Neutral site in Atlanta (ABC)"
+    "note": "Neutral site in Atlanta (ABC)",
+    "awayRank": 17,
+    "homeRank": 3
+   },
+   {
+    "away": "Minnesota",
+    "home": "Indiana",
+    "kick": "2026-10-31T19:30:00Z",
+    "note": "CBS",
+    "homeRank": 4
+   },
+   {
+    "away": "Northwestern",
+    "home": "Oregon",
+    "kick": "2026-10-31T19:30:00Z",
+    "note": "Peacock",
+    "awayRank": 20
+   },
+   {
+    "away": "Arizona State",
+    "home": "BYU",
+    "kick": "2026-10-31T19:30:00Z",
+    "note": "FOX",
+    "homeRank": 8
+   },
+   {
+    "away": "Utah",
+    "home": "Cincinnati",
+    "kick": "2026-10-31T19:45:00Z",
+    "note": "ESPN",
+    "awayRank": 6
+   },
+   {
+    "away": "Virginia",
+    "home": "Wake Forest",
+    "kick": "2026-10-31T19:45:00Z",
+    "note": "ESPN2",
+    "homeRank": 14
+   },
+   {
+    "away": "Nevada",
+    "home": "UCLA",
+    "kick": "2026-10-31T20:15:00Z",
+    "note": "Big Ten Network",
+    "homeRank": 7
+   },
+   {
+    "away": "Oklahoma State",
+    "home": "Iowa State",
+    "kick": "2026-10-31T23:00:00Z",
+    "note": "FS1",
+    "awayRank": 24
+   },
+   {
+    "away": "Mississippi State",
+    "home": "Texas",
+    "kick": "2026-10-31T23:30:00Z",
+    "note": "ESPN",
+    "homeRank": 11
+   },
+   {
+    "away": "Miami",
+    "home": "North Carolina",
+    "kick": "2026-10-31T23:30:00Z",
+    "note": "Saturday night",
+    "awayRank": 1
    },
    {
     "away": "Ohio State",
     "home": "USC",
     "kick": "2026-10-31T23:30:00Z",
-    "note": "Halloween night in LA (NBC)"
+    "note": "Halloween night in LA (NBC)",
+    "awayRank": 2
    },
    {
     "away": "Army",
     "home": "Memphis",
     "kick": "2026-11-01T00:00:00Z",
-    "note": "Away — Saturday night (ESPNU)",
+    "note": "Away, Saturday night (ESPNU)",
     "army": true
+   },
+   {
+    "away": "Texas State",
+    "home": "Boise State",
+    "kick": "2026-11-01T02:00:00Z",
+    "note": "The CW",
+    "homeRank": 20
    }
-  ]
+  ],
+  "poll": "AP Top 25, Week 9 (Oct 25)"
  },
  "location": {
   "name": "Lençóis Maranhenses National Park",
@@ -622,25 +726,15 @@
   "gettingThere": "From New York there is no direct flight; connect through a Brazilian hub such as São Paulo to São Luís, then continue by road to the park's gateway town of Barreirinhas.",
   "tip": "Plan around the water: the lagoons are seasonal, so check recent rainfall before booking a trip focused on swimming."
  },
- "flightsNote": "Real fares from Kayak searches run Oct 29 with your exact pass window, JFK/LGA/EWR only.",
+ "flightsNote": "Real fares from Kayak searches run Oct 29 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
   "asOf": "Wed Oct 28 close",
   "story": "Stocks edged up for a third straight day after the Fed held rates at 3.75%–4% with two officials dissenting in favor of a hike; tech and energy led while utilities and real estate lagged as long-term yields rose. Microsoft and Alphabet reported after the close.",
   "indices": [
    {
-    "name": "Dow",
-    "value": "52,475",
-    "chg": 0.19
-   },
-   {
     "name": "S&P 500",
     "value": "7,744",
     "chg": 0.28
-   },
-   {
-    "name": "Nasdaq",
-    "value": "26,550",
-    "chg": 0.27
    }
   ],
   "movers": [

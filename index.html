@@ -352,6 +352,7 @@ a.folder{color:var(--accent);border-style:solid;text-decoration:none}
 .prep-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
 .prep-bar .grp{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .prep-bar h3{font-size:20px;font-weight:700;flex-basis:100%;margin:2px 0 0}
+.sj-trip{padding:18px 20px;margin-bottom:16px}.sj-trip h3{margin:2px 0 4px}.sj-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:12px}.sj-row>div{border:1px solid var(--line);border-radius:12px;padding:12px 14px}.sj-row b{display:block;font:800 22px/1.15 var(--display)}.sj-row small{color:var(--muted)}.sj-alert{margin-top:12px;font-size:14px}
 .prep-frame{width:100%;height:78vh;min-height:480px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
 @media (max-width:560px){.prep-row{grid-template-columns:48px minmax(0,1fr);gap:4px 12px}.prep-d{grid-column:2}.prep-t{white-space:normal}}
 
@@ -934,7 +935,6 @@ body.gate-open{overflow:hidden}
   <div class="page-h"><span class="eyebrow" id="briefDate">Today</span><h2 id="briefHello">Good morning, Braeden.</h2><p id="briefSub">Here's your day at a glance.</p></div>
   <div class="cd-mini" id="cdMini"></div>
   <div class="panel quote" id="quoteCard"><span class="eyebrow">Quote of the day</span><blockquote id="quoteText">…</blockquote><cite id="quoteBy"></cite></div>
-  <div class="panel todo" id="todoCard" hidden><div class="sec-h" style="margin:0 0 10px"><h3>To do</h3><span class="chip" id="todoCount"></span></div><div id="todoList"></div></div>
   <div class="brief-grid sec" style="margin-top:16px">
     <div class="panel wx" id="wxCard">
       <span class="eyebrow">West Point weather</span>
@@ -962,6 +962,7 @@ body.gate-open{overflow:hidden}
 <!-- FLIGHTS -->
 <section class="view" id="v-flights">
   <div class="page-h"><span class="eyebrow">JFK · LGA · EWR · US &amp; Puerto Rico</span><h2>Weekend Flights</h2><p>Real round trips that fit a cadet's pass: leave Friday after 3 PM or Saturday before 3 PM, and land back in New York by 4 PM Sunday, or 4 PM Monday when that Monday is off. Every trip here fits; the only question is price.</p></div>
+  <div class="panel sj-trip sec" id="sjTrip" hidden></div>
   <div class="wk-strip" id="wkStrip" role="tablist" aria-label="Choose a weekend"></div>
   <div class="panel wk-info" id="wkInfo"></div>
   <div class="fl-controls">
@@ -1435,7 +1436,7 @@ function applyPrivate(P){
   $("#privPersonal").innerHTML = P.html.personal;
   paintAuth();
   renderHome(); renderSched(); renderResume(); renderCourses(); renderTravel(); renderDaily(); renderStudy(); renderFinance();
-  if (P.finKey){ loadFinance(P.finKey); loadStudy(); if (cView === "prep") renderPrep(); if (projOpen){ const f = projOpen; projOpen = ""; openProjFolder(f); } }
+  if (P.finKey){ loadFinance(P.finKey); loadStudy(); loadTrip(); loadSchedFix(); if (cView === "prep") renderPrep(); if (projOpen){ const f = projOpen; projOpen = ""; openProjFolder(f); } }
 }
 async function bootAuth(){
   let k = null;
@@ -2300,15 +2301,16 @@ document.addEventListener("change", e => {
   const items = (TODO||[]).filter(t => t.date <= key(new Date()));
   if (c.checked && items.length && items.every(t => d.has(t.id))) celebrate($("#todoCard"));
 });
+const rk = n => n ? "No. "+n+" " : "";
 function renderFootball(){
   const fb = DAILY.football || {results:[], upcoming:[]};
   $("#fbLabel").textContent = "College football · "+(fb.label || "");
   $("#fbResults").innerHTML = (fb.results||[]).map(g => {
     const aw = g.as > g.hs;
-    return '<div class="panel game"><div class="score-row '+(aw?'win':'lose')+'"><span>'+esc(g.away)+'</span><b>'+g.as+'</b></div><div class="score-row '+(aw?'lose':'win')+'"><span>@ '+esc(g.home)+'</span><b>'+g.hs+'</b></div>'+
+    return '<div class="panel game"><div class="score-row '+(aw?'win':'lose')+'"><span>'+rk(g.awayRank)+esc(g.away)+'</span><b>'+g.as+'</b></div><div class="score-row '+(aw?'lose':'win')+'"><span>@ '+rk(g.homeRank)+esc(g.home)+'</span><b>'+g.hs+'</b></div>'+
       '<p>'+esc(g.blurb)+'</p>'+((g.stats||[]).length ? '<ul>'+g.stats.map(s => '<li>'+esc(s)+'</li>').join("")+'</ul>' : '')+'</div>';
   }).join("");
-  $("#fbUpcoming").innerHTML = (fb.upcoming||[]).map(g => '<div class="panel up" style="cursor:default"><div class="datebox" style="--c:'+(g.army?'#c9a23a':'var(--accent)')+'"><small>'+MON[new Date(g.kick).getMonth()]+'</small><b>'+new Date(g.kick).getDate()+'</b></div><div style="min-width:0"><h4>'+esc(g.away)+' at '+esc(g.home)+'</h4><p>'+kickText(g.kick)+(g.note ? ' · '+esc(g.note) : '')+'</p></div><div></div></div>').join("");
+  $("#fbUpcoming").innerHTML = (fb.upcoming||[]).map(g => '<div class="panel up" style="cursor:default"><div class="datebox" style="--c:'+(g.army?'#c9a23a':'var(--accent)')+'"><small>'+MON[new Date(g.kick).getMonth()]+'</small><b>'+new Date(g.kick).getDate()+'</b></div><div style="min-width:0"><h4>'+rk(g.awayRank)+esc(g.away)+' at '+rk(g.homeRank)+esc(g.home)+'</h4><p>'+kickText(g.kick)+(g.note ? ' · '+esc(g.note) : '')+'</p></div><div></div></div>').join("");
 }
 
 
@@ -2363,6 +2365,44 @@ function rich(s){
     '<code>'+esc(p.slice(1,-1))+'</code>').join("");
 }
 let STUDY = {}, STUDY_DAILY = null;
+/* data/trip.enc: the San Juan return-flight tracker (sealed; refreshed by the morning update) */
+const usd0 = n => "$"+Math.round(n).toLocaleString("en-US");
+async function loadTrip(){
+  if (!finKey) return;
+  try{
+    const r = await fetch("data/trip.enc", {cache: "no-store"}); if (!r.ok) return;
+    const T = await openFin(await r.json()); if (!T || !T.ret) return;
+    const t12 = hm => { if (!hm) return ""; let [h,m] = hm.split(":").map(Number); const ap = h>=12?"PM":"AM"; h = h%12||12; return h+":"+String(m).padStart(2,"0")+" "+ap; };
+    const box = (lbl, o) => o ? '<div><small>'+esc(lbl)+'</small><b>'+usd0(o.price)+'</b><small>'+esc(o.airline)+' · '+esc(o.stops)+' · '+t12(o.depart)+' → '+t12(o.arrive)+(o.nextDay?' (+1)':'')+'</small><br><small>Trip total with your $'+T.paid.price+' flight: <strong>'+usd0(T.paid.price+o.price)+'</strong></small></div>' : '';
+    const d = new Date(T.ret.date+"T12:00:00"), c = new Date(T.checked);
+    $("#sjTrip").innerHTML = '<span class="eyebrow">Your trip · '+esc(T.ret.from)+' → '+esc(T.ret.to)+'</span><h3>San Juan return: '+DOW[d.getDay()]+', '+MON[d.getMonth()]+' '+d.getDate()+'</h3>'+
+      '<p class="meta">Paid '+usd0(T.paid.price)+' for '+esc(T.paid.leg)+'. One-way prices back, checked '+MON[c.getMonth()]+' '+c.getDate()+'.</p>'+
+      '<div class="sj-row">'+box("Your tracked flight · Google Flights", T.tracked.google)+box("Your tracked flight · Expedia", T.tracked.expedia)+box("Best price · Google Flights", T.best.google)+box("Best price · Expedia", T.best.expedia)+'</div>'+
+      (T.alert ? '<p class="sj-alert"><strong>Google Flights alert:</strong> '+esc(T.alert.text)+' ('+esc(T.alert.when)+')</p>' : '')+
+      '<p class="fine" style="margin-top:8px"><a href="'+esc(T.links.google)+'" target="_blank" rel="noopener">Google Flights ↗</a> · <a href="'+esc(T.links.expedia)+'" target="_blank" rel="noopener">Expedia ↗</a></p>';
+    $("#sjTrip").hidden = false;
+  }catch(e){}
+}
+/* data/sched.enc: schedule fixes applied on top of the locked schedule (sealed; written by tools/sealjson.py) */
+async function loadSchedFix(){
+  if (!finKey || !SCHED || !SCHED.events) return;
+  try{
+    const r = await fetch("data/sched.enc", {cache: "no-store"}); if (!r.ok) return;
+    const F = await openFin(await r.json()); if (!F) return;
+    const hit = (e, w) => new RegExp(w.re, "i").test(e.t) && (!w.and || new RegExp(w.and, "i").test(e.t) || (w.dates||[]).includes(e.start)) && (!w.date || e.start === w.date || (e.end && e.start <= w.date && e.end >= w.date));
+    let ev = SCHED.events.map(e => Object.assign({}, e));
+    (F.remove||[]).forEach(w => { ev = ev.filter(e => !hit(e, w)); });
+    (F.set||[]).forEach(w => {
+      let m = ev.filter(e => hit(e, w)); if (w.cat) { const c = m.filter(e => e.cat === w.cat); if (c.length) m = c; }
+      if (m.length) m.forEach(e => { Object.keys(w.to).forEach(k => { if (w.to[k] === null) delete e[k]; else e[k] = w.to[k]; }); });
+      else if (w.add) ev.push(Object.assign({}, w.add));
+    });
+    (F.add||[]).forEach(a => { if (!ev.some(e => e.start === a.start && e.t === a.t)) ev.push(Object.assign({}, a)); });
+    SCHED.events = ev.sort((a,b) => a.start.localeCompare(b.start));
+    Object.assign(SCHED.days, F.days || {});
+    buildEvents(); renderHome(); renderSched(); renderCourses(); renderBrief();
+  }catch(e){}
+}
 /* data/study.enc: today's lesson decks, refreshed every morning by the daily task (sealed with the same public key as finance.enc) */
 async function loadStudy(){
   if (!finKey) return;
@@ -2598,7 +2638,6 @@ function renderBrief(){
   if (f){ $("#bFlight").textContent = "$"+f.price+" to "+f.city.split(",")[0]; $("#bFlightSub").textContent = fitL.length ? f.from+" · "+fmtDay(f.depart)+" · fits your pass" : "Closest deal today · see weekend options"; }
   renderBillsTile();
   renderQuote();
-  renderTodo();
   if (DAILY.location){ $("#bPlace").textContent = DAILY.location.name; $("#bPlaceSub").textContent = DAILY.location.tagline || DAILY.location.region; }
   const wk = new Date(now); wk.setDate(wk.getDate()+7);
   const due = upcoming(now).filter(e => (e.cat==="due"||e.cat==="exam") && e.s < wk);
