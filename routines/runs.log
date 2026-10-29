@@ -8,3 +8,4 @@
 2026-10-28T18:34-04:00 | health-check | OK | Checked nightly-prep: OK line at 18:05 today |
 2026-10-29T07:10-04:00 | morning-update | OK | Football (unchanged wk8, upcoming verified), Bills (bye, odds/standings rechecked), place Lençóis Maranhenses, markets Oct 28, study decks MA486 L26, MA481X L26, MA376 L27, EM481 L23, SS388 L21 | skipped: finance (Era returned no accounts), flights (no Chrome); MA481X/SS388/EM481 decks partly from syllabus (no notes posted)
 2026-10-29T07:48-04:00 | health-check | OK | Checked morning-update: OK line at 07:10 today, daily.json updated today |
+2026-10-29T17:55-04:00 | nightly-prep | FAIL | Day 2: MA486 L27 (built from calendar + L26 base; L27 notes not posted yet) | MA481X not built: Canvas syllabus empty, no lesson schedule readable, couldn't confirm Oct 30 lesson
