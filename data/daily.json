@@ -2,24 +2,6 @@
  "updated": "2026-10-29T06:50:00-04:00",
  "flights": [
   {
-   "from": "LGA",
-   "to": "ATL",
-   "city": "Atlanta, GA",
-   "tag": "City",
-   "price": 239,
-   "airline": "Frontier",
-   "depart": "2026-11-13",
-   "departTime": "17:30",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-15",
-   "returnDepart": "08:10",
-   "returnArrive": "10:36",
-   "returnTo": "EWR",
-   "returnAirline": "Frontier",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ATL/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
    "from": "JFK",
    "to": "BOS",
    "city": "Boston, MA",
@@ -45,7 +27,7 @@
    "price": 249,
    "airline": "American Airlines",
    "depart": "2026-11-20",
-   "departTime": "18:29",
+   "departTime": "16:14",
    "stops": "Nonstop",
    "returnDate": "2026-11-22",
    "returnDepart": "05:10",
@@ -72,6 +54,24 @@
    "returnAirline": "JetBlue",
    "returnStops": "1 stop",
    "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BNA/2026-11-20/2026-11-22?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+  },
+  {
+   "from": "LGA",
+   "to": "ATL",
+   "city": "Atlanta, GA",
+   "tag": "City",
+   "price": 288,
+   "airline": "Frontier",
+   "depart": "2026-11-13",
+   "departTime": "17:30",
+   "stops": "Nonstop",
+   "returnDate": "2026-11-15",
+   "returnDepart": "08:10",
+   "returnArrive": "10:36",
+   "returnTo": "EWR",
+   "returnAirline": "Frontier",
+   "returnStops": "Nonstop",
+   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ATL/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
   },
   {
    "from": "LGA",
@@ -254,24 +254,6 @@
    "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BNA/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
   },
   {
-   "from": "LGA",
-   "to": "ATL",
-   "city": "Atlanta, GA",
-   "tag": "City",
-   "price": 378,
-   "airline": "Frontier",
-   "depart": "2026-10-30",
-   "departTime": "17:30",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-01",
-   "returnDepart": "06:19",
-   "returnArrive": "08:34",
-   "returnTo": "LGA",
-   "returnAirline": "Frontier",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ATL/2026-10-30/2026-11-01?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
    "from": "EWR",
    "to": "CLT",
    "city": "Charlotte, NC",
@@ -324,24 +306,6 @@
    "returnAirline": "Breeze Airways",
    "returnStops": "1 stop",
    "url": "https://www.kayak.com/flights/EWR,JFK,LGA-MCO/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "LGA",
-   "to": "ATL",
-   "city": "Atlanta, GA",
-   "tag": "City",
-   "price": 395,
-   "airline": "Frontier",
-   "depart": "2026-11-06",
-   "departTime": "17:30",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-08",
-   "returnDepart": "06:19",
-   "returnArrive": "08:34",
-   "returnTo": "LGA",
-   "returnAirline": "Frontier",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ATL/2026-11-06/2026-11-08?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
   },
   {
    "from": "LGA",
@@ -450,6 +414,42 @@
    "returnAirline": "American Airlines",
    "returnStops": "1 stop",
    "url": "https://www.kayak.com/flights/EWR,JFK,LGA-MCO/2026-10-30/2026-11-01?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+  },
+  {
+   "from": "LGA",
+   "to": "ATL",
+   "city": "Atlanta, GA",
+   "tag": "City",
+   "price": 497,
+   "airline": "Frontier",
+   "depart": "2026-11-06",
+   "departTime": "17:30",
+   "stops": "Nonstop",
+   "returnDate": "2026-11-08",
+   "returnDepart": "06:19",
+   "returnArrive": "08:34",
+   "returnTo": "LGA",
+   "returnAirline": "Frontier",
+   "returnStops": "Nonstop",
+   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ATL/2026-11-06/2026-11-08?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+  },
+  {
+   "from": "JFK",
+   "to": "ATL",
+   "city": "Atlanta, GA",
+   "tag": "City",
+   "price": 498,
+   "airline": "JetBlue",
+   "depart": "2026-10-30",
+   "departTime": "20:30",
+   "stops": "Nonstop",
+   "returnDate": "2026-11-01",
+   "returnDepart": "06:19",
+   "returnArrive": "08:34",
+   "returnTo": "LGA",
+   "returnAirline": "Frontier",
+   "returnStops": "Nonstop",
+   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ATL/2026-10-30/2026-11-01?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
   }
  ],
  "football": {
@@ -622,7 +622,7 @@
   "gettingThere": "From New York there is no direct flight; connect through a Brazilian hub such as São Paulo to São Luís, then continue by road to the park's gateway town of Barreirinhas.",
   "tip": "Plan around the water: the lagoons are seasonal, so check recent rainfall before booking a trip focused on swimming."
  },
- "flightsNote": "Real fares from Kayak searches run Oct 27 with your exact pass window, JFK/LGA/EWR only.",
+ "flightsNote": "Atlanta fares re-checked on Kayak Oct 29; other cities are from the Oct 27 searches. Your exact pass window, JFK/LGA/EWR only.",
  "markets": {
   "asOf": "Wed Oct 28 close",
   "story": "Stocks edged up for a third straight day after the Fed held rates at 3.75%–4% with two officials dissenting in favor of a hike; tech and energy led while utilities and real estate lagged as long-term yields rose. Microsoft and Alphabet reported after the close.",
