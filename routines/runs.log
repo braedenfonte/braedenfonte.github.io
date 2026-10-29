@@ -10,3 +10,4 @@
 2026-10-29T07:48-04:00 | health-check | OK | Checked morning-update: OK line at 07:10 today, daily.json updated today |
 2026-10-29T17:55-04:00 | nightly-prep | FAIL | Day 2: MA486 L27 (built from calendar + L26 base; L27 notes not posted yet) | MA481X not built: Canvas syllabus empty, no lesson schedule readable, couldn't confirm Oct 30 lesson
 2026-10-29T18:46-04:00 | health-check | RETRY nightly-prep | nightly-prep FAIL: MA481X not built (Canvas syllabus empty, Oct 30 lesson unconfirmed) |
+2026-10-29T18:46-04:00 | health-check | FAIL | Checked nightly-prep: FAIL line at 17:55 today (MA481X not built) | Re-run blocked: permission denied for the API trigger call; re-run nightly-prep manually
