@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-30T06:40:00-04:00",
+ "updated": "2026-10-31T07:05:00-04:00",
  "flights": [
   {
    "from": "JFK",
@@ -552,12 +552,6 @@
   ],
   "upcoming": [
    {
-    "away": "Baylor",
-    "home": "UCF",
-    "kick": "2026-10-30T23:30:00Z",
-    "note": "Friday night (ESPN)"
-   },
-   {
     "away": "Notre Dame",
     "home": "Navy",
     "kick": "2026-10-31T16:00:00Z",
@@ -689,84 +683,84 @@
   "poll": "AP Top 25, Week 9 (Oct 25)"
  },
  "location": {
-  "name": "Salar de Uyuni",
-  "wiki": "Salar_de_Uyuni",
-  "country": "Bolivia",
-  "region": "Potosí Department, southwestern Bolivia",
-  "lat": -20.134,
-  "lon": -67.489,
-  "tagline": "The world's largest salt flat, flat enough to calibrate satellites.",
-  "intro": "Salar de Uyuni is a salt flat in the high Andes of southwestern Bolivia. After the rains it turns into a shallow sheet of water that mirrors the sky. Its brine holds much of Bolivia's lithium.",
+  "name": "Giant's Causeway",
+  "wiki": "Giant's_Causeway",
+  "country": "United Kingdom (Northern Ireland)",
+  "region": "County Antrim, north coast of Northern Ireland",
+  "lat": 55.2408,
+  "lon": -6.5117,
+  "tagline": "About 40,000 interlocking basalt columns left by an ancient volcanic eruption.",
+  "intro": "The Giant's Causeway sits on the north coast of County Antrim, about five kilometres northeast of Bushmills. Its tightly packed basalt columns formed 50 to 60 million years ago in a volcanic fissure eruption. Irish legend says the giant Finn McCool built it to reach a rival in Scotland.",
   "stats": [
    {
-    "label": "Area",
-    "value": "10,582 km²"
+    "label": "Basalt columns",
+    "value": "About 40,000"
    },
    {
-    "label": "Elevation",
-    "value": "About 3,656 m"
+    "label": "Age",
+    "value": "50–60 million years"
    },
    {
-    "label": "Elevation variation",
-    "value": "Under 1 m on average"
+    "label": "Tallest columns",
+    "value": "About 12 m"
    },
    {
-    "label": "Nearest town",
-    "value": "Uyuni"
+    "label": "UNESCO listing",
+    "value": "1986"
    }
   ],
   "facts": [
-   "Its surface varies in elevation by less than a meter on average, which makes it about five times more effective for satellite calibration than the open ocean.",
-   "Bolivia holds about 22% of the world's known lithium resources (roughly 105 million tonnes), most of it in the Salar.",
-   "Every November it is a breeding ground for Chilean, Andean and James's flamingos.",
-   "Isla Incahuasi in the Salar is covered in giant cacti, mainly Echinopsis, that grow about 1 cm a year to roughly 12 m.",
-   "A train cemetery sits about 3 km outside Uyuni, left behind after the mining industry collapsed in the 1940s."
+   "It is made of roughly 40,000 interlocking basalt columns, formed in the Paleocene by a volcanic fissure eruption.",
+   "The tallest columns stand about 12 meters (39 ft) high.",
+   "In legend, the Irish giant Fionn mac Cumhaill (Finn McCool) built it to cross to Scotland and fight the giant Benandonner; in one version his wife Sadhbh disguises him as a baby and Benandonner flees, tearing up the causeway behind him.",
+   "It became a UNESCO World Heritage Site in 1986, and in 2022 the IUGS listed its rocks among its first 100 geological heritage sites.",
+   "It drew nearly one million visitors in 2019, and much of the site is owned and managed by the National Trust."
   ],
-  "bestTime": "The December to April rainy season turns the flat into a shallow mirror-like lake; outside it the surface is dry, firm white salt.",
-  "gettingThere": "From New York, connect to La Paz, Bolivia, then take a domestic flight or an overnight bus to the town of Uyuni, the gateway for Salar tours.",
-  "tip": "At this altitude, plan a day or two in La Paz or Uyuni first to adjust, and bring sunglasses and sunscreen for the glare off the salt."
+  "bestTime": "The coast is open year-round; go early or late in the day to avoid the largest crowds and check conditions before you walk the shore.",
+  "gettingThere": "From New York, fly to Belfast (usually with a connection), then continue to the coast near Bushmills by car or tour.",
+  "tip": "Wear shoes with good grip, since the columns can be slick when wet."
  },
  "flightsNote": "Real fares from Kayak searches run Oct 29 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
-  "asOf": "Thu Oct 29 close",
-  "story": "The S&P 500 slipped 0.30%, snapping a three-day winning streak, as Alphabet fell 12.64% on its worst day ever and revived worries about AI spending. Third-quarter GDP grew at a 3.4% annual rate and September PCE inflation ran 3.6% year over year, while health care hit a record.",
+  "asOf": "Fri Oct 30 close",
+  "story": "The S&P 500 fell 1.82%, its worst day since June, as weak tech earnings revived worries about AI spending; Intel plunged 28.58% and chip stocks sold off.",
   "indices": [
    {
     "name": "S&P 500",
-    "value": "7,720",
-    "chg": -0.3
+    "value": "7,580",
+    "chg": -1.82
    }
   ],
   "movers": [
    {
-    "sym": "GOOGL",
-    "move": "−12.6%",
+    "sym": "INTC",
+    "move": "−28.6%",
     "dir": -1,
-    "why": "Alphabet posted a double miss and negative free cash flow of about $9.1 billion, its worst day ever."
+    "why": "Intel forecast weaker fourth-quarter revenue of $15.0B–$16.0B and cited a PC slowdown."
    },
    {
-    "sym": "ADT",
-    "move": "+33%",
-    "dir": 1,
-    "why": "ADT agreed to be acquired by Thrive Holdings for $10.00 a share in cash."
-   },
-   {
-    "sym": "CROX",
-    "move": "+25.5%",
-    "dir": 1,
-    "why": "Crocs earned $3.69 a share, beating the $3.31 estimate."
-   },
-   {
-    "sym": "CAT",
-    "move": "−9.3%",
+    "sym": "RDDT",
+    "move": "−29.2%",
     "dir": -1,
-    "why": "Caterpillar's construction sales came in light despite a beat."
+    "why": "Reddit gave weak fourth-quarter revenue guidance and warned of fewer Google search referrals."
    },
    {
-    "sym": "LLY",
-    "move": "+6.6%",
+    "sym": "REGN",
+    "move": "+13.3%",
     "dir": 1,
-    "why": "Eli Lilly raised its revenue forecast and reported adjusted EPS of $7.48 against a $6.26 estimate."
+    "why": "Regeneron beat earnings expectations."
+   },
+   {
+    "sym": "FDXF",
+    "move": "+14.9%",
+    "dir": 1,
+    "why": "FedEx Freight gave strong fourth-quarter guidance in its first report as a standalone company."
+   },
+   {
+    "sym": "AMZN",
+    "move": "−1.4%",
+    "dir": -1,
+    "why": "Amazon's third-quarter revenue ($201.9B) and EPS ($1.89) came in below estimates."
    }
   ],
   "lines": [
@@ -775,14 +769,14 @@
     "kick": "2026-11-01T18:00:00Z",
     "spread": "BUF −3",
     "total": "54.5",
-    "ml": "BUF −175 · BAL +145",
+    "ml": "BUF −170 · BAL +142",
     "bills": true
    },
    {
     "game": "Ohio State @ USC",
     "kick": "2026-10-31T23:30:00Z",
     "spread": "OSU −6.5",
-    "total": "51.5",
+    "total": "50.5",
     "ml": "OSU −245 · USC +200"
    }
   ],
@@ -790,17 +784,12 @@
    {
     "game": "Nevada @ UCLA",
     "fav": "UCLA",
-    "p": 93
+    "p": 94
    },
    {
     "game": "New Mexico @ San José State",
     "fav": "New Mexico",
-    "p": 90
-   },
-   {
-    "game": "Arizona State @ BYU",
-    "fav": "BYU",
-    "p": 90
+    "p": 91
    },
    {
     "game": "Mississippi State @ Texas",
@@ -811,8 +800,13 @@
     "game": "Miami @ North Carolina",
     "fav": "Miami",
     "p": 90
+   },
+   {
+    "game": "Arizona State @ BYU",
+    "fav": "BYU",
+    "p": 90
    }
   ],
-  "sources": "Closes and movers: CappNotes and StockTitan (CNBC, Oct 29). Lines: DraftKings via ESPN (Oct 29, not yet refreshed). Win odds: ESPN Matchup Predictor (Oct 29, not yet refreshed)."
+  "sources": "Closes: AP via CNN/WTOP figures and Motley Fool, Wall Street Republic and StockTitan recaps (Oct 30). Lines: DraftKings via ESPN (Oct 31). Win odds: ESPN Matchup Predictor (Oct 31)."
  }
 }
