@@ -1,0 +1,28 @@
+{
+  "updated": "2026-11-01T17:35:00-05:00",
+  "items": [
+    {"id": "memo4", "title": "Finish Memo 4", "tag": "Writing", "sessions": [
+      {"date": "2026-11-01", "label": "Tonight", "start": "19:00", "end": "23:59"},
+      {"date": "2026-11-02", "label": "After practice", "start": "17:30", "end": "23:59"}
+    ]},
+    {"id": "macro-hw", "title": "Finish the macro homework", "tag": "SS388", "sessions": [
+      {"date": "2026-11-01", "label": "Tonight", "start": "19:00", "end": "23:59"}
+    ]},
+    {"id": "em481-2a", "title": "Finish EM481 Project 2A", "tag": "EM481", "sessions": [
+      {"date": "2026-11-02", "start": "10:30"}
+    ]},
+    {"id": "opord", "title": "Finish the OPORD", "tag": "Military", "sessions": [
+      {"date": "2026-11-03", "label": "All day", "start": "00:00", "end": "23:59"},
+      {"date": "2026-11-04", "start": "10:30", "end": "11:50"},
+      {"date": "2026-11-04", "start": "12:45", "end": "14:00"}
+    ]},
+    {"id": "ma481x-proj", "title": "Work on the MA481X project", "tag": "MA481X", "sessions": [
+      {"date": "2026-11-03", "label": "All day", "start": "00:00", "end": "23:59"},
+      {"date": "2026-11-04", "start": "10:30", "end": "11:50"},
+      {"date": "2026-11-04", "start": "12:45", "end": "14:00"}
+    ]},
+    {"id": "ma486-wpr", "title": "Study for the MA486 WPR", "tag": "MA486", "sessions": [
+      {"date": "2026-11-04", "label": "After the soccer game", "start": "20:00", "end": "23:59"}
+    ]}
+  ]
+}

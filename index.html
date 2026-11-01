@@ -461,6 +461,40 @@ footer p{max-width:70ch}
 .mini-h{font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:6px}
 .brief-tile{padding:20px;display:flex;flex-direction:column;gap:6px;text-decoration:none;transition:transform .2s,border-color .2s}
 .brief-tile:hover{transform:translateY(-3px);border-color:var(--accent)}
+/* to-do list */
+.tdo{padding:20px 22px;margin-bottom:16px}
+.tdo-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.tdo-top h3{font-size:22px;font-weight:700;margin-top:4px}
+.tdo-prog{display:flex;align-items:center;gap:10px;margin:14px 0 4px;font:500 12px var(--mono);color:var(--muted)}
+.tdo-prog .bar{flex:1;height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.tdo-list{display:grid;gap:8px;margin-top:14px}
+.td{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);transition:border-color .2s,opacity .25s,transform .2s}
+.td:hover{border-color:var(--faint)}
+.td.now{border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
+.td.late{border-style:dashed}
+.td.done{opacity:.55}
+.td.done .td-t{text-decoration:line-through;text-decoration-color:var(--faint)}
+.td-ck{width:24px;height:24px;margin-top:1px;border-radius:50%;border:2px solid var(--faint);background:none;display:grid;place-items:center;padding:0;cursor:pointer;transition:background .15s,border-color .15s}
+.td-ck:hover{border-color:var(--accent)}
+.td-ck svg{width:14px;height:14px;stroke:var(--on-accent);stroke-width:3;fill:none;opacity:0}
+.td.done .td-ck{background:var(--accent);border-color:var(--accent)}
+.td.done .td-ck svg{opacity:1}
+.td-t{font-weight:600;font-size:16px;line-height:1.3}
+.td-ss{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.td-ss .chip{font-size:11.5px;padding:3px 9px}
+.td-ss .chip.past{opacity:.5;text-decoration:line-through}
+.td-ss .chip.live{background:var(--accent);color:var(--on-accent)}
+.td-ss .chip.soon{background:var(--accent-soft);color:var(--fg)}
+.td-tag{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--surface-2);padding:3px 8px;border-radius:6px;white-space:nowrap}
+.td-when{grid-column:2/4;font:500 12px var(--mono);color:var(--muted);margin-top:-4px}
+.td.now .td-when{color:var(--accent)}
+.td-day{font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin:10px 0 0}
+.td-day:first-child{margin-top:0}
+.td-day b{color:var(--accent);font-weight:500}
+.td-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;background:var(--surface-2);font-size:15px}
+.td-row.done{opacity:.5;text-decoration:line-through}
+.td-row span:last-child{margin-left:auto;font:500 12px var(--mono);color:var(--muted);white-space:nowrap}
+@media (max-width:560px){.tdo{padding:18px 16px}.td{grid-template-columns:auto minmax(0,1fr)}.td-tag{display:none}.td-when{grid-column:2}}
 .brief-tile b{font:800 24px/1.15 var(--display)}
 .brief-tile span:last-child{color:var(--muted);font-size:14px}
 .fine{color:var(--faint);font-size:12.5px;margin-top:14px}
@@ -934,6 +968,14 @@ body.gate-open{overflow:hidden}
 <section class="view" id="v-brief">
   <div class="page-h"><span class="eyebrow" id="briefDate">Today</span><h2 id="briefHello">Good morning, Braeden.</h2><p id="briefSub">Here's your day at a glance.</p></div>
   <div class="cd-mini" id="cdMini"></div>
+  <div class="panel tdo" id="tdCard" hidden>
+    <div class="tdo-top">
+      <div><span class="eyebrow">This week</span><h3>To-do list</h3></div>
+      <div class="seg" id="tdSeg" role="tablist" aria-label="To-do view"><button type="button" data-tdv="next" class="on">Up next</button><button type="button" data-tdv="day">By day</button><button type="button" data-tdv="done">Done</button></div>
+    </div>
+    <div class="tdo-prog"><span id="tdCount">0 of 0 done</span><div class="bar"><i id="tdBar" style="width:0"></i></div></div>
+    <div class="tdo-list" id="tdList"></div>
+  </div>
   <div class="panel quote" id="quoteCard"><span class="eyebrow">Quote of the day</span><blockquote id="quoteText">…</blockquote><cite id="quoteBy"></cite></div>
   <div class="brief-grid sec" style="margin-top:16px">
     <div class="panel wx" id="wxCard">
@@ -2646,6 +2688,77 @@ function renderBrief(){
   $("#dailyDate").textContent = "Daily · "+MON[now.getMonth()]+" "+now.getDate();
 }
 
+/* ---------- to-do list (data/todos.json; checkmarks are saved in this browser) ---------- */
+let TDL = null, tdView = store.get("bf-todoview", "next");
+const tdDone = new Set(store.get("bf-tododone", []));
+const tdAt = (d, hm) => { const [h,m] = (hm||"00:00").split(":").map(Number); const x = parseD(d); x.setHours(h, m, 0, 0); return x; };
+const tdClock = hm => { let [h,m] = hm.split(":").map(Number); const ap = h >= 12 ? "PM" : "AM"; h = h % 12 || 12; return h+":"+String(m).padStart(2,"0")+" "+ap; };
+const tdRange = s => { if (s.label) return s.label; if (!s.end) return tdClock(s.start);
+  const a = tdClock(s.start), b = tdClock(s.end); return a.slice(-2) === b.slice(-2) ? a.slice(0,-3)+"–"+b : a+"–"+b; };
+function tdDayName(d, now){
+  const t = key(now), tm = new Date(now); tm.setDate(tm.getDate()+1);
+  if (d === t) return "Today"; if (d === key(tm)) return "Tomorrow";
+  const x = parseD(d); return DOW[x.getDay()]+", "+MON[x.getMonth()]+" "+x.getDate();
+}
+function tdSessions(it, now){
+  return it.sessions.map(s => { const a = tdAt(s.date, s.start), b = tdAt(s.date, s.end || s.start); if (!s.end) b.setHours(b.getHours()+1);
+    return {...s, a, b, st: now > b ? "past" : now >= a ? "live" : (a - now < 864e5 ? "soon" : "")}; }).sort((x,y) => x.a - y.a);
+}
+function tdWhen(next, now){
+  if (!next) return "All planned times have passed";
+  const day = tdDayName(next.date, now), r = tdRange(next);
+  if (next.st === "live") return next.label && next.label !== "Tonight" && next.label !== "All day" ? "Happening now: "+next.label.charAt(0).toLowerCase()+next.label.slice(1) : next.label ? "Happening now" : "Happening now, until "+tdClock(next.end || next.start);
+  if (day === "Today" && next.label === "Tonight") return "Next up: tonight";
+  return "Next up: "+day+(next.label === "All day" ? " (all day)" : ", "+(next.label ? next.label.charAt(0).toLowerCase()+next.label.slice(1) : r));
+}
+function renderTdl(){
+  const card = $("#tdCard"); if (!card) return;
+  if (!TDL || !(TDL.items||[]).length){ card.hidden = true; return; }
+  card.hidden = false;
+  const now = new Date(), items = TDL.items.map(it => { const ss = tdSessions(it, now); return {...it, ss, next: ss.find(s => s.st !== "past"), done: tdDone.has(it.id)}; });
+  const nDone = items.filter(i => i.done).length;
+  $("#tdCount").textContent = nDone+" of "+items.length+" done";
+  $("#tdBar").style.width = Math.round(100*nDone/items.length)+"%";
+  document.querySelectorAll("[data-tdv]").forEach(b => b.classList.toggle("on", b.dataset.tdv === tdView));
+  const ck = '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  const card1 = it => {
+    const live = it.next && it.next.st === "live", late = !it.done && !it.next;
+    return '<div class="td'+(it.done ? " done" : live ? " now" : late ? " late" : "")+'" data-td="'+esc(it.id)+'">'+
+      '<button type="button" class="td-ck" aria-pressed="'+it.done+'" aria-label="'+(it.done ? "Mark not done: " : "Mark done: ")+esc(it.title)+'">'+ck+'</button>'+
+      '<div><div class="td-t">'+esc(it.title)+'</div><div class="td-ss">'+it.ss.map(s => '<span class="chip'+(s.st ? " "+s.st : "")+'">'+esc(tdDayName(s.date, now))+' · '+esc(tdRange(s))+'</span>').join("")+'</div></div>'+
+      '<span class="td-tag">'+esc(it.tag||"")+'</span>'+
+      (it.done ? '' : '<div class="td-when">'+esc(tdWhen(it.next, now))+'</div>')+'</div>';
+  };
+  let html = "";
+  if (tdView === "done"){
+    const d = items.filter(i => i.done);
+    html = d.length ? d.map(card1).join("") : '<div class="empty-state" style="padding:22px">Nothing checked off yet. Tap a circle when you finish something.</div>';
+  } else if (tdView === "day"){
+    const days = {};
+    items.forEach(it => it.ss.forEach(s => (days[s.date] = days[s.date] || []).push({it, s})));
+    html = Object.keys(days).sort().filter(d => d >= key(now) || days[d].some(x => !x.it.done)).map(d => {
+      const name = tdDayName(d, now);
+      return '<div class="td-day">'+(name === "Today" ? "<b>Today</b>" : esc(name))+'</div>'+days[d].sort((x,y) => x.s.a - y.s.a).map(x =>
+        '<div class="td-row'+(x.it.done || x.s.st === "past" ? " done" : "")+'" data-cat="due"><span class="dot"'+(x.s.st === "live" ? ' style="background:var(--accent)"' : '')+'></span><span>'+esc(x.it.title)+'</span><span>'+esc(tdRange(x.s))+'</span></div>').join("");
+    }).join("") || '<div class="empty-state" style="padding:22px">Nothing left on the calendar.</div>';
+  } else {
+    const open = items.filter(i => !i.done).sort((a,b) => (a.next ? a.next.a : -Infinity) - (b.next ? b.next.a : -Infinity));
+    html = open.length ? open.map(card1).join("") : '<div class="empty-state" style="padding:22px">All done. Nice work.</div>';
+  }
+  $("#tdList").innerHTML = html;
+}
+function loadTdl(){
+  try { fetch("data/todos.json", {cache:"no-store"}).then(r => r.ok ? r.json() : null).then(j => { if (j) { TDL = j; renderTdl(); } }).catch(() => {}); } catch(e){}
+}
+document.addEventListener("click", e => {
+  const v = e.target.closest("[data-tdv]"); if (v){ tdView = v.dataset.tdv; store.set("bf-todoview", tdView); renderTdl(); return; }
+  const b = e.target.closest(".td-ck"); if (!b) return;
+  const id = b.closest("[data-td]").dataset.td, it = TDL.items.find(i => i.id === id);
+  if (tdDone.has(id)) { tdDone.delete(id); toast("Moved back to your list"); } else { tdDone.add(id); toast("Done: "+it.title); }
+  store.set("bf-tododone", [...tdDone]); renderTdl();
+});
+setInterval(renderTdl, 60000);
+
 /* ---------- countdowns ---------- */
 const TRIPS = [
   {id:"pr", cls:"pr", eyebrow:"Puerto Rico · with the boys", title:"Puerto Rico trip", start:new Date(2026,11,27,6,0,0), end:new Date(2027,0,2,23,59,0), sub:"Dec 27 – Jan 2", tag:"Trip"},
@@ -3556,7 +3669,7 @@ if (matchMedia("(hover:hover)").matches){
 })();
 
 renderCountdowns(); renderSong(); setFbTab(store.get("bf-fbtab", "bills"));
-renderHome(); renderSched(); renderResume(); renderCourses(); renderProjects(); renderDaily(); loadDaily(); loadPrepManifest(); loadLinksManifest(); loadWeather(); loadBills(); renderFinance(); renderQuote(); bootAuth().then(route, route);
+renderHome(); renderSched(); renderResume(); renderCourses(); renderProjects(); renderDaily(); loadDaily(); loadTdl(); loadPrepManifest(); loadLinksManifest(); loadWeather(); loadBills(); renderFinance(); renderQuote(); bootAuth().then(route, route);
 addEventListener("resize", () => GG.draw());
 setInterval(tick, 1000);
 })();
