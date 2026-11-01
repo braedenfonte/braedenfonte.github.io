@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-31T07:05:00-04:00",
+ "updated": "2026-11-01T07:00:00-05:00",
  "team": "Buffalo Bills",
  "record": {
   "w": 5,
@@ -87,7 +87,7 @@
  "lastGame": {
   "title": "Bills 33, Raiders 30",
   "stats": [
-   "Josh Allen: 255 pass yds, 2 TD — his 258th career TD pass ties Jim Kelly's Bills record",
+   "Josh Allen: 255 pass yds, 2 TD \u2014 his 258th career TD pass ties Jim Kelly's Bills record",
    "James Cook: 22 carries, 95 yds, TD + 3 catches for 58 yds",
    "TD catches for Keon Coleman (shovel pass) and Khalil Shakir (9-yd screen)",
    "Dorian Williams: first career interception, off Kirk Cousins",
@@ -96,16 +96,16 @@
  },
  "news": [
   {
-   "h": "Lamar Jackson trending toward a return",
-   "b": "Ravens coach Jesse Minter said Monday that Jackson (high ankle sprain, three straight games missed) is in a \"decent spot\" to play Sunday in Buffalo, with more known after Wednesday's practice."
+   "h": "Bills list Moore, Brown, Alford as questionable",
+   "b": "ESPN reported Oct. 30 that WR DJ Moore (shoulder), RT Spencer Brown (back) and nickel Dee Alford (ankle) were questionable against the Ravens."
   },
   {
-   "h": "Post-bye streak on the line",
-   "b": "Buffalo has won 11 straight games coming off its bye, a run dating to 2015, and Josh Allen has never lost after a bye. Sunday is Joe Brady's first post-bye game as head coach."
+   "h": "Ed Oliver back at full practice",
+   "b": "Defensive tackle Ed Oliver fully participated in Thursday's practice (Oct. 29), setting up a potential return against Baltimore."
   },
   {
-   "h": "Franklin wins appeal, cleared for Ravens",
-   "b": "The NFL reduced Sam Franklin Jr.'s one-game spitting suspension to a $14,926 fine after hearing officer James Thrash ruled on his appeal on Oct. 23. He is eligible to face Baltimore on Nov. 1."
+   "h": "Defense under scrutiny",
+   "b": "An ESPN piece on Oct. 31 noted Buffalo's defense ranks among the worst in several statistical areas, including third-most points allowed."
   },
   {
    "h": "Gardner-Johnson still out vs. Baltimore",
@@ -191,5 +191,5 @@
    "note": "Date and time may flex"
   }
  ],
- "source": "ESPN standings and DraftKings odds (Oct 31); record, results and news carried over from Oct 30 (no games since the bye)."
+ "source": "ESPN (standings, odds, team news), Nov 1, 2026. Ravens game kicks off 1:00 PM ET today."
 }

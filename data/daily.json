@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-31T07:05:00-04:00",
+ "updated": "2026-11-01T07:00:00-05:00",
  "flights": [
   {
    "from": "JFK",
@@ -453,272 +453,288 @@
   }
  ],
  "football": {
-  "label": "Week 8 recap",
+  "label": "Week 9 recap",
   "results": [
    {
-    "away": "BYU",
-    "home": "UCF",
-    "as": 31,
-    "hs": 39,
-    "blurb": "UCF beat No. 2 BYU in double overtime for the first win over an AP top-five team in program history.",
+    "away": "Miami",
+    "home": "North Carolina",
+    "as": 38,
+    "hs": 35,
+    "blurb": "No. 1 Miami survived a 4-touchdown game from UNC's Billy Edwards Jr. to stay unbeaten.",
     "stats": [
-     "Keyone Jenkins: 2-yd TD pass to Grayson Brousseau in 2OT",
-     "UCF's 47-yd FG try was blocked at the end of regulation",
-     "BYU's last 4th-down pass from the UCF 4 fell incomplete"
-    ]
+     "Darian Mensah: 22/29, 274 yds, 3 TD",
+     "Billy Edwards Jr.: 28/34, 341 yds, 4 TD for UNC",
+     "Malachi Toney: 7 catches, 75 yds, 2 TD"
+    ],
+    "awayRank": 1,
+    "homeRank": null
    },
    {
-    "away": "Indiana",
-    "home": "Michigan",
-    "as": 13,
-    "hs": 6,
-    "blurb": "No. 6 Indiana won a defensive slugfest in Ann Arbor on Josh Hoover's overtime TD run.",
+    "away": "Ohio State",
+    "home": "USC",
+    "as": 18,
+    "hs": 30,
+    "blurb": "Unranked USC upset No. 2 Ohio State in the Coliseum.",
     "stats": [
-     "Hoover: 4-yd TD run in OT",
-     "Nico Radicic: FGs of 22 and 34 yds",
-     "Tommy Carr: 20/32, 167 yds, INT for Michigan"
-    ]
+     "Jayden Maiava: 15/22, 222 yds, TD",
+     "Trent Mosley: 5 catches, 101 yds, TD",
+     "Bo Jackson: 21 carries, 121 yds for Ohio State"
+    ],
+    "awayRank": 2
    },
    {
-    "away": "Ole Miss",
-    "home": "Texas",
-    "as": 27,
-    "hs": 34,
-    "blurb": "No. 19 Texas blew a 24-3 halftime lead but held off No. 7 Ole Miss with an end-zone interception on the last play.",
-    "stats": [
-     "Arch Manning: 212 pass yds, 3 total TD, 2 INT",
-     "Raleek Brown: 157 rush yds",
-     "Trinidad Chambliss: 250 pass yds, 2 TD, 3 INT"
-    ]
-   },
-   {
-    "away": "Tennessee",
-    "home": "South Carolina",
-    "as": 24,
+    "away": "Florida",
+    "home": "Georgia",
+    "as": 8,
     "hs": 27,
-    "blurb": "Malik Orsan's 48-yard field goal at the gun beat No. 11 Tennessee after a late strip-sack.",
+    "blurb": "No. 3 Georgia held No. 17 Florida to 8 points.",
     "stats": [
-     "LaNorris Sellers: 210 pass yds, 96 rush yds, 3 total TD",
-     "DeSean Bishop: 130 rush yds, TD"
-    ]
+     "Gunner Stockton: 13/23, 101 yds",
+     "Nate Frazier: 12 carries, 67 yds, TD",
+     "Tramell Jones Jr.: 18/25, 172 yds, INT for Florida"
+    ],
+    "awayRank": 17,
+    "homeRank": 3
    },
    {
-    "away": "Texas A&M",
-    "home": "Alabama",
-    "as": 20,
-    "hs": 31,
-    "blurb": "No. 13 Alabama snapped a two-game skid behind Keelon Russell and an opening pick-six.",
-    "stats": [
-     "Russell: 19/30, 311 yds, 3 TD",
-     "Rico Scott: 6 catches, 156 yds",
-     "Dijon Lee Jr.: 39-yd INT return TD"
-    ]
-   },
-   {
-    "away": "North Texas",
-    "home": "Navy",
+    "away": "Oklahoma State",
+    "home": "Iowa State",
     "as": 49,
-    "hs": 39,
-    "blurb": "North Texas scored on offense, defense and special teams to win in Annapolis.",
-    "stats": [
-     "Jackson Gutierrez: 3 rush TD for Navy",
-     "Jahiem White: 174 rush yds, 2 TD",
-     "Justin Stevenson: 8 catches, 209 yds, 2 TD"
-    ]
+    "hs": 51,
+    "blurb": "No. 24 Oklahoma State lost a 100-point shootout at Iowa State.",
+    "stats": [],
+    "awayRank": 24
+   },
+   {
+    "away": "Texas State",
+    "home": "Boise State",
+    "as": 45,
+    "hs": 46,
+    "blurb": "No. 20 Boise State edged Texas State by a point.",
+    "stats": [],
+    "homeRank": 20
    },
    {
     "away": "Army",
-    "home": "Tulsa",
-    "as": 38,
-    "hs": 35,
-    "blurb": "Dawson Jones hit a 50-yard field goal on the final play to win it on Friday night in Tulsa.",
+    "home": "Memphis",
+    "as": 22,
+    "hs": 49,
+    "blurb": "Memphis pulled away from Army at home.",
     "stats": [
-     "Cale Hellums: 30 rushes, 121 yds, 3 TD",
-     "Godspower Nwawuihe: 12 rushes, 135 yds, TD",
-     "Army improves to 5-2, 4-1 in the American"
+     "Marcus Stokes: 29/35, 371 yds, 4 TD for Memphis",
+     "Jaylin Carter: 23 carries, 96 yds, 2 TD"
     ]
    },
    {
-    "away": "Air Force",
-    "home": "Wyoming",
-    "as": 14,
-    "hs": 28,
-    "blurb": "Wyoming beat Air Force in Laramie on Friday night.",
+    "away": "Notre Dame",
+    "home": "Navy",
+    "as": 35,
+    "hs": 13,
+    "blurb": "No. 5 Notre Dame beat Navy 35-13.",
     "stats": [
-     "Tyler Hughes: 146 rush yds, 3 total TD",
-     "Evan Medders: 115 rush yds, TD for AFA"
+     "CJ Carr: 19/29, 210 yds, 2 TD",
+     "Nolan James Jr.: 9 carries, 107 yds, 2 TD",
+     "Jackson Gutierrez: 28 carries, 110 yds, TD for Navy"
+    ],
+    "awayRank": 5
+   },
+   {
+    "away": "UConn",
+    "home": "Air Force",
+    "as": 26,
+    "hs": 35,
+    "blurb": "Air Force beat UConn behind Kemper Hodges' four rushing touchdowns.",
+    "stats": [
+     "Kemper Hodges: 35 carries, 200 yds, 4 TD"
     ]
    }
   ],
   "upcoming": [
    {
-    "away": "Notre Dame",
-    "home": "Navy",
-    "kick": "2026-10-31T16:00:00Z",
-    "note": "Neutral site in Foxborough (ABC)",
-    "awayRank": 5
+    "away": "Virginia Tech",
+    "home": "SMU",
+    "kick": "2026-11-07T00:00:00Z",
+    "note": "ESPN \u00b7 Gerald J. Ford Stadium",
+    "homeRank": 19
    },
    {
-    "away": "Arizona",
-    "home": "Texas Tech",
-    "kick": "2026-10-31T16:00:00Z",
-    "note": "ESPN",
-    "awayRank": 22,
-    "homeRank": 13
+    "away": "TCU",
+    "home": "Arizona",
+    "kick": "2026-11-07T03:15:00Z",
+    "note": "ESPN \u00b7 Casino Del Sol Stadium",
+    "homeRank": 22
    },
    {
-    "away": "SMU",
-    "home": "Syracuse",
-    "kick": "2026-10-31T16:00:00Z",
-    "note": "ESPN2",
-    "awayRank": 19
+    "away": "BYU",
+    "home": "Utah",
+    "kick": "2026-11-07T17:00:00Z",
+    "note": "ABC \u00b7 Rice-Eccles Stadium",
+    "awayRank": 8,
+    "homeRank": 6
    },
    {
-    "away": "Wisconsin",
-    "home": "Iowa",
-    "kick": "2026-10-31T16:00:00Z",
-    "note": "FOX",
-    "awayRank": 25
-   },
-   {
-    "away": "Auburn",
-    "home": "Ole Miss",
-    "kick": "2026-10-31T16:45:00Z",
-    "note": "SEC Network",
-    "homeRank": 12
-   },
-   {
-    "away": "Florida",
-    "home": "Georgia",
-    "kick": "2026-10-31T19:30:00Z",
-    "note": "Neutral site in Atlanta (ABC)",
-    "awayRank": 17,
-    "homeRank": 3
-   },
-   {
-    "away": "Minnesota",
-    "home": "Indiana",
-    "kick": "2026-10-31T19:30:00Z",
-    "note": "CBS",
-    "homeRank": 4
-   },
-   {
-    "away": "Northwestern",
-    "home": "Oregon",
-    "kick": "2026-10-31T19:30:00Z",
-    "note": "Peacock",
-    "awayRank": 20
-   },
-   {
-    "away": "Arizona State",
-    "home": "BYU",
-    "kick": "2026-10-31T19:30:00Z",
-    "note": "FOX",
-    "homeRank": 8
-   },
-   {
-    "away": "Utah",
-    "home": "Cincinnati",
-    "kick": "2026-10-31T19:45:00Z",
-    "note": "ESPN",
-    "awayRank": 6
-   },
-   {
-    "away": "Virginia",
-    "home": "Wake Forest",
-    "kick": "2026-10-31T19:45:00Z",
-    "note": "ESPN2",
-    "homeRank": 14
-   },
-   {
-    "away": "Nevada",
-    "home": "UCLA",
-    "kick": "2026-10-31T20:15:00Z",
-    "note": "Big Ten Network",
-    "homeRank": 7
+    "away": "Texas",
+    "home": "Missouri",
+    "kick": "2026-11-07T17:00:00Z",
+    "note": "ESPN \u00b7 Memorial Stadium",
+    "awayRank": 11,
+    "homeRank": 23
    },
    {
     "away": "Oklahoma State",
-    "home": "Iowa State",
-    "kick": "2026-10-31T23:00:00Z",
-    "note": "FS1",
+    "home": "Kansas State",
+    "kick": "2026-11-07T17:00:00Z",
+    "note": "TNT / HBO Max \u00b7 Bill Snyder Family Stadium",
     "awayRank": 24
    },
    {
-    "away": "Mississippi State",
-    "home": "Texas",
-    "kick": "2026-10-31T23:30:00Z",
-    "note": "ESPN",
-    "homeRank": 11
+    "away": "UCLA",
+    "home": "Minnesota",
+    "kick": "2026-11-07T17:00:00Z",
+    "note": "Kickoff time TBA \u00b7 Huntington Bank Stadium",
+    "awayRank": 7
+   },
+   {
+    "away": "Cincinnati",
+    "home": "Houston",
+    "kick": "2026-11-07T17:00:00Z",
+    "note": "Kickoff time TBA \u00b7 TDECU Stadium",
+    "homeRank": 18
+   },
+   {
+    "away": "Iowa",
+    "home": "Northwestern",
+    "kick": "2026-11-07T17:00:00Z",
+    "note": "Kickoff time TBA \u00b7 Ryan Field",
+    "homeRank": 20
+   },
+   {
+    "away": "Rutgers",
+    "home": "Wisconsin",
+    "kick": "2026-11-07T17:30:00Z",
+    "note": "BTN \u00b7 Camp Randall Stadium",
+    "homeRank": 25
+   },
+   {
+    "away": "Oregon",
+    "home": "Ohio State",
+    "kick": "2026-11-07T20:30:00Z",
+    "note": "CBS \u00b7 Ohio Stadium",
+    "homeRank": 2
+   },
+   {
+    "away": "Alabama",
+    "home": "LSU",
+    "kick": "2026-11-07T20:30:00Z",
+    "note": "ABC \u00b7 Tiger Stadium",
+    "awayRank": 10,
+    "homeRank": 15
+   },
+   {
+    "away": "Merrimack",
+    "home": "Wake Forest",
+    "kick": "2026-11-07T20:30:00Z",
+    "note": "ACC Network \u00b7 Allegacy Federal Credit Union Stadium",
+    "homeRank": 14
+   },
+   {
+    "away": "Temple",
+    "home": "Navy",
+    "kick": "2026-11-07T20:30:00Z",
+    "note": "CBSSN \u00b7 Navy-Marine Corps Memorial Stadium"
+   },
+   {
+    "away": "Boise State",
+    "home": "Colorado State",
+    "kick": "2026-11-07T23:00:00Z",
+    "note": "USA Network \u00b7 Canvas Stadium",
+    "awayRank": 20
+   },
+   {
+    "away": "Kentucky",
+    "home": "Tennessee",
+    "kick": "2026-11-07T23:15:00Z",
+    "note": "ESPN \u00b7 Neyland Stadium",
+    "awayRank": 9,
+    "homeRank": 16
    },
    {
     "away": "Miami",
-    "home": "North Carolina",
-    "kick": "2026-10-31T23:30:00Z",
-    "note": "Saturday night",
-    "awayRank": 1
+    "home": "Notre Dame",
+    "kick": "2026-11-08T00:30:00Z",
+    "note": "NBC \u00b7 Notre Dame Stadium",
+    "awayRank": 1,
+    "homeRank": 5
    },
    {
-    "away": "Ohio State",
-    "home": "USC",
-    "kick": "2026-10-31T23:30:00Z",
-    "note": "Halloween night in LA (NBC)",
-    "awayRank": 2
+    "away": "Georgia",
+    "home": "Ole Miss",
+    "kick": "2026-11-08T00:30:00Z",
+    "note": "ABC \u00b7 Vaught-Hemingway Stadium",
+    "awayRank": 3,
+    "homeRank": 12
    },
    {
-    "away": "Army",
-    "home": "Memphis",
-    "kick": "2026-11-01T00:00:00Z",
-    "note": "Away, Saturday night (ESPNU)",
+    "away": "Air Force",
+    "home": "Army",
+    "kick": "2026-11-08T00:30:00Z",
+    "note": "CBS \u00b7 Home at Michie Stadium",
     "army": true
    },
    {
-    "away": "Texas State",
-    "home": "Boise State",
-    "kick": "2026-11-01T02:00:00Z",
-    "note": "The CW",
-    "homeRank": 20
+    "away": "Oklahoma",
+    "home": "Florida",
+    "kick": "2026-11-08T00:45:00Z",
+    "note": "SEC Network \u00b7 Ben Hill Griffin Stadium",
+    "homeRank": 17
+   },
+   {
+    "away": "West Virginia",
+    "home": "Texas Tech",
+    "kick": "2026-11-08T02:30:00Z",
+    "note": "ESPN \u00b7 Galaxy Stadium",
+    "homeRank": 13
    }
   ],
-  "poll": "AP Top 25, Week 9 (Oct 25)"
+  "poll": "AP Top 25, Week 9 (Oct 25); Week 10 poll not yet released"
  },
  "location": {
-  "name": "Giant's Causeway",
-  "wiki": "Giant's_Causeway",
-  "country": "United Kingdom (Northern Ireland)",
-  "region": "County Antrim, north coast of Northern Ireland",
-  "lat": 55.2408,
-  "lon": -6.5117,
-  "tagline": "About 40,000 interlocking basalt columns left by an ancient volcanic eruption.",
-  "intro": "The Giant's Causeway sits on the north coast of County Antrim, about five kilometres northeast of Bushmills. Its tightly packed basalt columns formed 50 to 60 million years ago in a volcanic fissure eruption. Irish legend says the giant Finn McCool built it to reach a rival in Scotland.",
+  "name": "Ngorongoro Crater",
+  "wiki": "Ngorongoro_Crater",
+  "country": "Tanzania",
+  "region": "Ngorongoro Conservation Area, Arusha Region, northern Tanzania",
+  "lat": -3.21,
+  "lon": 35.46,
+  "tagline": "A collapsed volcano whose floor is a self-contained wildlife park.",
+  "intro": "Ngorongoro Crater is a large volcanic caldera inside the Ngorongoro Conservation Area, about 180 km west of Arusha. Its floor sits roughly 1,800 m above sea level and shelters about 25,000 large animals. The wider conservation area is a UNESCO World Heritage Site and includes Olduvai Gorge.",
   "stats": [
    {
-    "label": "Basalt columns",
-    "value": "About 40,000"
+    "label": "Floor area",
+    "value": "260 km\u00b2"
    },
    {
-    "label": "Age",
-    "value": "50–60 million years"
+    "label": "Depth",
+    "value": "610 m"
    },
    {
-    "label": "Tallest columns",
-    "value": "About 12 m"
+    "label": "Floor elevation",
+    "value": "1,800 m"
    },
    {
     "label": "UNESCO listing",
-    "value": "1986"
+    "value": "1979"
    }
   ],
   "facts": [
-   "It is made of roughly 40,000 interlocking basalt columns, formed in the Paleocene by a volcanic fissure eruption.",
-   "The tallest columns stand about 12 meters (39 ft) high.",
-   "In legend, the Irish giant Fionn mac Cumhaill (Finn McCool) built it to cross to Scotland and fight the giant Benandonner; in one version his wife Sadhbh disguises him as a baby and Benandonner flees, tearing up the causeway behind him.",
-   "It became a UNESCO World Heritage Site in 1986, and in 2022 the IUGS listed its rocks among its first 100 geological heritage sites.",
-   "It drew nearly one million visitors in 2019, and much of the site is owned and managed by the National Trust."
+   "The crater formed when a large volcano erupted and collapsed two to three million years ago.",
+   "Its floor covers about 260 square kilometres and the walls drop 610 metres.",
+   "Roughly 25,000 large animals, mostly ungulates, live in the crater.",
+   "Black rhinos fell from about 108 in 1964\u201366 to 13 in 1993; there were 55 as of 2018.",
+   "The same protected area holds Olduvai Gorge, one of the world's most important paleoanthropological sites."
   ],
-  "bestTime": "The coast is open year-round; go early or late in the day to avoid the largest crowds and check conditions before you walk the shore.",
-  "gettingThere": "From New York, fly to Belfast (usually with a connection), then continue to the coast near Bushmills by car or tour.",
-  "tip": "Wear shoes with good grip, since the columns can be slick when wet."
+  "bestTime": "Not verified; check current Tanzania park guidance before booking.",
+  "gettingThere": "From New York, fly to Kilimanjaro International (JRO) or Dar es Salaam with a connection, then drive about 180 km west from Arusha.",
+  "tip": "Entry to the crater floor is regulated by the Ngorongoro Conservation Area Authority, so book a licensed safari operator."
  },
  "flightsNote": "Real fares from Kayak searches run Oct 29 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
@@ -734,13 +750,13 @@
   "movers": [
    {
     "sym": "INTC",
-    "move": "−28.6%",
+    "move": "\u221228.6%",
     "dir": -1,
-    "why": "Intel forecast weaker fourth-quarter revenue of $15.0B–$16.0B and cited a PC slowdown."
+    "why": "Intel forecast weaker fourth-quarter revenue of $15.0B\u2013$16.0B and cited a PC slowdown."
    },
    {
     "sym": "RDDT",
-    "move": "−29.2%",
+    "move": "\u221229.2%",
     "dir": -1,
     "why": "Reddit gave weak fourth-quarter revenue guidance and warned of fewer Google search referrals."
    },
@@ -758,7 +774,7 @@
    },
    {
     "sym": "AMZN",
-    "move": "−1.4%",
+    "move": "\u22121.4%",
     "dir": -1,
     "why": "Amazon's third-quarter revenue ($201.9B) and EPS ($1.89) came in below estimates."
    }
@@ -767,46 +783,53 @@
    {
     "game": "Baltimore Ravens @ Buffalo Bills",
     "kick": "2026-11-01T18:00:00Z",
-    "spread": "BUF −3",
+    "spread": "BUF \u22123",
     "total": "54.5",
-    "ml": "BUF −170 · BAL +142",
+    "ml": "BUF \u2212166 \u00b7 BAL +140",
     "bills": true
    },
    {
-    "game": "Ohio State @ USC",
-    "kick": "2026-10-31T23:30:00Z",
-    "spread": "OSU −6.5",
-    "total": "50.5",
-    "ml": "OSU −245 · USC +200"
+    "game": "Miami @ Notre Dame",
+    "kick": "2026-11-08T00:30:00Z",
+    "spread": "ND \u22123.5",
+    "total": "55.5",
+    "ml": "ND \u2212170 \u00b7 MIA +142"
+   },
+   {
+    "game": "Georgia @ Ole Miss",
+    "kick": "2026-11-08T00:30:00Z",
+    "spread": "UGA \u22123",
+    "total": "56.5",
+    "ml": "UGA \u2212135 \u00b7 MISS +114"
    }
   ],
   "probs": [
    {
-    "game": "Nevada @ UCLA",
-    "fav": "UCLA",
-    "p": 94
+    "game": "Boise State @ Colorado State",
+    "fav": "Boise State",
+    "p": 93
    },
    {
-    "game": "New Mexico @ San José State",
-    "fav": "New Mexico",
-    "p": 91
+    "game": "UL Monroe @ Arkansas State",
+    "fav": "Arkansas State",
+    "p": 92
    },
    {
-    "game": "Mississippi State @ Texas",
-    "fav": "Texas",
+    "game": "Rice @ North Texas",
+    "fav": "North Texas",
     "p": 90
    },
    {
-    "game": "Miami @ North Carolina",
-    "fav": "Miami",
-    "p": 90
+    "game": "West Virginia @ Texas Tech",
+    "fav": "Texas Tech",
+    "p": 89
    },
    {
-    "game": "Arizona State @ BYU",
-    "fav": "BYU",
-    "p": 90
+    "game": "Liberty @ New Mexico State",
+    "fav": "Liberty",
+    "p": 89
    }
   ],
-  "sources": "Closes: AP via CNN/WTOP figures and Motley Fool, Wall Street Republic and StockTitan recaps (Oct 30). Lines: DraftKings via ESPN (Oct 31). Win odds: ESPN Matchup Predictor (Oct 31)."
+  "sources": "Odds: DraftKings via ESPN (Nov 1). Win probabilities: ESPN matchup predictor (FPI). Market recap unchanged from Fri Oct 30 close."
  }
 }
