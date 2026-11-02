@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-02T06:45:00-05:00",
+ "updated": "2026-11-02T08:07:18-05:00",
  "team": "Buffalo Bills",
  "record": {
   "w": 6,
@@ -72,7 +72,7 @@
  "afcEast": [
   {
    "team": "Buffalo Bills",
-   "w": 5,
+   "w": 6,
    "l": 1,
    "me": true
   },
