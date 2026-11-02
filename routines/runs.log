@@ -28,3 +28,5 @@
 2026-11-02T08:20-05:00 | morning-update | FAIL | rerun: bills AFC East Bills row fixed to 6-1; football/markets/place already current (Week 10 AP poll not out yet) | study decks not built (today's MA376 L27 not on Canvas, SS388/EM481 only objectives/lab, no real notes); finance skipped (Era plan hides accounts); flights + SJU trip skipped (laptop off)
 2026-11-02T17:55-05:00 | nightly-prep | FAIL | nothing built (couldn't tell if 2026-11-03 is Day 1 or Day 2) | Canvas file host inst-fs-pdx-prod.inscloudgate.net returns 406 for both calendars (MA376 xlsx, EM481 pdf); fix: set Routines environment network access to Full or allow inscloudgate.net
 2026-11-02T18:45-05:00 | health-check | RETRY nightly-prep | nightly-prep FAIL: couldn't tell Day 1/2 (Canvas file host 406) |
+2026-11-02T18:46-05:00 | health-check | RETRY nightly-prep | nightly-prep FAIL: nothing built (Canvas file host 406) |
+2026-11-02T18:48-05:00 | health-check | OK | Checked nightly-prep: FAIL at 17:55; retry already fired at 18:45 by another run, mine was a duplicate fire | 
