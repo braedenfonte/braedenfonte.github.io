@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-01T07:00:00-05:00",
+ "updated": "2026-11-02T07:00:00-05:00",
  "flights": [
   {
    "from": "JFK",
@@ -554,21 +554,21 @@
     "away": "Virginia Tech",
     "home": "SMU",
     "kick": "2026-11-07T00:00:00Z",
-    "note": "ESPN \u00b7 Gerald J. Ford Stadium",
+    "note": "ESPN · Gerald J. Ford Stadium",
     "homeRank": 19
    },
    {
     "away": "TCU",
     "home": "Arizona",
     "kick": "2026-11-07T03:15:00Z",
-    "note": "ESPN \u00b7 Casino Del Sol Stadium",
+    "note": "ESPN · Casino Del Sol Stadium",
     "homeRank": 22
    },
    {
     "away": "BYU",
     "home": "Utah",
     "kick": "2026-11-07T17:00:00Z",
-    "note": "ABC \u00b7 Rice-Eccles Stadium",
+    "note": "ABC · Rice-Eccles Stadium",
     "awayRank": 8,
     "homeRank": 6
    },
@@ -576,7 +576,7 @@
     "away": "Texas",
     "home": "Missouri",
     "kick": "2026-11-07T17:00:00Z",
-    "note": "ESPN \u00b7 Memorial Stadium",
+    "note": "ESPN · Memorial Stadium",
     "awayRank": 11,
     "homeRank": 23
    },
@@ -584,49 +584,49 @@
     "away": "Oklahoma State",
     "home": "Kansas State",
     "kick": "2026-11-07T17:00:00Z",
-    "note": "TNT / HBO Max \u00b7 Bill Snyder Family Stadium",
+    "note": "TNT / HBO Max · Bill Snyder Family Stadium",
     "awayRank": 24
    },
    {
     "away": "UCLA",
     "home": "Minnesota",
     "kick": "2026-11-07T17:00:00Z",
-    "note": "Kickoff time TBA \u00b7 Huntington Bank Stadium",
+    "note": "Kickoff time TBA · Huntington Bank Stadium",
     "awayRank": 7
    },
    {
     "away": "Cincinnati",
     "home": "Houston",
     "kick": "2026-11-07T17:00:00Z",
-    "note": "Kickoff time TBA \u00b7 TDECU Stadium",
+    "note": "Kickoff time TBA · TDECU Stadium",
     "homeRank": 18
    },
    {
     "away": "Iowa",
     "home": "Northwestern",
     "kick": "2026-11-07T17:00:00Z",
-    "note": "Kickoff time TBA \u00b7 Ryan Field",
+    "note": "Kickoff time TBA · Ryan Field",
     "homeRank": 20
    },
    {
     "away": "Rutgers",
     "home": "Wisconsin",
     "kick": "2026-11-07T17:30:00Z",
-    "note": "BTN \u00b7 Camp Randall Stadium",
+    "note": "BTN · Camp Randall Stadium",
     "homeRank": 25
    },
    {
     "away": "Oregon",
     "home": "Ohio State",
     "kick": "2026-11-07T20:30:00Z",
-    "note": "CBS \u00b7 Ohio Stadium",
+    "note": "CBS · Ohio Stadium",
     "homeRank": 2
    },
    {
     "away": "Alabama",
     "home": "LSU",
     "kick": "2026-11-07T20:30:00Z",
-    "note": "ABC \u00b7 Tiger Stadium",
+    "note": "ABC · Tiger Stadium",
     "awayRank": 10,
     "homeRank": 15
    },
@@ -634,27 +634,27 @@
     "away": "Merrimack",
     "home": "Wake Forest",
     "kick": "2026-11-07T20:30:00Z",
-    "note": "ACC Network \u00b7 Allegacy Federal Credit Union Stadium",
+    "note": "ACC Network · Allegacy Federal Credit Union Stadium",
     "homeRank": 14
    },
    {
     "away": "Temple",
     "home": "Navy",
     "kick": "2026-11-07T20:30:00Z",
-    "note": "CBSSN \u00b7 Navy-Marine Corps Memorial Stadium"
+    "note": "CBSSN · Navy-Marine Corps Memorial Stadium"
    },
    {
     "away": "Boise State",
     "home": "Colorado State",
     "kick": "2026-11-07T23:00:00Z",
-    "note": "USA Network \u00b7 Canvas Stadium",
+    "note": "USA Network · Canvas Stadium",
     "awayRank": 20
    },
    {
     "away": "Kentucky",
     "home": "Tennessee",
     "kick": "2026-11-07T23:15:00Z",
-    "note": "ESPN \u00b7 Neyland Stadium",
+    "note": "ESPN · Neyland Stadium",
     "awayRank": 9,
     "homeRank": 16
    },
@@ -662,7 +662,7 @@
     "away": "Miami",
     "home": "Notre Dame",
     "kick": "2026-11-08T00:30:00Z",
-    "note": "NBC \u00b7 Notre Dame Stadium",
+    "note": "NBC · Notre Dame Stadium",
     "awayRank": 1,
     "homeRank": 5
    },
@@ -670,7 +670,7 @@
     "away": "Georgia",
     "home": "Ole Miss",
     "kick": "2026-11-08T00:30:00Z",
-    "note": "ABC \u00b7 Vaught-Hemingway Stadium",
+    "note": "ABC · Vaught-Hemingway Stadium",
     "awayRank": 3,
     "homeRank": 12
    },
@@ -678,63 +678,63 @@
     "away": "Air Force",
     "home": "Army",
     "kick": "2026-11-08T00:30:00Z",
-    "note": "CBS \u00b7 Home at Michie Stadium",
+    "note": "CBS · Home at Michie Stadium",
     "army": true
    },
    {
     "away": "Oklahoma",
     "home": "Florida",
     "kick": "2026-11-08T00:45:00Z",
-    "note": "SEC Network \u00b7 Ben Hill Griffin Stadium",
+    "note": "SEC Network · Ben Hill Griffin Stadium",
     "homeRank": 17
    },
    {
     "away": "West Virginia",
     "home": "Texas Tech",
     "kick": "2026-11-08T02:30:00Z",
-    "note": "ESPN \u00b7 Galaxy Stadium",
+    "note": "ESPN · Galaxy Stadium",
     "homeRank": 13
    }
   ],
   "poll": "AP Top 25, Week 9 (Oct 25); Week 10 poll not yet released"
  },
  "location": {
-  "name": "Ngorongoro Crater",
-  "wiki": "Ngorongoro_Crater",
-  "country": "Tanzania",
-  "region": "Ngorongoro Conservation Area, Arusha Region, northern Tanzania",
-  "lat": -3.21,
-  "lon": 35.46,
-  "tagline": "A collapsed volcano whose floor is a self-contained wildlife park.",
-  "intro": "Ngorongoro Crater is a large volcanic caldera inside the Ngorongoro Conservation Area, about 180 km west of Arusha. Its floor sits roughly 1,800 m above sea level and shelters about 25,000 large animals. The wider conservation area is a UNESCO World Heritage Site and includes Olduvai Gorge.",
+  "name": "Angkor Wat",
+  "wiki": "Angkor_Wat",
+  "country": "Cambodia",
+  "region": "Siem Reap Province, northwestern Cambodia",
+  "lat": 13.4125,
+  "lon": 103.8667,
+  "tagline": "The largest religious complex in the world, rising from a 190-metre moat.",
+  "intro": "Angkor Wat is a Khmer temple complex near Siem Reap, commissioned by King Suryavarman II in the 12th century. It was built as a Hindu temple and later became a Buddhist site. A depiction of it has appeared on every version of Cambodia's national flag since 1863.",
   "stats": [
    {
-    "label": "Floor area",
-    "value": "260 km\u00b2"
+    "label": "Site area",
+    "value": "162.6 ha"
    },
    {
-    "label": "Depth",
-    "value": "610 m"
+    "label": "Central tower",
+    "value": "65 m"
    },
    {
-    "label": "Floor elevation",
-    "value": "1,800 m"
+    "label": "Moat width",
+    "value": "~190 m"
    },
    {
     "label": "UNESCO listing",
-    "value": "1979"
+    "value": "1992"
    }
   ],
   "facts": [
-   "The crater formed when a large volcano erupted and collapsed two to three million years ago.",
-   "Its floor covers about 260 square kilometres and the walls drop 610 metres.",
-   "Roughly 25,000 large animals, mostly ungulates, live in the crater.",
-   "Black rhinos fell from about 108 in 1964\u201366 to 13 in 1993; there were 55 as of 2018.",
-   "The same protected area holds Olduvai Gorge, one of the world's most important paleoanthropological sites."
+   "Construction began around 1122 and finished around 1150, under Suryavarman II.",
+   "Guinness World Records cites it as the largest religious complex in the world.",
+   "Unlike most Khmer temples, it faces west.",
+   "The moat is about 190 m wide with a perimeter of over 5 km.",
+   "It was on UNESCO's World Heritage in Danger list until 2004."
   ],
-  "bestTime": "Not verified; check current Tanzania park guidance before booking.",
-  "gettingThere": "From New York, fly to Kilimanjaro International (JRO) or Dar es Salaam with a connection, then drive about 180 km west from Arusha.",
-  "tip": "Entry to the crater floor is regulated by the Ngorongoro Conservation Area Authority, so book a licensed safari operator."
+  "bestTime": "Not verified; check current Cambodia travel guidance before booking.",
+  "gettingThere": "From New York, fly to Siem Reap (REP) with connections; the temples are a short drive from the city.",
+  "tip": "Book a multi-day Angkor pass and check current ticket rules before you go."
  },
  "flightsNote": "Real fares from Kayak searches run Oct 29 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
@@ -750,13 +750,13 @@
   "movers": [
    {
     "sym": "INTC",
-    "move": "\u221228.6%",
+    "move": "−28.6%",
     "dir": -1,
-    "why": "Intel forecast weaker fourth-quarter revenue of $15.0B\u2013$16.0B and cited a PC slowdown."
+    "why": "Intel forecast weaker fourth-quarter revenue of $15.0B–$16.0B and cited a PC slowdown."
    },
    {
     "sym": "RDDT",
-    "move": "\u221229.2%",
+    "move": "−29.2%",
     "dir": -1,
     "why": "Reddit gave weak fourth-quarter revenue guidance and warned of fewer Google search referrals."
    },
@@ -774,7 +774,7 @@
    },
    {
     "sym": "AMZN",
-    "move": "\u22121.4%",
+    "move": "−1.4%",
     "dir": -1,
     "why": "Amazon's third-quarter revenue ($201.9B) and EPS ($1.89) came in below estimates."
    }
@@ -783,24 +783,24 @@
    {
     "game": "Baltimore Ravens @ Buffalo Bills",
     "kick": "2026-11-01T18:00:00Z",
-    "spread": "BUF \u22123",
+    "spread": "BUF −3",
     "total": "54.5",
-    "ml": "BUF \u2212166 \u00b7 BAL +140",
+    "ml": "BUF −166 · BAL +140",
     "bills": true
    },
    {
     "game": "Miami @ Notre Dame",
     "kick": "2026-11-08T00:30:00Z",
-    "spread": "ND \u22123.5",
+    "spread": "ND −3.5",
     "total": "55.5",
-    "ml": "ND \u2212170 \u00b7 MIA +142"
+    "ml": "ND −170 · MIA +142"
    },
    {
     "game": "Georgia @ Ole Miss",
     "kick": "2026-11-08T00:30:00Z",
-    "spread": "UGA \u22123",
+    "spread": "UGA −3",
     "total": "56.5",
-    "ml": "UGA \u2212135 \u00b7 MISS +114"
+    "ml": "UGA −135 · MISS +114"
    }
   ],
   "probs": [

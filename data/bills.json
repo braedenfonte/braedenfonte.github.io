@@ -1,13 +1,13 @@
 {
- "updated": "2026-11-01T07:00:00-05:00",
+ "updated": "2026-11-02T06:45:00-05:00",
  "team": "Buffalo Bills",
  "record": {
-  "w": 5,
+  "w": 6,
   "l": 1
  },
- "standing": "Leads the AFC East by 1.5 games",
- "pf": 197,
- "pa": 171,
+ "standing": "Leads the AFC East",
+ "pf": 233,
+ "pa": 181,
  "results": [
   {
    "wk": 1,
@@ -59,6 +59,14 @@
    "os": 30,
    "res": "W",
    "note": "Recovered the onside kick"
+  },
+  {
+   "wk": 7,
+   "date": "Nov 1",
+   "opp": "vs Baltimore",
+   "bs": 36,
+   "os": 10,
+   "res": "W"
   }
  ],
  "afcEast": [
@@ -85,41 +93,34 @@
   }
  ],
  "lastGame": {
-  "title": "Bills 33, Raiders 30",
+  "title": "Bills 36, Ravens 10",
   "stats": [
-   "Josh Allen: 255 pass yds, 2 TD \u2014 his 258th career TD pass ties Jim Kelly's Bills record",
-   "James Cook: 22 carries, 95 yds, TD + 3 catches for 58 yds",
-   "TD catches for Keon Coleman (shovel pass) and Khalil Shakir (9-yd screen)",
-   "Dorian Williams: first career interception, off Kirk Cousins",
-   "Tyler Bass 38-yd FG made it 33-23; Bills recovered the onside kick to close it"
+   "Josh Allen: 3 TD (1-yd rush, TD passes to DJ Moore and Dalton Kincaid); passing TD record for the Bills",
+   "James Cook: third-quarter rushing TD",
+   "Tyler Bass: 3 field goals, Bills record for consecutive made FGs",
+   "Lamar Jackson left on Baltimore's first offensive play with a right hand injury",
+   "Landon Jackson and rookie TJ Parker each recorded their first sacks of the season"
   ]
  },
  "news": [
   {
-   "h": "Bills list Moore, Brown, Alford as questionable",
-   "b": "ESPN reported Oct. 30 that WR DJ Moore (shoulder), RT Spencer Brown (back) and nickel Dee Alford (ankle) were questionable against the Ravens."
+   "h": "Bills rout Ravens 36-10 to improve to 6-1",
+   "b": "Josh Allen accounted for three touchdowns as Buffalo dominated at Highmark Stadium on Nov. 1."
   },
   {
-   "h": "Ed Oliver back at full practice",
-   "b": "Defensive tackle Ed Oliver fully participated in Thursday's practice (Oct. 29), setting up a potential return against Baltimore."
+   "h": "Lamar Jackson hurt on first play",
+   "b": "The Ravens QB was knocked out on Baltimore's first offensive snap and will likely need surgery on his right hand, per WBUF."
   },
   {
-   "h": "Defense under scrutiny",
-   "b": "An ESPN piece on Oct. 31 noted Buffalo's defense ranks among the worst in several statistical areas, including third-most points allowed."
+   "h": "Bass sets Bills field goal streak record",
+   "b": "Tyler Bass made all three field goal attempts and set a Bills record for consecutive made field goals, per a WBUF headline."
   },
   {
-   "h": "Gardner-Johnson still out vs. Baltimore",
-   "b": "C.J. Gardner-Johnson's one-game suspension was upheld on appeal, and he was also fined $11,194 for unnecessary roughness against the Raiders. He will sit out the Ravens game."
+   "h": "Next up: Vikings on Monday Night Football",
+   "b": "Buffalo plays at Minnesota on Nov. 9."
   }
  ],
  "schedule": [
-  {
-   "kick": "2026-11-01T13:00-05:00",
-   "opp": "Baltimore Ravens",
-   "home": true,
-   "venue": "",
-   "note": "Home after the bye"
-  },
   {
    "kick": "2026-11-09T20:15-05:00",
    "opp": "Minnesota Vikings",
@@ -191,5 +192,5 @@
    "note": "Date and time may flex"
   }
  ],
- "source": "ESPN (standings, odds, team news), Nov 1, 2026. Ravens game kicks off 1:00 PM ET today."
+ "source": "WBUF game recap (Nov 1, 2026). AFC East rivals' records not re-verified."
 }
