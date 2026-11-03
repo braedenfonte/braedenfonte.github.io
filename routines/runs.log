@@ -31,3 +31,4 @@
 2026-11-02T18:46-05:00 | health-check | RETRY nightly-prep | nightly-prep FAIL: nothing built (Canvas file host 406) |
 2026-11-02T18:48-05:00 | health-check | OK | Checked nightly-prep: FAIL at 17:55; retry already fired at 18:45 by another run, mine was a duplicate fire | 
 2026-11-03T00:11Z | morning-update | OK | manual rerun from chat: football poll AP Week 10 (Nov 1) + upcoming ranks; 25 Kayak fares (cheapest $162 ATL Dec 4) | other parts unchanged
+2026-11-03T18:47-05:00 | health-check | RETRY nightly-prep | no nightly-prep line today (missing) |
