@@ -1,835 +1,828 @@
 {
- "updated": "2026-11-02T08:20:00-05:00",
- "flights": [
-  {
-   "from": "JFK",
-   "to": "BOS",
-   "city": "Boston, MA",
-   "tag": "City",
-   "price": 242,
-   "airline": "JetBlue",
-   "depart": "2026-11-20",
-   "departTime": "16:15",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-22",
-   "returnDepart": "13:24",
-   "returnArrive": "14:40",
-   "returnTo": "JFK",
-   "returnAirline": "JetBlue",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BOS/2026-11-20/2026-11-22?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+  "updated": "2026-11-02T19:55:00-05:00",
+  "flights": [
+    {
+      "from": "LGA",
+      "to": "ATL",
+      "city": "Atlanta, GA",
+      "tag": "City",
+      "price": 162,
+      "airline": "Frontier",
+      "depart": "2026-12-04",
+      "departTime": "17:30",
+      "stops": "Nonstop",
+      "returnDate": "2026-12-06",
+      "returnDepart": "08:26",
+      "returnArrive": "10:48",
+      "returnTo": "EWR",
+      "returnAirline": "Frontier",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ATL/2026-12-04/2026-12-06?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "EWR",
+      "to": "CHS",
+      "city": "Charleston, SC",
+      "tag": "City",
+      "price": 199,
+      "airline": "United",
+      "depart": "2026-12-04",
+      "departTime": "21:44",
+      "stops": "Nonstop",
+      "returnDate": "2026-12-06",
+      "returnDepart": "07:00",
+      "returnArrive": "09:00",
+      "returnTo": "EWR",
+      "returnAirline": "United",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-CHS/2026-12-04/2026-12-06?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "LGA",
+      "to": "TPA",
+      "city": "Tampa, FL",
+      "tag": "Beach",
+      "price": 259,
+      "airline": "Delta",
+      "depart": "2026-12-04",
+      "departTime": "19:05",
+      "stops": "Nonstop",
+      "returnDate": "2026-12-06",
+      "returnDepart": "07:30",
+      "returnArrive": "10:11",
+      "returnTo": "JFK",
+      "returnAirline": "Delta",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-TPA/2026-12-04/2026-12-06?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "EWR",
+      "to": "BNA",
+      "city": "Nashville, TN",
+      "tag": "City",
+      "price": 287,
+      "airline": "United",
+      "depart": "2026-12-04",
+      "departTime": "15:00",
+      "stops": "Nonstop",
+      "returnDate": "2026-12-06",
+      "returnDepart": "08:40",
+      "returnArrive": "11:55",
+      "returnTo": "EWR",
+      "returnAirline": "United",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BNA/2026-12-04/2026-12-06?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "LGA",
+      "to": "ATL",
+      "city": "Atlanta, GA",
+      "tag": "City",
+      "price": 290,
+      "airline": "Frontier",
+      "depart": "2026-11-13",
+      "departTime": "17:30",
+      "stops": "Nonstop",
+      "returnDate": "2026-11-15",
+      "returnDepart": "06:19",
+      "returnArrive": "08:34",
+      "returnTo": "LGA",
+      "returnAirline": "Frontier",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ATL/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "EWR",
+      "to": "ORD",
+      "city": "Chicago, IL",
+      "tag": "City",
+      "price": 312,
+      "airline": "United",
+      "depart": "2026-12-04",
+      "departTime": "16:55",
+      "stops": "Nonstop",
+      "returnDate": "2026-12-06",
+      "returnDepart": "05:55",
+      "returnArrive": "09:02",
+      "returnTo": "EWR",
+      "returnAirline": "United",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ORD/2026-12-04/2026-12-06?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "EWR",
+      "to": "SJU",
+      "city": "San Juan, PR",
+      "tag": "Island",
+      "price": 338,
+      "airline": "JetBlue",
+      "depart": "2026-12-04",
+      "departTime": "17:20",
+      "stops": "Nonstop",
+      "returnDate": "2026-12-06",
+      "returnDepart": "08:10",
+      "returnArrive": "11:13",
+      "returnTo": "JFK",
+      "returnAirline": "JetBlue",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-SJU/2026-12-04/2026-12-06?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "LGA",
+      "to": "AUS",
+      "city": "Austin, TX",
+      "tag": "City",
+      "price": 349,
+      "airline": "American",
+      "depart": "2026-12-04",
+      "departTime": "17:08",
+      "stops": "1 stop",
+      "returnDate": "2026-12-06",
+      "returnDepart": "06:44",
+      "returnArrive": "11:30",
+      "returnTo": "JFK",
+      "returnAirline": "American",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-AUS/2026-12-04/2026-12-06?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "LGA",
+      "to": "MIA",
+      "city": "Miami, FL",
+      "tag": "Beach",
+      "price": 364,
+      "airline": "American",
+      "depart": "2026-12-04",
+      "departTime": "19:29",
+      "stops": "Nonstop",
+      "returnDate": "2026-12-06",
+      "returnDepart": "06:51",
+      "returnArrive": "09:55",
+      "returnTo": "JFK",
+      "returnAirline": "American",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-MIA/2026-12-04/2026-12-06?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "EWR",
+      "to": "BQN",
+      "city": "Aguadilla, PR",
+      "tag": "Island",
+      "price": 365,
+      "airline": "United",
+      "depart": "2026-12-04",
+      "departTime": "19:00",
+      "stops": "Nonstop",
+      "returnDate": "2026-12-06",
+      "returnDepart": "01:09",
+      "returnArrive": "04:12",
+      "returnTo": "EWR",
+      "returnAirline": "United",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BQN/2026-12-04/2026-12-06?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "EWR",
+      "to": "MSY",
+      "city": "New Orleans, LA",
+      "tag": "City",
+      "price": 389,
+      "airline": "United",
+      "depart": "2026-12-04",
+      "departTime": "21:15",
+      "stops": "Nonstop",
+      "returnDate": "2026-12-06",
+      "returnDepart": "07:31",
+      "returnArrive": "11:30",
+      "returnTo": "EWR",
+      "returnAirline": "United",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-MSY/2026-12-04/2026-12-06?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "LGA",
+      "to": "BNA",
+      "city": "Nashville, TN",
+      "tag": "City",
+      "price": 413,
+      "airline": "Delta",
+      "depart": "2026-11-13",
+      "departTime": "19:40",
+      "stops": "Nonstop",
+      "returnDate": "2026-11-15",
+      "returnDepart": "05:30",
+      "returnArrive": "10:38",
+      "returnTo": "EWR",
+      "returnAirline": "Delta",
+      "returnStops": "1 stop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BNA/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "EWR",
+      "to": "BQN",
+      "city": "Aguadilla, PR",
+      "tag": "Island",
+      "price": 427,
+      "airline": "United",
+      "depart": "2026-11-13",
+      "departTime": "19:00",
+      "stops": "Nonstop",
+      "returnDate": "2026-11-15",
+      "returnDepart": "01:09",
+      "returnArrive": "04:12",
+      "returnTo": "EWR",
+      "returnAirline": "United",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BQN/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "EWR",
+      "to": "CLT",
+      "city": "Charlotte, NC",
+      "tag": "City",
+      "price": 449,
+      "airline": "American",
+      "depart": "2026-11-13",
+      "departTime": "17:08",
+      "stops": "Nonstop",
+      "returnDate": "2026-11-15",
+      "returnDepart": "10:37",
+      "returnArrive": "12:30",
+      "returnTo": "EWR",
+      "returnAirline": "American",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-CLT/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "EWR",
+      "to": "TPA",
+      "city": "Tampa, FL",
+      "tag": "Beach",
+      "price": 451,
+      "airline": "American",
+      "depart": "2026-11-13",
+      "departTime": "17:08",
+      "stops": "1 stop",
+      "returnDate": "2026-11-15",
+      "returnDepart": "05:35",
+      "returnArrive": "11:05",
+      "returnTo": "JFK",
+      "returnAirline": "American",
+      "returnStops": "1 stop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-TPA/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "LGA",
+      "to": "MCO",
+      "city": "Orlando, FL",
+      "tag": "Beach",
+      "price": 459,
+      "airline": "JetBlue",
+      "depart": "2026-11-13",
+      "departTime": "20:40",
+      "stops": "Nonstop",
+      "returnDate": "2026-11-15",
+      "returnDepart": "07:05",
+      "returnArrive": "11:37",
+      "returnTo": "EWR",
+      "returnAirline": "Breeze Airways",
+      "returnStops": "1 stop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-MCO/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "LGA",
+      "to": "DEN",
+      "city": "Denver, CO",
+      "tag": "Mountains",
+      "price": 461,
+      "airline": "Southwest",
+      "depart": "2026-11-13",
+      "departTime": "17:05",
+      "stops": "Nonstop",
+      "returnDate": "2026-11-15",
+      "returnDepart": "05:20",
+      "returnArrive": "10:55",
+      "returnTo": "LGA",
+      "returnAirline": "Southwest",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-DEN/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "EWR",
+      "to": "BQN",
+      "city": "Aguadilla, PR",
+      "tag": "Island",
+      "price": 484,
+      "airline": "United",
+      "depart": "2026-11-27",
+      "departTime": "19:00",
+      "stops": "Nonstop",
+      "returnDate": "2026-11-30",
+      "returnDepart": "01:09",
+      "returnArrive": "04:12",
+      "returnTo": "EWR",
+      "returnAirline": "United",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BQN/2026-11-27/2026-11-30?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "EWR",
+      "to": "ORD",
+      "city": "Chicago, IL",
+      "tag": "City",
+      "price": 491,
+      "airline": "American",
+      "depart": "2026-11-13",
+      "departTime": "17:27",
+      "stops": "Nonstop",
+      "returnDate": "2026-11-15",
+      "returnDepart": "06:45",
+      "returnArrive": "10:04",
+      "returnTo": "EWR",
+      "returnAirline": "American",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ORD/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "EWR",
+      "to": "CHS",
+      "city": "Charleston, SC",
+      "tag": "City",
+      "price": 494,
+      "airline": "American",
+      "depart": "2026-11-13",
+      "departTime": "19:46",
+      "stops": "1 stop",
+      "returnDate": "2026-11-15",
+      "returnDepart": "05:05",
+      "returnArrive": "09:12",
+      "returnTo": "JFK",
+      "returnAirline": "American",
+      "returnStops": "1 stop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-CHS/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "JFK",
+      "to": "SJU",
+      "city": "San Juan, PR",
+      "tag": "Island",
+      "price": 526,
+      "airline": "JetBlue",
+      "depart": "2026-11-13",
+      "departTime": "16:16",
+      "stops": "Nonstop",
+      "returnDate": "2026-11-15",
+      "returnDepart": "06:30",
+      "returnArrive": "09:33",
+      "returnTo": "JFK",
+      "returnAirline": "JetBlue",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-SJU/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "LGA",
+      "to": "FLL",
+      "city": "Fort Lauderdale, FL",
+      "tag": "Beach",
+      "price": 529,
+      "airline": "Delta",
+      "depart": "2026-11-13",
+      "departTime": "17:59",
+      "stops": "Nonstop",
+      "returnDate": "2026-11-15",
+      "returnDepart": "07:15",
+      "returnArrive": "10:04",
+      "returnTo": "JFK",
+      "returnAirline": "Delta",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-FLL/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "JFK",
+      "to": "MIA",
+      "city": "Miami, FL",
+      "tag": "Beach",
+      "price": 574,
+      "airline": "American",
+      "depart": "2026-11-13",
+      "departTime": "17:33",
+      "stops": "Nonstop",
+      "returnDate": "2026-11-15",
+      "returnDepart": "07:00",
+      "returnArrive": "10:00",
+      "returnTo": "JFK",
+      "returnAirline": "American",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-MIA/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "JFK",
+      "to": "BQN",
+      "city": "Aguadilla, PR",
+      "tag": "Island",
+      "price": 716,
+      "airline": "JetBlue",
+      "depart": "2026-11-06",
+      "departTime": "18:59",
+      "stops": "Nonstop",
+      "returnDate": "2026-11-08",
+      "returnDepart": "07:01",
+      "returnArrive": "09:59",
+      "returnTo": "JFK",
+      "returnAirline": "JetBlue",
+      "returnStops": "Nonstop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BQN/2026-11-06/2026-11-08?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    },
+    {
+      "from": "JFK",
+      "to": "SJU",
+      "city": "San Juan, PR",
+      "tag": "Island",
+      "price": 838,
+      "airline": "JetBlue",
+      "depart": "2026-11-06",
+      "departTime": "16:16",
+      "stops": "Nonstop",
+      "returnDate": "2026-11-08",
+      "returnDepart": "07:00",
+      "returnArrive": "14:16",
+      "returnTo": "JFK",
+      "returnAirline": "JetBlue",
+      "returnStops": "1 stop",
+      "url": "https://www.kayak.com/flights/EWR,JFK,LGA-SJU/2026-11-06/2026-11-08?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+    }
+  ],
+  "football": {
+    "label": "Week 9 recap",
+    "results": [
+      {
+        "away": "Miami",
+        "home": "North Carolina",
+        "as": 38,
+        "hs": 35,
+        "blurb": "No. 1 Miami survived a 4-touchdown game from UNC's Billy Edwards Jr. to stay unbeaten.",
+        "stats": [
+          "Darian Mensah: 22/29, 274 yds, 3 TD",
+          "Billy Edwards Jr.: 28/34, 341 yds, 4 TD for UNC",
+          "Malachi Toney: 7 catches, 75 yds, 2 TD"
+        ],
+        "awayRank": 1,
+        "homeRank": null
+      },
+      {
+        "away": "Ohio State",
+        "home": "USC",
+        "as": 18,
+        "hs": 30,
+        "blurb": "Unranked USC upset No. 2 Ohio State in the Coliseum.",
+        "stats": [
+          "Jayden Maiava: 15/22, 222 yds, TD",
+          "Trent Mosley: 5 catches, 101 yds, TD",
+          "Bo Jackson: 21 carries, 121 yds for Ohio State"
+        ],
+        "awayRank": 2
+      },
+      {
+        "away": "Florida",
+        "home": "Georgia",
+        "as": 8,
+        "hs": 27,
+        "blurb": "No. 3 Georgia held No. 17 Florida to 8 points.",
+        "stats": [
+          "Gunner Stockton: 13/23, 101 yds",
+          "Nate Frazier: 12 carries, 67 yds, TD",
+          "Tramell Jones Jr.: 18/25, 172 yds, INT for Florida"
+        ],
+        "awayRank": 17,
+        "homeRank": 3
+      },
+      {
+        "away": "Oklahoma State",
+        "home": "Iowa State",
+        "as": 49,
+        "hs": 51,
+        "blurb": "No. 24 Oklahoma State lost a 100-point shootout at Iowa State.",
+        "stats": [],
+        "awayRank": 24
+      },
+      {
+        "away": "Texas State",
+        "home": "Boise State",
+        "as": 45,
+        "hs": 46,
+        "blurb": "No. 20 Boise State edged Texas State by a point.",
+        "stats": [],
+        "homeRank": 20
+      },
+      {
+        "away": "Army",
+        "home": "Memphis",
+        "as": 22,
+        "hs": 49,
+        "blurb": "Memphis pulled away from Army at home.",
+        "stats": [
+          "Marcus Stokes: 29/35, 371 yds, 4 TD for Memphis",
+          "Jaylin Carter: 23 carries, 96 yds, 2 TD"
+        ]
+      },
+      {
+        "away": "Notre Dame",
+        "home": "Navy",
+        "as": 35,
+        "hs": 13,
+        "blurb": "No. 5 Notre Dame beat Navy 35-13.",
+        "stats": [
+          "CJ Carr: 19/29, 210 yds, 2 TD",
+          "Nolan James Jr.: 9 carries, 107 yds, 2 TD",
+          "Jackson Gutierrez: 28 carries, 110 yds, TD for Navy"
+        ],
+        "awayRank": 5
+      },
+      {
+        "away": "UConn",
+        "home": "Air Force",
+        "as": 26,
+        "hs": 35,
+        "blurb": "Air Force beat UConn behind Kemper Hodges' four rushing touchdowns.",
+        "stats": [
+          "Kemper Hodges: 35 carries, 200 yds, 4 TD"
+        ]
+      }
+    ],
+    "upcoming": [
+      {
+        "away": "New Mexico",
+        "home": "Nevada",
+        "kick": "2026-11-07T02:00:00Z",
+        "note": "Mackay Stadium",
+        "awayRank": 22
+      },
+      {
+        "away": "TCU",
+        "home": "Arizona",
+        "kick": "2026-11-07T03:15:00Z",
+        "note": "ESPN · Casino Del Sol Stadium",
+        "homeRank": 24
+      },
+      {
+        "away": "BYU",
+        "home": "Utah",
+        "kick": "2026-11-07T17:00:00Z",
+        "note": "ABC · Rice-Eccles Stadium",
+        "awayRank": 7,
+        "homeRank": 3
+      },
+      {
+        "away": "Texas",
+        "home": "Missouri",
+        "kick": "2026-11-07T17:00:00Z",
+        "note": "ESPN · Memorial Stadium",
+        "awayRank": 10,
+        "homeRank": 19
+      },
+      {
+        "away": "UCLA",
+        "home": "Minnesota",
+        "kick": "2026-11-07T17:00:00Z",
+        "note": "Kickoff time TBA · Huntington Bank Stadium",
+        "awayRank": 5
+      },
+      {
+        "away": "Cincinnati",
+        "home": "Houston",
+        "kick": "2026-11-07T17:00:00Z",
+        "note": "Kickoff time TBA · TDECU Stadium",
+        "homeRank": 17
+      },
+      {
+        "away": "Iowa",
+        "home": "Northwestern",
+        "kick": "2026-11-07T17:00:00Z",
+        "note": "Kickoff time TBA · Ryan Field",
+        "awayRank": 21
+      },
+      {
+        "away": "Texas A&M",
+        "home": "South Carolina",
+        "kick": "2026-11-07T20:00:00Z",
+        "note": "Williams-Brice Stadium",
+        "homeRank": 23
+      },
+      {
+        "away": "Oregon",
+        "home": "Ohio State",
+        "kick": "2026-11-07T20:30:00Z",
+        "note": "CBS · Ohio Stadium",
+        "homeRank": 11
+      },
+      {
+        "away": "Alabama",
+        "home": "LSU",
+        "kick": "2026-11-07T20:30:00Z",
+        "note": "ABC · Tiger Stadium",
+        "awayRank": 9,
+        "homeRank": 15
+      },
+      {
+        "away": "Merrimack",
+        "home": "Wake Forest",
+        "kick": "2026-11-07T20:30:00Z",
+        "note": "ACC Network · Allegacy Federal Credit Union Stadium",
+        "homeRank": 14
+      },
+      {
+        "away": "Temple",
+        "home": "Navy",
+        "kick": "2026-11-07T20:30:00Z",
+        "note": "CBSSN · Navy-Marine Corps Memorial Stadium"
+      },
+      {
+        "away": "Boise State",
+        "home": "Colorado State",
+        "kick": "2026-11-07T23:00:00Z",
+        "note": "USA Network · Canvas Stadium",
+        "awayRank": 20
+      },
+      {
+        "away": "Kentucky",
+        "home": "Tennessee",
+        "kick": "2026-11-07T23:15:00Z",
+        "note": "ESPN · Neyland Stadium",
+        "awayRank": 8,
+        "homeRank": 16
+      },
+      {
+        "away": "Miami",
+        "home": "Notre Dame",
+        "kick": "2026-11-08T00:30:00Z",
+        "note": "NBC · Notre Dame Stadium",
+        "awayRank": 1,
+        "homeRank": 4
+      },
+      {
+        "away": "Georgia",
+        "home": "Ole Miss",
+        "kick": "2026-11-08T00:30:00Z",
+        "note": "ABC · Vaught-Hemingway Stadium",
+        "awayRank": 2,
+        "homeRank": 12
+      },
+      {
+        "away": "Air Force",
+        "home": "Army",
+        "kick": "2026-11-08T00:30:00Z",
+        "note": "CBS · Home at Michie Stadium",
+        "army": true
+      },
+      {
+        "away": "Oklahoma",
+        "home": "Florida",
+        "kick": "2026-11-08T00:45:00Z",
+        "note": "SEC Network · Ben Hill Griffin Stadium",
+        "homeRank": 25
+      },
+      {
+        "away": "West Virginia",
+        "home": "Texas Tech",
+        "kick": "2026-11-08T02:30:00Z",
+        "note": "ESPN · Galaxy Stadium",
+        "homeRank": 13
+      }
+    ],
+    "poll": "AP Top 25, Week 10 (Nov 1)"
   },
-  {
-   "from": "LGA",
-   "to": "ATL",
-   "city": "Atlanta, GA",
-   "tag": "City",
-   "price": 249,
-   "airline": "American Airlines",
-   "depart": "2026-11-20",
-   "departTime": "16:14",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-22",
-   "returnDepart": "05:10",
-   "returnArrive": "09:12",
-   "returnTo": "JFK",
-   "returnAirline": "American Airlines",
-   "returnStops": "1 stop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ATL/2026-11-20/2026-11-22?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+  "location": {
+    "name": "Angkor Wat",
+    "wiki": "Angkor_Wat",
+    "country": "Cambodia",
+    "region": "Siem Reap Province, northwestern Cambodia",
+    "lat": 13.4125,
+    "lon": 103.8667,
+    "tagline": "The largest religious complex in the world, rising from a 190-metre moat.",
+    "intro": "Angkor Wat is a Khmer temple complex near Siem Reap, commissioned by King Suryavarman II in the 12th century. It was built as a Hindu temple and later became a Buddhist site. A depiction of it has appeared on every version of Cambodia's national flag since 1863.",
+    "stats": [
+      {
+        "label": "Site area",
+        "value": "162.6 ha"
+      },
+      {
+        "label": "Central tower",
+        "value": "65 m"
+      },
+      {
+        "label": "Moat width",
+        "value": "~190 m"
+      },
+      {
+        "label": "UNESCO listing",
+        "value": "1992"
+      }
+    ],
+    "facts": [
+      "Construction began around 1122 and finished around 1150, under Suryavarman II.",
+      "Guinness World Records cites it as the largest religious complex in the world.",
+      "Unlike most Khmer temples, it faces west.",
+      "The moat is about 190 m wide with a perimeter of over 5 km.",
+      "It was on UNESCO's World Heritage in Danger list until 2004."
+    ],
+    "bestTime": "Not verified; check current Cambodia travel guidance before booking.",
+    "gettingThere": "From New York, fly to Siem Reap (REP) with connections; the temples are a short drive from the city.",
+    "tip": "Book a multi-day Angkor pass and check current ticket rules before you go."
   },
-  {
-   "from": "LGA",
-   "to": "ATL",
-   "city": "Atlanta, GA",
-   "tag": "City",
-   "price": 288,
-   "airline": "Frontier",
-   "depart": "2026-11-13",
-   "departTime": "17:30",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-15",
-   "returnDepart": "08:10",
-   "returnArrive": "10:36",
-   "returnTo": "EWR",
-   "returnAirline": "Frontier",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ATL/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "JFK",
-   "to": "BOS",
-   "city": "Boston, MA",
-   "tag": "City",
-   "price": 308,
-   "airline": "JetBlue",
-   "depart": "2026-11-13",
-   "departTime": "22:29",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-15",
-   "returnDepart": "05:45",
-   "returnArrive": "07:00",
-   "returnTo": "JFK",
-   "returnAirline": "JetBlue",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BOS/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "LGA",
-   "to": "ORD",
-   "city": "Chicago, IL",
-   "tag": "City",
-   "price": 313,
-   "airline": "Delta",
-   "depart": "2026-11-20",
-   "departTime": "20:30",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-22",
-   "returnDepart": "06:00",
-   "returnArrive": "09:24",
-   "returnTo": "JFK",
-   "returnAirline": "Delta",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ORD/2026-11-20/2026-11-22?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "EWR",
-   "to": "CLT",
-   "city": "Charlotte, NC",
-   "tag": "City",
-   "price": 339,
-   "airline": "American Airlines",
-   "depart": "2026-11-20",
-   "departTime": "19:44",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-22",
-   "returnDepart": "07:10",
-   "returnArrive": "09:02",
-   "returnTo": "LGA",
-   "returnAirline": "American Airlines",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-CLT/2026-11-20/2026-11-22?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "LGA",
-   "to": "ORD",
-   "city": "Chicago, IL",
-   "tag": "City",
-   "price": 347,
-   "airline": "Delta",
-   "depart": "2026-11-13",
-   "departTime": "20:30",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-15",
-   "returnDepart": "07:00",
-   "returnArrive": "10:15",
-   "returnTo": "LGA",
-   "returnAirline": "Delta",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-ORD/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "JFK",
-   "to": "MCO",
-   "city": "Orlando, FL",
-   "tag": "Beach",
-   "price": 349,
-   "airline": "JetBlue",
-   "depart": "2026-11-20",
-   "departTime": "17:29",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-22",
-   "returnDepart": "07:05",
-   "returnArrive": "11:37",
-   "returnTo": "EWR",
-   "returnAirline": "Breeze Airways",
-   "returnStops": "1 stop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-MCO/2026-11-20/2026-11-22?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "LGA",
-   "to": "BNA",
-   "city": "Nashville, TN",
-   "tag": "City",
-   "price": 353,
-   "airline": "Delta",
-   "depart": "2026-11-13",
-   "departTime": "19:40",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-15",
-   "returnDepart": "05:30",
-   "returnArrive": "10:38",
-   "returnTo": "EWR",
-   "returnAirline": "Delta",
-   "returnStops": "1 stop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BNA/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "LGA",
-   "to": "FLL",
-   "city": "Fort Lauderdale, FL",
-   "tag": "Beach",
-   "price": 353,
-   "airline": "Delta",
-   "depart": "2026-11-20",
-   "departTime": "19:59",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-22",
-   "returnDepart": "06:00",
-   "returnArrive": "08:52",
-   "returnTo": "JFK",
-   "returnAirline": "JetBlue",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-FLL/2026-11-20/2026-11-22?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "LGA",
-   "to": "CHS",
-   "city": "Charleston, SC",
-   "tag": "City",
-   "price": 357,
-   "airline": "American Airlines",
-   "depart": "2026-11-13",
-   "departTime": "19:29",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-15",
-   "returnDepart": "05:05",
-   "returnArrive": "09:12",
-   "returnTo": "JFK",
-   "returnAirline": "American Airlines",
-   "returnStops": "1 stop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-CHS/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "LGA",
-   "to": "MIA",
-   "city": "Miami, FL",
-   "tag": "Beach",
-   "price": 359,
-   "airline": "Delta",
-   "depart": "2026-11-20",
-   "departTime": "19:50",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-22",
-   "returnDepart": "07:19",
-   "returnArrive": "10:14",
-   "returnTo": "JFK",
-   "returnAirline": "Delta",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-MIA/2026-11-20/2026-11-22?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "LGA",
-   "to": "BNA",
-   "city": "Nashville, TN",
-   "tag": "City",
-   "price": 362,
-   "airline": "Delta",
-   "depart": "2026-11-20",
-   "departTime": "19:40",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-22",
-   "returnDepart": "07:40",
-   "returnArrive": "10:57",
-   "returnTo": "LGA",
-   "returnAirline": "Delta",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BNA/2026-11-20/2026-11-22?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "LGA",
-   "to": "MCO",
-   "city": "Orlando, FL",
-   "tag": "Beach",
-   "price": 364,
-   "airline": "American Airlines",
-   "depart": "2026-11-13",
-   "departTime": "19:55",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-15",
-   "returnDepart": "05:00",
-   "returnArrive": "09:32",
-   "returnTo": "EWR",
-   "returnAirline": "American Airlines",
-   "returnStops": "1 stop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-MCO/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "LGA",
-   "to": "TPA",
-   "city": "Tampa, FL",
-   "tag": "Beach",
-   "price": 383,
-   "airline": "Delta",
-   "depart": "2026-11-13",
-   "departTime": "18:59",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-15",
-   "returnDepart": "05:10",
-   "returnArrive": "10:38",
-   "returnTo": "EWR",
-   "returnAirline": "Delta",
-   "returnStops": "1 stop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-TPA/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "JFK",
-   "to": "FLL",
-   "city": "Fort Lauderdale, FL",
-   "tag": "Beach",
-   "price": 396,
-   "airline": "JetBlue",
-   "depart": "2026-11-13",
-   "departTime": "15:59",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-15",
-   "returnDepart": "06:00",
-   "returnArrive": "08:52",
-   "returnTo": "JFK",
-   "returnAirline": "JetBlue",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-FLL/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "EWR",
-   "to": "BQN",
-   "city": "Aguadilla, PR",
-   "tag": "Island",
-   "price": 420,
-   "airline": "United Airlines",
-   "depart": "2026-11-20",
-   "departTime": "19:00",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-22",
-   "returnDepart": "01:09",
-   "returnArrive": "04:12",
-   "returnTo": "EWR",
-   "returnAirline": "United Airlines",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BQN/2026-11-20/2026-11-22?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "JFK",
-   "to": "TPA",
-   "city": "Tampa, FL",
-   "tag": "Beach",
-   "price": 437,
-   "airline": "American Airlines",
-   "depart": "2026-11-20",
-   "departTime": "17:33",
-   "stops": "1 stop",
-   "returnDate": "2026-11-22",
-   "returnDepart": "05:25",
-   "returnArrive": "11:05",
-   "returnTo": "JFK",
-   "returnAirline": "American Airlines",
-   "returnStops": "1 stop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-TPA/2026-11-20/2026-11-22?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "EWR",
-   "to": "BQN",
-   "city": "Aguadilla, PR",
-   "tag": "Island",
-   "price": 459,
-   "airline": "United Airlines",
-   "depart": "2026-11-13",
-   "departTime": "19:00",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-15",
-   "returnDepart": "01:09",
-   "returnArrive": "04:12",
-   "returnTo": "EWR",
-   "returnAirline": "United Airlines",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BQN/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "JFK",
-   "to": "SJU",
-   "city": "San Juan, PR",
-   "tag": "Island",
-   "price": 475,
-   "airline": "JetBlue",
-   "depart": "2026-11-20",
-   "departTime": "15:40",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-22",
-   "returnDepart": "03:29",
-   "returnArrive": "06:30",
-   "returnTo": "JFK",
-   "returnAirline": "JetBlue",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-SJU/2026-11-20/2026-11-22?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "JFK",
-   "to": "SJU",
-   "city": "San Juan, PR",
-   "tag": "Island",
-   "price": 574,
-   "airline": "JetBlue",
-   "depart": "2026-11-13",
-   "departTime": "16:16",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-15",
-   "returnDepart": "06:30",
-   "returnArrive": "09:33",
-   "returnTo": "JFK",
-   "returnAirline": "JetBlue",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-SJU/2026-11-13/2026-11-15?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "JFK",
-   "to": "BQN",
-   "city": "Aguadilla, PR",
-   "tag": "Island",
-   "price": 585,
-   "airline": "JetBlue",
-   "depart": "2026-10-30",
-   "departTime": "18:30",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-01",
-   "returnDepart": "07:30",
-   "returnArrive": "10:28",
-   "returnTo": "JFK",
-   "returnAirline": "JetBlue",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BQN/2026-10-30/2026-11-01?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "JFK",
-   "to": "BQN",
-   "city": "Aguadilla, PR",
-   "tag": "Island",
-   "price": 589,
-   "airline": "JetBlue",
-   "depart": "2026-11-06",
-   "departTime": "18:59",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-08",
-   "returnDepart": "07:01",
-   "returnArrive": "09:59",
-   "returnTo": "JFK",
-   "returnAirline": "JetBlue",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-BQN/2026-11-06/2026-11-08?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "JFK",
-   "to": "SJU",
-   "city": "San Juan, PR",
-   "tag": "Island",
-   "price": 606,
-   "airline": "JetBlue",
-   "depart": "2026-10-30",
-   "departTime": "16:50",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-01",
-   "returnDepart": "07:30",
-   "returnArrive": "10:33",
-   "returnTo": "JFK",
-   "returnAirline": "JetBlue",
-   "returnStops": "Nonstop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-SJU/2026-10-30/2026-11-01?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
-  },
-  {
-   "from": "JFK",
-   "to": "SJU",
-   "city": "San Juan, PR",
-   "tag": "Island",
-   "price": 801,
-   "airline": "JetBlue",
-   "depart": "2026-11-06",
-   "departTime": "16:16",
-   "stops": "Nonstop",
-   "returnDate": "2026-11-08",
-   "returnDepart": "07:00",
-   "returnArrive": "14:16",
-   "returnTo": "JFK",
-   "returnAirline": "JetBlue",
-   "returnStops": "1 stop",
-   "url": "https://www.kayak.com/flights/EWR,JFK,LGA-SJU/2026-11-06/2026-11-08?sort=price_a&fs=takeoff=1500,2359__;landing=__0000,1600"
+  "flightsNote": "Real fares from Kayak searches run Nov 2 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
+  "markets": {
+    "asOf": "Fri Oct 30 close",
+    "story": "The S&P 500 fell 1.82%, its worst day since June, as weak tech earnings revived worries about AI spending; Intel plunged 28.58% and chip stocks sold off.",
+    "indices": [
+      {
+        "name": "S&P 500",
+        "value": "7,580",
+        "chg": -1.82
+      }
+    ],
+    "movers": [
+      {
+        "sym": "INTC",
+        "move": "−28.6%",
+        "dir": -1,
+        "why": "Intel forecast weaker fourth-quarter revenue of $15.0B–$16.0B and cited a PC slowdown."
+      },
+      {
+        "sym": "RDDT",
+        "move": "−29.2%",
+        "dir": -1,
+        "why": "Reddit gave weak fourth-quarter revenue guidance and warned of fewer Google search referrals."
+      },
+      {
+        "sym": "REGN",
+        "move": "+13.3%",
+        "dir": 1,
+        "why": "Regeneron beat earnings expectations."
+      },
+      {
+        "sym": "FDXF",
+        "move": "+14.9%",
+        "dir": 1,
+        "why": "FedEx Freight gave strong fourth-quarter guidance in its first report as a standalone company."
+      },
+      {
+        "sym": "AMZN",
+        "move": "−1.4%",
+        "dir": -1,
+        "why": "Amazon's third-quarter revenue ($201.9B) and EPS ($1.89) came in below estimates."
+      }
+    ],
+    "lines": [
+      {
+        "game": "Baltimore Ravens @ Buffalo Bills",
+        "kick": "2026-11-01T18:00:00Z",
+        "spread": "BUF −3",
+        "total": "54.5",
+        "ml": "BUF −166 · BAL +140",
+        "bills": true
+      },
+      {
+        "game": "Miami @ Notre Dame",
+        "kick": "2026-11-08T00:30:00Z",
+        "spread": "ND −3.5",
+        "total": "55.5",
+        "ml": "ND −170 · MIA +142"
+      },
+      {
+        "game": "Georgia @ Ole Miss",
+        "kick": "2026-11-08T00:30:00Z",
+        "spread": "UGA −3",
+        "total": "56.5",
+        "ml": "UGA −135 · MISS +114"
+      }
+    ],
+    "probs": [
+      {
+        "game": "Boise State @ Colorado State",
+        "fav": "Boise State",
+        "p": 93
+      },
+      {
+        "game": "UL Monroe @ Arkansas State",
+        "fav": "Arkansas State",
+        "p": 92
+      },
+      {
+        "game": "Rice @ North Texas",
+        "fav": "North Texas",
+        "p": 90
+      },
+      {
+        "game": "West Virginia @ Texas Tech",
+        "fav": "Texas Tech",
+        "p": 89
+      },
+      {
+        "game": "Liberty @ New Mexico State",
+        "fav": "Liberty",
+        "p": 89
+      }
+    ],
+    "sources": "Odds: DraftKings via ESPN (Nov 1). Win probabilities: ESPN matchup predictor (FPI). Market recap unchanged from Fri Oct 30 close."
   }
- ],
- "football": {
-  "label": "Week 9 recap",
-  "results": [
-   {
-    "away": "Miami",
-    "home": "North Carolina",
-    "as": 38,
-    "hs": 35,
-    "blurb": "No. 1 Miami survived a 4-touchdown game from UNC's Billy Edwards Jr. to stay unbeaten.",
-    "stats": [
-     "Darian Mensah: 22/29, 274 yds, 3 TD",
-     "Billy Edwards Jr.: 28/34, 341 yds, 4 TD for UNC",
-     "Malachi Toney: 7 catches, 75 yds, 2 TD"
-    ],
-    "awayRank": 1,
-    "homeRank": null
-   },
-   {
-    "away": "Ohio State",
-    "home": "USC",
-    "as": 18,
-    "hs": 30,
-    "blurb": "Unranked USC upset No. 2 Ohio State in the Coliseum.",
-    "stats": [
-     "Jayden Maiava: 15/22, 222 yds, TD",
-     "Trent Mosley: 5 catches, 101 yds, TD",
-     "Bo Jackson: 21 carries, 121 yds for Ohio State"
-    ],
-    "awayRank": 2
-   },
-   {
-    "away": "Florida",
-    "home": "Georgia",
-    "as": 8,
-    "hs": 27,
-    "blurb": "No. 3 Georgia held No. 17 Florida to 8 points.",
-    "stats": [
-     "Gunner Stockton: 13/23, 101 yds",
-     "Nate Frazier: 12 carries, 67 yds, TD",
-     "Tramell Jones Jr.: 18/25, 172 yds, INT for Florida"
-    ],
-    "awayRank": 17,
-    "homeRank": 3
-   },
-   {
-    "away": "Oklahoma State",
-    "home": "Iowa State",
-    "as": 49,
-    "hs": 51,
-    "blurb": "No. 24 Oklahoma State lost a 100-point shootout at Iowa State.",
-    "stats": [],
-    "awayRank": 24
-   },
-   {
-    "away": "Texas State",
-    "home": "Boise State",
-    "as": 45,
-    "hs": 46,
-    "blurb": "No. 20 Boise State edged Texas State by a point.",
-    "stats": [],
-    "homeRank": 20
-   },
-   {
-    "away": "Army",
-    "home": "Memphis",
-    "as": 22,
-    "hs": 49,
-    "blurb": "Memphis pulled away from Army at home.",
-    "stats": [
-     "Marcus Stokes: 29/35, 371 yds, 4 TD for Memphis",
-     "Jaylin Carter: 23 carries, 96 yds, 2 TD"
-    ]
-   },
-   {
-    "away": "Notre Dame",
-    "home": "Navy",
-    "as": 35,
-    "hs": 13,
-    "blurb": "No. 5 Notre Dame beat Navy 35-13.",
-    "stats": [
-     "CJ Carr: 19/29, 210 yds, 2 TD",
-     "Nolan James Jr.: 9 carries, 107 yds, 2 TD",
-     "Jackson Gutierrez: 28 carries, 110 yds, TD for Navy"
-    ],
-    "awayRank": 5
-   },
-   {
-    "away": "UConn",
-    "home": "Air Force",
-    "as": 26,
-    "hs": 35,
-    "blurb": "Air Force beat UConn behind Kemper Hodges' four rushing touchdowns.",
-    "stats": [
-     "Kemper Hodges: 35 carries, 200 yds, 4 TD"
-    ]
-   }
-  ],
-  "upcoming": [
-   {
-    "away": "Virginia Tech",
-    "home": "SMU",
-    "kick": "2026-11-07T00:00:00Z",
-    "note": "ESPN · Gerald J. Ford Stadium",
-    "homeRank": 19
-   },
-   {
-    "away": "TCU",
-    "home": "Arizona",
-    "kick": "2026-11-07T03:15:00Z",
-    "note": "ESPN · Casino Del Sol Stadium",
-    "homeRank": 22
-   },
-   {
-    "away": "BYU",
-    "home": "Utah",
-    "kick": "2026-11-07T17:00:00Z",
-    "note": "ABC · Rice-Eccles Stadium",
-    "awayRank": 8,
-    "homeRank": 6
-   },
-   {
-    "away": "Texas",
-    "home": "Missouri",
-    "kick": "2026-11-07T17:00:00Z",
-    "note": "ESPN · Memorial Stadium",
-    "awayRank": 11,
-    "homeRank": 23
-   },
-   {
-    "away": "Oklahoma State",
-    "home": "Kansas State",
-    "kick": "2026-11-07T17:00:00Z",
-    "note": "TNT / HBO Max · Bill Snyder Family Stadium",
-    "awayRank": 24
-   },
-   {
-    "away": "UCLA",
-    "home": "Minnesota",
-    "kick": "2026-11-07T17:00:00Z",
-    "note": "Kickoff time TBA · Huntington Bank Stadium",
-    "awayRank": 7
-   },
-   {
-    "away": "Cincinnati",
-    "home": "Houston",
-    "kick": "2026-11-07T17:00:00Z",
-    "note": "Kickoff time TBA · TDECU Stadium",
-    "homeRank": 18
-   },
-   {
-    "away": "Iowa",
-    "home": "Northwestern",
-    "kick": "2026-11-07T17:00:00Z",
-    "note": "Kickoff time TBA · Ryan Field",
-    "homeRank": 20
-   },
-   {
-    "away": "Rutgers",
-    "home": "Wisconsin",
-    "kick": "2026-11-07T17:30:00Z",
-    "note": "BTN · Camp Randall Stadium",
-    "homeRank": 25
-   },
-   {
-    "away": "Oregon",
-    "home": "Ohio State",
-    "kick": "2026-11-07T20:30:00Z",
-    "note": "CBS · Ohio Stadium",
-    "homeRank": 2
-   },
-   {
-    "away": "Alabama",
-    "home": "LSU",
-    "kick": "2026-11-07T20:30:00Z",
-    "note": "ABC · Tiger Stadium",
-    "awayRank": 10,
-    "homeRank": 15
-   },
-   {
-    "away": "Merrimack",
-    "home": "Wake Forest",
-    "kick": "2026-11-07T20:30:00Z",
-    "note": "ACC Network · Allegacy Federal Credit Union Stadium",
-    "homeRank": 14
-   },
-   {
-    "away": "Temple",
-    "home": "Navy",
-    "kick": "2026-11-07T20:30:00Z",
-    "note": "CBSSN · Navy-Marine Corps Memorial Stadium"
-   },
-   {
-    "away": "Boise State",
-    "home": "Colorado State",
-    "kick": "2026-11-07T23:00:00Z",
-    "note": "USA Network · Canvas Stadium",
-    "awayRank": 20
-   },
-   {
-    "away": "Kentucky",
-    "home": "Tennessee",
-    "kick": "2026-11-07T23:15:00Z",
-    "note": "ESPN · Neyland Stadium",
-    "awayRank": 9,
-    "homeRank": 16
-   },
-   {
-    "away": "Miami",
-    "home": "Notre Dame",
-    "kick": "2026-11-08T00:30:00Z",
-    "note": "NBC · Notre Dame Stadium",
-    "awayRank": 1,
-    "homeRank": 5
-   },
-   {
-    "away": "Georgia",
-    "home": "Ole Miss",
-    "kick": "2026-11-08T00:30:00Z",
-    "note": "ABC · Vaught-Hemingway Stadium",
-    "awayRank": 3,
-    "homeRank": 12
-   },
-   {
-    "away": "Air Force",
-    "home": "Army",
-    "kick": "2026-11-08T00:30:00Z",
-    "note": "CBS · Home at Michie Stadium",
-    "army": true
-   },
-   {
-    "away": "Oklahoma",
-    "home": "Florida",
-    "kick": "2026-11-08T00:45:00Z",
-    "note": "SEC Network · Ben Hill Griffin Stadium",
-    "homeRank": 17
-   },
-   {
-    "away": "West Virginia",
-    "home": "Texas Tech",
-    "kick": "2026-11-08T02:30:00Z",
-    "note": "ESPN · Galaxy Stadium",
-    "homeRank": 13
-   }
-  ],
-  "poll": "AP Top 25, Week 9 (Oct 25); Week 10 poll not yet released"
- },
- "location": {
-  "name": "Angkor Wat",
-  "wiki": "Angkor_Wat",
-  "country": "Cambodia",
-  "region": "Siem Reap Province, northwestern Cambodia",
-  "lat": 13.4125,
-  "lon": 103.8667,
-  "tagline": "The largest religious complex in the world, rising from a 190-metre moat.",
-  "intro": "Angkor Wat is a Khmer temple complex near Siem Reap, commissioned by King Suryavarman II in the 12th century. It was built as a Hindu temple and later became a Buddhist site. A depiction of it has appeared on every version of Cambodia's national flag since 1863.",
-  "stats": [
-   {
-    "label": "Site area",
-    "value": "162.6 ha"
-   },
-   {
-    "label": "Central tower",
-    "value": "65 m"
-   },
-   {
-    "label": "Moat width",
-    "value": "~190 m"
-   },
-   {
-    "label": "UNESCO listing",
-    "value": "1992"
-   }
-  ],
-  "facts": [
-   "Construction began around 1122 and finished around 1150, under Suryavarman II.",
-   "Guinness World Records cites it as the largest religious complex in the world.",
-   "Unlike most Khmer temples, it faces west.",
-   "The moat is about 190 m wide with a perimeter of over 5 km.",
-   "It was on UNESCO's World Heritage in Danger list until 2004."
-  ],
-  "bestTime": "Not verified; check current Cambodia travel guidance before booking.",
-  "gettingThere": "From New York, fly to Siem Reap (REP) with connections; the temples are a short drive from the city.",
-  "tip": "Book a multi-day Angkor pass and check current ticket rules before you go."
- },
- "flightsNote": "Real fares from Kayak searches run Oct 29 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
- "markets": {
-  "asOf": "Fri Oct 30 close",
-  "story": "The S&P 500 fell 1.82%, its worst day since June, as weak tech earnings revived worries about AI spending; Intel plunged 28.58% and chip stocks sold off.",
-  "indices": [
-   {
-    "name": "S&P 500",
-    "value": "7,580",
-    "chg": -1.82
-   }
-  ],
-  "movers": [
-   {
-    "sym": "INTC",
-    "move": "−28.6%",
-    "dir": -1,
-    "why": "Intel forecast weaker fourth-quarter revenue of $15.0B–$16.0B and cited a PC slowdown."
-   },
-   {
-    "sym": "RDDT",
-    "move": "−29.2%",
-    "dir": -1,
-    "why": "Reddit gave weak fourth-quarter revenue guidance and warned of fewer Google search referrals."
-   },
-   {
-    "sym": "REGN",
-    "move": "+13.3%",
-    "dir": 1,
-    "why": "Regeneron beat earnings expectations."
-   },
-   {
-    "sym": "FDXF",
-    "move": "+14.9%",
-    "dir": 1,
-    "why": "FedEx Freight gave strong fourth-quarter guidance in its first report as a standalone company."
-   },
-   {
-    "sym": "AMZN",
-    "move": "−1.4%",
-    "dir": -1,
-    "why": "Amazon's third-quarter revenue ($201.9B) and EPS ($1.89) came in below estimates."
-   }
-  ],
-  "lines": [
-   {
-    "game": "Baltimore Ravens @ Buffalo Bills",
-    "kick": "2026-11-01T18:00:00Z",
-    "spread": "BUF −3",
-    "total": "54.5",
-    "ml": "BUF −166 · BAL +140",
-    "bills": true
-   },
-   {
-    "game": "Miami @ Notre Dame",
-    "kick": "2026-11-08T00:30:00Z",
-    "spread": "ND −3.5",
-    "total": "55.5",
-    "ml": "ND −170 · MIA +142"
-   },
-   {
-    "game": "Georgia @ Ole Miss",
-    "kick": "2026-11-08T00:30:00Z",
-    "spread": "UGA −3",
-    "total": "56.5",
-    "ml": "UGA −135 · MISS +114"
-   }
-  ],
-  "probs": [
-   {
-    "game": "Boise State @ Colorado State",
-    "fav": "Boise State",
-    "p": 93
-   },
-   {
-    "game": "UL Monroe @ Arkansas State",
-    "fav": "Arkansas State",
-    "p": 92
-   },
-   {
-    "game": "Rice @ North Texas",
-    "fav": "North Texas",
-    "p": 90
-   },
-   {
-    "game": "West Virginia @ Texas Tech",
-    "fav": "Texas Tech",
-    "p": 89
-   },
-   {
-    "game": "Liberty @ New Mexico State",
-    "fav": "Liberty",
-    "p": 89
-   }
-  ],
-  "sources": "Odds: DraftKings via ESPN (Nov 1). Win probabilities: ESPN matchup predictor (FPI). Market recap unchanged from Fri Oct 30 close."
- }
 }
