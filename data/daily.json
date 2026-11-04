@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02T19:55:00-05:00",
+  "updated": "2026-11-04T07:00:00-05:00",
   "flights": [
     {
       "from": "LGA",
@@ -692,108 +692,108 @@
     "poll": "AP Top 25, Week 10 (Nov 1)"
   },
   "location": {
-    "name": "Angkor Wat",
-    "wiki": "Angkor_Wat",
-    "country": "Cambodia",
-    "region": "Siem Reap Province, northwestern Cambodia",
-    "lat": 13.4125,
-    "lon": 103.8667,
-    "tagline": "The largest religious complex in the world, rising from a 190-metre moat.",
-    "intro": "Angkor Wat is a Khmer temple complex near Siem Reap, commissioned by King Suryavarman II in the 12th century. It was built as a Hindu temple and later became a Buddhist site. A depiction of it has appeared on every version of Cambodia's national flag since 1863.",
+    "name": "Meteora",
+    "wiki": "Meteora",
+    "country": "Greece",
+    "region": "Trikala, Thessaly, northwestern Greece",
+    "lat": 39.7142,
+    "lon": 21.6311,
+    "tagline": "Monasteries perched on sandstone pillars that rise hundreds of metres above the Thessalian plain.",
+    "intro": "Meteora is a forest of towering sandstone and conglomerate pillars near the town of Kalabaka. Monks began building monasteries on the summits in the 14th century, and six still stand today. The name is usually taken to mean \"suspended in the air\".",
     "stats": [
       {
-        "label": "Site area",
-        "value": "162.6 ha"
+        "label": "Monasteries today",
+        "value": "6"
       },
       {
-        "label": "Central tower",
-        "value": "65 m"
+        "label": "UNESCO listed",
+        "value": "1988"
       },
       {
-        "label": "Moat width",
-        "value": "~190 m"
+        "label": "Summit elevations",
+        "value": "~390–630 m"
       },
       {
-        "label": "UNESCO listing",
-        "value": "1992"
+        "label": "Greatest monastery founded",
+        "value": "1356 (Great Meteoron)"
       }
     ],
     "facts": [
-      "Construction began around 1122 and finished around 1150, under Suryavarman II.",
-      "Guinness World Records cites it as the largest religious complex in the world.",
-      "Unlike most Khmer temples, it faces west.",
-      "The moat is about 190 m wide with a perimeter of over 5 km.",
-      "It was on UNESCO's World Heritage in Danger list until 2004."
+      "About 24 monasteries were built at the peak, mostly from the second half of the 14th century; only six survive.",
+      "Before steps were cut into the rock in the 1920s, monks were reached by ladders or hoisted up in ropes and nets.",
+      "The Great Meteoron was founded by Athanasios the Meteorite, a monk from Mount Athos, who built it between 1356 and 1372.",
+      "The pillars formed from sediment laid down in a lake-edge delta; about 60 million years ago the land was uplifted and weathering along vertical faults carved them.",
+      "Holy Trinity monastery appears in the 1981 James Bond film For Your Eyes Only."
     ],
-    "bestTime": "Not verified; check current Cambodia travel guidance before booking.",
-    "gettingThere": "From New York, fly to Siem Reap (REP) with connections; the temples are a short drive from the city.",
-    "tip": "Book a multi-day Angkor pass and check current ticket rules before you go."
+    "bestTime": "Spring (April–May) or early autumn, for mild weather and green hillsides; some monasteries close on certain weekdays.",
+    "gettingThere": "From New York, fly to Athens or Thessaloniki (about 10–11 hours with a connection), then take a train or bus roughly 4–5 hours to Kalabaka, or rent a car.",
+    "tip": "Dress modestly: monasteries require covered shoulders and knees, with wraps often provided at the entrance."
   },
   "flightsNote": "Real fares from Kayak searches run Nov 2 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
   "markets": {
-    "asOf": "Fri Oct 30 close",
-    "story": "The S&P 500 fell 1.82%, its worst day since June, as weak tech earnings revived worries about AI spending; Intel plunged 28.58% and chip stocks sold off.",
+    "asOf": "Tue Nov 3 close",
+    "story": "The S&P 500 rose 0.4% as AI-linked megacaps like Nvidia and Broadcom rebounded, even though most index stocks fell; Apple slid on rising memory-chip costs as investors awaited midterm election results.",
     "indices": [
       {
         "name": "S&P 500",
-        "value": "7,580",
-        "chg": -1.82
+        "value": "7,569",
+        "chg": 0.37
       }
     ],
     "movers": [
       {
-        "sym": "INTC",
-        "move": "−28.6%",
-        "dir": -1,
-        "why": "Intel forecast weaker fourth-quarter revenue of $15.0B–$16.0B and cited a PC slowdown."
-      },
-      {
-        "sym": "RDDT",
-        "move": "−29.2%",
-        "dir": -1,
-        "why": "Reddit gave weak fourth-quarter revenue guidance and warned of fewer Google search referrals."
-      },
-      {
-        "sym": "REGN",
-        "move": "+13.3%",
+        "sym": "DD",
+        "move": "+8.6%",
         "dir": 1,
-        "why": "Regeneron beat earnings expectations."
+        "why": "DuPont beat earnings expectations."
       },
       {
-        "sym": "FDXF",
-        "move": "+14.9%",
+        "sym": "RVTY",
+        "move": "+7.8%",
         "dir": 1,
-        "why": "FedEx Freight gave strong fourth-quarter guidance in its first report as a standalone company."
+        "why": "Revvity topped analyst expectations and its CEO said end-market conditions are improving."
       },
       {
-        "sym": "AMZN",
-        "move": "−1.4%",
+        "sym": "CE",
+        "move": "+5%",
+        "dir": 1,
+        "why": "Celanese reported stronger-than-expected profits."
+      },
+      {
+        "sym": "NVDA",
+        "move": "+2.3%",
+        "dir": 1,
+        "why": "Nvidia was the biggest upward force on the S&P 500 as AI chip stocks firmed."
+      },
+      {
+        "sym": "AAPL",
+        "move": "−1.9%",
         "dir": -1,
-        "why": "Amazon's third-quarter revenue ($201.9B) and EPS ($1.89) came in below estimates."
+        "why": "Apple expects lower profit per dollar of revenue next quarter as memory-chip costs rise."
       }
     ],
     "lines": [
       {
-        "game": "Baltimore Ravens @ Buffalo Bills",
-        "kick": "2026-11-01T18:00:00Z",
-        "spread": "BUF −3",
-        "total": "54.5",
-        "ml": "BUF −166 · BAL +140",
+        "game": "Buffalo Bills @ Minnesota Vikings",
+        "kick": "2026-11-10T01:15:00Z",
+        "spread": "BUF −3.5",
+        "total": "45.5",
+        "ml": "BUF −175 · MIN +145",
         "bills": true
       },
       {
         "game": "Miami @ Notre Dame",
         "kick": "2026-11-08T00:30:00Z",
-        "spread": "ND −3.5",
-        "total": "55.5",
-        "ml": "ND −170 · MIA +142"
+        "spread": "ND −5.5",
+        "total": "57.5",
+        "ml": "ND −205 · MIA +170"
       },
       {
         "game": "Georgia @ Ole Miss",
         "kick": "2026-11-08T00:30:00Z",
-        "spread": "UGA −3",
+        "spread": "UGA −3.5",
         "total": "56.5",
-        "ml": "UGA −135 · MISS +114"
+        "ml": "UGA −175 · MISS +145"
       }
     ],
     "probs": [
@@ -823,6 +823,6 @@
         "p": 89
       }
     ],
-    "sources": "Odds: DraftKings via ESPN (Nov 1). Win probabilities: ESPN matchup predictor (FPI). Market recap unchanged from Fri Oct 30 close."
+    "sources": "Index close: AP via WTOP (Nov 3). Odds: DraftKings via ESPN (Nov 4). Win probabilities: ESPN matchup predictor (FPI), unchanged from Nov 1."
   }
 }

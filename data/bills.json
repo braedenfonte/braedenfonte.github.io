@@ -1,196 +1,196 @@
 {
- "updated": "2026-11-02T08:07:18-05:00",
- "team": "Buffalo Bills",
- "record": {
-  "w": 6,
-  "l": 1
- },
- "standing": "Leads the AFC East",
- "pf": 233,
- "pa": 181,
- "results": [
-  {
-   "wk": 1,
-   "date": "Sep 13",
-   "opp": "at Houston",
-   "bs": 36,
-   "os": 31,
-   "res": "W"
+  "updated": "2026-11-04T07:00:00-05:00",
+  "team": "Buffalo Bills",
+  "record": {
+    "w": 6,
+    "l": 1
   },
-  {
-   "wk": 2,
-   "date": "Sep 17",
-   "opp": "vs Detroit",
-   "bs": 41,
-   "os": 31,
-   "res": "W",
-   "note": "Thursday night"
+  "standing": "Leads the AFC East",
+  "pf": 233,
+  "pa": 181,
+  "results": [
+    {
+      "wk": 1,
+      "date": "Sep 13",
+      "opp": "at Houston",
+      "bs": 36,
+      "os": 31,
+      "res": "W"
+    },
+    {
+      "wk": 2,
+      "date": "Sep 17",
+      "opp": "vs Detroit",
+      "bs": 41,
+      "os": 31,
+      "res": "W",
+      "note": "Thursday night"
+    },
+    {
+      "wk": 3,
+      "date": "Sep 27",
+      "opp": "vs LA Chargers",
+      "bs": 24,
+      "os": 16,
+      "res": "W"
+    },
+    {
+      "wk": 4,
+      "date": "Oct 4",
+      "opp": "vs New England",
+      "bs": 26,
+      "os": 29,
+      "res": "L"
+    },
+    {
+      "wk": 5,
+      "date": "Oct 12",
+      "opp": "at LA Rams",
+      "bs": 37,
+      "os": 34,
+      "res": "W",
+      "note": "OT, Monday night"
+    },
+    {
+      "wk": 6,
+      "date": "Oct 18",
+      "opp": "at Las Vegas",
+      "bs": 33,
+      "os": 30,
+      "res": "W",
+      "note": "Recovered the onside kick"
+    },
+    {
+      "wk": 7,
+      "date": "Nov 1",
+      "opp": "vs Baltimore",
+      "bs": 36,
+      "os": 10,
+      "res": "W"
+    }
+  ],
+  "afcEast": [
+    {
+      "team": "Buffalo Bills",
+      "w": 6,
+      "l": 1,
+      "me": true
+    },
+    {
+      "team": "New England Patriots",
+      "w": 5,
+      "l": 3
+    },
+    {
+      "team": "New York Jets",
+      "w": 2,
+      "l": 6
+    },
+    {
+      "team": "Miami Dolphins",
+      "w": 1,
+      "l": 6
+    }
+  ],
+  "lastGame": {
+    "title": "Bills 36, Ravens 10",
+    "stats": [
+      "Josh Allen: 3 TD (1-yd rush, TD passes to DJ Moore and Dalton Kincaid); passing TD record for the Bills",
+      "James Cook: third-quarter rushing TD",
+      "Tyler Bass: 3 field goals, Bills record for consecutive made FGs",
+      "Lamar Jackson left on Baltimore's first offensive play with a right hand injury",
+      "Landon Jackson and rookie TJ Parker each recorded their first sacks of the season"
+    ]
   },
-  {
-   "wk": 3,
-   "date": "Sep 27",
-   "opp": "vs LA Chargers",
-   "bs": 24,
-   "os": 16,
-   "res": "W"
-  },
-  {
-   "wk": 4,
-   "date": "Oct 4",
-   "opp": "vs New England",
-   "bs": 26,
-   "os": 29,
-   "res": "L"
-  },
-  {
-   "wk": 5,
-   "date": "Oct 12",
-   "opp": "at LA Rams",
-   "bs": 37,
-   "os": 34,
-   "res": "W",
-   "note": "OT, Monday night"
-  },
-  {
-   "wk": 6,
-   "date": "Oct 18",
-   "opp": "at Las Vegas",
-   "bs": 33,
-   "os": 30,
-   "res": "W",
-   "note": "Recovered the onside kick"
-  },
-  {
-   "wk": 7,
-   "date": "Nov 1",
-   "opp": "vs Baltimore",
-   "bs": 36,
-   "os": 10,
-   "res": "W"
-  }
- ],
- "afcEast": [
-  {
-   "team": "Buffalo Bills",
-   "w": 6,
-   "l": 1,
-   "me": true
-  },
-  {
-   "team": "New England Patriots",
-   "w": 4,
-   "l": 3
-  },
-  {
-   "team": "New York Jets",
-   "w": 2,
-   "l": 5
-  },
-  {
-   "team": "Miami Dolphins",
-   "w": 1,
-   "l": 5
-  }
- ],
- "lastGame": {
-  "title": "Bills 36, Ravens 10",
-  "stats": [
-   "Josh Allen: 3 TD (1-yd rush, TD passes to DJ Moore and Dalton Kincaid); passing TD record for the Bills",
-   "James Cook: third-quarter rushing TD",
-   "Tyler Bass: 3 field goals, Bills record for consecutive made FGs",
-   "Lamar Jackson left on Baltimore's first offensive play with a right hand injury",
-   "Landon Jackson and rookie TJ Parker each recorded their first sacks of the season"
-  ]
- },
- "news": [
-  {
-   "h": "Bills rout Ravens 36-10 to improve to 6-1",
-   "b": "Josh Allen accounted for three touchdowns as Buffalo dominated at Highmark Stadium on Nov. 1."
-  },
-  {
-   "h": "Lamar Jackson hurt on first play",
-   "b": "The Ravens QB was knocked out on Baltimore's first offensive snap and will likely need surgery on his right hand, per WBUF."
-  },
-  {
-   "h": "Bass sets Bills field goal streak record",
-   "b": "Tyler Bass made all three field goal attempts and set a Bills record for consecutive made field goals, per a WBUF headline."
-  },
-  {
-   "h": "Next up: Vikings on Monday Night Football",
-   "b": "Buffalo plays at Minnesota on Nov. 9."
-  }
- ],
- "schedule": [
-  {
-   "kick": "2026-11-09T20:15-05:00",
-   "opp": "Minnesota Vikings",
-   "home": false,
-   "venue": "",
-   "note": "Monday Night Football"
-  },
-  {
-   "kick": "2026-11-15T13:00-05:00",
-   "opp": "New York Jets",
-   "home": false,
-   "venue": "",
-   "note": ""
-  },
-  {
-   "kick": "2026-11-22T13:00-05:00",
-   "opp": "Miami Dolphins",
-   "home": true,
-   "venue": "",
-   "note": ""
-  },
-  {
-   "kick": "2026-11-26T20:20-05:00",
-   "opp": "Kansas City Chiefs",
-   "home": true,
-   "venue": "",
-   "note": "Thanksgiving night"
-  },
-  {
-   "kick": "2026-12-06T16:25-05:00",
-   "opp": "New England Patriots",
-   "home": false,
-   "venue": "",
-   "note": ""
-  },
-  {
-   "kick": "2026-12-13T20:20-05:00",
-   "opp": "Green Bay Packers",
-   "home": false,
-   "venue": "",
-   "note": "Sunday Night Football"
-  },
-  {
-   "kick": "2026-12-19T20:20-05:00",
-   "opp": "Chicago Bears",
-   "home": true,
-   "venue": "",
-   "note": ""
-  },
-  {
-   "kick": "2026-12-25T16:30-05:00",
-   "opp": "Denver Broncos",
-   "home": false,
-   "venue": "",
-   "note": "Christmas Day"
-  },
-  {
-   "kick": "2027-01-03T13:00-05:00",
-   "opp": "Miami Dolphins",
-   "home": false,
-   "venue": "",
-   "note": ""
-  },
-  {
-   "kick": "2027-01-10T13:00-05:00",
-   "opp": "New York Jets",
-   "home": true,
-   "venue": "",
-   "note": "Date and time may flex"
-  }
- ],
- "source": "WBUF game recap (Nov 1, 2026). AFC East rivals' records not re-verified."
+  "news": [
+    {
+      "h": "Bills rout Ravens 36-10 to improve to 6-1",
+      "b": "Josh Allen accounted for three touchdowns as Buffalo dominated at Highmark Stadium on Nov. 1."
+    },
+    {
+      "h": "Lamar Jackson hurt on first play",
+      "b": "The Ravens QB was knocked out on Baltimore's first offensive snap and will likely need surgery on his right hand, per WBUF."
+    },
+    {
+      "h": "Bass sets Bills field goal streak record",
+      "b": "Tyler Bass made all three field goal attempts and set a Bills record for consecutive made field goals, per a WBUF headline."
+    },
+    {
+      "h": "Next up: Vikings on Monday Night Football",
+      "b": "Buffalo plays at Minnesota on Nov. 9."
+    }
+  ],
+  "schedule": [
+    {
+      "kick": "2026-11-09T20:15-05:00",
+      "opp": "Minnesota Vikings",
+      "home": false,
+      "venue": "",
+      "note": "Monday Night Football"
+    },
+    {
+      "kick": "2026-11-15T13:00-05:00",
+      "opp": "New York Jets",
+      "home": false,
+      "venue": "",
+      "note": ""
+    },
+    {
+      "kick": "2026-11-22T13:00-05:00",
+      "opp": "Miami Dolphins",
+      "home": true,
+      "venue": "",
+      "note": ""
+    },
+    {
+      "kick": "2026-11-26T20:20-05:00",
+      "opp": "Kansas City Chiefs",
+      "home": true,
+      "venue": "",
+      "note": "Thanksgiving night"
+    },
+    {
+      "kick": "2026-12-06T16:25-05:00",
+      "opp": "New England Patriots",
+      "home": false,
+      "venue": "",
+      "note": ""
+    },
+    {
+      "kick": "2026-12-13T20:20-05:00",
+      "opp": "Green Bay Packers",
+      "home": false,
+      "venue": "",
+      "note": "Sunday Night Football"
+    },
+    {
+      "kick": "2026-12-19T20:20-05:00",
+      "opp": "Chicago Bears",
+      "home": true,
+      "venue": "",
+      "note": ""
+    },
+    {
+      "kick": "2026-12-25T16:30-05:00",
+      "opp": "Denver Broncos",
+      "home": false,
+      "venue": "",
+      "note": "Christmas Day"
+    },
+    {
+      "kick": "2027-01-03T13:00-05:00",
+      "opp": "Miami Dolphins",
+      "home": false,
+      "venue": "",
+      "note": ""
+    },
+    {
+      "kick": "2027-01-10T13:00-05:00",
+      "opp": "New York Jets",
+      "home": true,
+      "venue": "",
+      "note": "Date and time may flex"
+    }
+  ],
+  "source": "Standings: ESPN (Nov 4, 2026); Bills game recap: WBUF (Nov 1)."
 }
