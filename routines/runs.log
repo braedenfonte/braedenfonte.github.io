@@ -32,3 +32,4 @@
 2026-11-02T18:48-05:00 | health-check | OK | Checked nightly-prep: FAIL at 17:55; retry already fired at 18:45 by another run, mine was a duplicate fire | 
 2026-11-03T00:11Z | morning-update | OK | manual rerun from chat: football poll AP Week 10 (Nov 1) + upcoming ranks; 25 Kayak fares (cheapest $162 ATL Dec 4) | other parts unchanged
 2026-11-03T18:47-05:00 | health-check | RETRY nightly-prep | no nightly-prep line today (missing) |
+2026-11-04T08:25-05:00 | morning-update | FAIL | markets (S&P 7,569 +0.36%), place Meteora; football/bills/flights/trip unchanged | study decks skipped: Canvas key expired, make a new one (files 403); finance skipped (Era returned no accounts); flights/trip skipped (laptop off); football/Bills not re-verified (searches returned no 2026 results)
