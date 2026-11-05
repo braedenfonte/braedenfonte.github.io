@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T08:20:00-05:00",
+ "updated": "2026-11-05T07:45:00-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -692,72 +692,72 @@
   "poll": "AP Top 25, Week 10 (Nov 1)"
  },
  "location": {
-  "name": "Meteora",
-  "wiki": "Meteora",
-  "country": "Greece",
-  "region": "Thessaly",
-  "lat": 39.7217,
-  "lon": 21.6306,
-  "tagline": "Monasteries perched on towering sandstone pillars",
-  "intro": "Meteora is a cluster of giant rock pillars rising above the Thessalian plain near Kalambaka, topped by Eastern Orthodox monasteries. Monks first climbed here to seek isolation, and the monasteries became a spiritual refuge for centuries.",
+  "name": "Iguazu Falls",
+  "wiki": "Iguazu_Falls",
+  "country": "Argentina / Brazil",
+  "region": "Misiones and Paraná",
+  "lat": -25.6867,
+  "lon": -54.4447,
+  "tagline": "The largest waterfall system in the world, on the Argentina–Brazil border",
+  "intro": "Iguazu Falls is a chain of roughly 275 drops along the Iguazu River, set in subtropical rainforest on the border of Argentina and Brazil. Most of the falls are on the Argentine side, while the Brazilian side offers the wide panoramic views.",
   "stats": [
    {
+    "label": "Number of drops",
+    "value": "About 275"
+   },
+   {
+    "label": "Width of the falls",
+    "value": "About 2.7 km"
+   },
+   {
     "label": "UNESCO listing",
-    "value": "1988"
+    "value": "1984 (Argentina), 1986 (Brazil)"
    },
    {
-    "label": "Active monasteries",
-    "value": "6"
-   },
-   {
-    "label": "Rock type",
-    "value": "Sandstone and conglomerate"
-   },
-   {
-    "label": "Region",
-    "value": "Thessaly, central Greece"
+    "label": "Countries",
+    "value": "Argentina and Brazil"
    }
   ],
   "facts": [
-   "Of about 24 monasteries once built here, six are still active today.",
-   "For centuries, monks and supplies were hoisted up by rope ladders and nets; steps were cut into the rock in the 1920s.",
-   "The pillars were shaped by erosion of river-deposited rock laid down millions of years ago.",
-   "The name Meteora means roughly 'suspended in the air'.",
-   "The monasteries appear in the 1981 James Bond film For Your Eyes Only."
+   "The falls are split into roughly 275 distinct drops and islands, and the count of smaller falls ranges from about 150 to 300 depending on the water level.",
+   "The name comes from the Guaraní words y ('water') and ûasú ('big').",
+   "The Devil's Throat is a long, narrow chasm about 80–90 m wide and 70–80 m deep.",
+   "The falls stretch along an edge about 2.7 km long.",
+   "Eleanor Roosevelt reportedly exclaimed 'Poor Niagara!' on seeing them."
   ],
-  "bestTime": "April–June or September–October, for mild weather and fewer crowds",
-  "gettingThere": "Fly New York to Athens, then take a train or bus to Kalambaka (about 4–5 hours).",
-  "tip": "Visit at sunset from the rocky viewpoints, and dress modestly (covered knees and shoulders) for monastery entry."
+  "bestTime": "March–May or August–November, for comfortable weather and strong but safe water levels",
+  "gettingThere": "Fly New York to Buenos Aires or São Paulo, then take a connecting flight to Puerto Iguazú (Argentina) or Foz do Iguaçu (Brazil).",
+  "tip": "Spend one day on each side: the Argentine side for walkways close to the falls, the Brazilian side for the big panorama."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 2 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
-  "asOf": "Tue Nov 3 close",
-  "story": "The S&P 500 rose 0.36% on Election Day as chip stocks rebounded from the recent AI selloff, while Apple's weak outlook pulled the Dow down 0.4%.",
+  "asOf": "Wed Nov 4 close",
+  "story": "The S&P 500 jumped 1.6% after President Donald Trump's party lost its sole control of Washington in the midterm elections, with hospital owners and retailers serving lower-income shoppers leading a broad rally as oil prices fell.",
   "indices": [
    {
     "name": "S&P 500",
-    "value": "7,569",
-    "chg": 0.36
+    "value": "7,689",
+    "chg": 1.6
    }
   ],
   "movers": [
    {
-    "sym": "AAPL",
-    "move": "−2%",
+    "sym": "Hospitals",
+    "move": "Rally",
+    "dir": 1,
+    "why": "Hospital owners were among the biggest gainers in the broad post-election rally."
+   },
+   {
+    "sym": "Retailers",
+    "move": "Rally",
+    "dir": 1,
+    "why": "Retailers focused on lower-income Americans led the gains."
+   },
+   {
+    "sym": "Oil",
+    "move": "Lower",
     "dir": -1,
-    "why": "Quarterly margins and sales failed to impress investors."
-   },
-   {
-    "sym": "SMH",
-    "move": "+2%",
-    "dir": 1,
-    "why": "Semiconductor ETF rose on strength in Nvidia, AMD, Micron and Broadcom."
-   },
-   {
-    "sym": "AMD",
-    "move": "Earnings beat",
-    "dir": 1,
-    "why": "Third-quarter revenue rose 45% to a record $13.4B on AI chip and data center demand."
+    "why": "Oil prices fell sharply, which eased Treasury yields."
    }
   ],
   "lines": [
@@ -803,6 +803,6 @@
     "p": 89
    }
   ],
-  "sources": "Index closes: Stocktwits and Asia Business Daily (Nov 3). Odds: DraftKings via ESPN (Nov 1); Bills–Vikings line not yet verified. Win probabilities: ESPN matchup predictor (FPI), Nov 1."
+  "sources": "S&P 500 close: AP via WTOP (Nov 4). Odds: DraftKings via ESPN (Nov 1); Bills–Vikings line not verified. Win probabilities: ESPN FPI, Nov 1."
  }
 }
