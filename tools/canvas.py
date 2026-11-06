@@ -68,13 +68,26 @@ def main():
         print(json.dumps(get(sys.argv[2]), indent=1))
     elif cmd == "download":
         info = get(f"/files/{sys.argv[2]}")
-        r = requests.get(info["url"], timeout=120)  # this link carries its own one-time pass
-        if r.status_code in (401, 403):
-            fail(f"Canvas file host blocked the download ({r.status_code}). Add the host from "
-                 f"{info['url'].split('/')[2]} to the Routines environment's Allowed domains.")
-        r.raise_for_status()
-        open(sys.argv[3], "wb").write(r.content)
-        print(f"saved {sys.argv[3]} ({len(r.content)//1024} KB): {info.get('display_name')}")
+        links = [info["url"]]  # this link carries its own one-time pass
+        try:  # backup: Canvas's public link for the same file
+            links.append(get(f"/files/{sys.argv[2]}/public_url")["public_url"])
+        except SystemExit:
+            pass
+        except Exception:
+            pass
+        errors = []
+        for link in links:
+            try:
+                r = requests.get(link, timeout=120)
+            except requests.RequestException as e:
+                errors.append(type(e).__name__)
+                continue
+            if r.ok and r.content:
+                open(sys.argv[3], "wb").write(r.content)
+                print(f"saved {sys.argv[3]} ({len(r.content)//1024} KB): {info.get('display_name')}")
+                return
+            errors.append(f"{r.status_code} from {r.url.split('/')[2]}")
+        fail("Canvas file host blocked the download (" + "; ".join(errors) + "). Skip this file and move on.")
     else:
         print(__doc__)
 
