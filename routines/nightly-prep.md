@@ -3,13 +3,25 @@
 Make prep sheets for TOMORROW's classes only, then archive them on the website.
 Follow `routines/common.md` (Canvas, run log, alerts, committing). Routine name for the log: `nightly-prep`.
 
+## Rule 0: Never die silently
+- Spend at most 10 minutes on any one step. If a download or site is blocked (403, 406, "not allowed"),
+  do NOT try workarounds (other hosts, mirrors, browser, retries in a loop): note it and move on.
+- No matter what happens, the run must END by appending a `nightly-prep` line to `routines/runs.log`
+  (OK or FAIL with the reason), committing and pushing it, and sending the alert if it failed.
+
 ## Step 1: Is tomorrow a Day 1, a Day 2, or no class?
 West Point alternates Day 1 / Day 2.
+- FIRST check the saved copy: `routines/day-codes.json` ({"YYYY-MM-DD": "1-23" | "2-24" | "N/A"}).
+  If tomorrow's date is in it, use that code and skip the downloads below.
 - Best source: the MA376 AY27-1 Calendar spreadsheet (course 12755, file 4662829, "Calendar" sheet):
   `python3 tools/canvas.py download 4662829 /tmp/cal.xlsx`, then read it with openpyxl
   (`pip install openpyxl` if missing). Each date has a code like "1-23" (Day 1, lesson 23),
   "2-24" (Day 2) or "N/A" (no class). Use it ONLY for the Day 1 / Day 2 code; its lesson titles are out of date.
 - Backup source: the EM481 AY27-1 Calendar PDF (course 12497, file 4386831), same 1-NN / 2-NN codes.
+- Whenever you DO read a calendar, save every date's code (the whole term) to `routines/day-codes.json`
+  (sorted keys, indent=1) so later runs don't need the download. Commit it with the run.
+- If tomorrow's code still can't be found (not saved and both downloads blocked): build nothing, log
+  `FAIL | couldn't tell Day 1/Day 2: <error>. Fix: set Routines environment network access to Full`, alert, finish.
 - If tomorrow is "N/A", a weekend, a holiday or leave: build nothing. Append the log line
   `OK | No classes tomorrow (<date>)`, commit just routines/runs.log, push, and finish.
 
@@ -36,7 +48,7 @@ Never run Day 1 skills before a Day 2, or Day 2 skills before a Day 1.
   (If the HTML file is gone, read the artifact's index.html with the Artifact tool and pass that.)
   Re-running for the same course and date replaces that sheet. `pip install cryptography` if missing.
 - Validate: `python3 -c "import json;json.load(open('data/prep/manifest.json'))"`.
-- Allowed files to commit: `data/prep/` and `routines/runs.log`. Make sure no plain .json sheet is staged.
+- Allowed files to commit: `data/prep/`, `routines/day-codes.json` and `routines/runs.log`. Make sure no plain .json sheet is staged.
 - Append the run log line (common.md) BEFORE committing, then commit once with message
   "Prep sheets <tomorrow's date>: <courses>" and push.
 

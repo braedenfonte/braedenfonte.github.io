@@ -51,4 +51,4 @@ If everything worked, send nothing.
 - Only stage the files the routine's own file allows, plus `routines/runs.log`.
 - `git fetch origin main` and `git rebase origin/main` first, then push to main. If the push is
   rejected, fetch, rebase again and push. Never force-push.
-- Never edit `index.html`, anything in `routines/` except runs.log, or `tools/`.
+- Never edit `index.html`, anything in `routines/` except runs.log (and day-codes.json in nightly-prep), or `tools/`.
