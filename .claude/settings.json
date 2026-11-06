@@ -1,0 +1,31 @@
+{
+ "permissions": {
+  "defaultMode": "acceptEdits",
+  "allow": [
+   "Bash",
+   "Read",
+   "Edit",
+   "Write",
+   "Glob",
+   "Grep",
+   "WebFetch",
+   "WebSearch",
+   "Skill",
+   "TaskCreate",
+   "TaskUpdate",
+   "PushNotification",
+   "mcp__claude-artifacts",
+   "mcp__Memory-Bank",
+   "mcp__Memory_Bank",
+   "mcp__Era-Context",
+   "mcp__Era_Context",
+   "mcp__Google-Drive",
+   "mcp__Google_Drive"
+  ],
+  "deny": [
+   "Bash(git push --force:*)",
+   "Bash(git push -f:*)",
+   "Bash(rm -rf /:*)"
+  ]
+ }
+}
