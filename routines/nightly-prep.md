@@ -37,6 +37,7 @@ Never run Day 1 skills before a Day 2, or Day 2 skills before a Day 1.
   "N/A", blank, a holiday, or tomorrow's date isn't on its schedule. A skip is not a failure.
 - Otherwise run its skill with the Skill tool and follow it fully, including publishing to its existing
   "<COURSE> Class Prep" artifact so the link stays the same. "Next class" = tomorrow's lesson.
+  For the page itself, use the layout in `routines/prep-format.md` INSTEAD of the skill's section 3.
   When the Canvas lesson page and the calendar disagree on the title, trust the lesson page.
 - For each course you built, note: course, lesson number, date (YYYY-MM-DD), title, Day 1/Day 2,
   artifact URL, and the local path of the HTML file you published.
