@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T07:45:00-05:00",
+ "updated": "2026-11-06T08:10:00-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -692,72 +692,61 @@
   "poll": "AP Top 25, Week 10 (Nov 1)"
  },
  "location": {
-  "name": "Iguazu Falls",
-  "wiki": "Iguazu_Falls",
-  "country": "Argentina / Brazil",
-  "region": "Misiones and Paraná",
-  "lat": -25.6867,
-  "lon": -54.4447,
-  "tagline": "The largest waterfall system in the world, on the Argentina–Brazil border",
-  "intro": "Iguazu Falls is a chain of roughly 275 drops along the Iguazu River, set in subtropical rainforest on the border of Argentina and Brazil. Most of the falls are on the Argentine side, while the Brazilian side offers the wide panoramic views.",
+  "name": "Lake Baikal",
+  "wiki": "Lake_Baikal",
+  "country": "Russia",
+  "region": "Siberia (Irkutsk Oblast and Buryatia)",
+  "lat": 53.5,
+  "lon": 108.0,
+  "tagline": "The deepest and one of the oldest lakes on Earth",
+  "intro": "Lake Baikal is a rift lake in southern Siberia, shaped like a long crescent. It is the deepest lake in the world and holds about a fifth of the planet's unfrozen fresh water. Its isolation has produced thousands of plant and animal species found nowhere else.",
   "stats": [
    {
-    "label": "Number of drops",
-    "value": "About 275"
+    "label": "Maximum depth",
+    "value": "1,642 m"
    },
    {
-    "label": "Width of the falls",
-    "value": "About 2.7 km"
+    "label": "Length",
+    "value": "636 km"
+   },
+   {
+    "label": "Surface area",
+    "value": "31,722 km²"
    },
    {
     "label": "UNESCO listing",
-    "value": "1984 (Argentina), 1986 (Brazil)"
-   },
-   {
-    "label": "Countries",
-    "value": "Argentina and Brazil"
+    "value": "1996"
    }
   ],
   "facts": [
-   "The falls are split into roughly 275 distinct drops and islands, and the count of smaller falls ranges from about 150 to 300 depending on the water level.",
-   "The name comes from the Guaraní words y ('water') and ûasú ('big').",
-   "The Devil's Throat is a long, narrow chasm about 80–90 m wide and 70–80 m deep.",
-   "The falls stretch along an edge about 2.7 km long.",
-   "Eleanor Roosevelt reportedly exclaimed 'Poor Niagara!' on seeing them."
+   "Its maximum depth of 1,642 m makes it the deepest lake on Earth.",
+   "It holds about 19% of the planet's unfrozen fresh water, roughly 23,600 cubic kilometres.",
+   "It is an estimated 25–30 million years old.",
+   "Up to 330 rivers flow into it.",
+   "The lake freezes from about January to May, with ice 0.5 to 1.4 m thick on average.",
+   "It is home to the endemic Baikal seal (nerpa)."
   ],
-  "bestTime": "March–May or August–November, for comfortable weather and strong but safe water levels",
-  "gettingThere": "Fly New York to Buenos Aires or São Paulo, then take a connecting flight to Puerto Iguazú (Argentina) or Foz do Iguaçu (Brazil).",
-  "tip": "Spend one day on each side: the Argentine side for walkways close to the falls, the Brazilian side for the big panorama."
+  "bestTime": "February–March for clear ice; July–August for hiking and mild weather",
+  "gettingThere": "Fly New York to Moscow or another European hub, then connect to Irkutsk and drive about 1.5 hours to the lake. Check current travel advisories and flight availability for Russia before planning.",
+  "tip": "Visit the winter ice for transparent blue ice, or the summer trails around the shore."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 2 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
-  "asOf": "Wed Nov 4 close",
-  "story": "The S&P 500 jumped 1.6% after President Donald Trump's party lost its sole control of Washington in the midterm elections, with hospital owners and retailers serving lower-income shoppers leading a broad rally as oil prices fell.",
+  "asOf": "Thu Nov 5 close",
+  "story": "The S&P 500 fell 4.4%, its worst day since the April 2025 tariff sell-off, as AI data-center stocks were hit by worries about possible data center moratoriums after the midterm elections; it erased Wednesday's gain, the index's best in three months.",
   "indices": [
    {
     "name": "S&P 500",
-    "value": "7,689",
-    "chg": 1.6
+    "value": "7,354",
+    "chg": -4.4
    }
   ],
   "movers": [
    {
-    "sym": "Hospitals",
-    "move": "Rally",
-    "dir": 1,
-    "why": "Hospital owners were among the biggest gainers in the broad post-election rally."
-   },
-   {
-    "sym": "Retailers",
-    "move": "Rally",
-    "dir": 1,
-    "why": "Retailers focused on lower-income Americans led the gains."
-   },
-   {
-    "sym": "Oil",
-    "move": "Lower",
+    "sym": "AI data centers",
+    "move": "Sell-off",
     "dir": -1,
-    "why": "Oil prices fell sharply, which eased Treasury yields."
+    "why": "Stocks tied to building AI data centers led the decline on worries about possible moratoriums on data centers."
    }
   ],
   "lines": [
@@ -803,6 +792,6 @@
     "p": 89
    }
   ],
-  "sources": "S&P 500 close: AP via WTOP (Nov 4). Odds: DraftKings via ESPN (Nov 1); Bills–Vikings line not verified. Win probabilities: ESPN FPI, Nov 1."
+  "sources": "S&P 500 close: AP via WTOP (Nov 5). Odds: DraftKings via ESPN (Nov 1); Bills–Vikings line not verified. Win probabilities: ESPN FPI, Nov 1."
  }
 }
