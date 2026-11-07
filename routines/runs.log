@@ -39,3 +39,4 @@
 2026-11-05T07:50-05:00 | morning-update | FAIL | markets (S&P 7,689 +1.6%), place Iguazu Falls; Canvas works | football/Bills not re-verified (searches return no 2026 results); study decks not rebuilt (kept yesterday's MA376/MA481X); finance skipped (Era plan hides accounts); flights/trip skipped (laptop off)
 2026-11-05T23:30-05:00 | nightly-prep | OK | Day 1 tomorrow (Fri 6 Nov): MA376 L29 built and archived; SS388 skipped (not on schedule); EM481 skipped (X-Hour, no lesson) |
 2026-11-06T08:20-05:00 | morning-update | FAIL | markets (S&P 7,354 -4.4%), place Lake Baikal, MA376 L29 deck sealed (replaces earlier decks) | football/Bills kept (no new games, not re-verified); MA486/MA481X/EM481/SS388 decks not built (no material for today's lessons); finance skipped (Era plan hides accounts); flights/trip skipped (laptop off)
+2026-11-07T07:48-05:00 | health-check | RETRY morning-update | no morning-update line today and daily.json not updated today (missing) |
