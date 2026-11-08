@@ -42,3 +42,4 @@
 2026-11-07T07:48-05:00 | health-check | RETRY morning-update | no morning-update line today and daily.json not updated today (missing) |
 2026-11-07T18:46-05:00 | health-check | RETRY nightly-prep | no nightly-prep line today (missing) |
 2026-11-07T18:46-05:00 | health-check | RETRY nightly-prep | no nightly-prep line today (missing) |
+2026-11-08T18:05-05:00 | nightly-prep | FAIL | MA376 L30, EM481 L25 built and archived | SS388 not built: Canvas returns 403 on SS388 (course 12510) files so the schedule/lesson number for 2026-11-09 (Quiz 4 day, Homework 4 due) couldn't be read. Fix: check SS388 file access on Canvas or add its schedule
