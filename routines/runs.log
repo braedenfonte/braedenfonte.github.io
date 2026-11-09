@@ -48,3 +48,4 @@
 2026-11-09T07:58-05:00 | morning-update | FAIL | re-run: Nov 8 data still current (daily/bills/place/markets/EM481+MA481X decks kept); Army has Nov 14 bye, next game Nov 21 vs East Carolina (time unconfirmed) | finance skipped (Era returned no accounts); flights and trip tracker skipped (Chrome not available); MA376 L30 notes still not posted; SS388 Canvas 403; MA486 no lesson dates
 2026-11-09T15:05-05:00 | morning-update | OK | manual catch-up: place Antelope Canyon, flights (31 Kayak searches, 25 fares), San Juan trip tracker; saved SS388 schedule (routines/ss388-schedule.json) | finance skipped (Era plan hides accounts); study decks not rebuilt (today's classes already over)
 2026-11-09T15:25-05:00 | morning-update | OK | manual: study decks rebuilt for MA486 L30, MA376 L30, EM481 L26, SS388 L24 (MA481X L30 kept) |
+2026-11-09T17:48-05:00 | nightly-prep | OK | Day 2: MA486 L30, MA481X L30 | 
