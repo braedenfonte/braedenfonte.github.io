@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T08:10:00-05:00",
+ "updated": "2026-11-08T20:15:00-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -453,292 +453,143 @@
   }
  ],
  "football": {
-  "label": "Week 9 recap",
+  "label": "Week 10 recap",
   "results": [
    {
-    "away": "Miami",
-    "home": "North Carolina",
-    "as": 38,
-    "hs": 35,
-    "blurb": "No. 1 Miami survived a 4-touchdown game from UNC's Billy Edwards Jr. to stay unbeaten.",
-    "stats": [
-     "Darian Mensah: 22/29, 274 yds, 3 TD",
-     "Billy Edwards Jr.: 28/34, 341 yds, 4 TD for UNC",
-     "Malachi Toney: 7 catches, 75 yds, 2 TD"
-    ],
-    "awayRank": 1,
-    "homeRank": null
-   },
-   {
-    "away": "Ohio State",
-    "home": "USC",
-    "as": 18,
-    "hs": 30,
-    "blurb": "Unranked USC upset No. 2 Ohio State in the Coliseum.",
-    "stats": [
-     "Jayden Maiava: 15/22, 222 yds, TD",
-     "Trent Mosley: 5 catches, 101 yds, TD",
-     "Bo Jackson: 21 carries, 121 yds for Ohio State"
-    ],
-    "awayRank": 2
-   },
-   {
-    "away": "Florida",
-    "home": "Georgia",
-    "as": 8,
-    "hs": 27,
-    "blurb": "No. 3 Georgia held No. 17 Florida to 8 points.",
-    "stats": [
-     "Gunner Stockton: 13/23, 101 yds",
-     "Nate Frazier: 12 carries, 67 yds, TD",
-     "Tramell Jones Jr.: 18/25, 172 yds, INT for Florida"
-    ],
-    "awayRank": 17,
-    "homeRank": 3
-   },
-   {
-    "away": "Oklahoma State",
-    "home": "Iowa State",
-    "as": 49,
-    "hs": 51,
-    "blurb": "No. 24 Oklahoma State lost a 100-point shootout at Iowa State.",
-    "stats": [],
-    "awayRank": 24
-   },
-   {
-    "away": "Texas State",
-    "home": "Boise State",
-    "as": 45,
-    "hs": 46,
-    "blurb": "No. 20 Boise State edged Texas State by a point.",
-    "stats": [],
-    "homeRank": 20
-   },
-   {
-    "away": "Army",
-    "home": "Memphis",
-    "as": 22,
-    "hs": 49,
-    "blurb": "Memphis pulled away from Army at home.",
-    "stats": [
-     "Marcus Stokes: 29/35, 371 yds, 4 TD for Memphis",
-     "Jaylin Carter: 23 carries, 96 yds, 2 TD"
-    ]
-   },
-   {
-    "away": "Notre Dame",
-    "home": "Navy",
-    "as": 35,
-    "hs": 13,
-    "blurb": "No. 5 Notre Dame beat Navy 35-13.",
-    "stats": [
-     "CJ Carr: 19/29, 210 yds, 2 TD",
-     "Nolan James Jr.: 9 carries, 107 yds, 2 TD",
-     "Jackson Gutierrez: 28 carries, 110 yds, TD for Navy"
-    ],
-    "awayRank": 5
-   },
-   {
-    "away": "UConn",
-    "home": "Air Force",
-    "as": 26,
-    "hs": 35,
-    "blurb": "Air Force beat UConn behind Kemper Hodges' four rushing touchdowns.",
-    "stats": [
-     "Kemper Hodges: 35 carries, 200 yds, 4 TD"
-    ]
-   }
-  ],
-  "upcoming": [
-   {
-    "away": "New Mexico",
-    "home": "Nevada",
-    "kick": "2026-11-07T02:00:00Z",
-    "note": "Mackay Stadium",
-    "awayRank": 22
-   },
-   {
-    "away": "TCU",
-    "home": "Arizona",
-    "kick": "2026-11-07T03:15:00Z",
-    "note": "ESPN · Casino Del Sol Stadium",
-    "homeRank": 24
+    "away": "Georgia",
+    "home": "Ole Miss",
+    "as": 42,
+    "hs": 7,
+    "blurb": "No. 1 in the new poll again: Georgia routed Ole Miss.",
+    "stats": []
    },
    {
     "away": "BYU",
     "home": "Utah",
-    "kick": "2026-11-07T17:00:00Z",
-    "note": "ABC · Rice-Eccles Stadium",
-    "awayRank": 7,
+    "as": 20,
+    "hs": 28,
+    "blurb": "No. 3 Utah beat No. 9 BYU and climbed to No. 2 in the new poll, its highest ranking since 2008.",
+    "stats": [],
+    "awayRank": 9,
     "homeRank": 3
-   },
-   {
-    "away": "Texas",
-    "home": "Missouri",
-    "kick": "2026-11-07T17:00:00Z",
-    "note": "ESPN · Memorial Stadium",
-    "awayRank": 10,
-    "homeRank": 19
-   },
-   {
-    "away": "UCLA",
-    "home": "Minnesota",
-    "kick": "2026-11-07T17:00:00Z",
-    "note": "Kickoff time TBA · Huntington Bank Stadium",
-    "awayRank": 5
-   },
-   {
-    "away": "Cincinnati",
-    "home": "Houston",
-    "kick": "2026-11-07T17:00:00Z",
-    "note": "Kickoff time TBA · TDECU Stadium",
-    "homeRank": 17
-   },
-   {
-    "away": "Iowa",
-    "home": "Northwestern",
-    "kick": "2026-11-07T17:00:00Z",
-    "note": "Kickoff time TBA · Ryan Field",
-    "awayRank": 21
-   },
-   {
-    "away": "Texas A&M",
-    "home": "South Carolina",
-    "kick": "2026-11-07T20:00:00Z",
-    "note": "Williams-Brice Stadium",
-    "homeRank": 23
    },
    {
     "away": "Oregon",
     "home": "Ohio State",
-    "kick": "2026-11-07T20:30:00Z",
-    "note": "CBS · Ohio Stadium",
-    "homeRank": 11
-   },
-   {
-    "away": "Alabama",
-    "home": "LSU",
-    "kick": "2026-11-07T20:30:00Z",
-    "note": "ABC · Tiger Stadium",
-    "awayRank": 9,
-    "homeRank": 15
-   },
-   {
-    "away": "Merrimack",
-    "home": "Wake Forest",
-    "kick": "2026-11-07T20:30:00Z",
-    "note": "ACC Network · Allegacy Federal Credit Union Stadium",
-    "homeRank": 14
-   },
-   {
-    "away": "Temple",
-    "home": "Navy",
-    "kick": "2026-11-07T20:30:00Z",
-    "note": "CBSSN · Navy-Marine Corps Memorial Stadium"
-   },
-   {
-    "away": "Boise State",
-    "home": "Colorado State",
-    "kick": "2026-11-07T23:00:00Z",
-    "note": "USA Network · Canvas Stadium",
-    "awayRank": 20
-   },
-   {
-    "away": "Kentucky",
-    "home": "Tennessee",
-    "kick": "2026-11-07T23:15:00Z",
-    "note": "ESPN · Neyland Stadium",
-    "awayRank": 8,
-    "homeRank": 16
-   },
-   {
-    "away": "Miami",
-    "home": "Notre Dame",
-    "kick": "2026-11-08T00:30:00Z",
-    "note": "NBC · Notre Dame Stadium",
-    "awayRank": 1,
-    "homeRank": 4
-   },
-   {
-    "away": "Georgia",
-    "home": "Ole Miss",
-    "kick": "2026-11-08T00:30:00Z",
-    "note": "ABC · Vaught-Hemingway Stadium",
-    "awayRank": 2,
+    "as": 41,
+    "hs": 28,
+    "blurb": "Oregon won in Columbus; Ohio State fell to No. 21.",
+    "stats": [],
+    "awayRank": 23,
     "homeRank": 12
+   },
+   {
+    "away": "Texas",
+    "home": "Missouri",
+    "as": 34,
+    "hs": 20,
+    "blurb": "No. 7 Texas beat No. 18 Missouri.",
+    "stats": [],
+    "awayRank": 7,
+    "homeRank": 18
    },
    {
     "away": "Air Force",
     "home": "Army",
-    "kick": "2026-11-08T00:30:00Z",
-    "note": "CBS · Home at Michie Stadium",
-    "army": true
+    "as": 24,
+    "hs": 21,
+    "blurb": "Army led 21-17 after the third quarter but did not score in the fourth; Air Force took the lead for good early in the fourth.",
+    "stats": []
    },
    {
-    "away": "Oklahoma",
-    "home": "Florida",
-    "kick": "2026-11-08T00:45:00Z",
-    "note": "SEC Network · Ben Hill Griffin Stadium",
-    "homeRank": 25
-   },
-   {
-    "away": "West Virginia",
-    "home": "Texas Tech",
-    "kick": "2026-11-08T02:30:00Z",
-    "note": "ESPN · Galaxy Stadium",
-    "homeRank": 13
+    "away": "Navy",
+    "home": "Temple",
+    "as": 42,
+    "hs": 35,
+    "blurb": "Navy won a 42-35 game over Temple.",
+    "stats": []
    }
   ],
-  "poll": "AP Top 25, Week 10 (Nov 1)"
+  "upcoming": [
+   {
+    "away": "Duke",
+    "home": "Miami",
+    "kick": "2026-11-14T17:00:00Z",
+    "note": "ABC (listed; times can shift)",
+    "homeRank": 5
+   },
+   {
+    "away": "Missouri",
+    "home": "Georgia",
+    "kick": "2026-11-14T20:30:00Z",
+    "note": "ABC · Athens",
+    "homeRank": 1
+   },
+   {
+    "away": "Boston College",
+    "home": "Notre Dame",
+    "kick": "2026-11-14T20:30:00Z",
+    "note": "NBC",
+    "homeRank": 3
+   },
+   {
+    "away": "USC",
+    "home": "Indiana",
+    "kick": "2026-11-14T20:30:00Z",
+    "note": "CBS",
+    "awayRank": 15,
+    "homeRank": 6
+   }
+  ],
+  "poll": "AP Top 25, Week 11 (Nov 8)"
  },
  "location": {
-  "name": "Lake Baikal",
-  "wiki": "Lake_Baikal",
-  "country": "Russia",
-  "region": "Siberia (Irkutsk Oblast and Buryatia)",
-  "lat": 53.5,
-  "lon": 108.0,
-  "tagline": "The deepest and one of the oldest lakes on Earth",
-  "intro": "Lake Baikal is a rift lake in southern Siberia, shaped like a long crescent. It is the deepest lake in the world and holds about a fifth of the planet's unfrozen fresh water. Its isolation has produced thousands of plant and animal species found nowhere else.",
+  "name": "Pamukkale",
+  "wiki": "Pamukkale",
+  "country": "Turkey",
+  "region": "Denizli Province, Inner Aegean",
+  "lat": 37.9239,
+  "lon": 29.1233,
+  "tagline": "White travertine terraces filled with warm mineral water",
+  "intro": "Pamukkale is a hillside of white travertine terraces in southwestern Turkey, built up by hot springs rich in calcium. Above it sit the ruins of the ancient spa city of Hierapolis. The two together are a UNESCO World Heritage Site.",
   "stats": [
    {
-    "label": "Maximum depth",
-    "value": "1,642 m"
+    "label": "Terrace length",
+    "value": "about 2,700 m"
    },
    {
-    "label": "Length",
-    "value": "636 km"
-   },
-   {
-    "label": "Surface area",
-    "value": "31,722 km²"
+    "label": "Terrace height",
+    "value": "about 160 m"
    },
    {
     "label": "UNESCO listing",
-    "value": "1996"
+    "value": "1988"
+   },
+   {
+    "label": "Hot springs",
+    "value": "17, 35–100 °C"
    }
   ],
   "facts": [
-   "Its maximum depth of 1,642 m makes it the deepest lake on Earth.",
-   "It holds about 19% of the planet's unfrozen fresh water, roughly 23,600 cubic kilometres.",
-   "It is an estimated 25–30 million years old.",
-   "Up to 330 rivers flow into it.",
-   "The lake freezes from about January to May, with ice 0.5 to 1.4 m thick on average.",
-   "It is home to the endemic Baikal seal (nerpa)."
+   "The travertine formation is about 2,700 m long, 600 m wide and 160 m high, visible from Denizli about 20 km away.",
+   "It is fed by 17 hot springs with temperatures between 35 °C and 100 °C.",
+   "Hierapolis was founded as a thermal spa in the early 2nd century BC.",
+   "Cleopatra's Pool is a thermal pool where ancient marble columns lie submerged.",
+   "More than two million people visit each year, and sections are periodically closed so the terraces can regenerate."
   ],
-  "bestTime": "February–March for clear ice; July–August for hiking and mild weather",
-  "gettingThere": "Fly New York to Moscow or another European hub, then connect to Irkutsk and drive about 1.5 hours to the lake. Check current travel advisories and flight availability for Russia before planning.",
-  "tip": "Visit the winter ice for transparent blue ice, or the summer trails around the shore."
+  "bestTime": "Spring and autumn for mild weather; go early or late in the day to avoid crowds",
+  "gettingThere": "Fly New York to Istanbul, then connect to Denizli (Çardak) airport and drive about 1 hour; or take a bus or taxi from Denizli.",
+  "tip": "Walk the terraces barefoot where allowed, and visit the Hierapolis ruins above them."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 2 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
-  "asOf": "Thu Nov 5 close",
-  "story": "The S&P 500 fell 4.4%, its worst day since the April 2025 tariff sell-off, as AI data-center stocks were hit by worries about possible data center moratoriums after the midterm elections; it erased Wednesday's gain, the index's best in three months.",
+  "asOf": "Fri Nov 6 close",
+  "story": "The S&P 500 rose 0.32% on Friday, recovering only a small part of Thursday's 4.36% drop as tech led the rebound; the Dow slipped 0.46%.",
   "indices": [
    {
     "name": "S&P 500",
-    "value": "7,354",
-    "chg": -4.4
+    "value": "7,377",
+    "chg": 0.32
    }
   ],
   "movers": [
@@ -751,47 +602,15 @@
   ],
   "lines": [
    {
-    "game": "Miami @ Notre Dame",
-    "kick": "2026-11-08T00:30:00Z",
-    "spread": "ND −3.5",
-    "total": "55.5",
-    "ml": "ND −170 · MIA +142"
-   },
-   {
-    "game": "Georgia @ Ole Miss",
-    "kick": "2026-11-08T00:30:00Z",
-    "spread": "UGA −3",
-    "total": "56.5",
-    "ml": "UGA −135 · MISS +114"
+    "game": "Bills @ Vikings",
+    "kick": "2026-11-10T01:15:00Z",
+    "spread": "BUF −3.5",
+    "total": "—",
+    "ml": "—",
+    "bills": true
    }
   ],
-  "probs": [
-   {
-    "game": "Boise State @ Colorado State",
-    "fav": "Boise State",
-    "p": 93
-   },
-   {
-    "game": "UL Monroe @ Arkansas State",
-    "fav": "Arkansas State",
-    "p": 92
-   },
-   {
-    "game": "Rice @ North Texas",
-    "fav": "North Texas",
-    "p": 90
-   },
-   {
-    "game": "West Virginia @ Texas Tech",
-    "fav": "Texas Tech",
-    "p": 89
-   },
-   {
-    "game": "Liberty @ New Mexico State",
-    "fav": "Liberty",
-    "p": 89
-   }
-  ],
-  "sources": "S&P 500 close: AP via WTOP (Nov 5). Odds: DraftKings via ESPN (Nov 1); Bills–Vikings line not verified. Win probabilities: ESPN FPI, Nov 1."
+  "probs": [],
+  "sources": "S&P 500 close: journalarta (Nov 6). Bills line: TSN preview (may have moved). Movers carried over from Nov 5. No other odds or win probabilities verified."
  }
 }
