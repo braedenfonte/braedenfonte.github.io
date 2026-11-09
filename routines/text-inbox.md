@@ -21,7 +21,7 @@ per message:
 | `what's due` / `due` / `due this week` | Read data/brief.json "due" + quizzes/tests and to-dos for the next 7 days. | Short list, soonest first. |
 | `today` / `tomorrow` | Day code and classes for that day (day-codes.json), plus that day's to-dos and due items. | Short list. |
 | `todos` / `to-do list` | Upcoming to-dos (next 7 days). | Short list. |
-| `help` | — | One line per command above. |
+| `help` | — | The grouped menu: 1) MORNING TEXT (automatic 7:04am: day, classes, due, tests, to-dos, headlines) 2) TO-DO LIST (add to-do / done / clear all / todos) 3) SCHEDULE (due / today / tomorrow) 4) L&A TRACKER (Sunday ~7pm CIS ping, reply go) 5) PRICE ALERTS (in the morning text: SJU to BWI under $700, weekend fare $250 or less). Note: checked hourly 7am-11pm. |
 | anything else | Nothing. | "I can do: add to-do, done, due, today, tomorrow, todos, go. Text help for examples." |
 
 He writes in normal words, not exact commands: figure out which row he means ("can you add haircut friday" = add to-do).
