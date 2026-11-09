@@ -51,18 +51,10 @@ bestTime, gettingThere (from New York), tip. Verify every fact. Append the name 
   (or a named published model like ESPN FPI) as {game, fav, p (whole number)}; skip over 95%.
 - sources: one short line.
 
-## 5) Finance (encrypted: plain numbers must NEVER be committed or put in daily.json)
-Call Era Context knowledge__get_financial_context_and_overview ONCE (no other Era calls). Write OUTSIDE
-the repo, /tmp/finance.json:
-{"asOf":"YYYY-MM-DD","accounts":[{"inst":"Chase","name":"Sapphire Reserve","type":"Credit card","mask":"3970","bal":196.87,"debt":true}, ...],
- "pending":[Robinhood / American Express / Chase / Capital One names NOT among linked institutions],
- "netWorth":<net_worth.amount>, "month":{"label":"Oct 1–16","income":..,"spending":..,"net":..},
- "lastMonth":{"label":"September","income":..,"spending":..,"net":..},
- "categories":[["Category", amount], ...top_categories in order], "flags":[short strings; omit zero counts]}
-Short names: "Chase", "Capital One", "Robinhood", "American Express". Round to cents.
-Run `python3 tools/finance.py seal /tmp/finance.json`, then delete /tmp/finance.json. If Era fails or
-returns no accounts (for example its plan hides them), leave data/finance.enc unchanged and log finance as
-"skipped (Era returned no accounts)". That is not a failure. Never print balances in the commit or summary.
+## 5) Finance: nothing to do
+The site's Finance tab pulls live balances from Plaid through the Cloudflare worker
+(bf-finance.bfonte18.workers.dev) each time it's opened. data/finance.enc is only an old fallback.
+Do NOT call Era and do NOT touch data/finance.enc. Don't mention finance in the run log.
 
 ## 6) Study decks (data/study.enc)
 Courses: MA486 ("Python"), MA481X ("Optimization"), MA376 ("Stats"), EM481 ("Simulation"), SS388 ("Macro").
