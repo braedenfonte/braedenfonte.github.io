@@ -1,0 +1,188 @@
+{
+ "source": "Canvas SS388 (course 12510) calendar, section H1, and lesson pages; read 2026-11-09",
+ "lessons": {
+  "2026-08-17": {
+   "lesson": 1,
+   "title": "Introduction to SS388 and Macroeconomics"
+  },
+  "2026-08-19": {
+   "lesson": 2,
+   "title": "CH2: Measurement"
+  },
+  "2026-08-24": {
+   "lesson": 3,
+   "title": "CH 3: Business Cycle Measurement"
+  },
+  "2026-08-26": {
+   "lesson": 4,
+   "title": "CH4: Consumer and Firm Behavior Math Review"
+  },
+  "2026-08-31": {
+   "lesson": 5,
+   "title": "CH4: Consumer and Firm Behavior"
+  },
+  "2026-09-02": {
+   "lesson": 6,
+   "title": "CH4: Consumer and Firm Behavior"
+  },
+  "2026-09-08": {
+   "lesson": 7,
+   "title": "CH5.A Closed-Economy, One-Period Macroeconomic Model"
+  },
+  "2026-09-10": {
+   "lesson": 8,
+   "title": "CH5.A Closed-Economy, One-Period Macroeconomic Model"
+  },
+  "2026-09-14": {
+   "lesson": 9,
+   "title": "CH5.A Closed-Economy, One-Period Macroeconomic Model"
+  },
+  "2026-09-16": {
+   "lesson": 10,
+   "title": "CH7. Economic Growth: Malthus and Solow"
+  },
+  "2026-09-21": {
+   "lesson": 11,
+   "title": "CH7. Economic Growth: Malthus and Solow"
+  },
+  "2026-09-23": {
+   "lesson": 12,
+   "title": "CH8. Income Disparity Among Countries and Endogenous Growth"
+  },
+  "2026-09-28": {
+   "lesson": 13,
+   "title": "WPR 1"
+  },
+  "2026-10-05": {
+   "lesson": 14,
+   "title": "CH9: A Two-Period Model: The Consumption-Savings Decision and Credit Market"
+  },
+  "2026-10-07": {
+   "lesson": 15,
+   "title": "CH9: A Two-Period Model: The Consumption-Savings Decision and Credit Market"
+  },
+  "2026-10-13": {
+   "lesson": 16,
+   "title": "CH 10. Credit Market Imperfections: Credit Frictions, Financial Crises, and Social Security"
+  },
+  "2026-10-15": {
+   "lesson": 17,
+   "title": "CH 10. Credit Market Imperfections: Credit Frictions, Financial Crises, and Social Security"
+  },
+  "2026-10-19": {
+   "lesson": 18,
+   "title": "CH11. A Real Intertemporal Model with Investment",
+   "reading": "Williamson Ch. 11, pp. 379-437",
+   "objectives": [
+    "Discuss the representative consumer in the goods market",
+    "Construct a model of the representative firm and its demand for investment"
+   ]
+  },
+  "2026-10-26": {
+   "lesson": 19,
+   "title": "CH11. A Real Intertemporal Model with Investment",
+   "reading": "Williamson Ch. 11, pp. 379-437",
+   "objectives": [
+    "Discuss the representative consumer in the goods market",
+    "Construct a model of the representative firm and its demand for investment"
+   ]
+  },
+  "2026-10-28": {
+   "lesson": 20,
+   "title": "CH12. Money, Banking, Prices, and Monetary Policy",
+   "reading": "Williamson Ch. 12, pp. 442-474",
+   "objectives": [
+    "Discuss shifts in supply and demand of money",
+    "Discuss the implications of money non-neutrality"
+   ]
+  },
+  "2026-11-02": {
+   "lesson": 21,
+   "title": "CH12. Money, Banking, Prices, and Monetary Policy",
+   "reading": "Williamson Ch. 12, pp. 442-474",
+   "objectives": [
+    "Discuss shifts in supply and demand of money",
+    "Discuss the implications of money non-neutrality"
+   ]
+  },
+  "2026-11-04": {
+   "lesson": 22,
+   "title": "CH 13. Business Cycle Models with Flexible Prices and Wages",
+   "reading": "Williamson Ch. 13, pp. 478-505",
+   "objectives": [
+    "Discuss key assumptions for RBC models",
+    "Compare outcomes of RBCs with Keynesian critiques",
+    "Coordination failure models"
+   ]
+  },
+  "2026-11-09": {
+   "lesson": 23,
+   "title": "CH 13. Business Cycle Models with Flexible Prices and Wages",
+   "reading": "Williamson Ch. 13, pp. 478-505",
+   "objectives": [
+    "Discuss key assumptions for RBC models",
+    "Compare outcomes of RBCs with Keynesian critiques",
+    "Coordination failure models"
+   ]
+  },
+  "2026-11-13": {
+   "lesson": 24,
+   "title": "CH 14. New Keynesian Economics: Sticky Prices",
+   "reading": "Williamson Ch. 14, pp. 509-528",
+   "objectives": [
+    "Discuss the roles of price and wage rigidities",
+    "Show role of public policy in Keynesian Economics",
+    "Compare with classical critiques"
+   ]
+  },
+  "2026-11-16": {
+   "lesson": 25,
+   "title": "CH 14. New Keynesian Economics: Sticky Prices",
+   "reading": "Williamson Ch. 14, pp. 509-528",
+   "objectives": [
+    "Discuss the roles of price and wage rigidities",
+    "Show role of public policy in Keynesian Economics",
+    "Compare with classical critiques"
+   ]
+  },
+  "2026-11-18": {
+   "lesson": 26,
+   "title": "CH 15: Phillips Curve and Neo-Fisherism",
+   "reading": "Williamson Ch. 15, pp. 531-560",
+   "objectives": [
+    "Construct the basic New Keynesian model with inflation",
+    "Show how there is a trade-off between the goals of the central bank in the basic New Keynesian Model"
+   ]
+  },
+  "2026-11-23": {
+   "lesson": 27,
+   "title": "CH 15: Phillips Curve and Neo-Fisherism",
+   "reading": "Williamson Ch. 15, pp. 531-560",
+   "objectives": [
+    "Construct the basic New Keynesian model with inflation",
+    "Show how there is a trade-off between the goals of the central bank in the basic New Keynesian Model"
+   ]
+  },
+  "2026-12-02": {
+   "lesson": 28,
+   "title": "WPR 2",
+   "reading": "Chapters 9-15",
+   "objectives": []
+  },
+  "2026-12-04": {
+   "lesson": 29,
+   "title": "CH 16: International Trade",
+   "reading": "Williamson Ch. 16, pp. 562-581",
+   "objectives": [
+    "Construct the first two-period small open economy model",
+    "Show how the first two-period SOE model explains the determinants of the current account balance"
+   ]
+  },
+  "2026-12-07": {
+   "lesson": 30,
+   "title": "Review",
+   "reading": "",
+   "objectives": []
+  }
+ }
+}

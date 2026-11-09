@@ -66,6 +66,7 @@ returns no accounts (for example its plan hides them), leave data/finance.enc un
 
 ## 6) Study decks (data/study.enc)
 Courses: MA486 ("Python"), MA481X ("Optimization"), MA376 ("Stats"), EM481 ("Simulation"), SS388 ("Macro").
+SS388 lesson dates, readings and objectives: `routines/ss388-schedule.json` (its Canvas files are hidden).
 For EACH, pick today's lesson if it meets today, otherwise its next lesson within 7 days (skip if none).
 Material: the "Get the lesson material" section of the matching class-prep skill. MA486 uses the public
 site https://usma-ma486-mathcomp.s3.us-east-1.amazonaws.com/MA486_AY26-1/index.html (WebFetch; notes at

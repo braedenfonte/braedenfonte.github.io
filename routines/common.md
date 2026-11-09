@@ -23,7 +23,9 @@ Install packages with `python3 -m pip install <name>` (not plain `pip`, which ca
   expired: skip every Canvas part, and the alert must say "Canvas key expired, make a new one".
 - To find a file by name (schedules, syllabi, calendars):
   `python3 tools/canvas.py get "/courses/<id>/files?search_term=<word>"` (e.g. search_term=schedule), then download it.
-  The SS388 course schedule spreadsheet is NOT reachable from the cloud through a Project: always find it on Canvas this way.
+  SS388: its Canvas Files are hidden from students (403). Do NOT download its schedule. Use `routines/ss388-schedule.json`
+  (date -> lesson, title, reading, objectives for section H1; a date not in it = no SS388 class). Lesson pages
+  under /courses/12510/modules still work for extra detail.
 - Known course ids: MA376 = 12755, EM481 = 12497. For others, run `python3 tools/canvas.py courses`.
 - Never submit, post or change anything in Canvas. Read only.
 

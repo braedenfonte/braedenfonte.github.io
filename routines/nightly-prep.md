@@ -27,6 +27,7 @@ West Point alternates Day 1 / Day 2.
 
 ## Step 2: Pick the courses
 - Day 1 -> MA376, SS388, EM481 (skills: ma376-class-prep, ss388-class-prep, em481-class-prep)
+  SS388: tomorrow's lesson comes from `routines/ss388-schedule.json`; if tomorrow isn't in it, SS388 has no class (skip, not a failure).
 - Day 2 -> MA486, MA481X (skills: ma486-class-prep, ma481x-class-prep). MS300 has no prep skill; skip it.
 Never run Day 1 skills before a Day 2, or Day 2 skills before a Day 1.
 
