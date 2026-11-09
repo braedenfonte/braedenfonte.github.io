@@ -9,6 +9,9 @@ To change or fix a routine, edit its file here. Nothing else needs to be rebuilt
 | `nightly-prep.md` | Daily 6:43 PM ET (stops early when there is no class tomorrow) | Prep sheets for tomorrow's classes, archived on the site |
 | `morning-update.md` | Daily 6:30 AM ET | Football, Bills, place of the day, markets, finance, study decks, flights |
 | `health-check.md` | 7:43 PM + 8:13 AM daily | Checks the routine that just ran, re-runs it once if it failed, alerts if it fails twice |
+| `morning-text.md` | Daily 7:04 AM ET | Texts Braeden the day: day code, classes, what's due, tests, headlines, price alerts |
+| `text-inbox.md` | Hourly 7 AM-11 PM ET | Answers his texts (add/remove to-dos, what's due, today), Sunday CIS ping, fires the L&A tracker on "go" |
+| `texting.md` | (read by the two above) | How to text him through Inkbox |
 | `common.md` | (read by all) | Shared rules: Canvas, run log, alerts, how to commit |
 | `runs.log` | (written by all) | One line per run: what worked, what failed and why |
 

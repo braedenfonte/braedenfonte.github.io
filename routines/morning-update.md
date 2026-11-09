@@ -4,7 +4,7 @@ Refresh the daily data, the study decks and the weekend flight deals, then commi
 Follow `routines/common.md` (Canvas, run log, alerts, committing). Routine name for the log: `morning-update`.
 
 Edit ONLY: `data/daily.json`, `data/places_history.json`, `data/bills.json`, `data/finance.enc`,
-`data/study.enc`, `data/trip.enc`, `routines/runs.log`. Keep every field name exactly as in the current files (read them
+`data/study.enc`, `data/trip.enc`, `data/brief.json`, `routines/runs.log`. Keep every field name exactly as in the current files (read them
 first and use them as templates). Set "updated" in daily.json to the current ISO time with offset.
 If one part fails, keep that part's previous content, finish the others, and log which part failed.
 
@@ -123,8 +123,26 @@ SJU → BWI on Sat Jan 2, 2027. He tracks the round trip on Google Flights (emai
    then delete /tmp/trip.json. Never put these prices in daily.json, the commit message or the run log.
    Include the tracked and best totals (385 + price) in the final summary.
 
+## 7c) Brief for the morning text (data/brief.json, PUBLIC: no balances, no grades, no San Juan prices)
+Write it every run, even if other parts failed (the 7:04 AM text reads it):
+{"date":"YYYY-MM-DD","updated":"<now ISO>","dayCode":"1-30 (from routines/day-codes.json)",
+ "classes":["MA376 0740", ...] (Day 1: MA376 0740, SS388 0905, EM481 1410; Day 2: MA486 0740, MA481X 0845, MS300 1035; [] if N/A),
+ "due":[{"course":"MA376","title":"Memo 5","due":"YYYY-MM-DDTHH:MM"}] (Canvas assignments due in the next 7 days for
+   MA376, EM481, MA481X, SS388 via `tools/canvas.py` `/courses/<id>/assignments?bucket=upcoming`, plus graded events you saw
+   while building the study decks; soonest first),
+ "tests":[{"course":"SS388","title":"WPR 2","date":"YYYY-MM-DD"}] (quizzes, WPRs, TEEs in the next 14 days, from Canvas and
+   routines/ss388-schedule.json),
+ "headlines":["Army @ Navy Sat 3 PM", "Bills 6-2, next vs MIA Sun 1 PM", "S&P 500 +0.42%"] (from parts 1, 2, 4),
+ "alerts":[...]}
+alerts (each one short line, else []):
+- From 7b: if the cheapest SJU → BWI one-way on Jan 2 ("best" on either site) is UNDER $700, add
+  "San Juan return is under $700 now. Check Google Flights." Never write the actual price here.
+- From 7: if any fare in "flights" is $250 or less, add "Cheap weekend: <city> $<price>, <Fri Mon D>-<Sun D> (<airline>)"
+  for the cheapest one only.
+Validate it with the others in part 8.
+
 ## 8) Validate and publish
-Run `python3 -c "import json;[json.load(open(f)) for f in ['data/daily.json','data/bills.json','data/places_history.json','data/finance.enc','data/study.enc','data/trip.enc']]"`
+Run `python3 -c "import json;[json.load(open(f)) for f in ['data/daily.json','data/bills.json','data/places_history.json','data/finance.enc','data/study.enc','data/trip.enc','data/brief.json']]"`
 and fix any error. `git status`: only the allowed files changed, no plain finance/study JSON staged.
 Append the run log line (common.md), then commit everything ONCE with message "Morning update YYYY-MM-DD"
 (name any skipped or failed part) and push as in common.md. Alert only on failure.

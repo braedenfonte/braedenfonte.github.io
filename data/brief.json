@@ -1,0 +1,10 @@
+{
+ "date": "2026-11-09",
+ "updated": "2026-11-09T15:05:00-05:00",
+ "dayCode": "1-30",
+ "classes": ["MA376 0740", "SS388 0905", "EM481 1410"],
+ "due": [],
+ "tests": [{"course": "SS388", "title": "WPR 2", "date": "2026-12-02"}],
+ "headlines": [],
+ "alerts": []
+}
