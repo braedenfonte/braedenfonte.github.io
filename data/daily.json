@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-09T14:20:40-05:00",
+ "updated": "2026-11-10T07:00:00-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -544,52 +544,52 @@
   "poll": "AP Top 25, Week 11 (Nov 8)"
  },
  "location": {
-  "name": "Antelope Canyon",
-  "wiki": "Antelope_Canyon",
-  "country": "United States",
-  "region": "Navajo Nation, Coconino County, Arizona",
-  "lat": 36.861964,
-  "lon": -111.374342,
-  "tagline": "Twisting sandstone slot canyons carved by flash floods",
-  "intro": "Antelope Canyon is a pair of narrow slot canyons on Navajo land just outside Page, Arizona. Flash floods carved the red Navajo Sandstone into smooth, wave-like walls that glow when sunlight filters down from above. It's one of the most photographed places in the American Southwest.",
+  "name": "Tsingy de Bemaraha",
+  "wiki": "Tsingy_de_Bemaraha_Strict_Nature_Reserve",
+  "country": "Madagascar",
+  "region": "Melaky Region, western Madagascar",
+  "lat": -18.8,
+  "lon": 44.7,
+  "tagline": "A forest of limestone needles above the Manambolo River",
+  "intro": "Tsingy de Bemaraha is a nature reserve and national park on Madagascar's western side, known for needle-shaped limestone formations that rise above cliffs over the Manambolo River. It was made a UNESCO World Heritage Site in 1990.",
   "stats": [
    {
-    "label": "Upper canyon length",
-    "value": "about 660 ft"
+    "label": "Reserve area",
+    "value": "834.11 km²"
    },
    {
-    "label": "Lower canyon length",
-    "value": "about 1,335 ft"
+    "label": "Reserve established",
+    "value": "1927"
    },
    {
-    "label": "Depth",
-    "value": "about 120 ft"
+    "label": "UNESCO listed",
+    "value": "1990"
    },
    {
-    "label": "Floor elevation",
-    "value": "3,704 ft"
+    "label": "Distance from Morondava",
+    "value": "about 150 km"
    }
   ],
   "facts": [
-   "The Navajo call Upper Antelope Canyon Tsé bighánílíní, meaning 'the place where water runs through rocks.'",
-   "Lower Antelope Canyon's Navajo name, Hazdistazí, means 'spiral rock arches.'",
-   "The canyons were formed by flash floods eroding Navajo Sandstone, and floods still reshape them today.",
-   "On August 12, 1997, a flash flood killed 11 tourists in Lower Antelope Canyon.",
-   "Since 1997 it has been a Navajo Tribal Park, and you can only enter with an authorized Navajo guide."
+   "'Tsingy' comes from a local phrase meaning 'the place where one cannot walk barefoot.'",
+   "The limestone pinnacles are so sharp they can cut through equipment and flesh.",
+   "The strict nature reserve was established on 31 December 1927.",
+   "In 1997 the southern end became Tsingy de Bemaraha National Park, while the northern end stayed a strict nature reserve.",
+   "UNESCO cites its geography, preserved mangrove forests, and wild bird and lemur populations."
   ],
-  "bestTime": "Spring through early fall for the famous midday light beams in Upper Antelope Canyon; tours close whenever flash-flood risk is high.",
-  "gettingThere": "Fly from NYC to Phoenix (PHX) or Las Vegas (LAS), then drive about 4.5 hours to Page, Arizona. Book a guided tour in advance.",
-  "tip": "Book a late-morning Upper Canyon tour for the light beams, or Lower Canyon if you'd rather climb ladders and see fewer crowds."
+  "bestTime": "The dry season, roughly May to November (sources vary on the start month). Heavy rain from about December to March makes roads impassable and the park shuts.",
+  "gettingThere": "Fly from New York to Antananarivo (usually with connections), then reach Morondava and drive about 150 km by 4x4. Limited access is also possible via Antsalova, which has flights from Antananarivo or Mahajanga.",
+  "tip": "Hire a local guide and operator, and check road and park status before you go; the track is unpaved with river crossings."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 9 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
-  "asOf": "Fri Nov 6 close",
-  "story": "The S&P 500 rose 0.32% on Friday, recovering only a small part of Thursday's 4.36% drop as tech led the rebound; the Dow slipped 0.46%.",
+  "asOf": "Mon Nov 9 close",
+  "story": "The S&P 500 jumped about 2.3% on Monday, regaining much of Thursday's sharp drop.",
   "indices": [
    {
     "name": "S&P 500",
-    "value": "7,377",
-    "chg": 0.32
+    "value": "7,550",
+    "chg": 2.3
    }
   ],
   "movers": [
@@ -602,15 +602,15 @@
   ],
   "lines": [
    {
-    "game": "Bills @ Vikings",
-    "kick": "2026-11-10T01:15:00Z",
-    "spread": "BUF −3.5",
+    "game": "Bills @ Jets",
+    "kick": "2026-11-15T18:00:00Z",
+    "spread": "—",
     "total": "—",
     "ml": "—",
     "bills": true
    }
   ],
   "probs": [],
-  "sources": "S&P 500 close: journalarta (Nov 6). Bills line: TSN preview (may have moved). Movers carried over from Nov 5. No other odds or win probabilities verified."
+  "sources": "S&P 500 close: La Nación market recap (Nov 9). Movers carried over from Nov 5. No other odds or win probabilities verified."
  }
 }

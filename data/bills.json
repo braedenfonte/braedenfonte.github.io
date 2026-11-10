@@ -1,13 +1,13 @@
 {
- "updated": "2026-11-08T20:15:00-05:00",
+ "updated": "2026-11-10T07:00:00-05:00",
  "team": "Buffalo Bills",
  "record": {
-  "w": 6,
+  "w": 7,
   "l": 1
  },
  "standing": "Leads the AFC East",
- "pf": 233,
- "pa": 181,
+ "pf": 256,
+ "pa": 187,
  "results": [
   {
    "wk": 1,
@@ -67,6 +67,15 @@
    "bs": 36,
    "os": 10,
    "res": "W"
+  },
+  {
+   "wk": 8,
+   "date": "Nov 9",
+   "opp": "at Minnesota",
+   "bs": 23,
+   "os": 6,
+   "res": "W",
+   "note": "Monday night"
   }
  ],
  "afcEast": [
@@ -93,41 +102,34 @@
   }
  ],
  "lastGame": {
-  "title": "Bills 36, Ravens 10",
+  "title": "Bills 23, Vikings 6",
   "stats": [
-   "Josh Allen: 3 TD (1-yd rush, TD passes to DJ Moore and Dalton Kincaid); passing TD record for the Bills",
-   "James Cook: third-quarter rushing TD",
-   "Tyler Bass: 3 field goals, Bills record for consecutive made FGs",
-   "Lamar Jackson left on Baltimore's first offensive play with a right hand injury",
-   "Landon Jackson and rookie TJ Parker each recorded their first sacks of the season"
+   "Josh Allen: 21-of-31, 234 yards, 1 TD, 1 INT; 25-yard TD pass to Keleki Latu (Latu's first career TD)",
+   "James Cook: 31 carries, 107 yards, 1 rushing TD (5 yards)",
+   "Tyler Bass: 3 field goals (39, 25 and 52 yards)",
+   "Defense: 3 turnovers, 2 INTs (Dorian Williams, Terrel Bernard); Vikings 0-for-7 on third down",
+   "Carson Wentz: 8-of-25, 81 yards, 2 INTs for Minnesota"
   ]
  },
  "news": [
   {
-   "h": "Bills rout Ravens 36-10 to improve to 6-1",
-   "b": "Josh Allen accounted for three touchdowns as Buffalo dominated at Highmark Stadium on Nov. 1."
+   "h": "Bills beat Vikings 23-6 on Monday night to move to 7-1",
+   "b": "Buffalo's defense forced three turnovers and held Minnesota 0-for-7 on third down at U.S. Bank Stadium."
   },
   {
-   "h": "Lamar Jackson hurt on first play",
-   "b": "The Ravens QB was knocked out on Baltimore's first offensive snap and will likely need surgery on his right hand, per WBUF."
+   "h": "Allen and Cook reach 5,000-yard milestone",
+   "b": "Per the Bills' recap, Josh Allen and James Cook became the first QB-RB duo in NFL history to each reach 5,000 yards as teammates in the same season."
   },
   {
-   "h": "Bass sets Bills field goal streak record",
-   "b": "Tyler Bass made all three field goal attempts and set a Bills record for consecutive made field goals, per a WBUF headline."
+   "h": "Cook carries it 31 times",
+   "b": "James Cook rushed 31 times for 107 yards and a touchdown, one carry short of his career high; Buffalo led time of possession 42:32 to 17:28."
   },
   {
-   "h": "Bills at Vikings on Monday Night Football",
-   "b": "Both teams are 6-1 for the Nov. 9 game at U.S. Bank Stadium (8:15 p.m. ET, ABC/ESPN); TSN lists Buffalo as a 3.5-point favorite."
+   "h": "Next up: at the Jets, Sunday 1 p.m. ET",
+   "b": "Buffalo visits MetLife Stadium in Week 10 on Nov. 15."
   }
  ],
  "schedule": [
-  {
-   "kick": "2026-11-09T20:15-05:00",
-   "opp": "Minnesota Vikings",
-   "home": false,
-   "venue": "",
-   "note": "Monday Night Football"
-  },
   {
    "kick": "2026-11-15T13:00-05:00",
    "opp": "New York Jets",
@@ -192,5 +194,5 @@
    "note": "Date and time may flex"
   }
  ],
- "source": "WBUF recap (Nov 1); buffalobills.com and TSN previews (Nov 8). AFC East rivals' records not re-verified."
+ "source": "buffalobills.com recap, Fox Sports box score, AP via KTTC (Nov 9-10). AFC East rivals' records not re-verified."
 }
