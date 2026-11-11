@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-10T07:00:00-05:00",
+ "updated": "2026-11-11T07:00:00-05:00",
  "team": "Buffalo Bills",
  "record": {
   "w": 7,
@@ -81,24 +81,24 @@
  "afcEast": [
   {
    "team": "Buffalo Bills",
-   "w": 6,
+   "w": 7,
    "l": 1,
    "me": true
   },
   {
    "team": "New England Patriots",
-   "w": 4,
-   "l": 3
+   "w": 5,
+   "l": 4
   },
   {
    "team": "New York Jets",
    "w": 2,
-   "l": 5
+   "l": 7
   },
   {
    "team": "Miami Dolphins",
    "w": 1,
-   "l": 5
+   "l": 7
   }
  ],
  "lastGame": {
@@ -117,16 +117,16 @@
    "b": "Buffalo's defense forced three turnovers and held Minnesota 0-for-7 on third down at U.S. Bank Stadium."
   },
   {
-   "h": "Allen and Cook reach 5,000-yard milestone",
-   "b": "Per the Bills' recap, Josh Allen and James Cook became the first QB-RB duo in NFL history to each reach 5,000 yards as teammates in the same season."
+   "h": "Benford hurt his wrist in Minnesota",
+   "b": "Top cornerback Christian Benford had an X-ray at halftime, returned, then left again in the third quarter; his status for the Jets is unclear."
   },
   {
-   "h": "Cook carries it 31 times",
-   "b": "James Cook rushed 31 times for 107 yards and a touchdown, one carry short of his career high; Buffalo led time of possession 42:32 to 17:28."
+   "h": "Bills open as 7.5-point favorites at the Jets",
+   "b": "BetMGM lists Buffalo \u22127.5 with a total of 51 for Sunday's game; the Jets are 2-7 and have lost four straight."
   },
   {
-   "h": "Next up: at the Jets, Sunday 1 p.m. ET",
-   "b": "Buffalo visits MetLife Stadium in Week 10 on Nov. 15."
+   "h": "Next up: at the Jets, Sunday 1 p.m. ET on CBS",
+   "b": "Buffalo visits MetLife Stadium on Nov. 15."
   }
  ],
  "schedule": [
@@ -134,8 +134,8 @@
    "kick": "2026-11-15T13:00-05:00",
    "opp": "New York Jets",
    "home": false,
-   "venue": "",
-   "note": ""
+   "venue": "MetLife Stadium",
+   "note": "CBS"
   },
   {
    "kick": "2026-11-22T13:00-05:00",
@@ -194,5 +194,5 @@
    "note": "Date and time may flex"
   }
  ],
- "source": "buffalobills.com recap, Fox Sports box score, AP via KTTC (Nov 9-10). AFC East rivals' records not re-verified."
+ "source": "buffalobills.com recap, Fox Sports standings, SI/BetMGM odds, Two Bills Drive (Nov 9-11)."
 }

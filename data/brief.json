@@ -1,13 +1,14 @@
 {
- "date": "2026-11-10",
- "updated": "2026-11-10T07:05:00-05:00",
- "dayCode": "2-30",
- "classes": [
-  "MA486 0740",
-  "MA481X 0845",
-  "MS300 1035"
- ],
+ "date": "2026-11-11",
+ "updated": "2026-11-11T07:05:00-05:00",
+ "dayCode": "N/A",
+ "classes": [],
  "due": [
+  {
+   "course": "MA481X",
+   "title": "Consultant Reflection (L31)",
+   "due": "2026-11-12T08:45"
+  },
   {
    "course": "MA376",
    "title": "Project Milestone Two",
@@ -17,19 +18,18 @@
    "course": "MA486",
    "title": "Project 2",
    "due": "2026-11-16T07:00"
-  }
- ],
- "tests": [
+  },
   {
-   "course": "SS388",
-   "title": "WPR 2",
-   "date": "2026-12-02"
+   "course": "MA481X",
+   "title": "Consultant Reflection (L32)",
+   "due": "2026-11-17T08:45"
   }
  ],
+ "tests": [],
  "headlines": [
-  "Bills 7-1, next at Jets Sun 1 PM",
-  "S&P 500 +2.30%",
-  "Army on bye Nov 14, next Nov 21 vs East Carolina"
+  "Bills 7-1, next at Jets Sun 1 PM (CBS)",
+  "S&P 500 \u22120.38%",
+  "Army off this week, next vs East Carolina Sat Nov 21"
  ],
  "alerts": []
 }
