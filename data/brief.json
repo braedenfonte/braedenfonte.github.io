@@ -1,34 +1,24 @@
 {
- "date": "2026-11-11",
- "updated": "2026-11-11T07:05:00-05:00",
- "dayCode": "N/A",
- "classes": [],
+ "date": "2026-11-12",
+ "updated": "2026-11-12T07:00:00-05:00",
+ "dayCode": "2-31",
+ "classes": ["MA486 0740", "MA481X 0845", "MS300 1035"],
  "due": [
-  {
-   "course": "MA481X",
-   "title": "Consultant Reflection (L31)",
-   "due": "2026-11-12T08:45"
-  },
-  {
-   "course": "MA376",
-   "title": "Project Milestone Two",
-   "due": "2026-11-13T23:59"
-  },
-  {
-   "course": "MA486",
-   "title": "Project 2",
-   "due": "2026-11-16T07:00"
-  },
-  {
-   "course": "MA481X",
-   "title": "Consultant Reflection (L32)",
-   "due": "2026-11-17T08:45"
-  }
+  {"course": "MA481X", "title": "Consultant Reflection (Firm 2 briefing)", "due": "2026-11-12T08:45"},
+  {"course": "MA376", "title": "Project Milestone Two", "due": "2026-11-13T23:59"},
+  {"course": "MA486", "title": "Project 2", "due": "2026-11-16T07:00"},
+  {"course": "MA481X", "title": "Consultant Reflection (Firm 5 briefing)", "due": "2026-11-17T08:45"},
+  {"course": "MA486", "title": "Project 2 presentations (in class)", "due": "2026-11-19T07:40"},
+  {"course": "MA481X", "title": "Consultant Reflection (Firm 4 briefing)", "due": "2026-11-19T08:45"},
+  {"course": "EM481", "title": "Project 2B", "due": "2026-11-19T23:59"}
  ],
- "tests": [],
+ "tests": [
+  {"course": "MA376", "title": "Block 4 quiz", "date": "2026-11-18"},
+  {"course": "MA481X", "title": "Firm 3 Client Briefing (your firm)", "date": "2026-11-20"}
+ ],
  "headlines": [
   "Bills 7-1, next at Jets Sun 1 PM (CBS)",
-  "S&P 500 \u22120.38%",
+  "S&P 500 +1.31%",
   "Army off this week, next vs East Carolina Sat Nov 21"
  ],
  "alerts": []

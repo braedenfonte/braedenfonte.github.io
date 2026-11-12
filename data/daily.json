@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11T07:00:00-05:00",
+ "updated": "2026-11-12T07:00:00-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -461,7 +461,11 @@
     "as": 42,
     "hs": 7,
     "blurb": "No. 1 in the new poll again: Georgia routed Ole Miss.",
-    "stats": []
+    "stats": [
+     "Gunner Stockton: 5 total TDs (4 passing, 1 rushing), 3 TD passes to Talyn Taylor",
+     "Georgia outrushed Ole Miss 295-66",
+     "Georgia sacked Trinidad Chambliss 5 times and forced 2 turnovers"
+    ]
    },
    {
     "away": "BYU",
@@ -469,7 +473,11 @@
     "as": 20,
     "hs": 28,
     "blurb": "No. 3 Utah beat No. 9 BYU and climbed to No. 2 in the new poll, its highest ranking since 2008.",
-    "stats": [],
+    "stats": [
+     "Devon Dampier: 177 passing yards, 87 rushing yards",
+     "Bear Bachmeier: 21-of-35, 272 yards, 1 TD, 4 INTs for BYU",
+     "Legend Glasker: 7 catches, 118 yards, 1 TD for BYU"
+    ],
     "awayRank": 9,
     "homeRank": 3
    },
@@ -479,7 +487,11 @@
     "as": 41,
     "hs": 28,
     "blurb": "Oregon won in Columbus; Ohio State fell to No. 21.",
-    "stats": [],
+    "stats": [
+     "Dylan Raiola: 25-of-40, 257 yards, 2 TDs",
+     "Dierre Hill Jr.: 13 carries, 75 yards, 2 TDs",
+     "Jeremiah Smith: 7 catches, 133 yards, 1 TD for Ohio State"
+    ],
     "awayRank": 23,
     "homeRank": 12
    },
@@ -565,7 +577,7 @@
     "away": "Missouri",
     "home": "Georgia",
     "kick": "2026-11-14T20:30:00Z",
-    "note": "ABC \u00b7 Athens",
+    "note": "ABC · Athens",
     "homeRank": 1
    },
    {
@@ -615,7 +627,7 @@
     "away": "San Jose State",
     "home": "Air Force",
     "kick": "2026-11-15T00:00:00Z",
-    "note": "CBSSN \u00b7 Falcon Stadium"
+    "note": "CBSSN · Falcon Stadium"
    },
    {
     "away": "Texas",
@@ -651,99 +663,137 @@
     "away": "Texas Tech",
     "home": "Oklahoma State",
     "kick": "2026-11-15T02:30:00Z",
-    "note": "ESPN \u00b7 Army and Navy are off this week",
+    "note": "ESPN · Army and Navy are off this week",
     "awayRank": 10
    }
   ],
   "poll": "AP Top 25, Week 11 (Nov 8)"
  },
  "location": {
-  "name": "Lofoten",
-  "wiki": "Lofoten",
-  "country": "Norway",
-  "region": "Nordland county, northern Norway",
-  "lat": 68.33,
-  "lon": 14.67,
-  "tagline": "Arctic islands with sharp peaks, fishing villages and the original maelstrom",
-  "intro": "Lofoten is an archipelago in Nordland county, Norway, between the 68th and 69th parallels north. Its six main islands are linked by bridges and undersea tunnels, and its villages have lived off the winter cod fishery for more than a thousand years.",
+  "name": "Chichen Itza",
+  "wiki": "Chichen_Itza",
+  "country": "Mexico",
+  "region": "Tinúm Municipality, Yucatán",
+  "lat": 20.6831,
+  "lon": -88.5686,
+  "tagline": "The great Maya city of the Yucatán, crowned by the Temple of Kukulcán",
+  "intro": "Chichen Itza is a large pre-Columbian city built by the Maya on the Yucatán Peninsula, between Valladolid and Mérida. It grew into a major regional power from about 600 to 1200 AD, and its stepped pyramid, El Castillo, is one of the most recognized buildings in the Americas.",
   "stats": [
    {
-    "label": "Area",
-    "value": "1,227 km\u00b2"
+    "label": "UNESCO World Heritage",
+    "value": "1988"
    },
    {
-    "label": "Population",
-    "value": "about 24,500"
+    "label": "El Castillo height",
+    "value": "about 30 m (98 ft)"
    },
    {
-    "label": "Municipalities",
-    "value": "6"
+    "label": "Great Ball Court",
+    "value": "168 × 70 m"
    },
    {
-    "label": "Midnight sun (Svolv\u00e6r)",
-    "value": "May 25 \u2013 Jul 17"
+    "label": "Ceremonial core",
+    "value": "at least 5 km²"
    }
   ],
   "facts": [
-   "The word \"maelstrom\" comes from the Moskstraumen, a system of tidal eddies off western Lofoten.",
-   "Lofoten has what may be the largest positive temperature anomaly in the world relative to latitude, so its winters are unusually mild.",
-   "Leknes sits about 169 km (105 mi) north of the Arctic Circle.",
-   "The Lofotr Viking Museum near Borg has a reconstructed 83-metre (272 ft) longhouse, the largest known.",
-   "In Svolv\u00e6r the sun does not rise from about December 4 to January 7."
+   "El Castillo, the Temple of Kukulcán, was voted one of the New Seven Wonders of the World in 2007.",
+   "Near the spring and autumn equinoxes, late-afternoon shadows on El Castillo's corner look like a serpent sliding down the staircase, though scholars think it was probably not designed on purpose.",
+   "The Sacred Cenote is a natural sinkhole about 60 m (200 ft) across, with sheer walls dropping about 27 m (89 ft) to the water.",
+   "The Great Ball Court measures 168 by 70 metres (551 by 230 ft).",
+   "The city was largely built between 800 and 1100 AD and was abandoned in the 13th century."
   ],
-  "bestTime": "Late May to mid-July for the midnight sun and hiking; winter brings polar night, the cod fishery and long dark skies.",
-  "gettingThere": "Fly from New York to Oslo, then to Bod\u00f8 and take the ferry to Moskenes or the speedboat to Svolv\u00e6r. You can also fly on to Leknes or Svolv\u00e6r airports, or drive in via the E10 and the Lofast road.",
-  "tip": "Rent a car: the E10 links the main islands, and there are no passenger trains to Lofoten."
+  "bestTime": "November to March for dry, cooler weather; arrive at opening to beat the heat and the tour-bus crowds, or visit at the March or September equinox for the serpent shadow.",
+  "gettingThere": "Fly nonstop from New York to Cancún, then drive or take a bus west to the site (a few hours by road). Mérida, to the west, is a closer base with flights via U.S. hubs.",
+  "tip": "Stay the night in nearby Valladolid so you can reach the gates at opening, then cool off in a cenote such as Ik Kil in the afternoon."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 9 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
-  "asOf": "Tue Nov 10 close",
-  "story": "Stocks fell after a hotter-than-expected inflation report (CPI up 0.4% vs 0.3% expected) raised bets on a Fed rate hike. Nvidia's slide weighed on tech.",
+  "asOf": "Wed Nov 11 close",
+  "story": "Stocks rebounded as CoreWeave's strong earnings revived the AI trade and chip stocks rallied, with Nvidia recovering part of its two-day slide. The bond market was closed for Veterans Day.",
   "indices": [
    {
     "name": "S&P 500",
-    "value": "7,521",
-    "chg": -0.38
+    "value": "7,619",
+    "chg": 1.31
    }
   ],
   "movers": [
    {
-    "sym": "NVDA",
-    "move": "\u22125.4%",
-    "dir": -1,
-    "why": "Down 9.6% over two sessions amid an internal probe and questions about CEO Jensen Huang's future."
+    "sym": "CRWV",
+    "move": "+25%",
+    "dir": 1,
+    "why": "CoreWeave beat estimates and raised its guidance, reviving the AI trade."
    },
    {
-    "sym": "CRWV",
-    "move": "+2% after hours",
+    "sym": "SNDK",
+    "move": "+14%",
     "dir": 1,
-    "why": "CoreWeave beat revenue estimates on strong cloud demand after closing down 0.5%."
+    "why": "SanDisk led S&P 500 gainers as memory-chip stocks rallied."
+   },
+   {
+    "sym": "MU",
+    "move": "+12%",
+    "dir": 1,
+    "why": "Micron jumped with other memory-chip makers in a broad chip rally."
+   },
+   {
+    "sym": "NVDA",
+    "move": "+2.9%",
+    "dir": 1,
+    "why": "Nvidia rebounded after falling nearly 10% over the prior two sessions."
+   },
+   {
+    "sym": "AAPL",
+    "move": "+2%",
+    "dir": 1,
+    "why": "Apple closed at a record high, just under $356."
    }
   ],
   "lines": [
    {
     "game": "Bills @ Jets",
     "kick": "2026-11-15T18:00:00Z",
-    "spread": "BUF \u22127.5",
-    "total": "51",
-    "ml": "BUF \u2212450 / NYJ +340",
+    "spread": "BUF −8.5",
+    "total": "50.5",
+    "ml": "BUF −520 / NYJ +390",
     "bills": true
    },
    {
     "game": "USC @ Indiana",
     "kick": "2026-11-14T20:30:00Z",
-    "spread": "IND \u22126.5",
-    "total": "49.5",
-    "ml": "IND \u2212270 / USC +220"
+    "spread": "IND −9.5",
+    "total": "50.5",
+    "ml": "IND −394 / USC +300"
    }
   ],
   "probs": [
    {
-    "game": "Bills @ Jets",
-    "fav": "Bills",
-    "p": 75
+    "game": "Purdue @ Iowa",
+    "fav": "Iowa",
+    "p": 92
+   },
+   {
+    "game": "Missouri @ Georgia",
+    "fav": "Georgia",
+    "p": 88
+   },
+   {
+    "game": "Northwestern @ Ohio State",
+    "fav": "Ohio State",
+    "p": 85
+   },
+   {
+    "game": "Duke @ Miami",
+    "fav": "Miami",
+    "p": 84
+   },
+   {
+    "game": "Illinois @ UCLA",
+    "fav": "UCLA",
+    "p": 79
    }
   ],
-  "sources": "S&P 500: AP via GV Wire (Nov 10). Bills line: BetMGM via SI (Nov 10). USC-Indiana: Fox Sports odds. Win prob: Dimers model (Nov 9)."
+  "sources": "S&P 500 and movers: CNBC, Investopedia via Yahoo Finance (Nov 11). Bills line: DraftKings via NBC Sports (Nov 10). USC-Indiana: Fox Sports odds (Nov 12). Win prob: Dimers model (Nov 11-12)."
  }
 }
