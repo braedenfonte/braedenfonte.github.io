@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Braeden Fonte (preview)</title>
+<meta name="robots" content="noindex">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Braeden Fonte — West Point Cadet, Class of 2028, Operations Research.">
+<!-- Home Screen app: on iPhone, Safari > Share > Add to Home Screen opens this full screen like an app -->
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Braeden">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0e0c0d">
+<!-- Static site, no build step. Data comes from /data (written by the routines in /routines). All paths are absolute. -->
+<script>
+/* Runs before first paint: saved theme + display mode (3D campus or low-power 2D). */
+(function(){var d=document.documentElement,g=function(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
+var t=g("bf-theme");if(t)d.setAttribute("data-theme",t);
+var m=g("bf-mode")||"auto",r=matchMedia("(prefers-reduced-motion: reduce)").matches,
+phone=matchMedia("(max-width:860px)").matches||(matchMedia("(pointer:coarse)").matches&&Math.min(screen.width,screen.height)<700),
+slow=(navigator.hardwareConcurrency||8)<4||(navigator.deviceMemory||8)<4||(navigator.connection&&navigator.connection.saveData);
+var lite=m==="lite"||(m!=="3d"&&(r||phone||slow||g("bf-slow")));
+d.setAttribute("data-mode",lite?"lite":"3d");window.BF_MODE={pref:m,lite:lite,why:r?"reduced motion":phone?"phone":slow?"slow device":""};})();
+</script>
+<link rel="preload" href="/vendor/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css">
+<link rel="stylesheet" href="/css/shell.css">
+<script defer src="/js/mapdata.js"></script>
+<script defer src="/js/app.js"></script>
+<script defer src="/js/shell.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+
+<div class="scrim" id="scrim"></div>
+
+<aside class="side" id="side" aria-label="Main navigation">
+  <a class="brand" href="#home"><span class="mark">BF</span><span><b>Braeden Fonte</b><small>USMA '28 · OR</small></span></a>
+  <nav class="nav" id="nav">
+    <a href="#home" data-v="home" class="nav-map"><svg viewBox="0 0 24 24"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg>Map</a>
+    <div class="nav-group">Daily</div>
+    <a href="#brief" data-v="brief"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Morning Brief</a>
+    <a href="#schedule" data-v="schedule"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Schedule</a>
+    <a href="#flights" data-v="flights"><svg viewBox="0 0 24 24"><path d="M2 16l20-6-3-2-6 1-5-6-2 1 3 6-5 2-2-1-1 1z"/><path d="M3 21h18"/></svg>Weekend Flights</a>
+    <a href="#football" data-v="football"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="10" ry="6" transform="rotate(-35 12 12)"/><path d="M9 15l6-6M10 11l1 1M12 9l1 1M11 13l1 1"/></svg>Football</a>
+    <a href="#daily" data-v="daily"><svg viewBox="0 0 24 24"><path d="M12 3v14"/><path d="M12 3l7 3-7 3"/><ellipse cx="12" cy="19" rx="7" ry="2"/></svg>Daily Golf</a>
+    <a href="#place" data-v="place"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Place of the Day</a>
+    <div class="nav-group">Career</div>
+    <a href="#about" data-v="about"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>About</a>
+    <a href="#resume" data-v="resume"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg>Resume</a>
+    <a href="#business" data-v="business"><svg viewBox="0 0 24 24"><path d="M4 6h16v10H8l-4 4z"/><path d="M8 10h8M8 13h5"/></svg>Business</a>
+    <div class="nav-group">Academics</div>
+    <a href="#courses" data-v="courses"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4z"/><path d="M7 9v5c0 2 2.5 3 5 3s5-1 5-3V9"/></svg>Courses</a>
+    <a href="#study" data-v="study"><svg viewBox="0 0 24 24"><path d="M4 5h7a3 3 0 013 3v12a2 2 0 00-2-2H4z"/><path d="M20 5h-6a3 3 0 00-3 3"/><path d="M20 5v13h-5"/></svg>Study</a>
+    <a href="#projects" data-v="projects"><svg viewBox="0 0 24 24"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg>Projects</a>
+    <div class="nav-group">More</div>
+    <a href="#finance" data-v="finance"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>Finance</a>
+    <a href="#memory" data-v="memory"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.5"/><circle cx="5" cy="6" r="1.2"/><circle cx="19" cy="7" r="1.5"/><circle cx="17" cy="18" r="1.2"/><circle cx="6" cy="17" r="1.5"/><path d="M6 7l4 3.5M18 8l-4 2.5M16.5 17l-3-3M7 16l3-2.5"/></svg>Memory</a>
+    <a href="#personal" data-v="personal"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/></svg>Personal</a>
+    <a href="#contact" data-v="contact"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Contact</a>
+  </nav>
+  <button class="link-btn lock-out" id="lockBtn" type="button" hidden>Lock private tabs</button>
+  <div class="side-foot">
+    <button class="tgl" id="themeBtn" type="button" aria-label="Switch color theme"><svg viewBox="0 0 24 24"><path d="M21 13A9 9 0 1111 3a7 7 0 0010 10z"/></svg><span id="themeLbl">Light</span></button>
+    <button class="tgl" id="soundBtn" type="button" aria-pressed="false" aria-label="Sound is off. Turn sound on"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z"/><path class="snd-on" d="M16.5 8.5a5 5 0 010 7M19 6a8.5 8.5 0 010 12"/><path class="snd-off" d="M17 9l5 6M22 9l-5 6"/></svg><span id="soundLbl">Sound off</span></button>
+    <button class="tgl" id="modeBtn" type="button" aria-pressed="false" aria-label="Low-power mode"><svg viewBox="0 0 24 24"><path d="M13 2L5 14h6l-1 8 8-12h-6z"/></svg><span id="modeLbl">Low power</span></button>
+  </div>
+</aside>
+
+<header class="topbar">
+  <a class="brand" href="#home"><span class="mark">BF</span><span><b>Braeden Fonte</b></span></a>
+  <div class="top-acts"><a class="top-map" href="#home">Map</a>
+  <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div>
+</header>
+
+<main id="main" tabindex="-1">
+<div class="wrap">
+
+<!-- HOME -->
+<section class="view" id="v-home">
+  <div class="campus" id="campus" data-state="2d">
+    <div class="campus-2d" id="campus2d" role="img" aria-label="Flat map of a stylized mini West Point campus. Each landmark below opens a section of the site."></div>
+    <canvas class="campus-3d" id="campus3d" aria-hidden="true"></canvas>
+    <div class="campus-labels" id="campusLabels"></div>
+    <div class="campus-hud">
+      <span class="eyebrow">West Point, NY · 41.39 N 73.96 W</span>
+      <h1 class="campus-name">Braeden Fonte</h1>
+      <p>Class of 2028 · Operations Research · Company H3</p>
+    </div>
+    <div class="campus-ctl">
+      <button class="small-btn" id="campusReset" type="button" hidden>Reset view</button>
+      <span class="chip" id="campusMode">2D map</span>
+    </div>
+    <div class="intro" id="intro" hidden>
+      <div class="intro-txt"><span class="eyebrow">Hudson River · West Point</span><b>Braeden Fonte</b></div>
+      <button class="btn" id="introSkip" type="button">Skip intro</button>
+    </div>
+  </div>
+  <p class="fine campus-help" id="campusHelp">Pick a landmark to open that part of the site, or use the menu.</p>
+  <div class="hero-cta home-cta">
+    <a class="btn primary" href="#resume">View resume <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="btn" href="#projects">See projects</a>
+    <a class="btn" href="#contact">Get in touch</a>
+  </div>
+  <div class="panel grad">
+    <div><span class="eyebrow">Countdown</span><h3 style="margin-top:6px"><b>Graduation</b> · May 20, 2028</h3></div>
+    <div class="clock" id="gradClock"></div>
+    <div class="term-bar">
+      <div class="bar"><i id="termBar" style="width:0"></i></div>
+      <div class="bar-meta"><span>AY27-1 · Aug 9</span><span id="termPct">—</span><span>Winter Leave · Dec 20</span></div>
+    </div>
+  </div>
+
+  <div class="grid g2 sec cd-pair" id="cdPair"></div>
+
+  <div class="stats stagger">
+    <div class="panel stat"><b id="stDays">—</b><span>Days to Winter Leave</span></div>
+    <div class="panel stat"><b id="stWeek">—</b><span>Events this week</span></div>
+    <div class="panel stat"><b>7</b><span>Courses this term</span></div>
+    <div class="panel stat"><b>4</b><span>Projects</span></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h"><h3 id="upTitle">Next up</h3><a class="link-btn" href="#schedule">Full schedule →</a></div>
+    <div class="up-list" id="homeUp"></div>
+  </div>
+</section>
+
+<!-- BRIEF -->
+<section class="view" id="v-brief">
+  <div class="page-h"><span class="eyebrow" id="briefDate">Today</span><h2 id="briefHello">Good morning, Braeden.</h2><p id="briefSub">Here's your day at a glance.</p></div>
+  <div class="cd-mini" id="cdMini"></div>
+  <div class="panel tdo" id="tdCard" hidden>
+    <div class="tdo-top">
+      <div><span class="eyebrow">This week</span><h3>To-do list</h3></div>
+      <div class="seg" id="tdSeg" role="tablist" aria-label="To-do view"><button type="button" data-tdv="next" class="on">Up next</button><button type="button" data-tdv="day">By day</button><button type="button" data-tdv="done">Done</button></div>
+    </div>
+    <div class="tdo-prog"><span id="tdCount">0 of 0 done</span><div class="bar"><i id="tdBar" style="width:0"></i></div></div>
+    <div class="tdo-list" id="tdList"></div>
+  </div>
+  <div class="panel quote" id="quoteCard"><span class="eyebrow">Quote of the day</span><blockquote id="quoteText">…</blockquote><cite id="quoteBy"></cite></div>
+  <div class="brief-grid sec" style="margin-top:16px">
+    <div class="panel wx" id="wxCard">
+      <span class="eyebrow">West Point weather</span>
+      <div class="wx-now"><b id="wxTemp">--°</b><span id="wxDesc">Loading forecast…</span></div>
+      <div class="wx-row" id="wxRow"></div>
+    </div>
+    <div class="panel brief-today">
+      <div class="sec-h" style="margin:0 0 10px"><h3>On deck</h3><a class="link-btn" href="#schedule">Schedule →</a></div>
+      <div id="briefToday" class="mini-list"></div>
+    </div>
+  </div>
+  <div class="grid g3 sec stagger">
+    <a class="panel brief-tile" href="#flights"><span class="eyebrow">Top weekend deal</span><b id="bFlight">—</b><span id="bFlightSub"></span></a>
+    <a class="panel brief-tile" href="#football"><span class="eyebrow">Bills countdown</span><b id="bBills">—</b><span id="bBillsSub"></span></a>
+    <a class="panel brief-tile" href="#place"><span class="eyebrow">Place of the day</span><b id="bPlace">—</b><span id="bPlaceSub"></span></a>
+  </div>
+  <div class="panel mk sec" id="mkCard" hidden></div>
+  <div class="panel song sec" id="songCard"></div>
+  <div class="sec">
+    <div class="sec-h"><h3>Due this week</h3><span class="chip" id="bDueCount">0</span></div>
+    <div class="up-list" id="briefDue"></div>
+  </div>
+</section>
+
+<!-- FLIGHTS -->
+<section class="view" id="v-flights">
+  <div class="page-h"><span class="eyebrow">JFK · LGA · EWR · US &amp; Puerto Rico</span><h2>Weekend Flights</h2><p>Real round trips that fit a cadet's pass: leave Friday after 3 PM or Saturday before 3 PM, and land back in New York by 4 PM Sunday, or 4 PM Monday when that Monday is off. Every trip here fits; the only question is price.</p></div>
+  <div class="panel sj-trip sec" id="sjTrip" hidden></div>
+  <div class="wk-strip" id="wkStrip" role="tablist" aria-label="Choose a weekend"></div>
+  <div class="panel wk-info" id="wkInfo"></div>
+  <div class="fl-controls">
+    <div class="fl-group"><span class="gg-lbl">Airports</span><div class="chips" id="apChips"></div></div>
+    <div class="fl-group"><span class="gg-lbl">Budget <span id="maxPVal">$350</span></span><input type="range" id="maxP" min="150" max="700" step="25" value="350"></div>
+    <div class="fl-group"><span class="gg-lbl">Vibe</span><div class="chips" id="tagChips"></div></div>
+    <div class="fl-group"><span class="gg-lbl">Sort</span><select id="flSort"><option value="price">Cheapest first</option><option value="depart">Earliest departure</option><option value="city">Destination A–Z</option></select></div>
+  </div>
+  <div class="sec-h"><h3 id="flHead">Fits your pass</h3><label class="toggle"><input type="checkbox" id="showNear" checked> Show just over budget</label></div>
+  <div class="flight-list" id="flightList"></div>
+  <div class="sec panel live-search">
+    <div><span class="eyebrow">Search live</span><h3>Check this weekend yourself</h3><p class="meta" id="lsDates"></p></div>
+    <div class="ls-row">
+      <select id="lsDest" aria-label="Destination"></select>
+      <a class="btn primary" id="lsKayak" target="_blank" rel="noopener" href="#">Leave Friday ↗</a>
+      <a class="btn" id="lsKayakSat" target="_blank" rel="noopener" href="#">Leave Saturday ↗</a>
+      <a class="btn" id="lsGoogle" target="_blank" rel="noopener" href="#">Google Flights ↗</a>
+    </div>
+    <p class="fine" style="margin:0">The Kayak buttons open with your pass window already set: JFK, LGA or EWR only, leaving Friday after 3 PM or Saturday before 3 PM, and landing back by 4 PM.</p>
+  </div>
+  <p class="fine" id="flightUpdated"></p>
+</section>
+
+<!-- FOOTBALL -->
+<section class="view" id="v-football">
+  <div class="page-h"><span class="eyebrow">Go Bills</span><h2>Football</h2><p>Switch between the Bills and the college scoreboard.</p></div>
+  <div class="seg fb-seg" id="fbSeg" role="tablist" aria-label="Football section"><button type="button" data-fbt="bills" class="on">Bills</button><button type="button" data-fbt="college">College</button></div>
+  <div id="fbBills">
+  <div class="panel bills-strip" id="billsStrip"></div>
+  <div class="grid g2 sec">
+    <div class="panel"><span class="eyebrow">Season</span><div class="rec" id="billsRec"></div><div class="stand" id="billsStand"></div></div>
+    <div class="panel"><span class="eyebrow">Last game</span><h3 id="billsLastT" style="margin:8px 0 0;font-size:22px"></h3><ul class="list-tight" id="billsLast"></ul></div>
+  </div>
+  <div class="sec"><div class="sec-h"><h3>Bills results</h3></div><div class="grid g3" id="billsResults"></div></div>
+  <div class="sec"><div class="sec-h"><h3>Bills news</h3></div><div class="grid g2" id="billsNews"></div></div>
+  <div class="sec"><div class="sec-h"><h3>Bills schedule</h3></div><div class="up-list" id="billsSched"></div><p class="fine" id="billsSrc"></p></div>
+  </div>
+  <div id="fbCollege" hidden>
+  <div class="sec-h"><h3 id="fbLabel">College football</h3></div>
+  <div class="sec">
+    <div class="sec-h"><h3>Results</h3></div>
+    <div class="grid g2" id="fbResults"></div>
+  </div>
+  <div class="sec">
+    <div class="sec-h"><h3>Coming up</h3></div>
+    <div class="up-list" id="fbUpcoming"></div>
+  </div>
+  </div>
+</section>
+
+<!-- DAILY -->
+<section class="view" id="v-daily">
+  <div class="page-h"><span class="eyebrow" id="dailyDate">Daily</span><h2>Daily Golf</h2><p>Three new holes every day, the same for everyone. Every result comes from your club, aim, timing, the wind, the lie and the slope of the green, so you get better by learning how they work.</p></div>
+  <div class="gg-top">
+    <div class="seg" id="ggModes" aria-label="Game mode"><button type="button" data-gmode="daily" class="on">Daily round</button><button type="button" data-gmode="practice">Practice</button></div>
+    <select id="ggParPick" class="gg-select" hidden aria-label="Practice hole par"><option value="0">Any par</option><option value="3">Par 3</option><option value="4">Par 4</option><option value="5">Par 5</option></select>
+    <label class="gg-switch"><input type="checkbox" id="ggCaddieT"><span>Caddie help</span></label>
+  </div>
+  <div class="panel golf-game">
+    <div class="gg-head">
+      <div><span class="eyebrow" id="ggMeta">Hole</span><h3 id="ggTitle">Hole</h3><p class="gg-wind" id="ggWind"></p></div>
+      <div class="gg-score"><div><b id="ggStrokes">0</b><small>strokes</small></div><div><b id="ggPar">4</b><small>par</small></div><div><b id="ggTot">E</b><small>round</small></div><div><b id="ggBest">—</b><small>best today</small></div></div>
+    </div>
+    <div class="gg-sc" id="ggCard"></div>
+    <div class="gg-body">
+      <div class="gg-left">
+        <canvas id="ggCanvas" aria-label="Golf hole. Tap the hole to aim, use the swing meter to hit."></canvas>
+        <p class="gg-msg" id="ggMsg" aria-live="polite"></p>
+        <div class="gg-caddie" id="ggCaddie"></div>
+      </div>
+      <div class="gg-ctrl">
+        <span class="gg-lbl">Club <span>↑ ↓ keys</span></span>
+        <div class="clubs" id="ggClubs"></div>
+        <div class="gg-row">
+          <div><span class="gg-lbl">Trajectory</span><div class="seg sm" id="ggTraj"><button type="button" data-traj="low">Low</button><button type="button" data-traj="mid" class="on">Normal</button><button type="button" data-traj="high">High</button></div></div>
+          <div><span class="gg-lbl">Shape</span><div class="seg sm" id="ggShape"><button type="button" data-shape="-1">Draw</button><button type="button" data-shape="0" class="on">Straight</button><button type="button" data-shape="1">Fade</button></div></div>
+        </div>
+        <label class="gg-lbl" for="ggAim">Aim <span id="ggAimVal">0°</span></label>
+        <input type="range" id="ggAim" min="-60" max="60" value="0">
+        <div class="gg-lie" id="ggLie"></div>
+        <span class="gg-lbl">Swing meter <span id="ggPowVal">ready</span></span>
+        <div class="gg-meter" id="ggMeter" role="button" tabindex="0" aria-label="Swing meter: tap to start, tap to set power, tap in the green zone to strike"><div class="gg-fill" id="ggFill"></div><div class="gg-sweet" id="ggSweet"></div><div class="gg-pmark" id="ggPMark" hidden></div><div class="gg-target" id="ggTarget" hidden></div><div class="gg-needle" id="ggNeedle"></div></div>
+        <div class="gg-ticks" id="ggTicks"></div>
+        <button class="btn primary" type="button" id="ggSwing">Swing</button>
+        <p class="gg-help">Tap three times (or Space): start the backswing, set power, then strike as the needle passes the green zone. Early pushes right, late pulls left. Tap the hole or use ← → to aim.</p>
+        <div class="gg-actions"><button class="link-btn" type="button" id="ggReset">Restart</button><button class="link-btn" type="button" id="ggNew">New practice hole</button></div>
+        <span class="gg-lbl">This hole</span>
+        <ol class="gg-log" id="ggLog"></ol>
+      </div>
+    </div>
+  </div>
+  <div class="grid g2 sec">
+    <div class="panel gg-card"><div class="sec-h" style="margin:0 0 10px"><h3>Last 7 days</h3><span class="chip" id="ggStreak"></span></div><div class="gg-week" id="ggWeek"></div></div>
+    <div class="panel gg-card"><div class="sec-h" style="margin:0 0 10px"><h3>Your stats</h3><span class="chip">this browser</span></div><div class="gg-stats" id="ggStats"></div></div>
+  </div>
+  <details class="panel gg-how sec">
+    <summary>How the ball flies (what you're learning)</summary>
+    <div class="gg-how-grid">
+      <div><b>Distance</b><p>Each club has a full carry. Power scales it. Rough costs about 14%, sand about 22%, and long clubs from sand far more.</p></div>
+      <div><b>Timing</b><p>The green zone is your sweet spot. Outside it you lose distance and start the ball off line: early pushes right, late pulls left. The zone shrinks in rough and sand.</p></div>
+      <div><b>Wind</b><p>Into the wind costs about 1% per mph; downwind adds about half that. Crosswind moves the ball more the longer and higher it flies. Low shots cut wind's effect almost in half.</p></div>
+      <div><b>Elevation</b><p>Uphill plays longer and downhill shorter, about 1 yard per yard of rise or drop.</p></div>
+      <div><b>Shape</b><p>A draw curves left and rolls a bit more; a fade curves right and lands softer. Use them to work around trees or hold against a crosswind.</p></div>
+      <div><b>Trajectory</b><p>High shots carry trees and stop fast; low shots run out and stay under the wind. Full, high wedges onto a green can spin back.</p></div>
+      <div><b>Greens</b><p>Arrows point downhill. Steeper slopes have darker arrows. Putts break toward the low side and run faster downhill. The cup only takes putts moving slowly enough.</p></div>
+      <div><b>Caddie help</b><p>Shows the plays-like distance, a suggested club, a ghost landing spot and the putt length mark. Turn it off once you can judge them yourself.</p></div>
+    </div>
+  </details>
+</section>
+
+<!-- PLACE -->
+<section class="view" id="v-place">
+  <div class="place-hero" id="placeHero">
+    <div class="place-hero-img" id="placeHeroImg"></div>
+    <div class="place-hero-txt"><span class="eyebrow" id="placeDate">Place of the day</span><h2 id="placeName">—</h2><p id="placeTag"></p></div>
+  </div>
+  <div class="place-grid">
+    <div>
+      <p class="lead" id="placeIntro"></p>
+      <div class="sec-h sec"><h3>Why it's cool</h3></div>
+      <ul class="facts-list" id="placeFacts"></ul>
+      <div class="panel place-tip" id="placeTip"></div>
+    </div>
+    <div class="place-side">
+      <div class="panel facts" id="placeStats"></div>
+      <div class="panel place-box"><span class="eyebrow">Best time to go</span><p id="placeBest"></p></div>
+      <div class="panel place-box"><span class="eyebrow">Getting there from NYC</span><p id="placeGo"></p></div>
+      <div class="place-links"><a class="btn" id="placeMap" target="_blank" rel="noopener" href="#">Open in Maps ↗</a><a class="btn" id="placeLink" target="_blank" rel="noopener" href="#">Wikipedia ↗</a></div>
+    </div>
+  </div>
+  <div class="sec"><div class="sec-h"><h3>Photos</h3><span class="chip">via Wikimedia Commons</span></div><div class="place-gallery" id="placeGallery"></div></div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="view" id="v-schedule">
+  <div class="page-h"><span class="eyebrow">AY27-1 Calendar</span><h2>Schedule</h2><p>Every due date, exam, game, and Corps event this term. Tap any event for a live countdown, and star the ones you want on the Home page.</p></div>
+  <div class="panel next-hero" id="nextHero"></div>
+  <div class="toolbar">
+    <div class="seg" role="tablist" aria-label="Schedule view">
+      <button type="button" id="vCal" class="on">Calendar</button>
+      <button type="button" id="vList">List</button>
+      <button type="button" id="vStar">Starred</button>
+    </div>
+    <label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="Search events, like EM481" aria-label="Search events"></label>
+  </div>
+  <div class="legend" id="catFilters"></div>
+  <div id="schedBody"></div>
+</section>
+
+<!-- ABOUT -->
+<section class="view" id="v-about">
+  <div class="page-h"><span class="eyebrow">About</span><h2>Leader, athlete, problem-solver.</h2></div>
+  <div id="privAbout"></div>
+</section>
+
+<!-- RESUME -->
+<section class="view" id="v-resume">
+  <div class="page-h"><span class="eyebrow">Resume</span><h2>Experience &amp; achievements</h2><p>Filter by category to see what matters to you.</p></div>
+  <div class="edu">
+    <div class="panel"><span class="eyebrow">Fall 2024 – Present</span><h4>United States Military Academy</h4><p>B.S. Operations Research (in progress) · Class of 2028 · Superintendent's Award, 2025 · CBT Squad Leader</p></div>
+    <div class="panel"><span class="eyebrow">2020 – 2024</span><h4>Caledonia-Mumford Central School</h4><p>Ranked #11 of 57 · High Honor Roll, 7 semesters · AP Scholar with Honor</p></div>
+  </div>
+  <div class="filters" id="resFilters"></div>
+  <div class="tl" id="resList"></div>
+</section>
+
+<!-- COURSES -->
+<section class="view" id="v-courses">
+  <div class="page-h"><span class="eyebrow">Academics</span><h2>Courses</h2><p>Each class links to its folder of notes and files. Upcoming deadlines are pulled straight from the schedule. Class folders keep every pre-class sheet and study help, filed by course and lesson.</p></div>
+  <div class="toolbar">
+    <div class="seg" aria-label="Courses section">
+      <button type="button" id="cvCourses" class="on">Courses</button>
+      <button type="button" id="cvPrep">Class folders</button>
+    </div>
+    <div class="seg" aria-label="Group courses by" id="cGroupSeg">
+      <button type="button" id="gSem" class="on">By semester</button>
+      <button type="button" id="gSub">By subject</button>
+    </div>
+  </div>
+  <div id="courseWrap">
+    <div class="filters" id="subFilters"></div>
+    <div id="courseBody"></div>
+  </div>
+  <div id="prepWrap" hidden>
+    <div class="tabs" id="prepTabs" role="tablist" aria-label="Course"></div>
+    <div id="prepBody"></div>
+  </div>
+</section>
+
+<!-- STUDY -->
+<section class="view" id="v-study">
+  <div class="page-h"><span class="eyebrow">Refresh &amp; prep</span><h2>Study</h2><p>Flashcards and practice problems built from your notes and files, one tab per class. Flip a card, then mark it so the hard ones come back.</p></div>
+  <div class="tabs" id="studyTabs" role="tablist" aria-label="Class"></div>
+  <div id="studyBody"></div>
+</section>
+
+<!-- FINANCE -->
+<section class="view" id="v-finance">
+  <div class="page-h"><span class="eyebrow">Money</span><h2>Finance</h2><p>Your linked accounts, refreshed each morning. Numbers are encrypted and only show after you unlock.</p></div>
+  <div class="sec-h"><h3>Accounts</h3><span class="chip" id="finAsOf">Not linked</span></div>
+  <div class="grid g4 stagger" id="acctGrid"></div>
+  <div class="sec">
+    <div class="sec-h"><h3>Snapshot</h3></div>
+    <div class="grid g3" id="finSnap"></div>
+  </div>
+  <div class="sec">
+    <div class="sec-h"><h3>Where it went</h3></div>
+    <div class="grid g2">
+      <div class="panel fin-p"><span class="eyebrow" id="finCatLbl">Spending by category</span><div id="finCats" class="fin-cats"></div></div>
+      <div class="panel fin-p"><span class="eyebrow">This month vs. last</span><div id="finCmp"></div></div>
+    </div>
+  </div>
+  <div class="sec" id="finFlagSec" hidden>
+    <div class="sec-h"><h3>Worth a look</h3></div>
+    <div class="panel fin-p"><ul class="list-tight" id="finFlags"></ul><p class="fine">Flags come from your bank data. Check them in your bank app.</p></div>
+  </div>
+  <div class="sec">
+    <div class="sec-h"><h3>Watchlist</h3></div>
+    <div class="panel">
+      <p>Track tickers you are interested in. This is your own list with links to charts, not recommendations. I'm not a licensed advisor, so there are no ranked stock picks or betting picks on this site.</p>
+      <form class="wl-form" id="wlForm" style="display:flex;gap:8px;margin-top:12px"><input class="gc-in" id="wlIn" placeholder="Ticker, like SPY" maxlength="8" style="max-width:180px" aria-label="Ticker"><button class="btn primary" type="submit">Add</button></form>
+      <div class="wl" id="wlList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="view" id="v-projects">
+  <div class="page-h"><span class="eyebrow">Work</span><h2>Projects</h2><p>Selected work in optimization, simulation, research, and AI.</p></div>
+  <div id="projFeat"></div>
+  <div class="sec-h sec"><h3>Live OR demos</h3><span class="chip">runs in your browser</span></div>
+  <div id="demoMount"><p class="fine">Loading the demos…</p></div>
+  <div class="sec-h sec"><h3>Project folders</h3></div>
+  <div class="grid g2 stagger" id="projGrid"></div>
+  <div class="panel" id="projFolder" hidden></div>
+</section>
+
+<!-- BUSINESS -->
+<section class="view" id="v-business">
+  <div class="page-h"><span class="eyebrow">Side business</span><h2>AI assistants for any website</h2></div>
+  <div class="panel biz">
+    <div>
+      <h3>Make any site smarter.</h3>
+      <p>I build an AI assistant, powered by Claude, that drops into any existing website. It answers visitor questions, highlights what the site offers, and makes the whole site more flexible and better at advertising itself.</p>
+      <div class="hero-cta"><a class="btn primary" href="#contact">Add one to your site</a></div>
+    </div>
+    <ul>
+      <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Works on any website you already have</li>
+      <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Powered directly by Claude</li>
+      <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Answers questions and promotes your services</li>
+      <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Setup and support included</li>
+    </ul>
+  </div>
+  <a class="panel feat sec" href="https://shortsmith.braedenfonte.com/create" target="_blank" rel="noopener">
+    <div class="feat-txt"><span class="eyebrow">Also mine</span><h3>Shortsmith</h3><p>An app to create short-form AI content in different styles. It gets posted automatically to Instagram, YouTube, Facebook and TikTok.</p></div>
+    <div class="feat-go"><span class="status live">Live</span><span class="btn primary">Open Shortsmith ↗</span></div>
+  </a>
+</section>
+
+
+<section class="view" id="v-memory">
+  <div class="page-h"><span class="eyebrow">Shared by Claude &amp; ChatGPT</span><h2>Memory</h2><p>Everything your AIs remember about you, as a galaxy. Each star is one memory, each cluster a topic. Drag to spin, scroll to zoom, click a star to read it.</p></div>
+  <div class="gx" id="gx">
+    <canvas id="gxCanvas" aria-label="Memory galaxy"></canvas>
+    <div class="gx-top"><input id="gxSearch" type="search" placeholder="Search memories…" aria-label="Search memories"><span class="gx-count" id="gxCount">Loading…</span></div>
+    <div class="gx-legend" id="gxLegend"></div>
+    <div class="gx-card" id="gxCard" hidden></div>
+    <div class="gx-tip" id="gxTip" hidden></div>
+  </div>
+  <p class="fine" id="gxNote">Memories are stored encrypted on your worker and only decrypt after you unlock the site.</p>
+</section>
+
+<!-- PERSONAL -->
+<section class="view" id="v-personal">
+  <div class="page-h"><span class="eyebrow">Off duty</span><h2>Personal</h2><p>Golf, travel, and photos from along the way.</p></div>
+  <div class="panel travel">
+    <div class="travel-top">
+      <div><h3>Travel map</h3><p class="travel-sub" id="travelSub"></p></div>
+      <div class="seg" id="zoomSeg" aria-label="Map zoom">
+        <button type="button" data-zoom="all" class="on">All</button>
+        <button type="button" data-zoom="ne">Northeast</button>
+        <button type="button" data-zoom="ny">New York</button>
+      </div>
+    </div>
+    <div class="travel-body">
+      <div class="travel-map" id="travelMap"></div>
+      <aside class="place-card" id="placeCard"></aside>
+    </div>
+    <div class="places" id="places"></div>
+  </div>
+
+  <div id="privPersonal"></div>
+</section>
+
+<!-- CONTACT -->
+<section class="view" id="v-contact">
+  <div class="page-h"><span class="eyebrow">Contact</span><h2>Let's talk.</h2><p>The fastest way to reach me is email or LinkedIn.</p></div>
+  <div class="grid g3 stagger">
+    <div class="panel contact-card"><span class="lbl">Personal email</span><span class="val">bfonte18@gmail.com</span><div class="acts"><button class="small-btn" type="button" data-copy="bfonte18@gmail.com">Copy</button><a class="small-btn" href="mailto:bfonte18@gmail.com">Email</a></div></div>
+    <div class="panel contact-card"><span class="lbl">School email</span><span class="val">braeden.fonte@westpoint.edu</span><div class="acts"><button class="small-btn" type="button" data-copy="braeden.fonte@westpoint.edu">Copy</button><a class="small-btn" href="mailto:braeden.fonte@westpoint.edu">Email</a></div></div>
+    <div class="panel contact-card"><span class="lbl">LinkedIn</span><span class="val">in/braeden-fonte</span><div class="acts"><a class="small-btn" href="https://www.linkedin.com/in/braeden-fonte-8aba38324/" target="_blank" rel="noopener">Open profile ↗</a></div></div>
+  </div>
+</section>
+
+<footer>
+  <p>The views expressed on this site are my own and do not reflect the official policy or position of the United States Military Academy, the Department of the Army, or the Department of Defense.</p>
+  <span class="mono">© 2026 Braeden Fonte</span>
+</footer>
+</div>
+</main>
+
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gateT" hidden>
+  <form class="gate-card" id="gateForm">
+    <div class="gate-ico"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg></div>
+    <span class="eyebrow">Private</span>
+    <h3 id="gateT">This tab is locked</h3>
+    <p>Enter the password to continue.</p>
+    <input type="password" id="gatePw" name="password" placeholder="Password" aria-label="Password" autocomplete="current-password" required>
+    <label class="gate-rem"><input type="checkbox" id="gateRem"> Remember on this device</label>
+    <p class="gate-err" id="gateErr" role="alert"></p>
+    <div class="gate-actions"><button class="btn primary" type="submit" id="gateGo">Unlock</button><button class="link-btn" type="button" id="gateX">Cancel</button></div>
+  </form>
+</div>
+<div id="drawerRoot"></div>
+</body>
+</html>
