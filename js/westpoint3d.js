@@ -24,7 +24,8 @@ export async function create(o){
   /* ---------- terrain with the painted map on it ---------- */
   const e = D.elev, tcv = document.createElement("canvas");
   const tex = keep(new THREE.CanvasTexture(tcv)); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-  function paintGround(){ map.paint(tcv, { pxPerM: 0.85, dark: dark(), footprintOnly: true }); tex.needsUpdate = true; }
+  let onPhoto = false;   // true while the Google photo ground is showing (our ground texture is then painted in daylight)
+  function paintGround(){ map.paint(tcv, { pxPerM: 0.85, dark: dark() && !onPhoto, footprintOnly: true }); tex.needsUpdate = true; }
   { const pos = [], uv = [], idx = [];
     for (let j = 0; j < e.rows; j++) for (let i = 0; i < e.cols; i++){ const h = e.h[j*e.cols + i]; pos.push((e.x0 + i*e.step)*S, (h < 0.4 ? -4 : h)*S*VE, -(e.y0 + j*e.step)*S); uv.push(i/(e.cols - 1), j/(e.rows - 1)); }
     for (let j = 0; j < e.rows - 1; j++) for (let i = 0; i < e.cols - 1; i++){ const a = j*e.cols + i, b = a + 1, c = a + e.cols, d = c + 1; idx.push(a, b, d, a, d, c); }
@@ -40,8 +41,11 @@ export async function create(o){
   const wallTex = document.createElement("canvas"), glowTex = document.createElement("canvas"); wallTex.width = wallTex.height = glowTex.width = glowTex.height = 256;
   { const a = wallTex.getContext("2d"), b = glowTex.getContext("2d"); a.fillStyle = "#fff"; a.fillRect(0, 0, 256, 256); b.fillStyle = "#000"; b.fillRect(0, 0, 256, 256); let s = 5;
     const rnd = () => (s = (s*9301 + 49297) % 233280)/233280;
-    for (let j = 0; j < 4; j++) for (let i = 0; i < 4; i++){ a.fillStyle = "#39414e"; a.fillRect(i*64 + 19, j*64 + 14, 26, 34); a.fillStyle = "#59636f"; a.fillRect(i*64 + 19, j*64 + 14, 26, 3);
-      if (rnd() < 0.4){ b.fillStyle = rnd() < 0.8 ? "#ffd89a" : "#cfe4ff"; b.fillRect(i*64 + 19, j*64 + 14, 26, 34); } } }
+    for (let y = 0; y < 256; y += 8) for (let x = -((y/8) % 2)*11; x < 256; x += 22){ const v = 228 + Math.round(rnd()*27); a.fillStyle = "rgb(" + v + "," + v + "," + (v - 4) + ")"; a.fillRect(x + 1, y + 1, 20, 6); }   // granite courses
+    for (let j = 0; j < 4; j++) for (let i = 0; i < 4; i++){ const x = i*64 + 25, y = j*64 + 12;   // narrow, tall windows with a pointed head
+      a.fillStyle = "#2f3640"; a.fillRect(x, y + 6, 14, 36); a.beginPath(); a.moveTo(x, y + 6); a.lineTo(x + 7, y); a.lineTo(x + 14, y + 6); a.fill();
+      a.fillStyle = "#8c939b"; a.fillRect(x + 6, y + 6, 2, 36); a.fillRect(x - 2, y + 42, 18, 3);
+      if (rnd() < 0.4){ b.fillStyle = rnd() < 0.8 ? "#ffd89a" : "#cfe4ff"; b.fillRect(x, y + 6, 14, 36); } } }
   const wT = keep(new THREE.CanvasTexture(wallTex)), gT = keep(new THREE.CanvasTexture(glowTex));
   [wT, gT].forEach(t => { t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 4; }); wT.colorSpace = THREE.SRGBColorSpace; gT.colorSpace = THREE.SRGBColorSpace;
   const wallMat = keep(new THREE.MeshStandardMaterial({ map: wT, emissiveMap: gT, emissive: 0xffffff, vertexColors: true, roughness: 0.9, side: THREE.DoubleSide }));
@@ -71,6 +75,34 @@ export async function create(o){
     if (b.k !== "house" && b.h >= 16 && P.length >= 4){ // a low parapet block so big halls don't look like plain boxes
       const c = b.c, Q = P.map(p => [c[0] + (p[0] - c[0])*0.9, c[1] + (p[1] - c[1])*0.9]); extrude(Q, top, top + 1.6*S, wcol.map(v => v*0.93), ROOF[b.k].map(v => v*0.9), lm); }
   });
+  /* ---------- Military Gothic detail (Central Area barracks, Thayer Hall, Bartlett Hall, Washington Hall): granite battlements,
+     square corner towers and stone buttresses, the way these buildings look from the Plain ---------- */
+  const GOTHIC = /Barracks|Thayer Hall|Bartlett Hall|Washington Hall/;
+  function box(cx, cy, ux, uy, L, Dp, y0, y1, col, lm){   // a block centered at (cx, cy) in map meters, long side along (ux, uy)
+    const vx = -uy, vy = ux, c = [[-L/2, -Dp/2], [L/2, -Dp/2], [L/2, Dp/2], [-L/2, Dp/2]].map(([a, d]) => [cx + ux*a + vx*d, cy + uy*a + vy*d]);
+    for (let k = 0; k < 4; k++){ const a = c[k], q = c[(k + 1) % 4];
+      tri(wp, wc, wl, [[a[0], y0, a[1]], [q[0], y0, q[1]], [q[0], y1, q[1]]], col, lm); wu.push(0.02, 0.02, 0.03, 0.02, 0.03, 0.03);
+      tri(wp, wc, wl, [[a[0], y0, a[1]], [q[0], y1, q[1]], [a[0], y1, a[1]]], col, lm); wu.push(0.02, 0.02, 0.03, 0.03, 0.02, 0.03); }
+    tri(rp, rc, rl, [[c[0][0], y1, c[0][1]], [c[1][0], y1, c[1][1]], [c[2][0], y1, c[2][1]]], col, lm); tri(rp, rc, rl, [[c[0][0], y1, c[0][1]], [c[2][0], y1, c[2][1]], [c[3][0], y1, c[3][1]]], col, lm);
+  }
+  function battlements(P, y, col, lm, step){ const n = P.length;   // merlons along every edge
+    for (let i = 0; i < n; i++){ const a = P[i], q = P[(i + 1) % n], L = Math.hypot(q[0] - a[0], q[1] - a[1]); if (L < 2) continue; const ux = (q[0] - a[0])/L, uy = (q[1] - a[1])/L;
+      for (let t = step/2; t < L; t += step) box(a[0] + ux*t, a[1] + uy*t, ux, uy, step*0.5, 0.9, y, y + 1.3*S, col, lm); } }
+  D.buildings.forEach(b => { if (!b.n || !GOTHIC.test(b.n)) return; const T = tops[b.i]; if (!T) return;
+    const P = T.P, n = P.length, lm = lmOf[b.i] != null ? lmOf[b.i] : -1, col = [0.66, 0.65, 0.62], dark2 = [0.58, 0.57, 0.55]; curB = b.i;
+    let ar = 0; for (let i = 0; i < n; i++){ const a = P[i], q = P[(i + 1) % n]; ar += a[0]*q[1] - q[0]*a[1]; } const sg = Math.sign(ar) || 1;
+    battlements(P, T.top, col, lm, 3.2);
+    for (let i = 0; i < n; i++){ const a = P[(i + n - 1) % n], c = P[i], q = P[(i + 1) % n];
+      const L1 = Math.hypot(c[0] - a[0], c[1] - a[1]), L2 = Math.hypot(q[0] - c[0], q[1] - c[1]), cr = (c[0] - a[0])*(q[1] - c[1]) - (c[1] - a[1])*(q[0] - c[0]);
+      if (cr*sg > 0 && L1 > 9 && L2 > 9){   // convex corner: a square tower that rises above the roof, with its own battlements
+        const ux = (q[0] - c[0])/L2, uy = (q[1] - c[1])/L2, w = 6.5, tcx = c[0] + ux*(w/2 - 1) - (c[0] - a[0])/L1*(w/2 - 1), tcy = c[1] + uy*(w/2 - 1) - (c[1] - a[1])/L1*(w/2 - 1);
+        const ty = T.top + 6*S; box(tcx, tcy, ux, uy, w, w, T.lo, ty, dark2, lm);
+        const hw = w/2, sq = [[-hw, -hw], [hw, -hw], [hw, hw], [-hw, hw]].map(([p1, p2]) => [tcx + ux*p1 - uy*p2, tcy + uy*p1 + ux*p2]); battlements(sq, ty, dark2, lm, 2.2); }
+      if (L2 > 14) for (let t = 9; t < L2 - 5; t += 9){ const ux = (q[0] - c[0])/L2, uy = (q[1] - c[1])/L2, ox = uy*sg*0.45, oy = -ux*sg*0.45;   // buttresses stepping out from the wall
+        box(c[0] + ux*t + ox, c[1] + uy*t + oy, ux, uy, 1.3, 0.9, T.lo, T.top + 0.4*S, dark2, lm); } }
+  });
+  curB = -1;
+
   // Michie Stadium: a bowl of stands around the field
   const stad = D.areas.find(a => a.k === "stadium"), stadLm = o.landmarks.findIndex(l => l.id === "stadium");
   curB = -1;
@@ -110,7 +142,7 @@ export async function create(o){
     const g = keep(new THREE.BufferGeometry()); g.setAttribute("position", new THREE.Float32BufferAttribute(pts, 3)); const ln = new THREE.LineSegments(g, lineBase); ln.visible = !!l.mine; scene.add(ln); outlines[l.id] = { ln, mine: !!l.mine }; });
 
   function retheme(){
-    const dk = dark() && !tilesOn; paintGround();   // the Google ground is a daytime photo, so buildings use daylight on it
+    onPhoto = tilesOn; const dk = dark() && !tilesOn; paintGround();   // the Google ground is a daytime photo, so buildings use daylight on it
     waterMat.color.set(dk ? 0x16324a : 0x3f80b3); slabMat.color.set(dk ? 0x0b0c10 : 0xcfd2d6);
     wallMat.emissiveIntensity = dk ? 0.9 : 0; wallMat.color.set(dk ? 0xb4bccb : 0xffffff); roofMat.color.set(dk ? 0xa9b2c4 : 0xffffff);
     hemi.color.set(dk ? 0x8ea6d6 : 0xffffff); hemi.groundColor.set(dk ? 0x0a0d14 : 0x6f7a66); hemi.intensity = dk ? 1.25 : 1.5;
@@ -191,9 +223,20 @@ export async function create(o){
 
   /* ---------- Google Photorealistic 3D Tiles: the real look. The model above stays underneath as the fallback
      (no key, low-power/data-saver, quota used up, or any load error) and stays invisible-but-pickable for hovers. ---------- */
-  let tiles = null, tilesOn = false, credit = null, tilesAct = 0, hold = null, calib = 0; const tileMats = new Set();
+  let tiles = null, tilesOn = false, credit = null, tilesAct = 0, hold = null, calib = 0;
+  // campus core (Central Area, the Plain, Trophy Point): our clean ground laid over Google's photo, so no flat, smeared trees there. Edges fade out.
+  const core = (() => { const X0 = -140, X1 = 600, Y0 = 300, Y1 = 1140, F = 70, pos = [], uv = [], col = [], idx = [];
+    const i0 = Math.ceil((X0 - e.x0)/e.step), i1 = Math.floor((X1 - e.x0)/e.step), j0 = Math.ceil((Y0 - e.y0)/e.step), j1 = Math.floor((Y1 - e.y0)/e.step), nc = i1 - i0 + 1;
+    for (let j = j0; j <= j1; j++) for (let i = i0; i <= i1; i++){ const x = e.x0 + i*e.step, y = e.y0 + j*e.step, h = e.h[j*e.cols + i];
+      pos.push(x*S, (h < 0.4 ? -4 : h)*S*VE + 0.25*S, -y*S); uv.push(i/(e.cols - 1), j/(e.rows - 1));
+      const fade = Math.min(1, (x - X0)/F, (X1 - x)/F, (y - Y0)/F, (Y1 - y)/F); col.push(1, 1, 1, h < 0.4 ? 0 : Math.max(0, fade)); }
+    for (let j = 0; j < j1 - j0; j++) for (let i = 0; i < nc - 1; i++){ const a = j*nc + i, b = a + 1, c = a + nc, d = c + 1; idx.push(a, b, d, a, d, c); }
+    const g = keep(new THREE.BufferGeometry()); g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+    g.setAttribute("color", new THREE.Float32BufferAttribute(col, 4)); g.setIndex(idx); g.computeVertexNormals();
+    const m = new THREE.Mesh(g, keep(new THREE.MeshStandardMaterial({ map: tex, vertexColors: true, transparent: true, roughness: 1, polygonOffset: true, polygonOffsetFactor: -4, polygonOffsetUnits: -4 })));
+    m.receiveShadow = true; m.visible = false; m.renderOrder = 1; scene.add(m); return m; })(); const tileMats = new Set();
   const own = scene.children.filter(c => (c.isMesh || c.isInstancedMesh) && !c.userData.keep && !picks.includes(c) && c !== walls && c !== roofs);   // Google has no 3D buildings here, so ours stay
-  function showOwn(on){ own.forEach(c => { c.visible = on; }); renderer.shadowMap.needsUpdate = true; }
+  function showOwn(on){ own.forEach(c => { c.visible = on; }); core.visible = !on; renderer.shadowMap.needsUpdate = true; }
   function stopTiles(why){ if (!tiles) return; console.warn("Google 3D tiles off, using the built-in map:", why);
     tiles.group.parent && tiles.group.parent.removeFromParent(); tiles.dispose(); tiles = null; tilesOn = false; tileMats.clear(); retheme();
     if (credit){ credit.remove(); credit = null; } showOwn(true); for (const k in outlines) outlines[k].ln.visible = outlines[k].mine; if (atHome) fly(homeFor(), 600); invalidate(); }
@@ -214,9 +257,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261113n").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261113q").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261113n"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261113q"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
