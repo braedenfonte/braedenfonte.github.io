@@ -110,7 +110,7 @@ const MAP = window.BFMap, tall = matchMedia("(max-width:860px)");
 const isDark = () => { const b = getComputedStyle(root).getPropertyValue("--bg").trim(); return parseInt(b.slice(1, 3), 16) < 128; };
 const cv2 = document.createElement("canvas"); map2d.appendChild(cv2);
 let full = null, fullKey = "", ready = false; const MINORS = [];
-LANDMARKS.forEach(l => { l.el.hidden = true; if (!l.views.length) l.el.classList.add("info"); });
+LANDMARKS.forEach(l => { l.el.hidden = true; if (!l.views.length) l.el.classList.add("info"); if (l.sign) l.el.classList.add("sign"); });
 const tipEl = document.createElement("div"); tipEl.className = "lm-tip"; tipEl.hidden = true; stage.appendChild(tipEl);
 function resolveLandmarks(){
   if (ready) return;
@@ -254,7 +254,7 @@ async function start3D(){
   loading = true;
   try{
     await MAP.load(); resolveLandmarks();
-    const mod = await import("/js/westpoint3d.js?v=20261114q");
+    const mod = await import("/js/westpoint3d.js?v=20261114u");
     if (MODE.lite) { loading = false; return; }
     campus = await mod.create({
       stage, canvas: $("#campus3d"),
