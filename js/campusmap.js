@@ -61,8 +61,15 @@ function paint(cv, o){
   });
   D.areas.forEach(a => { if (a.k === "stadium"){ x.fillStyle = C.stand; path(a.p, true); x.fill(); } });
   D.areas.forEach(a => { if (a.k === "pitch:american_football"){ x.fillStyle = C.pitch; path(a.p, true); x.fill(); x.strokeStyle = C.pitchLine; x.lineWidth = Math.max(1, 1.2*k); x.stroke(); } });
+  // sidewalks (concrete) along the bigger roads, drawn first so the road sits on top of them
+  const dk = !!o.dark, WALK = dk ? "#5b5e63" : "#d8d4cb", ASPH = dk ? "#2e3136" : "#5d6066", EDGE = dk ? "#9a9da2" : "#f2f2ee", YEL = dk ? "#b8962e" : "#e8c33a";
+  x.lineCap = "round"; x.strokeStyle = WALK; D.roads.forEach(r => { if (r.c <= 1){ x.lineWidth = Math.max(1.5, (ROAD_W[r.c] + 5)*k); path(r.p); x.stroke(); } });
   [4, 3, 2, 1, 0].forEach(c => { x.strokeStyle = c === 0 ? C.roadMain : c === 3 ? C.ped : c === 4 ? C.foot : C.road; x.lineWidth = Math.max(0.8, ROAD_W[c]*k);
     D.roads.forEach(r => { if (r.c === c){ path(r.p); x.stroke(); } }); });
+  // road paint: white edge lines + darker asphalt + a dashed yellow center line on the main roads
+  [1, 0].forEach(c => { D.roads.forEach(r => { if (r.c !== c) return; x.strokeStyle = EDGE; x.lineWidth = Math.max(1, ROAD_W[c]*k); path(r.p); x.stroke();
+    x.strokeStyle = ASPH; x.lineWidth = Math.max(0.6, (ROAD_W[c] - 0.7)*k); path(r.p); x.stroke(); }); });
+  if (k >= 0.5){ x.setLineDash([Math.max(2, 3*k), Math.max(2, 3*k)]); x.strokeStyle = YEL; x.lineWidth = Math.max(0.6, 0.35*k); D.roads.forEach(r => { if (r.c <= 1){ path(r.p); x.stroke(); } }); x.setLineDash([]); }
   D.areas.forEach(a => { if (a.k === "water"){ x.fillStyle = C.water; path(a.p, true); x.fill(); } });
   // the Hudson: wherever the terrain is at river level
   const wc = [1, 3, 5].map(i => parseInt(C.water.slice(i, i + 2), 16));
