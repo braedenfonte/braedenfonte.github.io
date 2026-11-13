@@ -23,16 +23,16 @@ var t=g("bf-theme");if(t)d.setAttribute("data-theme",t);
 var m=g("bf-mode")||"auto",r=matchMedia("(prefers-reduced-motion: reduce)").matches,
 phone=matchMedia("(max-width:860px)").matches||(matchMedia("(pointer:coarse)").matches&&Math.min(screen.width,screen.height)<700),
 slow=(navigator.hardwareConcurrency||8)<4||(navigator.deviceMemory||8)<4||(navigator.connection&&navigator.connection.saveData);
-var lite=m==="lite"||(m!=="3d"&&(r||phone||slow||g("bf-slow")));
+var lite=m==="lite"||(m!=="3d"&&(r||slow||g("bf-slow")));   /* phones get the 3D campus too; only slow devices, data saver or reduced motion start in 2D */
 d.setAttribute("data-mode",lite?"lite":"3d");window.BF_MODE={pref:m,lite:lite,why:r?"reduced motion":phone?"phone":slow?"slow device":""};})();
 </script>
 <link rel="preload" href="/vendor/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/site.css?v=20261113">
-<link rel="stylesheet" href="/css/shell.css?v=20261114e">
+<link rel="stylesheet" href="/css/shell.css?v=20261114g">
 <script defer src="/js/mapdata.js?v=20261113"></script>
 <script defer src="/js/app.js?v=20261113"></script>
 <script defer src="/js/campusmap.js?v=20261113f"></script>
-<script defer src="/js/shell.js?v=20261114e"></script>
+<script defer src="/js/shell.js?v=20261114f"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>

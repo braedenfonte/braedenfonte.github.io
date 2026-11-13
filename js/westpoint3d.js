@@ -266,16 +266,21 @@ export async function create(o){
     overName = null; if (!hit) return null; if (hit.object.userData.id) return hit.object.userData.id; const arr = hit.object.userData.lm, i = arr[hit.faceIndex], bi = arr.b[hit.faceIndex];
     if (i < 0 && bi >= 0) overName = D.buildings[bi].n; return i >= 0 ? o.landmarks[i].id : null; }
   function highlight(id){ if (id === hot) return; hot = id; for (const k in outlines) outlines[k].ln.visible = !tilesOn && (outlines[k].mine || k === id); invalidate(); }
+  const touches = new Map(); let pinch = null;
+  const pinchState = () => { const [a, b] = [...touches.values()]; return { d: Math.max(10, Math.hypot(b[0] - a[0], b[1] - a[1])), a: Math.atan2(b[1] - a[1], b[0] - a[0]), mx: (a[0] + b[0])/2, my: (a[1] + b[1])/2 }; };
   const L = (el, evn, fn, opt) => { el.addEventListener(evn, fn, opt); return () => el.removeEventListener(evn, fn, opt); };
   const off = [
-    L(canvas, "pointerdown", ev => { if (tween) return; drag = { x: ev.clientX, y: ev.clientY, moved: 0, id: ev.pointerId, rot: ev.button === 2 || ev.shiftKey || ev.ctrlKey || ev.altKey }; }),   // drag = move around; right-drag or Shift-drag = turn/tilt
+    L(canvas, "pointerdown", ev => { touches.set(ev.pointerId, [ev.clientX, ev.clientY]); if (touches.size === 2){ drag = null; pinch = pinchState(); return; } if (tween) return; drag = { x: ev.clientX, y: ev.clientY, moved: 0, id: ev.pointerId, rot: ev.button === 2 || ev.shiftKey || ev.ctrlKey || ev.altKey }; }),   // drag = move around; right-drag or Shift-drag = turn/tilt
     L(canvas, "contextmenu", ev => ev.preventDefault()),
     L(canvas, "pointermove", ev => {
+      if (touches.has(ev.pointerId)) touches.set(ev.pointerId, [ev.clientX, ev.clientY]);
+      if (pinch && touches.size === 2){ const p2 = pinchState(); zoom(pinch.d/p2.d); cur.az += p2.a - pinch.a; cur.pol = Math.min(tilesOn ? 1.5 : 1.4, Math.max(0.3, cur.pol - (p2.my - pinch.my)*0.004));
+        pan(p2.mx - pinch.mx, 0); pinch = p2; atHome = false; invalidate(); return; }   // two fingers: pinch = zoom, twist = turn, slide up/down = tilt
       if (drag && drag.id === ev.pointerId){ const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y; drag.moved += Math.abs(dx) + Math.abs(dy); drag.x = ev.clientX; drag.y = ev.clientY;
         if (drag.moved > 5){ if (!drag.cap){ drag.cap = true; try{ canvas.setPointerCapture(ev.pointerId); }catch(x){} } if (drag.rot){ cur.az -= dx*0.005; cur.pol = Math.min(tilesOn ? 1.5 : 1.4, Math.max(0.3, cur.pol - dy*0.003)); } else pan(dx, dy); atHome = false; invalidate(); } return; }
       if (ev.pointerType === "mouse" && !tween){ const id = pickAt(ev); if (o.tip) o.tip(overName, ev.clientX, ev.clientY); if (id !== hot){ highlight(id); o.onHover(id); } } }),
-    L(canvas, "pointerup", ev => { const d = drag; drag = null; if (d && d.moved <= 5 && !tween){ const id = pickAt(ev); if (id) o.onOpen(id); } }),
-    L(canvas, "pointercancel", () => { drag = null; }),
+    L(canvas, "pointerup", ev => { touches.delete(ev.pointerId); if (pinch){ if (touches.size < 2) pinch = null; drag = null; return; } const d = drag; drag = null; if (d && d.moved <= 5 && !tween){ const id = pickAt(ev); if (id) o.onOpen(id); } }),
+    L(canvas, "pointercancel", ev => { touches.delete(ev.pointerId); pinch = null; drag = null; }),
     L(canvas, "pointerleave", () => { if (o.tip) o.tip(null); if (hot){ highlight(null); o.onHover(null); } }),
     L(canvas, "wheel", ev => { if (tween) return; ev.preventDefault(); zoomAt(1 + Math.max(-0.3, Math.min(0.3, ev.deltaY*0.0015)), ev); }, { passive: false }),   // scroll = zoom toward the cursor
     L(document, "keydown", ev => { if (!active || /input|textarea/i.test(ev.target.tagName)) return; const k = { ArrowLeft: [-40, 0], ArrowRight: [40, 0], ArrowUp: [0, -40], ArrowDown: [0, 40], a: [-40, 0], d: [40, 0], w: [0, -40], s: [0, 40] }[ev.key]; if (k){ pan(-k[0], -k[1]); atHome = false; invalidate(); } }),   // arrows / WASD move around
@@ -353,9 +358,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261114e").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261114f").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261114e"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261114f"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
