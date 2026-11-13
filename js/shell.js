@@ -132,11 +132,12 @@ function place2D(){
   if (!ready || !full || stage.dataset.state === "3d") return;
   const r = stage.getBoundingClientRect(); if (!r.width) return;
   const T = tall.matches, b = MAP.bounds, dpr = Math.min(window.devicePixelRatio || 1, 2);
-  // phones: most of the post. wide screens: the cadet area, from Trophy Point down to Michie Stadium. Places outside the view are pinned to the edge.
-  const cy = T ? 350 : 620, s = r.height/(T ? 2000 : 1200), cx = T ? 230 : 300, PX = x => (x - cx)*s + r.width/2, PY = y => (cy - y)*s + r.height/2;
+  // phones: most of the post. wide screens: the cadet area from Trophy Point to Michie Stadium, plus the whole Hudson out to the Garrison shore.
+  // Places outside the view are pinned to the edge.
+  const cy = T ? 350 : 600, s = r.height/(T ? 2300 : 1450), cx = T ? 400 : 480, PX = x => (x - cx)*s + r.width/2, PY = y => (cy - y)*s + r.height/2;
   cv2.width = Math.round(r.width*dpr); cv2.height = Math.round(r.height*dpr); cv2.style.width = r.width+"px"; cv2.style.height = r.height+"px";
   const x = cv2.getContext("2d"), pal = MAP.palette(isDark()); x.setTransform(dpr, 0, 0, dpr, 0, 0);
-  x.fillStyle = pal.forest; x.fillRect(0, 0, r.width, r.height); x.fillStyle = pal.water; x.fillRect(PX(b.x1) - 1, 0, r.width, r.height);
+  x.fillStyle = pal.forest; x.fillRect(0, 0, r.width, r.height);   // the map now reaches past the far (Garrison) shore, so the edge is land
   x.imageSmoothingQuality = "high"; x.drawImage(full, PX(b.x0), PY(b.y1), (b.x1 - b.x0)*s, (b.y1 - b.y0)*s);
   const lw = T ? 132 : 176, lh = T ? 44 : 54, top = T ? 96 : 110;
   LANDMARKS.forEach(l => { l.px = PX(l.x); l.py = PY(l.y); l.sx = l.px; l.sy = l.py - 12; });
@@ -253,7 +254,7 @@ async function start3D(){
   loading = true;
   try{
     await MAP.load(); resolveLandmarks();
-    const mod = await import("/js/westpoint3d.js?v=20261113");
+    const mod = await import("/js/westpoint3d.js?v=20261113e");
     if (MODE.lite) { loading = false; return; }
     campus = await mod.create({
       stage, canvas: $("#campus3d"),

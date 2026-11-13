@@ -8,7 +8,7 @@ const B = { x0: -1050, y0: -1400, x1: 1050, y1: 1400 };
 const pts = p => { const o = []; for (let i = 0; i < p.length; i += 2) o.push([p[i], p[i + 1]]); return o; };
 function centroid(p){ let x = 0, y = 0; for (let i = 0; i < p.length; i += 2){ x += p[i]; y += p[i + 1]; } const n = p.length/2; return [x/n, y/n]; }
 function load(){
-  return loading || (loading = fetch("/campus/westpoint.json?v=20261113").then(r => { if (!r.ok) throw new Error("map data"); return r.json(); }).then(j => {
+  return loading || (loading = fetch("/campus/westpoint.json?v=20261113f").then(r => { if (!r.ok) throw new Error("map data"); return r.json(); }).then(j => {
     D = j; B.x1 = j.elev.x0 + (j.elev.cols - 1)*j.elev.step; B.y1 = j.elev.y0 + (j.elev.rows - 1)*j.elev.step; D.buildings.forEach((b, i) => { b.i = i; b.c = centroid(b.p); }); D.areas.forEach(a => { a.c = centroid(a.p); }); return D; }));
 }
 /* ground height (m) at any point, from the terrain grid */

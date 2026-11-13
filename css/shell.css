@@ -167,3 +167,4 @@ html[data-mode="lite"] .btn:hover,html[data-mode="lite"] .proj:hover{transform:n
 
 .lm-tip{position:absolute;left:0;top:0;z-index:6;pointer-events:none;white-space:nowrap;font:600 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:6px 9px;border-radius:6px;background:var(--fg);color:var(--bg)}
 .lm.info .lm-name{border-style:dashed;color:var(--muted)}.lm.info .lm-b{cursor:default}
+.tiles-credit{position:absolute;left:10px;bottom:8px;z-index:5;pointer-events:none;max-width:60%;font:500 10px/1.3 var(--mono);color:#fff;text-shadow:0 1px 2px #000a;opacity:.85}

@@ -2,6 +2,8 @@
 Units: meters. x = east, y = north, measured from lat0/lon0. Map data (c) OpenStreetMap contributors (ODbL)."""
 import gzip, json, math, sys
 d = json.load(gzip.open(__file__.replace('build.py', 'westpoint-raw.json.gz'))); E = d['elems']; ev = d['elev']
+try: ev = json.load(gzip.open(__file__.replace('build.py', 'westpoint-elev-wide.json.gz')))   # wider terrain from widen.py: whole Hudson + Garrison shore
+except FileNotFoundError: pass
 def ring(g): return [(g[i]/10, g[i+1]/10) for i in range(0, len(g), 2)]
 def area(p): return abs(sum(p[i][0]*p[(i+1)%len(p)][1] - p[(i+1)%len(p)][0]*p[i][1] for i in range(len(p))))/2
 def cen(p): return (sum(q[0] for q in p)/len(p), sum(q[1] for q in p)/len(p))
@@ -65,7 +67,7 @@ for e in E:
             if t.get('name'): a['n'] = t['name']
             A.append(a)
 h = [(-30 if v < -500 else v)/10 for v in ev['h']]   # bad readings in the river -> below water
-# The Hudson: flood-fill outward from every cell at river level. The far (east) bank is inside the map, so no widening.
+# The Hudson: flood-fill outward from every cell at river level. With the wide grid both banks are inside the map.
 cols, rows = ev['cols'], ev['rows']
 # river level = the most common low height (a river surface is flat, so it shows up as a spike)
 import collections
@@ -80,6 +82,19 @@ while stack:
     if i < cols - 1: stack.append(k + 1)
     if j > 0: stack.append(k - cols)
     if j < rows - 1: stack.append(k + cols)
+# Better: the real Hudson outline from OpenStreetMap (hudson-osm.json.gz). The DEM over the river is noisy (1-20 m),
+# so height alone leaves holes. Each cell is water if a ray from the cell to the west crosses the river outline an odd number of times.
+try:
+    hud = json.load(gzip.open(__file__.replace('build.py', 'hudson-osm.json.gz')))
+    segs = [(l[k], l[k+1]) for l in hud['lines'] for k in range(len(l) - 1)]
+    def inside(px, py):
+        n = 0
+        for (ax, ay), (bx, by) in segs:
+            if (ay > py) != (by > py) and ax + (py - ay)*(bx - ax)/(by - ay) < px: n += 1
+        return n % 2 == 1
+    water = [inside(ev['x0'] + (k % cols)*ev['step'], ev['y0'] + (k//cols)*ev['step']) for k in range(len(h))]
+    print('Hudson from OSM outline')
+except FileNotFoundError: pass
 EXT = 0
 h2 = []
 for j in range(rows): h2 += [(-3.0 if water[j*cols + i] else max(h[j*cols + i], 1.3)) for i in range(cols)] + [-3.0]*EXT
