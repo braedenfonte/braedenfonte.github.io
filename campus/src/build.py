@@ -65,6 +65,25 @@ for e in E:
             if t.get('name'): a['n'] = t['name']
             A.append(a)
 h = [(-30 if v < -500 else v)/10 for v in ev['h']]   # bad readings in the river -> below water
+# The Hudson: flood-fill outward from every cell at river level. The far (east) bank is inside the map, so no widening.
+cols, rows = ev['cols'], ev['rows']
+# river level = the most common low height (a river surface is flat, so it shows up as a spike)
+import collections
+bins = collections.Counter(round(v*2)/2 for v in h if -2.9 < v < 6); LEVEL = 0.5; T = 5.5   # this terrain source shows the river surface as noisy 0-5 m, so seed at <1 m and fill up to 5.5 m
+print('low-height spike:', sorted(bins.items())[:14])
+water = [False]*len(h); stack = [k for k, v in enumerate(h) if v < 1.0]
+while stack:
+    k = stack.pop()
+    if water[k] or h[k] >= T: continue
+    water[k] = True; i, j = k % cols, k//cols
+    if i > 0: stack.append(k - 1)
+    if i < cols - 1: stack.append(k + 1)
+    if j > 0: stack.append(k - cols)
+    if j < rows - 1: stack.append(k + cols)
+EXT = 0
+h2 = []
+for j in range(rows): h2 += [(-3.0 if water[j*cols + i] else max(h[j*cols + i], 1.3)) for i in range(cols)] + [-3.0]*EXT
+print('river level', LEVEL, 'water share', round(sum(water)/len(water), 3)); h = h2; ev = dict(ev, cols=cols + EXT)
 out = {'src': 'Map data (c) OpenStreetMap contributors, ODbL. Terrain: Mapzen/AWS terrain tiles (USGS 3DEP).', 'lat0': d['lat0'], 'lon0': d['lon0'],
        'elev': {'cols': ev['cols'], 'rows': ev['rows'], 'x0': ev['x0'], 'y0': ev['y0'], 'step': ev['step'], 'h': [round(v, 1) for v in h]},
        'buildings': B, 'roads': R, 'areas': A, 'nodes': N}

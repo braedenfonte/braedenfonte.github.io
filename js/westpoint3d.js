@@ -51,7 +51,8 @@ export async function create(o){
   const wp = [], wu = [], wc = [], wl = [], rp = [], rc = [], rl = [];   // wl / rl: which landmark each triangle belongs to (-1 = none)
   const lmOf = {}; o.landmarks.forEach((l, i) => { if (l.bi != null) lmOf[l.bi] = i; });
   const tops = {};
-  function tri(arrP, arrC, arrL, pts3, color, lm){ for (const p of pts3){ arrP.push(p[0]*S, p[1], -p[2]*S); arrC.push(color[0], color[1], color[2]); } arrL.push(lm); }
+  let curB = -1;   // which named building is being built (for hover names)
+  function tri(arrP, arrC, arrL, pts3, color, lm){ for (const p of pts3){ arrP.push(p[0]*S, p[1], -p[2]*S); arrC.push(color[0], color[1], color[2]); } arrL.push(lm); (arrL.b || (arrL.b = [])).push(curB); }
   function extrude(P, baseY, topY, wallColor, roofColor, lm, noRoof){
     let u = 0; const n = P.length, vh = (topY - baseY)/S/(4.2*4);
     for (let i = 0; i < n; i++){ const a = P[i], c = P[(i + 1) % n], len = Math.hypot(c[0] - a[0], c[1] - a[1]), u1 = u/(5.5*4), u2 = (u + len)/(5.5*4);
@@ -65,12 +66,14 @@ export async function create(o){
     const P = map.pts(b.p); let lo = 1e9, hi = -1e9; P.forEach(p => { const h = gy(p[0], p[1]); if (h < lo) lo = h; if (h > hi) hi = h; });
     const top = Math.min(hi, lo + 9*S) + b.h*S, lm = lmOf[b.i] != null ? lmOf[b.i] : -1; tops[b.i] = { P, lo, top };
     const jit = 0.94 + ((b.i*37) % 13)/100, wcol = (b.k === "house" ? HOUSE[b.i % HOUSE.length] : WALL[b.k]).map(v => v*jit);
+    curB = b.n ? b.i : -1;
     extrude(P, lo - 2*S, top, wcol, ROOF[b.k].map(v => v*jit), lm);
     if (b.k !== "house" && b.h >= 16 && P.length >= 4){ // a low parapet block so big halls don't look like plain boxes
       const c = b.c, Q = P.map(p => [c[0] + (p[0] - c[0])*0.9, c[1] + (p[1] - c[1])*0.9]); extrude(Q, top, top + 1.6*S, wcol.map(v => v*0.93), ROOF[b.k].map(v => v*0.9), lm); }
   });
   // Michie Stadium: a bowl of stands around the field
   const stad = D.areas.find(a => a.k === "stadium"), stadLm = o.landmarks.findIndex(l => l.id === "stadium");
+  curB = -1;
   if (stad){ const P = map.pts(stad.p), c = stad.c, g0 = gy(c[0], c[1]), n = P.length, inner = P.map(p => [c[0] + (p[0] - c[0])*0.52, c[1] + (p[1] - c[1])*0.52]);
     extrude(P, g0 - 2*S, g0 + 17*S, [0.6, 0.6, 0.62], null, stadLm, true);
     for (let i = 0; i < n; i++){ const a = P[i], b2 = P[(i + 1) % n], ai = inner[i], bi = inner[(i + 1) % n], col = i % 2 ? [0.5, 0.52, 0.56] : [0.56, 0.58, 0.62];
@@ -116,7 +119,7 @@ export async function create(o){
   }
 
   /* ---------- camera rig ---------- */
-  const c0 = V(260, 650, 0), HOME = { tx: c0.x, ty: c0.y, tz: c0.z, az: 1.12, pol: 0.98, dist: 74 };
+  const c0 = V(380, 660, 0), HOME = { tx: c0.x, ty: c0.y, tz: c0.z, az: 1.2, pol: 1.0, dist: 86 };
   const cur = Object.assign({}, HOME);
   let tween = null, raf = 0, active = true, dead = false, atHome = true, vw = 1, vh = 1;
   const ease = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2;
@@ -138,7 +141,7 @@ export async function create(o){
         if (ox > 0 && oy > 0){ moved = true; if (ox < oy){ const m = ox/2*(dx < 0 ? -1 : 1); p.sx -= m; q.sx += m; } else { const m = oy/2*(dy < 0 ? -1 : 1); p.sy -= m; q.sy += m; } } }
       L.forEach(clamp); if (!moved) break; }
     L.forEach(q => o.place(q.l.id, q.sx, q.sy, true, Math.abs(q.sx - q.x) > 90 || Math.abs(q.sy - q.y) > 90));
-    o.minor.forEach((m, i) => { v.copy(V(m.x, m.y, m.h + 5)).project(cam); const x = (v.x*0.5 + 0.5)*vw, y = (-v.y*0.5 + 0.5)*vh; o.placeMinor(i, x, y, cur.dist < 34 && v.z < 1 && x > 30 && x < vw - 30 && y > 60 && y < vh - 10); });
+    o.minor.forEach((m, i) => { v.copy(V(m.x, m.y, m.h + 5)).project(cam); const x = (v.x*0.5 + 0.5)*vw, y = (-v.y*0.5 + 0.5)*vh; o.placeMinor(i, x, y, false && v.z < 1 && x > 30 && x < vw - 30 && y > 60 && y < vh - 10); });
   }
 
   /* ---------- draw only when needed ---------- */
@@ -160,10 +163,11 @@ export async function create(o){
   const ro = "ResizeObserver" in window ? new ResizeObserver(resize) : null; if (ro) ro.observe(stage); else addEventListener("resize", resize);
 
   /* ---------- hover, click, drag ---------- */
-  const ray = new THREE.Raycaster(), ptr = new THREE.Vector2(); let hot = null, drag = null;
+  const ray = new THREE.Raycaster(), ptr = new THREE.Vector2(); let hot = null, drag = null, overName = null;
   function pickAt(ev){ const r = canvas.getBoundingClientRect(); ptr.set(((ev.clientX - r.left)/r.width)*2 - 1, -((ev.clientY - r.top)/r.height)*2 + 1); ray.setFromCamera(ptr, cam);
     picks.forEach(p => { p.visible = true; }); const hit = ray.intersectObjects([walls, roofs].concat(picks), false)[0]; picks.forEach(p => { p.visible = false; });
-    if (!hit) return null; if (hit.object.userData.id) return hit.object.userData.id; const i = hit.object.userData.lm[hit.faceIndex]; return i >= 0 ? o.landmarks[i].id : null; }
+    overName = null; if (!hit) return null; if (hit.object.userData.id) return hit.object.userData.id; const arr = hit.object.userData.lm, i = arr[hit.faceIndex], bi = arr.b[hit.faceIndex];
+    if (i < 0 && bi >= 0) overName = D.buildings[bi].n; return i >= 0 ? o.landmarks[i].id : null; }
   function highlight(id){ if (id === hot) return; hot = id; for (const k in outlines) outlines[k].ln.visible = outlines[k].mine || k === id; invalidate(); }
   const L = (el, evn, fn, opt) => { el.addEventListener(evn, fn, opt); return () => el.removeEventListener(evn, fn, opt); };
   const off = [
@@ -171,10 +175,10 @@ export async function create(o){
     L(canvas, "pointermove", ev => {
       if (drag && drag.id === ev.pointerId){ const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y; drag.moved += Math.abs(dx) + Math.abs(dy); drag.x = ev.clientX; drag.y = ev.clientY;
         if (drag.moved > 5){ if (!drag.cap){ drag.cap = true; try{ canvas.setPointerCapture(ev.pointerId); }catch(x){} } cur.az -= dx*0.005; cur.pol = Math.min(1.4, Math.max(0.3, cur.pol - dy*0.003)); atHome = false; invalidate(); } return; }
-      if (ev.pointerType === "mouse" && !tween){ const id = pickAt(ev); if (id !== hot){ highlight(id); o.onHover(id); } } }),
+      if (ev.pointerType === "mouse" && !tween){ const id = pickAt(ev); if (o.tip) o.tip(overName, ev.clientX, ev.clientY); if (id !== hot){ highlight(id); o.onHover(id); } } }),
     L(canvas, "pointerup", ev => { const d = drag; drag = null; if (d && d.moved <= 5 && !tween){ const id = pickAt(ev); if (id) o.onOpen(id); } }),
     L(canvas, "pointercancel", () => { drag = null; }),
-    L(canvas, "pointerleave", () => { if (hot){ highlight(null); o.onHover(null); } }),
+    L(canvas, "pointerleave", () => { if (o.tip) o.tip(null); if (hot){ highlight(null); o.onHover(null); } }),
     L(canvas, "wheel", ev => { if (tween) return; ev.preventDefault(); zoom(1 + Math.max(-0.3, Math.min(0.3, ev.deltaY*0.0015))); }, { passive: false }),   // scroll to zoom
     L(document, "visibilitychange", () => { if (!document.hidden) invalidate(); })
   ];
