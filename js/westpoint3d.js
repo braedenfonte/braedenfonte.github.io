@@ -224,22 +224,12 @@ export async function create(o){
   /* ---------- Google Photorealistic 3D Tiles: the real look. The model above stays underneath as the fallback
      (no key, low-power/data-saver, quota used up, or any load error) and stays invisible-but-pickable for hovers. ---------- */
   let tiles = null, tilesOn = false, credit = null, tilesAct = 0, hold = null, calib = 0;
-  // campus core (Central Area, the Plain, Trophy Point): our clean ground laid over Google's photo, so no flat, smeared trees there. Edges fade out.
-  const core = (() => { const X0 = -140, X1 = 600, Y0 = 300, Y1 = 1140, F = 70, pos = [], uv = [], col = [], idx = [];
-    const i0 = Math.ceil((X0 - e.x0)/e.step), i1 = Math.floor((X1 - e.x0)/e.step), j0 = Math.ceil((Y0 - e.y0)/e.step), j1 = Math.floor((Y1 - e.y0)/e.step), nc = i1 - i0 + 1;
-    for (let j = j0; j <= j1; j++) for (let i = i0; i <= i1; i++){ const x = e.x0 + i*e.step, y = e.y0 + j*e.step, h = e.h[j*e.cols + i];
-      pos.push(x*S, (h < 0.4 ? -4 : h)*S*VE + 0.25*S, -y*S); uv.push(i/(e.cols - 1), j/(e.rows - 1));
-      const fade = Math.min(1, (x - X0)/F, (X1 - x)/F, (y - Y0)/F, (Y1 - y)/F); col.push(1, 1, 1, h < 0.4 ? 0 : Math.max(0, fade)); }
-    for (let j = 0; j < j1 - j0; j++) for (let i = 0; i < nc - 1; i++){ const a = j*nc + i, b = a + 1, c = a + nc, d = c + 1; idx.push(a, b, d, a, d, c); }
-    const g = keep(new THREE.BufferGeometry()); g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
-    g.setAttribute("color", new THREE.Float32BufferAttribute(col, 4)); g.setIndex(idx); g.computeVertexNormals();
-    const m = new THREE.Mesh(g, keep(new THREE.MeshStandardMaterial({ map: tex, vertexColors: true, transparent: true, roughness: 1, polygonOffset: true, polygonOffsetFactor: -4, polygonOffsetUnits: -4 })));
-    m.receiveShadow = true; m.visible = false; m.renderOrder = 1; scene.add(m); return m; })(); const tileMats = new Set();
+ const tileMats = new Set();
   const own = scene.children.filter(c => (c.isMesh || c.isInstancedMesh) && !c.userData.keep && !picks.includes(c) && c !== walls && c !== roofs);   // Google has no 3D buildings here, so ours stay
-  function showOwn(on){ own.forEach(c => { c.visible = on; }); core.visible = !on; renderer.shadowMap.needsUpdate = true; }
+  function showOwn(on){ own.forEach(c => { c.visible = on; }); renderer.shadowMap.needsUpdate = true; }
   function stopTiles(why){ if (!tiles) return; console.warn("Google 3D tiles off, using the built-in map:", why);
     tiles.group.parent && tiles.group.parent.removeFromParent(); tiles.dispose(); tiles = null; tilesOn = false; tileMats.clear(); retheme();
-    if (credit){ credit.remove(); credit = null; } showOwn(true); for (const k in outlines) outlines[k].ln.visible = outlines[k].mine; if (atHome) fly(homeFor(), 600); invalidate(); }
+    if (credit){ credit.remove(); credit = null; } treeMeshes.forEach(m => m.removeFromParent()); showOwn(true); for (const k in outlines) outlines[k].ln.visible = outlines[k].mine; if (atHome) fly(homeFor(), 600); invalidate(); }
   // Google's ground and our terrain come from different surveys: measure the height gap at ~150 open-ground points and shift the
   // tiles so the two agree. Then our buildings (built on our terrain) sit exactly on Google's ground. Re-run as sharper tiles arrive.
   function calibrate(){
@@ -248,18 +238,53 @@ export async function create(o){
     for (let j = 0; j < 14; j++) for (let i = 0; i < 12; i++){ const x = -700 + i*140, y = -700 + j*150;
       if (map.heightAt(x, y) < 2 || grid.busy(x, y)) continue;
       rc.set(new THREE.Vector3(x*S, 600, -y*S), dn); const hit = rc.intersectObject(tiles.group, true)[0]; if (hit) diffs.push(gy(x, y) - hit.point.y); }
-    if (diffs.length < 40) return;
+    if (diffs.length < 15) return;
     diffs.sort((a, b) => a - b); const med = diffs[diffs.length >> 1], iqr = diffs[(diffs.length*3) >> 2] - diffs[diffs.length >> 2];
-    if (Math.abs(med) > 60*S || iqr > 12*S) return;   // still the rough first-pass globe: wait for the detailed ground
+        if (Math.abs(med) > 60*S || iqr > 12*S) return;   // still the rough first-pass globe: wait for the detailed ground
     calib++; hold.position.y += med; hold.updateMatrixWorld(true);
+    renderer.shadowMap.needsUpdate = true; invalidate();
+  }
+  /* 3D trees where the trees really are: look straight down at Google's photo once it is sharp, find tree canopy (dark green,
+     darker than lawns), and grow a leafy 3D tree there, tinted with the photo's own color. Skips buildings, roads, fields and lawns. */
+  let planted = false, treeMeshes = [], treeTries = 0;
+  function plantTrees(){
+    if (!tiles || planted || ++treeTries < 4) return; planted = true;   // wait for a few loading rounds so the photo is sharp
+    const phone = matchMedia("(pointer: coarse)").matches, R = phone ? 480 : 760, CX = 200, CY = 620, STEP = phone ? 9 : 7;
+    const N = 1024, X0 = CX - R, Y0 = CY - R, W2 = 2*R, rt = new THREE.WebGLRenderTarget(N, N), buf = new Uint8Array(N*N*4);
+    const oc = new THREE.OrthographicCamera(-R*S, R*S, R*S, -R*S, 1, 2000); oc.position.set(CX*S, 900, -CY*S); oc.up.set(0, 0, -1); oc.lookAt(CX*S, 0, -CY*S); oc.updateMatrixWorld();
+    const vis = scene.children.map(c => c.visible); scene.children.forEach(c => { c.visible = c === hold || c.isLight; });
+    renderer.setRenderTarget(rt); renderer.render(scene, oc); renderer.readRenderTargetPixels(rt, 0, 0, N, N, buf); renderer.setRenderTarget(null);
+    scene.children.forEach((c, k) => { c.visible = vis[k]; }); rt.dispose();
+    const px = (x, y) => { const i = Math.floor((x - X0)/W2*N), j = Math.floor((y - Y0)/W2*N); return (Math.min(N - 1, Math.max(0, j))*N + Math.min(N - 1, Math.max(0, i)))*4; };
+    const green = [], grid = map.busyGrid();
+    for (let k = 0; k < N*N*4; k += 64){ const r = buf[k], g = buf[k + 1], b = buf[k + 2]; if (g > r && g >= b) green.push(r + g + b); }
+    if (green.length < 200) return; green.sort((a, b) => a - b); const dark = green[Math.floor(green.length*0.62)];   // lawns are the brightest greens
+    const spots = []; let sd = 11; const rnd = () => (sd = (sd*9301 + 49297) % 233280)/233280;
+    for (let y = CY - R; y < CY + R; y += STEP) for (let x = CX - R; x < CX + R; x += STEP){
+      const jx = x + (rnd() - 0.5)*STEP, jy = y + (rnd() - 0.5)*STEP; if ((jx - CX)**2 + (jy - CY)**2 > R*R || map.heightAt(jx, jy) < 1.5 || grid.busy(jx, jy)) continue;
+      const k = px(jx, jy), r = buf[k], g = buf[k + 1], b = buf[k + 2]; if (!(g > r && g >= b && r + g + b <= dark)) continue;
+      spots.push([jx, jy, r, g, b, 0.75 + rnd()*0.55, rnd()]); }
+    if (!spots.length) return;
+    const crown = new THREE.IcosahedronGeometry(1, 1), pa = crown.attributes.position;   // lumpy, leafy crown
+    for (let i = 0; i < pa.count; i++){ const f = 0.82 + ((i*7919) % 23)/23*0.36; pa.setXYZ(i, pa.getX(i)*f, pa.getY(i)*f*0.85, pa.getZ(i)*f); } crown.computeVertexNormals();
+    const leaves = new THREE.InstancedMesh(keep(crown), keep(new THREE.MeshStandardMaterial({ roughness: 0.95 })), spots.length*2);
+    const trunks = new THREE.InstancedMesh(keep(new THREE.CylinderGeometry(0.22, 0.32, 1, 5)), keep(new THREE.MeshStandardMaterial({ color: 0x4a3b2c, roughness: 1 })), spots.length);
+    const d = new THREE.Object3D(), c = new THREE.Color(); let n = 0;
+    spots.forEach((t, i) => { const sc = t[5], h = (11 + t[6]*7)*sc, cr = (3.2 + t[6]*1.6)*sc, gy0 = gy(t[0], t[1]);
+      d.position.set(t[0]*S, gy0 + h*0.3*S, -t[1]*S); d.rotation.set(0, 0, 0); d.scale.set(S, h*0.6*S, S); d.updateMatrix(); trunks.setMatrixAt(i, d.matrix);
+      c.setRGB(t[2]/255*1.15, t[3]/255*1.15, t[4]/255*1.1);   // the photo's own canopy color (render target is linear)
+      for (let q = 0; q < 2; q++){ const ox = q ? (t[6] - 0.5)*cr*0.9 : 0, oz = q ? (0.5 - t[6])*cr*0.7 : 0, s2 = q ? 0.72 : 1;
+        d.position.set((t[0] + ox)*S, gy0 + (h - cr*(q ? 1.3 : 0.9))*S, -(t[1] + oz)*S); d.rotation.set(t[6]*3, i, 0); d.scale.set(cr*s2*S, cr*s2*1.05*S, cr*s2*S); d.updateMatrix();
+        leaves.setMatrixAt(n, d.matrix); leaves.setColorAt(n, c.clone().multiplyScalar(q ? 0.92 : 1)); n++; } });
+    leaves.count = n; leaves.castShadow = trunks.castShadow = true; leaves.receiveShadow = true; scene.add(leaves, trunks); treeMeshes = [leaves, trunks];
     renderer.shadowMap.needsUpdate = true; invalidate();
   }
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261113q").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261113u").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261113q"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261113u"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -277,7 +302,7 @@ export async function create(o){
     ["load-model", "load-tile-set", "tiles-load-start"].forEach(n => t.addEventListener(n, () => { tilesAct = performance.now(); }));
     t.addEventListener("load-tile-set", () => { const phone = matchMedia("(pointer: coarse)").matches; t.errorTarget = phone ? 12 : 8;
       t.lruCache.minSize = phone ? 500 : 900; t.lruCache.maxSize = phone ? 800 : 1400; invalidate(); });   // cap memory (Google's suggested 6000-8000 tiles is far too heavy for a laptop or phone)   // much sharper than Google's default; only the first (root) request of a visit is billed   // keep asking for tiles while they stream in
-    t.addEventListener("tiles-load-end", () => setTimeout(calibrate, 300));
+    t.addEventListener("tiles-load-end", () => setTimeout(() => { calibrate(); setTimeout(plantTrees, 1500); }, 300));
     t.addEventListener("tiles-load-end", () => { if (credit && tiles){ const a = [...new Set(tiles.getAttributions().filter(x => x.type === "string").flatMap(x => x.value.split(/[;,]\s*/)).filter(Boolean))]; credit.textContent = "Map data: " + (a.length ? a.join(", ") : "Google"); } invalidate(); });
     invalidate();
   }

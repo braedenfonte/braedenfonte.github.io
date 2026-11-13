@@ -120,9 +120,12 @@ Each test reload costs 1 of the 30 daily Google loads.
 - All named barracks + Thayer Hall + Bartlett Hall + Washington Hall get Military Gothic detail generated from their real OSM
   footprints (`GOTHIC` in `js/westpoint3d.js`): granite battlements on every roof edge, square corner towers rising 6 m above the roof
   with their own battlements, stone buttresses every 9 m. Wall texture is now granite courses with narrow pointed windows (all buildings).
-- Campus core (x -140..600, y 300..1140: Central Area, the Plain, Trophy Point) gets our own clean ground over Google's photo, so no
-  flat smeared trees there; the edge fades into the photo over 70 m.
+- (Removed: a clean painted ground over the campus core looked sloppy against the photo. Braeden wants the photo + real 3D trees.)
+- 3D trees (`plantTrees()`): once the photo is sharp, render Google's ground straight down, find dark-green canopy (darker than the
+  brightest 38% of greens = lawns), and grow a leafy tree (trunk + 2 lumpy crowns, photo-tinted) every ~7 m there, within 760 m of
+  campus (480 m on phones). Skips buildings, roads, fields, lawns. About 5,000 trees.
 - Reference: no free-to-use photos were found by search; style taken from documented descriptions (Military Gothic Revival, gray granite,
   Pershing 1891-95 by Richard Morris Hunt, Thayer Hall = former Riding Hall, Bartlett Hall ~1911-14).
 - Next: real heights per building, Thayer Hall's river-side towers, Pershing's front towers/sally port, Cadet Chapel, Washington Hall wings,
-  3D trees on the campus lawns, paving texture for Central Area.
+  the Thayer Hall footbridge between Taylor and Bartlett (needs to be a real 3D bridge),
+  exact building shapes (Braeden: current Gothic is closer but details still wrong; overlay still looks sloppy in places).
