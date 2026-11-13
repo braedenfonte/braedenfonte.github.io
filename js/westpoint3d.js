@@ -70,7 +70,7 @@ export async function create(o){
   }
   D.buildings.forEach(b => {
     const P = map.pts(b.p); let lo = 1e9, hi = -1e9; P.forEach(p => { const h = gy(p[0], p[1]); if (h < lo) lo = h; if (h > hi) hi = h; });
-    const hh = { "Washington Hall": 16, "MacArthur Barracks": 23.4, "Eisenhower Barracks": 23.4 }[b.n] || b.h;
+    const hh = { "Washington Hall": 16, "MacArthur Barracks": 23.4, "Eisenhower Barracks": 23.4, "Pershing Barracks": 21 }[b.n] || b.h;
     const top = Math.min(hi, lo + 9*S) + hh*S, lm = lmOf[b.i] != null ? lmOf[b.i] : -1; tops[b.i] = { P, lo, top };
     const jit = 0.94 + ((b.i*37) % 13)/100, wcol = (b.k === "house" ? HOUSE[b.i % HOUSE.length] : b.n && PLAIN_FRONT_RX.test(b.n) ? [0.8, 0.8, 0.77] : WALL[b.k]).map(v => v*jit);
     curB = b.n ? b.i : -1;
@@ -91,7 +91,7 @@ export async function create(o){
   function battlements(P, y, col, lm, step){ const n = P.length;   // merlons along every edge
     for (let i = 0; i < n; i++){ const a = P[i], q = P[(i + 1) % n], L = Math.hypot(q[0] - a[0], q[1] - a[1]); if (L < 2) continue; const ux = (q[0] - a[0])/L, uy = (q[1] - a[1])/L;
       for (let t = step/2; t < L; t += step) box(a[0] + ux*t, a[1] + uy*t, ux, uy, step*0.5, 0.9, y, y + 1.3*S, col, lm); } }
-  D.buildings.forEach(b => { if (!b.n || !GOTHIC.test(b.n) || PLAIN_FRONT.test(b.n)) return; const T = tops[b.i]; if (!T) return;
+  D.buildings.forEach(b => { if (!b.n || !GOTHIC.test(b.n) || PLAIN_FRONT.test(b.n) || b.n === "Pershing Barracks") return; const T = tops[b.i]; if (!T) return;
     const P = T.P, n = P.length, lm = lmOf[b.i] != null ? lmOf[b.i] : -1, col = [0.66, 0.65, 0.62], dark2 = [0.58, 0.57, 0.55]; curB = b.i;
     let ar = 0; for (let i = 0; i < n; i++){ const a = P[i], q = P[(i + 1) % n]; ar += a[0]*q[1] - q[0]*a[1]; } const sg = Math.sign(ar) || 1;
     battlements(P, T.top, col, lm, 3.2);
@@ -191,6 +191,45 @@ export async function create(o){
     { const g = at(-587, 1295); mk(g, B(2.4, 1, 2.4), granite, 0, 0.5, 0); const ob = mk(g, C(0.5, 0.9, 7, 4), granite, 0, 4.5, 0); ob.rotation.y = Math.PI/4; mk(g, new THREE.ConeGeometry(0.5*S, 0.8*S, 4), granite, 0, 8.4, 0).rotation.y = Math.PI/4; }
     // the Great Chain: giant iron links laid out at Trophy Point
     { const g = at(360, 1093); for (let i = 0; i < 13; i++){ const l = mk(g, new THREE.TorusGeometry(0.75*S, 0.2*S, 8, 16), iron, 0, 0.3, -9 + i*1.4); l.scale.set(1, 1.6, 1); l.rotation.set(i % 2 ? 0 : Math.PI/2, 0, Math.PI/2); } }
+  }
+
+  /* ---------- Pershing Barracks (1895, Richard Morris Hunt), from photos: rock-faced gray granite; a corbelled (machicolated)
+     parapet with battlements all around; square corner towers at both ends of the north front (toward the Plain), each rising
+     two floors above the roof with its own corbel band, battlements and four round corner turrets; round bartizans at the
+     south corners; a big round-arched sally port with iron lanterns in the middle of the north front. ---------- */
+  { const bi = D.buildings.findIndex(b => b.n === "Pershing Barracks"), T = bi >= 0 && tops[bi];
+    if (T){ const P = T.P, n = P.length, lm = lmOf[bi] != null ? lmOf[bi] : -1, stone = [0.72, 0.71, 0.68], dark = [0.6, 0.59, 0.56]; curB = bi;
+      let ar = 0; for (let i = 0; i < n; i++){ const a = P[i], q = P[(i + 1) % n]; ar += a[0]*q[1] - q[0]*a[1]; } const sg = ar > 0 ? 1 : -1;
+      const top = T.top, lo = T.lo, m = v => v*S;
+      // corbel band + outset parapet + battlements along every edge
+      function crown(Q, yTop, col){ for (let i = 0; i < Q.length; i++){ const a = Q[i], q = Q[(i + 1) % Q.length], L = Math.hypot(q[0] - a[0], q[1] - a[1]); if (L < 1.5) continue;
+          const ux = (q[0] - a[0])/L, uy = (q[1] - a[1])/L, nx = uy*sg, ny = -ux*sg;
+          for (let t = 0.7; t < L - 0.3; t += 1.3) box(a[0] + ux*t + nx*0.25, a[1] + uy*t + ny*0.25, ux, uy, 0.55, 0.5, yTop - m(0.9), yTop - m(0.1), dark, lm);   // corbels
+          box(a[0] + ux*L/2 + nx*0.4, a[1] + uy*L/2 + ny*0.4, ux, uy, L + 0.8, 0.6, yTop - m(0.1), yTop + m(1.3), col, lm);   // parapet
+          for (let t = 1.1; t < L - 0.5; t += 2.4) box(a[0] + ux*t + nx*0.4, a[1] + uy*t + ny*0.4, ux, uy, 1.2, 0.6, yTop + m(1.3), yTop + m(2.3), col, lm); } }   // merlons
+      crown(P, top, stone);
+      const cyl = (x, y, r, y0, y1, mat) => { const k = new THREE.Mesh(keep(new THREE.CylinderGeometry(r*S, r*S, y1 - y0, 14)), mat); k.position.set(x*S, (y0 + y1)/2, -y*S); k.castShadow = true; k.userData.keep = true; scene.add(k);
+        const c = new THREE.Mesh(keep(new THREE.ConeGeometry(r*S, m(1.6), 14)), mat); c.rotation.x = Math.PI; c.position.set(x*S, y0 - m(0.8), -y*S); c.userData.keep = true; scene.add(c);
+        for (let a = 0; a < 6; a++){ const t = new THREE.Mesh(keep(new THREE.BoxGeometry(m(0.45), m(0.7), m(0.45))), mat); t.position.set((x + Math.cos(a*Math.PI/3)*r*0.82)*S, y1 + m(0.35), -(y + Math.sin(a*Math.PI/3)*r*0.82)*S); t.userData.keep = true; scene.add(t); } };
+      const granite = keep(new THREE.MeshStandardMaterial({ color: 0xb9b6ae, roughness: 0.9 }));
+      // the two north corner towers
+      [[260, 596, 269, 590], [293, 596, 301, 588]].forEach(([x0, y1, x1, y0]) => { const cx = (x0 + x1)/2, cy = (y0 + y1)/2, w = x1 - x0 + 0.6, d = y1 - y0 + 0.6, tt = top + m(8.5);
+        box(cx, cy, 1, 0, w, d, lo, tt, stone, lm); const Q = [[cx - w/2, cy - d/2], [cx + w/2, cy - d/2], [cx + w/2, cy + d/2], [cx - w/2, cy + d/2]]; crown(Q, tt, stone);
+        Q.forEach(([qx, qy]) => cyl(qx, qy, 1.15, tt - m(3.5), tt + m(1.6), granite)); });
+      // bartizans on the south corners
+      [[296, 508], [262, 509]].forEach(([x, y]) => cyl(x, y, 1.2, top - m(4), top + m(1.6), granite));
+      curB = -1;
+      // sally port: a round-arched entrance with iron lanterns, centered on the north front between the towers
+      const cv = document.createElement("canvas"); cv.width = 256; cv.height = 320; const g = cv.getContext("2d");
+      g.fillStyle = "#bdb9b0"; g.fillRect(0, 0, 256, 320); for (let yy = 0; yy < 320; yy += 16) for (let xx = -((yy/16) % 2)*20; xx < 256; xx += 40){ const v = 172 + ((xx*7 + yy*3) % 40); g.fillStyle = "rgb(" + v + "," + v + "," + (v - 5) + ")"; g.fillRect(xx + 1, yy + 1, 38, 14); }
+      g.fillStyle = "#a29d93"; g.beginPath(); g.moveTo(52, 320); g.lineTo(52, 150); g.arc(128, 150, 76, Math.PI, 0); g.lineTo(204, 320); g.fill();
+      g.fillStyle = "#1c1f24"; g.beginPath(); g.moveTo(66, 320); g.lineTo(66, 150); g.arc(128, 150, 62, Math.PI, 0); g.lineTo(190, 320); g.fill();
+      g.fillStyle = "#3a2c22"; g.fillRect(84, 200, 88, 120); g.fillStyle = "#2a2018"; g.fillRect(126, 200, 4, 120);
+      [[30, 150], [226, 150]].forEach(([lx, ly]) => { g.fillStyle = "#111"; g.fillRect(lx - 2, ly, 4, 26); g.fillRect(lx - 10, ly - 28, 20, 30); g.fillStyle = "#ffd98a"; g.fillRect(lx - 7, ly - 24, 14, 22); });
+      const tex = keep(new THREE.CanvasTexture(cv)); tex.colorSpace = THREE.SRGBColorSpace; const W = 9, H = 11, cx = 281, yF = 593 + 0.08*sg*-1;
+      const geo = keep(new THREE.PlaneGeometry(W*S, H*S)); const door = new THREE.Mesh(geo, keep(new THREE.MeshStandardMaterial({ map: tex, roughness: 0.9 })));
+      door.position.set(cx*S, lo + m(H/2) + m(0.6), -(593 + 0.12)*S); door.userData.keep = true; scene.add(door);   // faces north (+y map = -z world), plane already faces +z... turn it around
+      door.rotation.y = Math.PI; }
   }
 
   // Michie Stadium: a bowl of stands around the field
@@ -405,9 +444,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261114x").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261114y").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261114x"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261114y"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -530,7 +569,7 @@ export async function create(o){
         else { blk(x, y, h, 20, 8, 3.2, 0, w0, 0x9b2a24); blk(x, y, h, 7, 6, 4, 3.2, w0, 0xf0efe9, -3); blk(x, y, h, 1, 1, 3, 7.2, w0, 0x222222, -3);   // tug pushing
           for (let k = 0; k < b.barges; k++){ const f = 10 + 32 + k*62; blk(x, y, h, 60, 11, 3, 0, w0, 0x3b3a38, f); blk(x, y, h, 54, 9.5, 1.6, 3, w0, k % 2 ? 0x6b5a45 : 0x4a4f55, f); } } }
       mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
-    fetch("/campus/movers.json?v=20261114x").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
+    fetch("/campus/movers.json?v=20261114y").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
     return { step };
   })();
 
