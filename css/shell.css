@@ -164,3 +164,6 @@ html[data-mode="lite"] .btn:hover,html[data-mode="lite"] .proj:hover{transform:n
 /* map fills the screen on the home page */
 .campus{height:100vh;height:100dvh;min-height:430px}
 @media (max-width:860px){ .campus{aspect-ratio:auto;height:calc(100dvh - 64px - env(safe-area-inset-top,0px));max-height:none} }
+
+.lm-tip{position:absolute;left:0;top:0;z-index:6;pointer-events:none;white-space:nowrap;font:600 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:6px 9px;border-radius:6px;background:var(--fg);color:var(--bg)}
+.lm.info .lm-name{border-style:dashed;color:var(--muted)}.lm.info .lm-b{cursor:default}

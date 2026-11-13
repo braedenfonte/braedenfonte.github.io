@@ -8,8 +8,8 @@ const B = { x0: -1050, y0: -1400, x1: 1050, y1: 1400 };
 const pts = p => { const o = []; for (let i = 0; i < p.length; i += 2) o.push([p[i], p[i + 1]]); return o; };
 function centroid(p){ let x = 0, y = 0; for (let i = 0; i < p.length; i += 2){ x += p[i]; y += p[i + 1]; } const n = p.length/2; return [x/n, y/n]; }
 function load(){
-  return loading || (loading = fetch("/campus/westpoint.json").then(r => { if (!r.ok) throw new Error("map data"); return r.json(); }).then(j => {
-    D = j; D.buildings.forEach((b, i) => { b.i = i; b.c = centroid(b.p); }); D.areas.forEach(a => { a.c = centroid(a.p); }); return D; }));
+  return loading || (loading = fetch("/campus/westpoint.json?v=20261113").then(r => { if (!r.ok) throw new Error("map data"); return r.json(); }).then(j => {
+    D = j; B.x1 = j.elev.x0 + (j.elev.cols - 1)*j.elev.step; B.y1 = j.elev.y0 + (j.elev.rows - 1)*j.elev.step; D.buildings.forEach((b, i) => { b.i = i; b.c = centroid(b.p); }); D.areas.forEach(a => { a.c = centroid(a.p); }); return D; }));
 }
 /* ground height (m) at any point, from the terrain grid */
 function heightAt(x, y){
@@ -83,7 +83,7 @@ function paint(cv, o){
     const seen = {}; D.buildings.forEach(b => { if (!b.n || seen[b.n] || o.skip && o.skip.indexOf(b.n) >= 0) return; const big = b.k === "barracks" || MINOR.indexOf(b.n) >= 0; if (!big) return; seen[b.n] = 1;
       txt(b.n.replace(" Barracks", ""), X(b.c[0]), Y(b.c[1]), f*(b.k === "barracks" ? 0.92 : 0.86), b.n === MINE ? C.accent : null, b.k === "barracks"); });
     D.areas.forEach(a => { if (a.n === "The Plain" || a.n === "Lusk Reservoir" || a.n === "Buffalo Soldier Field" || a.n === "West Point Cemetery") txt(a.n, X(a.c[0]), Y(a.c[1]), f*0.9); });
-    x.save(); x.translate(X(900), Y(300)); x.rotate(-Math.PI/2); txt("HUDSON RIVER", 0, 0, f*1.15, o.dark ? "#9fc3e0" : "#eaf4fb"); x.restore();
+    x.save(); x.translate(X(B.x1 - 380), Y(500)); x.rotate(-Math.PI/2); txt("HUDSON RIVER", 0, 0, f*1.15, o.dark ? "#9fc3e0" : "#eaf4fb"); x.restore();
   }
   return { W, H, k };
 }

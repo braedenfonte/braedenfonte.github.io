@@ -59,3 +59,11 @@ Written Nov 12, 2026 so a new Claude session can pick up the site redesign witho
    Plan it building by building, most-visible first, and keep 60fps and the low-power mode.
 9. Still unchecked by anyone: final look of the real map after the last lighting/label fixes; Finance and Memory
    with real data; a real iPhone; real 60fps.
+
+## Update Nov 13, 2026
+- The new site is LIVE on `main` (PR #3). Work on a fresh branch from `main` and open a PR; `redesign` is old.
+- Done: scroll to zoom, full-height map, hover names for every named building (3D), the Hudson (flood-filled from the
+  terrain's flat river level in `campus/src/build.py`; the east bank is inside the map), direction signs (Josh/Fishkill, Home/Caledonia, NYC, Highland Falls),
+  and `?v=` version tags on css/js links. **Bump the `?v=` number in index.html, shell.js and campusmap.js whenever those files change.**
+- Still open: soccer stadium -> Braeden's soccer schedule, statues (need coordinates), names for buildings OSM does not name
+  (honor building, BS&L building, soccer locker room: ask Braeden which footprints), and the detailed real-look buildings (#8).
