@@ -84,3 +84,34 @@ Written Nov 12, 2026 so a new Claude session can pick up the site redesign witho
   (`campus/src/widen.py` -> `westpoint-elev-wide.json.gz`, same public terrain tiles, matches the old grid to 0.12 m), and the river
   now comes from the real OpenStreetMap Hudson outline (`campus/src/hudson-osm.json.gz`) instead of guessing from heights
   (the terrain over the river is noisy, 1-20 m). Both shores, Constitution Island and the bend are in. The 2D view is framed a bit wider/east to show them.
+
+## Hybrid map plan (agreed with Braeden, Nov 13, 2026)
+**Finding:** Google has NO 3D buildings for West Point (military post). Its tiles here are aerial photos draped on the hills.
+Measured roof vs. street next to it: Washington Hall 2.8 m, Jefferson Hall 1.6 m, Pershing 1.8 m (real: 20-30 m). No tile setting can fix that.
+**Plan:** keep Google's real ground, trees and river; put our own 3D buildings on top, at real heights, with real detail.
+
+Phase 0 - tuning fixes (branch `map-tiles-tuning`): tile loader keeps updating until sharp (it stalled before), glTF handler matches
+Google URLs, real colors in dark mode, no floating red outline boxes, closer zoom, angled landmark close-ups. Note: the in-app
+browser pane pauses animation when hidden, so test tiles in a visible browser.
+
+Phase 1 - foundation. DONE Nov 13 (PR #6): our buildings stay visible on top of the tiles; the tiles are shifted so Google's ground
+matches our terrain (`calibrate()`, ~150 open-ground raycasts, only once the detailed ground has loaded); buildings use daylight
+granite colors on the photo ground even in dark mode; tile memory capped (1,400 desktop / 800 phone). Not done yet from the list below:
+real heights for every building and roof colors sampled from the photo.
+Phase 1 - foundation (original plan):
+- Show our building layer again while tiles are on (today it is hidden). Seat each building on the Google ground: raycast the tiles at
+  the footprint and use the lowest hit, so nothing floats or sinks. Check the 32 m geoid offset the same way.
+- Real heights: fill `HEIGHT` in `campus/src/build.py` for every named building (Braeden/photos), sensible defaults by type for the rest.
+- Roof and wall color per building sampled from the Google photo under it, so small buildings blend in.
+- Performance: one merged mesh per material, simple boxes when far away (LOD), keep 60 fps; low-power 2D untouched.
+
+Phase 2 - hero buildings, hand-modeled from parts (towers, battlements, buttresses, pointed windows, sally ports, pitched/flat roofs),
+one module per building in `js/buildings/`, most visible first:
+1. Cadet Chapel (tower, nave, buttresses)  2. Washington Hall  3. Taylor Hall (tower)  4. Jefferson Hall Library
+5. Central Area barracks (Pershing, Bradley, Eisenhower, MacArthur, Scott)  6. Thayer Hall  7. Michie Stadium stands
+8. Eisenhower Hall  9. Cullum Hall + Lincoln Hall  10. Mahan, Bartlett, Thayer Hotel, Battle Monument, Old Cadet Chapel.
+Materials: gray granite texture (procedural canvas), dark slate roofs, window rows. Check each against photos before moving on.
+Needs from Braeden: OK on the order; photos or names for any building he cares about that is not listed.
+
+Testing: `localhost:8765` is currently allowed on the Google key for this work. Remove it when the hybrid work is done.
+Each test reload costs 1 of the 30 daily Google loads.
