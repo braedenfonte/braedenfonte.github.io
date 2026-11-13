@@ -405,9 +405,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261114w").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261114x").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261114w"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261114x"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -451,27 +451,40 @@ export async function create(o){
       const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute("normal", new THREE.Float32BufferAttribute(nor, 3)); g.setAttribute("color", new THREE.Float32BufferAttribute(col, 3)); return g; };
     const part = (g, x, y, z) => { g.translate(x, y, z); return g; };
     // a person: legs, torso, arms, head (skin tone), about 1.75 m; body color comes from the instance color
-    const person = merge([[part(new THREE.BoxGeometry(0.16, 0.85, 0.2), -0.11, 0.43, 0), 0.35], [part(new THREE.BoxGeometry(0.16, 0.85, 0.2), 0.11, 0.43, 0), 0.35],
-      [part(new THREE.BoxGeometry(0.46, 0.62, 0.26), 0, 1.16, 0), 1], [part(new THREE.BoxGeometry(0.11, 0.58, 0.14), -0.29, 1.15, 0), 1], [part(new THREE.BoxGeometry(0.11, 0.58, 0.14), 0.29, 1.15, 0), 1],
-      [part(new THREE.SphereGeometry(0.12, 8, 6), 0, 1.6, 0), 1.6]]);
-    // a car: body, glass cabin, four dark wheels
-    const carG = merge([[part(new THREE.BoxGeometry(4.4, 0.75, 1.85), 0, 0.62, 0), 1], [part(new THREE.BoxGeometry(2.3, 0.6, 1.7), -0.2, 1.28, 0), 0.25],
-      ...[[1.35, 0.85], [1.35, -0.85], [-1.35, 0.85], [-1.35, -0.85]].map(([x, z]) => [part(new THREE.CylinderGeometry(0.34, 0.34, 0.24, 10).rotateX(Math.PI/2), x, 0.34, z), 0.08])]);
-    const im = (geo, n, mat) => { const m = new THREE.InstancedMesh(keep(geo), keep(mat), n); m.castShadow = true; m.frustumCulled = false; m.userData.keep = true; scene.add(m); return m; };
-    const carM = im(carG, cars.length, new THREE.MeshStandardMaterial({ roughness: 0.35, metalness: 0.4, vertexColors: true })), walkM = im(person, walkers.length, new THREE.MeshStandardMaterial({ roughness: 0.9, vertexColors: true })), runM = im(person.clone(), runners.length, new THREE.MeshStandardMaterial({ roughness: 0.9, vertexColors: true }));
-    const c = new THREE.Color(), CAR = [0x1d1f24, 0xe8e8e6, 0x8c929a, 0x24365e, 0x7b1c22, 0x2f4a3a, 0xc9c2b4];
-    cars.forEach((a, i) => carM.setColorAt(i, c.set(CAR[i % CAR.length])));
-    walkers.forEach((a, i) => walkM.setColorAt(i, c.set([0x5a606a, 0x6b7280, 0x2a2e35, 0x7d6a55, 0x3d4f6b][i % 5])));   // cadets in gray / black, a few visitors
-    runners.forEach((a, i) => runM.setColorAt(i, c.set(i % 4 ? 0x9a9fa6 : 0x2b2e33)));      // gray Army PT shirts
+    // a person: torso, arms, head, cap (body color from the instance), plus two legs that swing as they walk or run
+    const person = merge([[part(new THREE.BoxGeometry(0.46, 0.62, 0.26), 0, 1.16, 0), 1], [part(new THREE.BoxGeometry(0.11, 0.58, 0.14), -0.29, 1.15, 0), 1], [part(new THREE.BoxGeometry(0.11, 0.58, 0.14), 0.29, 1.15, 0), 1],
+      [part(new THREE.SphereGeometry(0.12, 8, 6), 0, 1.6, 0), 1.7], [part(new THREE.CylinderGeometry(0.13, 0.13, 0.07, 10), 0, 1.71, 0), 0.6]]);
+    const legG = new THREE.BoxGeometry(0.15, 0.85, 0.19); legG.translate(0, -0.425, 0);   // hinged at the hip
+    // vehicles: sedan, SUV, pickup and a white shuttle bus (body color from the instance, glass and wheels dark)
+    const wheels = (xs, r, w) => xs.flatMap(x => [[part(new THREE.CylinderGeometry(r, r, 0.24, 10).rotateX(Math.PI/2), x, r, w), 0.08], [part(new THREE.CylinderGeometry(r, r, 0.24, 10).rotateX(Math.PI/2), x, r, -w), 0.08]]);
+    const sedan = merge([[part(new THREE.BoxGeometry(4.5, 0.7, 1.85), 0, 0.62, 0), 1], [part(new THREE.BoxGeometry(2.2, 0.55, 1.7), -0.25, 1.24, 0), 0.22], [part(new THREE.BoxGeometry(0.1, 0.2, 1.5), 2.26, 0.7, 0), 1.6], ...wheels([1.4, -1.4], 0.34, 0.85)]);
+    const suv = merge([[part(new THREE.BoxGeometry(4.8, 1.0, 1.95), 0, 0.85, 0), 1], [part(new THREE.BoxGeometry(3.3, 0.7, 1.85), -0.4, 1.7, 0), 0.22], ...wheels([1.55, -1.5], 0.4, 0.9)]);
+    const pickup = merge([[part(new THREE.BoxGeometry(5.6, 0.85, 2), 0, 0.8, 0), 1], [part(new THREE.BoxGeometry(1.9, 0.75, 1.9), 0.9, 1.6, 0), 0.22], [part(new THREE.BoxGeometry(2.4, 0.25, 1.9), -1.4, 1.35, 0), 0.5], ...wheels([1.8, -1.8], 0.42, 0.95)]);
+    const bus = merge([[part(new THREE.BoxGeometry(12, 2.6, 2.55), 0, 1.75, 0), 1], [part(new THREE.BoxGeometry(11.6, 0.9, 2.6), 0, 2.2, 0), 0.25], [part(new THREE.BoxGeometry(12.05, 0.3, 2.6), 0, 1.1, 0), 0.35], ...wheels([4, -4], 0.5, 1.15)]);
+    const im = (geo, n, mat) => { const m = new THREE.InstancedMesh(keep(geo), keep(mat), Math.max(1, n)); m.castShadow = true; m.frustumCulled = false; m.userData.keep = true; scene.add(m); return m; };
+    const paint = () => new THREE.MeshStandardMaterial({ roughness: 0.32, metalness: 0.45, vertexColors: true }), cloth = () => new THREE.MeshStandardMaterial({ roughness: 0.9, vertexColors: true });
+    const KIND = cars.map((a, i) => i % 15 === 0 && a.l.c <= 1 ? 3 : i % 4 === 1 ? 1 : i % 7 === 3 ? 2 : 0), CM = [sedan, suv, pickup, bus].map((g, k) => im(g, KIND.filter(q => q === k).length, paint()));
+    const walkM = im(person, walkers.length, cloth()), runM = im(person.clone(), runners.length, cloth());
+    const legs = im(legG, (walkers.length + runners.length)*2, new THREE.MeshStandardMaterial({ roughness: 0.9 }));
+    const c = new THREE.Color(), CAR = [0x1d1f24, 0xe8e8e6, 0x8c929a, 0x24365e, 0x7b1c22, 0x2f4a3a, 0xc9c2b4, 0x3b3f46];
+    const slot = KIND.map((k, i) => KIND.slice(0, i).filter(q => q === k).length); cars.forEach((a, i) => CM[KIND[i]].setColorAt(slot[i], c.set(KIND[i] === 3 ? 0xf2f2ee : CAR[i % CAR.length])));
+    // cadets in OCP (tan-green), Army gray and black; a few visitors in color. Runners in gray Army PT shirts, black shorts.
+    const UNI = [0x7d7a5c, 0x6f6c50, 0x5a606a, 0x2a2e35, 0x7d7a5c, 0x3d6fb5, 0xb03a2e]; walkers.forEach((a, i) => walkM.setColorAt(i, c.set(UNI[i % UNI.length])));
+    runners.forEach((a, i) => runM.setColorAt(i, c.set(i % 5 ? 0xa3a8ae : 0x1f2226)));
+    let li = 0; [walkers, runners].forEach((arr, r) => arr.forEach((a, i) => { const col = r ? 0x141414 : UNI[i % UNI.length] === 0x7d7a5c || UNI[i % UNI.length] === 0x6f6c50 ? 0x6b6850 : 0x22252a; legs.setColorAt(li++, c.set(col)); legs.setColorAt(li++, c.set(col)); }));
     const o = new THREE.Object3D(); let last = 0;
-    function place(arr, mesh, k, now){ arr.forEach((a, i) => { a.d += a.v*k; if (a.d < 0 || a.d > a.l.L){ a.v = -a.v; a.d = Math.max(0, Math.min(a.l.L, a.d)); }
-      const p = at(a.l, a.d), nx = -Math.sin(p[2])*a.side, ny = Math.cos(p[2])*a.side, x = p[0] + nx + (mesh === carM ? -Math.sin(p[2])*1.6*Math.sign(a.v) : 0), y = p[1] + ny + (mesh === carM ? Math.cos(p[2])*1.6*Math.sign(a.v) : 0);
-      const bob = mesh === runM ? Math.abs(Math.sin(now/90 + i))*0.18 : mesh === walkM ? Math.abs(Math.sin(now/260 + i))*0.04 : 0;
-      o.position.set(x*S, gy(x, y) + bob*S, -y*S); o.rotation.set(0, p[2] + (a.v < 0 ? Math.PI : 0), 0); o.scale.setScalar(S*(mesh === carM ? 1.9 : 2.6)); o.updateMatrix(); mesh.setMatrixAt(i, o.matrix); });
-      mesh.instanceMatrix.needsUpdate = true; }
+    const move = (a, k) => { a.d += a.v*k; if (a.d < 0 || a.d > a.l.L){ a.v = -a.v; a.d = Math.max(0, Math.min(a.l.L, a.d)); } const p = at(a.l, a.d), h = p[2] + (a.v < 0 ? Math.PI : 0);
+      return [p[0] - Math.sin(p[2])*a.side, p[1] + Math.cos(p[2])*a.side, h]; };
+    function placeCars(k){ const n = [0, 0, 0, 0]; cars.forEach((a, i) => { const q = move(a, k), lane = 1.7*Math.sign(a.v), x = q[0] - Math.sin(q[2] - (a.v < 0 ? Math.PI : 0))*lane, y = q[1] + Math.cos(q[2] - (a.v < 0 ? Math.PI : 0))*lane;
+        o.position.set(x*S, gy(x, y), -y*S); o.rotation.set(0, q[2], 0); o.scale.setScalar(S*1.9); o.updateMatrix(); CM[KIND[i]].setMatrixAt(n[KIND[i]]++, o.matrix); }); CM.forEach(m => { m.instanceMatrix.needsUpdate = true; }); }
+    function placePeople(arr, mesh, run, k, now, l0){ const Z = 2.6, sp = run ? 95 : 190, amp = run ? 0.85 : 0.42; arr.forEach((a, i) => { const q = move(a, k), x = q[0], y = q[1], h = q[2], ph = now/sp + i*1.7, sw = Math.sin(ph)*amp;
+        const g = gy(x, y) + (run ? Math.abs(Math.cos(ph))*0.16 : Math.abs(Math.cos(ph))*0.03)*S*Z;
+        o.position.set(x*S, g, -y*S); o.rotation.set(0, h, 0, "YXZ"); o.scale.setScalar(S*Z); o.updateMatrix(); mesh.setMatrixAt(i, o.matrix);
+        for (const sd of [-1, 1]){ const ox = Math.sin(h)*0.11*sd*Z, oz = Math.cos(h)*0.11*sd*Z; o.position.set(x*S + ox*S, g + 0.85*S*Z, -y*S + oz*S); o.rotation.set(0, h, sw*sd, "YXZ"); o.updateMatrix(); legs.setMatrixAt(l0++, o.matrix); } });
+      mesh.instanceMatrix.needsUpdate = true; legs.instanceMatrix.needsUpdate = true; }
     function step(now){ const k = Math.min(0.1, (now - (last || now))/1000); last = now; if (!api.on) return;
-      place(cars, carM, k, now); place(walkers, walkM, k, now); place(runners, runM, k, now); }
-    const api = { on: true, step, show(v){ api.on = v; carM.visible = walkM.visible = runM.visible = v; } };
+      placeCars(k); placePeople(walkers, walkM, false, k, now, 0); placePeople(runners, runM, true, k, now, walkers.length*2); }
+    const api = { on: true, step, show(v){ api.on = v; CM.concat([walkM, runM, legs]).forEach(m => { m.visible = v; }); } };
     step(performance.now()); return api;
   })();
 
@@ -517,7 +530,7 @@ export async function create(o){
         else { blk(x, y, h, 20, 8, 3.2, 0, w0, 0x9b2a24); blk(x, y, h, 7, 6, 4, 3.2, w0, 0xf0efe9, -3); blk(x, y, h, 1, 1, 3, 7.2, w0, 0x222222, -3);   // tug pushing
           for (let k = 0; k < b.barges; k++){ const f = 10 + 32 + k*62; blk(x, y, h, 60, 11, 3, 0, w0, 0x3b3a38, f); blk(x, y, h, 54, 9.5, 1.6, 3, w0, k % 2 ? 0x6b5a45 : 0x4a4f55, f); } } }
       mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
-    fetch("/campus/movers.json?v=20261114w").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
+    fetch("/campus/movers.json?v=20261114x").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
     return { step };
   })();
 
