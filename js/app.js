@@ -1729,7 +1729,8 @@ const GG = (function(){
   const MIN = -10, MAX = 100, IMPACT = 6;
   const mt = {phase:"idle", p:IMPACT, pow:0, raf:0, t0:0};
   const pct = v => ((v - MIN) / (MAX - MIN) * 100) + "%";
-  const meterSpeed = () => putting() ? .08 : .08 + .045*(CLUBS[st.club].carry/250);
+  const TOUCH = matchMedia("(pointer: coarse)").matches;   // phones: slower meter, wider strike zone, hold-to-swing
+  const meterSpeed = () => (putting() ? .08 : .08 + .045*(CLUBS[st.club].carry/250)) * (TOUCH ? .6 : 1);
   function puttNeed(){ return clamp((dist(st.ball, HL.pin)*3 + 1.5) / (puttMax()*3), 0, 1); }
   function prevPow(){ if (mt.phase === "up") return Math.max(.05, mt.p/100); if (mt.phase === "down") return mt.pow; return putting() ? puttNeed() : 1; }
   function paintMeter(){
@@ -1737,12 +1738,12 @@ const GG = (function(){
     const f = $("#ggFill"); f.style.left = pct(0); f.style.width = (mt.phase==="up" ? Math.max(0,mt.p) : mt.phase==="down" ? mt.pow*100 : 0) / (MAX-MIN) * 100 + "%";
     const pm = $("#ggPMark"); pm.hidden = mt.phase !== "down"; pm.style.left = pct(mt.pow*100);
     const tg = $("#ggTarget"); tg.hidden = !putting() || !st.caddie || st.phase !== "aim"; tg.style.left = pct(puttNeed()*100);
-    const sw = (LIE[st.lie]||LIE.rough).sweet, sweet = $("#ggSweet");
+    const sw = (LIE[st.lie]||LIE.rough).sweet*(TOUCH ? 1.6 : 1), sweet = $("#ggSweet");
     sweet.style.left = pct(IMPACT - sw); sweet.style.width = (2*sw)/(MAX-MIN)*100 + "%";
     const pv = mt.phase==="up" ? Math.max(0,mt.p)/100 : mt.phase==="down" ? mt.pow : null;
     $("#ggPowVal").textContent = pv === null ? (putting() ? "stroke length" : "ready") : putting() ? Math.round(pv*puttMax()*3)+" ft flat" : Math.round(pv*100)+"% · "+Math.round(CLUBS[st.club].carry*pv)+" yds";
     $("#ggTicks").innerHTML = putting() ? [0,.25,.5,.75,1].map(t => '<span style="left:'+pct(t*100)+'">'+Math.round(t*puttMax()*3)+'ft</span>').join("") : [0,.5,.75,1].map(t => '<span style="left:'+pct(t*100)+'">'+Math.round(t*100)+'%</span>').join("");
-    $("#ggSwing").textContent = st.phase === "holed" ? (st.mode==="daily" && st.hi < 2 ? "Next hole" : st.mode==="daily" ? "Round done" : "New hole") : mt.phase==="idle" ? (putting() ? "Putt" : "Swing") : mt.phase==="up" ? "Set power" : "Strike";
+    $("#ggSwing").textContent = st.phase === "holed" ? (st.mode==="daily" && st.hi < 2 ? "Next hole" : st.mode==="daily" ? "Round done" : "New hole") : mt.phase==="idle" ? (TOUCH ? "Hold to " + (putting() ? "putt" : "swing") : putting() ? "Putt" : "Swing") : mt.phase==="up" ? (TOUCH ? "Let go to set power" : "Set power") : "Strike!";
   }
   function meterLoop(ts){
     if (!mt.t0) mt.t0 = ts; const dt = Math.min(50, ts - mt.t0); mt.t0 = ts;
@@ -1759,6 +1760,7 @@ const GG = (function(){
   }
   function strikeWord(e, sweet){ const a = Math.abs(e); return a <= sweet*.5 ? "Pure strike" : a <= sweet ? "Good contact" : a <= 6 ? (e>0?"A touch early":"A touch late") : (e>0?"Way early":"Way late"); }
   function strike(e){
+    if (TOUCH) e = e/1.6;   // the wider phone strike zone
     cancelAnimationFrame(mt.raf); const pow = mt.pow; mt.phase = "idle"; mt.p = IMPACT;
     const shot = putting() ? planPutt(pow, e) : plan(pow, e);
     shot.word = strikeWord(e, (LIE[st.lie]||LIE.rough).sweet);
@@ -2151,7 +2153,13 @@ const GG = (function(){
     $("#ggTraj").addEventListener("click", e => { const b = e.target.closest("[data-traj]"); if (!b || st.phase !== "aim") return; st.traj = b.dataset.traj; document.querySelectorAll("[data-traj]").forEach(x => x.classList.toggle("on", x===b)); paintClubs(); paintCaddie(); });
     $("#ggShape").addEventListener("click", e => { const b = e.target.closest("[data-shape]"); if (!b || st.phase !== "aim") return; st.shape = +b.dataset.shape; document.querySelectorAll("[data-shape]").forEach(x => x.classList.toggle("on", x===b)); paintCaddie(); });
     $("#ggAim").addEventListener("input", e => { if (st.phase !== "aim") return; st.aim = +e.target.value; syncAim(); });
-    $("#ggSwing").addEventListener("click", meterTap);
+    { const sw = $("#ggSwing"); sw.addEventListener("click", () => { if (!TOUCH) meterTap(); });
+      if (TOUCH){   // hold Swing to take the club back, let go to set power, tap again in the green zone to strike
+        sw.addEventListener("pointerdown", e => { e.preventDefault(); if (st.phase === "holed" || mt.phase === "idle" || mt.phase === "down") meterTap(); });
+        sw.addEventListener("pointerup", e => { e.preventDefault(); if (mt.phase === "up") meterTap(); });
+        sw.addEventListener("contextmenu", e => e.preventDefault());
+        if (matchMedia("(max-width:860px)").matches){ const dock = document.createElement("div"); dock.className = "gg-dock"; dock.append($("#ggMeter"), sw); document.body.append(dock); }   // meter + swing pinned to the bottom of the screen
+        const h = document.querySelector(".gg-help"); if (h) h.textContent = "Hold Swing to take the club back, let go to set the power, then tap Swing again as the needle crosses the green zone. Tap the hole to aim."; } }
     $("#ggMeter").addEventListener("pointerdown", e => { e.preventDefault(); meterTap(); });
     $("#ggModes").addEventListener("click", e => { const b = e.target.closest("[data-gmode]"); if (b && b.dataset.gmode !== st.mode && mt.phase === "idle" && st.phase !== "flight") setMode(b.dataset.gmode); });
     $("#ggParPick").addEventListener("change", e => { st.practicePar = +e.target.value; if (st.mode === "practice" && st.phase !== "flight"){ st.holes = [practiceHole()]; startHole(0); } });
