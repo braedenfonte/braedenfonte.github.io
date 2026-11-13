@@ -163,6 +163,36 @@ export async function create(o){
     put(new THREE.CylinderGeometry(0.24, 0.3, 1, 8), bronze, 0, 0, 6.6, 1, 1.15, 1); put(new THREE.SphereGeometry(0.2, 10, 8), bronze, 0, 0, 7.4, 1, 1.1, 1);   // rider + head
     return out; })();
 
+  /* ---------- statues and monuments (positions from OpenStreetMap). Bronze figures on granite pedestals face the Plain;
+     Battle Monument and Kosciuszko are tall columns with a figure on top; the Great Chain is a row of giant iron links. ---------- */
+  { const bronze = keep(new THREE.MeshStandardMaterial({ color: 0x5f8574, roughness: 0.45, metalness: 0.5 })), granite = keep(new THREE.MeshStandardMaterial({ color: 0xbab6ae, roughness: 0.85 })),
+      polished = keep(new THREE.MeshStandardMaterial({ color: 0x9a968f, roughness: 0.3, metalness: 0.15 })), iron = keep(new THREE.MeshStandardMaterial({ color: 0x24262a, roughness: 0.6, metalness: 0.6 }));
+    const K = 1.7;   // statues a bit larger than life so you can see them from above
+    const at = (x, y) => { const g = new THREE.Group(); g.position.set(x*S, gy(x, y), -y*S); g.rotation.y = Math.atan2(800 - y, 190 - x); g.userData.keep = true; scene.add(g); return g; };
+    const mk = (g, geo, mat, px, py, pz, rx, rz) => { const m = new THREE.Mesh(keep(geo), mat); m.position.set(px*S, py*S, pz*S); if (rx) m.rotation.x = rx; if (rz) m.rotation.z = rz; m.castShadow = true; g.add(m); return m; };
+    const B = (w, h, d) => new THREE.BoxGeometry(w*S, h*S, d*S), C = (r1, r2, h, n) => new THREE.CylinderGeometry(r1*S, r2*S, h*S, n || 12);
+    function figure(g, base, opts){ const k = K*(opts && opts.k || 1), m = bronze;   // standing figure facing +x (toward the Plain)
+      mk(g, B(0.3*k, 0.95*k, 0.18*k), m, 0, base + 0.48*k, -0.12*k); mk(g, B(0.3*k, 0.95*k, 0.18*k), m, 0, base + 0.48*k, 0.12*k);   // legs
+      mk(g, B(0.36*k, 0.8*k, 0.55*k), m, 0, base + 1.35*k, 0);   // coat / torso
+      mk(g, B(0.16*k, 0.7*k, 0.16*k), m, 0.02*k, base + 1.32*k, -0.36*k, 0, 0.1); mk(g, B(0.16*k, 0.7*k, 0.16*k), m, opts && opts.salute ? 0.18*k : 0.02*k, base + (opts && opts.salute ? 1.65 : 1.32)*k, 0.36*k, opts && opts.salute ? -1.2 : 0, 0);   // arms
+      mk(g, new THREE.SphereGeometry(0.15*k*S, 12, 10), m, 0, base + 1.93*k, 0); mk(g, C(0.17*k, 0.17*k, 0.06*k), m, 0, base + 2.07*k, 0); }   // head + cap
+    const pedestal = (g, w, h) => { mk(g, B(w + 0.6, 0.4, w + 0.6), granite, 0, 0.2, 0); mk(g, B(w, h, w), granite, 0, 0.4 + h/2, 0); mk(g, B(w + 0.3, 0.3, w + 0.3), granite, 0, 0.4 + h + 0.15, 0); return 0.4 + h + 0.3; };
+    // standing generals and founders
+    [[89, 890, "Thayer"], [100, 783, "MacArthur"], [303, 681, "Eisenhower"], [329, 668, "Patton"], [283, 970, "Sedgwick"]].forEach(([x, y, n]) => { const g = at(x, y), top = pedestal(g, 2.6, 3.2); figure(g, top, { salute: n === "MacArthur" }); });
+    // Battle Monument: polished granite column topped by Fame
+    { const g = at(265, 997); mk(g, B(8, 1, 8), granite, 0, 0.5, 0); mk(g, B(6, 3.5, 6), granite, 0, 2.75, 0); mk(g, C(1.25, 1.35, 21, 20), polished, 0, 15, 0); mk(g, B(3, 1.2, 3), granite, 0, 26.1, 0); mk(g, C(1, 1.2, 1, 12), polished, 0, 27.2, 0); figure(g, 27.7, { k: 1.2 }); }
+    // Kosciuszko: column with his figure on top, by Fort Clinton
+    { const g = at(616, 990); mk(g, B(5, 3, 5), granite, 0, 1.5, 0); mk(g, C(0.8, 0.9, 11, 16), granite, 0, 8.5, 0); mk(g, B(2, 0.8, 2), granite, 0, 14.4, 0); figure(g, 14.8); }
+    // L'Ecole Polytechnique monument: a small pedestal with a bronze bust
+    { const g = at(234, 602); const top = pedestal(g, 1.4, 2.2); mk(g, B(0.5*K, 0.6*K, 0.7*K), bronze, 0, top + 0.3*K, 0); mk(g, new THREE.SphereGeometry(0.2*K*S, 12, 10), bronze, 0, top + 0.8*K, 0); }
+    // Cadet Honor Code memorial: a granite block with two bronze cadets beside it
+    { const g = at(299, 630); mk(g, B(1.6, 1.6, 5.5), granite, 0, 0.8, 0); [-1.7, 1.7].forEach(dz => { const sub = new THREE.Group(); sub.position.z = dz*S; g.add(sub); figure(sub, 0, {}); }); }
+    // Dade monument: a granite obelisk
+    { const g = at(-587, 1295); mk(g, B(2.4, 1, 2.4), granite, 0, 0.5, 0); const ob = mk(g, C(0.5, 0.9, 7, 4), granite, 0, 4.5, 0); ob.rotation.y = Math.PI/4; mk(g, new THREE.ConeGeometry(0.5*S, 0.8*S, 4), granite, 0, 8.4, 0).rotation.y = Math.PI/4; }
+    // the Great Chain: giant iron links laid out at Trophy Point
+    { const g = at(360, 1093); for (let i = 0; i < 13; i++){ const l = mk(g, new THREE.TorusGeometry(0.75*S, 0.2*S, 8, 16), iron, 0, 0.3, -9 + i*1.4); l.scale.set(1, 1.6, 1); l.rotation.set(i % 2 ? 0 : Math.PI/2, 0, Math.PI/2); } }
+  }
+
   // Michie Stadium: a bowl of stands around the field
   const stad = D.areas.find(a => a.k === "stadium"), stadLm = o.landmarks.findIndex(l => l.id === "stadium");
   curB = -1;
@@ -188,7 +218,7 @@ export async function create(o){
   const picks = [];
   function add(geo, mat, x, y, up, shadow){ const m = new THREE.Mesh(keep(geo), mat); m.position.copy(V(x, y, up)); m.castShadow = shadow !== false; scene.add(m); return m; }
   function pick(l, r, hh){ const m = add(new THREE.CylinderGeometry(r*S, r*S, hh*S, 8), stone, l.x, l.y, hh/2, false); m.visible = false; m.userData.id = l.id; picks.push(m); }
-  D.nodes.forEach(n => { if (/Monument|Chain/.test(n.n)){ const big = n.n === "Battle Monument"; add(new THREE.CylinderGeometry((big ? 1.6 : 0.9)*S, (big ? 2.2 : 1.4)*S, (big ? 22 : 7)*S, 8), stone, n.p[0], n.p[1], big ? 11 : 3.5);
+  D.nodes.forEach(n => { if (false && /Monument|Chain/.test(n.n)){ const big = n.n === "Battle Monument"; add(new THREE.CylinderGeometry((big ? 1.6 : 0.9)*S, (big ? 2.2 : 1.4)*S, (big ? 22 : 7)*S, 8), stone, n.p[0], n.p[1], big ? 11 : 3.5);
       if (big) add(new THREE.SphereGeometry(2*S, 10, 8), accent, n.p[0], n.p[1], 23.5); }
     if (false && n.n === "Flagpole"){ add(new THREE.CylinderGeometry(0.35*S, 0.35*S, 34*S, 5), stone, n.p[0], n.p[1], 17); add(new THREE.BoxGeometry(9*S, 5*S, 0.3*S), accent, n.p[0] + 4.6, n.p[1], 31); } });
   o.landmarks.forEach(l => {
@@ -375,9 +405,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261114u").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261114w").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261114u"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261114w"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -487,7 +517,7 @@ export async function create(o){
         else { blk(x, y, h, 20, 8, 3.2, 0, w0, 0x9b2a24); blk(x, y, h, 7, 6, 4, 3.2, w0, 0xf0efe9, -3); blk(x, y, h, 1, 1, 3, 7.2, w0, 0x222222, -3);   // tug pushing
           for (let k = 0; k < b.barges; k++){ const f = 10 + 32 + k*62; blk(x, y, h, 60, 11, 3, 0, w0, 0x3b3a38, f); blk(x, y, h, 54, 9.5, 1.6, 3, w0, k % 2 ? 0x6b5a45 : 0x4a4f55, f); } } }
       mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
-    fetch("/campus/movers.json?v=20261114u").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
+    fetch("/campus/movers.json?v=20261114w").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
     return { step };
   })();
 
