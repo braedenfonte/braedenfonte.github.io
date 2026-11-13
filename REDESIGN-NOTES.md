@@ -130,3 +130,15 @@ Each test reload costs 1 of the 30 daily Google loads.
 - Next: real heights per building, Thayer Hall's river-side towers, Pershing's front towers/sally port, Cadet Chapel, Washington Hall wings,
   
   exact building shapes (Braeden: current Gothic is closer but details still wrong; overlay still looks sloppy in places).
+
+## Washington Hall, built from photos (Nov 13, evening)
+- References: Wikimedia Commons "West Point Washington Hall 03.JPG" (straight-on) and "...04.jpg" (wide), HABS NY-1458 (rock-faced
+  granite, random-range ashlar; 1929 core, 1960s expansion wrapped the old front, which survives inside as the "Poop Deck").
+- The Plain-side front = NE tip of the OSM Washington Hall footprint, (168,649)-(147,667), facing the Washington statue (OSM node 188,697).
+  The long wings either side in photos are MacArthur Barracks (right) and Eisenhower Barracks (left).
+- Measured off the straight-on photo: pavilion 27.7 m wide (pylons 7.1 m + center 13.5 m), 29.6 m tall, pylons 0.8 m forward with corner
+  pinnacles; wings 23.4 m (0.79 of the pavilion). Dining wings behind: 16 m. No battlements on these three (flat parapets in photos).
+- Center front drawn on a canvas (eagle shield, 3 pointed windows, 2 rows of grouped windows, 3 lancet groups, 3 arches with brown doors),
+  pylon faces with slit windows, 3 granite steps, equestrian statue on a white pedestal. Code: `WH` block in `js/westpoint3d.js`.
+- Ground auto-matching (`calibrate`) is OFF: it misfired on partly loaded tiles. The fixed 32 m geoid offset lines up.
+- Testing burns Google loads fast (each reload = 1 of 30/day). Today's cap was used up by testing on Nov 13.

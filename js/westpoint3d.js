@@ -43,7 +43,7 @@ export async function create(o){
     const rnd = () => (s = (s*9301 + 49297) % 233280)/233280;
     for (let y = 0; y < 256; y += 8) for (let x = -((y/8) % 2)*11; x < 256; x += 22){ const v = 228 + Math.round(rnd()*27); a.fillStyle = "rgb(" + v + "," + v + "," + (v - 4) + ")"; a.fillRect(x + 1, y + 1, 20, 6); }   // granite courses
     for (let j = 0; j < 4; j++) for (let i = 0; i < 4; i++){ const x = i*64 + 25, y = j*64 + 12;   // narrow, tall windows with a pointed head
-      a.fillStyle = "#2f3640"; a.fillRect(x, y + 6, 14, 36); a.beginPath(); a.moveTo(x, y + 6); a.lineTo(x + 7, y); a.lineTo(x + 14, y + 6); a.fill();
+      a.fillStyle = "#2f3640"; a.fillRect(x, y + 4, 14, 38);
       a.fillStyle = "#8c939b"; a.fillRect(x + 6, y + 6, 2, 36); a.fillRect(x - 2, y + 42, 18, 3);
       if (rnd() < 0.4){ b.fillStyle = rnd() < 0.8 ? "#ffd89a" : "#cfe4ff"; b.fillRect(x, y + 6, 14, 36); } } }
   const wT = keep(new THREE.CanvasTexture(wallTex)), gT = keep(new THREE.CanvasTexture(glowTex));
@@ -52,6 +52,7 @@ export async function create(o){
   const roofMat = keep(new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.95, side: THREE.DoubleSide }));
   const WALL = { barracks: [0.70, 0.68, 0.64], hall: [0.74, 0.72, 0.67] }, HOUSE = [[0.9, 0.88, 0.83], [0.78, 0.72, 0.62], [0.62, 0.4, 0.33], [0.82, 0.8, 0.74]];
   const ROOF = { barracks: [0.3, 0.33, 0.38], hall: [0.38, 0.4, 0.44], house: [0.42, 0.27, 0.22] };
+  const PLAIN_FRONT_RX = /^(Washington Hall|MacArthur Barracks|Eisenhower Barracks)$/;
   const wp = [], wu = [], wc = [], wl = [], rp = [], rc = [], rl = [];   // wl / rl: which landmark each triangle belongs to (-1 = none)
   const lmOf = {}; o.landmarks.forEach((l, i) => { if (l.bi != null) lmOf[l.bi] = i; });
   const tops = {};
@@ -68,16 +69,17 @@ export async function create(o){
   }
   D.buildings.forEach(b => {
     const P = map.pts(b.p); let lo = 1e9, hi = -1e9; P.forEach(p => { const h = gy(p[0], p[1]); if (h < lo) lo = h; if (h > hi) hi = h; });
-    const top = Math.min(hi, lo + 9*S) + b.h*S, lm = lmOf[b.i] != null ? lmOf[b.i] : -1; tops[b.i] = { P, lo, top };
-    const jit = 0.94 + ((b.i*37) % 13)/100, wcol = (b.k === "house" ? HOUSE[b.i % HOUSE.length] : WALL[b.k]).map(v => v*jit);
+    const hh = { "Washington Hall": 16, "MacArthur Barracks": 23.4, "Eisenhower Barracks": 23.4 }[b.n] || b.h;
+    const top = Math.min(hi, lo + 9*S) + hh*S, lm = lmOf[b.i] != null ? lmOf[b.i] : -1; tops[b.i] = { P, lo, top };
+    const jit = 0.94 + ((b.i*37) % 13)/100, wcol = (b.k === "house" ? HOUSE[b.i % HOUSE.length] : b.n && PLAIN_FRONT_RX.test(b.n) ? [0.8, 0.8, 0.77] : WALL[b.k]).map(v => v*jit);
     curB = b.n ? b.i : -1;
     extrude(P, lo - 2*S, top, wcol, ROOF[b.k].map(v => v*jit), lm);
-    if (b.k !== "house" && b.h >= 16 && P.length >= 4){ // a low parapet block so big halls don't look like plain boxes
+    if (b.k !== "house" && b.h >= 16 && P.length >= 4 && !(b.n && PLAIN_FRONT_RX.test(b.n))){ // a low parapet block so big halls don't look like plain boxes
       const c = b.c, Q = P.map(p => [c[0] + (p[0] - c[0])*0.9, c[1] + (p[1] - c[1])*0.9]); extrude(Q, top, top + 1.6*S, wcol.map(v => v*0.93), ROOF[b.k].map(v => v*0.9), lm); }
   });
   /* ---------- Military Gothic detail (Central Area barracks, Thayer Hall, Bartlett Hall, Washington Hall): granite battlements,
      square corner towers and stone buttresses, the way these buildings look from the Plain ---------- */
-  const GOTHIC = /Barracks|Thayer Hall|Bartlett Hall|Washington Hall/;
+  const GOTHIC = /Barracks|Thayer Hall|Bartlett Hall/, PLAIN_FRONT = /^(Washington Hall|MacArthur Barracks|Eisenhower Barracks)$/;
   function box(cx, cy, ux, uy, L, Dp, y0, y1, col, lm){   // a block centered at (cx, cy) in map meters, long side along (ux, uy)
     const vx = -uy, vy = ux, c = [[-L/2, -Dp/2], [L/2, -Dp/2], [L/2, Dp/2], [-L/2, Dp/2]].map(([a, d]) => [cx + ux*a + vx*d, cy + uy*a + vy*d]);
     for (let k = 0; k < 4; k++){ const a = c[k], q = c[(k + 1) % 4];
@@ -88,7 +90,7 @@ export async function create(o){
   function battlements(P, y, col, lm, step){ const n = P.length;   // merlons along every edge
     for (let i = 0; i < n; i++){ const a = P[i], q = P[(i + 1) % n], L = Math.hypot(q[0] - a[0], q[1] - a[1]); if (L < 2) continue; const ux = (q[0] - a[0])/L, uy = (q[1] - a[1])/L;
       for (let t = step/2; t < L; t += step) box(a[0] + ux*t, a[1] + uy*t, ux, uy, step*0.5, 0.9, y, y + 1.3*S, col, lm); } }
-  D.buildings.forEach(b => { if (!b.n || !GOTHIC.test(b.n)) return; const T = tops[b.i]; if (!T) return;
+  D.buildings.forEach(b => { if (!b.n || !GOTHIC.test(b.n) || PLAIN_FRONT.test(b.n)) return; const T = tops[b.i]; if (!T) return;
     const P = T.P, n = P.length, lm = lmOf[b.i] != null ? lmOf[b.i] : -1, col = [0.66, 0.65, 0.62], dark2 = [0.58, 0.57, 0.55]; curB = b.i;
     let ar = 0; for (let i = 0; i < n; i++){ const a = P[i], q = P[(i + 1) % n]; ar += a[0]*q[1] - q[0]*a[1]; } const sg = Math.sign(ar) || 1;
     battlements(P, T.top, col, lm, 3.2);
@@ -110,6 +112,55 @@ export async function create(o){
     for (const sd of [-1, 1]){ const ox = -uy*sd*1.9, oy = ux*sd*1.9; box(mx + ox, my + oy, ux, uy, L + 2, 0.5, top, top + 1.1*S, g, -1);   // parapets
       for (let t = -L/2 + 1.5; t < L/2; t += 2.6) box(mx + ox + ux*t, my + oy + uy*t, ux, uy, 1.2, 0.55, top + 1.1*S, top + 1.7*S, g, -1); }
     for (const f of [-0.17, 0.17]){ const px = mx + ux*L*f, py = my + uy*L*f; box(px, py, ux, uy, 2.2, 4.6, gy(px, py) - 1*S, top - 1.1*S, g2, -1); } }
+
+  /* ---------- Washington Hall: the Plain-side front, measured from photos (Wikimedia Commons, "West Point Washington Hall 03/04").
+     Front = NE end of the OSM footprint, facing the Washington statue (OSM node at 188, 697). Pavilion 27.7 m wide (pylons 7.1 m,
+     center 13.5 m), 29.6 m tall; pylons step 0.8 m forward. Center, top to bottom: eagle shield, 3 pointed windows, 2 rows of grouped
+     windows, 3 tall lancet groups, 3 entrance arches with brown doors. Wide granite steps, then the equestrian statue. ---------- */
+  const WH = (() => { const bi = D.buildings.findIndex(b => b.n === "Washington Hall"); if (bi < 0) return null;
+    const A = [168, 649], B = [147, 667], W = Math.hypot(B[0] - A[0], B[1] - A[1]), ux = (B[0] - A[0])/W, uy = (B[1] - A[1])/W, nx = uy, ny = -ux;   // u along the front, n out toward the Plain
+    const g0 = Math.min(gy(A[0], A[1]), gy(B[0], B[1])), H = 29.6, PY = 7.1, DEP = 12, PF = 0.8, at = (t, d) => [A[0] + ux*t + nx*d, A[1] + uy*t + ny*d];
+    const lm = lmOf[bi] != null ? lmOf[bi] : -1, stone = [0.8, 0.8, 0.77]; curB = bi;
+    const blk = (t0, t1, d0, d1, h, col) => { const c = at((t0 + t1)/2, (d0 + d1)/2); box(c[0], c[1], ux, uy, t1 - t0, d1 - d0, g0 - 1*S, g0 + h*S, col, lm); };
+    blk(PY, W - PY, -DEP, 0, H, stone); blk(0, PY, -DEP, PF, H + 0.9, stone); blk(W - PY, W, -DEP, PF, H + 0.9, stone);   // center + two pylons
+    for (const t of [0.5, PY - 0.5, W - PY + 0.5, W - 0.5]) for (const d of [PF - 0.5, -DEP + 0.5]){ const c = at(t, d); box(c[0], c[1], ux, uy, 1.1, 1.1, g0 + (H + 0.9)*S, g0 + (H + 2.4)*S, stone, lm); }   // pylon corner pinnacles
+    for (let k = 0; k < 3; k++){ const c = at(W/2, 1.2 + k*2.2 + 1.1); box(c[0], c[1], ux, uy, 15 + (2 - k)*3, 2.2, g0 - 1*S, g0 + (1.4 - k*0.45)*S, [0.78, 0.77, 0.74], lm); }   // front steps
+    curB = -1;
+    // the hand-drawn front: one canvas for the center panel, one for a pylon face
+    const fc = document.createElement("canvas"), pc = document.createElement("canvas"); fc.width = 512; fc.height = 1120; pc.width = 256; pc.height = 1120;
+    const stoneFill = (x, w2, h2, seed) => { let sd = seed; const r = () => (sd = (sd*9301 + 49297) % 233280)/233280; x.fillStyle = "#cfcdc6"; x.fillRect(0, 0, w2, h2);
+      for (let yy = 0; yy < h2; yy += 14) for (let xx = -((yy/14) % 2)*19; xx < w2; xx += 38){ const v = 196 + Math.round(r()*40); x.fillStyle = "rgb(" + v + "," + (v - 1) + "," + (v - 6) + ")"; x.fillRect(xx + 1, yy + 1, 36, 12); } };
+    const glass = "#2a323d", trim = "#e4e2dc", door = "#6e3b22";
+    const lancet = (x, X, Y, w2, h2) => { x.fillStyle = trim; x.beginPath(); x.moveTo(X - 4, Y + h2 + 4); x.lineTo(X - 4, Y + w2*0.55); x.quadraticCurveTo(X + w2/2, Y - w2*0.45, X + w2 + 4, Y + w2*0.55); x.lineTo(X + w2 + 4, Y + h2 + 4); x.fill();
+      x.fillStyle = glass; x.beginPath(); x.moveTo(X, Y + h2); x.lineTo(X, Y + w2*0.6); x.quadraticCurveTo(X + w2/2, Y - w2*0.3, X + w2, Y + w2*0.6); x.lineTo(X + w2, Y + h2); x.fill(); };
+    { const x = fc.getContext("2d"), F = 1120; stoneFill(x, 512, F, 7);
+      x.fillStyle = "#bdbab2"; [0.11, 0.5, 0.765].forEach(f => x.fillRect(0, f*F, 512, 10));   // string courses
+      x.fillStyle = "#b9b6ad"; x.beginPath(); x.moveTo(256 - 34, 0.025*F); x.lineTo(256 + 34, 0.025*F); x.lineTo(256 + 30, 0.075*F); x.quadraticCurveTo(256, 0.105*F, 256 - 30, 0.075*F); x.closePath(); x.fill();   // carved shield + eagle
+      x.fillStyle = "#a9a59c"; x.beginPath(); x.ellipse(256, 0.03*F, 46, 12, 0, 0, Math.PI*2); x.fill();
+      [[70, 90], [211, 90], [352, 90]].forEach(([X, w2]) => lancet(x, X, 0.15*F, w2, 0.075*F));   // 3 pointed windows
+      [0.275, 0.395].forEach(f => [60, 196, 332].forEach(X => { x.fillStyle = trim; x.fillRect(X - 5, f*F - 5, 130, 0.075*F + 10); x.fillStyle = glass; for (let k = 0; k < 3; k++) x.fillRect(X + k*41, f*F, 37, 0.075*F); }));
+      [60, 196, 332].forEach(X => { for (let k = 0; k < 3; k++) lancet(x, X + k*41, 0.54*F, 36, 0.195*F); x.fillStyle = trim; x.fillRect(X - 4, 0.64*F, 128, 6); });   // tall lancets with a transom
+      x.fillStyle = "#b2aea5"; x.fillRect(0, 0.79*F, 512, 0.21*F);   // base course
+      [[60, 92, 0.86], [190, 132, 0.82], [360, 92, 0.86]].forEach(([X, w2, f]) => { x.fillStyle = "#9d998f"; x.beginPath(); x.moveTo(X - 8, F); x.lineTo(X - 8, f*F + w2/2); x.arc(X + w2/2, f*F + w2/2, w2/2 + 8, Math.PI, 0); x.lineTo(X + w2 + 8, F); x.fill();
+        x.fillStyle = door; x.beginPath(); x.moveTo(X, F); x.lineTo(X, f*F + w2/2); x.arc(X + w2/2, f*F + w2/2, w2/2, Math.PI, 0); x.lineTo(X + w2, F); x.fill(); x.fillStyle = "#4a2716"; x.fillRect(X + w2/2 - 2, f*F + w2/2, 4, F); }); }
+    { const x = pc.getContext("2d"), F = 1120; stoneFill(x, 256, F, 3); x.fillStyle = "#bdbab2"; [0.11, 0.5, 0.765].forEach(f => x.fillRect(0, f*F, 256, 10));
+      x.fillStyle = glass; [[0.2, 0.06], [0.33, 0.06], [0.45, 0.05], [0.58, 0.07]].forEach(([f, hh]) => x.fillRect(116, f*F, 24, hh*F)); x.fillStyle = "#b2aea5"; x.fillRect(0, 0.79*F, 256, 0.21*F); }
+    const mk = cv => { const t = keep(new THREE.CanvasTexture(cv)); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return keep(new THREE.MeshStandardMaterial({ map: t, roughness: 0.92 })); };
+    const quad = (t0, t1, d, h0, h1, mat) => { const a = at(t0, d), b = at(t1, d), y0 = g0 + h0*S, y1 = g0 + h1*S, g = keep(new THREE.BufferGeometry());
+      g.setAttribute("position", new THREE.Float32BufferAttribute([a[0]*S, y0, -a[1]*S, b[0]*S, y0, -b[1]*S, b[0]*S, y1, -b[1]*S, a[0]*S, y1, -a[1]*S], 3));
+      g.setAttribute("uv", new THREE.Float32BufferAttribute([0, 0, 1, 0, 1, 1, 0, 1], 2)); g.setIndex([0, 1, 2, 0, 2, 3]); g.computeVertexNormals();
+      const m = new THREE.Mesh(g, mat); m.receiveShadow = true; m.userData.keep = true; scene.add(m); return m; };
+    const front = mk(fc), side = mk(pc), out = [quad(PY, W - PY, 0.04, 0, H, front), quad(0, PY, PF + 0.04, 0, H + 0.9, side), quad(W - PY, W, PF + 0.04, 0, H + 0.9, side)];
+    // George Washington on horseback (bronze, green patina) on a white granite pedestal, at the OSM statue node
+    const SX = 188, SY = 697, sg = gy(SX, SY), bronze = keep(new THREE.MeshStandardMaterial({ color: 0x5f8f7f, roughness: 0.55, metalness: 0.35 })), white = keep(new THREE.MeshStandardMaterial({ color: 0xe9e7e1, roughness: 0.8 }));
+    const rot = Math.atan2(ny, nx), put = (geo, mat, dx, dy, h, sx, sy, sz, rx) => { const m = new THREE.Mesh(keep(geo), mat); m.position.set((SX + dx)*S, sg + h*S, -(SY + dy)*S); m.scale.set(sx*S, sy*S, sz*S); m.rotation.set(0, rot, rx || 0, "YXZ"); m.castShadow = true; m.userData.keep = true; scene.add(m); out.push(m); return m; };
+    const fwd = (k) => [Math.cos(rot)*k, Math.sin(rot)*k];
+    put(new THREE.BoxGeometry(1, 1, 1), white, 0, 0, 0.35, 6.5, 0.7, 4.2); put(new THREE.BoxGeometry(1, 1, 1), white, 0, 0, 2.4, 4.4, 3.4, 2.2);   // base + pedestal
+    put(new THREE.SphereGeometry(1, 14, 10), bronze, 0, 0, 5.4, 1.75, 0.75, 0.62);   // horse body
+    for (const [a, b] of [[0.95, 0.35], [0.95, -0.35], [-0.95, 0.35], [-0.95, -0.35]]){ const f = fwd(a); put(new THREE.CylinderGeometry(0.11, 0.09, 1, 6), bronze, f[0] - Math.sin(rot)*b, f[1] + Math.cos(rot)*b, 4.55, 1, 1.15, 1); }
+    { const f = fwd(1.75); put(new THREE.CylinderGeometry(0.22, 0.32, 1, 8), bronze, f[0], f[1], 6.2, 1, 1.25, 1, -0.5); const h2 = fwd(2.15); put(new THREE.BoxGeometry(1, 1, 1), bronze, h2[0], h2[1], 6.8, 0.75, 0.35, 0.3); }   // neck + head
+    put(new THREE.CylinderGeometry(0.24, 0.3, 1, 8), bronze, 0, 0, 6.6, 1, 1.15, 1); put(new THREE.SphereGeometry(0.2, 10, 8), bronze, 0, 0, 7.4, 1, 1.1, 1);   // rider + head
+    return out; })();
 
   // Michie Stadium: a bowl of stands around the field
   const stad = D.areas.find(a => a.k === "stadium"), stadLm = o.landmarks.findIndex(l => l.id === "stadium");
@@ -290,9 +341,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261113v").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261113z").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261113v"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261113z"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -310,7 +361,7 @@ export async function create(o){
     ["load-model", "load-tile-set", "tiles-load-start"].forEach(n => t.addEventListener(n, () => { tilesAct = performance.now(); }));
     t.addEventListener("load-tile-set", () => { const phone = matchMedia("(pointer: coarse)").matches; t.errorTarget = phone ? 12 : 8;
       t.lruCache.minSize = phone ? 500 : 900; t.lruCache.maxSize = phone ? 800 : 1400; invalidate(); });   // cap memory (Google's suggested 6000-8000 tiles is far too heavy for a laptop or phone)   // much sharper than Google's default; only the first (root) request of a visit is billed   // keep asking for tiles while they stream in
-    t.addEventListener("tiles-load-end", () => setTimeout(() => { calibrate(); setTimeout(plantTrees, 1500); }, 300));
+    t.addEventListener("tiles-load-end", () => setTimeout(plantTrees, 1800));   // (ground auto-matching is off: it misfired on partly loaded tiles; the fixed 32 m geoid offset lines up)
     t.addEventListener("tiles-load-end", () => { if (credit && tiles){ const a = [...new Set(tiles.getAttributions().filter(x => x.type === "string").flatMap(x => x.value.split(/[;,]\s*/)).filter(Boolean))]; credit.textContent = "Map data: " + (a.length ? a.join(", ") : "Google"); } invalidate(); });
     invalidate();
   }
