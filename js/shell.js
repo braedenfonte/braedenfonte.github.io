@@ -16,20 +16,20 @@ if (!stage) return;
 /* ---------- landmarks: one list drives the 2D map, the 3D campus and the labels ----------
    p = position on the wide map (160 x 100), pm = position on the tall phone map (100 x 124). North is up, the Hudson is on the right. */
 const LANDMARKS = [
-  {id:"barracks", name:"Barracks",       views:["brief","schedule"],         p:[78,45],  pm:[52,41],  h:5},
-  {id:"library",  name:"Library",        views:["courses","study"],          p:[60,68],  pm:[28,80],  h:6},
-  {id:"thayer",   name:"Thayer Hall",    views:["projects"],                 p:[112,74], pm:[68,88],  h:5},
-  {id:"hq",       name:"Headquarters",   views:["about","resume","business"],p:[98,56],  pm:[56,66],  h:9},
-  {id:"stadium",  name:"Michie Stadium", views:["football"],                 p:[28,50],  pm:[20,56],  h:5},
-  {id:"golf",     name:"Golf Green",     views:["daily"],                    p:[56,17],  pm:[24,22],  h:3},
-  {id:"helipad",  name:"Helipad",        views:["flights"],                  p:[122,44], pm:[74,50],  h:2},
-  {id:"trophy",   name:"Trophy Point",   views:["place","personal"],         p:[110,20], pm:[66,24],  h:6},
-  {id:"gate",     name:"Thayer Gate",    views:["contact"],                  p:[84,92],  pm:[58,113], h:4},
-  {id:"vault",    name:"The Vault",      views:["finance","memory"],         p:[44,86],  pm:[24,104], h:4}
+  {id:"barracks", name:"Pershing Barracks",      views:["brief","schedule"],          at:{b:"Pershing Barracks"}, mine:true},
+  {id:"library",  name:"Jefferson Hall Library", views:["courses","study"],           at:{b:"Jefferson Hall Library"}},
+  {id:"thayer",   name:"Thayer Hall",            views:["projects"],                  at:{b:"Thayer Hall"}},
+  {id:"hq",       name:"Taylor Hall",            views:["about","resume","business"], at:{b:"Taylor Hall"}},
+  {id:"stadium",  name:"Michie Stadium",         views:["football"],                  at:{a:"Michie Stadium", h:17}},
+  {id:"golf",     name:"Golf Course",            views:["daily"],                     at:{xy:[-1010,430], h:16}, sign:true},   // real course is 1.5 mi west, off this map
+  {id:"dock",     name:"South Dock",             views:["flights"],                   at:{a:"South Dock Park", h:4}},
+  {id:"trophy",   name:"Trophy Point",           views:["place","personal"],          at:{n:"Battle Monument", h:22}},
+  {id:"gate",     name:"Thayer Gate",            views:["contact"],                   at:{b:"Thayer Gate"}},
+  {id:"vault",    name:"West Point Mint",        views:["finance","memory"],          at:{xy:[-1010,1180], h:16}, sign:true}  // real Mint is west of the cadet area, off this map
 ];
 const VIEW_NAMES = {brief:"Morning Brief", schedule:"Schedule", courses:"Courses", study:"Study", projects:"Projects", about:"About", resume:"Resume",
   business:"Business", football:"Football", daily:"Daily Golf", flights:"Weekend Flights", place:"Place of the Day", personal:"Personal", contact:"Contact", finance:"Finance", memory:"Memory"};
-const DECOR = { chapel:{p:[54,36], pm:[36,38]}, plain:{p:[94,32], pm:[60,30]} };
+
 
 /* ---------- live status chips (public data only) ---------- */
 let BRIEF = null;
@@ -58,9 +58,10 @@ function chipFor(id){
     }
     if (id === "thayer") return "3 live demos";
     if (id === "hq") return "Resume · About";
+    if (id === "golf") return "1.5 mi west · 3 holes today";
     if (id === "stadium"){ const b = BF.bills(); if (b && b.record){ const g = (b.schedule || [])[0]; return "Bills "+b.record.w+"-"+b.record.l+(g ? " · "+(g.home ? "vs " : "at ")+String(g.opp).split(" ").pop() : ""); } return "Bills & college"; }
     if (id === "golf") return "3 new holes today";
-    if (id === "helipad"){ const f = BF.flights().slice().sort((a,b) => a.price - b.price)[0]; return f ? "$"+f.price+" · "+String(f.city).split(",")[0] : "Weekend deals"; }
+    if (id === "dock"){ const f = BF.flights().slice().sort((a,b) => a.price - b.price)[0]; return f ? "$"+f.price+" · "+String(f.city).split(",")[0] : "Weekend deals"; }
     if (id === "trophy"){ const p = BF.place(); return p && p.name ? p.name : "Place of the day"; }
     if (id === "gate") return "Email · LinkedIn";
   }catch(e){}
@@ -98,67 +99,58 @@ function setHot(id, from3d){
   if (campus && !from3d) campus.highlight(id);
 }
 
-/* ---------- flat 2D map (always drawn first; it is the whole home screen in low-power mode) ---------- */
-const tall = matchMedia("(max-width:860px)");
-const TOP = 10;   // room for the name bar on the tall phone map
-const pos = l => tall.matches ? [l.pm[0], l.pm[1] + TOP] : l.p;
-function glyph(id){
-  const G = {
-    barracks:'<path class="m-b" d="M-7,-4h14v8h-2.8v-5.2h-8.4v5.2h-2.8z"/><rect class="m-acc" x="-1.2" y="-4" width="2.4" height=".7"/>',
-    library:'<rect class="m-b" x="-5.5" y="-3.6" width="11" height="7.2"/><rect class="m-top" x="-3.6" y="-2" width="7.2" height="4"/>',
-    thayer:'<rect class="m-b" x="-8" y="-2.6" width="16" height="5.2"/><path class="m-line" d="M-4,-2.6v5.2M0,-2.6v5.2M4,-2.6v5.2"/>',
-    hq:'<rect class="m-b" x="-4.5" y="-3.2" width="9" height="6.4"/><rect class="m-top" x="-1.5" y="-1.5" width="3" height="3"/>',
-    stadium:'<ellipse class="m-b" rx="7.4" ry="5.2"/><ellipse class="m-grass" rx="4.4" ry="2.6" stroke="var(--faint)" stroke-width=".25"/>',
-    golf:'<ellipse class="m-grass m-b" rx="6.4" ry="4"/><circle class="m-top" cx="2" cy="-.4" r=".7"/><path class="m-acc" d="M2,-.4v-3.4l2.4,.9-2.4,.9"/>',
-    helipad:'<circle class="m-b" r="3.8"/><path class="m-line" d="M-1.3,-1.6v3.2M1.3,-1.6v3.2M-1.3,0h2.6" stroke-width=".6"/>',
-    trophy:'<circle class="m-b" r="3"/><circle class="m-top" r="1.5"/><circle class="m-acc" r=".6"/>',
-    gate:'<rect class="m-b" x="-4" y="-1.4" width="2.4" height="2.8"/><rect class="m-b" x="1.6" y="-1.4" width="2.4" height="2.8"/><path class="m-line" d="M-1.6,0h3.2"/>',
-    vault:'<path class="m-b" d="M-4.5,3v-3.5a4.5,4.5 0 019,0v3.5z"/><circle cx="0" cy=".2" r="1.7" fill="none" stroke="var(--accent)" stroke-width=".6"/>'
-  };
-  return G[id] || "";
+/* ---------- flat 2D map: the real West Point map, painted from /campus/westpoint.json (it is the whole home screen in low-power mode) ---------- */
+const MAP = window.BFMap, tall = matchMedia("(max-width:860px)");
+const isDark = () => { const b = getComputedStyle(root).getPropertyValue("--bg").trim(); return parseInt(b.slice(1, 3), 16) < 128; };
+const cv2 = document.createElement("canvas"); map2d.appendChild(cv2);
+let full = null, fullKey = "", ready = false; const MINORS = [];
+LANDMARKS.forEach(l => { l.el.hidden = true; });
+function resolveLandmarks(){
+  if (ready) return;
+  LANDMARKS.forEach(l => { const p = MAP.locate(l.at); l.x = p.x; l.y = p.y; l.h = p.h || 0; l.bi = p.bi; });
+  const seen = {}; LANDMARKS.forEach(l => { seen[l.name] = 1; });
+  MAP.data.buildings.forEach(b => { if (!b.n || seen[b.n] || !(b.k === "barracks" || ["Washington Hall", "Cadet Chapel", "Eisenhower Hall", "Arvin Gymnasium", "Grant Barracks"].indexOf(b.n) >= 0) || b.n === "Old Central Barracks") return; seen[b.n] = 1;
+    const el = document.createElement("span"); el.className = "lm-minor"; el.textContent = b.n; el.hidden = true; labels.appendChild(el); MINORS.push({ name: b.n, x: b.c[0], y: b.c[1], h: b.h, el }); });
+  ready = true;
 }
+function putLabel(l, x, y, off){ l.el.hidden = false; l.el.classList.toggle("off", !!off); l.el.style.transform = "translate("+x.toFixed(1)+"px,"+y.toFixed(1)+"px) translate(-50%,-100%)"; }
 function drawMap(){
-  const T = tall.matches, W = T ? 100 : 160, H = T ? 124 + TOP : 100, rx = T ? 84 : 134;   // rx = where the river starts
-  let seed = 11; const rnd = () => (seed = (seed*9301+49297)%233280)/233280;
-  const wave = []; for (let y = 0; y <= H; y += H/8) wave.push([rx + Math.sin(y/H*5.2)*(T?3:5) - (y < H*.35 ? (T?5:9)*(1 - y/(H*.35)) : 0), y]);
-  const river = "M"+(W+400)+",-400L"+wave[0][0].toFixed(1)+",-400L"+wave.map(p => p[0].toFixed(1)+","+p[1].toFixed(1)).join("L")+"L"+wave[wave.length-1][0].toFixed(1)+","+(H+400)+"L"+(W+400)+","+(H+400)+"Z";
-  const by = id => pos(LANDMARKS.find(l => l.id === id));
-  const road = ids => "M"+ids.map(i => (typeof i === "string" ? by(i) : i).join(",")).join("L");
-  let s = '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" style="overflow:visible">'+
-    '<rect class="m-ground" x="-400" y="-400" width="'+(W+800)+'" height="'+(H+800)+'"/>';
-  for (let x = -390; x < W + 400; x += 10) s += '<path class="m-grid" d="M'+x+',-400V'+(H+400)+'"/>';
-  for (let y = -390; y < H + 400; y += 10) s += '<path class="m-grid" d="M-400,'+y+'H'+(W+400)+'"/>';
-  s += '<path class="m-water" d="'+river+'"/>';
-  const dp = d => T ? [d.pm[0], d.pm[1] + TOP] : d.p, pl = dp(DECOR.plain), ch = dp(DECOR.chapel);
-  s += '<rect class="m-grass" x="'+(pl[0]-(T?9:13))+'" y="'+(pl[1]-(T?5:6))+'" width="'+(T?18:26)+'" height="'+(T?10:12)+'" rx="1.5"/>';
-  s += '<path class="m-road" d="'+road(["gate","hq","barracks",pl,"trophy"])+'"/><path class="m-road" d="'+road(["library","hq","thayer"])+'"/>'+
-       '<path class="m-road" d="'+road(["stadium","barracks","helipad"])+'"/><path class="m-road" d="'+road(["vault","library"])+'"/><path class="m-road" d="'+road(["golf",ch,"barracks"])+'"/>';
-  for (let i = 0; i < (T ? 46 : 70); i++){
-    const x = 3 + rnd()*(rx - 10), y = 3 + rnd()*(H - 6);
-    if (LANDMARKS.some(l => Math.hypot(pos(l)[0]-x, pos(l)[1]-y) < 10) || Math.hypot(pl[0]-x, pl[1]-y) < 15) continue;
-    s += '<circle class="m-tree" cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+(0.9 + rnd()*0.9).toFixed(2)+'"/>';
-  }
-  s += '<g transform="translate('+ch[0]+','+ch[1]+')"><rect class="m-b" x="-2.4" y="-1.4" width="4.8" height="2.8"/><rect class="m-top" x="-1" y="-1" width="2" height="2"/></g>';
-  s += '<text class="m-txt" x="'+(rx+ (T?5:9))+'" y="'+(H*.62)+'" transform="rotate(90 '+(rx+(T?5:9))+' '+(H*.62)+')">Hudson River</text>';
-  s += '<text class="m-txt" x="'+pl[0]+'" y="'+(pl[1]+.8)+'" text-anchor="middle">The Plain</text>';
-  LANDMARKS.forEach(l => { const p = pos(l); s += '<g class="m-lm" data-lm="'+l.id+'" transform="translate('+p[0]+','+p[1]+')'+(T ? ' scale(.82)' : '')+'">'+glyph(l.id)+'</g>'; });
-  map2d.innerHTML = s + '</svg>';
+  if (!ready) return;
+  const key = (tall.matches ? "t" : "w") + (isDark() ? "d" : "l");
+  if (key !== fullKey){ full = document.createElement("canvas"); fullKey = key;
+    MAP.paint(full, { pxPerM: tall.matches ? 0.55 : 0.75, dark: isDark(), labels: true, hillshade: true, hot: LANDMARKS.filter(l => l.mine).map(l => l.bi), skip: LANDMARKS.map(l => l.name) }); }
   place2D();
 }
 function place2D(){
-  if (stage.dataset.state === "3d") return;
-  const T = tall.matches, W = T ? 100 : 160, H = T ? 124 + TOP : 100, r = stage.getBoundingClientRect();
-  if (!r.width) return;
-  const k = Math.min(r.width/W, r.height/H), ox = (r.width - W*k)/2, oy = (r.height - H*k)/2;
-  LANDMARKS.forEach(l => { const p = pos(l); l.el.hidden = false;
-    l.el.style.transform = "translate("+(ox + p[0]*k).toFixed(1)+"px,"+(oy + (p[1] - (T ? 3.4 : 4.6))*k).toFixed(1)+"px) translate(-50%,-100%)"; });
+  if (!ready || !full || stage.dataset.state === "3d") return;
+  const r = stage.getBoundingClientRect(); if (!r.width) return;
+  const T = tall.matches, b = MAP.bounds, dpr = Math.min(window.devicePixelRatio || 1, 2);
+  // phones: most of the post. wide screens: the cadet area, from Trophy Point down to Michie Stadium. Places outside the view are pinned to the edge.
+  const cy = T ? 350 : 620, s = r.height/(T ? 2000 : 1200), cx = T ? 0 : 60, PX = x => (x - cx)*s + r.width/2, PY = y => (cy - y)*s + r.height/2;
+  cv2.width = Math.round(r.width*dpr); cv2.height = Math.round(r.height*dpr); cv2.style.width = r.width+"px"; cv2.style.height = r.height+"px";
+  const x = cv2.getContext("2d"), pal = MAP.palette(isDark()); x.setTransform(dpr, 0, 0, dpr, 0, 0);
+  x.fillStyle = pal.forest; x.fillRect(0, 0, r.width, r.height); x.fillStyle = pal.water; x.fillRect(PX(b.x1) - 1, 0, r.width, r.height);
+  x.imageSmoothingQuality = "high"; x.drawImage(full, PX(b.x0), PY(b.y1), (b.x1 - b.x0)*s, (b.y1 - b.y0)*s);
+  const lw = T ? 132 : 176, lh = T ? 44 : 54, top = T ? 96 : 110;
+  LANDMARKS.forEach(l => { l.px = PX(l.x); l.py = PY(l.y); l.sx = l.px; l.sy = l.py - 12; });
+  const clamp = l => { l.sx = Math.min(r.width - lw/2 - 4, Math.max(lw/2 + 4, l.sx)); l.sy = Math.min(r.height - 6, Math.max(top, l.sy)); };
+  LANDMARKS.forEach(clamp);
+  for (let it = 0; it < 60; it++){ let moved = false;   // nudge overlapping labels apart
+    for (let i = 0; i < LANDMARKS.length; i++) for (let j = i + 1; j < LANDMARKS.length; j++){ const a = LANDMARKS[i], c = LANDMARKS[j], dx = c.sx - a.sx, dy = c.sy - a.sy, ox = lw - Math.abs(dx), oy = lh - Math.abs(dy);
+      if (ox > 0 && oy > 0){ moved = true; if (ox < oy){ const m = ox/2*(dx < 0 ? -1 : 1); a.sx -= m; c.sx += m; } else { const m = oy/2*(dy < 0 ? -1 : 1); a.sy -= m; c.sy += m; } } }
+    LANDMARKS.forEach(clamp); if (!moved) break; }
+  x.strokeStyle = pal.accent; x.fillStyle = pal.accent; x.lineWidth = 1.5;
+  LANDMARKS.forEach(l => { const inside = l.px > 0 && l.px < r.width && l.py > 0 && l.py < r.height;
+    if (inside){ x.beginPath(); x.moveTo(l.px, l.py); x.lineTo(l.sx, l.sy); x.stroke(); x.beginPath(); x.arc(l.px, l.py, 3.5, 0, 7); x.fill(); }
+    putLabel(l, l.sx, l.sy, !inside); });
+  MINORS.forEach(m => { m.el.hidden = true; });
 }
-map2d.addEventListener("click", e => { const g = e.target.closest(".m-lm"); if (g) openLandmark(LANDMARKS.find(l => l.id === g.dataset.lm)); });
-map2d.addEventListener("pointermove", e => { const g = e.target.closest(".m-lm"); setHot(g ? g.dataset.lm : null); });
-map2d.addEventListener("pointerleave", () => setHot(null));
-drawMap(); paintChips();
+map2d.addEventListener("click", e => { if (!ready) return; const r = stage.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top;
+  const near = LANDMARKS.map(l => [Math.hypot(l.px - mx, l.py - my), l]).sort((a, b) => a[0] - b[0])[0]; if (near && near[0] < 34) openLandmark(near[1]); });
+MAP.load().then(() => { resolveLandmarks(); drawMap(); paintChips(); }).catch(err => console.warn("Map data did not load.", err));
 (tall.addEventListener ? tall.addEventListener("change", drawMap) : tall.addListener(drawMap));
 if ("ResizeObserver" in window) new ResizeObserver(place2D).observe(stage); else addEventListener("resize", place2D);
+document.addEventListener("bf:theme", drawMap);
 
 /* ---------- sound: tiny synthesized UI sounds + quiet ambience. OFF by default, choice is remembered. ---------- */
 const Sound = (() => {
@@ -219,6 +211,7 @@ function toast(msg){ const t = document.createElement("div"); t.className = "toa
 
 /* ---------- display mode: 3D campus or low-power flat 2D ---------- */
 const MODE = window.BF_MODE || {pref:"auto", lite:false, why:""};
+const zin = $("#campusIn"), zout = $("#campusOut");
 const modeBtn = $("#modeBtn"), modeLbl = $("#modeLbl"), modeChip = $("#campusMode"), resetBtn = $("#campusReset"), help = $("#campusHelp");
 let campus = null, loading = false;
 function webglOK(){ try{ const c = document.createElement("canvas"); return !!(window.WebGLRenderingContext && (c.getContext("webgl2") || c.getContext("webgl"))); }catch(e){ return false; } }
@@ -229,8 +222,8 @@ function paintMode(){
   modeBtn.setAttribute("aria-label", lite ? "Low-power mode is on. Switch to the 3D campus" : "Low-power mode is off. Switch to the fast flat 2D version");
   modeLbl.textContent = lite ? "Low power on" : "Low power";
   modeChip.textContent = campus ? "3D campus" : lite ? "2D · low power" : "2D map";
-  resetBtn.hidden = !campus;
-  help.textContent = campus ? "Drag to look around. Hover a building for its status, click to fly there. Everything is also in the menu."
+  resetBtn.hidden = !campus; zin.hidden = zout.hidden = !campus;
+  help.textContent = campus ? "Drag to look around, + and − to zoom. Hover a labeled building for its status, click to fly there. Everything is also in the menu."
     : "Pick a landmark to open that part of the site, or use the menu.";
 }
 function to2D(){
@@ -252,14 +245,17 @@ async function start3D(){
   if (!webglOK()){ MODE.lite = true; paintMode(); return; }
   loading = true;
   try{
-    const mod = await import("/js/campus3d.js");
+    await MAP.load(); resolveLandmarks();
+    const mod = await import("/js/westpoint3d.js");
     if (MODE.lite) { loading = false; return; }
     campus = await mod.create({
       stage, canvas: $("#campus3d"),
-      landmarks: LANDMARKS.map(l => ({id: l.id, p: l.p, h: l.h})), decor: DECOR,
+      map: MAP, dark: isDark, minor: MINORS,
+      landmarks: LANDMARKS.map(l => ({id: l.id, x: l.x, y: l.y, h: l.h, bi: l.bi, sign: l.sign, mine: l.mine})),
+      placeMinor: (i, x, y, vis) => { const el = MINORS[i].el; el.hidden = !vis; if (vis) el.style.transform = "translate("+x.toFixed(1)+"px,"+y.toFixed(1)+"px) translate(-50%,-50%)"; },
       onHover: id => setHot(id, true),
       onOpen: id => openLandmark(LANDMARKS.find(l => l.id === id)),
-      place: (id, x, y, vis) => { const l = LANDMARKS.find(q => q.id === id); if (!l) return; l.el.hidden = !vis; if (vis) l.el.style.transform = "translate("+x.toFixed(1)+"px,"+y.toFixed(1)+"px) translate(-50%,-100%)"; },
+      place: (id, x, y, vis, off) => { const l = LANDMARKS.find(q => q.id === id); if (l) putLabel(l, x, y, off); },
       watch: MODE.pref !== "3d",
       onSlow: () => { store.set("bf-slow", true); setLite(true, true); toast("3D was running slowly, so I switched to the fast 2D map."); }
     });
@@ -271,6 +267,8 @@ async function start3D(){
   loading = false;
 }
 resetBtn.addEventListener("click", () => { if (campus) campus.flyHome(); });
+zin.addEventListener("click", () => { if (campus) campus.zoom(0.75); });
+zout.addEventListener("click", () => { if (campus) campus.zoom(1.33); });
 
 /* ---------- first-visit intro (3D only, under 6 seconds, skippable, never replays) ---------- */
 let introEnd = null;
