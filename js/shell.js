@@ -30,7 +30,7 @@ const LANDMARKS = [
   {id:"josh",     name:"Josh's House",           views:[], at:{xy:[1010,1330], h:16},  sign:true, note:"Fishkill · across the river"},
   {id:"home",     name:"Home",                   views:[], at:{xy:[-1010,820], h:16},  sign:true, note:"Caledonia, NY · far west"},
   {id:"nyc",      name:"New York City",          views:[], at:{xy:[420,-1370], h:16},  sign:true, note:"about 50 miles south"},
-  {id:"hfalls",   name:"Highland Falls",         views:[], at:{xy:[-150,-1370], h:16}, sign:true, note:"just past Thayer Gate"}
+  {id:"hfalls",   name:"Highland Falls",         views:[], at:{xy:[-60,-1060], h:16}, sign:true, note:"just past Thayer Gate"}
 ];
 const VIEW_NAMES = {brief:"Morning Brief", schedule:"Schedule", courses:"Courses", study:"Study", projects:"Projects", about:"About", resume:"Resume",
   business:"Business", football:"Football", daily:"Daily Golf", flights:"Weekend Flights", place:"Place of the Day", personal:"Personal", contact:"Contact", finance:"Finance", memory:"Memory"};
@@ -254,7 +254,7 @@ async function start3D(){
   loading = true;
   try{
     await MAP.load(); resolveLandmarks();
-    const mod = await import("/js/westpoint3d.js?v=20261114c");
+    const mod = await import("/js/westpoint3d.js?v=20261114d");
     if (MODE.lite) { loading = false; return; }
     campus = await mod.create({
       stage, canvas: $("#campus3d"),
