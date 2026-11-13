@@ -80,4 +80,7 @@ Written Nov 12, 2026 so a new Claude session can pick up the site redesign witho
   or Google refuses a request (quota hit = HTTP 429/403). Low-power mode never loads tiles. A "Map data: Google" credit is required, keep it.
 - Testing locally costs 1 load per page reload and only works if `http://localhost:8765/*` is temporarily added to the key's website list
   (it was removed after testing on Nov 13).
-- Still open: the low-power 2D map and the no-tiles 3D fallback still cut the Hudson off at the east edge (no Garrison shore).
+- Hudson fixed on the built-in map too (2D + 3D fallback): the terrain grid was widened 1.2 km east and 0.8 km north
+  (`campus/src/widen.py` -> `westpoint-elev-wide.json.gz`, same public terrain tiles, matches the old grid to 0.12 m), and the river
+  now comes from the real OpenStreetMap Hudson outline (`campus/src/hudson-osm.json.gz`) instead of guessing from heights
+  (the terrain over the river is noisy, 1-20 m). Both shores, Constitution Island and the bend are in. The 2D view is framed a bit wider/east to show them.
