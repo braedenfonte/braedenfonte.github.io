@@ -197,3 +197,17 @@ html[data-mode="lite"] .btn:hover,html[data-mode="lite"] .proj:hover{transform:n
   .campus .lm-pin{height:5px}
   .campus .lm.off .lm-name{opacity:.8}
 }
+
+/* controls panel can fold away; phones start folded */
+.wx-panel .wx-toggle{flex-basis:100%;text-align:left;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:0;padding:4px 2px;background:none}
+.wx-panel .wx-toggle::after{content:" \25BE";color:var(--muted)}
+.wx-panel.closed > :not(.wx-toggle){display:none}
+.wx-panel.closed .wx-toggle::after{content:" \25B8"}
+/* phones: a big Menu button right on the map */
+.map-menu{display:none}
+@media (max-width:860px){
+  .map-menu{display:flex;align-items:center;gap:6px;position:absolute;left:10px;bottom:10px;z-index:7;padding:9px 13px;border-radius:999px;border:1px solid var(--line);
+    background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(8px);color:var(--fg);font:700 13px/1 var(--body);box-shadow:0 4px 18px rgba(0,0,0,.25)}
+  .map-menu svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+  .tiles-credit{left:auto;right:10px;bottom:auto;top:56px;max-width:50%;text-align:right}
+}

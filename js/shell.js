@@ -27,9 +27,9 @@ const LANDMARKS = [
   {id:"gate",     name:"Thayer Gate",            views:["contact"],                   at:{b:"Thayer Gate"}},
   {id:"vault",    name:"West Point Mint",        views:["finance","memory"],          at:{xy:[-1010,1180], h:16}, sign:true},  // real Mint is west of the cadet area, off this map
   // direction signs only: they point toward real places that are off this map and do not open anything
-  {id:"josh",     name:"Josh's House",           views:[], at:{xy:[1010,1330], h:16},  sign:true, note:"Fishkill · across the river"},
+  {id:"josh",     name:"Josh's House",           views:[], at:{xy:[2150,1800], h:16},  sign:true, note:"Fishkill · across the river"},
   {id:"home",     name:"Home",                   views:[], at:{xy:[-1010,820], h:16},  sign:true, note:"Caledonia, NY · far west"},
-  {id:"nyc",      name:"New York City",          views:[], at:{xy:[420,-1370], h:16},  sign:true, note:"about 50 miles south"},
+  {id:"nyc",      name:"New York City",          views:[], at:{xy:[-150,-1360], h:16},  sign:true, note:"about 50 miles south"},
   {id:"hfalls",   name:"Highland Falls",         views:[], at:{xy:[-60,-1060], h:16}, sign:true, note:"just past Thayer Gate"}
 ];
 const VIEW_NAMES = {brief:"Morning Brief", schedule:"Schedule", courses:"Courses", study:"Study", projects:"Projects", about:"About", resume:"Resume",
@@ -254,7 +254,7 @@ async function start3D(){
   loading = true;
   try{
     await MAP.load(); resolveLandmarks();
-    const mod = await import("/js/westpoint3d.js?v=20261114p");
+    const mod = await import("/js/westpoint3d.js?v=20261114q");
     if (MODE.lite) { loading = false; return; }
     campus = await mod.create({
       stage, canvas: $("#campus3d"),
@@ -325,6 +325,7 @@ document.addEventListener("bf:theme", () => { if (campus) campus.retheme(); });
 
 paintMode();
 if (BF.view) onView(BF.view);
+{ const mm = $("#mapMenu"); if (mm) mm.addEventListener("click", () => document.body.classList.add("nav-open")); }   // phones: open the menu from the map
 window.BFShell = { sound: Sound, mode: MODE };
 /* The 3D world loads in the background after the page is usable. */
 const idle = window.requestIdleCallback ? f => requestIdleCallback(f, {timeout: 1500}) : f => setTimeout(f, 300);
