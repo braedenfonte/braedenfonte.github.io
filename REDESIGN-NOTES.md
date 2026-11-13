@@ -186,3 +186,11 @@ Merges: Braeden wants tested PRs merged automatically, no confirmation.
   visitors + tour buses), seasons (Live/Spring/Summer/Fall/Winter recolor trees) and street lamps at sunset/night.
 - Panel rows: Weather, Time, Season, Start an event (Parade, Retreat, PT run, Game day, Ball games; each runs ~4 minutes).
 - Next: Phase 5 realism (walk animation, uniforms, car variety, traffic stops), Phase 6 landmark rebuilds (Pershing first), Phase 7 play modes.
+
+## Nov 13 (night) round: polish + Phase 5/6 start
+- Live: readable weather at any zoom, signs on land (Josh NE edge, NYC south edge), phone Menu button + folding controls,
+  bigger movers, high birds, 28 deer, Parachute drop + Fire cannon buttons; golf on phones (hold to swing, docked meter);
+  3D signposts (iron post, gold cap, arrow board) + black/gold sign plaques; ACES tone mapping + gradient skies;
+  sidewalks + road paint in the painted map; all statues/monuments in 3D (OSM positions); walking legs, uniforms, vehicle types.
+- Phase 6 started: Pershing Barracks custom model (corbelled battlements, two north corner towers with turrets, south bartizans,
+  round-arched sally port with lanterns on the north front). Next landmarks: Cadet Chapel, Thayer Hall, Taylor Hall, Bartlett.
