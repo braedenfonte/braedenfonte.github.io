@@ -174,3 +174,7 @@ Merges: Braeden wants tested PRs merged automatically, no confirmation.
 - Step 1 started (Nov 13 night): `life` block in js/westpoint3d.js. 46 cars on OSM drivable roads (c<=2, right-hand lane offset),
   170 walkers on footways/service roads (gray/black cadet colors), 55 runners anywhere on campus (gray PT, bobbing). Simple shapes for now
   (box cars, cylinder people, scaled 1.15x/1.6x so they read from the default view). Next: proper little people/car models, formations.
+- Free movement (Nov 13 night): left-drag moves around the whole map (`pan()`, clamped to the map edges), scroll zooms toward the
+  mouse (`zoomAt()`), right-drag / Shift-drag turns and tilts, arrow keys / WASD move. Help text updated in shell.js.
+- Trains/ships not started: Overpass was overloaded. Railway (CSX River Line, runs in a tunnel under the Plain) must come from OSM
+  `railway=rail` (keep `tunnel=yes` segments hidden).
