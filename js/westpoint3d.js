@@ -5,7 +5,7 @@ import * as THREE from "/vendor/three.module.min.js";
 
 export async function create(o){
   const { stage, canvas, map } = o, D = map.data, BB = map.bounds;
-  const S = 0.05, VE = 1.15;                                  // world units per meter, vertical stretch
+  const S = 0.05, VE = 1.0;                                   // world units per meter, vertical stretch
   const gy = (x, y) => Math.max(map.heightAt(x, y), 0.2)*S*VE; // ground height in world units
   const V = (x, y, h) => new THREE.Vector3(x*S, gy(x, y) + (h || 0)*S, -y*S);
   const dark = () => o.dark();
@@ -13,7 +13,7 @@ export async function create(o){
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.shadowMap.autoUpdate = false;
-  const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(34, 1, 0.5, 2000);
+  const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(34, 1, 0.08, 2000);
   const hemi = new THREE.HemisphereLight(0xffffff, 0x333333, 1), sun = new THREE.DirectionalLight(0xffffff, 1);
   sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0008; sun.shadow.normalBias = 0.05;
   Object.assign(sun.shadow.camera, { left: -80, right: 80, top: 90, bottom: -90, near: 1, far: 420 });
@@ -115,16 +115,17 @@ export async function create(o){
     wallMat.emissiveIntensity = dk ? 0.9 : 0; wallMat.color.set(dk ? 0xb4bccb : 0xffffff); roofMat.color.set(dk ? 0xa9b2c4 : 0xffffff);
     hemi.color.set(dk ? 0x8ea6d6 : 0xffffff); hemi.groundColor.set(dk ? 0x0a0d14 : 0x6f7a66); hemi.intensity = dk ? 1.25 : 1.5;
     sun.color.set(dk ? 0xb9c8ff : 0xfff3df); sun.intensity = dk ? 1.7 : 2.5;
-    tileMats.forEach(m => m.color.set(dk ? 0x7d879c : 0xffffff));
+    
     renderer.shadowMap.needsUpdate = true; invalidate();
   }
 
   /* ---------- camera rig ---------- */
   const c0 = V(380, 660, 0), HOME = { tx: c0.x, ty: c0.y, tz: c0.z, az: 1.2, pol: 1.0, dist: 86 };
+  const c1 = V(330, 560, 0), HOME3D = { tx: c1.x, ty: c1.y, tz: c1.z, az: 1.15, pol: 1.08, dist: 58 };   // real tiles: low and angled, like tilting Google Earth
   const cur = Object.assign({}, HOME);
   let tween = null, raf = 0, active = true, dead = false, atHome = true, vw = 1, vh = 1;
   const ease = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2;
-  const homeFor = () => Object.assign({}, HOME, { dist: HOME.dist*Math.max(1, 1.7/(vw/vh)) });
+  const homeFor = () => { const H = tilesOn ? HOME3D : HOME; return Object.assign({}, H, { dist: H.dist*Math.max(1, 1.7/(vw/vh)) }); };
   function applyCam(){ const s = Math.sin(cur.pol); cam.position.set(cur.tx + cur.dist*s*Math.sin(cur.az), cur.ty + cur.dist*Math.cos(cur.pol), cur.tz + cur.dist*s*Math.cos(cur.az)); cam.lookAt(cur.tx, cur.ty, cur.tz); }
   function fly(to, dur, done){ if (tween && tween.done){ const d = tween.done; tween = null; d(); }
     if (!dur){ Object.assign(cur, to); tween = null; invalidate(); if (done) done(); return; }
@@ -156,10 +157,13 @@ export async function create(o){
       if (k >= 1){ const d = tween.done; tween = null; if (d) d(); } }
     lastT = tween ? now : 0;
     applyCam(); if (tiles){ cam.updateMatrixWorld(); tiles.update(); } renderer.render(scene, cam); placeLabels();
-    if (tween) raf = requestAnimationFrame(frame);
+    if (tiles && tiles.stats.downloading + tiles.stats.parsing > 0) tilesAct = now;
+    const busy = tiles && now - tilesAct < 2500;   // the tile loader only asks for the next, sharper pieces when update() runs, so keep running until it settles
+    if (tween || busy) raf = requestAnimationFrame(frame);
   }
   function invalidate(){ if (!raf && active && !dead) raf = requestAnimationFrame(frame); }
   function resize(){ const r = stage.getBoundingClientRect(); if (!r.width || !r.height) return; vw = r.width; vh = r.height; renderer.setSize(vw, vh, false); cam.aspect = vw/vh; cam.updateProjectionMatrix();
+    if (tiles) tiles.setResolutionFromRenderer(cam, renderer);
     if (atHome && !tween) Object.assign(cur, homeFor()); invalidate(); }
   const ro = "ResizeObserver" in window ? new ResizeObserver(resize) : null; if (ro) ro.observe(stage); else addEventListener("resize", resize);
 
@@ -169,13 +173,13 @@ export async function create(o){
     picks.forEach(p => { p.visible = true; }); const hit = ray.intersectObjects([walls, roofs].concat(picks), false)[0]; picks.forEach(p => { p.visible = false; });
     overName = null; if (!hit) return null; if (hit.object.userData.id) return hit.object.userData.id; const arr = hit.object.userData.lm, i = arr[hit.faceIndex], bi = arr.b[hit.faceIndex];
     if (i < 0 && bi >= 0) overName = D.buildings[bi].n; return i >= 0 ? o.landmarks[i].id : null; }
-  function highlight(id){ if (id === hot) return; hot = id; for (const k in outlines) outlines[k].ln.visible = outlines[k].mine || k === id; invalidate(); }
+  function highlight(id){ if (id === hot) return; hot = id; for (const k in outlines) outlines[k].ln.visible = !tilesOn && (outlines[k].mine || k === id); invalidate(); }
   const L = (el, evn, fn, opt) => { el.addEventListener(evn, fn, opt); return () => el.removeEventListener(evn, fn, opt); };
   const off = [
     L(canvas, "pointerdown", ev => { if (tween) return; drag = { x: ev.clientX, y: ev.clientY, moved: 0, id: ev.pointerId }; }),
     L(canvas, "pointermove", ev => {
       if (drag && drag.id === ev.pointerId){ const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y; drag.moved += Math.abs(dx) + Math.abs(dy); drag.x = ev.clientX; drag.y = ev.clientY;
-        if (drag.moved > 5){ if (!drag.cap){ drag.cap = true; try{ canvas.setPointerCapture(ev.pointerId); }catch(x){} } cur.az -= dx*0.005; cur.pol = Math.min(1.4, Math.max(0.3, cur.pol - dy*0.003)); atHome = false; invalidate(); } return; }
+        if (drag.moved > 5){ if (!drag.cap){ drag.cap = true; try{ canvas.setPointerCapture(ev.pointerId); }catch(x){} } cur.az -= dx*0.005; cur.pol = Math.min(tilesOn ? 1.5 : 1.4, Math.max(0.3, cur.pol - dy*0.003)); atHome = false; invalidate(); } return; }
       if (ev.pointerType === "mouse" && !tween){ const id = pickAt(ev); if (o.tip) o.tip(overName, ev.clientX, ev.clientY); if (id !== hot){ highlight(id); o.onHover(id); } } }),
     L(canvas, "pointerup", ev => { const d = drag; drag = null; if (d && d.moved <= 5 && !tween){ const id = pickAt(ev); if (id) o.onOpen(id); } }),
     L(canvas, "pointercancel", () => { drag = null; }),
@@ -183,37 +187,38 @@ export async function create(o){
     L(canvas, "wheel", ev => { if (tween) return; ev.preventDefault(); zoom(1 + Math.max(-0.3, Math.min(0.3, ev.deltaY*0.0015))); }, { passive: false }),   // scroll to zoom
     L(document, "visibilitychange", () => { if (!document.hidden) invalidate(); })
   ];
-  function zoom(f){ cur.dist = Math.min(230, Math.max(9, cur.dist*f)); atHome = false; invalidate(); }
+  function zoom(f){ cur.dist = Math.min(230, Math.max(tilesOn ? 1.6 : 9, cur.dist*f)); atHome = false; invalidate(); }
 
   /* ---------- Google Photorealistic 3D Tiles: the real look. The model above stays underneath as the fallback
      (no key, low-power/data-saver, quota used up, or any load error) and stays invisible-but-pickable for hovers. ---------- */
-  let tiles = null, tilesOn = false, credit = null; const tileMats = new Set();
+  let tiles = null, tilesOn = false, credit = null, tilesAct = 0; const tileMats = new Set();
   const own = scene.children.filter(c => (c.isMesh || c.isInstancedMesh) && !c.userData.keep && !picks.includes(c));
   function showOwn(on){ own.forEach(c => { c.visible = on; }); renderer.shadowMap.needsUpdate = true; }
   function stopTiles(why){ if (!tiles) return; console.warn("Google 3D tiles off, using the built-in map:", why);
     tiles.group.parent && tiles.group.parent.removeFromParent(); tiles.dispose(); tiles = null; tilesOn = false; tileMats.clear();
-    if (credit){ credit.remove(); credit = null; } showOwn(true); invalidate(); }
+    if (credit){ credit.remove(); credit = null; } showOwn(true); for (const k in outlines) outlines[k].ln.visible = outlines[k].mine; if (atHome) fly(homeFor(), 600); invalidate(); }
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261113e").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261113j").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261113e"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261113j"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
       e => { if (/root\.json/.test(uri)) setTimeout(() => stopTiles(e)); throw e; });
     t.registerPlugin(auth);
     const draco = new T.DRACOLoader().setDecoderPath("/vendor/draco/"), gltf = new T.GLTFLoader(t.manager); gltf.setDRACOLoader(draco);
-    t.manager.addHandler(/\.(gltf|glb)$/g, gltf);
+    t.manager.addHandler(/\.(gltf|glb)(\?.*)?$/i, gltf);   // Google tile URLs end in ?session=..., and Draco is needed for the detailed pieces
     t.setLatLonToYUp(map.data.lat0*Math.PI/180, map.data.lon0*Math.PI/180);   // tiles: X north, Y up, Z east (meters)
     const hold = new THREE.Group(); hold.rotation.y = Math.PI/2; hold.scale.setScalar(S);   // uniform, or the tiles pick the wrong detail level
     hold.position.y = 32*S*VE;   // ellipsoid -> sea level (geoid is ~32 m below the ellipsoid at West Point)
     hold.add(t.group); scene.add(hold); hold.updateMatrixWorld(true);
     t.setCamera(cam); t.setResolutionFromRenderer(cam, renderer);
-    t.addEventListener("load-model", ev => { if (!tiles) return; ev.scene.traverse(c => { if (c.material){ tileMats.add(c.material); c.material.color && c.material.color.set(dark() ? 0x7d879c : 0xffffff); } });
-      if (!tilesOn){ tilesOn = true; showOwn(false); credit = document.createElement("div"); credit.className = "tiles-credit"; stage.appendChild(credit); } invalidate(); });
-    t.addEventListener("load-tile-set", () => { t.errorTarget = 14; invalidate(); });   // sharper than Google's default (only the first root request is billed)   // keep asking for tiles while they stream in
+    t.addEventListener("load-model", ev => { if (!tiles) return; ev.scene.traverse(c => { if (c.material){ tileMats.add(c.material);  } });
+      if (!tilesOn){ tilesOn = true; showOwn(false); for (const k in outlines) outlines[k].ln.visible = false; if (atHome && !tween) fly(homeFor(), 1100); credit = document.createElement("div"); credit.className = "tiles-credit"; stage.appendChild(credit); } invalidate(); });
+    ["load-model", "load-tile-set", "tiles-load-start"].forEach(n => t.addEventListener(n, () => { tilesAct = performance.now(); }));
+    t.addEventListener("load-tile-set", () => { t.errorTarget = matchMedia("(pointer: coarse)").matches ? 12 : 8; invalidate(); });   // much sharper than Google's default; only the first (root) request of a visit is billed   // keep asking for tiles while they stream in
     t.addEventListener("tiles-load-end", () => { if (credit && tiles){ const a = [...new Set(tiles.getAttributions().filter(x => x.type === "string").flatMap(x => x.value.split(/[;,]\s*/)).filter(Boolean))]; credit.textContent = "Map data: " + (a.length ? a.join(", ") : "Google"); } invalidate(); });
     invalidate();
   }
@@ -225,7 +230,7 @@ export async function create(o){
     setActive(on){ active = on; if (on){ resize(); invalidate(); } else { skip(); if (raf){ cancelAnimationFrame(raf); raf = 0; } } },
     flyHome(instant){ atHome = true; fly(homeFor(), instant ? 0 : 520); },
     focus(id, done){ const l = o.landmarks.find(q => q.id === id); if (!l){ if (done) done(); return; } atHome = false; const p = V(l.x, l.y, (l.h || 0)/2);
-      fly({ tx: p.x, ty: p.y, tz: p.z, az: HOME.az + 0.4, pol: 1.08, dist: 17 }, 650, done); },
+      fly(tilesOn ? { tx: p.x, ty: p.y, tz: p.z, az: HOME3D.az + 0.35, pol: 1.22, dist: 9 } : { tx: p.x, ty: p.y, tz: p.z, az: HOME.az + 0.4, pol: 1.08, dist: 17 }, 650, done); },
     playIntro(done){ const to = homeFor(), p = V(650, 1250, 0); atHome = true; Object.assign(cur, { tx: p.x, ty: 0, tz: p.z, az: 0.15, pol: 1.44, dist: 200 }); fly(to, 4600, done); },
     dispose(){ dead = true; if (tiles){ tiles.dispose(); tiles = null; } if (credit) credit.remove(); if (raf) cancelAnimationFrame(raf); off.forEach(f => f()); if (ro) ro.disconnect(); disposables.forEach(d => d.dispose()); renderer.dispose(); }
   };
