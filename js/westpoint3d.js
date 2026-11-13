@@ -173,13 +173,14 @@ export async function create(o){
     if (U) g.setAttribute("uv", new THREE.Float32BufferAttribute(U, 2)); g.computeVertexNormals(); const m = new THREE.Mesh(g, mat); m.castShadow = m.receiveShadow = true; scene.add(m); return m; }
   const walls = meshOf(wp, wc, wu, wallMat), roofs = meshOf(rp, rc, null, roofMat); walls.userData.lm = wl; roofs.userData.lm = rl;
 
+  const forest = [];   // tree InstancedMeshes (built-in cones + photo-placed 3D trees), recolored by season
   /* ---------- trees on the open hillsides ---------- */
   { const grid = map.busyGrid(), spots = []; let s = 3; const rnd = () => (s = (s*9301 + 49297) % 233280)/233280;
     for (let i = 0; i < 16000 && spots.length < 3400; i++){ const x = BB.x0 + rnd()*w, y = BB.y0 + rnd()*hgt; if (map.heightAt(x, y) < 2 || grid.busy(x, y)) continue; spots.push([x, y, 0.7 + rnd()*0.7, rnd()]); }
     const inst = new THREE.InstancedMesh(keep(new THREE.ConeGeometry(5*S, 15*S, 5)), keep(new THREE.MeshStandardMaterial({ roughness: 1, flatShading: true })), spots.length), d = new THREE.Object3D(), c = new THREE.Color();
     spots.forEach((t, i) => { d.position.set(t[0]*S, gy(t[0], t[1]) + 7*S*t[2], -t[1]*S); d.scale.setScalar(t[2]); d.rotation.y = i; d.updateMatrix(); inst.setMatrixAt(i, d.matrix);
       inst.setColorAt(i, t[3] < 0.1 ? c.setRGB(0.62, 0.42, 0.16) : t[3] < 0.18 ? c.setRGB(0.66, 0.56, 0.2) : c.setRGB(0.16 + t[3]*0.1, 0.36 + t[3]*0.14, 0.17)); });
-    inst.castShadow = true; inst.receiveShadow = true; scene.add(inst); }
+    inst.castShadow = true; inst.receiveShadow = true; scene.add(inst); forest.push(inst); }
 
   /* ---------- extras: monuments, flagpole, South Dock, signposts, accent outlines ---------- */
   const accent = keep(new THREE.MeshStandardMaterial({ color: 0xe0243c, emissive: 0xe0243c, emissiveIntensity: 0.4, roughness: 0.6 })), stone = keep(new THREE.MeshStandardMaterial({ color: 0xcfcabd, roughness: 0.9 }));
@@ -188,7 +189,7 @@ export async function create(o){
   function pick(l, r, hh){ const m = add(new THREE.CylinderGeometry(r*S, r*S, hh*S, 8), stone, l.x, l.y, hh/2, false); m.visible = false; m.userData.id = l.id; picks.push(m); }
   D.nodes.forEach(n => { if (/Monument|Chain/.test(n.n)){ const big = n.n === "Battle Monument"; add(new THREE.CylinderGeometry((big ? 1.6 : 0.9)*S, (big ? 2.2 : 1.4)*S, (big ? 22 : 7)*S, 8), stone, n.p[0], n.p[1], big ? 11 : 3.5);
       if (big) add(new THREE.SphereGeometry(2*S, 10, 8), accent, n.p[0], n.p[1], 23.5); }
-    if (n.n === "Flagpole"){ add(new THREE.CylinderGeometry(0.35*S, 0.35*S, 34*S, 5), stone, n.p[0], n.p[1], 17); add(new THREE.BoxGeometry(9*S, 5*S, 0.3*S), accent, n.p[0] + 4.6, n.p[1], 31); } });
+    if (false && n.n === "Flagpole"){ add(new THREE.CylinderGeometry(0.35*S, 0.35*S, 34*S, 5), stone, n.p[0], n.p[1], 17); add(new THREE.BoxGeometry(9*S, 5*S, 0.3*S), accent, n.p[0] + 4.6, n.p[1], 31); } });
   o.landmarks.forEach(l => {
     if (l.id === "trophy") pick(l, 26, 30);
     if (l.id === "stadium") pick(l, 60, 6);
@@ -250,7 +251,7 @@ export async function create(o){
     applyCam(); if (tiles){ cam.updateMatrixWorld(); tiles.update(); } renderer.render(scene, cam); placeLabels();
     if (tiles && tiles.stats.downloading + tiles.stats.parsing > 0) tilesAct = now;
     const busy = tiles && now - tilesAct < 2500;   // the tile loader only asks for the next, sharper pieces when update() runs, so keep running until it settles
-    world.step(now); life.step(now); movers.step(now); sky.step(now);
+    world.step(now); life.step(now); movers.step(now); sky.step(now); events.step(now);
     if (tween || busy || world.live() || life.on) raf = requestAnimationFrame(frame);
   }
   function invalidate(){ if (!raf && active && !dead) raf = requestAnimationFrame(frame); }
@@ -352,15 +353,16 @@ export async function create(o){
       for (let q = 0; q < 2; q++){ const ox = q ? (t[6] - 0.5)*cr*0.9 : 0, oz = q ? (0.5 - t[6])*cr*0.7 : 0, s2 = q ? 0.72 : 1;
         d.position.set((t[0] + ox)*S, gy0 + (h - cr*(q ? 1.3 : 0.9))*S, -(t[1] + oz)*S); d.rotation.set(t[6]*3, i, 0); d.scale.set(cr*s2*S, cr*s2*1.05*S, cr*s2*S); d.updateMatrix();
         leaves.setMatrixAt(n, d.matrix); leaves.setColorAt(n, c.clone().multiplyScalar(q ? 0.92 : 1)); n++; } });
+    forest.push(leaves); if (worldReady) world.apply();
     leaves.count = n; leaves.castShadow = trunks.castShadow = true; leaves.receiveShadow = true; scene.add(leaves, trunks); treeMeshes = [leaves, trunks];
     renderer.shadowMap.needsUpdate = true; invalidate();
   }
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261114k").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261114p").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261114k"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261114p"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -470,7 +472,7 @@ export async function create(o){
         else { blk(x, y, h, 20, 8, 3.2, 0, w0, 0x9b2a24); blk(x, y, h, 7, 6, 4, 3.2, w0, 0xf0efe9, -3); blk(x, y, h, 1, 1, 3, 7.2, w0, 0x222222, -3);   // tug pushing
           for (let k = 0; k < b.barges; k++){ const f = 10 + 32 + k*62; blk(x, y, h, 60, 11, 3, 0, w0, 0x3b3a38, f); blk(x, y, h, 54, 9.5, 1.6, 3, w0, k % 2 ? 0x6b5a45 : 0x4a4f55, f); } } }
       mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
-    fetch("/campus/movers.json?v=20261114k").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
+    fetch("/campus/movers.json?v=20261114p").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
     return { step };
   })();
 
@@ -519,15 +521,103 @@ export async function create(o){
     return { step };
   })();
 
+  /* ---------- campus events on the real clock (America/New_York), and on demand from the panel:
+     flag up at reveille (06:30) and down at retreat (17:00) with the cannon at Trophy Point; company formations on the Plain (weekday
+     mornings, Saturday parades in season, with the band); PT runs in formation at dawn; Army home football from /data/daily.json
+     (crowds at Michie, tailgates in the lots, a jet flyover before kickoff); baseball at Doubleday Field; soccer on Daly Field;
+     visitors and tour buses at Trophy Point and the Thayer Hotel. ---------- */
+  const events = (() => {
+    const MAX = 2600, box = new THREE.BoxGeometry(1, 1, 1);
+    const mesh = new THREE.InstancedMesh(keep(box), keep(new THREE.MeshStandardMaterial({ roughness: 0.75 })), MAX); mesh.castShadow = true; mesh.frustumCulled = false; mesh.userData.keep = true;
+    { const w = new THREE.Color(1, 1, 1); for (let i = 0; i < MAX; i++) mesh.setColorAt(i, w); } mesh.count = 0; scene.add(mesh);
+    const smokeMat = keep(new THREE.MeshStandardMaterial({ color: 0xe8e8e8, transparent: true, opacity: 0.6, roughness: 1 })), smoke = new THREE.Mesh(keep(new THREE.SphereGeometry(1, 12, 10)), smokeMat); smoke.visible = false; smoke.userData.keep = true; scene.add(smoke);
+    const o = new THREE.Object3D(), col = new THREE.Color(); let n = 0, last = 0, clock = 0;
+    function blk(x, y, wy, h, len, wid, hei, c, fx, fy, fz){ if (n >= MAX) return; const ch = Math.cos(h), sh = Math.sin(h), px = x + ch*(fx || 0) - sh*(fy || 0), py = y + sh*(fx || 0) + ch*(fy || 0);
+      o.position.set(px*S, wy + ((fz || 0) + hei/2)*S, -py*S); o.rotation.set(0, h, 0); o.scale.set(len*S, hei*S, wid*S); o.updateMatrix(); mesh.setMatrixAt(n, o.matrix); mesh.setColorAt(n, col.set(c)); n++; }
+    const person = (x, y, h, c, bob, legs) => { const g = gy(x, y) + (bob || 0)*S; blk(x, y, g, h, 0.22, 0.42, 0.85, legs || 0x22252a); blk(x, y, g, h, 0.28, 0.48, 0.65, c, 0, 0, 0.85); blk(x, y, g, h, 0.22, 0.22, 0.24, 0xd9b38c, 0, 0, 1.5); };
+    // real New York time
+    const nyNow = () => { const p = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", hour12: false, weekday: "short", hour: "2-digit", minute: "2-digit", month: "numeric", day: "numeric", year: "numeric" }).formatToParts(new Date());
+      const g = t => (p.find(q => q.type === t) || {}).value; return { h: +g("hour") % 24 + +g("minute")/60, wd: g("weekday"), mo: +g("month"), d: +g("day"), y: +g("year") }; };
+    let manual = null, manualT = 0;   // an event started from the panel runs for a few minutes
+    let homeGame = null;
+    fetch("/data/daily.json", { cache: "no-store" }).then(r => r.json()).then(j => { const t = nyNow(); (((j.football || {}).upcoming) || []).forEach(g => { if (!g.army || !/home|michie/i.test((g.note || "") + g.home)) return;
+      const k = new Date(g.kick), kd = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", month: "numeric", day: "numeric" }).format(k);
+      if (kd === t.mo + "/" + t.d) homeGame = { kick: k, vs: g.away }; }); }).catch(() => {});
+    const FLAG = [150, 926], CANNON = [262, 1004], PLAIN = [190, 800], MICHIE = [-356, 185], DOUBLEDAY = [437, 730], DALY = [366, 922], TROPHY = [234, 1015], HOTEL = [-103, -955];
+    const LOTS = [[-510, 287], [-578, 319], [-639, 221], [-795, 297], [-564, 532]], rnd = Math.random;
+    // fixed random layouts (made once so people don't jump around)
+    const R = k => Array.from({ length: k }, () => [rnd(), rnd(), rnd()]);
+    const crowd = R(380), tail = R(90), fans = R(40), visitors = R(46), soccer = R(22), ptCols = R(4);
+    let flagH = -1, smokeT = -1, lastFire = -1, jets = -1;
+    function active(t){ const wk = !/Sat|Sun/.test(t.wd), parSeason = [4, 5, 8, 9, 10].includes(t.mo);
+      const m = manual && clock - manualT < 240 ? manual : null;
+      return { form: m === "parade" || (wk && t.h > 6.75 && t.h < 7.25) || (t.wd === "Sat" && parSeason && t.h > 10 && t.h < 11.5), band: m === "parade" || (t.wd === "Sat" && parSeason && t.h > 10 && t.h < 11.5),
+        pt: m === "pt" || (wk && t.h > 5.75 && t.h < 6.9), game: m === "game" || (homeGame && Math.abs(Date.now() - homeGame.kick)/36e5 < 4),
+        baseball: m === "ball" || ([3, 4, 5].includes(t.mo) && t.h > 13 && t.h < 17), soccer: m === "ball" || ([8, 9, 10, 11].includes(t.mo) && t.h > 15 && t.h < 18.5),
+        visitors: t.h > 9 && t.h < 17.5, retreat: m === "retreat" }; }
+    function step(now){ const dt = Math.min(0.1, (now - (last || now))/1000); last = now; clock += dt; n = 0; const t = nyNow(), A = active(t), T = clock;
+      // flag: up 06:30-17:00, eased over a minute; "Retreat" from the panel lowers it now; cannon smoke at reveille and retreat
+      const up = A.retreat ? 0 : t.h >= 6.5 && t.h < 17 ? 1 : 0; flagH = flagH < 0 ? up : flagH + Math.sign(up - flagH)*Math.min(Math.abs(up - flagH), dt/60*(A.retreat ? 4 : 1));
+      const fg = gy(FLAG[0], FLAG[1]); blk(FLAG[0], FLAG[1], fg, 0, 0.45, 0.45, 32, 0xdddddd); blk(FLAG[0], FLAG[1], fg, 0, 0.9, 0.9, 0.7, 0xc9a54a, 0, 0, 32);
+      const wave = Math.sin(T*3)*0.12; blk(FLAG[0], FLAG[1], fg, 0.3 + wave, 7, 0.12, 4.2, 0xb22234, 3.6, 0, 3 + flagH*24.5); blk(FLAG[0], FLAG[1], fg, 0.3 + wave, 2.8, 0.13, 2.2, 0x3c3b6e, 1.5, 0, 5 + flagH*24.5);
+      const fire = (Math.abs(t.h - 6.5) < 0.004 || Math.abs(t.h - 17) < 0.004 || (A.retreat && clock - manualT < 0.5)); if (fire && clock - lastFire > 60){ lastFire = clock; smokeT = 0; }
+      const cg = gy(CANNON[0], CANNON[1]); blk(CANNON[0], CANNON[1], cg, 0.6, 3, 0.6, 0.6, 0x2b2b2b, 0, 0, 0.9); blk(CANNON[0], CANNON[1], cg, 0.6, 1.4, 1.5, 1.2, 0x5a4a35);
+      if (smokeT >= 0){ smokeT += dt; const k = smokeT/14; smoke.visible = k < 1; smoke.position.set((CANNON[0] + 6 + k*20)*S, cg + (2 + k*14)*S, -(CANNON[1] + k*6)*S); smoke.scale.setScalar((2 + k*16)*S); smokeMat.opacity = 0.7*(1 - k); if (k >= 1) smokeT = -1; }
+      // company formations marching across the Plain, band in front on parade days
+      if (A.form){ for (let c = 0; c < 6; c++){ const lane = -150 + c*58, prog = ((T*1.1 + c*35) % 300) - 150;
+          for (let r = 0; r < 9; r++) for (let f = 0; f < 4; f++){ const x = PLAIN[0] + prog - r*1.6, y = PLAIN[1] + lane*0.6 + f*1.4 + (c % 2 ? 40 : -40); person(x, y, 0, 0x50565f, Math.abs(Math.sin(T*6 + r))*0.06, 0xdcdcd6); } }
+        if (A.band) for (let r = 0; r < 6; r++) for (let f = 0; f < 6; f++){ const x = PLAIN[0] - 20 + ((T*1.1) % 300) - 150 - r*1.6, y = PLAIN[1] - 110 + f*1.5; person(x, y, 0, 0x1a1f2e, 0, 0x1a1f2e); if (f % 2 === 0) blk(x, y, gy(x, y), 0, 0.4, 0.4, 0.3, 0xd4af37, 0, 0, 1.75); } }
+      // PT: columns of runners in formation looping the Plain road
+      if (A.pt) ptCols.forEach((q, c) => { const a = T*0.035 + c*1.6; for (let r = 0; r < 12; r++) for (let f = 0; f < 3; f++){ const aa = a - r*0.006, x = PLAIN[0] + Math.cos(aa)*(150 + f*1.5), y = PLAIN[1] + Math.sin(aa)*(95 + f*1.5); person(x, y, aa + Math.PI/2, f === 0 && r === 0 ? 0xf1c232 : 0x9aa0a6, Math.abs(Math.sin(T*9 + r))*0.15, 0x111111); } });
+      // Army home football: crowd around Michie, tailgates in the lots, jet flyover 10 minutes before kick (or right away from the panel)
+      if (A.game){ crowd.forEach((q, i) => { const a = q[0]*6.28, r = 85 + q[1]*55; person(MICHIE[0] + Math.cos(a)*r, MICHIE[1] + Math.sin(a)*r*0.8, a, [0x111111, 0xd4af37, 0x1d1d1d, 0x6b6b6b][i % 4], Math.abs(Math.sin(T*2 + i))*0.05); });
+        tail.forEach((q, i) => { const L = LOTS[i % LOTS.length], x = L[0] + (q[0] - 0.5)*60, y = L[1] + (q[1] - 0.5)*40, g = gy(x, y); blk(x, y, g, q[2]*0.4, 4.6, 1.9, 1.5, [0xeeeeee, 0x222222, 0x8a1c1c, 0x2a4b7c][i % 4]);
+          if (i % 3 === 0){ blk(x, y, g, 0, 3, 3, 0.08, 0xd4af37, 4, 0, 2.6); blk(x, y, g, 0, 0.1, 0.1, 2.6, 0x555555, 4, 0, 0); person(x + 3, y + 2, i, 0x111111); person(x + 5, y - 1, i + 1, 0xd4af37); } });
+        if (jets < 0 && (manual === "game" || (homeGame && homeGame.kick - Date.now() < 6e5 && homeGame.kick - Date.now() > 0))) jets = 0; }
+      if (jets >= 0){ jets += dt; const k = jets/22; if (k > 1) jets = -1; else for (let j = 0; j < 4; j++){ const x = 800 - k*2000 + j*-14, y = MICHIE[1] + 200 - k*300 + (j % 2 ? 12 : -12)*(j > 1 ? 2 : 1), g = 280*S + gy(MICHIE[0], MICHIE[1]); blk(x, y, g, Math.atan2(-300, -2000), 16, 2, 2, 0x5d6168); blk(x, y, g, Math.atan2(-300, -2000), 5, 11, 0.4, 0x5d6168, -2); } }
+      // baseball at Doubleday: 9 fielders, a batter, catcher, umpire, fans on the side
+      if (A.baseball){ const B = DOUBLEDAY, pos = [[0, 0], [-18, 18], [18, 18], [0, 30], [-26, 30], [26, 30], [-45, 60], [0, 75], [45, 60]];
+        pos.forEach((q, i) => person(B[0] + q[0], B[1] - 35 + q[1], -Math.PI/2, 0xd8d8d8, i === 0 ? Math.abs(Math.sin(T*1.5))*0.2 : 0, 0x222222));
+        person(B[0], B[1] - 45, Math.PI/2, 0x1a1a1a, 0, 0xd4af37); person(B[0], B[1] - 47, Math.PI/2, 0x555555); person(B[0], B[1] - 49, Math.PI/2, 0x111111);
+        const ph = (T % 6)/6; if (ph < 0.5){ const k = ph*2; blk(B[0], B[1] - 35 - k*10, gy(B[0], B[1]) + (1.5 + Math.sin(k*3.14)*2)*S, 0, 0.3, 0.3, 0.3, 0xffffff); }
+        fans.forEach((q, i) => person(B[0] - 70 + q[0]*30, B[1] - 60 + q[1]*40, 0, [0x111111, 0xd4af37, 0x777777][i % 3])); }
+      // soccer on Daly Field: two teams chasing the ball
+      if (A.soccer){ const bx = DALY[0] + Math.sin(T*0.37)*18, by = DALY[1] + Math.sin(T*0.23)*40;
+        soccer.forEach((q, i) => { const tx = bx + (q[0] - 0.5)*30, ty = by + (q[1] - 0.5)*55 + Math.sin(T*0.8 + i)*4; person(tx, ty, Math.atan2(by - ty, bx - tx), i < 11 ? 0x111111 : 0xf2f2f2, Math.abs(Math.sin(T*8 + i))*0.12, i < 11 ? 0xd4af37 : 0x1d3f6e); });
+        blk(bx, by, gy(bx, by), 0, 0.35, 0.35, 0.35, 0xffffff); }
+      // visitors with cameras at Trophy Point and outside the Thayer Hotel, two tour buses
+      if (A.visitors){ visitors.forEach((q, i) => { const P = i < 32 ? TROPHY : HOTEL, x = P[0] + (q[0] - 0.5)*70 + Math.sin(T*0.05 + i)*3, y = P[1] + (q[1] - 0.5)*50; person(x, y, q[2]*6, [0x2f6db5, 0xc0392b, 0xf1c40f, 0x27ae60, 0xffffff, 0x8e44ad][i % 6]); });
+        [[305, 1065, 0.3], [-60, -910, 1.9]].forEach(([x, y, h]) => { const g = gy(x, y); blk(x, y, g, h, 12.5, 2.6, 3.4, 0xf4f4f4, 0, 0, 0.4); blk(x, y, g, h, 12.6, 2.65, 0.9, 0x1d3f6e, 0, 0, 1.6); }); }
+      mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
+    return { step, start(k){ manual = k; manualT = clock; if (k === "retreat"){ smokeT = 0; lastFire = clock; } } };
+  })();
+
   let worldReady = false;
   const world = (() => {
-    let tintNow = 0xffffff; const st = { wx: "live", tod: "live", liveWx: "clear", liveTod: "day" }, N = 6000, pos = new Float32Array(N*6), vel = new Float32Array(N);
+    let tintNow = 0xffffff; const st = { season: "live", wx: "live", tod: "live", liveWx: "clear", liveTod: "day" }, N = 6000, pos = new Float32Array(N*6), vel = new Float32Array(N);
     const g = keep(new THREE.BufferGeometry()); g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
     const rainMat = keep(new THREE.LineBasicMaterial({ color: 0xaab8c8, transparent: true, opacity: 0.55 })), snowMat = keep(new THREE.PointsMaterial({ color: 0xffffff, size: 2.4, sizeAttenuation: false, transparent: true, opacity: 0.9 }));
     const rain = new THREE.LineSegments(g, rainMat), snow = new THREE.Points(g, snowMat); rain.frustumCulled = snow.frustumCulled = false; rain.visible = snow.visible = false; rain.userData.keep = snow.userData.keep = true; scene.add(rain, snow);
     let kind = "clear", last = 0, box = 40; const rnd = Math.random;
     function seed(){ box = Math.max(12, cur.dist*0.9); for (let i = 0; i < N; i++){ const x = cur.tx + (rnd() - 0.5)*box*2, y = cur.ty + rnd()*box*0.9, z = cur.tz + (rnd() - 0.5)*box*2; pos.set([x, y, z, x, y - 0.012*box, z], i*6); vel[i] = 0.6 + rnd()*0.5; } g.attributes.position.needsUpdate = true; }
     const wxNow = () => st.wx === "live" ? st.liveWx : st.wx, todNow = () => st.tod === "live" ? st.liveTod : st.tod;
+    const seasonNow = () => { if (st.season !== "live") return st.season; const m = new Date().getMonth() + 1; return m === 12 || m <= 2 ? "winter" : m <= 5 ? "spring" : m <= 8 ? "summer" : m <= 11 ? "fall" : "winter"; };
+    // street lamps along the campus roads: warm glows that switch on at sunset and night
+    const lampPts = []; D.roads.filter(r => r.c <= 2).forEach(r => { const P = map.pts(r.p); let acc = 0;
+      for (let i = 1; i < P.length; i++){ const a = P[i - 1], b = P[i], L = Math.hypot(b[0] - a[0], b[1] - a[1]); for (let d = (40 - acc % 40); d < L; d += 40){ const x = a[0] + (b[0] - a[0])*d/L, y = a[1] + (b[1] - a[1])*d/L;
+        if (Math.hypot(x - 200, y - 600) < 1100) lampPts.push(x*S, gy(x, y) + 6*S, -y*S); } acc += L; } });
+    const glowTex = (() => { const c = document.createElement("canvas"); c.width = c.height = 64; const g = c.getContext("2d"), r = g.createRadialGradient(32, 32, 0, 32, 32, 32); r.addColorStop(0, "rgba(255,230,170,1)"); r.addColorStop(0.25, "rgba(255,200,120,.65)"); r.addColorStop(1, "rgba(255,180,90,0)"); g.fillStyle = r; g.fillRect(0, 0, 64, 64); return keep(new THREE.CanvasTexture(c)); })();
+    const lg = keep(new THREE.BufferGeometry()); lg.setAttribute("position", new THREE.Float32BufferAttribute(lampPts, 3));
+    const lamps = new THREE.Points(lg, keep(new THREE.PointsMaterial({ map: glowTex, size: 11, sizeAttenuation: false, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending })));
+    lamps.visible = false; lamps.userData.keep = true; scene.add(lamps);
+    // seasons: fall reds/oranges/golds, bare winter branches (evergreens stay), fresh spring green, full summer green
+    const base = new Map(), cc = new THREE.Color(), FALL = [0xc8551e, 0xb5321e, 0xd99a22, 0xe0b23a, 0x8a3a1c];
+    function applySeason(){ const se = seasonNow(); forest.forEach(m => { if (!m.instanceColor) return; if (!base.has(m)) base.set(m, m.instanceColor.array.slice()); const b = base.get(m), a = m.instanceColor.array;
+      for (let i = 0; i < m.count; i++){ const k = i*3, h = (i*2654435761 >>> 0) % 100; cc.setRGB(b[k], b[k + 1], b[k + 2]);
+        if (se === "fall" && h < 78) cc.lerp(new THREE.Color(FALL[h % FALL.length]), 0.75);
+        else if (se === "winter" && h < 70) cc.setRGB(0.36, 0.31, 0.27);
+        else if (se === "spring") cc.lerp(new THREE.Color(0x8fcf5a), 0.35);
+        a[k] = cc.r; a[k + 1] = cc.g; a[k + 2] = cc.b; } m.instanceColor.needsUpdate = true; }); }
     function apply(){
       kind = wxNow(); const tod = todNow(), night = tod === "night", dusk = tod === "sunset";
       rain.visible = kind === "rain"; snow.visible = kind === "snow"; if (rain.visible || snow.visible) seed();
@@ -537,8 +627,8 @@ export async function create(o){
       const tint = night ? 0x3d4659 : dusk ? 0xffd2b0 : kind === "rain" ? 0xb4b8bd : kind === "snow" ? 0xe9edf2 : kind === "fog" ? 0xd0d3d6 : 0xffffff;
       tintNow = tint; tileMats.forEach(m => m.color && m.color.set(tint));
       hemi.intensity = night ? 0.45 : kind === "clear" ? 1.5 : 1.15; sun.intensity = night ? 0.25 : kind === "clear" ? (dusk ? 1.6 : 2.5) : 0.9; sun.color.set(dusk ? 0xffb37a : night ? 0x9fb4ff : 0xfff3df);
-      wallMat.emissiveIntensity = night ? 0.9 : 0; renderer.shadowMap.needsUpdate = true;
-      panel.querySelectorAll("button").forEach(b => b.classList.toggle("on", st[b.dataset.k] === b.dataset.v)); invalidate();
+      wallMat.emissiveIntensity = night ? 0.9 : 0; lamps.visible = night || dusk; applySeason(); renderer.shadowMap.needsUpdate = true;
+      panel.querySelectorAll("button[data-k]").forEach(b => b.classList.toggle("on", st[b.dataset.k] === b.dataset.v)); invalidate();
     }
     function step(now){ if (!rain.visible && !snow.visible){ last = now; return false; }
       const dt = Math.min(0.05, (now - (last || now))/1000); last = now; const fall = (kind === "rain" ? 2.2 : 0.18)*box*dt, bot = cur.ty - box*0.1;
@@ -549,8 +639,10 @@ export async function create(o){
       g.attributes.position.needsUpdate = true; return true; }
     const panel = document.createElement("div"); panel.className = "wx-panel";
     panel.innerHTML = '<span class="wx-h">Weather</span>' + [["live", "Live"], ["clear", "Sun"], ["rain", "Rain"], ["snow", "Snow"], ["fog", "Fog"]].map(([v, t]) => '<button type="button" data-k="wx" data-v="' + v + '">' + t + '</button>').join("") +
-      '<span class="wx-h">Time</span>' + [["live", "Live"], ["day", "Day"], ["sunset", "Sunset"], ["night", "Night"]].map(([v, t]) => '<button type="button" data-k="tod" data-v="' + v + '">' + t + '</button>').join("");
-    panel.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; st[b.dataset.k] = b.dataset.v; apply(); });
+      '<span class="wx-h">Time</span>' + [["live", "Live"], ["day", "Day"], ["sunset", "Sunset"], ["night", "Night"]].map(([v, t]) => '<button type="button" data-k="tod" data-v="' + v + '">' + t + '</button>').join("") +
+      '<span class="wx-h">Season</span>' + [["live", "Live"], ["spring", "Spring"], ["summer", "Summer"], ["fall", "Fall"], ["winter", "Winter"]].map(([v, t]) => '<button type="button" data-k="season" data-v="' + v + '">' + t + '</button>').join("") +
+      '<span class="wx-h">Start an event</span>' + [["parade", "Parade"], ["retreat", "Retreat"], ["pt", "PT run"], ["game", "Game day"], ["ball", "Ball games"]].map(([v, t]) => '<button type="button" data-ev="' + v + '">' + t + '</button>').join("");
+    panel.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; if (b.dataset.ev){ events.start(b.dataset.ev); return; } st[b.dataset.k] = b.dataset.v; apply(); });
     stage.appendChild(panel);
     // live: real weather + daylight at West Point right now (falls back to clear/day if offline)
     fetch("https://api.open-meteo.com/v1/forecast?latitude=41.39&longitude=-73.96&current=weather_code,is_day&timezone=America%2FNew_York").then(r => r.json()).then(j => {

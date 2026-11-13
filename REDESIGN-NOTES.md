@@ -178,3 +178,11 @@ Merges: Braeden wants tested PRs merged automatically, no confirmation.
   mouse (`zoomAt()`), right-drag / Shift-drag turns and tilts, arrow keys / WASD move. Help text updated in shell.js.
 - Trains/ships not started: Overpass was overloaded. Railway (CSX River Line, runs in a tunnel under the Plain) must come from OSM
   `railway=rail` (keep `tunnel=yes` segments hidden).
+
+## Live world status (Nov 13, late)
+- DONE + live: phone 3D (pinch/twist/tilt), small phone labels, people/cars/runners, trains (OSM tracks, `campus/movers.json`), boats,
+  birds/hawks/geese/deer, Black Hawk + parachutists (`?heli=1` forces one), events (`events` block: flag + cannon on the real clock,
+  formations/parade + band, PT runs, Army home game from data/daily.json with crowds/tailgates/jets, baseball at Doubleday, soccer on Daly,
+  visitors + tour buses), seasons (Live/Spring/Summer/Fall/Winter recolor trees) and street lamps at sunset/night.
+- Panel rows: Weather, Time, Season, Start an event (Parade, Retreat, PT run, Game day, Ball games; each runs ~4 minutes).
+- Next: Phase 5 realism (walk animation, uniforms, car variety, traffic stops), Phase 6 landmark rebuilds (Pershing first), Phase 7 play modes.
