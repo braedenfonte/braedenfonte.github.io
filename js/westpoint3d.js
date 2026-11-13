@@ -138,7 +138,7 @@ export async function create(o){
         if (ox > 0 && oy > 0){ moved = true; if (ox < oy){ const m = ox/2*(dx < 0 ? -1 : 1); p.sx -= m; q.sx += m; } else { const m = oy/2*(dy < 0 ? -1 : 1); p.sy -= m; q.sy += m; } } }
       L.forEach(clamp); if (!moved) break; }
     L.forEach(q => o.place(q.l.id, q.sx, q.sy, true, Math.abs(q.sx - q.x) > 90 || Math.abs(q.sy - q.y) > 90));
-    o.minor.forEach((m, i) => { v.copy(V(m.x, m.y, m.h + 5)).project(cam); const x = (v.x*0.5 + 0.5)*vw, y = (-v.y*0.5 + 0.5)*vh; o.placeMinor(i, x, y, cur.dist < 105 && v.z < 1 && x > 30 && x < vw - 30 && y > 60 && y < vh - 10); });
+    o.minor.forEach((m, i) => { v.copy(V(m.x, m.y, m.h + 5)).project(cam); const x = (v.x*0.5 + 0.5)*vw, y = (-v.y*0.5 + 0.5)*vh; o.placeMinor(i, x, y, cur.dist < 34 && v.z < 1 && x > 30 && x < vw - 30 && y > 60 && y < vh - 10); });
   }
 
   /* ---------- draw only when needed ---------- */
@@ -175,7 +175,7 @@ export async function create(o){
     L(canvas, "pointerup", ev => { const d = drag; drag = null; if (d && d.moved <= 5 && !tween){ const id = pickAt(ev); if (id) o.onOpen(id); } }),
     L(canvas, "pointercancel", () => { drag = null; }),
     L(canvas, "pointerleave", () => { if (hot){ highlight(null); o.onHover(null); } }),
-    L(canvas, "wheel", ev => { if (!ev.ctrlKey || tween) return; ev.preventDefault(); zoom(1 + ev.deltaY*0.01); }, { passive: false }),
+    L(canvas, "wheel", ev => { if (tween) return; ev.preventDefault(); zoom(1 + Math.max(-0.3, Math.min(0.3, ev.deltaY*0.0015))); }, { passive: false }),   // scroll to zoom
     L(document, "visibilitychange", () => { if (!document.hidden) invalidate(); })
   ];
   function zoom(f){ cur.dist = Math.min(230, Math.max(9, cur.dist*f)); atHome = false; invalidate(); }
