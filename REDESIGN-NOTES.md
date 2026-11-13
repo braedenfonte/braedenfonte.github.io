@@ -126,6 +126,7 @@ Each test reload costs 1 of the 30 daily Google loads.
   campus (480 m on phones). Skips buildings, roads, fields, lawns. About 5,000 trees.
 - Reference: no free-to-use photos were found by search; style taken from documented descriptions (Military Gothic Revival, gray granite,
   Pershing 1891-95 by Richard Morris Hunt, Thayer Hall = former Riding Hall, Bartlett Hall ~1911-14).
+- Thayer Hall footbridge (OSM footway layer 2, 398,498 -> 362,499) is now a 3D granite bridge with battlemented parapets on 2 piers.
 - Next: real heights per building, Thayer Hall's river-side towers, Pershing's front towers/sally port, Cadet Chapel, Washington Hall wings,
-  the Thayer Hall footbridge between Taylor and Bartlett (needs to be a real 3D bridge),
+  
   exact building shapes (Braeden: current Gothic is closer but details still wrong; overlay still looks sloppy in places).

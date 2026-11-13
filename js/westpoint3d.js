@@ -102,6 +102,14 @@ export async function create(o){
         box(c[0] + ux*t + ox, c[1] + uy*t + oy, ux, uy, 1.3, 0.9, T.lo, T.top + 0.4*S, dark2, lm); } }
   });
   curB = -1;
+  // The Thayer Hall footbridge (OSM: footway, bridge, layer 2) from Thayer Hall west to the Taylor / Bartlett level: a granite deck with
+  // battlemented parapets on two stone piers, at the height of the upper (Plain-side) end.
+  { const A = [398, 498], B2 = [362, 499], L = Math.hypot(B2[0] - A[0], B2[1] - A[1]), ux = (B2[0] - A[0])/L, uy = (B2[1] - A[1])/L, mx = (A[0] + B2[0])/2, my = (A[1] + B2[1])/2;
+    const top = Math.max(gy(A[0], A[1]), gy(B2[0], B2[1])) + 0.6*S, g = [0.64, 0.63, 0.6], g2 = [0.56, 0.55, 0.53];
+    box(mx, my, ux, uy, L + 2, 4.2, top - 1.1*S, top, g, -1);   // deck
+    for (const sd of [-1, 1]){ const ox = -uy*sd*1.9, oy = ux*sd*1.9; box(mx + ox, my + oy, ux, uy, L + 2, 0.5, top, top + 1.1*S, g, -1);   // parapets
+      for (let t = -L/2 + 1.5; t < L/2; t += 2.6) box(mx + ox + ux*t, my + oy + uy*t, ux, uy, 1.2, 0.55, top + 1.1*S, top + 1.7*S, g, -1); }
+    for (const f of [-0.17, 0.17]){ const px = mx + ux*L*f, py = my + uy*L*f; box(px, py, ux, uy, 2.2, 4.6, gy(px, py) - 1*S, top - 1.1*S, g2, -1); } }
 
   // Michie Stadium: a bowl of stands around the field
   const stad = D.areas.find(a => a.k === "stadium"), stadLm = o.landmarks.findIndex(l => l.id === "stadium");
@@ -282,9 +290,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261113u").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261113v").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261113u"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261113v"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
