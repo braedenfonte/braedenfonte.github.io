@@ -16,7 +16,8 @@ Written Nov 12, 2026 so a new Claude session can pick up the site redesign witho
 1. Locked tabs stay locked: brief, schedule, about, resume, courses, study, finance, memory, personal.
    Do not change the unlock/encryption code in `js/app.js`, the keys, or any `.enc` format. Never ask for or store the password.
 2. Do not change any file path, name or JSON format in `data/`, `tools/`, `routines/` (daily routines write them).
-3. Keep the Contact disclaimer. Static site only, no build step, no paid services or API keys.
+3. Keep the Contact disclaimer. Static site only, no build step. No paid services or API keys, EXCEPT the one Braeden
+   approved on Nov 13, 2026: Google Map Tiles API for the photorealistic home map (see "Update Nov 13 (later)" below).
 4. PWA setup (manifest, icons, status bar) must keep working. Keep low-power 2D mode working for every section.
 5. Crimson accent stays. Jarvis stays removed. Braeden wants short, plain-language replies.
 
@@ -67,3 +68,16 @@ Written Nov 12, 2026 so a new Claude session can pick up the site redesign witho
   and `?v=` version tags on css/js links. **Bump the `?v=` number in index.html, shell.js and campusmap.js whenever those files change.**
 - Still open: soccer stadium -> Braeden's soccer schedule, statues (need coordinates), names for buildings OSM does not name
   (honor building, BS&L building, soccer locker room: ask Braeden which footprints), and the detailed real-look buildings (#8).
+
+## Update Nov 13, 2026 (later): Google Photorealistic 3D Tiles on the home map
+- Braeden chose Google's real 3D city tiles over hand-modeling. Google Cloud project **braedenfonte-map** (separate from ShortSmith),
+  billed to "My Billing Account". Key: `js/mapkey.js` (public by design). Locked to `https://braedenfonte.com/*` and to Map Tiles API only.
+  Daily cap: **30** "3D Tiles root requests" (1 per page load with the 3D map) = max ~930/month, under the 1,000 free. Over that it is $6 per 1,000.
+- To raise/lower the cap: Cloud console > IAM & Admin > Quotas, filter `tile.googleapis.com`, "3D Tiles root requests per day".
+- Code: `startTiles()` at the bottom of `js/westpoint3d.js`, renderer bundled in `vendor/tiles3d.module.min.js` (3d-tiles-renderer 0.3.39
+  built against three r160, `three` left external) plus `vendor/draco/`. The old model is still built: hidden while tiles show, but still
+  used for hover names and clicks. It comes back automatically when there is no key, data-saver is on, the site is not braedenfonte.com/localhost,
+  or Google refuses a request (quota hit = HTTP 429/403). Low-power mode never loads tiles. A "Map data: Google" credit is required, keep it.
+- Testing locally costs 1 load per page reload and only works if `http://localhost:8765/*` is temporarily added to the key's website list
+  (it was removed after testing on Nov 13).
+- Still open: the low-power 2D map and the no-tiles 3D fallback still cut the Hudson off at the east edge (no Garrison shore).

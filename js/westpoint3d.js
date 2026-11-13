@@ -102,7 +102,7 @@ export async function create(o){
     if (l.id === "trophy") pick(l, 26, 30);
     if (l.id === "stadium") pick(l, 60, 6);
     if (l.id === "dock"){ add(new THREE.BoxGeometry(80*S, 2.5*S, 10*S), stone, l.x + 45, l.y, 1.2); add(new THREE.BoxGeometry(14*S, 5*S, 5*S), accent, l.x + 70, l.y, 3.5); pick(l, 45, 14); }
-    if (l.sign){ add(new THREE.CylinderGeometry(0.7*S, 0.7*S, 16*S, 6), stone, l.x, l.y, 8); add(new THREE.BoxGeometry(2*S, 9*S, 26*S), accent, l.x, l.y, 16); pick(l, 22, 24); }
+    if (l.sign){ add(new THREE.CylinderGeometry(0.7*S, 0.7*S, 16*S, 6), stone, l.x, l.y, 8).userData.keep = true; add(new THREE.BoxGeometry(2*S, 9*S, 26*S), accent, l.x, l.y, 16).userData.keep = true; pick(l, 22, 24); }
   });
   const lineBase = keep(new THREE.LineBasicMaterial({ color: 0xe0243c })), outlines = {};
   o.landmarks.forEach((l, i) => { const t = l.bi != null && tops[l.bi]; if (!t) return; const pts = [], n = t.P.length;
@@ -115,6 +115,7 @@ export async function create(o){
     wallMat.emissiveIntensity = dk ? 0.9 : 0; wallMat.color.set(dk ? 0xb4bccb : 0xffffff); roofMat.color.set(dk ? 0xa9b2c4 : 0xffffff);
     hemi.color.set(dk ? 0x8ea6d6 : 0xffffff); hemi.groundColor.set(dk ? 0x0a0d14 : 0x6f7a66); hemi.intensity = dk ? 1.25 : 1.5;
     sun.color.set(dk ? 0xb9c8ff : 0xfff3df); sun.intensity = dk ? 1.7 : 2.5;
+    tileMats.forEach(m => m.color.set(dk ? 0x7d879c : 0xffffff));
     renderer.shadowMap.needsUpdate = true; invalidate();
   }
 
@@ -154,7 +155,7 @@ export async function create(o){
       if (o.watch && !watched && tween.frames > 34){ watched = true; if (tween.slowMs/(tween.frames - 5) > 45){ if (tween.done) tween.done(); tween = null; o.onSlow(); return; } }
       if (k >= 1){ const d = tween.done; tween = null; if (d) d(); } }
     lastT = tween ? now : 0;
-    applyCam(); renderer.render(scene, cam); placeLabels();
+    applyCam(); if (tiles){ cam.updateMatrixWorld(); tiles.update(); } renderer.render(scene, cam); placeLabels();
     if (tween) raf = requestAnimationFrame(frame);
   }
   function invalidate(){ if (!raf && active && !dead) raf = requestAnimationFrame(frame); }
@@ -184,7 +185,41 @@ export async function create(o){
   ];
   function zoom(f){ cur.dist = Math.min(230, Math.max(9, cur.dist*f)); atHome = false; invalidate(); }
 
+  /* ---------- Google Photorealistic 3D Tiles: the real look. The model above stays underneath as the fallback
+     (no key, low-power/data-saver, quota used up, or any load error) and stays invisible-but-pickable for hovers. ---------- */
+  let tiles = null, tilesOn = false, credit = null; const tileMats = new Set();
+  const own = scene.children.filter(c => (c.isMesh || c.isInstancedMesh) && !c.userData.keep && !picks.includes(c));
+  function showOwn(on){ own.forEach(c => { c.visible = on; }); renderer.shadowMap.needsUpdate = true; }
+  function stopTiles(why){ if (!tiles) return; console.warn("Google 3D tiles off, using the built-in map:", why);
+    tiles.group.parent && tiles.group.parent.removeFromParent(); tiles.dispose(); tiles = null; tilesOn = false; tileMats.clear();
+    if (credit){ credit.remove(); credit = null; } showOwn(true); invalidate(); }
+  async function startTiles(){
+    const nc = navigator.connection; if (nc && nc.saveData) return;
+    if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
+    const key = await import("/js/mapkey.js?v=20261113e").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    if (!key || dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261113e"); if (dead) return;
+    const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
+    const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
+    auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
+      e => { if (/root\.json/.test(uri)) setTimeout(() => stopTiles(e)); throw e; });
+    t.registerPlugin(auth);
+    const draco = new T.DRACOLoader().setDecoderPath("/vendor/draco/"), gltf = new T.GLTFLoader(t.manager); gltf.setDRACOLoader(draco);
+    t.manager.addHandler(/\.(gltf|glb)$/g, gltf);
+    t.setLatLonToYUp(map.data.lat0*Math.PI/180, map.data.lon0*Math.PI/180);   // tiles: X north, Y up, Z east (meters)
+    const hold = new THREE.Group(); hold.rotation.y = Math.PI/2; hold.scale.setScalar(S);   // uniform, or the tiles pick the wrong detail level
+    hold.position.y = 32*S*VE;   // ellipsoid -> sea level (geoid is ~32 m below the ellipsoid at West Point)
+    hold.add(t.group); scene.add(hold); hold.updateMatrixWorld(true);
+    t.setCamera(cam); t.setResolutionFromRenderer(cam, renderer);
+    t.addEventListener("load-model", ev => { if (!tiles) return; ev.scene.traverse(c => { if (c.material){ tileMats.add(c.material); c.material.color && c.material.color.set(dark() ? 0x7d879c : 0xffffff); } });
+      if (!tilesOn){ tilesOn = true; showOwn(false); credit = document.createElement("div"); credit.className = "tiles-credit"; stage.appendChild(credit); } invalidate(); });
+    t.addEventListener("load-tile-set", () => { t.errorTarget = 14; invalidate(); });   // sharper than Google's default (only the first root request is billed)   // keep asking for tiles while they stream in
+    t.addEventListener("tiles-load-end", () => { if (credit && tiles){ const a = [...new Set(tiles.getAttributions().filter(x => x.type === "string").flatMap(x => x.value.split(/[;,]\s*/)).filter(Boolean))]; credit.textContent = "Map data: " + (a.length ? a.join(", ") : "Google"); } invalidate(); });
+    invalidate();
+  }
+
   retheme(); resize(); applyCam(); renderer.render(scene, cam); placeLabels();
+  startTiles().catch(e => stopTiles(e));
   return {
     highlight, retheme, skip, zoom,
     setActive(on){ active = on; if (on){ resize(); invalidate(); } else { skip(); if (raf){ cancelAnimationFrame(raf); raf = 0; } } },
@@ -192,6 +227,6 @@ export async function create(o){
     focus(id, done){ const l = o.landmarks.find(q => q.id === id); if (!l){ if (done) done(); return; } atHome = false; const p = V(l.x, l.y, (l.h || 0)/2);
       fly({ tx: p.x, ty: p.y, tz: p.z, az: HOME.az + 0.4, pol: 1.08, dist: 17 }, 650, done); },
     playIntro(done){ const to = homeFor(), p = V(650, 1250, 0); atHome = true; Object.assign(cur, { tx: p.x, ty: 0, tz: p.z, az: 0.15, pol: 1.44, dist: 200 }); fly(to, 4600, done); },
-    dispose(){ dead = true; if (raf) cancelAnimationFrame(raf); off.forEach(f => f()); if (ro) ro.disconnect(); disposables.forEach(d => d.dispose()); renderer.dispose(); }
+    dispose(){ dead = true; if (tiles){ tiles.dispose(); tiles = null; } if (credit) credit.remove(); if (raf) cancelAnimationFrame(raf); off.forEach(f => f()); if (ro) ro.disconnect(); disposables.forEach(d => d.dispose()); renderer.dispose(); }
   };
 }
