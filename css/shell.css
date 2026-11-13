@@ -189,3 +189,11 @@ html[data-mode="lite"] .btn:hover,html[data-mode="lite"] .proj:hover{transform:n
 .campus[data-state="2d"] .wx-panel{display:none}
 @media (max-width:860px){ .wx-panel{right:8px;bottom:8px;max-width:210px;padding:5px 6px;gap:3px} .wx-panel button{padding:5px 6px} .wx-panel .wx-h{display:none} }
 @media (max-width:860px){ .campus-hud{display:none} }
+/* phones: small place names on the map so they don't cover the buildings; status chips only on hover/tap */
+@media (max-width:860px){
+  .campus .lm-name{font-size:7.5px;padding:2px 4px;letter-spacing:.03em;border-radius:4px;border-width:1px}
+  .campus .lm-chip{display:none}
+  .campus .lm.hot .lm-chip{display:block;font-size:8px;padding:2px 4px;max-width:110px}
+  .campus .lm-pin{height:5px}
+  .campus .lm.off .lm-name{opacity:.8}
+}

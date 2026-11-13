@@ -227,7 +227,7 @@ export async function create(o){
   const v = new THREE.Vector3();
   function placeLabels(){
     const L = o.landmarks.map(l => { v.copy(V(l.x, l.y, (l.h || 0) + 10)).project(cam); let x = (v.x*0.5 + 0.5)*vw, y = (-v.y*0.5 + 0.5)*vh; if (v.z > 1){ x = vw - x; y = vh + 100; } return { l, x, y, sx: x, sy: y }; });
-    const lw = 196, lh = 32, clamp = q => { q.sx = Math.min(vw - 100, Math.max(100, q.sx)); q.sy = Math.min(vh - 8, Math.max(q.sx < 470 ? 170 : 96, q.sy)); };
+    const sm = vw < 700, lw = sm ? 92 : 196, lh = sm ? 16 : 32, mg = sm ? 46 : 100, clamp = q => { q.sx = Math.min(vw - mg, Math.max(mg, q.sx)); q.sy = Math.min(vh - 8, Math.max(sm ? 60 : q.sx < 470 ? 170 : 96, q.sy)); };   // phones: small labels, small gaps
     L.forEach(clamp);
     for (let it = 0; it < 40; it++){ let moved = false;   // nudge overlapping labels apart
       for (let a = 0; a < L.length; a++) for (let b = a + 1; b < L.length; b++){ const p = L[a], q = L[b], dx = q.sx - p.sx, dy = q.sy - p.sy, ox = lw - Math.abs(dx), oy = lh - Math.abs(dy);
@@ -250,7 +250,7 @@ export async function create(o){
     applyCam(); if (tiles){ cam.updateMatrixWorld(); tiles.update(); } renderer.render(scene, cam); placeLabels();
     if (tiles && tiles.stats.downloading + tiles.stats.parsing > 0) tilesAct = now;
     const busy = tiles && now - tilesAct < 2500;   // the tile loader only asks for the next, sharper pieces when update() runs, so keep running until it settles
-    world.step(now); life.step(now); movers.step(now);
+    world.step(now); life.step(now); movers.step(now); sky.step(now);
     if (tween || busy || world.live() || life.on) raf = requestAnimationFrame(frame);
   }
   function invalidate(){ if (!raf && active && !dead) raf = requestAnimationFrame(frame); }
@@ -358,9 +358,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261114h").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261114k").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261114h"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261114k"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -470,7 +470,52 @@ export async function create(o){
         else { blk(x, y, h, 20, 8, 3.2, 0, w0, 0x9b2a24); blk(x, y, h, 7, 6, 4, 3.2, w0, 0xf0efe9, -3); blk(x, y, h, 1, 1, 3, 7.2, w0, 0x222222, -3);   // tug pushing
           for (let k = 0; k < b.barges; k++){ const f = 10 + 32 + k*62; blk(x, y, h, 60, 11, 3, 0, w0, 0x3b3a38, f); blk(x, y, h, 54, 9.5, 1.6, 3, w0, k % 2 ? 0x6b5a45 : 0x4a4f55, f); } } }
       mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
-    fetch("/campus/movers.json?v=20261114h").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
+    fetch("/campus/movers.json?v=20261114k").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
+    return { step };
+  })();
+
+  /* ---------- sky and wildlife: songbird flocks, hawks over the river cliffs, Canada geese on the Plain, deer on the wooded hills,
+     and a rare Army Black Hawk up the Hudson that sometimes drops parachutists onto the Plain ---------- */
+  const sky = (() => {
+    const MAX = 700, box = new THREE.BoxGeometry(1, 1, 1);
+    const mesh = new THREE.InstancedMesh(keep(box), keep(new THREE.MeshStandardMaterial({ roughness: 0.8 })), MAX); mesh.castShadow = true; mesh.frustumCulled = false; mesh.userData.keep = true;
+    { const w = new THREE.Color(1, 1, 1); for (let i = 0; i < MAX; i++) mesh.setColorAt(i, w); } mesh.count = 0; scene.add(mesh);
+    const o = new THREE.Object3D(), col = new THREE.Color(); let n = 0, last = 0, clock = 0;
+    // block centered at map (x, y), world height wy, heading h (+ optional pitch / roll), size in meters
+    function blk(x, y, wy, h, len, wid, hei, c, fx, fy, fz, pitch, roll){ if (n >= MAX) return; const ch = Math.cos(h), sh = Math.sin(h), px = x + ch*(fx || 0) - sh*(fy || 0), py = y + sh*(fx || 0) + ch*(fy || 0);
+      o.position.set(px*S, wy + (fz || 0)*S, -py*S); o.rotation.set(roll || 0, h, pitch || 0, "YZX"); o.scale.set(len*S, hei*S, wid*S); o.updateMatrix(); mesh.setMatrixAt(n, o.matrix); mesh.setColorAt(n, col.set(c)); n++; }
+    const rnd = Math.random, grid = map.busyGrid();
+    // songbird flocks circling over campus and the river
+    const flocks = Array.from({ length: 5 }, () => ({ cx: -100 + rnd()*900, cy: 300 + rnd()*900, r: 80 + rnd()*160, alt: 35 + rnd()*50, sp: 0.12 + rnd()*0.1, ph: rnd()*6, birds: Array.from({ length: 7 + Math.floor(rnd()*9) }, () => [(rnd() - 0.5)*30, (rnd() - 0.5)*30, (rnd() - 0.5)*8, rnd()*6]) }));
+    const hawks = Array.from({ length: 3 }, (_, i) => ({ cx: 620 + i*90, cy: 450 + i*260, r: 60 + rnd()*50, alt: 110 + rnd()*60, sp: 0.05 + rnd()*0.03, ph: rnd()*6 }));
+    const geese = Array.from({ length: 22 }, () => ({ x: 120 + (rnd() - 0.5)*160, y: 840 + (rnd() - 0.5)*140, h: rnd()*6, t: rnd()*10 }));
+    const deer = []; for (let k = 0; k < 400 && deer.length < 10; k++){ const x = -900 + rnd()*1700, y = -600 + rnd()*2000; if (map.heightAt(x, y) < 25 || grid.busy(x, y)) continue; deer.push({ hx: x, hy: y, x, y, h: rnd()*6, t: rnd()*10 }); }
+    // Black Hawk route up the river; on drop runs it swings over the Plain
+    const RIVER = [[420, -1500], [760, -100], [1050, 700], [880, 1450], [100, 2150]], PLAIN = [178, 828];
+    const force = /[?&]heli=1/.test(location.search); let heli = null, nextHeli = force ? 3 : 50 + rnd()*60; const jumpers = [];   // ?heli=1 shows the drop right away
+    const path = (pts, d) => { let acc = 0; for (let i = 1; i < pts.length; i++){ const a = pts[i - 1], b = pts[i], L = Math.hypot(b[0] - a[0], b[1] - a[1]); if (acc + L >= d){ const f = (d - acc)/L; return [a[0] + (b[0] - a[0])*f, a[1] + (b[1] - a[1])*f, Math.atan2(b[1] - a[1], b[0] - a[0])]; } acc += L; } return null; };
+    const total = pts => pts.reduce((a, p, i) => i ? a + Math.hypot(p[0] - pts[i - 1][0], p[1] - pts[i - 1][1]) : 0, 0);
+    function step(now){ const dt = Math.min(0.1, (now - (last || now))/1000); last = now; clock += dt; n = 0; const t = clock;
+      flocks.forEach(f => { const a = f.ph + t*f.sp, cx = f.cx + Math.cos(a)*f.r, cy = f.cy + Math.sin(a)*f.r, h = a + Math.PI/2;
+        f.birds.forEach(b => { const fl = 0.35 + Math.abs(Math.sin(t*14 + b[3]))*0.65, x = cx + b[0], y = cy + b[1]; blk(x, y, gy(x, y) + (f.alt + b[2])*S, h, 0.5, 1.4*fl, 0.12, 0x2b2b2b); }); });
+      hawks.forEach(k => { const a = k.ph + t*k.sp, x = k.cx + Math.cos(a)*k.r, y = k.cy + Math.sin(a)*k.r, wy = gy(x, y) + k.alt*S; blk(x, y, wy, a + Math.PI/2, 1.2, 3.4, 0.2, 0x5a4330, 0, 0, 0, 0, 0.25); blk(x, y, wy, a + Math.PI/2, 0.6, 0.5, 0.25, 0xe9e3d6, 0.5); });
+      geese.forEach((g, i) => { g.t -= dt; if (g.t < 0){ g.t = 3 + rnd()*8; g.h += (rnd() - 0.5)*2; } const v = Math.sin(t*0.5 + i) > 0.6 ? 0.35 : 0; g.x += Math.cos(g.h)*v*dt; g.y += Math.sin(g.h)*v*dt;
+        const gw = gy(g.x, g.y); blk(g.x, g.y, gw, g.h, 0.9, 0.45, 0.45, 0x7a6a58, 0, 0, 0.25); blk(g.x, g.y, gw, g.h, 0.12, 0.12, 0.55, 0x161616, 0.42, 0, 0.45); blk(g.x, g.y, gw, g.h, 0.25, 0.14, 0.1, 0xe8e4dc, 0.48, 0, 0.92); });
+      deer.forEach((d, i) => { d.t -= dt; if (d.t < 0){ d.t = 4 + rnd()*10; d.h = Math.atan2(d.hy - d.y + (rnd() - 0.5)*40, d.hx - d.x + (rnd() - 0.5)*40); } const v = Math.sin(t*0.3 + i*2) > 0.3 ? 0.6 : 0; d.x += Math.cos(d.h)*v*dt; d.y += Math.sin(d.h)*v*dt;
+        const dw = gy(d.x, d.y); blk(d.x, d.y, dw, d.h, 1.5, 0.45, 0.6, 0x8a6240, 0, 0, 0.8); blk(d.x, d.y, dw, d.h, 0.4, 0.3, 0.6, 0x7b5537, 0.8, 0, 1.15); for (const [lx, ly] of [[0.6, 0.15], [0.6, -0.15], [-0.6, 0.15], [-0.6, -0.15]]) blk(d.x, d.y, dw, d.h, 0.1, 0.1, 0.8, 0x5c4028, lx, ly, 0); });
+      // Black Hawk
+      if (!heli && clock > nextHeli){ const drop = force || rnd() < 0.45, pts = drop ? [RIVER[0], RIVER[1], [600, 500], PLAIN, [700, 1300], RIVER[4]] : RIVER; heli = { pts, L: total(pts), d: 0, drop, dropped: false }; nextHeli = clock + 240 + rnd()*300; }
+      if (heli){ heli.d += 62*dt; const q = path(heli.pts, heli.d); if (!q) heli = null; else {
+          const nearPlain = Math.hypot(q[0] - PLAIN[0], q[1] - PLAIN[1]), alt = heli.drop ? 160 + Math.max(0, 260 - nearPlain*0.4) : 150, wy = gy(q[0], q[1]) + alt*S, C = 0x2d3328;
+          blk(q[0], q[1], wy, q[2], 11, 2.4, 2.6, C); blk(q[0], q[1], wy, q[2], 7, 0.6, 0.8, C, -8.5, 0, 1.4); blk(q[0], q[1], wy, q[2], 0.3, 0.2, 2, C, -12, 0, 1.6);   // body, tail boom, tail fin
+          blk(q[0], q[1], wy, q[2], 1.8, 1.9, 0.6, 0x1b2330, 4.6, 0, 1.2);   // cockpit glass
+          for (let r = 0; r < 4; r++) blk(q[0], q[1], wy, q[2] + clock*28 + r*Math.PI/2, 8, 0.45, 0.08, 0x151515, 0, 0, 3.1);   // spinning main rotor
+          if (heli.drop && !heli.dropped && nearPlain < 40){ heli.dropped = true; for (let k = 0; k < 6; k++) jumpers.push({ x: q[0] + (k - 2.5)*14*Math.cos(q[2]), y: q[1] + (k - 2.5)*14*Math.sin(q[2]), alt: alt - 4, h: rnd()*6, land: 0 }); } } }
+      for (let i = jumpers.length - 1; i >= 0; i--){ const j = jumpers[i];
+        if (j.alt > 0){ j.alt = Math.max(0, j.alt - 7*dt); j.x += (PLAIN[0] - j.x)*0.02*dt + Math.cos(t*0.3 + i)*2*dt; j.y += (PLAIN[1] - j.y)*0.02*dt; j.h += 0.2*dt; } else if ((j.land += dt) > 25){ jumpers.splice(i, 1); continue; }
+        const wy = gy(j.x, j.y) + j.alt*S; blk(j.x, j.y, wy, j.h, 0.45, 0.45, 1.75, 0x4b5320, 0, 0, 0.9);   // jumper in OCP
+        if (j.alt > 0) blk(j.x, j.y, wy, j.h, 3.2, 7, 0.6, j.alt > 40 && i % 2 ? 0x3a4030 : 0x2a2f24, 0, 0, 7.5); }   // canopy
+      mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
     return { step };
   })();
 
