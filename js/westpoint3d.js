@@ -250,7 +250,7 @@ export async function create(o){
     applyCam(); if (tiles){ cam.updateMatrixWorld(); tiles.update(); } renderer.render(scene, cam); placeLabels();
     if (tiles && tiles.stats.downloading + tiles.stats.parsing > 0) tilesAct = now;
     const busy = tiles && now - tilesAct < 2500;   // the tile loader only asks for the next, sharper pieces when update() runs, so keep running until it settles
-    world.step(now); life.step(now);
+    world.step(now); life.step(now); movers.step(now);
     if (tween || busy || world.live() || life.on) raf = requestAnimationFrame(frame);
   }
   function invalidate(){ if (!raf && active && !dead) raf = requestAnimationFrame(frame); }
@@ -358,9 +358,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261114f").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261114h").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261114f"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261114h"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -426,6 +426,52 @@ export async function create(o){
       place(cars, carM, k, now); place(walkers, walkM, k, now); place(runners, runM, k, now); }
     const api = { on: true, step, show(v){ api.on = v; carM.visible = walkM.visible = runM.visible = v; } };
     step(performance.now()); return api;
+  })();
+
+  /* ---------- trains and boats. Tracks are the real OSM lines in /campus/movers.json: CSX River Subdivision on the West Point
+     shore (into the tunnel under the Plain), Metro-North / Amtrak Hudson Line on the Garrison shore. Boats follow the Hudson's centerline.
+     Everything is one batch of instanced blocks (hulls, cabins, sails, rail cars) so it stays cheap. ---------- */
+  const movers = (() => {
+    const MAX = 420, box = new THREE.BoxGeometry(1, 1, 1); box.translate(0, 0.5, 0);
+    const mesh = new THREE.InstancedMesh(keep(box), keep(new THREE.MeshStandardMaterial({ roughness: 0.6, metalness: 0.2 })), MAX); mesh.castShadow = true; mesh.frustumCulled = false; mesh.userData.keep = true; { const w = new THREE.Color(1, 1, 1); for (let i = 0; i < MAX; i++) mesh.setColorAt(i, w); } mesh.count = 0; scene.add(mesh);
+    const o = new THREE.Object3D(), col = new THREE.Color(); let n = 0, data = null, last = 0;
+    const prep = P => { const cum = [0]; for (let i = 1; i < P.length; i++) cum.push(cum[i - 1] + Math.hypot(P[i][0] - P[i - 1][0], P[i][1] - P[i - 1][1])); return { P, cum, L: cum[cum.length - 1] }; };
+    const at = (l, d) => { let i = 1; while (i < l.cum.length - 1 && l.cum[i] < d) i++; const a = l.P[i - 1], b = l.P[i], f = (d - l.cum[i - 1])/Math.max(0.01, l.cum[i] - l.cum[i - 1]);
+      return { x: a[0] + (b[0] - a[0])*f, y: a[1] + (b[1] - a[1])*f, h: Math.atan2(b[1] - a[1], b[0] - a[0]), tun: a[2] && b[2] }; };
+    // one block: (x, y) map meters, heading h, length/width/height in meters, lift above base, color
+    function blk(x, y, h, len, wid, hei, lift, base, c, fx, fy){ if (n >= MAX) return; const ch = Math.cos(h), sh = Math.sin(h), px = x + ch*(fx || 0) - sh*(fy || 0), py = y + sh*(fx || 0) + ch*(fy || 0);
+      o.position.set(px*S, base + lift*S, -py*S); o.rotation.set(0, h, 0); o.scale.set(len*S, hei*S, wid*S); o.updateMatrix(); mesh.setMatrixAt(n, o.matrix); mesh.setColorAt(n, col.set(c)); n++; }
+    const trains = [], boats = []; let nextTrain = 4, nextBoat = 2, clock = 0;
+    const month = new Date().getMonth(), summer = month >= 4 && month <= 9;
+    function spawnTrain(){ if (!data || trains.length >= 2) return; const r = Math.random(), line = data.rail[r < 0.55 ? 0 : 1] || data.rail[0];
+      const freight = /River/.test(line.name), dir = Math.random() < 0.5 ? 1 : -1;
+      const kind = freight ? { cars: 28 + Math.floor(Math.random()*16), len: 17, gap: 1.2, v: 14, loco: 0x1d2a52, stripe: 0xf2c230, car: [0x5a3a2a, 0x6b6f75, 0x2f3a46, 0x7a4b2e] }
+        : Math.random() < 0.7 ? { cars: 6 + Math.floor(Math.random()*3), len: 25.9, gap: 0.8, v: 26, loco: 0xc8ccd2, stripe: 0x1e4f9c, car: [0xc9cdd3] }   // Metro-North
+        : { cars: 5, len: 26, gap: 0.8, v: 30, loco: 0x9aa0a8, stripe: 0x1f3c6e, car: [0xc2c6cc] };                                                       // Amtrak
+      trains.push(Object.assign({ line, dir, s: dir > 0 ? -30 : line.L + 30 }, kind)); }
+    function spawnBoat(){ if (!data || boats.length >= (summer ? 4 : 2)) return; const r = Math.random(), dir = Math.random() < 0.5 ? 1 : -1;
+      const kind = summer && r < 0.35 ? { t: "sail", v: 3, len: 9 } : summer && r < 0.5 ? { t: "tour", v: 5, len: 38 } : { t: "tow", v: 3.2, len: 140, barges: 2 + Math.floor(Math.random()*2) };
+      boats.push(Object.assign({ dir, s: dir > 0 ? 0 : data.river.L, off: (Math.random() - 0.5)*120 }, kind)); }
+    function step(now){ if (!data) return; const dt = Math.min(0.1, (now - (last || now))/1000); last = now; clock += dt; n = 0;
+      if (clock > nextTrain){ spawnTrain(); nextTrain = clock + 45 + Math.random()*90; }
+      if (clock > nextBoat){ spawnBoat(); nextBoat = clock + 30 + Math.random()*60; }
+      for (let i = trains.length - 1; i >= 0; i--){ const t = trains[i]; t.s += t.v*t.dir*dt; const tot = (t.cars + 1)*(t.len + t.gap);
+        if ((t.dir > 0 && t.s - tot > t.line.L) || (t.dir < 0 && t.s + tot < 0)){ trains.splice(i, 1); continue; }
+        for (let k = 0; k <= t.cars; k++){ const d = t.s - t.dir*k*(t.len + t.gap); if (d < 0 || d > t.line.L) continue; const q = at(t.line, d); if (q.tun) continue;
+          const g = gy(q.x, q.y) + 0.4*S, h = q.h + (t.dir < 0 ? Math.PI : 0);
+          if (k === 0){ blk(q.x, q.y, h, t.len, 3.1, 4.3, 0, g, t.loco); blk(q.x, q.y, h, t.len + 0.1, 3.15, 0.5, 2.2, g, t.stripe); }
+          else { blk(q.x, q.y, h, t.len, 3.0, t.car.length > 1 ? 3.9 : 4.1, 0, g, t.car[k % t.car.length]); if (t.car.length === 1) blk(q.x, q.y, h, t.len + 0.05, 3.05, 0.35, 1.2, g, t.stripe); } } }
+      const R = data.river, w0 = 0.25*S;
+      for (let i = boats.length - 1; i >= 0; i--){ const b = boats[i]; b.s += b.v*b.dir*dt; if (b.s < -200 || b.s > R.L + 200){ boats.splice(i, 1); continue; }
+        const q = at(R, Math.max(0, Math.min(R.L, b.s))), h = q.h + (b.dir < 0 ? Math.PI : 0), side = b.off;
+        const x = q.x - Math.sin(q.h)*side, y = q.y + Math.cos(q.h)*side;
+        if (b.t === "sail"){ blk(x, y, h, 9, 3, 1.2, 0, w0, 0xf4f4f2); blk(x, y, h, 0.15, 0.15, 11, 1.2, w0, 0xdddddd); blk(x, y, h, 4.5, 0.08, 9, 2, w0, 0xffffff, -1.2); }
+        else if (b.t === "tour"){ blk(x, y, h, 38, 9, 2.4, 0, w0, 0xf2f2ef); blk(x, y, h, 26, 7.5, 2.6, 2.4, w0, 0xe6e8ea, -2); blk(x, y, h, 20, 7, 0.3, 5, w0, 0x1d3f6e, -2); }
+        else { blk(x, y, h, 20, 8, 3.2, 0, w0, 0x9b2a24); blk(x, y, h, 7, 6, 4, 3.2, w0, 0xf0efe9, -3); blk(x, y, h, 1, 1, 3, 7.2, w0, 0x222222, -3);   // tug pushing
+          for (let k = 0; k < b.barges; k++){ const f = 10 + 32 + k*62; blk(x, y, h, 60, 11, 3, 0, w0, 0x3b3a38, f); blk(x, y, h, 54, 9.5, 1.6, 3, w0, k % 2 ? 0x6b5a45 : 0x4a4f55, f); } } }
+      mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
+    fetch("/campus/movers.json?v=20261114h").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
+    return { step };
   })();
 
   let worldReady = false;
