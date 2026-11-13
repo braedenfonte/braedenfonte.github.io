@@ -142,3 +142,11 @@ Each test reload costs 1 of the 30 daily Google loads.
   pylon faces with slit windows, 3 granite steps, equestrian statue on a white pedestal. Code: `WH` block in `js/westpoint3d.js`.
 - Ground auto-matching (`calibrate`) is OFF: it misfired on partly loaded tiles. The fixed 32 m geoid offset lines up.
 - Testing burns Google loads fast (each reload = 1 of 30/day). Today's cap was used up by testing on Nov 13.
+
+## Full-screen home + live world plan (Nov 13, night)
+- Home map is now edge-to-edge (desktop). Sidebar hides off the left edge; a crimson tab at the left edge + a 16 px hover zone
+  (`.edge-hot` in index.html, CSS at the end of css/shell.css) slide it in; it stays while hovered. Phones unchanged (top bar + menu).
+- Braeden's answers: weather/time = live West Point weather + clock by default, with a control panel to play (sunny/rain/snow/fog/night).
+  Live world order: people + cars, train + ships, birds + Black Hawks, weather effects. Also wanted: occasional Black Hawk dropping
+  parachutists onto the Plain, occasional baseball game (Doubleday Field), runners on the road to Thayer Gate and back, occasional
+  soccer game on Daly Field. Pershing Barracks photo rebuild is postponed (do after the live world).
