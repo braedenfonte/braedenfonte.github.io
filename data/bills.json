@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-12T07:00:00-05:00",
+ "updated": "2026-11-13T06:55:00-05:00",
  "team": "Buffalo Bills",
  "record": {
   "w": 7,
@@ -113,20 +113,20 @@
  },
  "news": [
   {
-   "h": "Benford limited with wrist injury",
-   "b": "Top cornerback Christian Benford (wrist) was listed as limited on Wednesday's estimated report after a walkthrough. He hurt his right wrist covering Justin Jefferson on Monday."
+   "h": "Spencer Brown misses Thursday practice",
+   "b": "Starting right tackle Spencer Brown (ankle) did not practice Thursday after being limited Wednesday. Game designations come after Friday's practice."
   },
   {
-   "h": "Four offensive linemen limited",
-   "b": "Dion Dawkins, Spencer Brown (ankle), Connor McGovern (neck) and Alec Anderson (ankle) were also estimated as limited, along with TE Dalton Kincaid (ankle)."
+   "h": "Three more line starters limited",
+   "b": "Dion Dawkins (rib), Connor McGovern (neck) and Alec Anderson (ankle) were limited Thursday, along with TE Dalton Kincaid (ankle)."
   },
   {
-   "h": "Line grows to Bills −8.5 at the Jets",
-   "b": "DraftKings moved Buffalo from −7 to −8.5, with the total up from 46.5 to 50.5, per NBC Sports."
+   "h": "Benford limited, Franklin added",
+   "b": "CB Christian Benford (wrist) was limited again, and safety Sam Franklin Jr., a core special-teamer, was added with a shoulder injury."
   },
   {
-   "h": "Jets are 2-7 and have lost four straight",
-   "b": "Garrett Wilson (concussion) was limited Wednesday. Kickoff is Sunday at 1 p.m. ET on CBS at MetLife Stadium."
+   "h": "Garrett Wilson limited for the Jets",
+   "b": "WRs Garrett Wilson (concussion) and Omar Cooper Jr. (ankle) were limited Thursday; CB Jarvis Brownlee Jr., DL Harrison Phillips and LB Trevin Wallace did not practice. Kickoff Sunday 1 p.m. ET on CBS."
   }
  ],
  "schedule": [
@@ -194,5 +194,5 @@
    "note": "Date and time may flex"
   }
  ],
- "source": "Fox Sports standings, newyorkjets.com injury report, NBC Sports/DraftKings odds, Yahoo Sports (Nov 10-11)."
+ "source": "Fox Sports standings, ClutchPoints and Heavy (Bills injuries), newyorkjets.com injury report (Nov 12), NBC Sports/DraftKings odds (Nov 10)."
 }

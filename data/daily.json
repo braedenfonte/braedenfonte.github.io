@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-12T07:00:00-05:00",
+ "updated": "2026-11-13T06:55:00-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -670,84 +670,84 @@
   "poll": "AP Top 25, Week 11 (Nov 8)"
  },
  "location": {
-  "name": "Chichen Itza",
-  "wiki": "Chichen_Itza",
-  "country": "Mexico",
-  "region": "Tinúm Municipality, Yucatán",
-  "lat": 20.6831,
-  "lon": -88.5686,
-  "tagline": "The great Maya city of the Yucatán, crowned by the Temple of Kukulcán",
-  "intro": "Chichen Itza is a large pre-Columbian city built by the Maya on the Yucatán Peninsula, between Valladolid and Mérida. It grew into a major regional power from about 600 to 1200 AD, and its stepped pyramid, El Castillo, is one of the most recognized buildings in the Americas.",
+  "name": "Mount Fuji",
+  "wiki": "Mount_Fuji",
+  "country": "Japan",
+  "region": "Shizuoka and Yamanashi prefectures, Honshu",
+  "lat": 35.3608,
+  "lon": 138.7275,
+  "tagline": "Japan's highest peak, a near-perfect volcanic cone about 100 km from Tokyo",
+  "intro": "Mount Fuji is an active stratovolcano on the island of Honshu, straddling Shizuoka and Yamanashi prefectures about 100 km southwest of Tokyo. At 3,776 m it is the highest mountain in Japan, and its snow-capped, symmetrical cone has been a sacred site and a subject for artists for centuries.",
   "stats": [
    {
+    "label": "Summit elevation",
+    "value": "3,776 m (12,389 ft)"
+   },
+   {
+    "label": "Last eruption",
+    "value": "1707–1708 (Hōei)"
+   },
+   {
     "label": "UNESCO World Heritage",
-    "value": "1988"
+    "value": "2013 (cultural site)"
    },
    {
-    "label": "El Castillo height",
-    "value": "about 30 m (98 ft)"
-   },
-   {
-    "label": "Great Ball Court",
-    "value": "168 × 70 m"
-   },
-   {
-    "label": "Ceremonial core",
-    "value": "at least 5 km²"
+    "label": "Summit crater",
+    "value": "780 m wide, 240 m deep"
    }
   ],
   "facts": [
-   "El Castillo, the Temple of Kukulcán, was voted one of the New Seven Wonders of the World in 2007.",
-   "Near the spring and autumn equinoxes, late-afternoon shadows on El Castillo's corner look like a serpent sliding down the staircase, though scholars think it was probably not designed on purpose.",
-   "The Sacred Cenote is a natural sinkhole about 60 m (200 ft) across, with sheer walls dropping about 27 m (89 ft) to the water.",
-   "The Great Ball Court measures 168 by 70 metres (551 by 230 ft).",
-   "The city was largely built between 800 and 1100 AD and was abandoned in the 13th century."
+   "UNESCO listed it as a cultural site, not a natural one: the official name is \"Fujisan, sacred place and source of artistic inspiration.\"",
+   "Its last eruption, the Hōei eruption of 1707–08, formed a second peak on its flank called Mount Hōei.",
+   "Women were barred from climbing it as part of mountain worship until an 1872 government edict; Tatsu Takayama is the first woman on record to reach the summit, in 1832.",
+   "Hokusai's woodblock series Thirty-six Views of Mount Fuji, from the 1830s, includes The Great Wave off Kanagawa.",
+   "Since 2024 Yamanashi has charged a 2,000-yen fee on the Yoshida Trail and capped it at 4,000 hikers a day."
   ],
-  "bestTime": "November to March for dry, cooler weather; arrive at opening to beat the heat and the tour-bus crowds, or visit at the March or September equinox for the serpent shadow.",
-  "gettingThere": "Fly nonstop from New York to Cancún, then drive or take a bus west to the site (a few hours by road). Mérida, to the west, is a closer base with flights via U.S. hubs.",
-  "tip": "Stay the night in nearby Valladolid so you can reach the gates at opening, then cool off in a cenote such as Ik Kil in the afternoon."
+  "bestTime": "July to early September is the official climbing season; for views of the snow-capped cone, the clear, dry air of late autumn and winter is best.",
+  "gettingThere": "Fly nonstop from New York (JFK or EWR) to Tokyo, then take a highway bus or train (about 2 hours) to Kawaguchiko in the Fuji Five Lakes area.",
+  "tip": "Stay a night at Lake Kawaguchi and look at dawn, when Fuji is most often clear of clouds; to climb, book a hut on the Yoshida Trail and start in the afternoon to watch sunrise from the summit."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 9 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
-  "asOf": "Wed Nov 11 close",
-  "story": "Stocks rebounded as CoreWeave's strong earnings revived the AI trade and chip stocks rallied, with Nvidia recovering part of its two-day slide. The bond market was closed for Veterans Day.",
+  "asOf": "Thu Nov 12 close",
+  "story": "Stocks slipped as Nvidia fell after CEO Jensen Huang resigned and the 10-year Treasury yield rose above 5% on worries about more Fed rate hikes. Oil rose after President Trump said he was no longer interested in a deal with Iran.",
   "indices": [
    {
     "name": "S&P 500",
-    "value": "7,619",
-    "chg": 1.31
+    "value": "7,592",
+    "chg": -0.35
    }
   ],
   "movers": [
    {
-    "sym": "CRWV",
-    "move": "+25%",
-    "dir": 1,
-    "why": "CoreWeave beat estimates and raised its guidance, reviving the AI trade."
-   },
-   {
-    "sym": "SNDK",
-    "move": "+14%",
-    "dir": 1,
-    "why": "SanDisk led S&P 500 gainers as memory-chip stocks rallied."
-   },
-   {
-    "sym": "MU",
-    "move": "+12%",
-    "dir": 1,
-    "why": "Micron jumped with other memory-chip makers in a broad chip rally."
-   },
-   {
     "sym": "NVDA",
-    "move": "+2.9%",
-    "dir": 1,
-    "why": "Nvidia rebounded after falling nearly 10% over the prior two sessions."
+    "move": "−4%",
+    "dir": -1,
+    "why": "Nvidia fell more than 4% (down as much as 13% early) after CEO Jensen Huang resigned."
    },
    {
-    "sym": "AAPL",
-    "move": "+2%",
+    "sym": "AMD",
+    "move": "+5.9%",
     "dir": 1,
-    "why": "Apple closed at a record high, just under $356."
+    "why": "AMD led S&P 500 gainers as Nvidia rivals rallied."
+   },
+   {
+    "sym": "AVGO",
+    "move": "+5.5%",
+    "dir": 1,
+    "why": "Broadcom rose with other Nvidia rivals."
+   },
+   {
+    "sym": "GPN",
+    "move": "−12%",
+    "dir": -1,
+    "why": "Global Payments was the S&P 500's biggest decliner."
+   },
+   {
+    "sym": "SMCI",
+    "move": "−11.3%",
+    "dir": -1,
+    "why": "Super Micro Computer fell with the Nvidia slide in AI hardware."
    }
   ],
   "lines": [
@@ -794,6 +794,6 @@
     "p": 79
    }
   ],
-  "sources": "S&P 500 and movers: CNBC, Investopedia via Yahoo Finance (Nov 11). Bills line: DraftKings via NBC Sports (Nov 10). USC-Indiana: Fox Sports odds (Nov 12). Win prob: Dimers model (Nov 11-12)."
+  "sources": "S&P 500: AP via La Nación (Nov 12). Movers: Yahoo Finance, Trefis (Nov 12-13). Bills line: DraftKings via NBC Sports (Nov 10). USC-Indiana: Fox Sports odds (Nov 12). Win prob: Dimers model (Nov 11-12)."
  }
 }
