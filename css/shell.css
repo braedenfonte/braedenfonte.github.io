@@ -180,3 +180,10 @@ html[data-mode="lite"] .btn:hover,html[data-mode="lite"] .proj:hover{transform:n
   body[data-view="home"] .edge-hot{display:block;position:fixed;left:0;top:0;bottom:0;width:16px;z-index:39}
   body[data-view="home"] .edge-hot::after{content:"";position:absolute;left:0;top:50%;width:5px;height:64px;margin-top:-32px;border-radius:0 6px 6px 0;background:var(--accent);opacity:.85;box-shadow:0 0 12px rgba(224,36,60,.6)}
 }
+/* weather + time panel on the 3D map */
+.wx-panel{position:absolute;right:12px;bottom:12px;z-index:6;display:flex;flex-wrap:wrap;align-items:center;gap:4px;max-width:330px;padding:7px 8px;border-radius:10px;
+  background:color-mix(in srgb,var(--surface) 82%,transparent);backdrop-filter:blur(8px);border:1px solid var(--line);font:600 11px/1 var(--mono)}
+.wx-panel .wx-h{flex-basis:100%;margin:2px 2px 0;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;font-size:10px}
+.wx-panel button{font:inherit;padding:6px 8px;border-radius:7px;border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer}
+.wx-panel button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.campus[data-state="2d"] .wx-panel{display:none}

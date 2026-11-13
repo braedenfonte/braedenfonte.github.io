@@ -150,3 +150,9 @@ Each test reload costs 1 of the 30 daily Google loads.
   Live world order: people + cars, train + ships, birds + Black Hawks, weather effects. Also wanted: occasional Black Hawk dropping
   parachutists onto the Plain, occasional baseball game (Doubleday Field), runners on the road to Thayer Gate and back, occasional
   soccer game on Daly Field. Pershing Barracks photo rebuild is postponed (do after the live world).
+- Weather + time panel (bottom-right of the 3D map, `world` block in js/westpoint3d.js): Live (open-meteo current weather_code +
+  is_day, no key) or Sun/Rain/Snow/Fog, and Live/Day/Sunset/Night. Rain = animated streaks, snow = drifting points, fog/haze via scene.fog,
+  Google photo tiles tinted for night/sunset/overcast, building windows glow at night. Hidden in 2D mode.
+- NEXT (in Braeden's order): people walking + cars on real roads -> trains on the riverside track + ships on the Hudson -> birds + rare
+  Black Hawk flyover (sometimes dropping parachutists onto the Plain) -> occasional baseball game (Doubleday Field), runners on the road to
+  Thayer Gate and back, occasional soccer on Daly Field. Then Pershing Barracks photo rebuild.

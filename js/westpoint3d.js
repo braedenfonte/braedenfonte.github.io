@@ -207,7 +207,7 @@ export async function create(o){
     hemi.color.set(dk ? 0x8ea6d6 : 0xffffff); hemi.groundColor.set(dk ? 0x0a0d14 : 0x6f7a66); hemi.intensity = dk ? 1.25 : 1.5;
     sun.color.set(dk ? 0xb9c8ff : 0xfff3df); sun.intensity = dk ? 1.7 : 2.5;
     
-    renderer.shadowMap.needsUpdate = true; invalidate();
+    renderer.shadowMap.needsUpdate = true; invalidate(); if (worldReady) world.apply();
   }
 
   /* ---------- camera rig ---------- */
@@ -250,7 +250,8 @@ export async function create(o){
     applyCam(); if (tiles){ cam.updateMatrixWorld(); tiles.update(); } renderer.render(scene, cam); placeLabels();
     if (tiles && tiles.stats.downloading + tiles.stats.parsing > 0) tilesAct = now;
     const busy = tiles && now - tilesAct < 2500;   // the tile loader only asks for the next, sharper pieces when update() runs, so keep running until it settles
-    if (tween || busy) raf = requestAnimationFrame(frame);
+    world.step(now);
+    if (tween || busy || world.live()) raf = requestAnimationFrame(frame);
   }
   function invalidate(){ if (!raf && active && !dead) raf = requestAnimationFrame(frame); }
   function resize(){ const r = stage.getBoundingClientRect(); if (!r.width || !r.height) return; vw = r.width; vh = r.height; renderer.setSize(vw, vh, false); cam.aspect = vw/vh; cam.updateProjectionMatrix();
@@ -341,9 +342,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261113z").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261114a").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261113z"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261114a"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -356,7 +357,7 @@ export async function create(o){
     hold.position.y = 32*S*VE;   // ellipsoid -> sea level (geoid is ~32 m below the ellipsoid at West Point)
     hold.add(t.group); scene.add(hold); hold.updateMatrixWorld(true);
     t.setCamera(cam); t.setResolutionFromRenderer(cam, renderer);
-    t.addEventListener("load-model", ev => { if (!tiles) return; ev.scene.traverse(c => { if (c.material){ tileMats.add(c.material);  } });
+    t.addEventListener("load-model", ev => { if (!tiles) return; ev.scene.traverse(c => { if (c.material){ tileMats.add(c.material); if (c.material.color) c.material.color.set(world.tint());  } });
       if (!tilesOn){ tilesOn = true; showOwn(false); retheme(); for (const k in outlines) outlines[k].ln.visible = false; if (atHome && !tween) fly(homeFor(), 1100); credit = document.createElement("div"); credit.className = "tiles-credit"; stage.appendChild(credit); } invalidate(); });
     ["load-model", "load-tile-set", "tiles-load-start"].forEach(n => t.addEventListener(n, () => { tilesAct = performance.now(); }));
     t.addEventListener("load-tile-set", () => { const phone = matchMedia("(pointer: coarse)").matches; t.errorTarget = phone ? 12 : 8;
@@ -366,6 +367,50 @@ export async function create(o){
     invalidate();
   }
 
+  /* ---------- weather + time of day. Default "Live": real West Point weather (open-meteo, no key) and the real clock.
+     A small panel lets you switch to sunny / rain / snow / fog and day / sunset / night. ---------- */
+  let worldReady = false;
+  const world = (() => {
+    let tintNow = 0xffffff; const st = { wx: "live", tod: "live", liveWx: "clear", liveTod: "day" }, N = 6000, pos = new Float32Array(N*6), vel = new Float32Array(N);
+    const g = keep(new THREE.BufferGeometry()); g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    const rainMat = keep(new THREE.LineBasicMaterial({ color: 0xaab8c8, transparent: true, opacity: 0.55 })), snowMat = keep(new THREE.PointsMaterial({ color: 0xffffff, size: 2.4, sizeAttenuation: false, transparent: true, opacity: 0.9 }));
+    const rain = new THREE.LineSegments(g, rainMat), snow = new THREE.Points(g, snowMat); rain.frustumCulled = snow.frustumCulled = false; rain.visible = snow.visible = false; rain.userData.keep = snow.userData.keep = true; scene.add(rain, snow);
+    let kind = "clear", last = 0, box = 40; const rnd = Math.random;
+    function seed(){ box = Math.max(12, cur.dist*0.9); for (let i = 0; i < N; i++){ const x = cur.tx + (rnd() - 0.5)*box*2, y = cur.ty + rnd()*box*0.9, z = cur.tz + (rnd() - 0.5)*box*2; pos.set([x, y, z, x, y - 0.012*box, z], i*6); vel[i] = 0.6 + rnd()*0.5; } g.attributes.position.needsUpdate = true; }
+    const wxNow = () => st.wx === "live" ? st.liveWx : st.wx, todNow = () => st.tod === "live" ? st.liveTod : st.tod;
+    function apply(){
+      kind = wxNow(); const tod = todNow(), night = tod === "night", dusk = tod === "sunset";
+      rain.visible = kind === "rain"; snow.visible = kind === "snow"; if (rain.visible || snow.visible) seed();
+      const fogCol = night ? 0x10141c : kind === "fog" ? 0xc9ccd0 : kind === "rain" ? 0x8d949c : kind === "snow" ? 0xd7dbe0 : dusk ? 0xe8b48c : 0xbcd2ea;
+      scene.fog = kind === "fog" ? new THREE.Fog(fogCol, 8, 70) : kind === "rain" || kind === "snow" ? new THREE.Fog(fogCol, 20, 150) : night ? new THREE.Fog(fogCol, 40, 240) : null;
+      scene.background = new THREE.Color(night ? 0x0b0f17 : kind === "clear" ? (dusk ? 0xf0b98f : 0x9cc4ea) : fogCol);
+      const tint = night ? 0x3d4659 : dusk ? 0xffd2b0 : kind === "rain" ? 0xb4b8bd : kind === "snow" ? 0xe9edf2 : kind === "fog" ? 0xd0d3d6 : 0xffffff;
+      tintNow = tint; tileMats.forEach(m => m.color && m.color.set(tint));
+      hemi.intensity = night ? 0.45 : kind === "clear" ? 1.5 : 1.15; sun.intensity = night ? 0.25 : kind === "clear" ? (dusk ? 1.6 : 2.5) : 0.9; sun.color.set(dusk ? 0xffb37a : night ? 0x9fb4ff : 0xfff3df);
+      wallMat.emissiveIntensity = night ? 0.9 : 0; renderer.shadowMap.needsUpdate = true;
+      panel.querySelectorAll("button").forEach(b => b.classList.toggle("on", st[b.dataset.k] === b.dataset.v)); invalidate();
+    }
+    function step(now){ if (!rain.visible && !snow.visible){ last = now; return false; }
+      const dt = Math.min(0.05, (now - (last || now))/1000); last = now; const fall = (kind === "rain" ? 2.2 : 0.18)*box*dt, bot = cur.ty - box*0.1;
+      for (let i = 0; i < N; i++){ const k = i*6; let y = pos[k + 1] - fall*vel[i];
+        if (kind === "snow"){ pos[k] += Math.sin(now/900 + i)*0.002*box; pos[k + 2] += Math.cos(now/1100 + i)*0.002*box; }
+        if (y < bot){ y = cur.ty + box*0.9; pos[k] = cur.tx + (rnd() - 0.5)*box*2; pos[k + 2] = cur.tz + (rnd() - 0.5)*box*2; }
+        pos[k + 1] = y; pos[k + 3] = pos[k]; pos[k + 4] = y - (kind === "rain" ? 0.02*box : 0); pos[k + 5] = pos[k + 2]; }
+      g.attributes.position.needsUpdate = true; return true; }
+    const panel = document.createElement("div"); panel.className = "wx-panel";
+    panel.innerHTML = '<span class="wx-h">Weather</span>' + [["live", "Live"], ["clear", "Sun"], ["rain", "Rain"], ["snow", "Snow"], ["fog", "Fog"]].map(([v, t]) => '<button type="button" data-k="wx" data-v="' + v + '">' + t + '</button>').join("") +
+      '<span class="wx-h">Time</span>' + [["live", "Live"], ["day", "Day"], ["sunset", "Sunset"], ["night", "Night"]].map(([v, t]) => '<button type="button" data-k="tod" data-v="' + v + '">' + t + '</button>').join("");
+    panel.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; st[b.dataset.k] = b.dataset.v; apply(); });
+    stage.appendChild(panel);
+    // live: real weather + daylight at West Point right now (falls back to clear/day if offline)
+    fetch("https://api.open-meteo.com/v1/forecast?latitude=41.39&longitude=-73.96&current=weather_code,is_day&timezone=America%2FNew_York").then(r => r.json()).then(j => {
+      const c = j.current.weather_code, h = new Date().getHours();
+      st.liveWx = c === 45 || c === 48 ? "fog" : (c >= 71 && c <= 77) || c === 85 || c === 86 ? "snow" : (c >= 51 && c <= 67) || (c >= 80 && c <= 82) || c >= 95 ? "rain" : "clear";
+      st.liveTod = !j.current.is_day ? "night" : (h >= 17 && h <= 19) ? "sunset" : "day"; apply(); }).catch(() => apply());
+    return { step, live: () => rain.visible || snow.visible, apply, panel, tint: () => tintNow };
+  })();
+
+  worldReady = true;
   retheme(); resize(); applyCam(); renderer.render(scene, cam); placeLabels();
   startTiles().catch(e => stopTiles(e));
   return {
@@ -375,6 +420,6 @@ export async function create(o){
     focus(id, done){ const l = o.landmarks.find(q => q.id === id); if (!l){ if (done) done(); return; } atHome = false; const p = V(l.x, l.y, (l.h || 0)/2);
       fly(tilesOn ? { tx: p.x, ty: p.y, tz: p.z, az: HOME3D.az + 0.35, pol: 1.22, dist: 9 } : { tx: p.x, ty: p.y, tz: p.z, az: HOME.az + 0.4, pol: 1.08, dist: 17 }, 650, done); },
     playIntro(done){ const to = homeFor(), p = V(650, 1250, 0); atHome = true; Object.assign(cur, { tx: p.x, ty: 0, tz: p.z, az: 0.15, pol: 1.44, dist: 200 }); fly(to, 4600, done); },
-    dispose(){ dead = true; if (tiles){ tiles.dispose(); tiles = null; } if (credit) credit.remove(); if (raf) cancelAnimationFrame(raf); off.forEach(f => f()); if (ro) ro.disconnect(); disposables.forEach(d => d.dispose()); renderer.dispose(); }
+    dispose(){ dead = true; world.panel.remove(); if (tiles){ tiles.dispose(); tiles = null; } if (credit) credit.remove(); if (raf) cancelAnimationFrame(raf); off.forEach(f => f()); if (ro) ro.disconnect(); disposables.forEach(d => d.dispose()); renderer.dispose(); }
   };
 }
