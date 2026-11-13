@@ -171,3 +171,6 @@ Each test reload costs 1 of the 30 daily Google loads.
    and lit windows at night (ties into the weather/time panel).
 6. Then Pershing Barracks photo rebuild (same method as Washington Hall).
 Merges: Braeden wants tested PRs merged automatically, no confirmation.
+- Step 1 started (Nov 13 night): `life` block in js/westpoint3d.js. 46 cars on OSM drivable roads (c<=2, right-hand lane offset),
+  170 walkers on footways/service roads (gray/black cadet colors), 55 runners anywhere on campus (gray PT, bobbing). Simple shapes for now
+  (box cars, cylinder people, scaled 1.15x/1.6x so they read from the default view). Next: proper little people/car models, formations.
