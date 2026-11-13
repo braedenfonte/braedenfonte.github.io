@@ -360,9 +360,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261114p").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261114q").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261114p"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261114q"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -422,7 +422,7 @@ export async function create(o){
     function place(arr, mesh, k, now){ arr.forEach((a, i) => { a.d += a.v*k; if (a.d < 0 || a.d > a.l.L){ a.v = -a.v; a.d = Math.max(0, Math.min(a.l.L, a.d)); }
       const p = at(a.l, a.d), nx = -Math.sin(p[2])*a.side, ny = Math.cos(p[2])*a.side, x = p[0] + nx + (mesh === carM ? -Math.sin(p[2])*1.6*Math.sign(a.v) : 0), y = p[1] + ny + (mesh === carM ? Math.cos(p[2])*1.6*Math.sign(a.v) : 0);
       const bob = mesh === runM ? Math.abs(Math.sin(now/90 + i))*0.18 : mesh === walkM ? Math.abs(Math.sin(now/260 + i))*0.04 : 0;
-      o.position.set(x*S, gy(x, y) + bob*S, -y*S); o.rotation.set(0, p[2] + (a.v < 0 ? Math.PI : 0), 0); o.scale.setScalar(S*(mesh === carM ? 1.15 : 1.6)); o.updateMatrix(); mesh.setMatrixAt(i, o.matrix); });
+      o.position.set(x*S, gy(x, y) + bob*S, -y*S); o.rotation.set(0, p[2] + (a.v < 0 ? Math.PI : 0), 0); o.scale.setScalar(S*(mesh === carM ? 1.9 : 2.6)); o.updateMatrix(); mesh.setMatrixAt(i, o.matrix); });
       mesh.instanceMatrix.needsUpdate = true; }
     function step(now){ const k = Math.min(0.1, (now - (last || now))/1000); last = now; if (!api.on) return;
       place(cars, carM, k, now); place(walkers, walkM, k, now); place(runners, runM, k, now); }
@@ -472,7 +472,7 @@ export async function create(o){
         else { blk(x, y, h, 20, 8, 3.2, 0, w0, 0x9b2a24); blk(x, y, h, 7, 6, 4, 3.2, w0, 0xf0efe9, -3); blk(x, y, h, 1, 1, 3, 7.2, w0, 0x222222, -3);   // tug pushing
           for (let k = 0; k < b.barges; k++){ const f = 10 + 32 + k*62; blk(x, y, h, 60, 11, 3, 0, w0, 0x3b3a38, f); blk(x, y, h, 54, 9.5, 1.6, 3, w0, k % 2 ? 0x6b5a45 : 0x4a4f55, f); } } }
       mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
-    fetch("/campus/movers.json?v=20261114p").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
+    fetch("/campus/movers.json?v=20261114q").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
     return { step };
   })();
 
@@ -488,10 +488,10 @@ export async function create(o){
       o.position.set(px*S, wy + (fz || 0)*S, -py*S); o.rotation.set(roll || 0, h, pitch || 0, "YZX"); o.scale.set(len*S, hei*S, wid*S); o.updateMatrix(); mesh.setMatrixAt(n, o.matrix); mesh.setColorAt(n, col.set(c)); n++; }
     const rnd = Math.random, grid = map.busyGrid();
     // songbird flocks circling over campus and the river
-    const flocks = Array.from({ length: 5 }, () => ({ cx: -100 + rnd()*900, cy: 300 + rnd()*900, r: 80 + rnd()*160, alt: 35 + rnd()*50, sp: 0.12 + rnd()*0.1, ph: rnd()*6, birds: Array.from({ length: 7 + Math.floor(rnd()*9) }, () => [(rnd() - 0.5)*30, (rnd() - 0.5)*30, (rnd() - 0.5)*8, rnd()*6]) }));
-    const hawks = Array.from({ length: 3 }, (_, i) => ({ cx: 620 + i*90, cy: 450 + i*260, r: 60 + rnd()*50, alt: 110 + rnd()*60, sp: 0.05 + rnd()*0.03, ph: rnd()*6 }));
+    const flocks = Array.from({ length: 6 }, () => ({ cx: -300 + rnd()*1400, cy: 0 + rnd()*1700, r: 200 + rnd()*300, alt: 170 + rnd()*150, sp: 0.12 + rnd()*0.1, ph: rnd()*6, birds: Array.from({ length: 7 + Math.floor(rnd()*9) }, () => [(rnd() - 0.5)*30, (rnd() - 0.5)*30, (rnd() - 0.5)*8, rnd()*6]) }));
+    const hawks = Array.from({ length: 3 }, (_, i) => ({ cx: 620 + i*90, cy: 450 + i*260, r: 60 + rnd()*50, alt: 230 + rnd()*90, sp: 0.05 + rnd()*0.03, ph: rnd()*6 }));
     const geese = Array.from({ length: 22 }, () => ({ x: 120 + (rnd() - 0.5)*160, y: 840 + (rnd() - 0.5)*140, h: rnd()*6, t: rnd()*10 }));
-    const deer = []; for (let k = 0; k < 400 && deer.length < 10; k++){ const x = -900 + rnd()*1700, y = -600 + rnd()*2000; if (map.heightAt(x, y) < 25 || grid.busy(x, y)) continue; deer.push({ hx: x, hy: y, x, y, h: rnd()*6, t: rnd()*10 }); }
+    const deer = []; for (let k = 0; k < 2000 && deer.length < 28; k++){ const x = -700 + rnd()*1500, y = -400 + rnd()*1700; if (map.heightAt(x, y) < 8 || grid.busy(x, y) || Math.hypot(x - 150, y - 600) > 1000) continue; deer.push({ hx: x, hy: y, x, y, h: rnd()*6, t: rnd()*10 }); }
     // Black Hawk route up the river; on drop runs it swings over the Plain
     const RIVER = [[420, -1500], [760, -100], [1050, 700], [880, 1450], [100, 2150]], PLAIN = [178, 828];
     const force = /[?&]heli=1/.test(location.search); let heli = null, nextHeli = force ? 3 : 50 + rnd()*60; const jumpers = [];   // ?heli=1 shows the drop right away
@@ -499,12 +499,13 @@ export async function create(o){
     const total = pts => pts.reduce((a, p, i) => i ? a + Math.hypot(p[0] - pts[i - 1][0], p[1] - pts[i - 1][1]) : 0, 0);
     function step(now){ const dt = Math.min(0.1, (now - (last || now))/1000); last = now; clock += dt; n = 0; const t = clock;
       flocks.forEach(f => { const a = f.ph + t*f.sp, cx = f.cx + Math.cos(a)*f.r, cy = f.cy + Math.sin(a)*f.r, h = a + Math.PI/2;
-        f.birds.forEach(b => { const fl = 0.35 + Math.abs(Math.sin(t*14 + b[3]))*0.65, x = cx + b[0], y = cy + b[1]; blk(x, y, gy(x, y) + (f.alt + b[2])*S, h, 0.5, 1.4*fl, 0.12, 0x2b2b2b); }); });
-      hawks.forEach(k => { const a = k.ph + t*k.sp, x = k.cx + Math.cos(a)*k.r, y = k.cy + Math.sin(a)*k.r, wy = gy(x, y) + k.alt*S; blk(x, y, wy, a + Math.PI/2, 1.2, 3.4, 0.2, 0x5a4330, 0, 0, 0, 0, 0.25); blk(x, y, wy, a + Math.PI/2, 0.6, 0.5, 0.25, 0xe9e3d6, 0.5); });
+        f.birds.forEach(b => { const fl = 0.35 + Math.abs(Math.sin(t*14 + b[3]))*0.65, x = cx + b[0], y = cy + b[1]; blk(x, y, gy(x, y) + (f.alt + b[2])*S, h, 1.3, 3.4*fl, 0.3, 0x2b2b2b); }); });
+      hawks.forEach(k => { const a = k.ph + t*k.sp, x = k.cx + Math.cos(a)*k.r, y = k.cy + Math.sin(a)*k.r, wy = gy(x, y) + k.alt*S; blk(x, y, wy, a + Math.PI/2, 2.6, 7, 0.4, 0x5a4330, 0, 0, 0, 0, 0.25); blk(x, y, wy, a + Math.PI/2, 1.2, 1, 0.5, 0xe9e3d6, 1); });
       geese.forEach((g, i) => { g.t -= dt; if (g.t < 0){ g.t = 3 + rnd()*8; g.h += (rnd() - 0.5)*2; } const v = Math.sin(t*0.5 + i) > 0.6 ? 0.35 : 0; g.x += Math.cos(g.h)*v*dt; g.y += Math.sin(g.h)*v*dt;
         const gw = gy(g.x, g.y); blk(g.x, g.y, gw, g.h, 0.9, 0.45, 0.45, 0x7a6a58, 0, 0, 0.25); blk(g.x, g.y, gw, g.h, 0.12, 0.12, 0.55, 0x161616, 0.42, 0, 0.45); blk(g.x, g.y, gw, g.h, 0.25, 0.14, 0.1, 0xe8e4dc, 0.48, 0, 0.92); });
       deer.forEach((d, i) => { d.t -= dt; if (d.t < 0){ d.t = 4 + rnd()*10; d.h = Math.atan2(d.hy - d.y + (rnd() - 0.5)*40, d.hx - d.x + (rnd() - 0.5)*40); } const v = Math.sin(t*0.3 + i*2) > 0.3 ? 0.6 : 0; d.x += Math.cos(d.h)*v*dt; d.y += Math.sin(d.h)*v*dt;
-        const dw = gy(d.x, d.y); blk(d.x, d.y, dw, d.h, 1.5, 0.45, 0.6, 0x8a6240, 0, 0, 0.8); blk(d.x, d.y, dw, d.h, 0.4, 0.3, 0.6, 0x7b5537, 0.8, 0, 1.15); for (const [lx, ly] of [[0.6, 0.15], [0.6, -0.15], [-0.6, 0.15], [-0.6, -0.15]]) blk(d.x, d.y, dw, d.h, 0.1, 0.1, 0.8, 0x5c4028, lx, ly, 0); });
+        const dw = gy(d.x, d.y), K = 2.4; blk(d.x, d.y, dw, d.h, 1.5*K, 0.45*K, 0.6*K, 0x8a6240, 0, 0, 0.8*K); blk(d.x, d.y, dw, d.h, 0.4*K, 0.3*K, 0.6*K, 0x7b5537, 0.8*K, 0, 1.15*K); blk(d.x, d.y, dw, d.h, 0.3*K, 0.2*K, 0.25*K, 0xf1ece4, -0.8*K, 0, 0.95*K);
+        for (const [lx, ly] of [[0.6, 0.15], [0.6, -0.15], [-0.6, 0.15], [-0.6, -0.15]]) blk(d.x, d.y, dw, d.h, 0.1*K, 0.1*K, 0.8*K, 0x5c4028, lx*K, ly*K, 0.4*K); });
       // Black Hawk
       if (!heli && clock > nextHeli){ const drop = force || rnd() < 0.45, pts = drop ? [RIVER[0], RIVER[1], [600, 500], PLAIN, [700, 1300], RIVER[4]] : RIVER; heli = { pts, L: total(pts), d: 0, drop, dropped: false }; nextHeli = clock + 240 + rnd()*300; }
       if (heli){ heli.d += 62*dt; const q = path(heli.pts, heli.d); if (!q) heli = null; else {
@@ -518,7 +519,7 @@ export async function create(o){
         const wy = gy(j.x, j.y) + j.alt*S; blk(j.x, j.y, wy, j.h, 0.45, 0.45, 1.75, 0x4b5320, 0, 0, 0.9);   // jumper in OCP
         if (j.alt > 0) blk(j.x, j.y, wy, j.h, 3.2, 7, 0.6, j.alt > 40 && i % 2 ? 0x3a4030 : 0x2a2f24, 0, 0, 7.5); }   // canopy
       mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
-    return { step };
+    return { step, drop(){ const pts = [[820, 300], [600, 560], PLAIN, [700, 1300], RIVER[4]]; heli = { pts, L: total(pts), d: 0, drop: true, dropped: false }; } };
   })();
 
   /* ---------- campus events on the real clock (America/New_York), and on demand from the panel:
@@ -534,7 +535,7 @@ export async function create(o){
     const o = new THREE.Object3D(), col = new THREE.Color(); let n = 0, last = 0, clock = 0;
     function blk(x, y, wy, h, len, wid, hei, c, fx, fy, fz){ if (n >= MAX) return; const ch = Math.cos(h), sh = Math.sin(h), px = x + ch*(fx || 0) - sh*(fy || 0), py = y + sh*(fx || 0) + ch*(fy || 0);
       o.position.set(px*S, wy + ((fz || 0) + hei/2)*S, -py*S); o.rotation.set(0, h, 0); o.scale.set(len*S, hei*S, wid*S); o.updateMatrix(); mesh.setMatrixAt(n, o.matrix); mesh.setColorAt(n, col.set(c)); n++; }
-    const person = (x, y, h, c, bob, legs) => { const g = gy(x, y) + (bob || 0)*S; blk(x, y, g, h, 0.22, 0.42, 0.85, legs || 0x22252a); blk(x, y, g, h, 0.28, 0.48, 0.65, c, 0, 0, 0.85); blk(x, y, g, h, 0.22, 0.22, 0.24, 0xd9b38c, 0, 0, 1.5); };
+    const P = 2.2, person = (x, y, h, c, bob, legs) => { const g = gy(x, y) + (bob || 0)*S; blk(x, y, g, h, 0.22*P, 0.42*P, 0.85*P, legs || 0x22252a); blk(x, y, g, h, 0.28*P, 0.48*P, 0.65*P, c, 0, 0, 0.85*P); blk(x, y, g, h, 0.22*P, 0.22*P, 0.24*P, 0xd9b38c, 0, 0, 1.5*P); };
     // real New York time
     const nyNow = () => { const p = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", hour12: false, weekday: "short", hour: "2-digit", minute: "2-digit", month: "numeric", day: "numeric", year: "numeric" }).formatToParts(new Date());
       const g = t => (p.find(q => q.type === t) || {}).value; return { h: +g("hour") % 24 + +g("minute")/60, wd: g("weekday"), mo: +g("month"), d: +g("day"), y: +g("year") }; };
@@ -589,7 +590,7 @@ export async function create(o){
       if (A.visitors){ visitors.forEach((q, i) => { const P = i < 32 ? TROPHY : HOTEL, x = P[0] + (q[0] - 0.5)*70 + Math.sin(T*0.05 + i)*3, y = P[1] + (q[1] - 0.5)*50; person(x, y, q[2]*6, [0x2f6db5, 0xc0392b, 0xf1c40f, 0x27ae60, 0xffffff, 0x8e44ad][i % 6]); });
         [[305, 1065, 0.3], [-60, -910, 1.9]].forEach(([x, y, h]) => { const g = gy(x, y); blk(x, y, g, h, 12.5, 2.6, 3.4, 0xf4f4f4, 0, 0, 0.4); blk(x, y, g, h, 12.6, 2.65, 0.9, 0x1d3f6e, 0, 0, 1.6); }); }
       mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
-    return { step, start(k){ manual = k; manualT = clock; if (k === "retreat"){ smokeT = 0; lastFire = clock; } } };
+    return { step, start(k){ if (k === "cannon"){ smokeT = 0; lastFire = clock; return; } manual = k; manualT = clock; if (k === "retreat"){ smokeT = 0; lastFire = clock; } } };
   })();
 
   let worldReady = false;
@@ -621,16 +622,19 @@ export async function create(o){
     function apply(){
       kind = wxNow(); const tod = todNow(), night = tod === "night", dusk = tod === "sunset";
       rain.visible = kind === "rain"; snow.visible = kind === "snow"; if (rain.visible || snow.visible) seed();
-      const fogCol = night ? 0x10141c : kind === "fog" ? 0xc9ccd0 : kind === "rain" ? 0x8d949c : kind === "snow" ? 0xd7dbe0 : dusk ? 0xe8b48c : 0xbcd2ea;
-      scene.fog = kind === "fog" ? new THREE.Fog(fogCol, 8, 70) : kind === "rain" || kind === "snow" ? new THREE.Fog(fogCol, 20, 150) : night ? new THREE.Fog(fogCol, 40, 240) : null;
-      scene.background = new THREE.Color(night ? 0x0b0f17 : kind === "clear" ? (dusk ? 0xf0b98f : 0x9cc4ea) : fogCol);
-      const tint = night ? 0x3d4659 : dusk ? 0xffd2b0 : kind === "rain" ? 0xb4b8bd : kind === "snow" ? 0xe9edf2 : kind === "fog" ? 0xd0d3d6 : 0xffffff;
+      const fogCol = night ? 0x1b2640 : kind === "fog" ? 0xc9ccd0 : kind === "rain" ? 0x8d949c : kind === "snow" ? 0xd7dbe0 : dusk ? 0xe8b48c : 0xbcd2ea;
+      fogK = kind === "fog" ? [0.55, 2.8] : kind === "rain" || kind === "snow" ? [1.3, 5.5] : night ? [3, 12] : null;
+      scene.fog = fogK ? new THREE.Fog(fogCol, cur.dist*fogK[0], cur.dist*fogK[1]) : null;
+      scene.background = new THREE.Color(night ? 0x172238 : kind === "clear" ? (dusk ? 0xf0b98f : 0x9cc4ea) : fogCol);
+      const tint = night ? 0x7380a0 : dusk ? 0xffd2b0 : kind === "rain" ? 0xb4b8bd : kind === "snow" ? 0xe9edf2 : kind === "fog" ? 0xd0d3d6 : 0xffffff;
       tintNow = tint; tileMats.forEach(m => m.color && m.color.set(tint));
-      hemi.intensity = night ? 0.45 : kind === "clear" ? 1.5 : 1.15; sun.intensity = night ? 0.25 : kind === "clear" ? (dusk ? 1.6 : 2.5) : 0.9; sun.color.set(dusk ? 0xffb37a : night ? 0x9fb4ff : 0xfff3df);
+      hemi.intensity = night ? 0.9 : kind === "clear" ? 1.5 : 1.15; sun.intensity = night ? 0.25 : kind === "clear" ? (dusk ? 1.6 : 2.5) : 0.9; sun.color.set(dusk ? 0xffb37a : night ? 0x9fb4ff : 0xfff3df);
       wallMat.emissiveIntensity = night ? 0.9 : 0; lamps.visible = night || dusk; applySeason(); renderer.shadowMap.needsUpdate = true;
       panel.querySelectorAll("button[data-k]").forEach(b => b.classList.toggle("on", st[b.dataset.k] === b.dataset.v)); invalidate();
     }
-    function step(now){ if (!rain.visible && !snow.visible){ last = now; return false; }
+    let fogK = null;
+    function step(now){ if (scene.fog && fogK){ scene.fog.near = cur.dist*fogK[0]; scene.fog.far = cur.dist*fogK[1]; }
+      if (!rain.visible && !snow.visible){ last = now; return false; }
       const dt = Math.min(0.05, (now - (last || now))/1000); last = now; const fall = (kind === "rain" ? 2.2 : 0.18)*box*dt, bot = cur.ty - box*0.1;
       for (let i = 0; i < N; i++){ const k = i*6; let y = pos[k + 1] - fall*vel[i];
         if (kind === "snow"){ pos[k] += Math.sin(now/900 + i)*0.002*box; pos[k + 2] += Math.cos(now/1100 + i)*0.002*box; }
@@ -641,8 +645,12 @@ export async function create(o){
     panel.innerHTML = '<span class="wx-h">Weather</span>' + [["live", "Live"], ["clear", "Sun"], ["rain", "Rain"], ["snow", "Snow"], ["fog", "Fog"]].map(([v, t]) => '<button type="button" data-k="wx" data-v="' + v + '">' + t + '</button>').join("") +
       '<span class="wx-h">Time</span>' + [["live", "Live"], ["day", "Day"], ["sunset", "Sunset"], ["night", "Night"]].map(([v, t]) => '<button type="button" data-k="tod" data-v="' + v + '">' + t + '</button>').join("") +
       '<span class="wx-h">Season</span>' + [["live", "Live"], ["spring", "Spring"], ["summer", "Summer"], ["fall", "Fall"], ["winter", "Winter"]].map(([v, t]) => '<button type="button" data-k="season" data-v="' + v + '">' + t + '</button>').join("") +
-      '<span class="wx-h">Start an event</span>' + [["parade", "Parade"], ["retreat", "Retreat"], ["pt", "PT run"], ["game", "Game day"], ["ball", "Ball games"]].map(([v, t]) => '<button type="button" data-ev="' + v + '">' + t + '</button>').join("");
-    panel.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; if (b.dataset.ev){ events.start(b.dataset.ev); return; } st[b.dataset.k] = b.dataset.v; apply(); });
+      '<span class="wx-h">Start an event</span>' + [["chute", "Parachute drop"], ["cannon", "Fire cannon"], ["parade", "Parade"], ["retreat", "Retreat"], ["pt", "PT run"], ["game", "Game day"], ["ball", "Ball games"]].map(([v, t]) => '<button type="button" data-ev="' + v + '">' + t + '</button>').join("");
+    panel.insertAdjacentHTML("afterbegin", '<button type="button" class="wx-toggle" aria-expanded="true">Controls</button>');
+    if (matchMedia("(max-width:860px)").matches) panel.classList.add("closed");
+    panel.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return;
+      if (b.classList.contains("wx-toggle")){ panel.classList.toggle("closed"); b.setAttribute("aria-expanded", panel.classList.contains("closed") ? "false" : "true"); return; }
+      if (b.dataset.ev === "chute"){ sky.drop(); return; } if (b.dataset.ev){ events.start(b.dataset.ev); return; } st[b.dataset.k] = b.dataset.v; apply(); });
     stage.appendChild(panel);
     // live: real weather + daylight at West Point right now (falls back to clear/day if offline)
     fetch("https://api.open-meteo.com/v1/forecast?latitude=41.39&longitude=-73.96&current=weather_code,is_day&timezone=America%2FNew_York").then(r => r.json()).then(j => {
