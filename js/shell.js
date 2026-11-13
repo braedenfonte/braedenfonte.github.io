@@ -231,7 +231,7 @@ function paintMode(){
   modeLbl.textContent = lite ? "Low power on" : "Low power";
   modeChip.textContent = campus ? "3D campus" : lite ? "2D · low power" : "2D map";
   resetBtn.hidden = !campus; zin.hidden = zout.hidden = !campus;
-  help.textContent = campus ? "Drag to look around, + and − to zoom. Hover a labeled building for its status, click to fly there. Everything is also in the menu."
+  help.textContent = campus ? "Drag to move around, scroll to zoom where your mouse points, right-drag (or Shift-drag) to turn and tilt, arrow keys or WASD to move. Hover a labeled building for its status, click to fly there. Everything is also in the menu."
     : "Pick a landmark to open that part of the site, or use the menu.";
 }
 function to2D(){
@@ -254,7 +254,7 @@ async function start3D(){
   loading = true;
   try{
     await MAP.load(); resolveLandmarks();
-    const mod = await import("/js/westpoint3d.js?v=20261114b");
+    const mod = await import("/js/westpoint3d.js?v=20261114c");
     if (MODE.lite) { loading = false; return; }
     campus = await mod.create({
       stage, canvas: $("#campus3d"),
