@@ -353,9 +353,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261114d").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261114e").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261114d"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261114e"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -391,19 +391,30 @@ export async function create(o){
       return [a[0] + (b[0] - a[0])*f, a[1] + (b[1] - a[1])*f, Math.atan2(b[1] - a[1], b[0] - a[0])]; };
     let sd = 99; const rnd = () => (sd = (sd*9301 + 49297) % 233280)/233280;
     const mk = (n, arr, speed, side) => Array.from({ length: n }, () => { const l = pick(arr, rnd()); return { l, d: rnd()*l.L, v: speed*(0.8 + rnd()*0.4)*(rnd() < 0.5 ? 1 : -1), side: (rnd() - 0.5)*side }; });
-    const cars = mk(46, drive, 9, 0), walkers = mk(170, walk, 1.4, 3), runners = mk(55, any, 3.4, 2.5);
-    const person = new THREE.CylinderGeometry(0.3, 0.26, 1.75, 6); person.translate(0, 0.875, 0);
-    const carG = new THREE.BoxGeometry(4.5, 1.45, 1.9); carG.translate(0, 0.72, 0);
+    const mid = l => l.P[Math.floor(l.P.length/2)], core = walk.filter(l => { const m = mid(l); return m[0] > -160 && m[0] < 520 && m[1] > 330 && m[1] < 1120; });
+    const crowd = core.length ? core.concat(core, core, core, walk) : walk;   // ~4x more people on the main-campus paths
+    const cars = mk(46, drive, 9, 0), walkers = mk(420, crowd, 1.25, 3.5), runners = mk(60, any, 5.2, 2.5);
+    const merge = parts => { const pos = [], nor = [], col = []; parts.forEach(([g, c]) => { const n = g.index ? g.toNonIndexed() : g, P = n.attributes.position, N = n.attributes.normal;
+        for (let i = 0; i < P.count; i++){ pos.push(P.getX(i), P.getY(i), P.getZ(i)); nor.push(N.getX(i), N.getY(i), N.getZ(i)); col.push(c, c, c); } });
+      const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute("normal", new THREE.Float32BufferAttribute(nor, 3)); g.setAttribute("color", new THREE.Float32BufferAttribute(col, 3)); return g; };
+    const part = (g, x, y, z) => { g.translate(x, y, z); return g; };
+    // a person: legs, torso, arms, head (skin tone), about 1.75 m; body color comes from the instance color
+    const person = merge([[part(new THREE.BoxGeometry(0.16, 0.85, 0.2), -0.11, 0.43, 0), 0.35], [part(new THREE.BoxGeometry(0.16, 0.85, 0.2), 0.11, 0.43, 0), 0.35],
+      [part(new THREE.BoxGeometry(0.46, 0.62, 0.26), 0, 1.16, 0), 1], [part(new THREE.BoxGeometry(0.11, 0.58, 0.14), -0.29, 1.15, 0), 1], [part(new THREE.BoxGeometry(0.11, 0.58, 0.14), 0.29, 1.15, 0), 1],
+      [part(new THREE.SphereGeometry(0.12, 8, 6), 0, 1.6, 0), 1.6]]);
+    // a car: body, glass cabin, four dark wheels
+    const carG = merge([[part(new THREE.BoxGeometry(4.4, 0.75, 1.85), 0, 0.62, 0), 1], [part(new THREE.BoxGeometry(2.3, 0.6, 1.7), -0.2, 1.28, 0), 0.25],
+      ...[[1.35, 0.85], [1.35, -0.85], [-1.35, 0.85], [-1.35, -0.85]].map(([x, z]) => [part(new THREE.CylinderGeometry(0.34, 0.34, 0.24, 10).rotateX(Math.PI/2), x, 0.34, z), 0.08])]);
     const im = (geo, n, mat) => { const m = new THREE.InstancedMesh(keep(geo), keep(mat), n); m.castShadow = true; m.frustumCulled = false; m.userData.keep = true; scene.add(m); return m; };
-    const carM = im(carG, cars.length, new THREE.MeshStandardMaterial({ roughness: 0.35, metalness: 0.4 })), walkM = im(person, walkers.length, new THREE.MeshStandardMaterial({ roughness: 0.9 })), runM = im(person.clone(), runners.length, new THREE.MeshStandardMaterial({ roughness: 0.9 }));
+    const carM = im(carG, cars.length, new THREE.MeshStandardMaterial({ roughness: 0.35, metalness: 0.4, vertexColors: true })), walkM = im(person, walkers.length, new THREE.MeshStandardMaterial({ roughness: 0.9, vertexColors: true })), runM = im(person.clone(), runners.length, new THREE.MeshStandardMaterial({ roughness: 0.9, vertexColors: true }));
     const c = new THREE.Color(), CAR = [0x1d1f24, 0xe8e8e6, 0x8c929a, 0x24365e, 0x7b1c22, 0x2f4a3a, 0xc9c2b4];
     cars.forEach((a, i) => carM.setColorAt(i, c.set(CAR[i % CAR.length])));
-    walkers.forEach((a, i) => walkM.setColorAt(i, c.set(i % 5 ? 0x4b5058 : 0x1f2328)));   // cadets in gray / black
-    runners.forEach((a, i) => runM.setColorAt(i, c.set(i % 3 ? 0x8a8f96 : 0x2b2e33)));      // gray Army PT shirts
+    walkers.forEach((a, i) => walkM.setColorAt(i, c.set([0x5a606a, 0x6b7280, 0x2a2e35, 0x7d6a55, 0x3d4f6b][i % 5])));   // cadets in gray / black, a few visitors
+    runners.forEach((a, i) => runM.setColorAt(i, c.set(i % 4 ? 0x9a9fa6 : 0x2b2e33)));      // gray Army PT shirts
     const o = new THREE.Object3D(); let last = 0;
     function place(arr, mesh, k, now){ arr.forEach((a, i) => { a.d += a.v*k; if (a.d < 0 || a.d > a.l.L){ a.v = -a.v; a.d = Math.max(0, Math.min(a.l.L, a.d)); }
       const p = at(a.l, a.d), nx = -Math.sin(p[2])*a.side, ny = Math.cos(p[2])*a.side, x = p[0] + nx + (mesh === carM ? -Math.sin(p[2])*1.6*Math.sign(a.v) : 0), y = p[1] + ny + (mesh === carM ? Math.cos(p[2])*1.6*Math.sign(a.v) : 0);
-      const bob = mesh === runM ? Math.abs(Math.sin(now/120 + i))*0.12 : 0;
+      const bob = mesh === runM ? Math.abs(Math.sin(now/90 + i))*0.18 : mesh === walkM ? Math.abs(Math.sin(now/260 + i))*0.04 : 0;
       o.position.set(x*S, gy(x, y) + bob*S, -y*S); o.rotation.set(0, p[2] + (a.v < 0 ? Math.PI : 0), 0); o.scale.setScalar(S*(mesh === carM ? 1.15 : 1.6)); o.updateMatrix(); mesh.setMatrixAt(i, o.matrix); });
       mesh.instanceMatrix.needsUpdate = true; }
     function step(now){ const k = Math.min(0.1, (now - (last || now))/1000); last = now; if (!api.on) return;
