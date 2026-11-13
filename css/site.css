@@ -865,3 +865,17 @@ body.gate-open{overflow:hidden}
 .confetti{position:fixed;width:8px;height:12px;z-index:80;pointer-events:none;border-radius:2px;animation:conf 1.4s cubic-bezier(.2,.6,.4,1) forwards}
 @keyframes conf{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.flash3d .fi{transform:none!important}.flash3d .face.back{display:none}.flash3d .fi.flipped .face.front{display:none}.flash3d .fi.flipped .face.back{display:grid;transform:none}}
+/* golf on phones: a big swing button that stays on screen, a taller meter, no double-tap zoom */
+@media (pointer:coarse){
+  #ggSwing{position:sticky;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:6;width:100%;padding:18px 14px;font-size:18px;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+  .gg-meter{height:46px}
+  #ggCanvas{touch-action:none}
+}
+@media (pointer:coarse) and (max-width:860px){
+  body[data-view="daily"] main{padding-bottom:150px}
+  .gg-dock{position:fixed;left:0;right:0;bottom:0;z-index:15;display:none;flex-direction:column;gap:8px;padding:10px 12px calc(12px + env(safe-area-inset-bottom,0px));
+    background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+  body[data-view="daily"] .gg-dock{display:flex}
+  body.nav-open .gg-dock, body.gate-open .gg-dock{display:none}
+  .gg-dock #ggSwing{position:static;width:100%;box-shadow:none}
+}
