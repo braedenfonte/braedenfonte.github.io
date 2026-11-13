@@ -110,7 +110,7 @@ export async function create(o){
     const g = keep(new THREE.BufferGeometry()); g.setAttribute("position", new THREE.Float32BufferAttribute(pts, 3)); const ln = new THREE.LineSegments(g, lineBase); ln.visible = !!l.mine; scene.add(ln); outlines[l.id] = { ln, mine: !!l.mine }; });
 
   function retheme(){
-    const dk = dark(); paintGround();
+    const dk = dark() && !tilesOn; paintGround();   // the Google ground is a daytime photo, so buildings use daylight on it
     waterMat.color.set(dk ? 0x16324a : 0x3f80b3); slabMat.color.set(dk ? 0x0b0c10 : 0xcfd2d6);
     wallMat.emissiveIntensity = dk ? 0.9 : 0; wallMat.color.set(dk ? 0xb4bccb : 0xffffff); roofMat.color.set(dk ? 0xa9b2c4 : 0xffffff);
     hemi.color.set(dk ? 0x8ea6d6 : 0xffffff); hemi.groundColor.set(dk ? 0x0a0d14 : 0x6f7a66); hemi.intensity = dk ? 1.25 : 1.5;
@@ -191,18 +191,32 @@ export async function create(o){
 
   /* ---------- Google Photorealistic 3D Tiles: the real look. The model above stays underneath as the fallback
      (no key, low-power/data-saver, quota used up, or any load error) and stays invisible-but-pickable for hovers. ---------- */
-  let tiles = null, tilesOn = false, credit = null, tilesAct = 0; const tileMats = new Set();
-  const own = scene.children.filter(c => (c.isMesh || c.isInstancedMesh) && !c.userData.keep && !picks.includes(c));
+  let tiles = null, tilesOn = false, credit = null, tilesAct = 0, hold = null, calib = 0; const tileMats = new Set();
+  const own = scene.children.filter(c => (c.isMesh || c.isInstancedMesh) && !c.userData.keep && !picks.includes(c) && c !== walls && c !== roofs);   // Google has no 3D buildings here, so ours stay
   function showOwn(on){ own.forEach(c => { c.visible = on; }); renderer.shadowMap.needsUpdate = true; }
   function stopTiles(why){ if (!tiles) return; console.warn("Google 3D tiles off, using the built-in map:", why);
-    tiles.group.parent && tiles.group.parent.removeFromParent(); tiles.dispose(); tiles = null; tilesOn = false; tileMats.clear();
+    tiles.group.parent && tiles.group.parent.removeFromParent(); tiles.dispose(); tiles = null; tilesOn = false; tileMats.clear(); retheme();
     if (credit){ credit.remove(); credit = null; } showOwn(true); for (const k in outlines) outlines[k].ln.visible = outlines[k].mine; if (atHome) fly(homeFor(), 600); invalidate(); }
+  // Google's ground and our terrain come from different surveys: measure the height gap at ~150 open-ground points and shift the
+  // tiles so the two agree. Then our buildings (built on our terrain) sit exactly on Google's ground. Re-run as sharper tiles arrive.
+  function calibrate(){
+    if (!tiles || !hold || calib >= 3) return;
+    const rc = new THREE.Raycaster(), dn = new THREE.Vector3(0, -1, 0), grid = map.busyGrid(), diffs = []; hold.updateMatrixWorld(true);
+    for (let j = 0; j < 14; j++) for (let i = 0; i < 12; i++){ const x = -700 + i*140, y = -700 + j*150;
+      if (map.heightAt(x, y) < 2 || grid.busy(x, y)) continue;
+      rc.set(new THREE.Vector3(x*S, 600, -y*S), dn); const hit = rc.intersectObject(tiles.group, true)[0]; if (hit) diffs.push(gy(x, y) - hit.point.y); }
+    if (diffs.length < 40) return;
+    diffs.sort((a, b) => a - b); const med = diffs[diffs.length >> 1], iqr = diffs[(diffs.length*3) >> 2] - diffs[diffs.length >> 2];
+    if (Math.abs(med) > 60*S || iqr > 12*S) return;   // still the rough first-pass globe: wait for the detailed ground
+    calib++; hold.position.y += med; hold.updateMatrixWorld(true);
+    renderer.shadowMap.needsUpdate = true; invalidate();
+  }
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261113j").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261113n").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261113j"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261113n"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -211,14 +225,16 @@ export async function create(o){
     const draco = new T.DRACOLoader().setDecoderPath("/vendor/draco/"), gltf = new T.GLTFLoader(t.manager); gltf.setDRACOLoader(draco);
     t.manager.addHandler(/\.(gltf|glb)(\?.*)?$/i, gltf);   // Google tile URLs end in ?session=..., and Draco is needed for the detailed pieces
     t.setLatLonToYUp(map.data.lat0*Math.PI/180, map.data.lon0*Math.PI/180);   // tiles: X north, Y up, Z east (meters)
-    const hold = new THREE.Group(); hold.rotation.y = Math.PI/2; hold.scale.setScalar(S);   // uniform, or the tiles pick the wrong detail level
+    hold = new THREE.Group(); hold.rotation.y = Math.PI/2; hold.scale.setScalar(S);   // uniform, or the tiles pick the wrong detail level
     hold.position.y = 32*S*VE;   // ellipsoid -> sea level (geoid is ~32 m below the ellipsoid at West Point)
     hold.add(t.group); scene.add(hold); hold.updateMatrixWorld(true);
     t.setCamera(cam); t.setResolutionFromRenderer(cam, renderer);
     t.addEventListener("load-model", ev => { if (!tiles) return; ev.scene.traverse(c => { if (c.material){ tileMats.add(c.material);  } });
-      if (!tilesOn){ tilesOn = true; showOwn(false); for (const k in outlines) outlines[k].ln.visible = false; if (atHome && !tween) fly(homeFor(), 1100); credit = document.createElement("div"); credit.className = "tiles-credit"; stage.appendChild(credit); } invalidate(); });
+      if (!tilesOn){ tilesOn = true; showOwn(false); retheme(); for (const k in outlines) outlines[k].ln.visible = false; if (atHome && !tween) fly(homeFor(), 1100); credit = document.createElement("div"); credit.className = "tiles-credit"; stage.appendChild(credit); } invalidate(); });
     ["load-model", "load-tile-set", "tiles-load-start"].forEach(n => t.addEventListener(n, () => { tilesAct = performance.now(); }));
-    t.addEventListener("load-tile-set", () => { t.errorTarget = matchMedia("(pointer: coarse)").matches ? 12 : 8; invalidate(); });   // much sharper than Google's default; only the first (root) request of a visit is billed   // keep asking for tiles while they stream in
+    t.addEventListener("load-tile-set", () => { const phone = matchMedia("(pointer: coarse)").matches; t.errorTarget = phone ? 12 : 8;
+      t.lruCache.minSize = phone ? 500 : 900; t.lruCache.maxSize = phone ? 800 : 1400; invalidate(); });   // cap memory (Google's suggested 6000-8000 tiles is far too heavy for a laptop or phone)   // much sharper than Google's default; only the first (root) request of a visit is billed   // keep asking for tiles while they stream in
+    t.addEventListener("tiles-load-end", () => setTimeout(calibrate, 300));
     t.addEventListener("tiles-load-end", () => { if (credit && tiles){ const a = [...new Set(tiles.getAttributions().filter(x => x.type === "string").flatMap(x => x.value.split(/[;,]\s*/)).filter(Boolean))]; credit.textContent = "Map data: " + (a.length ? a.join(", ") : "Google"); } invalidate(); });
     invalidate();
   }

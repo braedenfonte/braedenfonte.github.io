@@ -94,7 +94,11 @@ Phase 0 - tuning fixes (branch `map-tiles-tuning`): tile loader keeps updating u
 Google URLs, real colors in dark mode, no floating red outline boxes, closer zoom, angled landmark close-ups. Note: the in-app
 browser pane pauses animation when hidden, so test tiles in a visible browser.
 
-Phase 1 - foundation (1 session):
+Phase 1 - foundation. DONE Nov 13 (PR #6): our buildings stay visible on top of the tiles; the tiles are shifted so Google's ground
+matches our terrain (`calibrate()`, ~150 open-ground raycasts, only once the detailed ground has loaded); buildings use daylight
+granite colors on the photo ground even in dark mode; tile memory capped (1,400 desktop / 800 phone). Not done yet from the list below:
+real heights for every building and roof colors sampled from the photo.
+Phase 1 - foundation (original plan):
 - Show our building layer again while tiles are on (today it is hidden). Seat each building on the Google ground: raycast the tiles at
   the footprint and use the lowest hit, so nothing floats or sinks. Check the 32 m geoid offset the same way.
 - Real heights: fill `HEIGHT` in `campus/src/build.py` for every named building (Braeden/photos), sensible defaults by type for the rest.
