@@ -151,3 +151,13 @@ html[data-mode="lite"] .btn:hover,html[data-mode="lite"] .proj:hover{transform:n
 [hidden]{display:none!important}
 .nav a.lk+a.lk{border-top:0;border-radius:8px}
 .campus-2d{overflow:hidden}
+
+/* real West Point map */
+.campus{background:#0b0e14}
+.campus-2d canvas{display:block}
+.campus-hud{background:color-mix(in srgb,var(--surface) 82%,transparent);padding:10px 14px;border-radius:10px;border:1px solid var(--line);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.campus[data-state="2d"] .lm-pin{display:none}
+.lm.off{opacity:.85}.lm.off .lm-pin{display:none}.lm.off .lm-name::after{content:" ›";color:var(--accent)}
+.lm-minor{position:absolute;left:0;top:0;pointer-events:none;white-space:nowrap;font:600 10px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#fff;text-shadow:0 1px 2px #000,0 0 6px rgba(0,0,0,.8);will-change:transform}
+.lm[data-lm="barracks"] .lm-name{border-color:var(--accent);background:var(--accent);color:#fff}
+.campus-attr{margin:4px 0 0;font-size:12px}
