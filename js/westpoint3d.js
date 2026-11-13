@@ -13,6 +13,7 @@ export async function create(o){
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.shadowMap.autoUpdate = false;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.08;   // filmic color: richer greens, softer highlights
   const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(34, 1, 0.08, 2000);
   const hemi = new THREE.HemisphereLight(0xffffff, 0x333333, 1), sun = new THREE.DirectionalLight(0xffffff, 1);
   sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0008; sun.shadow.normalBias = 0.05;
@@ -194,8 +195,22 @@ export async function create(o){
     if (l.id === "trophy") pick(l, 26, 30);
     if (l.id === "stadium") pick(l, 60, 6);
     if (l.id === "dock"){ add(new THREE.BoxGeometry(80*S, 2.5*S, 10*S), stone, l.x + 45, l.y, 1.2); add(new THREE.BoxGeometry(14*S, 5*S, 5*S), accent, l.x + 70, l.y, 3.5); pick(l, 45, 14); }
-    if (l.sign){ add(new THREE.CylinderGeometry(0.7*S, 0.7*S, 16*S, 6), stone, l.x, l.y, 8).userData.keep = true; add(new THREE.BoxGeometry(2*S, 9*S, 26*S), accent, l.x, l.y, 16).userData.keep = true; pick(l, 22, 24); }
+    if (l.sign) signpost(l);
   });
+  // direction signposts: a black iron post with a gold cap and finial, and an arrow-shaped black board with a gold edge
+  // that points off the map toward the real place (away from the cadet area)
+  function signpost(l){
+    const g0 = gy(l.x, l.y), dir = Math.atan2(l.y - 620, l.x - 160), grp = new THREE.Group(); grp.position.set(l.x*S, g0, -l.y*S); grp.userData.keep = true;
+    const iron = keep(new THREE.MeshStandardMaterial({ color: 0x15181d, roughness: 0.45, metalness: 0.6 })), gold = keep(new THREE.MeshStandardMaterial({ color: 0xc9a54a, roughness: 0.35, metalness: 0.8, emissive: 0x3a2a08 }));
+    const m = (geo, mat, y) => { const k = new THREE.Mesh(keep(geo), mat); k.position.y = y*S; k.castShadow = true; grp.add(k); return k; };
+    m(new THREE.CylinderGeometry(1.4*S, 1.8*S, 1.2*S, 12), iron, 0.6); m(new THREE.CylinderGeometry(0.55*S, 0.65*S, 30*S, 10), iron, 15);
+    m(new THREE.CylinderGeometry(1*S, 1*S, 0.8*S, 12), gold, 30.4); m(new THREE.SphereGeometry(1*S, 12, 10), gold, 31.6);
+    const arrow = (L, H, T) => { const sh = new THREE.Shape(); sh.moveTo(0, -H/2); sh.lineTo(L - H*0.6, -H/2); sh.lineTo(L, 0); sh.lineTo(L - H*0.6, H/2); sh.lineTo(0, H/2); sh.lineTo(0, -H/2);
+      const g = new THREE.ExtrudeGeometry(sh, { depth: T, bevelEnabled: false }); g.translate(-1.2, 0, -T/2); g.scale(S, S, S); return g; };
+    const board = new THREE.Group(); board.position.y = 23*S; board.rotation.y = dir; grp.add(board);
+    const edge = new THREE.Mesh(keep(arrow(26, 8.4, 0.5)), gold), face = new THREE.Mesh(keep(arrow(25, 7, 0.9)), iron); face.position.x = 0.3*S; edge.castShadow = true; board.add(edge, face);
+    scene.add(grp); pick(l, 18, 34);
+  }
   const lineBase = keep(new THREE.LineBasicMaterial({ color: 0xe0243c })), outlines = {};
   o.landmarks.forEach((l, i) => { const t = l.bi != null && tops[l.bi]; if (!t) return; const pts = [], n = t.P.length;
     for (let k = 0; k < n; k++){ const a = t.P[k], b = t.P[(k + 1) % n]; pts.push(a[0]*S, t.top + 0.02, -a[1]*S, b[0]*S, t.top + 0.02, -b[1]*S, a[0]*S, t.lo, -a[1]*S, a[0]*S, t.top, -a[1]*S); }
@@ -360,9 +375,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261114q").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261114u").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261114q"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261114u"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -472,7 +487,7 @@ export async function create(o){
         else { blk(x, y, h, 20, 8, 3.2, 0, w0, 0x9b2a24); blk(x, y, h, 7, 6, 4, 3.2, w0, 0xf0efe9, -3); blk(x, y, h, 1, 1, 3, 7.2, w0, 0x222222, -3);   // tug pushing
           for (let k = 0; k < b.barges; k++){ const f = 10 + 32 + k*62; blk(x, y, h, 60, 11, 3, 0, w0, 0x3b3a38, f); blk(x, y, h, 54, 9.5, 1.6, 3, w0, k % 2 ? 0x6b5a45 : 0x4a4f55, f); } } }
       mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
-    fetch("/campus/movers.json?v=20261114q").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
+    fetch("/campus/movers.json?v=20261114u").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
     return { step };
   })();
 
@@ -625,7 +640,7 @@ export async function create(o){
       const fogCol = night ? 0x1b2640 : kind === "fog" ? 0xc9ccd0 : kind === "rain" ? 0x8d949c : kind === "snow" ? 0xd7dbe0 : dusk ? 0xe8b48c : 0xbcd2ea;
       fogK = kind === "fog" ? [0.55, 2.8] : kind === "rain" || kind === "snow" ? [1.3, 5.5] : night ? [3, 12] : null;
       scene.fog = fogK ? new THREE.Fog(fogCol, cur.dist*fogK[0], cur.dist*fogK[1]) : null;
-      scene.background = new THREE.Color(night ? 0x172238 : kind === "clear" ? (dusk ? 0xf0b98f : 0x9cc4ea) : fogCol);
+      scene.background = kind === "clear" || night ? skyTex(night ? ["#0c1424", "#1d2c4a", "#3a4d73"] : dusk ? ["#3b4f86", "#d98a63", "#ffd3a1"] : ["#3f7fd0", "#8fbbe8", "#e3eef7"]) : new THREE.Color(fogCol);
       const tint = night ? 0x7380a0 : dusk ? 0xffd2b0 : kind === "rain" ? 0xb4b8bd : kind === "snow" ? 0xe9edf2 : kind === "fog" ? 0xd0d3d6 : 0xffffff;
       tintNow = tint; tileMats.forEach(m => m.color && m.color.set(tint));
       hemi.intensity = night ? 0.9 : kind === "clear" ? 1.5 : 1.15; sun.intensity = night ? 0.25 : kind === "clear" ? (dusk ? 1.6 : 2.5) : 0.9; sun.color.set(dusk ? 0xffb37a : night ? 0x9fb4ff : 0xfff3df);
@@ -633,6 +648,8 @@ export async function create(o){
       panel.querySelectorAll("button[data-k]").forEach(b => b.classList.toggle("on", st[b.dataset.k] === b.dataset.v)); invalidate();
     }
     let fogK = null;
+    const skies = {}; function skyTex(stops){ const k = stops.join(); if (skies[k]) return skies[k]; const c = document.createElement("canvas"); c.width = 4; c.height = 256; const g = c.getContext("2d"), lg = g.createLinearGradient(0, 0, 0, 256);
+      lg.addColorStop(0, stops[0]); lg.addColorStop(0.55, stops[1]); lg.addColorStop(1, stops[2]); g.fillStyle = lg; g.fillRect(0, 0, 4, 256); const t = keep(new THREE.CanvasTexture(c)); t.colorSpace = THREE.SRGBColorSpace; return (skies[k] = t); }
     function step(now){ if (scene.fog && fogK){ scene.fog.near = cur.dist*fogK[0]; scene.fog.far = cur.dist*fogK[1]; }
       if (!rain.visible && !snow.visible){ last = now; return false; }
       const dt = Math.min(0.05, (now - (last || now))/1000); last = now; const fall = (kind === "rain" ? 2.2 : 0.18)*box*dt, bot = cur.ty - box*0.1;
