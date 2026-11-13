@@ -156,3 +156,18 @@ Each test reload costs 1 of the 30 daily Google loads.
 - NEXT (in Braeden's order): people walking + cars on real roads -> trains on the riverside track + ships on the Hudson -> birds + rare
   Black Hawk flyover (sometimes dropping parachutists onto the Plain) -> occasional baseball game (Doubleday Field), runners on the road to
   Thayer Gate and back, occasional soccer on Daly Field. Then Pershing Barracks photo rebuild.
+
+## Live world: full build list (Braeden, Nov 13 night). Build in this order.
+1. People walking (paths, Central Area, Plain) + cars driving the real OSM roads. Runners anywhere on campus (loops on roads and paths,
+   incl. out to Thayer Gate and back).
+2. Trains on the riverside track (freight + Amtrak, occasional) + ships on the Hudson; river life: sailboats/kayaks in summer, tugboats
+   pushing barges, an occasional tour boat stopping at South Dock.
+3. Birds; wildlife: deer on the wooded hills, Canada geese on the Plain, hawks over the river cliffs. Rare Black Hawk flyover along the
+   river; sometimes it drops parachutists onto the Plain.
+4. Events: company formations marching across the Plain (Saturday parade with the band) and morning PT runs in formation; flag raised and
+   lowered at the Plain flagpole at real reveille/retreat times with the cannon smoke at Trophy Point; game day at Michie on real home-game
+   days (crowds, tailgates, pre-game flyover); occasional baseball game at Doubleday Field; occasional soccer on Daly Field.
+5. Visitors + tour buses at Trophy Point and the Thayer Hotel. Seasons: fall foliage / snow cover matching the real date; street lamps
+   and lit windows at night (ties into the weather/time panel).
+6. Then Pershing Barracks photo rebuild (same method as Washington Hall).
+Merges: Braeden wants tested PRs merged automatically, no confirmation.
