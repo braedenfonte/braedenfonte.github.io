@@ -1,18 +1,9 @@
 {
- "date": "2026-11-13",
- "updated": "2026-11-13T07:10:00-05:00",
- "dayCode": "1-31",
- "classes": [
-  "MA376 0740",
-  "SS388 0905",
-  "EM481 1410"
- ],
+ "date": "2026-11-14",
+ "updated": "2026-11-14T07:10:00-05:00",
+ "dayCode": "N/A",
+ "classes": [],
  "due": [
-  {
-   "course": "MA376",
-   "title": "Project Milestone Two",
-   "due": "2026-11-13T23:59"
-  },
   {
    "course": "MA486",
    "title": "Project 2",
@@ -58,8 +49,8 @@
  ],
  "headlines": [
   "Bills 7-1, next at Jets Sun 1 PM (CBS)",
-  "S&P 500 −0.35%",
-  "Army off this week, next vs East Carolina Sat Nov 21"
+  "Army off this week, next vs East Carolina Sat Nov 21",
+  "S&P 500 −0.40% Fri, +2.5% for the week"
  ],
  "alerts": []
 }

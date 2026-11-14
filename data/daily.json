@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-13T06:55:00-05:00",
+ "updated": "2026-11-14T07:05:00-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -453,8 +453,34 @@
   }
  ],
  "football": {
-  "label": "Week 10 recap",
+  "label": "Week 10 recap + Friday's Week 11 games",
   "results": [
+   {
+    "away": "Illinois",
+    "home": "UCLA",
+    "as": 14,
+    "hs": 22,
+    "homeRank": 4,
+    "blurb": "UCLA moved to 10-0 as Ty Dieffenbach returned from a second-quarter elbow injury and Scooter Jackson's interception with 2:50 left sealed it.",
+    "stats": [
+     "Dieffenbach: 13/20, 232 yds, 2 TD, 1 INT",
+     "Mizell: 6 rec, 176 yds, TD",
+     "Scooter Jackson: 2 INT for UCLA"
+    ]
+   },
+   {
+    "away": "Houston",
+    "home": "Colorado",
+    "as": 32,
+    "hs": 42,
+    "awayRank": 14,
+    "blurb": "Colorado scored 28 straight points after trailing 20-7 and upset No. 14 Houston, its first win over an AP top-15 team since 2007.",
+    "stats": [
+     "Richard Young: 20 car, 94 yds, 2 TD",
+     "Isaac Wilson: 17/25, 217 yds, TD before leaving with an ankle injury",
+     "Weigman: 26/42, 272 yds, 3 TD, 1 INT for Houston"
+    ]
+   },
    {
     "away": "Georgia",
     "home": "Ole Miss",
@@ -524,20 +550,6 @@
   ],
   "upcoming": [
    {
-    "away": "Illinois",
-    "home": "UCLA",
-    "kick": "2026-11-14T02:00:00Z",
-    "note": "FOX (Fri night)",
-    "homeRank": 4
-   },
-   {
-    "away": "Houston",
-    "home": "Colorado",
-    "kick": "2026-11-14T03:15:00Z",
-    "note": "ESPN (Fri night)",
-    "awayRank": 14
-   },
-   {
     "away": "Duke",
     "home": "Miami",
     "kick": "2026-11-14T17:00:00Z",
@@ -603,25 +615,18 @@
     "homeRank": 18
    },
    {
-    "away": "Baylor",
-    "home": "BYU",
-    "kick": "2026-11-14T20:30:00Z",
-    "note": "FOX",
-    "homeRank": 12
-   },
-   {
-    "away": "Ole Miss",
-    "home": "Oklahoma",
-    "kick": "2026-11-14T21:15:00Z",
-    "note": "SEC Network",
-    "awayRank": 19
-   },
-   {
     "away": "Florida",
     "home": "Kentucky",
     "kick": "2026-11-14T23:15:00Z",
     "note": "ESPN",
     "homeRank": 13
+   },
+   {
+    "away": "Baylor",
+    "home": "BYU",
+    "kick": "2026-11-15T00:00:00Z",
+    "note": "FOX (moved after FAA ground stop)",
+    "homeRank": 12
    },
    {
     "away": "San Jose State",
@@ -636,14 +641,6 @@
     "note": "ABC",
     "awayRank": 8,
     "homeRank": 24
-   },
-   {
-    "away": "Utah",
-    "home": "Arizona",
-    "kick": "2026-11-15T00:30:00Z",
-    "note": "FOX",
-    "awayRank": 2,
-    "homeRank": 22
    },
    {
     "away": "Purdue",
@@ -665,89 +662,104 @@
     "kick": "2026-11-15T02:30:00Z",
     "note": "ESPN · Army and Navy are off this week",
     "awayRank": 10
+   },
+   {
+    "away": "Utah",
+    "home": "Arizona",
+    "kick": "2026-11-15T03:30:00Z",
+    "note": "FOX (moved after FAA ground stop)",
+    "awayRank": 2,
+    "homeRank": 22
+   },
+   {
+    "away": "Ole Miss",
+    "home": "Oklahoma",
+    "kick": "2026-11-15T18:00:00Z",
+    "note": "Moved to Sunday 1 PM ET after FAA ground stop; TV TBA",
+    "awayRank": 19
    }
   ],
   "poll": "AP Top 25, Week 11 (Nov 8)"
  },
  "location": {
-  "name": "Mount Fuji",
-  "wiki": "Mount_Fuji",
-  "country": "Japan",
-  "region": "Shizuoka and Yamanashi prefectures, Honshu",
-  "lat": 35.3608,
-  "lon": 138.7275,
-  "tagline": "Japan's highest peak, a near-perfect volcanic cone about 100 km from Tokyo",
-  "intro": "Mount Fuji is an active stratovolcano on the island of Honshu, straddling Shizuoka and Yamanashi prefectures about 100 km southwest of Tokyo. At 3,776 m it is the highest mountain in Japan, and its snow-capped, symmetrical cone has been a sacred site and a subject for artists for centuries.",
+  "name": "Machu Picchu",
+  "wiki": "Machu_Picchu",
+  "country": "Peru",
+  "region": "Cusco Region, Andes",
+  "lat": -13.1633,
+  "lon": -72.5456,
+  "tagline": "A 15th-century Inca citadel on a ridge high above the Urubamba River",
+  "intro": "Machu Picchu is a 15th-century Inca citadel on a mountain ridge about 80 km northwest of Cusco, Peru, at 2,430 m. It is believed to have been an estate of the Inca emperor Pachacuti, was abandoned around the time of the Spanish conquest, and became world-famous after Hiram Bingham's 1911 visit.",
   "stats": [
    {
-    "label": "Summit elevation",
-    "value": "3,776 m (12,389 ft)"
+    "label": "Elevation",
+    "value": "2,430 m (7,970 ft)"
    },
    {
-    "label": "Last eruption",
-    "value": "1707–1708 (Hōei)"
+    "label": "Built",
+    "value": "c. 1450–1470"
    },
    {
     "label": "UNESCO World Heritage",
-    "value": "2013 (cultural site)"
+    "value": "1983"
    },
    {
-    "label": "Summit crater",
-    "value": "780 m wide, 240 m deep"
+    "label": "Visitors",
+    "value": "Over 1.5 million a year"
    }
   ],
   "facts": [
-   "UNESCO listed it as a cultural site, not a natural one: the official name is \"Fujisan, sacred place and source of artistic inspiration.\"",
-   "Its last eruption, the Hōei eruption of 1707–08, formed a second peak on its flank called Mount Hōei.",
-   "Women were barred from climbing it as part of mountain worship until an 1872 government edict; Tatsu Takayama is the first woman on record to reach the summit, in 1832.",
-   "Hokusai's woodblock series Thirty-six Views of Mount Fuji, from the 1830s, includes The Great Wave off Kanagawa.",
-   "Since 2024 Yamanashi has charged a 2,000-yen fee on the Yoshida Trail and capped it at 4,000 hikers a day."
+   "It was built on earthquake faults, possibly because the fractured rock there was easy to quarry for building.",
+   "The cliffs below the site drop about 450 m (1,480 ft) to the Urubamba River.",
+   "Bingham's expeditions took thousands of artifacts to Yale; Yale returned them to Peru between 2010 and 2012.",
+   "Radiocarbon dating suggests people lived there from about 1420, earlier than the written Spanish chronologies imply.",
+   "Its 15th-century bismuth bronze ceremonial knives are the earliest known artifacts made of that alloy."
   ],
-  "bestTime": "July to early September is the official climbing season; for views of the snow-capped cone, the clear, dry air of late autumn and winter is best.",
-  "gettingThere": "Fly nonstop from New York (JFK or EWR) to Tokyo, then take a highway bus or train (about 2 hours) to Kawaguchiko in the Fuji Five Lakes area.",
-  "tip": "Stay a night at Lake Kawaguchi and look at dawn, when Fuji is most often clear of clouds; to climb, book a hut on the Yoshida Trail and start in the afternoon to watch sunrise from the summit."
+  "bestTime": "The dry season, May to September, has the clearest skies; April and October are quieter with fewer crowds.",
+  "gettingThere": "Fly from New York to Lima (about 8 hours nonstop from JFK), connect to Cusco, then take the train to Aguas Calientes and the shuttle bus up to the site.",
+  "tip": "Spend a couple of days in Cusco or the Sacred Valley first to adjust to the altitude, and book timed entry tickets (and a Huayna Picchu permit) well ahead."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 9 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
-  "asOf": "Thu Nov 12 close",
-  "story": "Stocks slipped as Nvidia fell after CEO Jensen Huang resigned and the 10-year Treasury yield rose above 5% on worries about more Fed rate hikes. Oil rose after President Trump said he was no longer interested in a deal with Iran.",
+  "asOf": "Fri Nov 13 close",
+  "story": "Stocks fell in choppy trading as chipmakers sold off again, with Nvidia down a second day after CEO Jensen Huang's resignation and Treasury yields rising. The S&P 500 still gained 2.5% for the week, its first weekly gain since early October.",
   "indices": [
    {
     "name": "S&P 500",
-    "value": "7,592",
-    "chg": -0.35
+    "value": "7,562",
+    "chg": -0.4
    }
   ],
   "movers": [
    {
-    "sym": "NVDA",
-    "move": "−4%",
-    "dir": -1,
-    "why": "Nvidia fell more than 4% (down as much as 13% early) after CEO Jensen Huang resigned."
-   },
-   {
     "sym": "AMD",
-    "move": "+5.9%",
-    "dir": 1,
-    "why": "AMD led S&P 500 gainers as Nvidia rivals rallied."
-   },
-   {
-    "sym": "AVGO",
-    "move": "+5.5%",
-    "dir": 1,
-    "why": "Broadcom rose with other Nvidia rivals."
-   },
-   {
-    "sym": "GPN",
-    "move": "−12%",
+    "move": "−8.8%",
     "dir": -1,
-    "why": "Global Payments was the S&P 500's biggest decliner."
+    "why": "AMD led S&P 500 decliners as chip stocks fell, after a 30% gain earlier in the week."
    },
    {
-    "sym": "SMCI",
-    "move": "−11.3%",
+    "sym": "CSCO",
+    "move": "−6.2%",
     "dir": -1,
-    "why": "Super Micro Computer fell with the Nvidia slide in AI hardware."
+    "why": "Cisco fell a day after record quarterly revenue, as gross margin slipped to 63.7% and it guided to $18.0-18.2 billion."
+   },
+   {
+    "sym": "NVDA",
+    "move": "−2%",
+    "dir": -1,
+    "why": "Nvidia fell again after Huang's resignation; CFO Colette Kress is interim CEO."
+   },
+   {
+    "sym": "DELL",
+    "move": "−7.2%",
+    "dir": -1,
+    "why": "Dell was among the day's biggest S&P 500 losers with hardware stocks."
+   },
+   {
+    "sym": "CHTR",
+    "move": "+4.3%",
+    "dir": 1,
+    "why": "Charter Communications led S&P 500 gainers, extending a longer run."
    }
   ],
   "lines": [
@@ -762,38 +774,38 @@
    {
     "game": "USC @ Indiana",
     "kick": "2026-11-14T20:30:00Z",
-    "spread": "IND −9.5",
+    "spread": "IND −8.5",
     "total": "50.5",
-    "ml": "IND −394 / USC +300"
+    "ml": "IND −330 / USC +275"
    }
   ],
   "probs": [
    {
-    "game": "Purdue @ Iowa",
-    "fav": "Iowa",
-    "p": 92
+    "game": "Middle Tennessee @ Liberty",
+    "fav": "Liberty",
+    "p": 95
+   },
+   {
+    "game": "Alabama @ Vanderbilt",
+    "fav": "Alabama",
+    "p": 95
+   },
+   {
+    "game": "Stanford @ Virginia Tech",
+    "fav": "Virginia Tech",
+    "p": 90
    },
    {
     "game": "Missouri @ Georgia",
     "fav": "Georgia",
-    "p": 88
+    "p": 89
    },
    {
-    "game": "Northwestern @ Ohio State",
-    "fav": "Ohio State",
-    "p": 85
-   },
-   {
-    "game": "Duke @ Miami",
-    "fav": "Miami",
-    "p": 84
-   },
-   {
-    "game": "Illinois @ UCLA",
-    "fav": "UCLA",
-    "p": 79
+    "game": "Southern Miss @ Louisiana Tech",
+    "fav": "Louisiana Tech",
+    "p": 89
    }
   ],
-  "sources": "S&P 500: AP via La Nación (Nov 12). Movers: Yahoo Finance, Trefis (Nov 12-13). Bills line: DraftKings via NBC Sports (Nov 10). USC-Indiana: Fox Sports odds (Nov 12). Win prob: Dimers model (Nov 11-12)."
+  "sources": "S&P 500: AP via La Nación (Nov 13). Movers: Trefis, StockTitan (Nov 13-14). Bills line: DraftKings via NBC Sports (Nov 10). USC-Indiana: CBS Sports (Nov 13). Win prob: ESPN FPI (Nov 14)."
  }
 }

@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-13T06:55:00-05:00",
+ "updated": "2026-11-14T06:45:00-05:00",
  "team": "Buffalo Bills",
  "record": {
   "w": 7,
@@ -113,20 +113,20 @@
  },
  "news": [
   {
-   "h": "Spencer Brown misses Thursday practice",
-   "b": "Starting right tackle Spencer Brown (ankle) did not practice Thursday after being limited Wednesday. Game designations come after Friday's practice."
+   "h": "Spencer Brown doubtful at Jets",
+   "b": "Starting right tackle Spencer Brown (ankle) is doubtful after missing Thursday and Friday practice. Tylan Grable would likely start if Brown can't go."
   },
   {
-   "h": "Three more line starters limited",
-   "b": "Dion Dawkins (rib), Connor McGovern (neck) and Alec Anderson (ankle) were limited Thursday, along with TE Dalton Kincaid (ankle)."
+   "h": "Four Bills listed questionable",
+   "b": "CB Christian Benford (wrist), S Sam Franklin Jr. (shoulder), DB Jordan Hancock (hamstring) and WR Tyrell Shavers (knee) are questionable. Dion Dawkins, Alec Anderson, Connor McGovern and Dalton Kincaid practiced fully and have no designation."
   },
   {
-   "h": "Benford limited, Franklin added",
-   "b": "CB Christian Benford (wrist) was limited again, and safety Sam Franklin Jr., a core special-teamer, was added with a shoulder injury."
+   "h": "Amani Hooker will play Sunday",
+   "b": "Joe Brady says trade-deadline pickup Amani Hooker, a safety acquired from Tennessee, will play at the Jets, though his role and snap count are still to be decided."
   },
   {
-   "h": "Garrett Wilson limited for the Jets",
-   "b": "WRs Garrett Wilson (concussion) and Omar Cooper Jr. (ankle) were limited Thursday; CB Jarvis Brownlee Jr., DL Harrison Phillips and LB Trevin Wallace did not practice. Kickoff Sunday 1 p.m. ET on CBS."
+   "h": "Garrett Wilson expected to play",
+   "b": "The Jets list Garrett Wilson (concussion) as questionable but expect him to clear protocol. Omar Cooper Jr. and seven other Jets are questionable; LB Trevin Wallace (groin) is out. Kickoff Sunday 1 p.m. ET on CBS."
   }
  ],
  "schedule": [
@@ -135,7 +135,7 @@
    "opp": "New York Jets",
    "home": false,
    "venue": "MetLife Stadium",
-   "note": "CBS"
+   "note": "CBS (Harlan, Green)"
   },
   {
    "kick": "2026-11-22T13:00-05:00",
@@ -194,5 +194,5 @@
    "note": "Date and time may flex"
   }
  ],
- "source": "Fox Sports standings, ClutchPoints and Heavy (Bills injuries), newyorkjets.com injury report (Nov 12), NBC Sports/DraftKings odds (Nov 10)."
+ "source": "buffalobills.com injury report and Hooker story (Nov 13), newyorkjets.com Friday injury report (Nov 13), Fox Sports standings (Nov 14), ESPN TNF result (Nov 12)."
 }
