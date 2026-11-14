@@ -59,11 +59,16 @@ export async function create(o){
   const tops = {};
   let curB = -1;   // which named building is being built (for hover names)
   function tri(arrP, arrC, arrL, pts3, color, lm){ for (const p of pts3){ arrP.push(p[0]*S, p[1], -p[2]*S); arrC.push(color[0], color[1], color[2]); } arrL.push(lm); (arrL.b || (arrL.b = [])).push(curB); }
-  function extrude(P, baseY, topY, wallColor, roofColor, lm, noRoof){
-    let u = 0; const n = P.length, vh = (topY - baseY)/S/(4.2*4);
+  // floors: when given, exactly that many rows of windows sit at the top of the wall (4.2 m each); below them is plain stone foundation
+  function extrude(P, baseY, topY, wallColor, roofColor, lm, noRoof, floors){
+    let u = 0; const n = P.length, yF = floors ? Math.max(baseY, topY - floors*4.2*S) : baseY, vh = floors ? floors/4 : (topY - baseY)/S/(4.2*4);
     for (let i = 0; i < n; i++){ const a = P[i], c = P[(i + 1) % n], len = Math.hypot(c[0] - a[0], c[1] - a[1]), u1 = u/(5.5*4), u2 = (u + len)/(5.5*4);
-      tri(wp, wc, wl, [[a[0], baseY, a[1]], [c[0], baseY, c[1]], [c[0], topY, c[1]]], wallColor, lm); wu.push(u1, 0, u2, 0, u2, vh);
-      tri(wp, wc, wl, [[a[0], baseY, a[1]], [c[0], topY, c[1]], [a[0], topY, a[1]]], wallColor, lm); wu.push(u1, 0, u2, vh, u1, vh); u += len; }
+      tri(wp, wc, wl, [[a[0], yF, a[1]], [c[0], yF, c[1]], [c[0], topY, c[1]]], wallColor, lm); wu.push(u1, 0, u2, 0, u2, vh);
+      tri(wp, wc, wl, [[a[0], yF, a[1]], [c[0], topY, c[1]], [a[0], topY, a[1]]], wallColor, lm); wu.push(u1, 0, u2, vh, u1, vh);
+      if (yF > baseY + 1e-6){ const fc = wallColor.map(v => v*0.9);   // foundation: stone, no windows
+        tri(wp, wc, wl, [[a[0], baseY, a[1]], [c[0], baseY, c[1]], [c[0], yF, c[1]]], fc, lm); wu.push(0.02, 0.02, 0.03, 0.02, 0.03, 0.03);
+        tri(wp, wc, wl, [[a[0], baseY, a[1]], [c[0], yF, c[1]], [a[0], yF, a[1]]], fc, lm); wu.push(0.02, 0.02, 0.03, 0.03, 0.02, 0.03); }
+      u += len; }
     if (noRoof) return;
     const faces = THREE.ShapeUtils.triangulateShape(P.map(p => new THREE.Vector2(p[0], p[1])), []);
     faces.forEach(f => tri(rp, rc, rl, f.map(k => [P[k][0], topY, P[k][1]]), roofColor, lm));
@@ -71,10 +76,10 @@ export async function create(o){
   D.buildings.forEach(b => {
     const P = map.pts(b.p); let lo = 1e9, hi = -1e9; P.forEach(p => { const h = gy(p[0], p[1]); if (h < lo) lo = h; if (h > hi) hi = h; });
     const F = 4.2, hh = { "Washington Hall": 16, "Pershing Barracks": 4*F, "Bradley Barracks": 6*F, "Eisenhower Barracks": 6*F, "MacArthur Barracks": 6*F, "Scott Barracks": 4*F, "Thayer Hall": 4*F }[b.n] || b.h;   // real floor counts
-    const top = Math.min(hi, lo + 9*S) + hh*S, lm = lmOf[b.i] != null ? lmOf[b.i] : -1; tops[b.i] = { P, lo, top };
+    const floors = Math.max(1, Math.round(hh/4.2)), top = hi + floors*4.2*S, lm = lmOf[b.i] != null ? lmOf[b.i] : -1; tops[b.i] = { P, lo, top, floors, yF: top - floors*4.2*S };   // roof sits exactly N floors above the highest ground
     const jit = 0.94 + ((b.i*37) % 13)/100, wcol = (b.k === "house" ? HOUSE[b.i % HOUSE.length] : b.n && PLAIN_FRONT_RX.test(b.n) ? [0.8, 0.8, 0.77] : WALL[b.k]).map(v => v*jit);
     curB = b.n ? b.i : -1;
-    extrude(P, lo - 2*S, top, wcol, ROOF[b.k].map(v => v*jit), lm);
+    extrude(P, lo - 2*S, top, wcol, ROOF[b.k].map(v => v*jit), lm, false, floors);
     if (b.k !== "house" && b.h >= 16 && P.length >= 4 && !(b.n && PLAIN_FRONT_RX.test(b.n))){ // a low parapet block so big halls don't look like plain boxes
       const c = b.c, Q = P.map(p => [c[0] + (p[0] - c[0])*0.9, c[1] + (p[1] - c[1])*0.9]); extrude(Q, top, top + 1.6*S, wcol.map(v => v*0.93), ROOF[b.k].map(v => v*0.9), lm); }
   });
@@ -239,7 +244,7 @@ export async function create(o){
       let best = -1, bd = -9, u0 = 0, uAt = 0; for (let i = 0, u = 0; i < n; i++){ const a = P[i], q = P[(i + 1) % n], L = Math.hypot(q[0] - a[0], q[1] - a[1]); if (L > 8){ const nx = (q[1] - a[1])/L*sg, ny = -(q[0] - a[0])/L*sg, d = nx*toward[0] + ny*toward[1] - (pickT.score ? pickT.score(a, q) : 0); if (d > bd){ bd = d; best = i; uAt = u; } } u += L; }
       const a = P[best], q = P[(best + 1) % n], L = Math.hypot(q[0] - a[0], q[1] - a[1]), ux = (q[0] - a[0])/L, uy = (q[1] - a[1])/L, nx = uy*sg, ny = -ux*sg;
       let t = pickT(a, q, L); const k = Math.round((uAt + t - 2.75)/5.5); t = Math.min(L - 1, Math.max(1, k*5.5 + 2.75 - uAt));
-      return { x: a[0] + ux*t + nx*0.07, y: a[1] + uy*t + ny*0.07, wy: T.lo - 2*S + (floor*4.2 + 1.9)*S, rot: Math.atan2(nx, -ny), a, q, L, ux, uy, nx, ny, lo: T.lo }; };
+      return { x: a[0] + ux*t + nx*0.07, y: a[1] + uy*t + ny*0.07, wy: T.yF + (floor*4.2 + 1.9)*S, rot: Math.atan2(nx, -ny), a, q, L, ux, uy, nx, ny, lo: T.lo }; };
     const glowTex2 = (() => { const c = document.createElement("canvas"); c.width = c.height = 64; const g = c.getContext("2d"), r = g.createRadialGradient(32, 32, 0, 32, 32, 32); r.addColorStop(0, "rgba(255,255,255,1)"); r.addColorStop(0.3, "rgba(255,255,255,.45)"); r.addColorStop(1, "rgba(255,255,255,0)"); g.fillStyle = r; g.fillRect(0, 0, 64, 64); return keep(new THREE.CanvasTexture(c)); })();
     function party(w){ if (!w) return; const mat = new THREE.MeshBasicMaterial({ color: 0xff00aa, toneMapped: false }), pane = new THREE.Mesh(keep(new THREE.PlaneGeometry(1.25*S, 2.5*S)), keep(mat));
       pane.position.set(w.x*S, w.wy, -w.y*S); pane.rotation.y = w.rot; pane.userData.keep = true; scene.add(pane);
@@ -252,9 +257,9 @@ export async function create(o){
     // MacArthur long wing (right of the mess hall from the Plain): ground-floor arch ~25 m from the mess hall, room 2 windows past it, 1st floor
     const PAV = [157, 658], arcs = [];
     const fromPav = (d) => (a, q, L) => Math.hypot(a[0] - PAV[0], a[1] - PAV[1]) < Math.hypot(q[0] - PAV[0], q[1] - PAV[1]) ? d : L - d;
-    const mArch = winOn("MacArthur Barracks", [0.97, 0.24], fromPav(25), 0); if (mArch) arcs.push(mArch);
+    [25, 68].forEach(d => { const w = winOn("MacArthur Barracks", [0.97, 0.24], fromPav(d), 0); if (w) arcs.push(w); });
     party(winOn("MacArthur Barracks", [0.97, 0.24], fromPav(25 + 11), 0));
-    const eArch = winOn("Eisenhower Barracks", [0.2, 0.98], fromPav(70), 0); if (eArch) arcs.push(eArch);   // left wing: arch near its far end, as in the photo
+    [25, 66].forEach(d => { const w = winOn("Eisenhower Barracks", [0.2, 0.98], fromPav(d), 0); if (w) arcs.push(w); });   // left wing: same two arches
     // the arches: stone surround, dark round-arched opening, drawn on the wall at ground level
     { const c = document.createElement("canvas"); c.width = 160; c.height = 200; const g = c.getContext("2d"); g.fillStyle = "#cfccc4"; g.fillRect(0, 0, 160, 200);
       g.fillStyle = "#a9a59c"; g.beginPath(); g.moveTo(22, 200); g.lineTo(22, 86); g.arc(80, 86, 58, Math.PI, 0); g.lineTo(138, 200); g.fill();
@@ -482,9 +487,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261115a").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261115b").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261115a"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261115b"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -607,7 +612,7 @@ export async function create(o){
         else { blk(x, y, h, 20, 8, 3.2, 0, w0, 0x9b2a24); blk(x, y, h, 7, 6, 4, 3.2, w0, 0xf0efe9, -3); blk(x, y, h, 1, 1, 3, 7.2, w0, 0x222222, -3);   // tug pushing
           for (let k = 0; k < b.barges; k++){ const f = 10 + 32 + k*62; blk(x, y, h, 60, 11, 3, 0, w0, 0x3b3a38, f); blk(x, y, h, 54, 9.5, 1.6, 3, w0, k % 2 ? 0x6b5a45 : 0x4a4f55, f); } } }
       mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
-    fetch("/campus/movers.json?v=20261115a").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
+    fetch("/campus/movers.json?v=20261115b").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
     return { step };
   })();
 
