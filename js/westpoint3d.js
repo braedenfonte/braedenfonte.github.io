@@ -33,8 +33,18 @@ export async function create(o){
     const g = keep(new THREE.BufferGeometry()); g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2)); g.setIndex(idx); g.computeVertexNormals();
     const m = new THREE.Mesh(g, keep(new THREE.MeshStandardMaterial({ map: tex, roughness: 1, side: THREE.DoubleSide }))); m.receiveShadow = true; scene.add(m); }
   const w = BB.x1 - BB.x0, hgt = BB.y1 - BB.y0, cx = (BB.x0 + BB.x1)/2*S, cz = -(BB.y0 + BB.y1)/2*S;
-  const waterMat = keep(new THREE.MeshStandardMaterial({ roughness: 0.22, metalness: 0.15 }));
-  { const m = new THREE.Mesh(keep(new THREE.PlaneGeometry(w*S, hgt*S)), waterMat); m.rotation.x = -Math.PI/2; m.position.set(cx, 0.15*S, cz); m.receiveShadow = true; scene.add(m); }
+  const rip = (() => { const c = document.createElement("canvas"); c.width = c.height = 128; const g = c.getContext("2d"), im = g.createImageData(128, 128);
+    for (let y = 0; y < 128; y++) for (let x = 0; x < 128; x++){ const a = Math.sin(x*0.29 + Math.sin(y*0.17)*2) + Math.sin(y*0.23 + Math.sin(x*0.11)*3), b = Math.cos(x*0.21 - y*0.13) + Math.sin(y*0.31), q = (y*128 + x)*4;
+      im.data[q] = 128 + a*30; im.data[q + 1] = 128 + b*30; im.data[q + 2] = 255; im.data[q + 3] = 255; } g.putImageData(im, 0, 0); const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(4, 4); return keep(t); })();
+  const waterMat = keep(new THREE.MeshStandardMaterial({ roughness: 0.18, metalness: 0.25, normalMap: rip, normalScale: new THREE.Vector2(0.6, 0.6) }));   // ripples drift (see frame)
+  { const wp2 = [], wu2 = [];   // water only over the real river cells (not one big sheet), so it never shows up on low land
+    for (let j = 0; j < e.rows - 1; j++) for (let i = 0; i < e.cols - 1; i++){ const k = j*e.cols + i; if (!(e.h[k] < 0 || e.h[k + 1] < 0 || e.h[k + e.cols] < 0 || e.h[k + e.cols + 1] < 0)) continue;
+      const x0 = (e.x0 + i*e.step)*S, x1 = x0 + e.step*S, z0 = -(e.y0 + j*e.step)*S, z1 = z0 - e.step*S, y = 0.8*S;
+      wp2.push(x0, y, z0, x1, y, z0, x1, y, z1, x0, y, z0, x1, y, z1, x0, y, z1); wu2.push(i/60, j/60, (i + 1)/60, j/60, (i + 1)/60, (j + 1)/60, i/60, j/60, (i + 1)/60, (j + 1)/60, i/60, (j + 1)/60); }
+    const wg = keep(new THREE.BufferGeometry()); wg.setAttribute("position", new THREE.Float32BufferAttribute(wp2, 3)); wg.setAttribute("uv", new THREE.Float32BufferAttribute(wu2, 2)); wg.computeVertexNormals();
+    const m = new THREE.Mesh(wg, waterMat); m.receiveShadow = true; m.userData.keep = true; scene.add(m);
+    D.areas.forEach(a => { if (a.k !== "water") return; const P = map.pts(a.p), sh = new THREE.Shape(P.map(p => new THREE.Vector2(p[0]*S, p[1]*S))), pm = new THREE.Mesh(keep(new THREE.ShapeGeometry(sh)), waterMat);   // ponds and reservoirs
+      pm.rotation.x = -Math.PI/2; pm.position.y = Math.min(...P.map(p => gy(p[0], p[1]))) + 0.6*S; pm.userData.keep = true; scene.add(pm); }); }
   const slabMat = keep(new THREE.MeshStandardMaterial({ roughness: 1 }));
   { const m = new THREE.Mesh(keep(new THREE.BoxGeometry(w*S + 1.2, 3, hgt*S + 1.2)), slabMat); m.position.set(cx, -1.5 - 4*S*VE, cz); scene.add(m); }
 
@@ -53,7 +63,7 @@ export async function create(o){
   const roofMat = keep(new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.95, side: THREE.DoubleSide }));
   const WALL = { barracks: [0.70, 0.68, 0.64], hall: [0.74, 0.72, 0.67] }, HOUSE = [[0.9, 0.88, 0.83], [0.78, 0.72, 0.62], [0.62, 0.4, 0.33], [0.82, 0.8, 0.74]];
   const ROOF = { barracks: [0.3, 0.33, 0.38], hall: [0.38, 0.4, 0.44], house: [0.42, 0.27, 0.22] };
-  const PLAIN_FRONT_RX = /^(Washington Hall|MacArthur Barracks|Eisenhower Barracks)$/;
+  const PLAIN_FRONT_RX = /^(Washington Hall|MacArthur Barracks|Eisenhower Barracks)$/; let shelfY = null; const forest = [];   // forest: tree meshes recolored by season. shelfY: Davis shelf deck height (people on it walk at this height)
   const wp = [], wu = [], wc = [], wl = [], rp = [], rc = [], rl = [];   // wl / rl: which landmark each triangle belongs to (-1 = none)
   const lmOf = {}; o.landmarks.forEach((l, i) => { if (l.bi != null) lmOf[l.bi] = i; });
   const tops = {};
@@ -275,18 +285,68 @@ export async function create(o){
     const t = keep(new THREE.CanvasTexture(c)); t.colorSpace = THREE.SRGBColorSpace; const mat = keep(new THREE.MeshBasicMaterial({ map: t, transparent: true, toneMapped: false }));
     const band = new THREE.Mesh(keep(new THREE.PlaneGeometry((L - 30)*S, 3*S)), mat); band.position.set(mx*S, gy(mx, my) + 6.3*S, -my*S); band.rotation.y = Math.atan2(ny, nx) - Math.PI/2 + Math.PI; band.userData.keep = true; scene.add(band); }
 
+  /* ---------- trees placed by hand where the photo method misses them: the 8 on Pershing's Central Area side, the row between
+     Pershing and Bartlett, the apron in front of Washington Hall / Eisenhower / MacArthur, and the big ones around the Plain ---------- */
+  { const T = [], add2 = (pts, s2) => pts.forEach(p => T.push([p[0], p[1], s2]));
+    add2([515, 525, 535, 545, 555, 565, 575, 585].map(y => [253, y]), 1);                 // Pershing patio, Central Area side
+    add2([516, 530, 544, 558, 572, 586].map(y => [322, y]), 1.05);                        // between Pershing and Bartlett
+    add2([[150, 702], [138, 724], [126, 746], [212, 712], [232, 700], [248, 684], [164, 742], [222, 734], [118, 700], [262, 668]], 1.15);   // the apron
+    add2([[92, 688], [84, 760], [88, 842], [96, 905], [372, 700], [386, 790], [366, 880], [300, 920]], 1.7);   // big trees around the Plain
+    const trunk = new THREE.InstancedMesh(keep(new THREE.CylinderGeometry(0.3, 0.45, 1, 6)), keep(new THREE.MeshStandardMaterial({ color: 0x4a3a2a, roughness: 1 })), T.length);
+    const crownG = new THREE.IcosahedronGeometry(1, 1); { const pa = crownG.attributes.position; for (let i = 0; i < pa.count; i++){ const f = 0.84 + ((i*7919) % 23)/23*0.32; pa.setXYZ(i, pa.getX(i)*f, pa.getY(i)*f*0.9, pa.getZ(i)*f); } crownG.computeVertexNormals(); }
+    const crown = new THREE.InstancedMesh(keep(crownG), keep(new THREE.MeshStandardMaterial({ roughness: 0.95 })), T.length*2), d = new THREE.Object3D(), cc = new THREE.Color();
+    T.forEach(([x, y, k], i) => { const g = gy(x, y), h = 13*k, r = 4.2*k; d.position.set(x*S, g + h*0.3*S, -y*S); d.rotation.set(0, 0, 0); d.scale.set(S*k, h*0.6*S, S*k); d.updateMatrix(); trunk.setMatrixAt(i, d.matrix);
+      for (let q = 0; q < 2; q++){ d.position.set((x + (q ? 1.5 : 0)*k)*S, g + (h - r*(q ? 1.3 : 0.85))*S, -(y + (q ? -1 : 0)*k)*S); d.rotation.set(i, i*2, 0); d.scale.setScalar(r*(q ? 0.75 : 1)*S); d.updateMatrix(); crown.setMatrixAt(i*2 + q, d.matrix); crown.setColorAt(i*2 + q, cc.setRGB(0.2 + (i % 5)*0.02, 0.38 + (i % 3)*0.03, 0.16)); } });
+    trunk.castShadow = crown.castShadow = true; trunk.userData.keep = crown.userData.keep = true; scene.add(trunk, crown); forest.push(crown); }
+
+  /* ---------- Clinton Field (soccer): grandstand along the west sideline with the press box in the middle, bleachers on the east side;
+     the soccer locker room across Cullum Road on the cliff side ---------- */
+  { const F = [492, 570, 841, 956], cy = (F[2] + F[3])/2, gr = [0.62, 0.63, 0.66], seat = [0.18, 0.2, 0.24];
+    for (let t = 0; t < 6; t++){ const x = F[0] - 3 - t*1.6, g = gy(x, cy); box(x, cy, 0, 1, 80, 1.6, g - 1*S, g + (0.6 + t*0.75)*S, t % 2 ? seat : gr, -1); }   // west grandstand tiers
+    { const x = F[0] - 9, g = gy(x, cy); box(x - 3, cy, 0, 1, 80, 1.2, g - 1*S, g + 5.2*S, gr, -1); box(x - 1.5, cy, 0, 1, 16, 5, g + 5*S, g + 8.6*S, [0.82, 0.82, 0.8], -1); box(x - 1.5, cy, 0, 1, 16.4, 5.4, g + 8.6*S, g + 9*S, [0.2, 0.22, 0.26], -1); box(x + 1.1, cy, 0, 1, 14, 0.15, g + 6*S, g + 8*S, [0.15, 0.25, 0.35], -1); }   // press box
+    for (let t = 0; t < 3; t++){ const x = F[1] + 2 + t*1.5, g = gy(x, cy); box(x, cy, 0, 1, 50, 1.5, g - 1*S, g + (0.5 + t*0.7)*S, t % 2 ? seat : gr, -1); }   // east bleachers
+    const L = [[600, 878], [628, 878], [628, 902], [600, 902]], g0 = Math.min(...L.map(p => gy(p[0], p[1]))), g1 = Math.max(...L.map(p => gy(p[0], p[1])));
+    extrude(L, g0 - 2*S, g1 + 2*4.2*S, [0.74, 0.72, 0.68], [0.36, 0.38, 0.42], -1, false, 2); }   // locker room (2 floors)
+
+  /* ---------- Davis Barracks: the shelf (a raised concrete deck along the north front at first-floor-window level, from the OSM
+     'Davis Shelf' path), a long straight staircase and a switchback (Z) staircase up to it, and the tall open atrium in the middle ---------- */
+  { const bi = D.buildings.findIndex(b => b.n === "Davis Barracks"), T = bi >= 0 && tops[bi];
+    if (T){ const X0 = 54, X1 = 210, Y0 = 476.5, Y1 = 487, deck = T.yF + 0.4*S, con = [0.78, 0.77, 0.74], rail = [0.35, 0.36, 0.38]; shelfY = deck;
+      for (let x = X0; x < X1; x += 12){ const xe = Math.min(X1, x + 12), gmin = Math.min(gy(x, Y1), gy(xe, Y1), gy(x, Y0)); box((x + xe)/2, (Y0 + Y1)/2, 1, 0, xe - x, Y1 - Y0, gmin - 1*S, deck, con, -1); }   // deck
+      box((X0 + X1)/2, Y1 - 0.15, 1, 0, X1 - X0, 0.3, deck, deck + 1.1*S, rail, -1);   // railing
+      const steps = (x, y, ux, uy, n, top, run, wid) => { for (let k = 0; k < n; k++){ const f = (k + 0.5)*run, y0 = top - (k + 1)*(top - gy(x + ux*n*run, y + uy*n*run))/n; box(x + ux*f, y + uy*f, ux, uy, run, wid, y0 - 1.2*S, y0 + 0.18*S, con, -1); } };
+      steps(196, Y1, 0, 1, 18, deck, 0.9, 7);   // the long straight staircase down to the north
+      { const mid = deck - (deck - gy(70, Y1 + 9))/2; steps(66, Y1, 0, 1, 9, deck, 0.9, 3.2); box(66, Y1 + 9.6, 1, 0, 6.4, 3.2, mid - 1.2*S, mid, con, -1); steps(69, Y1 + 9.6, 1, 0, 9, mid, 0.9, 3.2); }   // the Z: down, landing, then turning
+      // atrium: a tall open bay through the middle of the north front, three floors high
+      const c = document.createElement("canvas"); c.width = 256; c.height = 256; const g = c.getContext("2d"); g.fillStyle = "#c9c6bd"; g.fillRect(0, 0, 256, 256);
+      g.fillStyle = "#1d2228"; g.fillRect(28, 20, 200, 236); g.strokeStyle = "#6d7a86"; g.lineWidth = 3; for (let x = 28; x <= 228; x += 25){ g.beginPath(); g.moveTo(x, 20); g.lineTo(x, 256); g.stroke(); } for (let y = 20; y <= 256; y += 30){ g.beginPath(); g.moveTo(28, y); g.lineTo(228, y); g.stroke(); }
+      g.fillStyle = "rgba(255,214,140,.35)"; g.fillRect(40, 140, 176, 110); const tx = keep(new THREE.CanvasTexture(c)); tx.colorSpace = THREE.SRGBColorSpace;
+      const at = new THREE.Mesh(keep(new THREE.PlaneGeometry(14*S, 3*4.2*S)), keep(new THREE.MeshStandardMaterial({ map: tx, roughness: 0.6 }))); at.position.set(134*S, deck + 1.5*4.2*S, -(477.2)*S); at.rotation.y = Math.PI; at.userData.keep = true; scene.add(at); } }
+
   // Michie Stadium: a bowl of stands around the field
   const stad = D.areas.find(a => a.k === "stadium"), stadLm = o.landmarks.findIndex(l => l.id === "stadium");
   curB = -1;
-  if (stad){ const P = map.pts(stad.p), c = stad.c, g0 = gy(c[0], c[1]), n = P.length, inner = P.map(p => [c[0] + (p[0] - c[0])*0.52, c[1] + (p[1] - c[1])*0.52]);
-    extrude(P, g0 - 2*S, g0 + 17*S, [0.6, 0.6, 0.62], null, stadLm, true);
-    for (let i = 0; i < n; i++){ const a = P[i], b2 = P[(i + 1) % n], ai = inner[i], bi = inner[(i + 1) % n], col = i % 2 ? [0.5, 0.52, 0.56] : [0.56, 0.58, 0.62];
-      tri(rp, rc, rl, [[a[0], g0 + 17*S, a[1]], [b2[0], g0 + 17*S, b2[1]], [bi[0], g0 + 1.5*S, bi[1]]], col, stadLm); tri(rp, rc, rl, [[a[0], g0 + 17*S, a[1]], [bi[0], g0 + 1.5*S, bi[1]], [ai[0], g0 + 1.5*S, ai[1]]], col, stadLm); } }
+  /* Michie Stadium: turf field with yard lines and ARMY end zones (covers the graduation chairs in the photo), a 14-tier west grandstand
+     with the tall press box, 10-tier east stands, a south end section, four light towers and a scoreboard */
+  const MF = [-374, -318, 143, 257], MFX = (MF[0] + MF[1])/2, MFY = (MF[2] + MF[3])/2, MG = gy(MFX, MFY);
+  if (stad){ const grey = [0.6, 0.61, 0.63], seat = [0.27, 0.29, 0.33], gold = [0.72, 0.6, 0.27];
+    for (let t = 0; t < 14; t++) box(MF[0] - 4 - t*1.8, MFY, 0, 1, 124, 1.8, MG - 1*S, MG + (0.5 + t*0.95)*S, t % 3 === 2 ? gold : t % 2 ? seat : grey, stadLm);   // west grandstand
+    { const x = MF[0] - 4 - 14*1.8 - 4; box(x, MFY, 0, 1, 70, 7, MG, MG + 14*S, grey, stadLm); box(x, MFY, 0, 1, 72, 9, MG + 14*S, MG + 22*S, [0.8, 0.8, 0.78], stadLm); box(x + 4.6, MFY, 0, 1, 66, 0.2, MG + 15.5*S, MG + 20.5*S, [0.12, 0.2, 0.3], stadLm); box(x, MFY, 0, 1, 74, 10, MG + 22*S, MG + 22.8*S, [0.2, 0.22, 0.26], stadLm); }   // press box
+    for (let t = 0; t < 10; t++) box(MF[1] + 4 + t*1.8, MFY, 0, 1, 112, 1.8, MG - 1*S, MG + (0.5 + t*0.9)*S, t % 3 === 2 ? gold : t % 2 ? seat : grey, stadLm);   // east stands
+    for (let t = 0; t < 6; t++) box(MFX, MF[2] - 5 - t*1.8, 1, 0, 52, 1.8, MG - 1*S, MG + (0.5 + t*0.85)*S, t % 2 ? seat : grey, stadLm);   // south end
+    box(MFX, MF[3] + 16, 1, 0, 22, 2, MG + 4*S, MG + 13*S, [0.12, 0.12, 0.14], stadLm); box(MFX - 8, MF[3] + 16, 1, 0, 1, 1, MG, MG + 4*S, grey, stadLm); box(MFX + 8, MF[3] + 16, 1, 0, 1, 1, MG, MG + 4*S, grey, stadLm);   // scoreboard
+    [[MF[0] - 30, MF[2] - 8], [MF[0] - 30, MF[3] + 8], [MF[1] + 24, MF[2] - 8], [MF[1] + 24, MF[3] + 8]].forEach(([x, y]) => { box(x, y, 1, 0, 1, 1, MG, MG + 34*S, grey, stadLm); box(x, y, 1, 0, 6, 1.2, MG + 34*S, MG + 37*S, [0.85, 0.85, 0.8], stadLm); });   // light towers
+    const c = document.createElement("canvas"); c.width = 256; c.height = 512; const g = c.getContext("2d");
+    for (let k = 0; k < 24; k++){ g.fillStyle = k % 2 ? "#3f8a3a" : "#4a9a43"; g.fillRect(0, k*512/24, 256, 512/24); }
+    g.fillStyle = "#111"; g.fillRect(0, 0, 256, 43); g.fillRect(0, 469, 256, 43); g.fillStyle = "#d4af37"; g.font = "bold 30px sans-serif"; g.textAlign = "center"; g.fillText("ARMY", 128, 32); g.save(); g.translate(128, 490); g.rotate(Math.PI); g.fillText("ARMY", 0, 11); g.restore();
+    g.strokeStyle = "#fff"; g.lineWidth = 2; for (let k = 0; k <= 10; k++){ const y = 43 + k*42.6; g.beginPath(); g.moveTo(6, y); g.lineTo(250, y); g.stroke(); } g.strokeRect(4, 2, 248, 508);
+    g.fillStyle = "#d4af37"; g.beginPath(); g.arc(128, 256, 18, 0, 7); g.fill();
+    const tx = keep(new THREE.CanvasTexture(c)); tx.colorSpace = THREE.SRGBColorSpace; const turf = new THREE.Mesh(keep(new THREE.PlaneGeometry((MF[1] - MF[0])*S, (MF[3] - MF[2])*S)), keep(new THREE.MeshStandardMaterial({ map: tx, roughness: 0.95 })));
+    turf.rotation.x = -Math.PI/2; turf.position.set(MFX*S, MG + 0.25*S, -MFY*S); turf.userData.keep = true; turf.receiveShadow = true; scene.add(turf); }
   function meshOf(P, C, U, mat){ const g = keep(new THREE.BufferGeometry()); g.setAttribute("position", new THREE.Float32BufferAttribute(P, 3)); g.setAttribute("color", new THREE.Float32BufferAttribute(C, 3));
     if (U) g.setAttribute("uv", new THREE.Float32BufferAttribute(U, 2)); g.computeVertexNormals(); const m = new THREE.Mesh(g, mat); m.castShadow = m.receiveShadow = true; scene.add(m); return m; }
   const walls = meshOf(wp, wc, wu, wallMat), roofs = meshOf(rp, rc, null, roofMat); walls.userData.lm = wl; roofs.userData.lm = rl;
 
-  const forest = [];   // tree InstancedMeshes (built-in cones + photo-placed 3D trees), recolored by season
   /* ---------- trees on the open hillsides ---------- */
   { const grid = map.busyGrid(), spots = []; let s = 3; const rnd = () => (s = (s*9301 + 49297) % 233280)/233280;
     for (let i = 0; i < 16000 && spots.length < 3400; i++){ const x = BB.x0 + rnd()*w, y = BB.y0 + rnd()*hgt; if (map.heightAt(x, y) < 2 || grid.busy(x, y)) continue; spots.push([x, y, 0.7 + rnd()*0.7, rnd()]); }
@@ -378,7 +438,7 @@ export async function create(o){
     applyCam(); if (tiles){ cam.updateMatrixWorld(); tiles.update(); } renderer.render(scene, cam); placeLabels();
     if (tiles && tiles.stats.downloading + tiles.stats.parsing > 0) tilesAct = now;
     const busy = tiles && now - tilesAct < 2500;   // the tile loader only asks for the next, sharper pieces when update() runs, so keep running until it settles
-    world.step(now); life.step(now); movers.step(now); sky.step(now); events.step(now);
+    world.step(now); life.step(now); movers.step(now); sky.step(now); events.step(now); rip.offset.set(now*0.000011, now*0.000007);
     if (tween || busy || world.live() || life.on) raf = requestAnimationFrame(frame);
   }
   function invalidate(){ if (!raf && active && !dead) raf = requestAnimationFrame(frame); }
@@ -428,6 +488,8 @@ export async function create(o){
   /* ---------- Google Photorealistic 3D Tiles: the real look. The model above stays underneath as the fallback
      (no key, low-power/data-saver, quota used up, or any load error) and stays invisible-but-pickable for hovers. ---------- */
   let tiles = null, tilesOn = false, credit = null, tilesAct = 0, hold = null, calib = 0;
+  renderer.localClippingEnabled = true;   // Google's ground is cut to our map block (less to draw, same area as the built-in map)
+  const CLIP = [new THREE.Plane(new THREE.Vector3(1, 0, 0), -BB.x0*S), new THREE.Plane(new THREE.Vector3(-1, 0, 0), BB.x1*S), new THREE.Plane(new THREE.Vector3(0, 0, 1), BB.y1*S), new THREE.Plane(new THREE.Vector3(0, 0, -1), -BB.y0*S)];
  const tileMats = new Set();
   const own = scene.children.filter(c => (c.isMesh || c.isInstancedMesh) && !c.userData.keep && !picks.includes(c) && c !== walls && c !== roofs);   // Google has no 3D buildings here, so ours stay
   function showOwn(on){ own.forEach(c => { c.visible = on; }); renderer.shadowMap.needsUpdate = true; }
@@ -453,7 +515,7 @@ export async function create(o){
   let planted = false, treeMeshes = [], treeTries = 0;
   function plantTrees(){
     if (!tiles || planted || ++treeTries < 4) return; planted = true;   // wait for a few loading rounds so the photo is sharp
-    const phone = matchMedia("(pointer: coarse)").matches, R = phone ? 480 : 760, CX = 200, CY = 620, STEP = phone ? 9 : 7;
+    const phone = matchMedia("(pointer: coarse)").matches, R = phone ? 480 : 760, CX = 200, CY = 620, STEP = phone ? 8 : 5.5;
     const N = 1024, X0 = CX - R, Y0 = CY - R, W2 = 2*R, rt = new THREE.WebGLRenderTarget(N, N), buf = new Uint8Array(N*N*4);
     const oc = new THREE.OrthographicCamera(-R*S, R*S, R*S, -R*S, 1, 2000); oc.position.set(CX*S, 900, -CY*S); oc.up.set(0, 0, -1); oc.lookAt(CX*S, 0, -CY*S); oc.updateMatrixWorld();
     const vis = scene.children.map(c => c.visible); scene.children.forEach(c => { c.visible = c === hold || c.isLight; });
@@ -462,7 +524,7 @@ export async function create(o){
     const px = (x, y) => { const i = Math.floor((x - X0)/W2*N), j = Math.floor((y - Y0)/W2*N); return (Math.min(N - 1, Math.max(0, j))*N + Math.min(N - 1, Math.max(0, i)))*4; };
     const green = [], grid = map.busyGrid();
     for (let k = 0; k < N*N*4; k += 64){ const r = buf[k], g = buf[k + 1], b = buf[k + 2]; if (g > r && g >= b) green.push(r + g + b); }
-    if (green.length < 200) return; green.sort((a, b) => a - b); const dark = green[Math.floor(green.length*0.62)];   // lawns are the brightest greens
+    if (green.length < 200) return; green.sort((a, b) => a - b); const dark = green[Math.floor(green.length*0.72)];   // lawns are the brightest greens
     const spots = []; let sd = 11; const rnd = () => (sd = (sd*9301 + 49297) % 233280)/233280;
     for (let y = CY - R; y < CY + R; y += STEP) for (let x = CX - R; x < CX + R; x += STEP){
       const jx = x + (rnd() - 0.5)*STEP, jy = y + (rnd() - 0.5)*STEP; if ((jx - CX)**2 + (jy - CY)**2 > R*R || map.heightAt(jx, jy) < 1.5 || grid.busy(jx, jy)) continue;
@@ -487,9 +549,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261115c").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261115e").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261115c"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261115e"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -502,7 +564,7 @@ export async function create(o){
     hold.position.y = 32*S*VE;   // ellipsoid -> sea level (geoid is ~32 m below the ellipsoid at West Point)
     hold.add(t.group); scene.add(hold); hold.updateMatrixWorld(true);
     t.setCamera(cam); t.setResolutionFromRenderer(cam, renderer);
-    t.addEventListener("load-model", ev => { if (!tiles) return; ev.scene.traverse(c => { if (c.material){ tileMats.add(c.material); if (c.material.color) c.material.color.set(world.tint());  } });
+    t.addEventListener("load-model", ev => { if (!tiles) return; ev.scene.traverse(c => { if (c.material){ tileMats.add(c.material); c.material.clippingPlanes = CLIP; if (c.material.color) c.material.color.set(world.tint());  } });
       if (!tilesOn){ tilesOn = true; showOwn(false); retheme(); for (const k in outlines) outlines[k].ln.visible = false; if (atHome && !tween) fly(homeFor(), 1100); credit = document.createElement("div"); credit.className = "tiles-credit"; stage.appendChild(credit); } invalidate(); });
     ["load-model", "load-tile-set", "tiles-load-start"].forEach(n => t.addEventListener(n, () => { tilesAct = performance.now(); }));
     t.addEventListener("load-tile-set", () => { const phone = matchMedia("(pointer: coarse)").matches; t.errorTarget = phone ? 12 : 8;
@@ -516,9 +578,9 @@ export async function create(o){
      A small panel lets you switch to sunny / rain / snow / fog and day / sunset / night. ---------- */
   /* ---------- campus life: cadets walking the paths, runners all over campus, cars on the real roads (all follow OSM lines) ---------- */
   const life = (() => {
-    const lines = D.roads.map(r => ({ c: r.c, P: map.pts(r.p) })).filter(l => l.P.length > 1).map(l => { let L = 0; const cum = [0];
+    const lines = D.roads.map(r => ({ c: r.c, n: r.n || "", P: map.pts(r.p) })).filter(l => l.P.length > 1).map(l => { let L = 0; const cum = [0];
       for (let i = 1; i < l.P.length; i++){ L += Math.hypot(l.P[i][0] - l.P[i - 1][0], l.P[i][1] - l.P[i - 1][1]); cum.push(L); } return Object.assign(l, { L, cum }); }).filter(l => l.L > 30);
-    const drive = lines.filter(l => l.c <= 2), walk = lines.filter(l => l.c >= 2), any = lines;
+    const drive = lines.filter(l => l.c === 0 || (l.c <= 1 && l.n)), walk = lines.filter(l => l.c >= 2), any = lines;   // cars only on the real named main roads (Cullum Road etc.), not service drives like the one into Jefferson Hall
     if (!drive.length || !walk.length) return { on: false, step(){} };
     const pick = (arr, r) => arr[Math.floor(r*arr.length)];
     const at = (l, d) => { let i = 1; while (i < l.cum.length - 1 && l.cum[i] < d) i++; const a = l.P[i - 1], b = l.P[i], f = (d - l.cum[i - 1])/Math.max(0.01, l.cum[i] - l.cum[i - 1]);
@@ -527,7 +589,12 @@ export async function create(o){
     const mk = (n, arr, speed, side) => Array.from({ length: n }, () => { const l = pick(arr, rnd()); return { l, d: rnd()*l.L, v: speed*(0.8 + rnd()*0.4)*(rnd() < 0.5 ? 1 : -1), side: (rnd() - 0.5)*side }; });
     const mid = l => l.P[Math.floor(l.P.length/2)], core = walk.filter(l => { const m = mid(l); return m[0] > -160 && m[0] < 520 && m[1] > 330 && m[1] < 1120; });
     const crowd = core.length ? core.concat(core, core, core, walk) : walk;   // ~4x more people on the main-campus paths
-    const cars = mk(46, drive, 9, 0), walkers = mk(420, crowd, 1.25, 3.5), runners = mk(60, any, 5.2, 2.5);
+    const cars = mk(46, drive, 9, 0), walkers = mk(420, crowd, 1.25, 3.5).concat(mk(200, core.length ? core : walk, 1.4, 3).map(a => Object.assign(a, { cc: true }))), runners = mk(60, any, 5.2, 2.5);   // + 200 cadets who only appear at class change
+    // stop signs at intersections of the main roads, the guard post at Thayer Gate, and shuttle bus stops
+    const xs = new Map(); drive.forEach(l => l.P.forEach(p => { const k = Math.round(p[0]/4) + "," + Math.round(p[1]/4); xs.set(k, (xs.get(k) || 0) + 1); }));
+    const STOPS = [...xs].filter(([k, c]) => c > 1).map(([k]) => k.split(",").map(v => v*4)), GATE = [-30, -796], BUSSTOPS = [[-70, -915], [400, 470], [170, 660], [520, 820]];
+    const nyMin = () => { const p = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", hour12: false, hour: "2-digit", minute: "2-digit", weekday: "short" }).formatToParts(new Date()), g = t => (p.find(q => q.type === t) || {}).value; return { h: +g("hour") % 24, m: +g("minute"), wd: g("weekday") }; };
+    let classChange = false, ccCheck = 0;
     const merge = parts => { const pos = [], nor = [], col = []; parts.forEach(([g, c]) => { const n = g.index ? g.toNonIndexed() : g, P = n.attributes.position, N = n.attributes.normal;
         for (let i = 0; i < P.count; i++){ pos.push(P.getX(i), P.getY(i), P.getZ(i)); nor.push(N.getX(i), N.getY(i), N.getZ(i)); col.push(c, c, c); } });
       const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute("normal", new THREE.Float32BufferAttribute(nor, 3)); g.setAttribute("color", new THREE.Float32BufferAttribute(col, 3)); return g; };
@@ -557,14 +624,23 @@ export async function create(o){
     const o = new THREE.Object3D(); let last = 0;
     const move = (a, k) => { a.d += a.v*k; if (a.d < 0 || a.d > a.l.L){ a.v = -a.v; a.d = Math.max(0, Math.min(a.l.L, a.d)); } const p = at(a.l, a.d), h = p[2] + (a.v < 0 ? Math.PI : 0);
       return [p[0] - Math.sin(p[2])*a.side, p[1] + Math.cos(p[2])*a.side, h]; };
-    function placeCars(k){ const n = [0, 0, 0, 0]; cars.forEach((a, i) => { const q = move(a, k), lane = 1.7*Math.sign(a.v), x = q[0] - Math.sin(q[2] - (a.v < 0 ? Math.PI : 0))*lane, y = q[1] + Math.cos(q[2] - (a.v < 0 ? Math.PI : 0))*lane;
+    function placeCars(k){ const n = [0, 0, 0, 0]; cars.forEach((a, i) => { a.cool = (a.cool || 0) - k; let kk = k; if (a.wait > 0){ a.wait -= k; kk = 0; }
+        const q = move(a, kk), lane = 1.7*Math.sign(a.v), x = q[0] - Math.sin(q[2] - (a.v < 0 ? Math.PI : 0))*lane, y = q[1] + Math.cos(q[2] - (a.v < 0 ? Math.PI : 0))*lane;
+        if (a.cool <= 0 && kk){ const near = (P, r) => Math.hypot(P[0] - q[0], P[1] - q[1]) < r;
+          if (near(GATE, 14)){ a.wait = 5 + Math.random()*3; a.cool = 25; }   // ID check at Thayer Gate
+          else if (KIND[i] === 3 && BUSSTOPS.some(P => near(P, 16))){ a.wait = 8; a.cool = 25; }   // bus stop
+          else if (STOPS.some(P => near(P, 6))){ a.wait = 1 + Math.random()*1.5; a.cool = 6; } }   // stop sign
         o.position.set(x*S, gy(x, y), -y*S); o.rotation.set(0, q[2], 0); o.scale.setScalar(S*1.9); o.updateMatrix(); CM[KIND[i]].setMatrixAt(n[KIND[i]]++, o.matrix); }); CM.forEach(m => { m.instanceMatrix.needsUpdate = true; }); }
-    function placePeople(arr, mesh, run, k, now, l0){ const Z = 2.6, sp = run ? 95 : 190, amp = run ? 0.85 : 0.42; arr.forEach((a, i) => { const q = move(a, k), x = q[0], y = q[1], h = q[2], ph = now/sp + i*1.7, sw = Math.sin(ph)*amp;
-        const g = gy(x, y) + (run ? Math.abs(Math.cos(ph))*0.16 : Math.abs(Math.cos(ph))*0.03)*S*Z;
-        o.position.set(x*S, g, -y*S); o.rotation.set(0, h, 0, "YXZ"); o.scale.setScalar(S*Z); o.updateMatrix(); mesh.setMatrixAt(i, o.matrix);
-        for (const sd of [-1, 1]){ const ox = Math.sin(h)*0.11*sd*Z, oz = Math.cos(h)*0.11*sd*Z; o.position.set(x*S + ox*S, g + 0.85*S*Z, -y*S + oz*S); o.rotation.set(0, h, sw*sd, "YXZ"); o.updateMatrix(); legs.setMatrixAt(l0++, o.matrix); } });
+    // people face the way they walk: the figure's front is its local +z, so turn it a quarter more than the path heading; legs swing front to back
+    function placePeople(arr, mesh, run, k, now, l0){ const Z = 2.6, sp = run ? 95 : 190, amp = run ? 0.85 : 0.42; arr.forEach((a, i) => {
+        if (a.cc && !classChange){ o.scale.setScalar(0); o.updateMatrix(); mesh.setMatrixAt(i, o.matrix); legs.setMatrixAt(l0++, o.matrix); legs.setMatrixAt(l0++, o.matrix); return; }
+        const q = move(a, k), x = q[0], y = q[1], th = q[2] + Math.PI/2, ph = now/sp + i*1.7, sw = Math.sin(ph)*amp;
+        const ground = a.l.n === "Davis Shelf" && shelfY != null ? shelfY : gy(x, y), g = ground + (run ? Math.abs(Math.cos(ph))*0.16 : Math.abs(Math.cos(ph))*0.03)*S*Z;
+        o.position.set(x*S, g, -y*S); o.rotation.set(0, th, 0, "YXZ"); o.scale.setScalar(S*Z); o.updateMatrix(); mesh.setMatrixAt(i, o.matrix);
+        for (const sd of [-1, 1]){ const ox = Math.cos(th)*0.11*sd*Z, oz = -Math.sin(th)*0.11*sd*Z; o.position.set(x*S + ox*S, g + 0.85*S*Z, -y*S + oz*S); o.rotation.set(sw*sd, th, 0, "YXZ"); o.updateMatrix(); legs.setMatrixAt(l0++, o.matrix); } });
       mesh.instanceMatrix.needsUpdate = true; legs.instanceMatrix.needsUpdate = true; }
     function step(now){ const k = Math.min(0.1, (now - (last || now))/1000); last = now; if (!api.on) return;
+      if ((ccCheck -= k) <= 0){ ccCheck = 20; const t = nyMin(); classChange = !/Sat|Sun/.test(t.wd) && t.h >= 7 && t.h <= 16 && (t.m >= 50 || t.m <= 4) || /[?&]cc=1/.test(location.search); }   // class change: 10 minutes before each hour
       placeCars(k); placePeople(walkers, walkM, false, k, now, 0); placePeople(runners, runM, true, k, now, walkers.length*2); }
     const api = { on: true, step, show(v){ api.on = v; CM.concat([walkM, runM, legs]).forEach(m => { m.visible = v; }); } };
     step(performance.now()); return api;
@@ -612,7 +688,7 @@ export async function create(o){
         else { blk(x, y, h, 20, 8, 3.2, 0, w0, 0x9b2a24); blk(x, y, h, 7, 6, 4, 3.2, w0, 0xf0efe9, -3); blk(x, y, h, 1, 1, 3, 7.2, w0, 0x222222, -3);   // tug pushing
           for (let k = 0; k < b.barges; k++){ const f = 10 + 32 + k*62; blk(x, y, h, 60, 11, 3, 0, w0, 0x3b3a38, f); blk(x, y, h, 54, 9.5, 1.6, 3, w0, k % 2 ? 0x6b5a45 : 0x4a4f55, f); } } }
       mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
-    fetch("/campus/movers.json?v=20261115c").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
+    fetch("/campus/movers.json?v=20261115e").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
     return { step };
   })();
 
@@ -727,7 +803,8 @@ export async function create(o){
       // PT: columns of runners in formation looping the Plain road
       if (A.pt) ptCols.forEach((q, c) => { const a = T*0.035 + c*1.6; for (let r = 0; r < 12; r++) for (let f = 0; f < 3; f++){ const aa = a - r*0.006, x = PLAIN[0] + Math.cos(aa)*(150 + f*1.5), y = PLAIN[1] + Math.sin(aa)*(95 + f*1.5); person(x, y, aa + Math.PI/2, f === 0 && r === 0 ? 0xf1c232 : 0x9aa0a6, Math.abs(Math.sin(T*9 + r))*0.15, 0x111111); } });
       // Army home football: crowd around Michie, tailgates in the lots, jet flyover 10 minutes before kick (or right away from the panel)
-      if (A.game){ crowd.forEach((q, i) => { const a = q[0]*6.28, r = 85 + q[1]*55; person(MICHIE[0] + Math.cos(a)*r, MICHIE[1] + Math.sin(a)*r*0.8, a, [0x111111, 0xd4af37, 0x1d1d1d, 0x6b6b6b][i % 4], Math.abs(Math.sin(T*2 + i))*0.05); });
+      if (A.game){ crowd.forEach((q, i) => { const west = i % 3 !== 0, t = Math.floor(q[1]*(west ? 13 : 9)), x = west ? MF[0] - 4 - t*1.8 : MF[1] + 4 + t*1.8, y = MF[2] + 6 + q[0]*(MF[3] - MF[2] - 12), top = MG + (0.5 + t*(west ? 0.95 : 0.9))*S;   // fans seated on the tiers
+          person(x, y, west ? 0 : Math.PI, [0x111111, 0xd4af37, 0x1d1d1d, 0x6b6b6b][i % 4], (top - gy(x, y))/S + Math.abs(Math.sin(T*3 + i))*0.08); });
         tail.forEach((q, i) => { const L = LOTS[i % LOTS.length], x = L[0] + (q[0] - 0.5)*60, y = L[1] + (q[1] - 0.5)*40, g = gy(x, y); blk(x, y, g, q[2]*0.4, 4.6, 1.9, 1.5, [0xeeeeee, 0x222222, 0x8a1c1c, 0x2a4b7c][i % 4]);
           if (i % 3 === 0){ blk(x, y, g, 0, 3, 3, 0.08, 0xd4af37, 4, 0, 2.6); blk(x, y, g, 0, 0.1, 0.1, 2.6, 0x555555, 4, 0, 0); person(x + 3, y + 2, i, 0x111111); person(x + 5, y - 1, i + 1, 0xd4af37); } });
         if (jets < 0 && (manual === "game" || (homeGame && homeGame.kick - Date.now() < 6e5 && homeGame.kick - Date.now() > 0))) jets = 0; }

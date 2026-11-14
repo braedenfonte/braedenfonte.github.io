@@ -50,7 +50,7 @@ for e in E:
             if hw in ('steps',) or t.get('tunnel'): continue
             q = simp(p, 0.8 if c < 4 else 1.2); L = sum(math.dist(q[i], q[i+1]) for i in range(len(q)-1))
             if L < (25 if c >= 2 else 8): continue
-            R.append({'c': c, 'p': flat(q)})
+            R.append(dict({'c': c, 'p': flat(q)}, **({'n': t['name']} if t.get('name') else {})))
         else:
             kind = None
             if t.get('natural') == 'water' and t.get('water') != 'river': kind = 'water'
