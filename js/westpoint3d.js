@@ -487,9 +487,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261115b").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261115c").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261115b"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261115c"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -612,14 +612,14 @@ export async function create(o){
         else { blk(x, y, h, 20, 8, 3.2, 0, w0, 0x9b2a24); blk(x, y, h, 7, 6, 4, 3.2, w0, 0xf0efe9, -3); blk(x, y, h, 1, 1, 3, 7.2, w0, 0x222222, -3);   // tug pushing
           for (let k = 0; k < b.barges; k++){ const f = 10 + 32 + k*62; blk(x, y, h, 60, 11, 3, 0, w0, 0x3b3a38, f); blk(x, y, h, 54, 9.5, 1.6, 3, w0, k % 2 ? 0x6b5a45 : 0x4a4f55, f); } } }
       mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
-    fetch("/campus/movers.json?v=20261115b").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
+    fetch("/campus/movers.json?v=20261115c").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
     return { step };
   })();
 
   /* ---------- sky and wildlife: songbird flocks, hawks over the river cliffs, Canada geese on the Plain, deer on the wooded hills,
      and a rare Army Black Hawk up the Hudson that sometimes drops parachutists onto the Plain ---------- */
   const sky = (() => {
-    const MAX = 700, box = new THREE.BoxGeometry(1, 1, 1);
+    const MAX = 1300, box = new THREE.BoxGeometry(1, 1, 1);
     const mesh = new THREE.InstancedMesh(keep(box), keep(new THREE.MeshStandardMaterial({ roughness: 0.8 })), MAX); mesh.castShadow = true; mesh.frustumCulled = false; mesh.userData.keep = true;
     { const w = new THREE.Color(1, 1, 1); for (let i = 0; i < MAX; i++) mesh.setColorAt(i, w); } mesh.count = 0; scene.add(mesh);
     const o = new THREE.Object3D(), col = new THREE.Color(); let n = 0, last = 0, clock = 0;
@@ -634,6 +634,16 @@ export async function create(o){
     const deer = []; for (let k = 0; k < 2000 && deer.length < 28; k++){ const x = -700 + rnd()*1500, y = -400 + rnd()*1700; if (map.heightAt(x, y) < 8 || grid.busy(x, y) || Math.hypot(x - 150, y - 600) > 1000) continue; deer.push({ hx: x, hy: y, x, y, h: rnd()*6, t: rnd()*10 }); }
     // Black Hawk route up the river; on drop runs it swings over the Plain
     const RIVER = [[420, -1500], [760, -100], [1050, 700], [880, 1450], [100, 2150]], PLAIN = [178, 828];
+    // LEGENDARY EVENT: the Golden Knights jump onto the Plain. A banner announces it, the camera flies over to watch, and a red and white
+    // target ring appears where they land. Happens on its own about once every few hours, or any time from the Parachute drop button.
+    const ring = new THREE.Mesh(keep(new THREE.RingGeometry(14*S, 22*S, 48)), keep(new THREE.MeshBasicMaterial({ color: 0xd8202f, side: THREE.DoubleSide, transparent: true, opacity: 0.85 })));
+    const ring2 = new THREE.Mesh(keep(new THREE.CircleGeometry(6*S, 32)), keep(new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide })));
+    ring.rotation.x = ring2.rotation.x = -Math.PI/2; ring.position.set(PLAIN[0]*S, gy(PLAIN[0], PLAIN[1]) + 0.3*S, -PLAIN[1]*S); ring2.position.copy(ring.position); ring2.position.y += 0.05*S; scene.add(ring, ring2); ring.visible = false; ring2.visible = false;
+    ring.onBeforeRender = () => { ring2.visible = ring.visible; };
+    let legendT = 0;
+    function legend(){ legendT = 1; const b = document.createElement("div"); b.className = "legend-banner"; b.innerHTML = '<span class="lg-k">⚡ Legendary event ⚡</span><b>Golden Knights jump onto the Plain</b><span class="lg-s">Black Hawk inbound over the Hudson</span>';
+      stage.appendChild(b); setTimeout(() => b.classList.add("out"), 11000); setTimeout(() => b.remove(), 12500);
+      const p = V(PLAIN[0] + 120, PLAIN[1] - 60, 0); fly({ tx: p.x, ty: p.y, tz: p.z, az: 1.05, pol: 1.12, dist: 42 }, 2200); }
     const force = /[?&]heli=1/.test(location.search); let heli = null, nextHeli = force ? 3 : 50 + rnd()*60; const jumpers = [];   // ?heli=1 shows the drop right away
     const path = (pts, d) => { let acc = 0; for (let i = 1; i < pts.length; i++){ const a = pts[i - 1], b = pts[i], L = Math.hypot(b[0] - a[0], b[1] - a[1]); if (acc + L >= d){ const f = (d - acc)/L; return [a[0] + (b[0] - a[0])*f, a[1] + (b[1] - a[1])*f, Math.atan2(b[1] - a[1], b[0] - a[0])]; } acc += L; } return null; };
     const total = pts => pts.reduce((a, p, i) => i ? a + Math.hypot(p[0] - pts[i - 1][0], p[1] - pts[i - 1][1]) : 0, 0);
@@ -647,19 +657,25 @@ export async function create(o){
         const dw = gy(d.x, d.y), K = 2.4; blk(d.x, d.y, dw, d.h, 1.5*K, 0.45*K, 0.6*K, 0x8a6240, 0, 0, 0.8*K); blk(d.x, d.y, dw, d.h, 0.4*K, 0.3*K, 0.6*K, 0x7b5537, 0.8*K, 0, 1.15*K); blk(d.x, d.y, dw, d.h, 0.3*K, 0.2*K, 0.25*K, 0xf1ece4, -0.8*K, 0, 0.95*K);
         for (const [lx, ly] of [[0.6, 0.15], [0.6, -0.15], [-0.6, 0.15], [-0.6, -0.15]]) blk(d.x, d.y, dw, d.h, 0.1*K, 0.1*K, 0.8*K, 0x5c4028, lx*K, ly*K, 0.4*K); });
       // Black Hawk
-      if (!heli && clock > nextHeli){ const drop = force || rnd() < 0.45, pts = drop ? [RIVER[0], RIVER[1], [600, 500], PLAIN, [700, 1300], RIVER[4]] : RIVER; heli = { pts, L: total(pts), d: 0, drop, dropped: false }; nextHeli = clock + 240 + rnd()*300; }
+      if (!heli && clock > nextHeli){ const drop = force || rnd() < 1/30, pts = drop ? [RIVER[0], RIVER[1], [600, 500], PLAIN, [700, 1300], RIVER[4]] : RIVER; heli = { pts, L: total(pts), d: 0, drop, dropped: false }; if (drop) legend(); nextHeli = clock + 240 + rnd()*300; }
       if (heli){ heli.d += 62*dt; const q = path(heli.pts, heli.d); if (!q) heli = null; else {
           const nearPlain = Math.hypot(q[0] - PLAIN[0], q[1] - PLAIN[1]), alt = heli.drop ? 160 + Math.max(0, 260 - nearPlain*0.4) : 150, wy = gy(q[0], q[1]) + alt*S, C = 0x2d3328;
           blk(q[0], q[1], wy, q[2], 11, 2.4, 2.6, C); blk(q[0], q[1], wy, q[2], 7, 0.6, 0.8, C, -8.5, 0, 1.4); blk(q[0], q[1], wy, q[2], 0.3, 0.2, 2, C, -12, 0, 1.6);   // body, tail boom, tail fin
           blk(q[0], q[1], wy, q[2], 1.8, 1.9, 0.6, 0x1b2330, 4.6, 0, 1.2);   // cockpit glass
           for (let r = 0; r < 4; r++) blk(q[0], q[1], wy, q[2] + clock*28 + r*Math.PI/2, 8, 0.45, 0.08, 0x151515, 0, 0, 3.1);   // spinning main rotor
-          if (heli.drop && !heli.dropped && nearPlain < 40){ heli.dropped = true; for (let k = 0; k < 6; k++) jumpers.push({ x: q[0] + (k - 2.5)*14*Math.cos(q[2]), y: q[1] + (k - 2.5)*14*Math.sin(q[2]), alt: alt - 4, h: rnd()*6, land: 0 }); } } }
+          if (heli.drop && !heli.dropped && nearPlain < 40){ heli.dropped = true; for (let k = 0; k < 12; k++) jumpers.push({ x: q[0] + (k - 5.5)*10*Math.cos(q[2]), y: q[1] + (k - 5.5)*10*Math.sin(q[2]), alt: alt - 4 - (k % 3)*12, h: rnd()*6, land: 0, k, trail: [], tt: 0,
+              tx: PLAIN[0] + Math.cos(k*0.52)*(6 + k*1.5), ty: PLAIN[1] + Math.sin(k*0.52)*(6 + k*1.5) }); } } }
       for (let i = jumpers.length - 1; i >= 0; i--){ const j = jumpers[i];
-        if (j.alt > 0){ j.alt = Math.max(0, j.alt - 7*dt); j.x += (PLAIN[0] - j.x)*0.02*dt + Math.cos(t*0.3 + i)*2*dt; j.y += (PLAIN[1] - j.y)*0.02*dt; j.h += 0.2*dt; } else if ((j.land += dt) > 25){ jumpers.splice(i, 1); continue; }
-        const wy = gy(j.x, j.y) + j.alt*S; blk(j.x, j.y, wy, j.h, 0.45, 0.45, 1.75, 0x4b5320, 0, 0, 0.9);   // jumper in OCP
-        if (j.alt > 0) blk(j.x, j.y, wy, j.h, 3.2, 7, 0.6, j.alt > 40 && i % 2 ? 0x3a4030 : 0x2a2f24, 0, 0, 7.5); }   // canopy
+        if (j.alt > 0){ j.alt = Math.max(0, j.alt - 6.5*dt); const f = Math.min(1, 0.12*dt*(1 + 300/Math.max(30, j.alt))); j.x += (j.tx - j.x)*f + Math.cos(t*0.4 + i)*3*dt; j.y += (j.ty - j.y)*f + Math.sin(t*0.4 + i)*3*dt; j.h += 0.35*dt;
+          if ((j.tt += dt) > 0.22){ j.tt = 0; j.trail.push([j.x, j.y, j.alt]); if (j.trail.length > 26) j.trail.shift(); } }
+        else if ((j.land += dt) > 40){ jumpers.splice(i, 1); continue; }
+        const wy = gy(j.x, j.y) + j.alt*S, SMK = [0xd8202f, 0xf4f4f4, 0x1f4fb4][j.k % 3], CAN = [0xd8202f, 0xf4f4f4, 0x1f4fb4, 0xd4af37][j.k % 4];
+        blk(j.x, j.y, wy, j.h, 0.7, 0.7, 2.6, 0x111111, 0, 0, 1.3);   // jumper (Golden Knights black)
+        if (j.alt > 0){ blk(j.x, j.y, wy, j.h, 5, 11, 1, CAN, 0, 0, 11); blk(j.x, j.y, wy, j.h, 5.1, 11.1, 0.35, 0xffffff, 0, 0, 12); }   // big ram-air canopy
+        j.trail.forEach((p, n) => { const s2 = 1.2 + (j.trail.length - n)*0.18; blk(p[0], p[1], gy(p[0], p[1]) + p[2]*S, 0, s2, s2, s2, SMK, 0, 0, 0); }); if (j.alt <= 0 && j.trail.length) j.trail.shift(); }   // red, white and blue smoke
+      if (legendT && !heli && !jumpers.length) legendT = 0; ring.visible = legendT > 0 || jumpers.length > 0;
       mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
-    return { step, drop(){ const pts = [[820, 300], [600, 560], PLAIN, [700, 1300], RIVER[4]]; heli = { pts, L: total(pts), d: 0, drop: true, dropped: false }; } };
+    return { step, drop(){ const pts = [[1000, 120], [700, 480], PLAIN, [700, 1300], RIVER[4]]; heli = { pts, L: total(pts), d: 0, drop: true, dropped: false }; legend(); } };
   })();
 
   /* ---------- campus events on the real clock (America/New_York), and on demand from the panel:
