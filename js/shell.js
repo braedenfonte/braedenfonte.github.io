@@ -23,7 +23,7 @@ const LANDMARKS = [
   {id:"hq",       name:"Taylor Hall",            views:["about","resume","business"], at:{b:"Taylor Hall"}},
   {id:"stadium",  name:"Michie Stadium",         views:["football"],                  at:{a:"Michie Stadium", h:17}},
   {id:"golf",     name:"Golf Course",            views:["daily"],                     at:{xy:[-1010,430], h:16}, sign:true},   // real course is 1.5 mi west, off this map
-  {id:"dock",     name:"South Dock",             views:["flights"],                   at:{a:"South Dock Park", h:4}},
+  {id:"dock",     name:"South Dock",             views:["flights"],                   at:{xy:[395,70], h:4}},   // the real South Dock port, by the USGS gauge
   {id:"trophy",   name:"Trophy Point",           views:["place","personal"],          at:{n:"Battle Monument", h:22}},
   {id:"gate",     name:"Thayer Gate",            views:["contact"],                   at:{b:"Thayer Gate"}},
   {id:"vault",    name:"West Point Mint",        views:["finance","memory"],          at:{xy:[-1010,1180], h:16}, sign:true},  // real Mint is west of the cadet area, off this map
@@ -255,7 +255,7 @@ async function start3D(){
   loading = true;
   try{
     await MAP.load(); resolveLandmarks();
-    const mod = await import("/js/westpoint3d.js?v=20261115c");
+    const mod = await import("/js/westpoint3d.js?v=20261115e");
     if (MODE.lite) { loading = false; return; }
     campus = await mod.create({
       stage, canvas: $("#campus3d"),
