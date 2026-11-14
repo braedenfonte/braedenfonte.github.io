@@ -228,15 +228,39 @@ export async function create(o){
       [[30, 150], [226, 150]].forEach(([lx, ly]) => { g.fillStyle = "#111"; g.fillRect(lx - 2, ly, 4, 26); g.fillRect(lx - 10, ly - 28, 20, 30); g.fillStyle = "#ffd98a"; g.fillRect(lx - 7, ly - 24, 14, 22); });
       const tex = keep(new THREE.CanvasTexture(cv)); tex.colorSpace = THREE.SRGBColorSpace; const W = 8, H = 10, dm = keep(new THREE.MeshStandardMaterial({ map: tex, roughness: 0.9 }));
       [[297.12, 548, Math.PI/2], [278.38, 553, -Math.PI/2]].forEach(([x, y, r]) => { const door = new THREE.Mesh(keep(new THREE.PlaneGeometry(W*S, H*S)), dm); door.position.set(x*S, gy(x, y) + m(H/2), -y*S); door.rotation.y = r; door.userData.keep = true; scene.add(door); });
-      // Braeden's room: the 2nd-floor corner window on the west side next to Bradley, with DJ lights going like there's a party
-      { const x = 261.86, y = 573, wy = lo + m(4.2 + 2.2), win = new THREE.MeshBasicMaterial({ color: 0xff00aa, toneMapped: false });
-        const w = new THREE.Mesh(keep(new THREE.PlaneGeometry(m(2.4), m(2.6))), win); w.position.set(x*S, wy, -y*S); w.rotation.y = -Math.PI/2; w.userData.keep = true; scene.add(w);
-        const fr = new THREE.Mesh(keep(new THREE.PlaneGeometry(m(2.9), m(3.1))), keep(new THREE.MeshStandardMaterial({ color: 0x2d2f33 }))); fr.position.set((x - 0.01)*S, wy, -y*S); fr.rotation.y = -Math.PI/2; fr.userData.keep = true; scene.add(fr);
-        const gc = document.createElement("canvas"); gc.width = gc.height = 64; const gg = gc.getContext("2d"), rg = gg.createRadialGradient(32, 32, 0, 32, 32, 32); rg.addColorStop(0, "rgba(255,255,255,1)"); rg.addColorStop(0.3, "rgba(255,255,255,.5)"); rg.addColorStop(1, "rgba(255,255,255,0)"); gg.fillStyle = rg; gg.fillRect(0, 0, 64, 64);
-        const gm = new THREE.PointsMaterial({ map: keep(new THREE.CanvasTexture(gc)), size: 26, sizeAttenuation: false, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, color: 0xff00aa });
-        const pg = keep(new THREE.BufferGeometry()); pg.setAttribute("position", new THREE.Float32BufferAttribute([(x - 0.6)*S, wy, -y*S], 3)); const glow = new THREE.Points(pg, keep(gm)); glow.userData.keep = true; scene.add(glow);
-        const hue = new THREE.Color(); w.onBeforeRender = () => { const t = performance.now()/1000, beat = (t*2.2) % 1, h = (Math.floor(t*2.2) * 0.137) % 1; hue.setHSL(h, 1, beat < 0.15 ? 0.75 : 0.5); win.color.copy(hue); gm.color.copy(hue); gm.size = 20 + (beat < 0.15 ? 14 : 0); }; } }
+ }
 
+  }
+
+  /* ---------- easter eggs (no labels): party windows with DJ lights, snapped onto real windows of the wall texture
+     (windows every 5.5 m along the wall, 4.2 m floors). Plus the ground-floor arches on the Washington Hall wings (from the photos). */
+  { const winOn = (bn, toward, pickT, floor) => { const bi = D.buildings.findIndex(b => b.n === bn), T = bi >= 0 && tops[bi]; if (!T) return null; const P = T.P, n = P.length;
+      let ar = 0; for (let i = 0; i < n; i++){ const a = P[i], q = P[(i + 1) % n]; ar += a[0]*q[1] - q[0]*a[1]; } const sg = ar > 0 ? 1 : -1;
+      let best = -1, bd = -9, u0 = 0, uAt = 0; for (let i = 0, u = 0; i < n; i++){ const a = P[i], q = P[(i + 1) % n], L = Math.hypot(q[0] - a[0], q[1] - a[1]); if (L > 8){ const nx = (q[1] - a[1])/L*sg, ny = -(q[0] - a[0])/L*sg, d = nx*toward[0] + ny*toward[1] - (pickT.score ? pickT.score(a, q) : 0); if (d > bd){ bd = d; best = i; uAt = u; } } u += L; }
+      const a = P[best], q = P[(best + 1) % n], L = Math.hypot(q[0] - a[0], q[1] - a[1]), ux = (q[0] - a[0])/L, uy = (q[1] - a[1])/L, nx = uy*sg, ny = -ux*sg;
+      let t = pickT(a, q, L); const k = Math.round((uAt + t - 2.75)/5.5); t = Math.min(L - 1, Math.max(1, k*5.5 + 2.75 - uAt));
+      return { x: a[0] + ux*t + nx*0.07, y: a[1] + uy*t + ny*0.07, wy: T.lo - 2*S + (floor*4.2 + 1.9)*S, rot: Math.atan2(nx, -ny), a, q, L, ux, uy, nx, ny, lo: T.lo }; };
+    const glowTex2 = (() => { const c = document.createElement("canvas"); c.width = c.height = 64; const g = c.getContext("2d"), r = g.createRadialGradient(32, 32, 0, 32, 32, 32); r.addColorStop(0, "rgba(255,255,255,1)"); r.addColorStop(0.3, "rgba(255,255,255,.45)"); r.addColorStop(1, "rgba(255,255,255,0)"); g.fillStyle = r; g.fillRect(0, 0, 64, 64); return keep(new THREE.CanvasTexture(c)); })();
+    function party(w){ if (!w) return; const mat = new THREE.MeshBasicMaterial({ color: 0xff00aa, toneMapped: false }), pane = new THREE.Mesh(keep(new THREE.PlaneGeometry(1.25*S, 2.5*S)), keep(mat));
+      pane.position.set(w.x*S, w.wy, -w.y*S); pane.rotation.y = w.rot; pane.userData.keep = true; scene.add(pane);
+      const gm = keep(new THREE.PointsMaterial({ map: glowTex2, size: 14, sizeAttenuation: false, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, color: 0xff00aa })), pg = keep(new THREE.BufferGeometry());
+      pg.setAttribute("position", new THREE.Float32BufferAttribute([(w.x + w.nx*0.6)*S, w.wy, -(w.y + w.ny*0.6)*S], 3)); const glow = new THREE.Points(pg, gm); glow.userData.keep = true; scene.add(glow);
+      const col = new THREE.Color(), off = Math.random()*10; pane.onBeforeRender = () => { const t = performance.now()/1000 + off, beat = (t*2.1) % 1; col.setHSL((Math.floor(t*2.1)*0.137) % 1, 1, beat < 0.15 ? 0.72 : 0.5); mat.color.copy(col); gm.color.copy(col); gm.size = 11 + (beat < 0.15 ? 8 : 0); }; }
+    // Pershing, 2nd floor: the window at the corner closest to Bradley Barracks
+    const BR = [177, 550], PER = [278, 552]; { const dx = BR[0] - PER[0], dy = BR[1] - PER[1], L0 = Math.hypot(dx, dy);
+      party(winOn("Pershing Barracks", [dx/L0, dy/L0], Object.assign((a, q, L) => Math.hypot(a[0] - BR[0], a[1] - BR[1]) < Math.hypot(q[0] - BR[0], q[1] - BR[1]) ? 1.5 : L - 1.5, { score: (a, q) => Math.min(Math.hypot(a[0] - BR[0], a[1] - BR[1]), Math.hypot(q[0] - BR[0], q[1] - BR[1]))/40 }), 1)); }
+    // MacArthur long wing (right of the mess hall from the Plain): ground-floor arch ~25 m from the mess hall, room 2 windows past it, 1st floor
+    const PAV = [157, 658], arcs = [];
+    const fromPav = (d) => (a, q, L) => Math.hypot(a[0] - PAV[0], a[1] - PAV[1]) < Math.hypot(q[0] - PAV[0], q[1] - PAV[1]) ? d : L - d;
+    const mArch = winOn("MacArthur Barracks", [0.97, 0.24], fromPav(25), 0); if (mArch) arcs.push(mArch);
+    party(winOn("MacArthur Barracks", [0.97, 0.24], fromPav(25 + 11), 0));
+    const eArch = winOn("Eisenhower Barracks", [0.2, 0.98], fromPav(70), 0); if (eArch) arcs.push(eArch);   // left wing: arch near its far end, as in the photo
+    // the arches: stone surround, dark round-arched opening, drawn on the wall at ground level
+    { const c = document.createElement("canvas"); c.width = 160; c.height = 200; const g = c.getContext("2d"); g.fillStyle = "#cfccc4"; g.fillRect(0, 0, 160, 200);
+      g.fillStyle = "#a9a59c"; g.beginPath(); g.moveTo(22, 200); g.lineTo(22, 86); g.arc(80, 86, 58, Math.PI, 0); g.lineTo(138, 200); g.fill();
+      g.fillStyle = "#1a1c20"; g.beginPath(); g.moveTo(34, 200); g.lineTo(34, 86); g.arc(80, 86, 46, Math.PI, 0); g.lineTo(126, 200); g.fill();
+      const t = keep(new THREE.CanvasTexture(c)); t.colorSpace = THREE.SRGBColorSpace; const am = keep(new THREE.MeshStandardMaterial({ map: t, roughness: 0.9 }));
+      arcs.forEach(w => { const m2 = new THREE.Mesh(keep(new THREE.PlaneGeometry(6.4*S, 8*S)), am); m2.position.set(w.x*S, gy(w.x, w.y) + 4*S, -w.y*S); m2.rotation.y = w.rot; m2.userData.keep = true; scene.add(m2); }); }
   }
 
   // Thayer Hall's 2nd floor on the river side is the math department (Braeden's department): a lit band of windows along the river facade
@@ -458,9 +482,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261114z").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261115a").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261114z"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261115a"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -583,7 +607,7 @@ export async function create(o){
         else { blk(x, y, h, 20, 8, 3.2, 0, w0, 0x9b2a24); blk(x, y, h, 7, 6, 4, 3.2, w0, 0xf0efe9, -3); blk(x, y, h, 1, 1, 3, 7.2, w0, 0x222222, -3);   // tug pushing
           for (let k = 0; k < b.barges; k++){ const f = 10 + 32 + k*62; blk(x, y, h, 60, 11, 3, 0, w0, 0x3b3a38, f); blk(x, y, h, 54, 9.5, 1.6, 3, w0, k % 2 ? 0x6b5a45 : 0x4a4f55, f); } } }
       mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
-    fetch("/campus/movers.json?v=20261114z").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
+    fetch("/campus/movers.json?v=20261115a").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
     return { step };
   })();
 
