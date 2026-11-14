@@ -215,3 +215,11 @@ html[data-mode="lite"] .btn:hover,html[data-mode="lite"] .proj:hover{transform:n
 .lm.sign .lm-name{background:#14171c;color:#e2bd62;border:1px solid #c9a54a;border-style:solid;box-shadow:0 2px 10px rgba(0,0,0,.35)}
 .lm.sign .lm-name::after{content:" \2192";color:#e2bd62}
 .lm.sign .lm-pin{background:#c9a54a}
+/* controls: each category looks different. Weather = sky blue, Time = amber, Season = green, Events = bold crimson tiles */
+.wx-panel .wx-i{margin-right:4px;font-size:12px}
+.wx-panel button.cat-wx{border-color:#9cc3e6;background:color-mix(in srgb,#5aa0dc 12%,transparent)} .wx-panel button.cat-wx.on{background:#2f7cc0;border-color:#2f7cc0;color:#fff}
+.wx-panel button.cat-tod{border-color:#e8c27a;background:color-mix(in srgb,#e8a33a 12%,transparent)} .wx-panel button.cat-tod.on{background:#c98316;border-color:#c98316;color:#fff}
+.wx-panel button.cat-season{border-color:#9fd08a;background:color-mix(in srgb,#5fae46 12%,transparent)} .wx-panel button.cat-season.on{background:#3f8f2c;border-color:#3f8f2c;color:#fff}
+.wx-panel button.cat-ev{border:0;border-radius:9px;padding:8px 10px;background:linear-gradient(180deg,#e0243c,#a8172b);color:#fff;font-weight:700;box-shadow:0 2px 8px rgba(160,20,40,.35)}
+.wx-panel button.cat-ev:active{transform:translateY(1px);box-shadow:0 1px 3px rgba(160,20,40,.35)}
+.wx-panel .cat-h-wx{color:#2f7cc0}.wx-panel .cat-h-tod{color:#c98316}.wx-panel .cat-h-season{color:#3f8f2c}.wx-panel .cat-h-ev{color:#c0182f}
