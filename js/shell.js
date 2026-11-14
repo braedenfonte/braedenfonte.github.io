@@ -19,6 +19,8 @@ const LANDMARKS = [
   {id:"barracks", name:"Pershing Barracks",      views:["brief","schedule"],          at:{b:"Pershing Barracks"}, mine:true},
   {id:"library",  name:"Jefferson Hall Library", views:["courses","study"],           at:{b:"Jefferson Hall Library"}},
   {id:"thayer",   name:"Thayer Hall",            views:["projects"],                  at:{b:"Thayer Hall"}},
+  {id:"math",     name:"Math Dept · 2nd floor",  views:["projects"],                  at:{xy:[490,530], h:7}},   // Braeden's department, Thayer Hall river side
+  {id:"room",     name:"My Room",                views:[], at:{xy:[258,573], h:8}, note:"Pershing · 2nd floor"},
   {id:"hq",       name:"Taylor Hall",            views:["about","resume","business"], at:{b:"Taylor Hall"}},
   {id:"stadium",  name:"Michie Stadium",         views:["football"],                  at:{a:"Michie Stadium", h:17}},
   {id:"golf",     name:"Golf Course",            views:["daily"],                     at:{xy:[-1010,430], h:16}, sign:true},   // real course is 1.5 mi west, off this map
@@ -254,7 +256,7 @@ async function start3D(){
   loading = true;
   try{
     await MAP.load(); resolveLandmarks();
-    const mod = await import("/js/westpoint3d.js?v=20261114y");
+    const mod = await import("/js/westpoint3d.js?v=20261114z");
     if (MODE.lite) { loading = false; return; }
     campus = await mod.create({
       stage, canvas: $("#campus3d"),

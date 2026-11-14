@@ -70,7 +70,7 @@ export async function create(o){
   }
   D.buildings.forEach(b => {
     const P = map.pts(b.p); let lo = 1e9, hi = -1e9; P.forEach(p => { const h = gy(p[0], p[1]); if (h < lo) lo = h; if (h > hi) hi = h; });
-    const hh = { "Washington Hall": 16, "MacArthur Barracks": 23.4, "Eisenhower Barracks": 23.4, "Pershing Barracks": 21 }[b.n] || b.h;
+    const F = 4.2, hh = { "Washington Hall": 16, "Pershing Barracks": 4*F, "Bradley Barracks": 6*F, "Eisenhower Barracks": 6*F, "MacArthur Barracks": 6*F, "Scott Barracks": 4*F, "Thayer Hall": 4*F }[b.n] || b.h;   // real floor counts
     const top = Math.min(hi, lo + 9*S) + hh*S, lm = lmOf[b.i] != null ? lmOf[b.i] : -1; tops[b.i] = { P, lo, top };
     const jit = 0.94 + ((b.i*37) % 13)/100, wcol = (b.k === "house" ? HOUSE[b.i % HOUSE.length] : b.n && PLAIN_FRONT_RX.test(b.n) ? [0.8, 0.8, 0.77] : WALL[b.k]).map(v => v*jit);
     curB = b.n ? b.i : -1;
@@ -219,18 +219,32 @@ export async function create(o){
       // bartizans on the south corners
       [[296, 508], [262, 509]].forEach(([x, y]) => cyl(x, y, 1.2, top - m(4), top + m(1.6), granite));
       curB = -1;
-      // sally port: a round-arched entrance with iron lanterns, centered on the north front between the towers
+      // sally port: a round-arched passage with iron lanterns straight through the long wing, from the Bartlett side (east) to Central Area (west)
       const cv = document.createElement("canvas"); cv.width = 256; cv.height = 320; const g = cv.getContext("2d");
       g.fillStyle = "#bdb9b0"; g.fillRect(0, 0, 256, 320); for (let yy = 0; yy < 320; yy += 16) for (let xx = -((yy/16) % 2)*20; xx < 256; xx += 40){ const v = 172 + ((xx*7 + yy*3) % 40); g.fillStyle = "rgb(" + v + "," + v + "," + (v - 5) + ")"; g.fillRect(xx + 1, yy + 1, 38, 14); }
       g.fillStyle = "#a29d93"; g.beginPath(); g.moveTo(52, 320); g.lineTo(52, 150); g.arc(128, 150, 76, Math.PI, 0); g.lineTo(204, 320); g.fill();
-      g.fillStyle = "#1c1f24"; g.beginPath(); g.moveTo(66, 320); g.lineTo(66, 150); g.arc(128, 150, 62, Math.PI, 0); g.lineTo(190, 320); g.fill();
-      g.fillStyle = "#3a2c22"; g.fillRect(84, 200, 88, 120); g.fillStyle = "#2a2018"; g.fillRect(126, 200, 4, 120);
+      g.fillStyle = "#15171b"; g.beginPath(); g.moveTo(66, 320); g.lineTo(66, 150); g.arc(128, 150, 62, Math.PI, 0); g.lineTo(190, 320); g.fill();
+      g.fillStyle = "#7d8a6a"; g.beginPath(); g.moveTo(96, 320); g.lineTo(96, 196); g.arc(128, 196, 32, Math.PI, 0); g.lineTo(160, 320); g.fill();   // daylight at the far end of the passage
       [[30, 150], [226, 150]].forEach(([lx, ly]) => { g.fillStyle = "#111"; g.fillRect(lx - 2, ly, 4, 26); g.fillRect(lx - 10, ly - 28, 20, 30); g.fillStyle = "#ffd98a"; g.fillRect(lx - 7, ly - 24, 14, 22); });
-      const tex = keep(new THREE.CanvasTexture(cv)); tex.colorSpace = THREE.SRGBColorSpace; const W = 9, H = 11, cx = 281, yF = 593 + 0.08*sg*-1;
-      const geo = keep(new THREE.PlaneGeometry(W*S, H*S)); const door = new THREE.Mesh(geo, keep(new THREE.MeshStandardMaterial({ map: tex, roughness: 0.9 })));
-      door.position.set(cx*S, lo + m(H/2) + m(0.6), -(593 + 0.12)*S); door.userData.keep = true; scene.add(door);   // faces north (+y map = -z world), plane already faces +z... turn it around
-      door.rotation.y = Math.PI; }
+      const tex = keep(new THREE.CanvasTexture(cv)); tex.colorSpace = THREE.SRGBColorSpace; const W = 8, H = 10, dm = keep(new THREE.MeshStandardMaterial({ map: tex, roughness: 0.9 }));
+      [[297.12, 548, Math.PI/2], [278.38, 553, -Math.PI/2]].forEach(([x, y, r]) => { const door = new THREE.Mesh(keep(new THREE.PlaneGeometry(W*S, H*S)), dm); door.position.set(x*S, gy(x, y) + m(H/2), -y*S); door.rotation.y = r; door.userData.keep = true; scene.add(door); });
+      // Braeden's room: the 2nd-floor corner window on the west side next to Bradley, with DJ lights going like there's a party
+      { const x = 261.86, y = 573, wy = lo + m(4.2 + 2.2), win = new THREE.MeshBasicMaterial({ color: 0xff00aa, toneMapped: false });
+        const w = new THREE.Mesh(keep(new THREE.PlaneGeometry(m(2.4), m(2.6))), win); w.position.set(x*S, wy, -y*S); w.rotation.y = -Math.PI/2; w.userData.keep = true; scene.add(w);
+        const fr = new THREE.Mesh(keep(new THREE.PlaneGeometry(m(2.9), m(3.1))), keep(new THREE.MeshStandardMaterial({ color: 0x2d2f33 }))); fr.position.set((x - 0.01)*S, wy, -y*S); fr.rotation.y = -Math.PI/2; fr.userData.keep = true; scene.add(fr);
+        const gc = document.createElement("canvas"); gc.width = gc.height = 64; const gg = gc.getContext("2d"), rg = gg.createRadialGradient(32, 32, 0, 32, 32, 32); rg.addColorStop(0, "rgba(255,255,255,1)"); rg.addColorStop(0.3, "rgba(255,255,255,.5)"); rg.addColorStop(1, "rgba(255,255,255,0)"); gg.fillStyle = rg; gg.fillRect(0, 0, 64, 64);
+        const gm = new THREE.PointsMaterial({ map: keep(new THREE.CanvasTexture(gc)), size: 26, sizeAttenuation: false, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, color: 0xff00aa });
+        const pg = keep(new THREE.BufferGeometry()); pg.setAttribute("position", new THREE.Float32BufferAttribute([(x - 0.6)*S, wy, -y*S], 3)); const glow = new THREE.Points(pg, keep(gm)); glow.userData.keep = true; scene.add(glow);
+        const hue = new THREE.Color(); w.onBeforeRender = () => { const t = performance.now()/1000, beat = (t*2.2) % 1, h = (Math.floor(t*2.2) * 0.137) % 1; hue.setHSL(h, 1, beat < 0.15 ? 0.75 : 0.5); win.color.copy(hue); gm.color.copy(hue); gm.size = 20 + (beat < 0.15 ? 14 : 0); }; } }
+
   }
+
+  // Thayer Hall's 2nd floor on the river side is the math department (Braeden's department): a lit band of windows along the river facade
+  { const A = [444, 430], B2 = [508, 604], L = Math.hypot(B2[0] - A[0], B2[1] - A[1]), ux = (B2[0] - A[0])/L, uy = (B2[1] - A[1])/L, nx = uy, ny = -ux, mx = (A[0] + B2[0])/2 + nx*0.25, my = (A[1] + B2[1])/2 + ny*0.25;
+    const c = document.createElement("canvas"); c.width = 1024; c.height = 64; const g = c.getContext("2d"); g.fillStyle = "rgba(0,0,0,0)"; g.clearRect(0, 0, 1024, 64);
+    for (let k = 0; k < 64; k++){ const x = 4 + k*16; g.fillStyle = k % 7 === 3 ? "#ffe9b0" : "#ffd27a"; g.fillRect(x, 16, 9, 36); }
+    const t = keep(new THREE.CanvasTexture(c)); t.colorSpace = THREE.SRGBColorSpace; const mat = keep(new THREE.MeshBasicMaterial({ map: t, transparent: true, toneMapped: false }));
+    const band = new THREE.Mesh(keep(new THREE.PlaneGeometry((L - 30)*S, 3*S)), mat); band.position.set(mx*S, gy(mx, my) + 6.3*S, -my*S); band.rotation.y = Math.atan2(ny, nx) - Math.PI/2 + Math.PI; band.userData.keep = true; scene.add(band); }
 
   // Michie Stadium: a bowl of stands around the field
   const stad = D.areas.find(a => a.k === "stadium"), stadLm = o.landmarks.findIndex(l => l.id === "stadium");
@@ -444,9 +458,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261114y").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261114z").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261114y"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261114z"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -569,7 +583,7 @@ export async function create(o){
         else { blk(x, y, h, 20, 8, 3.2, 0, w0, 0x9b2a24); blk(x, y, h, 7, 6, 4, 3.2, w0, 0xf0efe9, -3); blk(x, y, h, 1, 1, 3, 7.2, w0, 0x222222, -3);   // tug pushing
           for (let k = 0; k < b.barges; k++){ const f = 10 + 32 + k*62; blk(x, y, h, 60, 11, 3, 0, w0, 0x3b3a38, f); blk(x, y, h, 54, 9.5, 1.6, 3, w0, k % 2 ? 0x6b5a45 : 0x4a4f55, f); } } }
       mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
-    fetch("/campus/movers.json?v=20261114y").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
+    fetch("/campus/movers.json?v=20261114z").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
     return { step };
   })();
 
@@ -745,6 +759,10 @@ export async function create(o){
       '<span class="wx-h">Time</span>' + [["live", "Live"], ["day", "Day"], ["sunset", "Sunset"], ["night", "Night"]].map(([v, t]) => '<button type="button" data-k="tod" data-v="' + v + '">' + t + '</button>').join("") +
       '<span class="wx-h">Season</span>' + [["live", "Live"], ["spring", "Spring"], ["summer", "Summer"], ["fall", "Fall"], ["winter", "Winter"]].map(([v, t]) => '<button type="button" data-k="season" data-v="' + v + '">' + t + '</button>').join("") +
       '<span class="wx-h">Start an event</span>' + [["chute", "Parachute drop"], ["cannon", "Fire cannon"], ["parade", "Parade"], ["retreat", "Retreat"], ["pt", "PT run"], ["game", "Game day"], ["ball", "Ball games"]].map(([v, t]) => '<button type="button" data-ev="' + v + '">' + t + '</button>').join("");
+    { const ICON = { "wx:live": "📡", "wx:clear": "☀️", "wx:rain": "🌧️", "wx:snow": "❄️", "wx:fog": "🌫️", "tod:live": "🕑", "tod:day": "🌤️", "tod:sunset": "🌇", "tod:night": "🌙",
+        "season:live": "📅", "season:spring": "🌷", "season:summer": "🌳", "season:fall": "🍂", "season:winter": "⛄", "ev:chute": "🪂", "ev:cannon": "💥", "ev:parade": "🎖️", "ev:retreat": "🇺🇸", "ev:pt": "🏃", "ev:game": "🏈", "ev:ball": "⚾" };
+      panel.querySelectorAll("button").forEach(b => { const k = b.dataset.ev ? "ev:" + b.dataset.ev : b.dataset.k + ":" + b.dataset.v; if (ICON[k]) b.insertAdjacentHTML("afterbegin", '<span class="wx-i" aria-hidden="true">' + ICON[k] + '</span>'); b.classList.add("cat-" + (b.dataset.ev ? "ev" : b.dataset.k)); });
+      panel.querySelectorAll(".wx-h").forEach((h, i) => h.classList.add("cat-h", ["cat-h-wx", "cat-h-tod", "cat-h-season", "cat-h-ev"][i] || "")); }
     panel.insertAdjacentHTML("afterbegin", '<button type="button" class="wx-toggle" aria-expanded="true">Controls</button>');
     if (matchMedia("(max-width:860px)").matches) panel.classList.add("closed");
     panel.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return;
