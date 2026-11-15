@@ -38,7 +38,7 @@ try{saved=JSON.parse(localStorage.getItem(storageKey))||{}}catch{}
 function saveLoadout(){
  try{localStorage.setItem(storageKey,JSON.stringify({pilot:pilots[choice][0],callsign:$('callsign').value.trim(),stream:$('stream').value,outfit:$('outfit').value,sound:$('soundMode').value,mode:$('mode').value,accessory:$('accessory').value}))}catch{}
 }
-const accessories=[['pole','Fishing pole','🎣'],['sandwich','Bacon, egg & cheese','🥪'],['glasses','Blue-light glasses','👓'],['boots','Cowboy boots','🥾'],['igloo','Igloo charm','🧊'],['none','None',''],['camera','Camera','📷'],['hat','Cowboy hat','🤠'],['surf','Surfboard','🏄'],['shorts','Spandex shorts','🩳'],['shoes','Irish baby shoes','👟'],['pringles','Pringles can','🥫']];
+const accessories=[['combover','Blond comb-over',''],['pole','Fishing pole','🎣'],['sandwich','Bacon, egg & cheese','🥪'],['glasses','Blue-light glasses','👓'],['boots','Cowboy boots','🥾'],['igloo','Igloo charm','🧊'],['none','None',''],['camera','Camera','📷'],['hat','Cowboy hat','🤠'],['surf','Surfboard','🏄'],['shorts','Spandex shorts','🩳'],['shoes','Irish baby shoes','👟'],['pringles','Pringles can','🥫']];
 const rankKey='groundhog-air-rally-amex-points';
 const ranks=[['Starter',0],['Green',150],['Gold',450],['Platinum',950],['Reserve',1800],['Centurion',3200]];
 const placementPoints=[65,42,28,17,8,0,-8,-15,-23,-30,-38,-45];
@@ -84,7 +84,7 @@ function reportKO(victim,reason,attacker){
  if(feed.length>3)feed.shift().row.remove();
  if(attacker===player){$('ko').textContent='KNOCKOUT · '+victim.name;$('ko').hidden=false;koUntil=time+1.6}
 }
-const presets=Object.fromEntries(Object.entries({"Braeden":["basketball","glasses"],"Ethan":["volley","shorts"],"Josh":["beers","shoes"],"Casey":["loops","camera"],"Owen":["shotglass","surf"],"Bridger":["salmon","pole"],"Jimmy":["pizza","boots"],"Cole":["spurs","hat"],"Jess Joe":["chips","sandwich"]}).map(([pilot,[shot,accessory]])=>[pilot,[pilotKits[pilot][1],shot,accessory]]));
+const presets=Object.fromEntries(Object.entries({"Braeden":["basketball","glasses"],"Ethan":["volley","combover"],"Josh":["beers","shoes"],"Casey":["loops","camera"],"Owen":["shotglass","surf"],"Bridger":["salmon","pole"],"Jimmy":["pizza","boots"],"Cole":["spurs","hat"],"Jess Joe":["chips","sandwich"]}).map(([pilot,[shot,accessory]])=>[pilot,[pilotKits[pilot][1],shot,accessory]]));
 const rivals=['Maggie','Molly','Lili','Carli','Jade','Sophia','Adriann','Adrianna','Mila','Robin','Rachel','Ramon','CPT William Reynolds','MAJ P','CPT Derek Swanson','LTC Dusty Turner','MAJ Austin Semmel','Claude','Reese','Irish Woman','Emma Beck'];
 const landmarks=[
  {x:650,y:480,w:220,h:150,label:'IONA VS ANCHORAGE',color:'#ad7753',court:true},
@@ -624,9 +624,24 @@ function drawPattern(s){
 function drawGear(gear){
  const line=(x,y,u,v,color,width=1)=>{g.beginPath();g.moveTo(x,y);g.lineTo(u,v);g.strokeStyle=color;g.lineWidth=width;g.stroke()};
  if(gear==='glasses'){g.lineWidth=2;circle(12,-6,4,'#40627b','#a2eaff');circle(12,6,4,'#40627b','#a2eaff');rect(11,-2,2,4,'#a2eaff');line(10,-8,12,-10,'#fff');line(10,4,12,2,'#fff')}
+ else if(gear==='combover'){
+  g.beginPath();g.moveTo(-3,-9);g.quadraticCurveTo(5,-13,11,-7);g.quadraticCurveTo(7,-3,9,6);g.quadraticCurveTo(3,10,-3,6);g.closePath();
+  g.fillStyle='#eec875';g.fill();g.strokeStyle='#855c36';g.lineWidth=1;g.stroke();
+  line(7,-8,1,-4,'#fff0af');line(8,-5,0,0,'#fff0af');line(7,-1,0,4,'#bd8948');
+ }
  else if(gear==='hat'){g.beginPath();g.ellipse(5,0,9,15,0,0,Math.PI*2);g.fillStyle='#70462b';g.fill();g.strokeStyle='#e4ab70';g.stroke();circle(5,0,8,'#c18950','#573922');rect(3,-7,3,14,'#573922');rect(3,-2,3,4,'#dbac60')}
  else if(gear==='shorts'){rect(-17,-9,11,18,'#232942');rect(-17,-8,2,16,'#58adff');line(-16,0,-9,0,'#7588ad')}
- else if(gear==='boots'||gear==='shoes'){
+ else if(gear==='shoes'){
+  for(const y of [-11,11]){
+   g.save();g.translate(-15,y);g.rotate(y<0?-.22:.22);
+   g.beginPath();g.roundRect(-6,-4,14,8,4);g.fillStyle='#fff3dd';g.fill();g.strokeStyle='#25382a';g.lineWidth=1.25;g.stroke();
+   g.beginPath();g.roundRect(-5,-4,11,6,3);g.fillStyle='#239755';g.fill();
+   circle(5,-.5,3,'#fff4de');rect(-4,-3,2,5,'#f08b42');
+   line(-1,-2,-1,1,'#fff');line(1,-2,1,1,'#fff');
+   g.restore();
+  }
+ }
+ else if(gear==='boots'){
   for(const y of [-9,9]){const boot=gear==='boots';rect(-20,y-3,8,6,boot?'#794929':'#208254');circle(-11,y,4,boot?'#ae703e':'#55b577','#243b32');rect(-20,y+2,12,2,boot?'#38261e':'#fff1db');rect(-15,y-2,5,1,boot?'#eab276':'#f7aa48');if(!boot)rect(-14,y-4,2,3,'#fff1db')}
  }else if(gear==='surf'){g.beginPath();g.ellipse(-3,14,17,4,0,0,Math.PI*2);g.fillStyle='#ff9562';g.fill();rect(-15,13,21,2,'#fff0cc');rect(10,13,3,2,'#5a7897')}
  else if(gear==='pole'){line(-19,11,15,13,'#c78f59',2);line(12,13,20,15,'#e3b982');circle(-8,13,3,'#b6d3de','#343b46');line(20,15,18,24,'#fff');circle(18,24,2,'#ff785a')}
