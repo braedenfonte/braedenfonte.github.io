@@ -1282,8 +1282,22 @@ function drawPattern(s){
   if(pattern==='spain'){
    // Ethan: Spanish flag, red-yellow-red with the yellow band doubled and a simple crest.
    rect(-17,-11,24,22,'#c60b1e');rect(-10.5,-11,11,22,'#ffc400');
-   g.save();g.translate(-5,-5);g.rotate(Math.PI/2);rect(-3,-3,6,6,'#c60b1e');rect(-3,-3,3,3,'#e8b44a');rect(0,0,3,3,'#e8b44a');g.strokeStyle='#7a5a14';g.lineWidth=.6;g.strokeRect(-3,-3,6,6);
-   rect(-3.4,-4.6,6.8,1.6,'#c9a24a');rect(-5,-3,1.2,6,'#d8d8d8');rect(3.8,-3,1.2,6,'#d8d8d8');g.restore();
+   g.save();g.translate(-5,-5.2);g.rotate(Math.PI/2);
+   // Pillars of Hercules with red ribbons.
+   for(const px of [-4.4,4.4]){rect(px-.7,-2.6,1.4,6.4,'#e3e3e3');rect(px-1.1,-3.2,2.2,.8,'#c9a24a');rect(px-1.1,3.6,2.2,.8,'#c9a24a');rect(px-1.3,-.4,2.6,.9,'#c60b1e')}
+   // Crown.
+   g.beginPath();g.moveTo(-2.4,-3.6);g.lineTo(-2.6,-5.4);g.lineTo(-1.2,-4.6);g.lineTo(0,-6);g.lineTo(1.2,-4.6);g.lineTo(2.6,-5.4);g.lineTo(2.4,-3.6);g.closePath();g.fillStyle='#e0b23a';g.fill();g.strokeStyle='#7a5a14';g.lineWidth=.25;g.stroke();
+   circle(0,-6.2,.45,'#e0b23a');for(const cx of [-1.4,0,1.4])circle(cx,-4.1,.3,'#c60b1e');
+   // Quartered shield: Castile, Leon, Aragon, Navarre, with Granada at the point.
+   g.save();g.beginPath();g.moveTo(-2.7,-3.2);g.lineTo(2.7,-3.2);g.lineTo(2.7,1.6);g.quadraticCurveTo(2.7,4.2,0,4.6);g.quadraticCurveTo(-2.7,4.2,-2.7,1.6);g.closePath();g.clip();
+   rect(-2.7,-3.2,2.7,3.6,'#c60b1e');rect(-1.9,-2.2,1.1,1.6,'#e0b23a');rect(-2.1,-2.5,1.5,.5,'#e0b23a');
+   rect(0,-3.2,2.7,3.6,'#f4f1ea');circle(1.35,-1.4,.75,'#7a2a8a');
+   rect(-2.7,.4,2.7,4.4,'#e0b23a');for(let i=0;i<4;i++)rect(-2.5+i*.65,.4,.32,4.4,'#c60b1e');
+   rect(0,.4,2.7,4.4,'#c60b1e');g.strokeStyle='#e0b23a';g.lineWidth=.35;g.strokeRect(.5,.9,1.7,2.4);g.beginPath();g.moveTo(.5,.9);g.lineTo(2.2,3.3);g.moveTo(2.2,.9);g.lineTo(.5,3.3);g.stroke();
+   circle(0,3.9,.6,'#f4f1ea');circle(0,3.9,.3,'#3a8a3a');g.restore();
+   g.beginPath();g.moveTo(-2.7,-3.2);g.lineTo(2.7,-3.2);g.lineTo(2.7,1.6);g.quadraticCurveTo(2.7,4.2,0,4.6);g.quadraticCurveTo(-2.7,4.2,-2.7,1.6);g.closePath();g.strokeStyle='#7a5a14';g.lineWidth=.35;g.stroke();
+   circle(0,-.3,.9,'#2a5aa0','#e0b23a');
+   g.restore();
   }
   if(pattern==='ice'){
    // Bridger: glacier-blue ice with white shards and a snowflake.
@@ -1355,6 +1369,24 @@ function drawGear(gear){
 }
 let emblemBoost=1,animNow=0;
 const lootColorsAll={'Marist Camera':'#fff4ad','Kia Turbo':'#ffab62','Igloo Wall':'#aadfff','Froot Loops Burst':'#ff88bd','Salmon Shield':'#67f2dc','MAJ P’s Blabber':'#c9b6ff'};
+// Pilot crests, drawn in a 25-unit disc: Bears-style wishbone C, varsity block CM, Mount Sinai MS.
+const blockFont=n=>'900 '+n+'px "Arial Black","Arial Bold",Impact,sans-serif';
+function varsity(text,x,y,size,fill,inner,outer,sx=1){
+ g.save();g.translate(x,y);g.scale(sx,1);g.font=blockFont(size);g.textAlign='center';g.lineJoin='miter';g.miterLimit=2;
+ g.lineWidth=size*.34;g.strokeStyle=outer;g.strokeText(text,0,0);g.lineWidth=size*.18;g.strokeStyle=inner;g.strokeText(text,0,0);g.fillStyle=fill;g.fillText(text,0,0);g.restore();
+}
+function bearsC(){
+ const R=10,r=5.6,a=.78;
+ const path=()=>{g.beginPath();g.arc(0,0,R,-a,Math.PI+.2,true);g.lineTo(-R-3.2,0);g.lineTo(Math.cos(Math.PI-.2)*R,Math.sin(Math.PI-.2)*R);g.arc(0,0,R,Math.PI-.2,a,true);
+  g.lineTo(Math.cos(a)*r,Math.sin(a)*r);g.arc(0,0,r,a,-a,false);g.closePath()};
+ g.lineJoin='miter';path();g.lineWidth=3.6;g.strokeStyle='#ffffff';g.stroke();path();g.lineWidth=1.8;g.strokeStyle='#0b1630';g.stroke();path();g.fillStyle='#c83803';g.fill();
+}
+function drawCrest(kind){
+ if(kind==='bears'){circle(0,0,12.5,'#f4f4f2');g.lineWidth=1.6;circle(0,0,12.5,null,'#0b1630');g.save();g.translate(1,0);bearsC();g.restore();return}
+ circle(0,0,12.5,'#f6f3ef');g.lineWidth=1.6;circle(0,0,12.5,null,kind==='cm'?'#5a1a2c':'#111');
+ if(kind==='cm'){varsity('M',3.2,8.6,15,'#7a1e36','#ffffff','#7a1e36');varsity('C',-3.8,2.4,14,'#7a1e36','#ffffff','#7a1e36')}
+ else{varsity('S',0,8.6,20,'#e11d2a','#ffffff','#111111',1.25);varsity('M',0,4.6,9.5,'#111111','#ffffff','#111111',1.15)}
+}
 function crestLetter(text,x,y,fill,font,edge,width=2.2){
  g.font=font;g.textAlign='center';g.lineJoin='round';g.lineWidth=width;g.strokeStyle=edge;g.strokeText(text,x,y);g.fillStyle=fill;g.fillText(text,x,y);
 }
@@ -1404,11 +1436,7 @@ function drawPilot(s){
   if(crest&&s.trim){
    // Upright crest on the pilot's back. emblemBoost enlarges it only in the match view on small (phone) zoom.
    g.save();g.translate(-15,0);g.rotate(-s.angle);g.scale(emblemBoost,emblemBoost);
-   const bears=crest==='bears';
-   circle(0,0,12.5,bears?'#17294f':'#fffaf0');g.lineWidth=2;circle(0,0,12.5,null,bears?'#ff8c40':'#1d1518');
-   if(crest==='cm'){crestLetter('M',2.5,7.5,'#812d4d','900 17px Georgia','#fffaf0');crestLetter('C',-4.5,1.5,'#812d4d','900 14px Georgia','#fffaf0')}
-   else if(crest==='ms'){crestLetter('M',0,7,'#121418','900 20px Georgia','#fffaf0');crestLetter('S',0,9,'#d3192e','900 12px Georgia','#fffaf0',2.4)}
-   else crestLetter('C',0,8,'#ff8c40','900 23px Georgia','#fff7e5',3);
+   drawCrest(crest);
    g.restore();
   }
   drawGear(s.accessory);
@@ -1616,11 +1644,7 @@ function draw3DHog(ox,oy,scale,kit,now){
   g.beginPath();g.arc(0,0,11,0,Math.PI*2);g.strokeStyle='#00000055';g.lineWidth=1;g.stroke()},{cull:true,bias:1,text:true,flipY:true});
  const crest={'#812d4d':'cm','#22252b':'ms','#17294f':'bears'}[kit.color];
  if(crest&&kit.trim)decal([-12.5,0,11.8],[0,1,0],[-.82,0,-.57],()=>{
-  const bears=crest==='bears';circle(0,0,9.5,bears?'#17294f':'#fffaf0');g.lineWidth=1.5;circle(0,0,9.5,null,bears?'#ff8c40':'#1d1518');
-  g.save();g.scale(.76,.76);
-  if(crest==='cm'){crestLetter('M',2.5,7.5,'#812d4d','900 17px Georgia','#fffaf0');crestLetter('C',-4.5,1.5,'#812d4d','900 14px Georgia','#fffaf0')}
-  else if(crest==='ms'){crestLetter('M',0,7,'#121418','900 20px Georgia','#fffaf0');crestLetter('S',0,9,'#d3192e','900 12px Georgia','#fffaf0',2.4)}
-  else crestLetter('C',0,8,'#ff8c40','900 23px Georgia','#fff7e5',3);g.restore();
+  g.save();g.scale(.76,.76);drawCrest(crest);g.restore();
  },{cull:true,bias:2,text:true});
  // Accessories, modelled in 3D.
  const acc=kit.accessory;
