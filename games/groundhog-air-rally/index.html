@@ -1,9 +1,9 @@
 <!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Groundhog Air Rally</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#101c1a;color:#fff9dc;font:16px system-ui;overflow:hidden}canvas{display:block;width:100vw;height:100dvh;touch-action:none}main{position:absolute;inset:0;display:grid;place-items:center;background:#0b1918a0;padding:16px}section{background:#172b28;border:2px solid #4f7362;border-radius:24px;padding:clamp(18px,4vw,44px);max-width:620px;box-shadow:0 18px 70px #0009}h1{font-size:clamp(32px,7vw,67px);line-height:.95;margin:8px 0 18px;color:#ffda79}p{line-height:1.4}button{font:inherit;font-weight:750;border:0;border-radius:12px;padding:12px;background:#2f5045;color:white;cursor:pointer;touch-action:manipulation}button[aria-pressed=true],#start{background:#ffda79;color:#1c2922}#pilots{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}#start{margin-top:14px;width:100%}#hud{position:absolute;inset:12px 12px auto;display:flex;justify-content:space-between;gap:8px;pointer-events:none}#hud span,#power{background:#142824ed;border:1px solid #74967f;padding:9px;border-radius:10px}#power{position:absolute;right:14px;bottom:120px} [hidden]{display:none!important}small{display:block;margin-top:12px;color:#c7dbc9}@media(max-width:420px){#pilots{grid-template-columns:repeat(2,1fr)}#hud{font-size:12px}}
-#results{text-align:center;width:min(440px,100%)}#results h2{font-size:clamp(32px,8vw,58px);margin:4px 0}#results[data-win=true]{border-color:#ffda79}#results[data-win=false]{border-color:#ed9789}#place{font-size:clamp(52px,14vw,102px);font-weight:900;line-height:1.05;color:#ffda79}#resultStats{display:flex;justify-content:center;gap:24px;margin:18px 0}#results button{margin:4px}#again{background:#ffda79;color:#172b28}#menu{overflow:auto}#menu section{margin:auto;width:min(620px,100%)}#pilots{grid-template-columns:repeat(4,minmax(0,1fr))}#pilots button{padding:7px 3px;font-size:13px;border-bottom:3px solid var(--accent)}#loadout{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}#loadout label{font-size:13px;color:#d5e9d7}#loadout input,#loadout select{display:block;width:100%;background:#101f1d;color:white;border:1px solid #74967f;border-radius:8px;padding:8px;font:inherit;margin-top:3px}#pilotDetail{display:flex;align-items:center;gap:10px;margin:8px 0}#badge{font-size:24px;border:2px solid var(--accent);border-radius:100%;width:40px;height:40px;display:grid;place-items:center}#origin{color:#d5e9d7;font-size:13px}@media(max-height:650px){#menu section{padding:15px}#menu h1{font-size:32px;margin:4px 0}#menu h1 br{display:none}#menu p{margin:5px 0}}#levels{position:absolute;left:12px;bottom:14px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;pointer-events:none;width:min(280px,calc(100% - 24px))}.upgrade{background:#142824ed;border:1px solid #74967f;border-left:3px solid var(--accent);border-radius:8px;padding:6px}.upgrade span{display:flex;justify-content:space-between;font-size:12px;font-weight:750}.upgrade b{color:var(--accent)}.upgrade i{display:flex;gap:3px;margin-top:4px}.upgrade em{height:5px;flex:1;background:#49605a;border-radius:2px}.upgrade em.on{background:var(--accent)}@media(pointer:coarse){#levels{bottom:auto;top:58px;width:min(204px,calc(100% - 124px))}.upgrade span{font-size:10px}}#album{overflow:auto}#album section{width:min(590px,100%);max-height:88dvh;overflow:auto}#albumList{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px;padding:0;list-style:none}#albumList li{padding:8px;background:#29443d;border-radius:8px;font-size:13px}#openAlbum{width:100%;margin-top:6px}.loadoutTitle{font-size:15px;margin:12px 0 6px;color:#ffda79}#loadoutPreview{display:flex;align-items:center;gap:12px;border:1px solid #74967f;border-radius:10px;padding:8px 12px;background:#101f1d}#previewHog{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;font-size:25px;background:var(--accent)}#previewShot{font-size:13px;color:#d5e9d7}#rules{background:#172b28;color:#fff9dc;border:2px solid #74967f;border-radius:18px;width:min(510px,92vw);padding:22px}#rules::backdrop{background:#071715cc}#mode{font:inherit;background:#101f1d;color:white;padding:5px;border-radius:6px}#loadout select:disabled,#loadout input:disabled{opacity:.66}#rankCard,#rankResult{background:#243c38;border:1px solid #719188;border-radius:10px;padding:8px;margin:8px 0;color:#fbe6a1;font-size:13px}#rankCard progress{display:block;width:100%;height:8px;margin:5px 0;accent-color:#ffda79}#feed{position:absolute;inset:61px auto auto 12px;max-width:min(250px,52vw);display:grid;gap:4px;pointer-events:none}#feed div{background:#132925ed;border-left:3px solid #ffda79;padding:4px 8px;border-radius:5px;font-size:12px}#ko{position:absolute;top:23%;width:100%;text-align:center;color:#ffde86;font-weight:900;font-size:clamp(20px,5vw,38px);text-shadow:0 2px 5px black;pointer-events:none}#end{overflow:auto}#results{margin:auto;position:relative;overflow:hidden}#results[data-win=true]{box-shadow:0 0 75px #ffd57366;background:radial-gradient(ellipse at top,#5f5533,#172b28 68%)}#results[data-win=false]{box-shadow:0 0 75px #e7776760;background:radial-gradient(ellipse at top,#653c3b,#172b28 68%)}@media(prefers-reduced-motion:no-preference){#results{animation:result-in .38s ease-out both}@keyframes result-in{from{opacity:0;transform:scale(.91) translateY(15px)}to{opacity:1;transform:none}}}@media(pointer:coarse){#feed{top:145px}}#rankCard{padding:14px;background:linear-gradient(125deg,#504125,#172c29);border-color:#e5bc65;box-shadow:inset 0 0 26px #ffc76725}#rankTitle{font-size:clamp(17px,4vw,24px)}#historyButton{display:block;margin-top:8px;font-size:12px;padding:6px 10px}#history{background:#172b28;color:#fff9dc;border:2px solid #cba658;border-radius:18px;width:min(510px,92vw)}#history::backdrop{background:#071715cc}#history li{padding:8px}#resultStats{gap:9px;flex-wrap:wrap}#resultStats span{flex:1 1 90px;background:#142824;padding:9px;border-radius:9px;font-weight:800;font-size:16px}#rankResult strong{display:block;font-size:clamp(28px,8vw,48px);color:#ffda79}#ko{top:29%;font-size:clamp(30px,8vw,62px);letter-spacing:.04em;text-shadow:0 3px 8px #000,0 0 28px #e39452}#feed div{font-size:14px}#end[data-win=false]{background:#3e1418a0}#end[data-win=true]{background:#2432196b}</style>
+#results{text-align:center;width:min(440px,100%)}#results h2{font-size:clamp(32px,8vw,58px);margin:4px 0}#results[data-win=true]{border-color:#ffda79}#results[data-win=false]{border-color:#ed9789}#place{font-size:clamp(52px,14vw,102px);font-weight:900;line-height:1.05;color:#ffda79}#resultStats{display:flex;justify-content:center;gap:24px;margin:18px 0}#results button{margin:4px}#again{background:#ffda79;color:#172b28}#menu{overflow:auto}#menu section{margin:auto;width:min(620px,100%)}#pilots{grid-template-columns:repeat(4,minmax(0,1fr))}#pilots button{padding:7px 3px;font-size:13px;border-bottom:3px solid var(--accent)}#loadout{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}#loadout label{font-size:13px;color:#d5e9d7}#loadout input,#loadout select{display:block;width:100%;background:#101f1d;color:white;border:1px solid #74967f;border-radius:8px;padding:8px;font:inherit;margin-top:3px}#pilotDetail{display:flex;align-items:center;gap:10px;margin:8px 0}#badge{font-size:24px;border:2px solid var(--accent);border-radius:100%;width:40px;height:40px;display:grid;place-items:center}#origin{color:#d5e9d7;font-size:13px}@media(max-height:650px){#menu section{padding:15px}#menu h1{font-size:32px;margin:4px 0}#menu h1 br{display:none}#menu p{margin:5px 0}}#levels{position:absolute;left:12px;bottom:14px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;pointer-events:none;width:min(280px,calc(100% - 24px))}.upgrade{background:#142824ed;border:1px solid #74967f;border-left:3px solid var(--accent);border-radius:8px;padding:6px}.upgrade span{display:flex;justify-content:space-between;font-size:12px;font-weight:750}.upgrade b{color:var(--accent)}.upgrade i{display:flex;gap:3px;margin-top:4px}.upgrade em{height:5px;flex:1;background:#49605a;border-radius:2px}.upgrade em.on{background:var(--accent)}@media(pointer:coarse){#levels{bottom:auto;top:58px;width:min(204px,calc(100% - 124px))}.upgrade span{font-size:10px}}#album{overflow:auto}#album section{width:min(590px,100%);max-height:88dvh;overflow:auto}#albumList{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px;padding:0;list-style:none}#albumList li{padding:8px;background:#29443d;border-radius:8px;font-size:13px}#openAlbum{width:100%;margin-top:6px}.loadoutTitle{font-size:15px;margin:12px 0 6px;color:#ffda79}#loadoutPreview{display:flex;align-items:center;gap:12px;border:1px solid #74967f;border-radius:10px;padding:8px 12px;background:#101f1d}#previewHog{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;font-size:25px;background:var(--accent)}#previewShot{font-size:13px;color:#d5e9d7}#rules{background:#172b28;color:#fff9dc;border:2px solid #74967f;border-radius:18px;width:min(510px,92vw);padding:22px}#rules::backdrop{background:#071715cc}#mode{font:inherit;background:#101f1d;color:white;padding:5px;border-radius:6px}#loadout select:disabled,#loadout input:disabled{opacity:.66}#rankCard,#rankResult{background:#243c38;border:1px solid #719188;border-radius:10px;padding:8px;margin:8px 0;color:#fbe6a1;font-size:13px}#rankCard progress{display:block;width:100%;height:8px;margin:5px 0;accent-color:#ffda79}#feed{position:absolute;inset:61px auto auto 12px;max-width:min(250px,52vw);display:grid;gap:4px;pointer-events:none}#feed div{background:#132925ed;border-left:3px solid #ffda79;padding:4px 8px;border-radius:5px;font-size:12px}#ko{position:absolute;top:23%;width:100%;text-align:center;color:#ffde86;font-weight:900;font-size:clamp(20px,5vw,38px);text-shadow:0 2px 5px black;pointer-events:none}#end{overflow:auto}#results{margin:auto;position:relative;overflow:hidden}#results[data-win=true]{box-shadow:0 0 75px #ffd57366;background:radial-gradient(ellipse at top,#5f5533,#172b28 68%)}#results[data-win=false]{box-shadow:0 0 75px #e7776760;background:radial-gradient(ellipse at top,#653c3b,#172b28 68%)}@media(prefers-reduced-motion:no-preference){#results{animation:result-in .38s ease-out both}@keyframes result-in{from{opacity:0;transform:scale(.91) translateY(15px)}to{opacity:1;transform:none}}}@media(pointer:coarse){#feed{top:145px}}#rankCard{padding:14px;background:linear-gradient(125deg,#504125,#172c29);border-color:#e5bc65;box-shadow:inset 0 0 26px #ffc76725}#rankTitle{font-size:clamp(17px,4vw,24px)}#historyButton{display:block;margin-top:8px;font-size:12px;padding:6px 10px}#history{background:#172b28;color:#fff9dc;border:2px solid #cba658;border-radius:18px;width:min(510px,92vw)}#history::backdrop{background:#071715cc}#history li{padding:8px}#resultStats{gap:9px;flex-wrap:wrap}#resultStats span{flex:1 1 90px;background:#142824;padding:9px;border-radius:9px;font-weight:800;font-size:16px}#rankResult strong{display:block;font-size:clamp(28px,8vw,48px);color:#ffda79}#ko{top:29%;font-size:clamp(30px,8vw,62px);letter-spacing:.04em;text-shadow:0 3px 8px #000,0 0 28px #e39452}#feed div{font-size:14px}#end[data-win=false]{background:#3e1418a0}#end[data-win=true]{background:#2432196b}#rankCard{margin:0 0 14px}#pilots button{background:var(--pilot,#29413b);color:#fff;text-shadow:0 1px 4px #000,0 0 2px #000;border:1px solid #ffffff40;border-bottom:4px solid var(--accent);min-height:37px}#pilots button[aria-pressed=true]{outline:2px solid #fff9dc;outline-offset:1px}#pilots button:hover{filter:brightness(1.17)}.arenaPicker{display:block;font-size:13px;font-weight:750;margin-top:10px}.arenaPicker select{display:block;width:100%;margin-top:4px;padding:7px;background:#101f1d;color:#fff9dc;border:1px solid #74967f;border-radius:8px;font:inherit}</style>
 <canvas id="field" aria-label="Groundhog Air Rally arena"></canvas><div id="hud" hidden><span id="stats"></span><span id="zone"></span></div><div id="levels" hidden></div><button id="power" hidden>Power</button>
-<main id="menu"><section><div>GROUNDHOG BATTLE ROYALE</div><h1>Groundhog<br>Air Rally</h1><p id="brief">Knock out rival groundhogs, grab crate loot, and stay ahead of the fog. Last groundhog flying wins.</p><h2 class="loadoutTitle">Choose your pilot</h2><div id="pilots" aria-label="Choose pilot"></div><div id="pilotDetail"><span id="badge" aria-hidden="true"></span><span id="origin"></span></div><h2 class="loadoutTitle">Customize your groundhog</h2><label>Loadout <select id="mode"><option value="preset">Pilot default</option><option value="custom">Custom</option></select></label><div id="loadout"><label>Accessory<select id="accessory"></select></label><label>In-match name<input id="callsign" maxlength="20" autocomplete="off" placeholder="Use pilot name"></label><label>Projectile appearance<select id="stream"></select></label><label>Outfit color<select id="outfit"></select></label><label>Hit sounds<select id="soundMode"><option value="on">On</option><option value="off">Off</option></select></label></div><div id="loadoutPreview"><span id="previewHog" aria-hidden="true">🦫</span><span><strong id="previewName"></strong><br><span id="previewShot"></span></span></div><div id="rankCard"><strong id="rankTitle"></strong><progress id="rankProgress" aria-label="Progress toward next rank"></progress><span id="rankNext"></span><button id="historyButton">Last 3 matches</button></div><button id="start">Start match</button><button id="rulesButton">How to play</button> <button id="openAlbum">Scrapbook</button><small>Desktop · WASD, mouse to aim and fire, E for power<br>Touch · Left stick to fly, right stick to aim and fire</small></section></main>
+<main id="menu"><section><div id="rankCard"><strong id="rankTitle"></strong><progress id="rankProgress" aria-label="Progress toward next rank"></progress><span id="rankNext"></span><button id="historyButton">Last 3 matches</button></div><div>GROUNDHOG BATTLE ROYALE</div><h1>Groundhog<br>Air Rally</h1><p id="brief">Knock out rival groundhogs, grab crate loot, and stay ahead of the fog. Last groundhog flying wins.</p><h2 class="loadoutTitle">Choose your pilot</h2><div id="pilots" aria-label="Choose pilot"></div><div id="pilotDetail"><span id="badge" aria-hidden="true"></span><span id="origin"></span></div><h2 class="loadoutTitle">Customize your groundhog</h2><input type="hidden" id="mode" value="preset"><div id="loadout"><label>Accessory<select id="accessory"></select></label><label>In-match name<input id="callsign" maxlength="20" autocomplete="off" placeholder="Use pilot name"></label><label>Projectile appearance<select id="stream"></select></label><label>Outfit color<select id="outfit"></select></label><label>Hit sounds<select id="soundMode"><option value="on">On</option><option value="off">Off</option></select></label></div><div id="loadoutPreview"><span id="previewHog" aria-hidden="true">🦫</span><span><strong id="previewName"></strong><br><span id="previewShot"></span></span></div><label class="arenaPicker">Arena<select id="arenaSelect"></select></label><button id="start">Start match</button><button id="rulesButton">How to play</button> <button id="openAlbum">Scrapbook</button><small>Desktop · WASD, mouse to aim and fire, E for power<br>Touch · Left stick to fly, right stick to aim and fire</small></section></main>
 <div id="feed" hidden></div><div id="ko" role="status" hidden></div><main id="end" hidden><section id="results" aria-labelledby="outcome"><h2 id="outcome"></h2><div id="place"></div><div id="placement"></div><div id="resultStats"><span id="resultKills"></span><span id="resultAssists"></span><span id="resultTime"></span></div><p id="cause"></p><div id="rankResult"></div><button id="again">Play again</button><button id="changePilot">Change pilot</button></section></main><main id="album" hidden><section><h2>Scrapbook</h2><p id="albumCount"></p><ul id="albumList"></ul><button id="closeAlbum">Back to loadout</button></section></main><dialog id="history"><h2>Last 3 matches</h2><ol id="historyList"></ol><form method="dialog"><button>Close</button></form></dialog><dialog id="rules"><h2>How to play</h2><p>Be the last groundhog flying. Shoot crates and fly over loot to collect it. Each stat stacks to level 5. Gold drops give two upgrade levels and a power. Eliminated pilots drop their held power.</p><p>Fly back inside the ring within 10 seconds if you enter the fog.</p><p><b>Computer</b> · WASD to fly, mouse to aim and fire, E to use a power.<br><b>Phone</b> · Left stick to fly, right stick to aim and fire, Power button to activate.</p><form method="dialog"><button>Got it</button></form></dialog><script>
 'use strict';
 const $=id=>document.getElementById(id);
@@ -68,7 +68,7 @@ function recordResult(place){
  const change=base>0?Math.round((base+bonus)*scale):base<0?Math.min(-1,Math.round(base*(1+previous*.10))+Math.min(bonus,5)):bonus;
  rankPoints=Math.max(0,before+change);
  try{localStorage.setItem(rankKey,String(rankPoints))}catch{}
- showRank();
+ showRank();refreshArenas();
  const current=rankIndex(rankPoints),delta=rankPoints-before;
  const amount=(delta>0?'+':'')+delta+' Amex points';
  const headline=document.createElement('strong');headline.textContent=amount;
@@ -84,14 +84,14 @@ function reportKO(victim,reason,attacker){
 }
 const presets=Object.fromEntries(Object.entries({"Braeden":["basketball","glasses"],"Ethan":["volley","shorts"],"Josh":["beers","shoes"],"Casey":["loops","camera"],"Owen":["shotglass","surf"],"Bridger":["salmon","pole"],"Jimmy":["pizza","boots"],"Cole":["spurs","hat"],"Jess Joe":["chips","sandwich"]}).map(([pilot,[shot,accessory]])=>[pilot,[pilotKits[pilot][1],shot,accessory]]));
 const rivals=['Owen','Bridger','Jimmy','Cole','Maggie','Molly','Lili','Jess Joe','Carli','Jade','Sophia','Adriann','Adrianna','Mila','Robin','Rachel','Ramon','CPT William Reynolds','MAJ P','CPT Derek Swanson','LTC Dusty Turner','MAJ Austin Semmel','Claude','Reese','Irish Woman',...pilots.map(p=>p[0])];
-const props=[
+const landmarks=[
  {x:650,y:480,w:220,h:150,label:'IONA VS ANCHORAGE',color:'#ad7753',court:true},
  {x:1110,y:880,w:184,h:92,label:'MARIST LOST & FOUND',color:'#9e4d4b'},
  {x:470,y:1030,w:85,h:44,label:'KIA SOUL',color:'#5bada3'},
  {x:1190,y:420,w:170,h:86,label:'PHEBES · 18+',color:'#734f79'},
  {x:810,y:1170,w:140,h:70,label:'KENAI IGLOO',color:'#83a9b7'}
 ];
-props.push(
+landmarks.push(
  {x:630,y:435,w:85,h:26,label:'BLEACHERS',color:'#8d685d'},
  {x:815,y:650,w:80,h:28,label:'TEAM BENCH',color:'#476898'},
  {x:1360,y:1020,w:145,h:145,label:'TURNER VS SEMMEL',color:'#b36776',boxing:true},
@@ -129,6 +129,24 @@ $('openAlbum').onclick=()=>{
  $('menu').hidden=true;$('album').hidden=false;$('closeAlbum').focus();
 };
 $('closeAlbum').onclick=()=>{$('album').hidden=true;$('menu').hidden=false;$('openAlbum').focus()};
+const arenas=[
+ ['Rally Grounds',0,['#45534b','#4c5c51','#42494c'],[]],
+ ['Volleyball Weekend',1,['#5d5b4f','#646256','#44494e'],[{x:790,y:920,w:205,h:130,label:'PRACTICE COURT',color:'#9b7352',court:true}]],
+ ['Kenai Icefield',2,['#697e86','#778d95','#50636e'],[{x:1270,y:1450,w:160,h:90,label:'KENAI ICE SHELTER',color:'#9cafb7'},{x:1790,y:1140,w:155,h:84,label:'SALMON STATION',color:'#586879'}]],
+ ['Dublin After Dark',3,['#323c3d','#394747','#292e36'],[{x:1460,y:1350,w:130,h:190,label:'DUBLIN ROW',color:'#684f4a'},{x:1900,y:1650,w:160,h:94,label:'MARKET HALL',color:'#514b60'}]],
+ ['Cleveland Fight Night',4,['#4c4c51','#54555a','#33363d'],[{x:1520,y:1260,w:178,h:130,label:'FIGHT NIGHT GYM',color:'#5d5465'}]],
+ ['Centurion Circuit',5,['#494738','#555140','#353535'],[{x:1350,y:1420,w:125,h:100,label:'CENTURION CLUB',color:'#7b6e50'},{x:1820,y:1500,w:155,h:100,label:'FINALS PAVILION',color:'#67624d'}]]
+];
+let arena=arenas[0],props=landmarks;
+function refreshArenas(){
+ const picker=$('arenaSelect'),previous=picker.value;
+ picker.replaceChildren(...arenas.map(([name,level],index)=>{
+  const option=document.createElement('option');option.value=index;option.disabled=rankIndex(rankPoints)<level;
+  option.textContent=name+(option.disabled?' · Unlock at '+ranks[level][0]:'');return option;
+ }));
+ picker.value=Number(previous)<arenas.length&&arenas[Number(previous)][1]<=rankIndex(rankPoints)?previous||'0':'0';
+}
+refreshArenas();
 const size=3200, center=size/2, keys=new Set(), sticks={};
 let hitFrom=0,hitFlash=0;
 let eliminationPlace=0, cause="";
@@ -192,6 +210,7 @@ function sound(shield){
  osc.connect(volume).connect(audio.destination);osc.start(t);osc.stop(t+.14);
 }
 function begin(){
+ refreshArenas();arena=arenas[Number($('arenaSelect').value)]||arenas[0];props=[...landmarks,...arena[3]];
  saveLoadout();
  if(window.AudioContext&&$('soundMode').value==='on'){audio??=new AudioContext();audio.resume().catch(()=>{})}
  supply=null;supplyCalled=false;walls=[];
@@ -248,7 +267,7 @@ function options(id,items,current){
  for(const [value,title] of items){const option=document.createElement('option');option.value=value;option.textContent=title;$(id).append(option)}
  $(id).value=items.some(([value])=>value===current)?current:items[0][0];
 }
-pilots.forEach(([short,,,color],i)=>{const b=document.createElement('button');b.textContent=short+' · '+pilotKits[short][0];b.style.setProperty('--accent',color);b.onclick=()=>{$('mode').value='preset';lockFields();select(i);saveLoadout()};$('pilots').append(b)});
+pilots.forEach(([short,,,color],i)=>{const b=document.createElement('button');b.textContent=short;const [, , primary, trim]=pilotKits[short];b.style.setProperty('--accent',trim);b.style.setProperty('--pilot',primary);b.onclick=()=>{$('mode').value='preset';lockFields();select(i);saveLoadout()};$('pilots').append(b)});
 const customButton=document.createElement('button');
 customButton.textContent='Custom';
 customButton.style.setProperty('--accent','#ffda79');
@@ -426,12 +445,23 @@ function step(dt){
 function circle(x,y,r,fill,stroke){g.beginPath();g.arc(x,y,r,0,Math.PI*2);if(fill){g.fillStyle=fill;g.fill()}if(stroke){g.strokeStyle=stroke;g.stroke()}}
 function rect(x,y,a,b,color){g.fillStyle=color;g.fillRect(x,y,a,b)}
 function label(s,x,y,color='#fff4d7',font='bold 13px system-ui'){g.font=font;g.textAlign='center';g.fillStyle=color;g.fillText(s,x,y)}
+function drawBoxer(x,y,facing,kit,now){
+ const strike=Math.max(0,Math.sin(now/86))**5;
+ g.save();g.translate(x+Math.sin(now/205)*2,y);g.scale(facing,1);
+ circle(0,9,13,'#382f3e80');
+ rect(-7,5,5,11,'#222731');rect(3,6,5,11,'#252b36');
+ rect(-8,0,16,8,kit);rect(-8,0,16,2,'#eee2c9');
+ rect(-7,-8,14,9,'#b07b61');circle(0,-12,5,'#c59679');
+ rect(3,-9,7+5*strike,4,'#b07b61');
+ circle(10+8*strike,-7,4,kit,'#242833');circle(7,1,4,kit,'#242833');
+ g.restore();
+}
 function render(now){
  rect(0,0,w,h,'#172b2b');
  g.save();g.translate(w/2,h/2);g.scale(zoom,zoom);g.translate(-cam.x,-cam.y);
- rect(0,0,size,size,'#4f8063');
- for(let x=0;x<size;x+=80)for(let y=0;y<size;y+=80)if((x+y)%160===0)rect(x,y,80,80,'#538669');
- rect(0,710,size,100,'#495957');rect(900,0,121,size,'#495957');
+ rect(0,0,size,size,arena[2][0]);
+ for(let x=0;x<size;x+=80)for(let y=0;y<size;y+=80)if((x+y)%160===0)rect(x,y,80,80,arena[2][1]);
+ rect(0,710,size,100,arena[2][2]);rect(900,0,121,size,arena[2][2]);
  for(let i=0;i<size;i+=60){rect(i,758,30,3,'#b1b69c');rect(959,i,3,30,'#b1b69c')}
  for(let i=0;i<48;i++){
   const x=(i*239+73)%size,y=(i*397+113)%size;
@@ -444,7 +474,11 @@ function render(now){
   if(o.boxing){
    for(let i=0;i<3;i++){g.strokeStyle=['#ecd6a8','#23354a','#ecd6a8'][i];g.strokeRect(o.x+8+i*4,o.y+8+i*4,o.w-16-i*8,o.h-16-i*8)}
    for(const dx of [10,o.w-10])for(const dy of [10,o.h-10])circle(o.x+dx,o.y+dy,6,'#f5c46e');
-   const pulse=Math.sin(now/170)*8;circle(o.x+o.w/2-22+pulse,o.y+42,13,'#eaa055');circle(o.x+o.w/2+22-pulse,o.y+42,13,'#70b9e8');
+   for(let i=0;i<8;i++)rect(o.x+8+i*17,o.y-13,13,7,'#656267');
+   drawBoxer(o.x+o.w/2-20,o.y+46,1,'#993b43',now);
+   drawBoxer(o.x+o.w/2+20,o.y+46,-1,'#396b91',now+310);
+   label('TURNER',o.x+37,o.y+105,'#fff4d7','bold 9px system-ui');
+   label('SEMMEL',o.x+107,o.y+105,'#fff4d7','bold 9px system-ui');
   }else if(o.court){
    rect(o.x+o.w/2-2,o.y+8,4,o.h-16,'#ffe5a5');
    for(const edge of [24,o.w-26])rect(o.x+edge,o.y+10,2,o.h-20,'#ffe5a5');
@@ -457,7 +491,8 @@ function render(now){
    for(let i=0;i<4;i++)circle(o.x+30+i*25,o.y+25,23,'#c3e6ef','#738fa3');
    rect(o.x+o.w/2-13,o.y+o.h-17,26,18,'#314d65');
   }else{
-   for(let i=9;i<o.w-13;i+=25)rect(o.x+i,o.y+10,15,10,'#344b58');
+   rect(o.x+5,o.y+5,o.w-10,o.h*.38,'#ffffff24');
+   for(let i=9;i<o.w-13;i+=25){rect(o.x+i,o.y+10,15,10,'#344b58');rect(o.x+i+2,o.y+12,11,3,'#91b1b1')}
    rect(o.x+12,o.y+o.h-17,o.w-24,8,'#ebc790');
   }
   label(o.label,o.x+o.w/2,o.y+o.h/2+4);
