@@ -115,7 +115,7 @@ function reportKO(victim,reason,attacker){
  if(feed.length>3)feed.shift().row.remove();
  if(attacker===player){$('ko').textContent='KNOCKOUT · '+victim.name;$('ko').hidden=false;koUntil=time+1.6}
 }
-const presets=Object.fromEntries(Object.entries({"Braeden":["basketball","glasses"],"Ethan":["volley","combover"],"Josh":["beers","shoes"],"Casey":["loops","camera"],"Owen":["shotglass","surf"],"Bridger":["salmon","pole"],"Jimmy":["pizza","boots"],"Cole":["spurs","hat"],"Jess Joe":["chips","sandwich"]}).map(([pilot,[shot,accessory]])=>[pilot,[pilotKits[pilot][1],shot,accessory]]));
+const presets=Object.fromEntries(Object.entries({"Braeden":["basketball","glasses"],"Ethan":["volley","combover"],"Josh":["beers","shoes"],"Casey":["loops","camera"],"Owen":["shotglass","surf"],"Bridger":["salmon","pole"],"Jimmy":["pizza","boots"],"Cole":["spurs","hat"],"Jess Joe":["chips","pringles"]}).map(([pilot,[shot,accessory]])=>[pilot,[pilotKits[pilot][1],shot,accessory]]));
 const rivals=['Maggie','Molly','Lili','Carli','Jade','Sophia','Adriann','Adrianna','Mila','Robin','Rachel','Ramon','CPT William Reynolds','MAJ P','CPT Derek Swanson','LTC Dusty Turner','MAJ Austin Semmel','Claude','Reese','Irish Woman','Emma Beck'];
 const landmarks=[
  {x:650,y:480,w:220,h:150,label:'IONA VS ANCHORAGE',color:'#ad7753',court:true},
@@ -400,6 +400,60 @@ function startMusic(){
  musicStep=0;musicNext=audio.currentTime+.1;musicTimer=setInterval(musicTick,60);
 }
 function stopMusic(){clearInterval(musicTimer);musicTimer=0}
+
+// Bot brain. Skill rises with your Amex rank: better aim, smarter retreats, more power use.
+function botSkill(){return .4+.12*rankIndex(rankPoints)}
+function clearShot(a,b){const d=distance(a,b),n=Math.ceil(d/22);for(let i=1;i<n;i++){const x=a.x+(b.x-a.x)*i/n,y=a.y+(b.y-a.y)*i/n;if(blocked(x,y,2)||walls.some(w=>w.hp>0&&w.until>time&&Math.hypot(w.x-x,w.y-y)<24))return false}return true}
+function openDir(s,angle){for(const off of [0,.6,-.6,1.2,-1.2,1.9,-1.9,2.6,-2.6]){const a=angle+off;if(!blocked(s.x+Math.cos(a)*48,s.y+Math.sin(a)*48,16))return a}return angle+Math.PI}
+function botThink(s,ring){
+ const skill=botSkill(),me=ships.indexOf(s),others=ships.filter(t=>t!==s&&t.hp>0);
+ if(!others.length)return null;
+ // Prefer close, weak, visible targets.
+ const target=others.reduce((best,t)=>{const score=distance(s,t)-(maxHealth(t)-t.hp)*1.4-(distance(s,t)<600&&clearShot(s,t)?60:0);return !best||score<best.score?{t,score}:best},null).t;
+ const d=distance(s,target),a=Math.atan2(target.y-s.y,target.x-s.x),see=clearShot(s,target);
+ const hpPct=s.hp/maxHealth(s),centerPoint={x:center,y:center},fromCenter=distance(s,centerPoint);
+ const nextRing=Math.max(95,ring-120),shrinkIn=time<18?18-time:10-(time-18)%10;
+ const loot=drops.find(item=>distance(s,item)<240&&(hpPct>.6||item.gold)) || (d>300&&time>5?crates.find(item=>item.hp>0&&distance(s,item)<280&&clearShot(s,item)):null);
+ let steer,mode='fight';
+ if(fromCenter>ring-60||(shrinkIn<4&&fromCenter>nextRing-40)){steer=Math.atan2(center-s.y,center-s.x);mode='zone'}
+ else if(hpPct<.4&&d<360){
+  // Retreat behind the nearest cover, on the side away from the target.
+  const cover=props.reduce((best,o)=>{const c={x:o.x+o.w/2,y:o.y+o.h/2},dd=distance(s,c);return dd<520&&(!best||dd<best.dd)?{o,c,dd}:best},null);
+  if(cover&&skill>.5){const away=Math.atan2(cover.c.y-target.y,cover.c.x-target.x),r=Math.max(cover.o.w,cover.o.h)/2+34;steer=Math.atan2(cover.c.y+Math.sin(away)*r-s.y,cover.c.x+Math.cos(away)*r-s.x)}
+  else steer=a+Math.PI;
+  mode='retreat';
+ }else if(loot){steer=Math.atan2(loot.y-s.y,loot.x-s.x);mode='loot'}
+ else if(!see&&d<600){steer=a+(me%2?1:-1)*.9;mode='flank'}
+ else{
+  // Hold a preferred range and circle-strafe, switching direction now and then.
+  const want=200+(me%4)*25,side=Math.sin(time*.7+me*1.7)>0?1:-1;
+  steer=d>want+60?a+side*.35:d<want-60?a+Math.PI-side*.5:a+side*Math.PI/2;
+ }
+ steer=openDir(s,steer);
+ const pace=mode==='zone'||mode==='retreat'?1:.8;
+ // Aim: lead the target, with error that shrinks as skill rises.
+ const lead=Math.min(.6,d/565)*skill,ax=target.x+target.vx*lead,ay=target.y+target.vy*lead;
+ const err=(1-skill)*.32*Math.sin(time*5.3+me*2.1);
+ if(mode==='loot'&&loot.hp&&d>300){s.angle=Math.atan2(loot.y-s.y,loot.x-s.x);fire(s)}
+ else{s.angle=Math.atan2(ay-s.y,ax-s.x)+err;if(time>=5&&d<420&&see)fire(s)}
+ botPower(s,target,d,hpPct,mode);
+ return {dx:Math.cos(steer)*pace,dy:Math.sin(steer)*pace};
+}
+function botPower(s,target,d,hpPct,mode){
+ const p=s.power;if(!p||p==='MAJ P’s Blabber'||Math.random()>botSkill()*.08)return;
+ let use=false;
+ if(p==='Ramon’s Healthy Lotion')use=maxHealth(s)-s.hp>=50;
+ else if(p==='Salmon Shield')use=time-s.lastDamage<.6&&hpPct<.75;
+ else if(p==='Froot Loops Burst')use=d<320&&clearShot(s,target);
+ else if(p==='Kia Turbo')use=mode==='zone'||mode==='retreat';
+ else if(p==='Igloo Wall')use=mode==='retreat'&&d<320;
+ else if(p==='Marist Camera')use=true;
+ if(!use)return;
+ if(p==='Ramon’s Healthy Lotion')s.hp=Math.min(maxHealth(s),s.hp+65);
+ else if(p==='Igloo Wall'){const a=Math.atan2(target.y-s.y,target.x-s.x),x=s.x+Math.cos(a)*48,y=s.y+Math.sin(a)*48;if(blocked(x,y,25))return;walls.push({x,y,hp:4,until:time+10})}
+ else{s.effect=p;s.buff=5}
+ s.power='';if(distance(s,cam)<600)floatText(s.x,s.y-30,powerNames[p]||p,'#c9f0ff');
+}
 function begin(){
  refreshArenas();arena=arenas[Number($('arenaSelect').value)]||arenas[0];props=[...landmarks,...arena[3]];props.push(...randomLandmarks());props.push(...layoutCover(arena));dropTime=random(30,45);$('arenaName').textContent=arena[0];$('dropAlert').hidden=true;
  saveLoadout();
@@ -678,16 +732,7 @@ function step(dt){
    if(aim&&Math.hypot(aim.dx,aim.dy)>9){s.angle=Math.atan2(aim.dy,aim.dx);fire(s)}
    else if(mouse.active&&!aim){s.angle=Math.atan2((mouse.y-h/2)/zoom+cam.y-s.y,(mouse.x-w/2)/zoom+cam.x-s.x);if(mouse.down)fire(s)}
   }else if(s.sleep>time){s.vx*=.85;s.vy*=.85}else{
-   const target=ships.filter(t=>t!==s&&t.hp>0).reduce((a,t)=>!a||distance(s,t)<distance(s,a)?t:a,null);
-   if(!target)continue;
-   const d=distance(s,target),a=Math.atan2(target.y-s.y,target.x-s.x);
-   const loot=drops.find(item=>distance(s,item)<220&&(s.hp>=75||item.type==='Repair')) || (d>290&&time>5?crates.find(item=>item.hp>0&&distance(s,item)<260):null);
-   const lootAngle=loot?Math.atan2(loot.y-s.y,loot.x-s.x):a;
-   const steer=distance(s,centerPoint)>ring-55?Math.atan2(center-s.y,center-s.x):s.hp<40&&d<240?a+Math.PI:loot?lootAngle:a+Math.sin(time*1.1+ships.indexOf(s))*1.2+(d<125?2.2:0);
-   dx=Math.cos(steer)*.72;dy=Math.sin(steer)*.72;s.angle=a+Math.sin(time*3+ships.indexOf(s))*.19;
-   if(blocked(s.x+dx*56,s.y+dy*56,15)){dx=Math.cos(steer+1.5);dy=Math.sin(steer+1.5)}
-   if(loot&&d>290&&loot.hp){s.angle=lootAngle;fire(s)}else if(time>=5&&d<390&&!blocked(s.x+Math.cos(a)*35,s.y+Math.sin(a)*35))fire(s);
-   if(s.power&&powers.indexOf(s.power)<2&&d<250&&s.hp<75){s.effect=s.power;s.power='';s.buff=4}
+   const ai=botThink(s,ring);if(!ai)continue;dx=ai.dx;dy=ai.dy;
   }
   const magnitude=Math.max(1,Math.hypot(dx,dy)),speed=(190+s.speed*23)*(s.buff>0&&s.effect==='Kia Turbo'?1.5:1);
   s.vx+=(speed*dx/magnitude-s.vx)*Math.min(1,dt*8);s.vy+=(speed*dy/magnitude-s.vy)*Math.min(1,dt*8);
