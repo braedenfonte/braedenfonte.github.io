@@ -32,7 +32,7 @@ The live site uses GitHub Pages and the existing custom domain. Changes to the g
 
 ## Pilots and cosmetics
 
-Selecting a pilot applies their preset. **Custom** enables editing, and clicking a cosmetic tile also switches to Custom while retaining the rest of the active loadout. Match and hangar art share drawing routines. Accessories are attached to the rotating pilot model, with glasses over the eyes and hats or hair on the head.
+Selecting a pilot applies their preset. **Custom** enables editing, and clicking a cosmetic tile also switches to Custom while retaining the rest of the active loadout. The match and cosmetic tiles use the 2D top-down art; the hangar preview uses a matching 3D model. Accessories are attached to the rotating pilot model, with glasses over the eyes and hats or hair on the head.
 
 | Pilot | Home | Skin | Projectile | Accessory |
 |---|---|---|---|---|
@@ -46,7 +46,7 @@ Selecting a pilot applies their preset. **Custom** enables editing, and clicking
 | Cole Bryant | West, TX | Texas flag | Cowboy spurs | Cowboy hat |
 | Jess Joe Augustine | Mount Sinai, NY | Black M and red S | Pringles | Pringles can |
 
-The CM, MS, and Bears-inspired C crests sit upright on the pilot's back and are drawn larger in the match view on phone-sized zoom (`emblemBoost`). Ethan has short blond hair on the crown, leaving the eyes clear. The MS crest interlocks a small red S inside a large black M. The selected outline is black. Alternative projectiles and gear are available in the cosmetic picker. Cosmetic projectiles share collision and base combat behavior even when their artwork differs in size. The hangar includes a live rotating preview and test fire.
+The CM, MS, and Bears-inspired C crests sit upright on the pilot's back and are drawn larger in the match view on phone-sized zoom (`emblemBoost`). Ethan has short blond hair on the crown, leaving the eyes clear. The MS crest interlocks a small red S inside a large black M. Pilot buttons use names and outfit colors. The selected outline is black. Alternative projectiles and gear are available in the cosmetic picker. Cosmetic projectiles share collision and combat behavior and are drawn at the same size (`shotScale`). The hangar preview is 3D (`draw3DHog`): shaded ellipsoids with skin patterns, crests and accessories mapped onto planes. It turns slowly on its own; drag it to spin and tilt, and Test fire shoots from the nose.
 
 The nine playable pilots are excluded from the bot pool. Side characters include Maggie, Molly, Lili, Carli, Jade, Sophia, Adriann, Adrianna, Mila, Robin, Rachel, Ramon, CPT William Reynolds, MAJ P, CPT Derek Swanson, LTC Dusty Turner, MAJ Austin Semmel, Claude, Reese, Irish Woman, and Emma Beck. Reese and Irish Woman are side characters with Scrapbook cameos, just like the other non-playable friends. Adriann and Adrianna are separate people.
 
