@@ -158,10 +158,11 @@ function randomLandmarks(){
 function dropPoint(){
  for(let i=0;i<150;i++){
   const point=spawn(radius()-48);
-  if(distance(point,{x:center,y:center})<radius()-32&&!blocked(point.x,point.y,34))return point;
+  // Pad leaves room for the three Pot of Gold pickups that fan out around the chest.
+  if(distance(point,{x:center,y:center})<radius()-60&&!blocked(point.x,point.y,64))return point;
  }
  for(let y=center-radius()+40;y<center+radius();y+=40)for(let x=center-radius()+40;x<center+radius();x+=40)
-  if(Math.hypot(x-center,y-center)<radius()-32&&!blocked(x,y,34))return {x,y};
+  if(Math.hypot(x-center,y-center)<radius()-60&&!blocked(x,y,64))return {x,y};
  return null;
 }
 function refreshArenas(){
@@ -326,6 +327,11 @@ for(const id of ['stream','outfit','accessory','callsign','soundMode'])$(id).onc
 $('start').onclick=begin;$('again').onclick=begin;$('changePilot').onclick=()=>{$('end').hidden=true;$('menu').hidden=false;$('start').focus()};
 function announce(message){toast=message;notice=2.8}
 const powers=['Marist Camera','Froot Loops Burst','Salmon Shield','Kia Turbo','Igloo Wall','Ramon’s Healthy Lotion'];
+const powerIcons={'Marist Camera':'📷','Froot Loops Burst':'🥣','Salmon Shield':'🐟','Kia Turbo':'🚗','Igloo Wall':'🧊','Ramon’s Healthy Lotion':'🧴'};
+const powerNames={'Marist Camera':'MARIST CAMERA','Froot Loops Burst':'FROOT LOOPS','Salmon Shield':'SALMON SHIELD','Kia Turbo':'KIA TURBO','Igloo Wall':'IGLOO WALL','Ramon’s Healthy Lotion':'RAMON’S LOTION'};
+function lootTag(text,x,y,color,font='bold 11px system-ui'){
+ g.font=font;g.textAlign='center';g.lineJoin='round';g.lineWidth=3;g.strokeStyle='#14201dd9';g.strokeText(text,x,y);g.fillStyle=color;g.fillText(text,x,y);
+}
 let walls=[];
 function activate(){
  if(!live||!player.power)return;
@@ -458,11 +464,11 @@ function step(dt){
    if(!crate.hp){
     const stats=Object.keys(upgrades);
     const take=list=>list[Math.floor(random(0,list.length))];
-    const drop=(type,x=0,y=0,tier=1)=>drops.push({x:crate.x+x,y:crate.y+y,type,tier});
+    const drop=(type,x=0,y=0,tier=1,gold=false)=>drops.push({x:crate.x+x,y:crate.y+y,type,tier,gold});
     if(crate.supply){
      const first=take(stats);
-     drop(first,-30,0,3);drop(take(stats.filter(stat=>stat!==first)),30,0,3);
-     drop(take(['Kia Turbo','Igloo Wall','Ramon’s Healthy Lotion','Marist Camera']),0,30);
+     drop(first,-40,-6,3,true);drop(take(stats.filter(stat=>stat!==first)),40,-6,3,true);
+     drop(take(['Kia Turbo','Igloo Wall','Ramon’s Healthy Lotion','Marist Camera']),0,48,1,true);
     }else drop(take(Math.random()<.06?powers:stats));
    }
    continue;
@@ -608,8 +614,8 @@ function drawPattern(s){
  const pattern=skinPatterns[Object.values(pilotKits).findIndex(kit=>kit[2]===s.color)]||'chevrons';
  if(['chevrons','diagonal','sunset','western','texas','flames'].includes(pattern)){
   if(pattern==='diagonal'){rect(-16,-11,8,22,'#178657');rect(-8,-11,7,22,'#faf8ed');rect(-1,-11,8,22,'#ef8839')}
-  if(pattern==='chevrons'){rect(-17,-11,24,22,'#fff9ee');label('M',-3,7,'#812d4d','bold 16px Georgia');label('C',-10,0,'#812d4d','bold 12px Georgia')}
-  if(pattern==='flames'){rect(-17,-11,24,22,'#e2c9b9');label('M',-8,3,'#14171b','bold 13px Georgia');label('S',-2,8,'#cb2034','bold 13px Georgia')}
+  if(pattern==='chevrons'){rect(-17,-11,24,22,'#fff9ee');rect(-17,-11,24,3,'#812d4d');rect(-17,8,24,3,'#812d4d')}
+  if(pattern==='flames'){rect(-17,-11,24,22,'#1b1d22');rect(-17,-4,24,3,'#cb2034');rect(-17,2,24,3,'#cb2034')}
   if(pattern==='texas'){rect(-16,-11,8,22,'#214784');rect(-8,-11,15,11,'#fff9ea');rect(-8,0,15,11,'#c73246');label('★',-12,3,'#fff','8px system-ui')}
   if(pattern==='western'){rect(-17,-11,24,22,'#142747');label('C',-5,8,'#f4edde','bold 22px Georgia');label('C',-5,7,'#fa7629','bold 19px Georgia')}
   if(pattern==='sunset'){for(let i=0;i<8;i++){g.save();g.translate(-5,0);g.rotate(i*Math.PI/4);rect(6,-.7,5,1.4,'#ffbc62');g.restore()}circle(-5,0,5,'#ffe4a7')}
@@ -634,15 +640,26 @@ function drawGear(gear){
  const line=(x,y,u,v,color,width=1)=>{g.beginPath();g.moveTo(x,y);g.lineTo(u,v);g.strokeStyle=color;g.lineWidth=width;g.stroke()};
  if(gear==='glasses'){g.lineWidth=2;circle(12,-6,4,'#40627b','#a2eaff');circle(12,6,4,'#40627b','#a2eaff');rect(11,-2,2,4,'#a2eaff');line(10,-8,12,-10,'#fff');line(10,4,12,2,'#fff')}
  else if(gear==='combover'){
-  g.beginPath();g.ellipse(5,0,11,12,0,0,Math.PI*2);g.fillStyle='#9c764f';g.fill();
-  g.beginPath();g.ellipse(4,0,10,10,0,0,Math.PI*2);g.fillStyle='#c29962';g.fill();
-  g.beginPath();g.moveTo(-5,-7);g.quadraticCurveTo(2,-13,13,-8);g.quadraticCurveTo(18,-5,11,1);g.quadraticCurveTo(6,6,-5,4);g.quadraticCurveTo(-8,-1,-5,-7);
-  g.fillStyle='#f0c775';g.fill();g.strokeStyle='#705039';g.lineWidth=1;g.stroke();
-  for(let i=0;i<3;i++){
-   g.beginPath();g.moveTo(-4,-5+i*3);g.quadraticCurveTo(5,-9+i*4,13,-6+i*2);
-   g.strokeStyle=i===2?'#ae7942':'#fff0ad';g.stroke();
+  // High-and-tight: dark buzzed sides fading into the fur, blond top on the crown only, so the eyes stay visible.
+  const fade=g.createRadialGradient(3,0,3,3,0,14);
+  fade.addColorStop(0,'#33241a');fade.addColorStop(.62,'#46311f');fade.addColorStop(1,'#ba835600');
+  g.save();g.beginPath();g.arc(8,0,13,0,Math.PI*2);g.clip();circle(3,0,14,fade);g.restore();
+  // Short strip on the far side of the part.
+  g.beginPath();g.roundRect(-3,-9.6,11,2.6,1.3);g.fillStyle='#d6a24a';g.fill();
+  // Main comb-over: crisp straight part edge, volume swept across the crown and up at the front.
+  const sweep=g.createLinearGradient(0,-6,3,7);sweep.addColorStop(0,'#fff2b0');sweep.addColorStop(1,'#dda243');
+  g.beginPath();g.moveTo(-3.5,-5.6);g.lineTo(9,-5.6);g.quadraticCurveTo(12.6,-2.5,11.2,1.6);
+  g.quadraticCurveTo(9.8,5.4,5.5,6.6);g.quadraticCurveTo(0,8,-3.5,6);g.quadraticCurveTo(-6,0,-3.5,-5.6);
+  g.fillStyle=sweep;g.fill();g.strokeStyle='#7d5222';g.lineWidth=1;g.stroke();
+  // Parallel comb lines running away from the part, bending forward like a styled sweep.
+  for(const sx of [-1.5,2.5,6.5]){
+   g.beginPath();g.moveTo(sx,-4.6);g.bezierCurveTo(sx+.5,-1,sx+2.5,2,sx+3.2,5.2);g.strokeStyle='#c28a34';g.lineWidth=.9;g.stroke();
   }
-  line(-3,5,9,2,'#f6dfab',1.4);
+  g.beginPath();g.moveTo(9.4,-4.5);g.quadraticCurveTo(11.6,-1.5,10.3,2);g.strokeStyle='#fffbe0';g.lineWidth=1.2;g.stroke();
+  // Visible side part (scalp line).
+  line(-3.5,-6.3,9,-6.3,'#f7e4cc',1.4);
+  // Eyes drawn back on top of the hair line.
+  circle(12,-6,2,'#241b18');circle(12,6,2,'#241b18');
  }
  else if(gear==='hat'){g.beginPath();g.ellipse(5,0,9,15,0,0,Math.PI*2);g.fillStyle='#70462b';g.fill();g.strokeStyle='#e4ab70';g.stroke();circle(5,0,8,'#c18950','#573922');rect(3,-7,3,14,'#573922');rect(3,-2,3,4,'#dbac60')}
  else if(gear==='shorts'){rect(-17,-9,11,18,'#232942');rect(-17,-8,2,16,'#58adff');line(-16,0,-9,0,'#7588ad')}
@@ -661,20 +678,27 @@ function drawGear(gear){
  }else if(gear==='surf'){g.beginPath();g.ellipse(-3,14,17,4,0,0,Math.PI*2);g.fillStyle='#ff9562';g.fill();rect(-15,13,21,2,'#fff0cc');rect(10,13,3,2,'#5a7897')}
  else if(gear==='pole'){line(-19,11,15,13,'#c78f59',2);line(12,13,20,15,'#e3b982');circle(-8,13,3,'#b6d3de','#343b46');line(20,15,18,24,'#fff');circle(18,24,2,'#ff785a')}
  else if(gear==='camera'){rect(-12,7,15,11,'#283644');rect(-10,6,6,3,'#526a7c');rect(-10,8,3,2,'#fff3b0');circle(-4,13,4,'#12232c','#b6c8d1');circle(-4,13,2.5,'#72bde8');circle(-5,12,1,'#fff')}
- else if(gear==='sandwich'){rect(-13,8,16,10,'#ba763e');rect(-12,10,14,3,'#ffe297');rect(-12,13,14,2,'#a04737');rect(-11,15,12,2,'#ebac5b')}
+ else if(gear==='sandwich'){rect(-5,10,16,10,'#ba763e');rect(-4,12,14,3,'#ffe297');rect(-4,15,14,2,'#a04737');rect(-3,17,12,2,'#ebac5b')}
  else if(gear==='pringles'){rect(-13,8,14,7,'#e04f4a');rect(-13,7,2,9,'#f8d48b');circle(-6,11,2,'#ffe4b4')}
+}
+let emblemBoost=1;
+function crestLetter(text,x,y,fill,font,edge,width=2.2){
+ g.font=font;g.textAlign='center';g.lineJoin='round';g.lineWidth=width;g.strokeStyle=edge;g.strokeText(text,x,y);g.fillStyle=fill;g.fillText(text,x,y);
 }
 function drawPilot(s){
   g.save();g.translate(s.x,s.y);g.rotate(s.angle);
   circle(-18,0,9,'#77503a');circle(-4,0,16,'#9b6849');circle(-5,0,11,s.color);if(s.trim)drawPattern(s);
   circle(4,-11,5,'#77503a');circle(4,11,5,'#77503a');circle(8,0,13,'#ba8356','#583b30');
   circle(12,-6,2,'#241b18');circle(12,6,2,'#241b18');circle(18,0,5,'#efd2a0');circle(21,0,2.5,'#33221d');
-  if(['#812d4d','#22252b','#17294f'].includes(s.color)&&s.trim){
-   g.save();g.translate(-14,0);g.rotate(-s.angle);
-   circle(0,0,10,s.color==='#17294f'?'#17294f':'#fff8ed','#30242a');
-   if(s.color==='#812d4d'){label('M',2,6,'#812d4d','900 13px Georgia');label('C',-4,0,'#812d4d','900 10px Georgia')}
-   else if(s.color==='#22252b'){label('M',-3,1,'#15171b','900 10px Georgia');label('S',3,6,'#c4283a','900 11px Georgia')}
-   else{label('C',0,6,'#fff7e5','900 18px Georgia');label('C',0,5,'#ff8c40','900 15px Georgia')}
+  const crest={'#812d4d':'cm','#22252b':'ms','#17294f':'bears'}[s.color];
+  if(crest&&s.trim){
+   // Upright crest on the pilot's back. emblemBoost enlarges it only in the match view on small (phone) zoom.
+   g.save();g.translate(-15,0);g.rotate(-s.angle);g.scale(emblemBoost,emblemBoost);
+   const bears=crest==='bears';
+   circle(0,0,12.5,bears?'#17294f':'#fffaf0');g.lineWidth=2;circle(0,0,12.5,null,bears?'#ff8c40':'#1d1518');
+   if(crest==='cm'){crestLetter('M',2.5,7.5,'#812d4d','900 17px Georgia','#fffaf0');crestLetter('C',-4.5,1.5,'#812d4d','900 14px Georgia','#fffaf0')}
+   else if(crest==='ms'){crestLetter('M',-3,2,'#121418','900 14px Georgia','#fffaf0');crestLetter('S',4,9,'#d3192e','900 15px Georgia','#fffaf0')}
+   else crestLetter('C',0,8,'#ff8c40','900 23px Georgia','#fff7e5',3);
    g.restore();
   }
   drawGear(s.accessory);
@@ -846,19 +870,32 @@ function render(now){
  for(const d of drops){
   const stat=upgrades[d.type];
   const tier=stat?Math.min(5,player[stat]+(d.tier||1)):0;
-  const icon={Repair:'+',Speed:'»',Health:'♥',Shield:'⬟','Fire rate':'➜●'}[d.type]||'★';
+  const icon={Repair:'+',Speed:'»',Health:'♥',Shield:'⬟','Fire rate':'➜●'}[d.type]||powerIcons[d.type]||'★';
+  const ring=d.gold?6:0;
+  if(d.gold){
+   // Pot of Gold loot: gold coin rim, shamrock-green inner ring and orbiting glints, on top of the usual level colour.
+   g.save();g.shadowBlur=18;g.shadowColor='#ffd76f';circle(d.x,d.y,19,'#9c6b16');g.restore();
+   g.lineWidth=2;circle(d.x,d.y,19,'#e7b33f','#fff1a8');circle(d.x,d.y,16,null,'#2f9a57');
+   for(let i=0;i<4;i++){const a=now/380+i*Math.PI/2;circle(d.x+Math.cos(a)*24,d.y+Math.sin(a)*24,2,'#fff3b0')}
+  }
   if(tier>=4){
    const tint=tierColors[tier-1],pulse=Math.sin(now/190)*3;
    g.save();g.shadowBlur=tier===5?24:15;g.shadowColor=tint;g.lineWidth=tier===5?3:2;
-   circle(d.x,d.y,19+pulse,null,tint);g.restore();
+   circle(d.x,d.y,19+ring+pulse,null,tint);g.restore();
    for(let i=0;i<(tier===5?6:3);i++){
-    const a=now/440+i*Math.PI/3;circle(d.x+Math.cos(a)*23,d.y+Math.sin(a)*23,1.7,tint);
+    const a=now/440+i*Math.PI/3;circle(d.x+Math.cos(a)*(23+ring),d.y+Math.sin(a)*(23+ring),1.7,tint);
    }
   }
+  g.lineWidth=d.gold?2:1;
   circle(d.x,d.y,14,stat?tierColors[tier-1]:lootColors[d.type],d.tier>1?'#fff0a2':'#203733');
-  label(icon,d.x,d.y+4,'#272c31');
-  if(tier)label(tier+(d.tier>1?' · +'+d.tier:''),d.x,d.y-18,'#fff9dc','bold 12px system-ui');
+  label(icon,d.x,d.y+(stat?4:5),'#272c31',stat?'bold 13px system-ui':'14px system-ui');
+  // Name what you are picking up: traits from the Pot of Gold and every power.
+  const name=d.gold&&stat?'+'+d.tier+' '+d.type.toUpperCase():stat?'':powerNames[d.type]||d.type.toUpperCase();
+  const tb=clamp(.85/zoom,1,1.35);
+  if(name)lootTag(name,d.x,d.gold&&!stat?d.y+35*tb:d.y-24-ring/2,d.gold?'#ffe08a':'#fff9dc','bold '+(11*tb).toFixed(1)+'px system-ui');
+  if(tier)lootTag(d.gold?'LV '+tier:tier+(d.tier>1?' · +'+d.tier:''),d.x,d.gold?d.y+21+12*tb:d.y-18,'#fff9dc','bold '+((d.gold?10:12)*tb).toFixed(1)+'px system-ui');
  }
+ emblemBoost=clamp(.85/zoom,1,1.35);
  for(const s of ships)if(s.hp>0){
   circle(s.x+5,s.y+9,19,'#233a3d80');
   drawPilot(s);
@@ -866,6 +903,7 @@ function render(now){
   label(s.name,s.x,s.y-32);
   rect(s.x-17,s.y+27,34,4,'#233e3c');rect(s.x-17,s.y+27,34*s.hp/maxHealth(s),4,s.color);
  }
+ emblemBoost=1;
  for(const b of bolts)drawShot(b,now);
  for(const p of sparks)circle(p.x,p.y,3,p.color);
  g.beginPath();g.rect(-4000,-4000,9600,9600);g.arc(center,center,radius(),0,Math.PI*2);g.fillStyle='#67508cad';g.fill('evenodd');
@@ -883,6 +921,7 @@ function render(now){
   const nextRadius=Math.max(95,radius()-120);
   g.setLineDash([3,3]);circle(mx+center*scale,my+center*scale,nextRadius*scale,null,'#d0e5cb');g.setLineDash([]);
   if(supply?.hp)circle(mx+supply.x*scale,my+supply.y*scale,4,'#ffd76f');
+  for(const d of drops)if(d.gold)circle(mx+d.x*scale,my+d.y*scale,2.5,'#ffd76f','#2f9a57');
   if(player.effect==='Marist Camera'&&player.buff>0)for(const rival of ships)if(rival!==player&&rival.hp>0&&distance(rival,player)<550)circle(mx+rival.x*scale,my+rival.y*scale,3,'#ff8e9a');
   circle(mx+player.x*scale,my+player.y*scale,3,'#ffda79');
   if(player.out>0){
