@@ -38,11 +38,11 @@ Selecting a pilot applies their preset. **Custom** enables editing, and clicking
 |---|---|---|---|---|
 | Braeden Fonte | Caledonia, NY | White with overlapping maroon C and M | Basketballs | Blue-light glasses |
 | Ethan Ploetz | Alexandria, VA | Spanish flag | Volleyballs | Blond hair |
-| Josh Brancamp | Fishkill, NY | Irish flag | Spinning Beers | Irish baby shoes |
-| Casey Adams | Cleveland, OH | Pink and black | Froot Loops | Camera |
+| Josh Brancamp | Fishkill, NY | Irish flag | Spinning Beers | Irish baby shoes (all four feet) |
+| Casey Adams | Cleveland, OH | Tito's vodka handle | Froot Loops | Camera |
 | Owen Beckwith | San Diego, CA | Sunset orange and pale sun | Milky shot glasses | Surfboard |
 | Bridger Beck | Kenai, AK | Icy blue and white | Salmon | Fishing pole |
-| Jimmy Benne | San Antonio, TX | Navy and orange Bears-inspired C | Deep-dish pizzas | Cowboy boots (on the back feet) |
+| Jimmy Benne | San Antonio, TX | Navy and orange Bears-inspired C | Deep-dish pizzas | Cowboy boots (all four feet) |
 | Cole Bryant | West, TX | Texas flag | Cowboy spurs | Cowboy hat |
 | Jess Joe Augustine | Mount Sinai, NY | Black M and red S | Pringles | Pringles can |
 
