@@ -341,21 +341,29 @@ function collect(s,type,tier=1){
 }
 function ship(name,color,point){return {...point,name,color,hp:100,lastDamage:0,regen:0,angle:0,vx:0,vy:0,cd:0,out:0,speed:0,rate:0,health:0,shield:0,power:'',effect:'',buff:0,sleep:0,phase:Math.random()*5000}}
 let audio;
-function sound(shield){
- if($('soundMode').value==='off'||!audio||audio.state!=='running')return;
- const osc=audio.createOscillator(),volume=audio.createGain(),t=audio.currentTime;
- osc.type=shield?'sine':'triangle';osc.frequency.setValueAtTime(shield?780:210,t);
- osc.frequency.exponentialRampToValueAtTime(shield?390:85,t+.12);
- volume.gain.setValueAtTime(.09,t);volume.gain.exponentialRampToValueAtTime(.001,t+.13);
- osc.connect(volume).connect(audio.destination);osc.start(t);osc.stop(t+.14);
-}
+function sound(shield){sfx(shield?'block':'hurt')}
 // Synthesized sound effects and match music (Web Audio, no files).
 let sfxBus=null,musicBus=null,musicFilter=null,musicTimer=0,musicStep=0,musicNext=0,lastSfx={},fogBeep=0;
+// iPhones mute Web Audio when the ringer switch is off; playing a silent media element switches the
+// page to the 'playback' audio category so the volume buttons control the game instead.
+let silentTrack=null;
+function unlockSilentSwitch(){
+ if(silentTrack)return;
+ const rate=8000,n=rate/2,buf=new Uint8Array(44+n),v=new DataView(buf.buffer);
+ const str=(o,t)=>{for(let i=0;i<t.length;i++)buf[o+i]=t.charCodeAt(i)};
+ str(0,'RIFF');v.setUint32(4,36+n,true);str(8,'WAVEfmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
+ v.setUint32(24,rate,true);v.setUint32(28,rate,true);v.setUint16(32,1,true);v.setUint16(34,8,true);str(36,'data');v.setUint32(40,n,true);buf.fill(128,44);
+ let bin='';for(const c of buf)bin+=String.fromCharCode(c);
+ silentTrack=new Audio('data:audio/wav;base64,'+btoa(bin));silentTrack.loop=true;silentTrack.setAttribute('playsinline','');silentTrack.volume=.01;
+ silentTrack.play().catch(()=>{silentTrack=null});
+}
 function ensureAudio(){
  if(!window.AudioContext)return false;
+ try{if(navigator.audioSession)navigator.audioSession.type='playback'}catch{}
+ unlockSilentSwitch();
  audio??=new AudioContext();if(audio.state!=='running')audio.resume().catch(()=>{});
  if(!sfxBus){const limiter=audio.createDynamicsCompressor();limiter.threshold.value=-10;limiter.ratio.value=12;limiter.connect(audio.destination);
-  sfxBus=audio.createGain();sfxBus.gain.value=.8;sfxBus.connect(limiter);
+  sfxBus=audio.createGain();sfxBus.gain.value=2;sfxBus.connect(limiter);
   musicFilter=audio.createBiquadFilter();musicFilter.type='lowpass';musicFilter.frequency.value=9000;
   musicBus=audio.createGain();musicBus.gain.value=.05;musicBus.connect(musicFilter).connect(limiter)}
  return true;
@@ -385,7 +393,13 @@ function sfx(name,at,vol=1){
   case 'shot_loops':tone(880,1250,.06,'square',.028*k);break;
   case 'shot_salmon':noise(.12,.05*k,900);tone(300,180,.1,'sine',.04*k);break;
   case 'shot_chips':noise(.05,.05*k,3000);break;
-  case 'hitmark':tone(1300,900,.05,'square',.03*k);break;
+  case 'hitmark':noise(.035,.09*k,4200);tone(1700,2500,.03,'square',.03*k);tone(230,110,.07,'sine',.11*k);break;
+  case 'hurt':tone(140,60,.16,'sine',.16*k);noise(.08,.07*k,600);tone(320,180,.09,'sawtooth',.03*k,.01);break;
+  case 'block':tone(1400,1900,.12,'sine',.05*k);tone(2100,2600,.1,'triangle',.03*k,.03);break;
+  case 'kill':tone(190,45,.35,'sine',.22*k);noise(.12,.12*k,2400);tone(95,40,.4,'triangle',.12*k,.02);
+   [784,1047,1319,1568].forEach((f,i)=>tone(f,f*1.01,.16,'triangle',.07*k,.08+i*.06));[2637,3136].forEach((f,i)=>tone(f,f,.25,'sine',.03*k,.32+i*.05));break;
+  case 'death':noise(.45,.12*k,380);tone(150,32,.7,'sine',.2*k);
+   [[440,415],[415,370],[370,262]].forEach(([a,b],i)=>tone(a,b,.34,'sawtooth',.045*k,.12+i*.3));break;
   case 'ko':tone(170,40,.42,'sawtooth',.07*k);noise(.3,.08*k,500);tone(880,1320,.25,'triangle',.05*k,.12);break;
   case 'crate':noise(.15,.08*k,1800);tone(220,110,.1,'square',.03*k);break;
   case 'pickup':[660,880,1320].forEach((f,i)=>tone(f,f,.1,'triangle',.06*k,i*.06));break;
@@ -724,7 +738,7 @@ function eliminate(s,reason,attacker){
  if(s===player){eliminationPlace=ships.filter(t=>t===s||t.hp>0).length;cause=reason;player.killer=attacker}
  if(attacker&&attacker!==player&&attacker.hp>0&&Math.random()<.45)say(attacker,botLines[Math.floor(Math.random()*botLines.length)]);
  if(s.power){drops.push({x:s.x,y:s.y,type:s.power,fromPilot:true});s.power=''}
- s.hp=0;sfx('ko',s===player?null:s);burst(s.x,s.y,s.color,18);burst(s.x,s.y,'#ffd27a',10,'chunk');
+ s.hp=0;if(s===player)sfx('death');else if(attacker===player)sfx('kill');else sfx('ko',s);burst(s.x,s.y,s.color,18);burst(s.x,s.y,'#ffd27a',10,'chunk');
  for(const c of ['#ff7d7d','#ffd65a','#8ae692','#7cbdff','#c29aff'])burst(s.x,s.y,c,5,'confetti');
  rings.push({x:s.x,y:s.y,life:.5,max:.5,size:70,color:'#fff1c2'});
  if(distance(s,player)<520)shake=Math.max(shake,s===player||attacker===player?9:4);
