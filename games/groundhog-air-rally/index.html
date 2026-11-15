@@ -1,15 +1,39 @@
 <!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Groundhog Air Rally</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#101c1a;color:#fff9dc;font:16px system-ui;overflow:hidden}canvas{display:block;width:100vw;height:100dvh;touch-action:none}main{position:absolute;inset:0;display:grid;place-items:center;background:#0b1918a0;padding:16px}section{background:#172b28;border:2px solid #4f7362;border-radius:24px;padding:clamp(18px,4vw,44px);max-width:620px;box-shadow:0 18px 70px #0009}h1{font-size:clamp(32px,7vw,67px);line-height:.95;margin:8px 0 18px;color:#ffda79}p{line-height:1.4}button{font:inherit;font-weight:750;border:0;border-radius:12px;padding:12px;background:#2f5045;color:white;cursor:pointer;touch-action:manipulation}button[aria-pressed=true],#start{background:#ffda79;color:#1c2922}#pilots{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}#start{margin-top:14px;width:100%}#hud{position:absolute;inset:12px 12px auto;display:flex;justify-content:space-between;gap:8px;pointer-events:none}#hud span,#power{background:#142824ed;border:1px solid #74967f;padding:9px;border-radius:10px}#power{position:absolute;right:14px;bottom:120px} [hidden]{display:none!important}small{display:block;margin-top:12px;color:#c7dbc9}@media(max-width:420px){#pilots{grid-template-columns:repeat(2,1fr)}#hud{font-size:12px}}
-#results{text-align:center;width:min(440px,100%)}#results h2{font-size:clamp(32px,8vw,58px);margin:4px 0}#results[data-win=true]{border-color:#ffda79}#results[data-win=false]{border-color:#ed9789}#place{font-size:clamp(52px,14vw,102px);font-weight:900;line-height:1.05;color:#ffda79}#resultStats{display:flex;justify-content:center;gap:24px;margin:18px 0}#results button{margin:4px}#again{background:#ffda79;color:#172b28}</style>
+#results{text-align:center;width:min(440px,100%)}#results h2{font-size:clamp(32px,8vw,58px);margin:4px 0}#results[data-win=true]{border-color:#ffda79}#results[data-win=false]{border-color:#ed9789}#place{font-size:clamp(52px,14vw,102px);font-weight:900;line-height:1.05;color:#ffda79}#resultStats{display:flex;justify-content:center;gap:24px;margin:18px 0}#results button{margin:4px}#again{background:#ffda79;color:#172b28}#menu{overflow:auto}#menu section{margin:auto;width:min(620px,100%)}#pilots{grid-template-columns:repeat(4,minmax(0,1fr))}#pilots button{padding:7px 3px;font-size:13px;border-bottom:3px solid var(--accent)}#loadout{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}#loadout label{font-size:13px;color:#d5e9d7}#loadout input,#loadout select{display:block;width:100%;background:#101f1d;color:white;border:1px solid #74967f;border-radius:8px;padding:8px;font:inherit;margin-top:3px}#pilotDetail{display:flex;align-items:center;gap:10px;margin:8px 0}#badge{font-size:24px;border:2px solid var(--accent);border-radius:100%;width:40px;height:40px;display:grid;place-items:center}#origin{color:#d5e9d7;font-size:13px}@media(max-height:650px){#menu section{padding:15px}#menu h1{font-size:32px;margin:4px 0}#menu h1 br{display:none}#menu p{margin:5px 0}}</style>
 <canvas id="field" aria-label="Groundhog Air Rally arena"></canvas><div id="hud" hidden><span id="stats"></span><span id="zone"></span></div><button id="power" hidden>Power</button>
-<main id="menu"><section><div>GROUNDHOG BATTLE ROYALE</div><h1>Groundhog<br>Air Rally</h1><p id="brief">Knock out rival groundhogs, grab crate loot, and stay ahead of the fog. Last groundhog flying wins.</p><div id="pilots" aria-label="Choose pilot"></div><button id="start">Start match</button><small>Desktop · WASD, mouse to aim and fire, E for power<br>Touch · Left stick to fly, right stick to aim and fire</small></section></main>
+<main id="menu"><section><div>GROUNDHOG BATTLE ROYALE</div><h1>Groundhog<br>Air Rally</h1><p id="brief">Knock out rival groundhogs, grab crate loot, and stay ahead of the fog. Last groundhog flying wins.</p><div id="pilots" aria-label="Choose pilot"></div><div id="pilotDetail"><span id="badge" aria-hidden="true"></span><span id="origin"></span></div><div id="loadout"><label>Callsign<input id="callsign" maxlength="20" autocomplete="off" placeholder="Use pilot name"></label><label>Shot stream<select id="stream"></select></label><label>Outfit<select id="outfit"></select></label><label>Hit sounds<select id="soundMode"><option value="on">On</option><option value="off">Off</option></select></label></div><button id="start">Start match</button><small>Desktop · WASD, mouse to aim and fire, E for power<br>Touch · Left stick to fly, right stick to aim and fire</small></section></main>
 <main id="end" hidden><section id="results" aria-labelledby="outcome"><h2 id="outcome"></h2><div id="place"></div><div id="placement"></div><div id="resultStats"><span id="resultKills"></span><span id="resultTime"></span></div><p id="cause"></p><button id="again">Play again</button><button id="changePilot">Change pilot</button></section></main><script>
 'use strict';
 const $=id=>document.getElementById(id);
 const canvas=$('field'), g=canvas.getContext('2d');
-const names=['Braeden','Ethan','Josh','Casey'];
-const colors=['#ffc96a','#73e5d1','#ff8e9a','#a7a5ff'];
+const pilots=[
+ ['Braeden','Braeden Fonte','Caledonia, NY','#ffc96a','🌽'],
+ ['Ethan','Ethan Ploetz','Alexandria, VA','#73e5d1','🧭'],
+ ['Josh','Josh Brancamp','Fishkill, NY','#ff8e9a','📷'],
+ ['Casey','Casey Adams','Cleveland, OH','#a7a5ff','🏙️'],
+ ['Owen','Owen Beckwith','San Diego, CA','#79c9fd','🌊'],
+ ['Bridger','Bridger Beck','Kenai, AK','#e8a370','🐟'],
+ ['Jimmy','Jimmy Benne','San Antonio, TX','#ed9eac','⭐'],
+ ['Cole','Cole Bryant','West, TX','#c7db78','🛞']
+];
+const colors=pilots.map(p=>p[3]);
+const streams=[
+ ['loops','Froot Loops',['#ff755d','#ffd65a','#8ae692','#b9a1ff']],
+ ['salmon','Kenai Salmon',['#ffa48c','#ff7870']],
+ ['volley','Volleyballs',['#fff1c5','#e2faff']],
+ ['flash','Marist Camera Flash',['#fff8ba','#ffffff']],
+ ['snow','Igloo Snowballs',['#eaffff','#93dcff']]
+];
+const outfits=[['signature','Pilot signature'],['gold','Credit Card Gold'],['ice','Kenai Ice'],['purple','Phebes Purple'],['mint','Kia Mint']];
+const outfitColors={gold:'#ffdb71',ice:'#a8e6ff',purple:'#bc8af8',mint:'#73e5b9'};
+const storageKey='groundhog-air-rally-loadout';
+let saved={};
+try{saved=JSON.parse(localStorage.getItem(storageKey))||{}}catch{}
+function saveLoadout(){
+ try{localStorage.setItem(storageKey,JSON.stringify({pilot:pilots[choice][0],callsign:$('callsign').value.trim(),stream:$('stream').value,outfit:$('outfit').value,sound:$('soundMode').value}))}catch{}
+}
 const rivals=['Owen','Bridger','Jimmy','Cole','Maggie','Molly','Lili','Jess Joe','Carli','Jade','Sophia'];
 const props=[
  {x:650,y:480,w:220,h:150,label:'IONA vs UAA',color:'#ad7753',court:true},
@@ -43,7 +67,7 @@ function spawn(radius){
 function ship(name,color,point){return {...point,name,color,hp:100,angle:0,vx:0,vy:0,cd:0,out:0,speed:0,rate:0,power:'',effect:'',buff:0}}
 let audio;
 function sound(shield){
- if(!audio||audio.state!=='running')return;
+ if($('soundMode').value==='off'||!audio||audio.state!=='running')return;
  const osc=audio.createOscillator(),volume=audio.createGain(),t=audio.currentTime;
  osc.type=shield?'sine':'triangle';osc.frequency.setValueAtTime(shield?780:210,t);
  osc.frequency.exponentialRampToValueAtTime(shield?390:85,t+.12);
@@ -51,7 +75,8 @@ function sound(shield){
  osc.connect(volume).connect(audio.destination);osc.start(t);osc.stop(t+.14);
 }
 function begin(){
- if(window.AudioContext){audio??=new AudioContext();audio.resume().catch(()=>{})}
+ saveLoadout();
+ if(window.AudioContext&&$('soundMode').value==='on'){audio??=new AudioContext();audio.resume().catch(()=>{})}
  time=0;kills=0;notice=0;hitFlash=0;mouse.down=false;keys.clear();
  eliminationPlace=0;cause='';
  const phase=random(0,Math.PI*2);
@@ -63,15 +88,34 @@ function begin(){
   }
   return {x,y};
  });
- player=ship(names[choice],colors[choice],locations[0]);
+ player=ship($('callsign').value.trim()||pilots[choice][0],outfitColors[$('outfit').value]||colors[choice],locations[0]);
+ player.stream=$('stream').value;
  ships=[player,...rivals.map((name,i)=>ship(name,colors[(i+1)%4],locations[i+1]))];
+ for(const [i,rival] of ships.slice(1).entries())rival.stream=streams[i%streams.length][0];
  crates=[...locations.map(p=>({x:p.x+(center-p.x)*.065,y:p.y+(center-p.y)*.065})).filter(p=>!blocked(p.x,p.y,20)),...Array.from({length:85},()=>spawn(1440))].map((p,i)=>({...p,hp:2,bonus:i%9===0}));
  drops=[];bolts=[];sparks=[];cam={x:player.x,y:player.y};live=true;
  $('end').hidden=true;$('menu').hidden=true;$('hud').hidden=false;$('power').hidden=false;
 }
-function select(i){choice=i;[...$('pilots').children].forEach((b,j)=>b.setAttribute('aria-pressed',i===j))}
-names.forEach((n,i)=>{const b=document.createElement('button');b.textContent=n;b.onclick=()=>select(i);$('pilots').append(b)});
-select(0);$('start').onclick=begin;$('again').onclick=begin;$('changePilot').onclick=()=>{$('end').hidden=true;$('menu').hidden=false;$('start').focus()};
+function select(i){
+ choice=i;
+ [...$('pilots').children].forEach((b,j)=>b.setAttribute('aria-pressed',i===j));
+ const [,name,home,color,badge]=pilots[i];
+ $('badge').textContent=badge;
+ $('badge').style.setProperty('--accent',outfitColors[$('outfit').value]||color);
+ $('origin').textContent=name+' · '+home;
+ $('callsign').placeholder=pilots[i][0];
+}
+function options(id,items,current){
+ for(const [value,title] of items){const option=document.createElement('option');option.value=value;option.textContent=title;$(id).append(option)}
+ $(id).value=items.some(([value])=>value===current)?current:items[0][0];
+}
+pilots.forEach(([short,,,color],i)=>{const b=document.createElement('button');b.textContent=short;b.style.setProperty('--accent',color);b.onclick=()=>{select(i);saveLoadout()};$('pilots').append(b)});
+options('stream',streams,saved.stream);options('outfit',outfits,saved.outfit);
+$('callsign').value=typeof saved.callsign==='string'?saved.callsign.slice(0,20):'';
+$('soundMode').value=saved.sound==='off'?'off':'on';
+select(Math.max(0,pilots.findIndex(p=>p[0]===saved.pilot)));
+for(const id of ['stream','outfit','callsign','soundMode'])$(id).onchange=()=>{select(choice);saveLoadout()};
+$('start').onclick=begin;$('again').onclick=begin;$('changePilot').onclick=()=>{$('end').hidden=true;$('menu').hidden=false;$('start').focus()};
 function announce(message){toast=message;notice=2.8}
 function activate(){if(!live||!player.power)return;player.effect=player.power;player.power='';player.buff=5;announce(player.effect)}
 $('power').onclick=activate;
@@ -95,7 +139,8 @@ function fire(s){
  if(s.cd>0)return;
  s.cd=Math.max(.10,.35-s.rate*.045)*(s.buff>0&&s.effect==='Froot Loops Burst'?.48:1);
  const dx=Math.cos(s.angle),dy=Math.sin(s.angle);
- bolts.push({x:s.x+dx*21,y:s.y+dy*21,dx,dy,owner:s,life:.84,tint:s.buff>0&&s.effect==='Froot Loops Burst'?'#ff91be':['#ff755d','#ffd65a','#8ae692','#b9a1ff'][Math.floor(random(0,4))]});
+ const [style,,palette]=streams.find(item=>item[0]===s.stream)||streams[0];
+ bolts.push({x:s.x+dx*21,y:s.y+dy*21,dx,dy,owner:s,life:.84,style,tint:s.buff>0&&s.effect==='Froot Loops Burst'?'#ff91be':palette[Math.floor(random(0,palette.length))]});
 }
 function burst(x,y,color,n=9){for(let i=0;i<n;i++)sparks.push({x,y,vx:random(-100,100),vy:random(-100,100),life:random(.2,.55),color})}
 function radius(){return Math.max(95,1460-Math.max(0,Math.floor((time-18)/10)+1)*120)}
@@ -208,7 +253,18 @@ function render(now){
   label(s.name,s.x,s.y-32);
   rect(s.x-17,s.y+27,34,4,'#233e3c');rect(s.x-17,s.y+27,34*s.hp/100,4,s.color);
  }
- for(const b of bolts){g.lineWidth=3;circle(b.x,b.y,5,null,b.tint)}
+ for(const b of bolts){
+  g.lineWidth=2.5;
+  if(b.style==='loops')circle(b.x,b.y,5,null,b.tint);
+  else if(b.style==='volley'){circle(b.x,b.y,6,b.tint);circle(b.x-1,b.y+1,3,null,'#598591')}
+  else if(b.style==='snow'){circle(b.x,b.y,5,b.tint);circle(b.x-2,b.y-2,2,'#fff')}
+  else{
+   g.save();g.translate(b.x,b.y);g.rotate(Math.atan2(b.dy,b.dx));
+   if(b.style==='salmon'){circle(2,0,4,b.tint);g.fillStyle=b.tint;g.beginPath();g.moveTo(0,0);g.lineTo(-7,-4);g.lineTo(-7,4);g.fill();circle(4,-1,1,'#4c3446')}
+   else{rect(-7,-1,14,2,b.tint);rect(-1,-7,2,14,b.tint);circle(0,0,3,'#fff')}
+   g.restore();
+  }
+ }
  for(const p of sparks)circle(p.x,p.y,3,p.color);
  g.beginPath();g.rect(-4000,-4000,9600,9600);g.arc(center,center,radius(),0,Math.PI*2);g.fillStyle='#67508cad';g.fill('evenodd');
  g.lineWidth=4;circle(center,center,radius(),null,'#ddaff4');
