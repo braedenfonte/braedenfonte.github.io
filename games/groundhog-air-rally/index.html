@@ -115,12 +115,12 @@ function drawUpgradeLevels(){
  }
 }
 const maxHealth=s=>100+s.health*15;
-function collect(s,type){
+function collect(s,type,tier=1){
  const stat=upgrades[type];
  if(stat){
   if(s[stat]>=maxLevel)return false;
-  s[stat]++;
-  if(stat==='health')s.hp=Math.min(maxHealth(s),s.hp+15);
+  const gained=Math.min(tier,maxLevel-s[stat]);s[stat]+=gained;
+  if(stat==='health')s.hp=Math.min(maxHealth(s),s.hp+15*gained);
  }else if(type==='Repair'){
   if(s.hp>=maxHealth(s))return false;
   s.hp=Math.min(maxHealth(s),s.hp+40);
@@ -141,7 +141,7 @@ function sound(shield){
 function begin(){
  saveLoadout();
  if(window.AudioContext&&$('soundMode').value==='on'){audio??=new AudioContext();audio.resume().catch(()=>{})}
- supply=null;supplyCalled=false;
+ supply=null;supplyCalled=false;walls=[];
  time=0;kills=0;notice=0;hitFlash=0;mouse.down=false;keys.clear();
  eliminationPlace=0;cause='';
  const phase=random(0,Math.PI*2);
@@ -190,7 +190,21 @@ select(Math.max(0,pilots.findIndex(p=>p[0]===saved.pilot)));
 for(const id of ['stream','outfit','callsign','soundMode'])$(id).onchange=()=>{select(choice);saveLoadout()};
 $('start').onclick=begin;$('again').onclick=begin;$('changePilot').onclick=()=>{$('end').hidden=true;$('menu').hidden=false;$('start').focus()};
 function announce(message){toast=message;notice=2.8}
-function activate(){if(!live||!player.power)return;player.effect=player.power;player.power='';player.buff=5;announce(player.effect)}
+const powers=['Froot Loops Burst','Salmon Shield','Kia Turbo','Igloo Wall','Ramon’s Repair'];
+let walls=[];
+function activate(){
+ if(!live||!player.power)return;
+ const power=player.power;
+ if(power==='Igloo Wall'){
+  const x=player.x+Math.cos(player.angle)*48,y=player.y+Math.sin(player.angle)*48;
+  if(blocked(x,y,25)||x<25||y<25||x>size-25||y>size-25){announce('No space for cover');return}
+  walls.push({x,y,hp:4,until:time+10});
+ }else if(power==='Ramon’s Repair'){
+  if(player.hp>=maxHealth(player)){announce('Health is full');return}
+  player.hp=Math.min(maxHealth(player),player.hp+65);
+ }else {player.effect=power;player.buff=5}
+ player.power='';announce(power);
+}
 $('power').onclick=activate;
 addEventListener('keydown',e=>{if(live&&['w','a','s','d','ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();keys.add(e.key.toLowerCase());if(e.key.toLowerCase()==='e'&&!e.repeat)activate()});
 addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));
@@ -269,9 +283,9 @@ function step(dt){
    dx=Math.cos(steer)*.72;dy=Math.sin(steer)*.72;s.angle=a+Math.sin(time*3+ships.indexOf(s))*.19;
    if(blocked(s.x+dx*56,s.y+dy*56,15)){dx=Math.cos(steer+1.5);dy=Math.sin(steer+1.5)}
    if(loot&&d>290&&loot.hp){s.angle=lootAngle;fire(s)}else if(time>=5&&d<390&&!blocked(s.x+Math.cos(a)*35,s.y+Math.sin(a)*35))fire(s);
-   if(s.power&&d<250&&s.hp<75){s.effect=s.power;s.power='';s.buff=4}
+   if(s.power&&powers.indexOf(s.power)<2&&d<250&&s.hp<75){s.effect=s.power;s.power='';s.buff=4}
   }
-  const magnitude=Math.max(1,Math.hypot(dx,dy)),speed=190+s.speed*23;
+  const magnitude=Math.max(1,Math.hypot(dx,dy)),speed=(190+s.speed*23)*(s.buff>0&&s.effect==='Kia Turbo'?1.5:1);
   s.vx+=(speed*dx/magnitude-s.vx)*Math.min(1,dt*8);s.vy+=(speed*dy/magnitude-s.vy)*Math.min(1,dt*8);
   const nx=clamp(s.x+s.vx*dt,15,size-15),ny=clamp(s.y+s.vy*dt,15,size-15);
   if(!blocked(nx,s.y,14))s.x=nx;else s.vx=0;
@@ -282,10 +296,12 @@ function step(dt){
  for(const b of bolts){
   b.life-=dt;b.x+=b.dx*565*dt;b.y+=b.dy*565*dt;
   if(b.life<=0||blocked(b.x,b.y)){b.life=0;continue}
+  const wall=walls.find(item=>item.hp>0&&item.until>time&&distance(item,b)<24);
+  if(wall){wall.hp--;b.life=0;burst(b.x,b.y,'#addfff',5);continue}
   const crate=crates.find(c=>c.hp>0&&distance(c,b)<17);
   if(crate){
    b.life=0;crate.hp--;burst(b.x,b.y,'#ffcf83',5);
-   if(!crate.hp){const choices=crate.supply?Object.keys(upgrades):crate.bonus?['Froot Loops Burst','Salmon Shield']:['Repair',...Object.keys(upgrades),'Froot Loops Burst','Salmon Shield'];drops.push({x:crate.x,y:crate.y,type:choices[Math.floor(random(0,choices.length))]})}
+   if(!crate.hp){const stats=Object.keys(upgrades),choices=crate.supply?stats:crate.bonus?powers:['Repair',...stats,...powers];drops.push({x:crate.x,y:crate.y,type:choices[Math.floor(random(0,choices.length))],tier:crate.supply?2:1});if(crate.supply)drops.push({x:crate.x+29,y:crate.y,type:powers[2+Math.floor(random(0,3))]})}
    continue;
   }
   const s=ships.find(t=>t!==b.owner&&t.hp>0&&distance(t,b)<18);
@@ -294,7 +310,7 @@ function step(dt){
  bolts=bolts.filter(b=>b.life>0);
  drops=drops.filter(d=>{
   const s=ships.find(t=>t.hp>0&&distance(t,d)<25&&(upgrades[d.type]?t[upgrades[d.type]]<maxLevel:d.type!=='Repair'||t.hp<maxHealth(t)));
-  return !s||!collect(s,d.type);
+  return !s||!collect(s,d.type,d.tier);
  });
  for(const p of sparks){p.x+=p.vx*dt;p.y+=p.vy*dt;p.life-=dt}
  sparks=sparks.filter(p=>p.life>0);
@@ -327,7 +343,9 @@ function render(now){
  }
  if(supply?.hp){circle(supply.x,supply.y,25+4*Math.sin(now/180),null,'#ffd76f');label('GROUNDHOG DROP',supply.x,supply.y-32);}
  for(const c of crates)if(c.hp){rect(c.x-14,c.y-14,28,28,c.bonus?'#ffd271':'#b98754');g.strokeStyle='#4c342a';g.strokeRect(c.x-12,c.y-12,24,24);label(c.bonus?'GH':'×',c.x,c.y+5,'#422e2a')}
- for(const d of drops){circle(d.x,d.y,12,'#ffe195');label(d.type==='Repair'?'+':d.type==='Speed'?'»':d.type==='Fire rate'?'↑':d.type==='Health'?'♥':d.type==='Shield'?'⬟':'★',d.x,d.y+5,'#382b30')}
+ for(const wall of walls)if(wall.hp>0&&wall.until>time){circle(wall.x,wall.y,24,'#8fd4e9','#dbfaff');label('▤ '+wall.hp,wall.x,wall.y+4,'#20495b')}
+ const lootColors={Repair:'#8cf0a5',Speed:'#74e3ff',Health:'#ff9ba5',Shield:'#b9a5ff','Fire rate':'#ffda79','Kia Turbo':'#ffab62','Igloo Wall':'#aadfff','Ramon’s Repair':'#ddf28c','Froot Loops Burst':'#ff88bd','Salmon Shield':'#67f2dc'};
+ for(const d of drops){circle(d.x,d.y,12,lootColors[d.type],d.tier===2?'#fff0a2':undefined);label(d.tier===2?'×2':d.type==='Repair'?'+':d.type==='Speed'?'»':d.type==='Fire rate'?'↑':d.type==='Health'?'♥':d.type==='Shield'?'⬟':'★',d.x,d.y+5,'#382b30')}
  for(const s of ships)if(s.hp>0){
   circle(s.x+5,s.y+9,19,'#233a3d80');
   g.save();g.translate(s.x,s.y);g.rotate(s.angle);
@@ -341,13 +359,13 @@ function render(now){
  }
  for(const b of bolts){
   g.lineWidth=2.5;
-  if(b.style==='loops')circle(b.x,b.y,5,null,b.tint);
+  if(b.style==='loops')circle(b.x,b.y,6,null,b.tint);
   else if(b.style==='volley'){circle(b.x,b.y,6,b.tint);circle(b.x-1,b.y+1,3,null,'#598591')}
-  else if(b.style==='snow'){circle(b.x,b.y,5,b.tint);circle(b.x-2,b.y-2,2,'#fff')}
+  else if(b.style==='snow'){circle(b.x,b.y,6,b.tint);circle(b.x-2,b.y-2,2,'#fff')}
   else{
    g.save();g.translate(b.x,b.y);g.rotate(Math.atan2(b.dy,b.dx));
-   if(b.style==='salmon'){circle(2,0,4,b.tint);g.fillStyle=b.tint;g.beginPath();g.moveTo(0,0);g.lineTo(-7,-4);g.lineTo(-7,4);g.fill();circle(4,-1,1,'#4c3446')}
-   else{rect(-7,-1,14,2,b.tint);rect(-1,-7,2,14,b.tint);circle(0,0,3,'#fff')}
+   if(b.style==='salmon'){circle(1,0,4,b.tint);g.fillStyle=b.tint;g.beginPath();g.moveTo(0,0);g.lineTo(-6,-4);g.lineTo(-6,4);g.fill();circle(4,-1,1,'#4c3446')}
+   else{rect(-6,-1,12,2,b.tint);rect(-1,-6,2,12,b.tint);circle(0,0,3,'#fff')}
    g.restore();
   }
  }
@@ -367,7 +385,7 @@ function render(now){
   if(player.out>0){
    const dir=Math.atan2(center-player.y,center-player.x);
    g.save();g.translate(w/2+Math.cos(dir)*65,h/2+Math.sin(dir)*65);g.rotate(dir);
-   g.beginPath();g.moveTo(12,0);g.lineTo(-7,8);g.lineTo(-7,-8);g.closePath();g.fillStyle='#ffda79';g.fill();g.restore();
+   g.beginPath();g.moveTo(12,0);g.lineTo(-6,8);g.lineTo(-6,-8);g.closePath();g.fillStyle='#ffda79';g.fill();g.restore();
   }
   if(hitFlash>0){g.lineWidth=5;g.beginPath();g.arc(w/2,h/2,43,hitFrom-.38,hitFrom+.38);g.strokeStyle='#ff7869';g.stroke()}
   if(time<5)label('Spawn protection · '+Math.ceil(5-time)+'s',w/2,112,'#ffdf89','bold 16px system-ui');
