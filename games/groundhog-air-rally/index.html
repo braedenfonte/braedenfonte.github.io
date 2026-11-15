@@ -1368,7 +1368,87 @@ function syncLab(){
  root.replaceChildren(tabs,grid,hint);
 }
 let previewFire=-Infinity;
-$('testShot').onclick=()=>{previewFire=performance.now()};
+{const pc=$('pilotCanvas');pc.style.touchAction='none';pc.style.cursor='grab';
+ pc.addEventListener('pointerdown',e=>{view3d.drag={x:e.clientX,y:e.clientY,yaw:view3d.yaw,pitch:view3d.pitch};pc.setPointerCapture(e.pointerId);pc.style.cursor='grabbing'});
+ pc.addEventListener('pointermove',e=>{const d=view3d.drag;if(!d)return;view3d.yaw=d.yaw-(e.clientX-d.x)*.012;view3d.pitch=clamp(d.pitch+(e.clientY-d.y)*.008,-.35,1.25)});
+ const end=()=>{view3d.drag=null;view3d.idleAt=performance.now();pc.style.cursor='grab'};pc.addEventListener('pointerup',end);pc.addEventListener('pointercancel',end);}
+$('testShot').onclick=()=>{previewFire=performance.now();view3d.idleAt=performance.now()};
+// 3D hangar groundhog: shaded ellipsoids plus flat artwork mapped onto planes, painter-sorted.
+// Model space: +x forward (nose), +y the pilot's right, +z up. Drag the preview to spin and tilt.
+const view3d={yaw:.7,pitch:.55,drag:null,idleAt:0};
+function draw3DHog(ox,oy,scale,kit,now){
+ const cyaw=Math.cos(view3d.yaw),syaw=Math.sin(view3d.yaw),cp=Math.cos(view3d.pitch),sp=Math.sin(view3d.pitch);
+ const rot=([x,y,z])=>{const x1=x*cyaw-y*syaw,y1=x*syaw+y*cyaw;return [x1*cp+z*sp,y1,-x1*sp+z*cp]};
+ const P=p=>{const [d,X,Z]=rot(p);return {x:ox+X*scale,y:oy-Z*scale,d}};
+ const V=v=>{const [,X,Z]=rot(v);return [X*scale,-Z*scale]};
+ const parts=[],add=(d,fn)=>parts.push({d,fn});
+ const ell=(c,r,color,opt={})=>{const p=P(c);add(p.d+(opt.bias||0),()=>{
+  const ax=[V([1,0,0]),V([0,1,0]),V([0,0,1])];let a=0,b=0,cc=0;ax.forEach(([X,Y],i)=>{a+=r[i]*r[i]*X*X;b+=r[i]*r[i]*X*Y;cc+=r[i]*r[i]*Y*Y});
+  const l11=Math.sqrt(a),l21=b/l11,l22=Math.sqrt(Math.max(1e-6,cc-l21*l21));
+  g.save();g.transform(l11,l21,0,l22,p.x,p.y);
+  const grd=g.createRadialGradient(-.35,-.45,.05,0,0,1.05);grd.addColorStop(0,opt.light||shadeColor(color,.28));grd.addColorStop(.6,color);grd.addColorStop(1,shadeColor(color,-.35));
+  g.beginPath();g.arc(0,0,1,0,Math.PI*2);g.fillStyle=opt.flat?color:grd;g.fill();
+  if(opt.line!==false){g.lineWidth=1.4/Math.sqrt(l11*l22);g.strokeStyle='#2a1a12';g.stroke()}g.restore()})};
+ const decal=(c,U,Vv,fn,opt={})=>{const p=P(c),[ux,uy]=V(U),[vx,vy]=V(Vv),n=[U[1]*Vv[2]-U[2]*Vv[1],U[2]*Vv[0]-U[0]*Vv[2],U[0]*Vv[1]-U[1]*Vv[0]],facing=rot(n)[0];
+  if(opt.cull&&facing<0)return;add(p.d+(opt.bias||0),()=>{g.save();g.transform(ux,uy,vx,vy,p.x,p.y);fn(facing);g.restore()})};
+ const line3=(a,b,color,w=1.5,bias=0)=>{const A=P(a),B=P(b);add((A.d+B.d)/2+bias,()=>{g.beginPath();g.moveTo(A.x,A.y);g.lineTo(B.x,B.y);g.strokeStyle=color;g.lineWidth=w*scale/3;g.lineCap='round';g.stroke();g.lineCap='butt'})};
+ const t=now/1000,flap=.45+.4*Math.sin(t*9),wag=Math.sin(t*6)*.3;
+ // Ground shadow.
+ const sh=P([0,0,-22]);g.save();g.translate(sh.x,sh.y);g.scale(1,.35);circle(0,0,34*scale,'#00000040');g.restore();
+ // Body, belly, head, snout.
+ ell([0,0,0],[20,16,14],'#9b6849');ell([3,0,-5],[16,12,9],'#c99a72',{bias:-2});
+ ell([19,0,6],[12,12,11],'#ba8356');ell([29,0,3],[6,6.5,5],'#f1d7ae',{bias:.5});
+ ell([34.5,0,4.5],[2.4,2.6,2.2],'#2b1b17',{bias:1});
+ decal([34.6,0,0],[0,1,0],[0,0,-1],()=>{rect(-1.7,0,3.4,3.6,'#fffaf0');rect(-.2,0,.4,3.6,'#8a6b55')},{cull:true,bias:1});
+ for(const s of [-1,1]){
+  ell([27,s*5.6,9],[2.3,2.3,2.5],'#1c1412',{bias:1.5,line:false});ell([28.6,s*5.2,10],[.8,.8,.8],'#ffffff',{bias:2,line:false,flat:true});
+  ell([25,s*8.5,3],[2.4,2.4,2],'#f19a8b',{bias:.6,line:false,flat:true});
+  ell([14,s*9,15],[3.5,4.5,4.5],'#77503a');ell([15.2,s*9,15],[1.4,2.8,2.8],'#e59a8f',{bias:.3,line:false});
+  for(const k of [0,1])line3([31,s*3,2+k],[37.5,s*(9+k*2),3+k*2],'#4a3428aa',.6,3);
+  ell([16,s*9,-12],[4,3.5,3],'#7b5240');ell([-12,s*11,-11],[5,4,3.5],'#6b4636');
+  // Wings flap up and down.
+  const fy=Math.cos(flap),fz=Math.sin(flap);
+  decal([-2,s*15,5],[1,0,0],[0,s*fy,fz],()=>{
+   g.beginPath();g.moveTo(-9,0);g.quadraticCurveTo(-14,16,-2,20);g.quadraticCurveTo(10,18,9,0);g.closePath();
+   g.fillStyle='#f6ead4ee';g.fill();g.strokeStyle='#6d4e3a';g.lineWidth=1;g.stroke();
+   g.strokeStyle='#cdb89b';g.lineWidth=.7;for(const fx of [-5,0,4]){g.beginPath();g.moveTo(fx,3);g.lineTo(fx-2,16);g.stroke()}
+  },{bias:s*0});
+ }
+ ell([-24,Math.sin(wag)*4,2],[9,6,6],'#6f4935');
+ // Skin pattern and crest on the back.
+ if(kit.trim||kit.color){decal([-3,0,13.7],[1,0,0],[0,1,0],()=>{g.save();g.translate(5,0);drawPattern({color:kit.color,trim:kit.trim});g.restore();
+  g.beginPath();g.arc(0,0,11,0,Math.PI*2);g.strokeStyle='#00000045';g.lineWidth=1;g.stroke()},{cull:true,bias:1})}
+ const crest={'#812d4d':'cm','#22252b':'ms','#17294f':'bears'}[kit.color];
+ if(crest&&kit.trim)decal([-12.5,0,11.8],[0,-1,0],[.82,0,.57],()=>{
+  const bears=crest==='bears';circle(0,0,9.5,bears?'#17294f':'#fffaf0');g.lineWidth=1.5;circle(0,0,9.5,null,bears?'#ff8c40':'#1d1518');
+  g.save();g.scale(.76,-.76);
+  if(crest==='cm'){crestLetter('M',2.5,7.5,'#812d4d','900 17px Georgia','#fffaf0');crestLetter('C',-4.5,1.5,'#812d4d','900 14px Georgia','#fffaf0')}
+  else if(crest==='ms'){crestLetter('M',0,7,'#121418','900 20px Georgia','#fffaf0');crestLetter('S',0,9,'#d3192e','900 12px Georgia','#fffaf0',2.4)}
+  else crestLetter('C',0,8,'#ff8c40','900 23px Georgia','#fff7e5',3);g.restore();
+ },{cull:true,bias:2});
+ // Accessories in 3D.
+ const acc=kit.accessory;
+ if(acc==='glasses'){
+  decal([31.2,0,9],[0,1,0],[0,0,-1],()=>{g.lineWidth=1.3;for(const x of [-5.6,5.6])circle(x,0,3.7,'#40627bbb','#a2eaff');rect(-1.9,-.6,3.8,1.2,'#a2eaff')},{bias:3});
+  for(const s of [-1,1])line3([29,s*9.2,9],[19,s*11.5,10],'#a2eaff',1,2);
+ }else if(acc==='combover'){ell([15,0,13.5],[11.5,11.5,6],'#f2c95a',{bias:2});ell([18,-2,17],[5,4,2],'#fff0a8',{bias:2.5,line:false,flat:true})}
+ else if(acc==='hat'){ell([18,0,16.5],[17,17,1.6],'#70462b',{bias:2});ell([18,0,19],[8.3,7.3,1.4],'#573922',{bias:2.5});ell([18,0,22],[8,7,5.5],'#8a5a35',{bias:3})}
+ else if(acc==='boots'){for(const s of [-1,1]){ell([-15,s*12,-13],[7.5,3.6,3],'#8a5228',{bias:1});ell([-11,s*12,-8],[3.6,3.6,5],'#c58a4a',{bias:1.2})}}
+ else if(acc==='shoes'){for(const s of [-1,1]){ell([-13,s*11,-13],[6.5,3.8,3],'#fff3dd',{bias:1});ell([-12,s*11,-11.4],[4.6,3.2,2.2],'#239755',{bias:1.3});ell([-9,s*11,-11],[1.6,1.6,1.6],'#f08b42',{bias:1.5,line:false})}}
+ else if(acc==='camera'){for(const s of [-1,1])line3([22,s*7,-5],[17,s*10,7],'#222',1,1);decal([26,0,-6],[0,1,0],[0,0,-1],()=>{rect(-7,-4.5,14,9,'#283644');rect(-5,-6,5,2,'#526a7c');circle(1.5,0,3.6,'#12232c','#b6c8d1');circle(1.5,0,2.2,'#72bde8');circle(.6,-.8,.7,'#fff')},{bias:2})}
+ else if(acc==='sandwich'){decal([26,0,-9],[0,1,0],[0,0,-1],()=>{rect(-7,-5,14,3,'#ba763e');rect(-7,-2,14,2,'#ffe297');rect(-7,0,14,1.6,'#a04737');rect(-7,1.6,14,1.4,'#ebac5b');rect(-7,3,14,2.5,'#ba763e')},{bias:2})}
+ else if(acc==='pringles'){ell([23,7,-5],[3.6,3.6,8],'#e04f4a',{bias:2});ell([23,7,3],[3.6,3.6,.9],'#f8d48b',{bias:2.5})}
+ else if(acc==='surf'){ell([0,0,-16],[32,9.5,1.6],'#ff9562',{bias:-3});ell([0,0,-15.2],[32,1.6,1.6],'#fff0cc',{bias:-2.5,line:false})}
+ else if(acc==='pole'){line3([17,9,-10],[44,24,30],'#c78f59',1.8,4);line3([44,24,30],[46,27,2],'#ffffffcc',.6,4);ell([46,27,1],[2,2,2],'#ff785a',{bias:4});ell([22,11,-6],[2.4,2.4,2.4],'#b6d3de',{bias:4})}
+ else if(acc==='igloo')ell([-6,0,15],[4.5,4.5,3.4],'#dff4fb',{bias:2});
+ else if(acc==='shorts')ell([-10,0,-3],[11,16.4,11],'#232942',{bias:.5});
+ parts.sort((a,b)=>a.d-b.d);for(const part of parts)part.fn();
+ return {nose:P([36,0,4]),dir:V([1,0,0])};
+}
+function shadeColor(hex,k){
+ const n=parseInt(hex.slice(1,7),16);let r=n>>16,gg=n>>8&255,b=n&255;
+ const f=v=>Math.round(k>0?v+(255-v)*k:v*(1+k));return '#'+[f(r),f(gg),f(b)].map(v=>Math.max(0,Math.min(255,v)).toString(16).padStart(2,'0')).join('')+(hex.length>7?hex.slice(7):'');
+}
 function renderHangar(now){
  if($('menu').hidden)return;
  syncLab();
@@ -1386,17 +1466,22 @@ function renderHangar(now){
   const outfit=$('outfit').value,accessory=$('accessory').value;
   const trim=Object.values(pilotKits).find(kit=>kit[1]===outfit)?.[3];
   const reduced=typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const firing=now-previewFire<950,angle=firing?0:reduced?-.25:Math.sin(now/1050)*.8;
-  g.save();g.translate(ox,oy);g.scale(Math.min(3.9,width/125),Math.min(3.9,width/125));
-  drawPilot({x:0,y:0,angle,color:outfitColors[outfit]||colors[choice],trim,accessory});g.restore();
+  const firing=now-previewFire<950;
+  // Idle spin unless the player is dragging or recently dragged; reduced motion keeps it still.
+  const dt=Math.min(.05,(now-(view3d.last||now))/1000);view3d.last=now;
+  if(!view3d.drag&&!reduced&&now-view3d.idleAt>2500)view3d.yaw+=dt*.55;
+  const sc=Math.min(width/95,height/72);
+  const pose=draw3DHog(width*.5,height*.56,sc,{color:outfitColors[outfit]||colors[choice],trim,accessory},now);
   if(firing){
    const [style,,palette]=streams.find(item=>item[0]===$('stream').value)||streams[0];
+   const len=Math.hypot(...pose.dir)||1,ux=pose.dir[0]/len,uy=pose.dir[1]/len;
    for(let i=0;i<3;i++){
     const age=now-previewFire-i*90;if(age<0||age>590)continue;
-    g.save();g.translate(ox+42+age*.32,oy);g.scale(1.65,1.65);
+    g.save();g.translate(pose.nose.x+ux*age*.32,pose.nose.y+uy*age*.32);g.scale(sc*.45,sc*.45);
     drawShot({x:0,y:0,dx:1,dy:0,style,tint:palette[i%palette.length]},now);g.restore();
    }
   }
+  label('Drag to spin',width/2,height-12,'#c8d6d0a0','600 11px system-ui');
   label('PILOT HANGAR',width/2,26,'#f3d28d','bold 12px system-ui');
  }finally{g=field}
 }
