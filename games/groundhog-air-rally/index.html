@@ -1,10 +1,10 @@
 <!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Groundhog Air Rally</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#101c1a;color:#fff9dc;font:16px system-ui;overflow:hidden}canvas{display:block;width:100vw;height:100dvh;touch-action:none}main{position:absolute;inset:0;display:grid;place-items:center;background:#0b1918a0;padding:16px}section{background:#172b28;border:2px solid #4f7362;border-radius:24px;padding:clamp(18px,4vw,44px);max-width:620px;box-shadow:0 18px 70px #0009}h1{font-size:clamp(32px,7vw,67px);line-height:.95;margin:8px 0 18px;color:#ffda79}p{line-height:1.4}button{font:inherit;font-weight:750;border:0;border-radius:12px;padding:12px;background:#2f5045;color:white;cursor:pointer;touch-action:manipulation}button[aria-pressed=true],#start{background:#ffda79;color:#1c2922}#pilots{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}#start{margin-top:14px;width:100%}#hud{position:absolute;inset:12px 12px auto;display:flex;justify-content:space-between;gap:8px;pointer-events:none}#hud span,#power{background:#142824ed;border:1px solid #74967f;padding:9px;border-radius:10px}#power{position:absolute;right:14px;bottom:120px} [hidden]{display:none!important}small{display:block;margin-top:12px;color:#c7dbc9}@media(max-width:420px){#pilots{grid-template-columns:repeat(2,1fr)}#hud{font-size:12px}}
-#results{text-align:center;width:min(440px,100%)}#results h2{font-size:clamp(32px,8vw,58px);margin:4px 0}#results[data-win=true]{border-color:#ffda79}#results[data-win=false]{border-color:#ed9789}#place{font-size:clamp(52px,14vw,102px);font-weight:900;line-height:1.05;color:#ffda79}#resultStats{display:flex;justify-content:center;gap:24px;margin:18px 0}#results button{margin:4px}#again{background:#ffda79;color:#172b28}#menu{overflow:auto}#menu section{margin:auto;width:min(620px,100%)}#pilots{grid-template-columns:repeat(4,minmax(0,1fr))}#pilots button{padding:7px 3px;font-size:13px;border-bottom:3px solid var(--accent)}#loadout{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}#loadout label{font-size:13px;color:#d5e9d7}#loadout input,#loadout select{display:block;width:100%;background:#101f1d;color:white;border:1px solid #74967f;border-radius:8px;padding:8px;font:inherit;margin-top:3px}#pilotDetail{display:flex;align-items:center;gap:10px;margin:8px 0}#badge{font-size:24px;border:2px solid var(--accent);border-radius:100%;width:40px;height:40px;display:grid;place-items:center}#origin{color:#d5e9d7;font-size:13px}@media(max-height:650px){#menu section{padding:15px}#menu h1{font-size:32px;margin:4px 0}#menu h1 br{display:none}#menu p{margin:5px 0}}#levels{position:absolute;left:12px;bottom:14px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;pointer-events:none;width:min(280px,calc(100% - 24px))}.upgrade{background:#142824ed;border:1px solid #74967f;border-left:3px solid var(--accent);border-radius:8px;padding:6px}.upgrade span{display:flex;justify-content:space-between;font-size:12px;font-weight:750}.upgrade b{color:var(--accent)}.upgrade i{display:flex;gap:3px;margin-top:4px}.upgrade em{height:5px;flex:1;background:#49605a;border-radius:2px}.upgrade em.on{background:var(--accent)}@media(pointer:coarse){#levels{bottom:auto;top:58px;width:min(204px,calc(100% - 124px))}.upgrade span{font-size:10px}}#album{overflow:auto}#album section{width:min(590px,100%);max-height:88dvh;overflow:auto}#albumList{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px;padding:0;list-style:none}#albumList li{padding:8px;background:#29443d;border-radius:8px;font-size:13px}#openAlbum{width:100%;margin-top:6px}.loadoutTitle{font-size:15px;margin:12px 0 6px;color:#ffda79}#loadoutPreview{display:flex;align-items:center;gap:12px;border:1px solid #74967f;border-radius:10px;padding:8px 12px;background:#101f1d}#previewHog{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;font-size:25px;background:var(--accent)}#previewShot{font-size:13px;color:#d5e9d7}#rules{background:#172b28;color:#fff9dc;border:2px solid #74967f;border-radius:18px;width:min(510px,92vw);padding:22px}#rules::backdrop{background:#071715cc}#mode{font:inherit;background:#101f1d;color:white;padding:5px;border-radius:6px}#loadout select:disabled,#loadout input:disabled{opacity:.66}</style>
+#results{text-align:center;width:min(440px,100%)}#results h2{font-size:clamp(32px,8vw,58px);margin:4px 0}#results[data-win=true]{border-color:#ffda79}#results[data-win=false]{border-color:#ed9789}#place{font-size:clamp(52px,14vw,102px);font-weight:900;line-height:1.05;color:#ffda79}#resultStats{display:flex;justify-content:center;gap:24px;margin:18px 0}#results button{margin:4px}#again{background:#ffda79;color:#172b28}#menu{overflow:auto}#menu section{margin:auto;width:min(620px,100%)}#pilots{grid-template-columns:repeat(4,minmax(0,1fr))}#pilots button{padding:7px 3px;font-size:13px;border-bottom:3px solid var(--accent)}#loadout{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}#loadout label{font-size:13px;color:#d5e9d7}#loadout input,#loadout select{display:block;width:100%;background:#101f1d;color:white;border:1px solid #74967f;border-radius:8px;padding:8px;font:inherit;margin-top:3px}#pilotDetail{display:flex;align-items:center;gap:10px;margin:8px 0}#badge{font-size:24px;border:2px solid var(--accent);border-radius:100%;width:40px;height:40px;display:grid;place-items:center}#origin{color:#d5e9d7;font-size:13px}@media(max-height:650px){#menu section{padding:15px}#menu h1{font-size:32px;margin:4px 0}#menu h1 br{display:none}#menu p{margin:5px 0}}#levels{position:absolute;left:12px;bottom:14px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;pointer-events:none;width:min(280px,calc(100% - 24px))}.upgrade{background:#142824ed;border:1px solid #74967f;border-left:3px solid var(--accent);border-radius:8px;padding:6px}.upgrade span{display:flex;justify-content:space-between;font-size:12px;font-weight:750}.upgrade b{color:var(--accent)}.upgrade i{display:flex;gap:3px;margin-top:4px}.upgrade em{height:5px;flex:1;background:#49605a;border-radius:2px}.upgrade em.on{background:var(--accent)}@media(pointer:coarse){#levels{bottom:auto;top:58px;width:min(204px,calc(100% - 124px))}.upgrade span{font-size:10px}}#album{overflow:auto}#album section{width:min(590px,100%);max-height:88dvh;overflow:auto}#albumList{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px;padding:0;list-style:none}#albumList li{padding:8px;background:#29443d;border-radius:8px;font-size:13px}#openAlbum{width:100%;margin-top:6px}.loadoutTitle{font-size:15px;margin:12px 0 6px;color:#ffda79}#loadoutPreview{display:flex;align-items:center;gap:12px;border:1px solid #74967f;border-radius:10px;padding:8px 12px;background:#101f1d}#previewHog{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;font-size:25px;background:var(--accent)}#previewShot{font-size:13px;color:#d5e9d7}#rules{background:#172b28;color:#fff9dc;border:2px solid #74967f;border-radius:18px;width:min(510px,92vw);padding:22px}#rules::backdrop{background:#071715cc}#mode{font:inherit;background:#101f1d;color:white;padding:5px;border-radius:6px}#loadout select:disabled,#loadout input:disabled{opacity:.66}#rankCard,#rankResult{background:#243c38;border:1px solid #719188;border-radius:10px;padding:8px;margin:8px 0;color:#fbe6a1;font-size:13px}#rankCard progress{display:block;width:100%;height:8px;margin:5px 0;accent-color:#ffda79}#feed{position:absolute;inset:61px auto auto 12px;max-width:min(250px,52vw);display:grid;gap:4px;pointer-events:none}#feed div{background:#132925ed;border-left:3px solid #ffda79;padding:4px 8px;border-radius:5px;font-size:12px}#ko{position:absolute;top:23%;width:100%;text-align:center;color:#ffde86;font-weight:900;font-size:clamp(20px,5vw,38px);text-shadow:0 2px 5px black;pointer-events:none}#end{overflow:auto}#results{margin:auto;position:relative;overflow:hidden}#results[data-win=true]{box-shadow:0 0 75px #ffd57366;background:radial-gradient(ellipse at top,#5f5533,#172b28 68%)}#results[data-win=false]{box-shadow:0 0 75px #e7776760;background:radial-gradient(ellipse at top,#653c3b,#172b28 68%)}@media(prefers-reduced-motion:no-preference){#results{animation:result-in .38s ease-out both}@keyframes result-in{from{opacity:0;transform:scale(.91) translateY(15px)}to{opacity:1;transform:none}}}@media(pointer:coarse){#feed{top:145px}}</style>
 <canvas id="field" aria-label="Groundhog Air Rally arena"></canvas><div id="hud" hidden><span id="stats"></span><span id="zone"></span></div><div id="levels" hidden></div><button id="power" hidden>Power</button>
-<main id="menu"><section><div>GROUNDHOG BATTLE ROYALE</div><h1>Groundhog<br>Air Rally</h1><p id="brief">Knock out rival groundhogs, grab crate loot, and stay ahead of the fog. Last groundhog flying wins.</p><h2 class="loadoutTitle">Choose your pilot</h2><div id="pilots" aria-label="Choose pilot"></div><div id="pilotDetail"><span id="badge" aria-hidden="true"></span><span id="origin"></span></div><h2 class="loadoutTitle">Customize your groundhog</h2><label>Loadout <select id="mode"><option value="preset">Pilot default</option><option value="custom">Custom</option></select></label><div id="loadout"><label>Accessory<select id="accessory"></select></label><label>In-match name<input id="callsign" maxlength="20" autocomplete="off" placeholder="Use pilot name"></label><label>Projectile appearance<select id="stream"></select></label><label>Outfit color<select id="outfit"></select></label><label>Hit sounds<select id="soundMode"><option value="on">On</option><option value="off">Off</option></select></label></div><div id="loadoutPreview"><span id="previewHog" aria-hidden="true">🦫</span><span><strong id="previewName"></strong><br><span id="previewShot"></span></span></div><button id="start">Start match</button><button id="rulesButton">How to play</button> <button id="openAlbum">Scrapbook</button><small>Desktop · WASD, mouse to aim and fire, E for power<br>Touch · Left stick to fly, right stick to aim and fire</small></section></main>
-<main id="end" hidden><section id="results" aria-labelledby="outcome"><h2 id="outcome"></h2><div id="place"></div><div id="placement"></div><div id="resultStats"><span id="resultKills"></span><span id="resultTime"></span></div><p id="cause"></p><button id="again">Play again</button><button id="changePilot">Change pilot</button></section></main><main id="album" hidden><section><h2>Scrapbook</h2><p id="albumCount"></p><ul id="albumList"></ul><button id="closeAlbum">Back to loadout</button></section></main><dialog id="rules"><h2>How to play</h2><p>Be the last groundhog flying. Shoot crates and fly over loot to collect it. Each stat stacks to level 5. Gold drops give two upgrade levels and a power. Eliminated pilots drop their held power.</p><p>Fly back inside the ring within 10 seconds if you enter the fog.</p><p><b>Computer</b> · WASD to fly, mouse to aim and fire, E to use a power.<br><b>Phone</b> · Left stick to fly, right stick to aim and fire, Power button to activate.</p><form method="dialog"><button>Got it</button></form></dialog><script>
+<main id="menu"><section><div>GROUNDHOG BATTLE ROYALE</div><h1>Groundhog<br>Air Rally</h1><p id="brief">Knock out rival groundhogs, grab crate loot, and stay ahead of the fog. Last groundhog flying wins.</p><h2 class="loadoutTitle">Choose your pilot</h2><div id="pilots" aria-label="Choose pilot"></div><div id="pilotDetail"><span id="badge" aria-hidden="true"></span><span id="origin"></span></div><h2 class="loadoutTitle">Customize your groundhog</h2><label>Loadout <select id="mode"><option value="preset">Pilot default</option><option value="custom">Custom</option></select></label><div id="loadout"><label>Accessory<select id="accessory"></select></label><label>In-match name<input id="callsign" maxlength="20" autocomplete="off" placeholder="Use pilot name"></label><label>Projectile appearance<select id="stream"></select></label><label>Outfit color<select id="outfit"></select></label><label>Hit sounds<select id="soundMode"><option value="on">On</option><option value="off">Off</option></select></label></div><div id="loadoutPreview"><span id="previewHog" aria-hidden="true">🦫</span><span><strong id="previewName"></strong><br><span id="previewShot"></span></span></div><div id="rankCard"><strong id="rankTitle"></strong><progress id="rankProgress" aria-label="Progress toward next rank"></progress><span id="rankNext"></span></div><button id="start">Start match</button><button id="rulesButton">How to play</button> <button id="openAlbum">Scrapbook</button><small>Desktop · WASD, mouse to aim and fire, E for power<br>Touch · Left stick to fly, right stick to aim and fire</small></section></main>
+<div id="feed" hidden></div><div id="ko" role="status" hidden></div><main id="end" hidden><section id="results" aria-labelledby="outcome"><h2 id="outcome"></h2><div id="place"></div><div id="placement"></div><div id="resultStats"><span id="resultKills"></span><span id="resultTime"></span></div><p id="cause"></p><div id="rankResult"></div><button id="again">Play again</button><button id="changePilot">Change pilot</button></section></main><main id="album" hidden><section><h2>Scrapbook</h2><p id="albumCount"></p><ul id="albumList"></ul><button id="closeAlbum">Back to loadout</button></section></main><dialog id="rules"><h2>How to play</h2><p>Be the last groundhog flying. Shoot crates and fly over loot to collect it. Each stat stacks to level 5. Gold drops give two upgrade levels and a power. Eliminated pilots drop their held power.</p><p>Fly back inside the ring within 10 seconds if you enter the fog.</p><p><b>Computer</b> · WASD to fly, mouse to aim and fire, E to use a power.<br><b>Phone</b> · Left stick to fly, right stick to aim and fire, Power button to activate.</p><form method="dialog"><button>Got it</button></form></dialog><script>
 'use strict';
 const $=id=>document.getElementById(id);
 const canvas=$('field'), g=canvas.getContext('2d');
@@ -25,7 +25,8 @@ const streams=[
  ['salmon','Kenai Salmon',['#ffa48c','#ff7870']],
  ['volley','Volleyballs',['#fff1c5','#e2faff']],
  ['flash','Marist Camera Flash',['#fff8ba','#ffffff']],
- ['snow','Igloo Snowballs',['#eaffff','#93dcff']]
+ ['snow','Igloo Snowballs',['#eaffff','#93dcff']],
+ ['basketball','Basketballs',['#ff9950','#ee813e']]
 ];
 const outfits=[['signature','Pilot signature'],['gold','Credit Card Gold'],['ice','Kenai Ice'],['purple','Phebes Purple'],['mint','Kia Mint']];
 const outfitColors={gold:'#ffdb71',ice:'#a8e6ff',purple:'#bc8af8',mint:'#73e5b9'};
@@ -35,9 +36,42 @@ try{saved=JSON.parse(localStorage.getItem(storageKey))||{}}catch{}
 function saveLoadout(){
  try{localStorage.setItem(storageKey,JSON.stringify({pilot:pilots[choice][0],callsign:$('callsign').value.trim(),stream:$('stream').value,outfit:$('outfit').value,sound:$('soundMode').value,mode:$('mode').value,accessory:$('accessory').value}))}catch{}
 }
-const accessories=[['none','None',''],['camera','Camera','📷'],['hat','Cowboy hat','🤠'],['surf','Surfboard','🏄'],['shorts','Spandex shorts','🩳'],['shoes','Irish baby shoes','👟'],['pringles','Pringles can','🥫']];
-const presets={Braeden:['gold','loops','none'],Ethan:['mint','volley','shorts'],Josh:['purple','flash','shoes'],Casey:['gold','flash','camera'],Owen:['mint','volley','surf'],Bridger:['ice','salmon','none'],Jimmy:['gold','loops','none'],Cole:['purple','loops','hat'],'Jess Joe':['mint','loops','pringles']};
-const rivals=['Owen','Bridger','Jimmy','Cole','Maggie','Molly','Lili','Jess Joe','Carli','Jade','Sophia','Adriann','Adrianna','Mila','Robin','Rachel','Ramon','CPT Reynolds','MAJ P','CPT Swanson','LTC Turner','MAJ Semmel','Claude',...pilots.map(p=>p[0])];
+const accessories=[['glasses','Blue-light glasses','👓'],['boots','Cowboy boots','🥾'],['igloo','Igloo charm','🧊'],['none','None',''],['camera','Camera','📷'],['hat','Cowboy hat','🤠'],['surf','Surfboard','🏄'],['shorts','Spandex shorts','🩳'],['shoes','Irish baby shoes','👟'],['pringles','Pringles can','🥫']];
+const rankKey='groundhog-air-rally-amex-points';
+const ranks=[['Starter',0],['Green',150],['Gold',450],['Platinum',950],['Reserve',1800],['Centurion',3200]];
+const placementPoints=[65,42,28,17,8,0,-8,-15,-23,-30,-38,-45];
+let rankPoints=0;
+try{rankPoints=Math.max(0,Number.parseInt(localStorage.getItem(rankKey),10)||0)}catch{}
+function rankIndex(points){return ranks.reduce((index,rank,i)=>points>=rank[1]?i:index,0)}
+function showRank(){
+ const i=rankIndex(rankPoints), next=ranks[i+1];
+ $('rankTitle').textContent='CPT Swanson’s Amex Rank · '+ranks[i][0];
+ $('rankProgress').max=next?next[1]-ranks[i][1]:1;
+ $('rankProgress').value=next?rankPoints-ranks[i][1]:1;
+ $('rankNext').textContent=rankPoints+' points · '+(next?(next[1]-rankPoints)+' to '+next[0]:'Top rank');
+}
+showRank();
+let feed=[],koUntil=0;
+function recordResult(place){
+ const before=rankPoints, previous=rankIndex(before);
+ const scale=[1,.9,.8,.7,.55,.45][previous];
+ const base=placementPoints[place-1]??-45;
+ const bonus=Math.min(20,kills*4);
+ const change=base>0?Math.round((base+bonus)*scale):base<0?Math.min(-1,Math.round(base*(1+previous*.10))+Math.min(bonus,5)):bonus;
+ rankPoints=Math.max(0,before+change);
+ try{localStorage.setItem(rankKey,String(rankPoints))}catch{}
+ showRank();
+ const current=rankIndex(rankPoints),delta=rankPoints-before;
+ $('rankResult').textContent=(delta>0?'+':'')+delta+' Amex points · '+ranks[current][0]+(current>previous?' · Promoted!':current<previous?' · Demoted':'')+' · '+rankPoints+' points total';
+}
+function reportKO(victim,reason,attacker){
+ const row=document.createElement('div');row.textContent=attacker?attacker.name+' → '+victim.name:victim.name+' · fog';
+ feed.push({row,expires:time+5});$('feed').append(row);
+ if(feed.length>3)feed.shift().row.remove();
+ if(attacker===player){$('ko').textContent='KNOCKOUT · '+victim.name;$('ko').hidden=false;koUntil=time+1.6}
+}
+const presets={Braeden:['gold','basketball','glasses'],Ethan:['mint','volley','shorts'],Josh:['purple','flash','shoes'],Casey:['gold','flash','camera'],Owen:['mint','volley','surf'],Bridger:['ice','salmon','igloo'],Jimmy:['gold','loops','boots'],Cole:['purple','loops','hat'],'Jess Joe':['mint','loops','pringles']};
+const rivals=['Owen','Bridger','Jimmy','Cole','Maggie','Molly','Lili','Jess Joe','Carli','Jade','Sophia','Adriann','Adrianna','Mila','Robin','Rachel','Ramon','CPT William Reynolds','MAJ P','CPT Derek Swanson','LTC Dusty Turner','MAJ Austin Semmel','Claude',...pilots.map(p=>p[0])];
 const props=[
  {x:650,y:480,w:220,h:150,label:'IONA vs UAA',color:'#ad7753',court:true},
  {x:1110,y:880,w:184,h:92,label:'MARIST LOST & FOUND',color:'#9e4d4b'},
@@ -146,6 +180,7 @@ function begin(){
  if(window.AudioContext&&$('soundMode').value==='on'){audio??=new AudioContext();audio.resume().catch(()=>{})}
  supply=null;supplyCalled=false;walls=[];
  time=0;kills=0;notice=0;hitFlash=0;mouse.down=false;keys.clear();
+ feed=[];koUntil=0;$('feed').replaceChildren();$('feed').hidden=false;$('ko').hidden=true;
  eliminationPlace=0;cause='';
  const phase=random(0,Math.PI*2);
  const pool=[...new Set(rivals)].filter(name=>name!==pilots[choice][0]);
@@ -266,21 +301,26 @@ function finish(alive){
  $('hud').hidden=$('levels').hidden=$('power').hidden=true;$('end').hidden=false;
  $('results').dataset.win=alive;
  $('outcome').textContent=alive?'Victory!':'Eliminated';
- $('place').textContent='#'+(alive?1:eliminationPlace||1+ships.filter(s=>s.hp>0).length);
+ const place=alive?1:eliminationPlace||1+ships.filter(s=>s.hp>0).length;
+ $('place').textContent='#'+place;recordResult(place);$('feed').hidden=$('ko').hidden=true;
  $('placement').textContent='of '+ships.length+' pilots';
  $('resultKills').textContent=kills+' eliminations';
  $('resultTime').textContent=Math.floor(time)+'s survived';
- $('resultKills').textContent+=' · '+(kills*3)+' Swanson points';
+
  $('cause').textContent=alive?'Last groundhog flying':cause||'Your copter is down';
+ if(alive)for(const color of colors)burst(player.x,player.y,color,16);
  $('again').focus();
 }
-function eliminate(s,reason){
+function eliminate(s,reason,attacker){
+ reportKO(s,reason,attacker);
  if(s===player){eliminationPlace=ships.filter(t=>t===s||t.hp>0).length;cause=reason}
  if(s.power){drops.push({x:s.x,y:s.y,type:s.power,fromPilot:true});s.power=''}
  s.hp=0;burst(s.x,s.y,s.color,18);
 }
 function step(dt){
  time+=dt;notice-=dt;
+ while(feed.length&&feed[0].expires<=time)feed.shift().row.remove();
+ if(koUntil&&time>=koUntil){$('ko').hidden=true;koUntil=0}
  for(const [title,,x,y] of finds){
   if(!discovered.has(title)&&Math.hypot(player.x-x,player.y-y)<(title==='Lost camera'?108:52)){
    discovered.add(title);announce('Scrapbook · '+title);
@@ -336,7 +376,7 @@ function step(dt){
    continue;
   }
   const s=ships.find(t=>t!==b.owner&&t.hp>0&&distance(t,b)<18);
-  if(s){b.life=0;if(time<5)continue;if(s===player){hitFrom=Math.atan2(-b.dy,-b.dx);hitFlash=.55;sound(s.buff>0&&s.effect==='Salmon Shield')}burst(b.x,b.y,s.color,5);if(s.buff>0&&s.effect==='Salmon Shield'){burst(s.x,s.y,'#7ef1f5',9);continue;}s.hp=Math.max(0,s.hp-(20-2*s.shield));if(!s.hp){eliminate(s,'Shot down by '+b.owner.name);if(b.owner===player)kills++}}
+  if(s){b.life=0;if(time<5)continue;if(s===player){hitFrom=Math.atan2(-b.dy,-b.dx);hitFlash=.55;sound(s.buff>0&&s.effect==='Salmon Shield')}burst(b.x,b.y,s.color,5);if(s.buff>0&&s.effect==='Salmon Shield'){burst(s.x,s.y,'#7ef1f5',9);continue;}s.hp=Math.max(0,s.hp-(20-2*s.shield));if(!s.hp){eliminate(s,'Shot down by '+b.owner.name,b.owner);if(b.owner===player)kills++}}
  }
  bolts=bolts.filter(b=>b.life>0);
  drops=drops.filter(d=>{
@@ -407,6 +447,7 @@ function render(now){
  for(const b of bolts){
   g.lineWidth=2.5;
   if(b.style==='loops')circle(b.x,b.y,6,null,b.tint);
+  else if(b.style==='basketball'){circle(b.x,b.y,6,b.tint);rect(b.x-5,b.y,10,1,'#663c2a');rect(b.x,b.y-5,1,10,'#663c2a')}
   else if(b.style==='volley'){circle(b.x,b.y,6,b.tint);circle(b.x-1,b.y+1,3,null,'#598591')}
   else if(b.style==='snow'){circle(b.x,b.y,6,b.tint);circle(b.x-2,b.y-2,2,'#fff')}
   else{
@@ -443,6 +484,8 @@ function render(now){
 function frame(now){
  const dt=Math.min(.034,(now-last)/1000);last=now;
  if(live)step(dt);
+ else for(const p of sparks){p.x+=p.vx*dt;p.y+=p.vy*dt;p.life-=dt}
+ if(!live)sparks=sparks.filter(p=>p.life>0);
  render(now);requestAnimationFrame(frame);
 }
 function resize(){w=canvas.clientWidth;h=canvas.clientHeight;const dpr=Math.min(2,devicePixelRatio);canvas.width=w*dpr;canvas.height=h*dpr;g.setTransform(dpr,0,0,dpr,0,0);zoom=clamp(Math.min(w,h)/610,.58,1.2)}
