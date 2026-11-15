@@ -228,7 +228,7 @@ function begin(){
 function select(i){
  choice=i;
  if($('mode').value==='preset')applyPreset();
- [...$('pilots').children].forEach((b,j)=>b.setAttribute('aria-pressed',i===j));
+ [...$('pilots').children].forEach((b,j)=>b.setAttribute('aria-pressed',$('mode').value==='custom'?j===pilots.length:i===j));
  const [,name,home,color,badge]=pilots[i];
  $('badge').textContent=badge;
  $('badge').style.setProperty('--accent',outfitColors[$('outfit').value]||color);
@@ -249,6 +249,14 @@ function options(id,items,current){
  $(id).value=items.some(([value])=>value===current)?current:items[0][0];
 }
 pilots.forEach(([short,,,color],i)=>{const b=document.createElement('button');b.textContent=short+' · '+pilotKits[short][0];b.style.setProperty('--accent',color);b.onclick=()=>{$('mode').value='preset';lockFields();select(i);saveLoadout()};$('pilots').append(b)});
+const customButton=document.createElement('button');
+customButton.textContent='Custom';
+customButton.style.setProperty('--accent','#ffda79');
+customButton.onclick=()=>{
+ if($('mode').value!=='custom'){$('mode').value='custom';$('mode').onchange()}
+ $('callsign').focus();
+};
+$('pilots').append(customButton);
 options('stream',streams,saved.stream);options('outfit',outfits,saved.outfit);options('accessory',accessories,saved.accessory);
 const fields=['outfit','stream','accessory','callsign'];
 let custom={outfit:$('outfit').value,stream:$('stream').value,accessory:$('accessory').value,callsign:typeof saved.callsign==='string'?saved.callsign.slice(0,20):''};
