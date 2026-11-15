@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-14T06:45:00-05:00",
+ "updated": "2026-11-15T06:45:00-05:00",
  "team": "Buffalo Bills",
  "record": {
   "w": 7,
@@ -113,20 +113,20 @@
  },
  "news": [
   {
+   "h": "Hancock activated, Buechele elevated",
+   "b": "The Bills activated DB Jordan Hancock from injured reserve (hamstring) and released DB Te'Cory Couch to make room. QB Shane Buechele was elevated from the practice squad for the Jets game, his first elevation of the season."
+  },
+  {
    "h": "Spencer Brown doubtful at Jets",
-   "b": "Starting right tackle Spencer Brown (ankle) is doubtful after missing Thursday and Friday practice. Tylan Grable would likely start if Brown can't go."
+   "b": "Right tackle Spencer Brown (ankle) is doubtful, and Tylan Grable would likely start in his place. Christian Benford, Sam Franklin Jr. and Tyrell Shavers are questionable."
   },
   {
-   "h": "Four Bills listed questionable",
-   "b": "CB Christian Benford (wrist), S Sam Franklin Jr. (shoulder), DB Jordan Hancock (hamstring) and WR Tyrell Shavers (knee) are questionable. Dion Dawkins, Alec Anderson, Connor McGovern and Dalton Kincaid practiced fully and have no designation."
+   "h": "Jets activate VJ Payne",
+   "b": "New York activated S VJ Payne from injured reserve and waived OL Kohl Levao on Saturday. Garrett Wilson (concussion) practiced fully Friday, is listed questionable and is expected to play."
   },
   {
-   "h": "Amani Hooker will play Sunday",
-   "b": "Joe Brady says trade-deadline pickup Amani Hooker, a safety acquired from Tennessee, will play at the Jets, though his role and snap count are still to be decided."
-  },
-  {
-   "h": "Garrett Wilson expected to play",
-   "b": "The Jets list Garrett Wilson (concussion) as questionable but expect him to clear protocol. Omar Cooper Jr. and seven other Jets are questionable; LB Trevin Wallace (groin) is out. Kickoff Sunday 1 p.m. ET on CBS."
+   "h": "Preview: run game vs. fumble-forcing Jets",
+   "b": "Buffalo ran a season-high 44 times at Minnesota, and the Jets have allowed about 140 rushing yards per game over their last four. New York leads the NFL with 13 forced fumbles; kickoff is 1 p.m. ET on CBS from MetLife Stadium."
   }
  ],
  "schedule": [
@@ -141,58 +141,58 @@
    "kick": "2026-11-22T13:00-05:00",
    "opp": "Miami Dolphins",
    "home": true,
-   "venue": "",
-   "note": ""
+   "venue": "Highmark Stadium",
+   "note": "CBS"
   },
   {
    "kick": "2026-11-26T20:20-05:00",
    "opp": "Kansas City Chiefs",
    "home": true,
-   "venue": "",
-   "note": "Thanksgiving night"
+   "venue": "Highmark Stadium",
+   "note": "Thanksgiving night, NBC"
   },
   {
    "kick": "2026-12-06T16:25-05:00",
    "opp": "New England Patriots",
    "home": false,
-   "venue": "",
-   "note": ""
+   "venue": "Gillette Stadium",
+   "note": "CBS"
   },
   {
    "kick": "2026-12-13T20:20-05:00",
    "opp": "Green Bay Packers",
    "home": false,
-   "venue": "",
-   "note": "Sunday Night Football"
+   "venue": "Lambeau Field",
+   "note": "Sunday Night Football, NBC"
   },
   {
    "kick": "2026-12-19T20:20-05:00",
    "opp": "Chicago Bears",
    "home": true,
-   "venue": "",
-   "note": ""
+   "venue": "Highmark Stadium",
+   "note": "Saturday night, CBS"
   },
   {
    "kick": "2026-12-25T16:30-05:00",
    "opp": "Denver Broncos",
    "home": false,
-   "venue": "",
-   "note": "Christmas Day"
+   "venue": "Empower Field at Mile High",
+   "note": "Christmas Day, Netflix"
   },
   {
    "kick": "2027-01-03T13:00-05:00",
    "opp": "Miami Dolphins",
    "home": false,
-   "venue": "",
-   "note": ""
+   "venue": "Hard Rock Stadium",
+   "note": "CBS"
   },
   {
    "kick": "2027-01-10T13:00-05:00",
    "opp": "New York Jets",
    "home": true,
-   "venue": "",
+   "venue": "Highmark Stadium",
    "note": "Date and time may flex"
   }
  ],
- "source": "buffalobills.com injury report and Hooker story (Nov 13), newyorkjets.com Friday injury report (Nov 13), Fox Sports standings (Nov 14), ESPN TNF result (Nov 12)."
+ "source": "buffalobills.com roster moves (Nov 14), injury report (Nov 13), storylines (Nov 11) and schedule; newyorkjets.com Payne move (Nov 14) and Friday injury report (Nov 13); Fox Sports standings and NFL.com Week 10 schedule (Nov 15)."
 }

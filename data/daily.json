@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-14T07:05:00-05:00",
+ "updated": "2026-11-15T06:39:05-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -453,20 +453,77 @@
   }
  ],
  "football": {
-  "label": "Week 10 recap + Friday's Week 11 games",
+  "label": "Week 12 recap",
   "results": [
    {
-    "away": "Illinois",
-    "home": "UCLA",
-    "as": 14,
-    "hs": 22,
-    "homeRank": 4,
-    "blurb": "UCLA moved to 10-0 as Ty Dieffenbach returned from a second-quarter elbow injury and Scooter Jackson's interception with 2:50 left sealed it.",
+    "away": "Utah",
+    "home": "Arizona",
+    "as": 40,
+    "hs": 39,
+    "awayRank": 2,
+    "homeRank": 22,
+    "blurb": "Utah survived in Tucson by a single point to stay unbeaten in the chase for No. 1.",
     "stats": [
-     "Dieffenbach: 13/20, 232 yds, 2 TD, 1 INT",
-     "Mizell: 6 rec, 176 yds, TD",
-     "Scooter Jackson: 2 INT for UCLA"
+     "Daniel Bray: 18 carries, 197 yds, TD",
+     "Devon Dampier: 13/25, 204 yds, 2 TD, INT; 14 rushes, 100 yds, 2 TD",
+     "Noah Fifita (ARIZ): 27/43, 356 yds, 3 TD, INT"
     ]
+   },
+   {
+    "away": "Texas",
+    "home": "LSU",
+    "as": 22,
+    "hs": 21,
+    "awayRank": 8,
+    "homeRank": 24,
+    "blurb": "Texas edged LSU by one in Baton Rouge in a game with six combined turnovers.",
+    "stats": [
+     "Arch Manning: 19/35, 174 yds, TD, 3 INT; rushing TD",
+     "Dilin Jones (LSU): 19 carries, 125 yds, TD",
+     "Sam Leavitt (LSU): 27/37, 244 yds, 2 TD, 3 INT"
+    ]
+   },
+   {
+    "away": "USC",
+    "home": "Indiana",
+    "as": 13,
+    "hs": 27,
+    "awayRank": 15,
+    "homeRank": 6,
+    "blurb": "Indiana's defense forced three Jayden Maiava interceptions to handle USC in Bloomington.",
+    "stats": [
+     "Grant Wilson: 17/27, 305 yds, 2 TD, INT",
+     "Jayden Maiava (USC): 26/42, 311 yds, TD, 3 INT",
+     "Trent Mosley (USC): 9 catches, 130 yds"
+    ]
+   },
+   {
+    "away": "Wake Forest",
+    "home": "SMU",
+    "as": 49,
+    "hs": 7,
+    "awayRank": 11,
+    "homeRank": 25,
+    "blurb": "Wake Forest routed SMU on the road in a top-25 ACC matchup.",
+    "stats": []
+   },
+   {
+    "away": "Florida",
+    "home": "Kentucky",
+    "as": 21,
+    "hs": 14,
+    "homeRank": 13,
+    "blurb": "Unranked Florida upset No. 13 Kentucky in Lexington.",
+    "stats": []
+   },
+   {
+    "away": "South Carolina",
+    "home": "Arkansas",
+    "as": 6,
+    "hs": 34,
+    "awayRank": 20,
+    "blurb": "Arkansas blew out No. 20 South Carolina in Fayetteville.",
+    "stats": []
    },
    {
     "away": "Houston",
@@ -474,250 +531,200 @@
     "as": 32,
     "hs": 42,
     "awayRank": 14,
-    "blurb": "Colorado scored 28 straight points after trailing 20-7 and upset No. 14 Houston, its first win over an AP top-15 team since 2007.",
-    "stats": [
-     "Richard Young: 20 car, 94 yds, 2 TD",
-     "Isaac Wilson: 17/25, 217 yds, TD before leaving with an ankle injury",
-     "Weigman: 26/42, 272 yds, 3 TD, 1 INT for Houston"
-    ]
-   },
-   {
-    "away": "Georgia",
-    "home": "Ole Miss",
-    "as": 42,
-    "hs": 7,
-    "blurb": "No. 1 in the new poll again: Georgia routed Ole Miss.",
-    "stats": [
-     "Gunner Stockton: 5 total TDs (4 passing, 1 rushing), 3 TD passes to Talyn Taylor",
-     "Georgia outrushed Ole Miss 295-66",
-     "Georgia sacked Trinidad Chambliss 5 times and forced 2 turnovers"
-    ]
-   },
-   {
-    "away": "BYU",
-    "home": "Utah",
-    "as": 20,
-    "hs": 28,
-    "blurb": "No. 3 Utah beat No. 9 BYU and climbed to No. 2 in the new poll, its highest ranking since 2008.",
-    "stats": [
-     "Devon Dampier: 177 passing yards, 87 rushing yards",
-     "Bear Bachmeier: 21-of-35, 272 yards, 1 TD, 4 INTs for BYU",
-     "Legend Glasker: 7 catches, 118 yards, 1 TD for BYU"
-    ],
-    "awayRank": 9,
-    "homeRank": 3
-   },
-   {
-    "away": "Oregon",
-    "home": "Ohio State",
-    "as": 41,
-    "hs": 28,
-    "blurb": "Oregon won in Columbus; Ohio State fell to No. 21.",
-    "stats": [
-     "Dylan Raiola: 25-of-40, 257 yards, 2 TDs",
-     "Dierre Hill Jr.: 13 carries, 75 yards, 2 TDs",
-     "Jeremiah Smith: 7 catches, 133 yards, 1 TD for Ohio State"
-    ],
-    "awayRank": 23,
-    "homeRank": 12
-   },
-   {
-    "away": "Texas",
-    "home": "Missouri",
-    "as": 34,
-    "hs": 20,
-    "blurb": "No. 7 Texas beat No. 18 Missouri.",
-    "stats": [],
-    "awayRank": 7,
-    "homeRank": 18
-   },
-   {
-    "away": "Air Force",
-    "home": "Army",
-    "as": 24,
-    "hs": 21,
-    "blurb": "Army led 21-17 after the third quarter but did not score in the fourth; Air Force took the lead for good early in the fourth.",
+    "blurb": "Colorado knocked off No. 14 Houston in Boulder on Friday night.",
     "stats": []
    },
    {
-    "away": "Navy",
-    "home": "Temple",
-    "as": 42,
-    "hs": 35,
-    "blurb": "Navy won a 42-35 game over Temple.",
+    "away": "San José State",
+    "home": "Air Force",
+    "as": 3,
+    "hs": 24,
+    "blurb": "Air Force's defense held San José State to a field goal at Falcon Stadium.",
     "stats": []
    }
   ],
   "upcoming": [
    {
-    "away": "Duke",
-    "home": "Miami",
-    "kick": "2026-11-14T17:00:00Z",
-    "note": "ABC",
-    "homeRank": 5
+    "away": "Oregon",
+    "home": "Michigan State",
+    "kick": "2026-11-21T01:00:00Z",
+    "note": "Fri · FOX",
+    "awayRank": 18
    },
    {
-    "away": "Wake Forest",
-    "home": "SMU",
-    "kick": "2026-11-14T17:00:00Z",
-    "note": "ESPN",
-    "awayRank": 11,
-    "homeRank": 25
-   },
-   {
-    "away": "Northwestern",
-    "home": "Ohio State",
-    "kick": "2026-11-14T17:00:00Z",
-    "note": "FOX",
-    "homeRank": 21
-   },
-   {
-    "away": "Alabama",
-    "home": "Vanderbilt",
-    "kick": "2026-11-14T17:45:00Z",
-    "note": "SEC Network",
-    "awayRank": 7
-   },
-   {
-    "away": "Tennessee",
-    "home": "Texas A&M",
-    "kick": "2026-11-14T20:00:00Z",
-    "note": "ESPN",
-    "awayRank": 9
-   },
-   {
-    "away": "Missouri",
-    "home": "Georgia",
-    "kick": "2026-11-14T20:30:00Z",
-    "note": "ABC · Athens",
-    "homeRank": 1
-   },
-   {
-    "away": "Boston College",
-    "home": "Notre Dame",
-    "kick": "2026-11-14T20:30:00Z",
-    "note": "NBC/Peacock",
-    "homeRank": 3
-   },
-   {
-    "away": "USC",
-    "home": "Indiana",
-    "kick": "2026-11-14T20:30:00Z",
-    "note": "CBS/Paramount+",
-    "awayRank": 15,
-    "homeRank": 6
-   },
-   {
-    "away": "Michigan",
-    "home": "Oregon",
-    "kick": "2026-11-14T20:30:00Z",
-    "note": "FS1",
-    "homeRank": 18
-   },
-   {
-    "away": "Florida",
-    "home": "Kentucky",
-    "kick": "2026-11-14T23:15:00Z",
-    "note": "ESPN",
-    "homeRank": 13
-   },
-   {
-    "away": "Baylor",
-    "home": "BYU",
-    "kick": "2026-11-15T00:00:00Z",
-    "note": "FOX (moved after FAA ground stop)",
-    "homeRank": 12
-   },
-   {
-    "away": "San Jose State",
+    "away": "UTEP",
     "home": "Air Force",
-    "kick": "2026-11-15T00:00:00Z",
-    "note": "CBSSN · Falcon Stadium"
+    "kick": "2026-11-21T01:00:00Z",
+    "note": "Fri · The CW · Falcon Stadium"
    },
    {
-    "away": "Texas",
-    "home": "LSU",
-    "kick": "2026-11-15T00:30:00Z",
-    "note": "ABC",
-    "awayRank": 8,
-    "homeRank": 24
+    "away": "New Mexico",
+    "home": "Wyoming",
+    "kick": "2026-11-21T02:00:00Z",
+    "note": "Fri · FS1",
+    "awayRank": 23
    },
    {
-    "away": "Purdue",
-    "home": "Iowa",
-    "kick": "2026-11-15T00:30:00Z",
-    "note": "NBC",
-    "homeRank": 16
+    "away": "East Carolina",
+    "home": "Army",
+    "kick": "2026-11-21T17:00:00Z",
+    "note": "Home at Michie Stadium · CBSSN",
+    "army": true
    },
    {
-    "away": "South Carolina",
-    "home": "Arkansas",
-    "kick": "2026-11-15T00:45:00Z",
-    "note": "SEC Network",
-    "awayRank": 20
+    "away": "Memphis",
+    "home": "Navy",
+    "kick": "2026-11-21T17:00:00Z",
+    "note": "Navy-Marine Corps Memorial Stadium · TV TBA"
    },
    {
-    "away": "Texas Tech",
-    "home": "Oklahoma State",
-    "kick": "2026-11-15T02:30:00Z",
-    "note": "ESPN · Army and Navy are off this week",
-    "awayRank": 10
+    "away": "Ohio State",
+    "home": "Nebraska",
+    "kick": "2026-11-21T17:00:00Z",
+    "note": "FOX",
+    "awayRank": 21
    },
    {
     "away": "Utah",
-    "home": "Arizona",
-    "kick": "2026-11-15T03:30:00Z",
-    "note": "FOX (moved after FAA ground stop)",
-    "awayRank": 2,
-    "homeRank": 22
+    "home": "TCU",
+    "kick": "2026-11-21T17:00:00Z",
+    "note": "Time TBA",
+    "awayRank": 2
    },
    {
-    "away": "Ole Miss",
-    "home": "Oklahoma",
-    "kick": "2026-11-15T18:00:00Z",
-    "note": "Moved to Sunday 1 PM ET after FAA ground stop; TV TBA",
-    "awayRank": 19
+    "away": "Virginia Tech",
+    "home": "Miami",
+    "kick": "2026-11-21T17:00:00Z",
+    "note": "Time TBA",
+    "homeRank": 5
+   },
+   {
+    "away": "BYU",
+    "home": "Kansas",
+    "kick": "2026-11-21T17:00:00Z",
+    "note": "Time TBA",
+    "awayRank": 12
+   },
+   {
+    "away": "Texas Tech",
+    "home": "Baylor",
+    "kick": "2026-11-21T17:00:00Z",
+    "note": "Time TBA",
+    "awayRank": 10
+   },
+   {
+    "away": "Wake Forest",
+    "home": "Georgia Tech",
+    "kick": "2026-11-21T17:00:00Z",
+    "note": "Time TBA",
+    "awayRank": 11
+   },
+   {
+    "away": "Houston",
+    "home": "West Virginia",
+    "kick": "2026-11-21T17:00:00Z",
+    "note": "Time TBA",
+    "awayRank": 14
+   },
+   {
+    "away": "Iowa",
+    "home": "Illinois",
+    "kick": "2026-11-21T19:30:00Z",
+    "note": "BTN",
+    "awayRank": 16
+   },
+   {
+    "away": "UCLA",
+    "home": "Michigan",
+    "kick": "2026-11-21T20:30:00Z",
+    "note": "CBS",
+    "awayRank": 4
+   },
+   {
+    "away": "Arkansas",
+    "home": "Texas",
+    "kick": "2026-11-21T20:30:00Z",
+    "note": "TV TBA",
+    "homeRank": 8
+   },
+   {
+    "away": "LSU",
+    "home": "Tennessee",
+    "kick": "2026-11-21T20:30:00Z",
+    "note": "TV TBA",
+    "awayRank": 24,
+    "homeRank": 9
+   },
+   {
+    "away": "Indiana",
+    "home": "Washington",
+    "kick": "2026-11-21T20:30:00Z",
+    "note": "Peacock",
+    "awayRank": 6
+   },
+   {
+    "away": "Georgia",
+    "home": "South Carolina",
+    "kick": "2026-11-22T00:30:00Z",
+    "note": "ABC",
+    "awayRank": 1,
+    "homeRank": 20
+   },
+   {
+    "away": "SMU",
+    "home": "Notre Dame",
+    "kick": "2026-11-22T00:30:00Z",
+    "note": "NBC",
+    "awayRank": 25,
+    "homeRank": 3
+   },
+   {
+    "away": "Kentucky",
+    "home": "Missouri",
+    "kick": "2026-11-22T00:30:00Z",
+    "note": "SEC Network",
+    "awayRank": 13
    }
   ],
   "poll": "AP Top 25, Week 11 (Nov 8)"
  },
  "location": {
-  "name": "Machu Picchu",
-  "wiki": "Machu_Picchu",
-  "country": "Peru",
-  "region": "Cusco Region, Andes",
-  "lat": -13.1633,
-  "lon": -72.5456,
-  "tagline": "A 15th-century Inca citadel on a ridge high above the Urubamba River",
-  "intro": "Machu Picchu is a 15th-century Inca citadel on a mountain ridge about 80 km northwest of Cusco, Peru, at 2,430 m. It is believed to have been an estate of the Inca emperor Pachacuti, was abandoned around the time of the Spanish conquest, and became world-famous after Hiram Bingham's 1911 visit.",
+  "name": "Venice",
+  "wiki": "Venice",
+  "country": "Italy",
+  "region": "Veneto, Venetian Lagoon",
+  "lat": 45.4375,
+  "lon": 12.3358,
+  "tagline": "A car-free city of canals and palaces floating on more than a hundred islands in a lagoon",
+  "intro": "Venice is a city in northeastern Italy built on a group of 126 islands in the Venetian Lagoon, separated by canals and linked by hundreds of bridges. For roughly a thousand years it was the capital of the Republic of Venice, a maritime power that grew rich on trade until Napoleon ended it in 1797. Today fewer than 50,000 people live in the historic island city, which is visited by tens of millions of tourists a year.",
   "stats": [
    {
-    "label": "Elevation",
-    "value": "2,430 m (7,970 ft)"
+    "label": "Islands",
+    "value": "126"
    },
    {
-    "label": "Built",
-    "value": "c. 1450–1470"
+    "label": "Grand Canal",
+    "value": "3.8 km (2.4 mi) long"
    },
    {
     "label": "UNESCO World Heritage",
-    "value": "1983"
+    "value": "1987"
    },
    {
-    "label": "Visitors",
-    "value": "Over 1.5 million a year"
+    "label": "Historic-city residents",
+    "value": "Nearly 50,000"
    }
   ],
   "facts": [
-   "It was built on earthquake faults, possibly because the fractured rock there was easy to quarry for building.",
-   "The cliffs below the site drop about 450 m (1,480 ft) to the Urubamba River.",
-   "Bingham's expeditions took thousands of artifacts to Yale; Yale returned them to Peru between 2010 and 2012.",
-   "Radiocarbon dating suggests people lived there from about 1420, earlier than the written Spanish chronologies imply.",
-   "Its 15th-century bismuth bronze ceremonial knives are the earliest known artifacts made of that alloy."
+   "Much of the city stands on closely spaced piles of alder-tree trunks driven into the lagoon mud, topped with Istrian limestone.",
+   "Venice is Europe's largest car-free urban area: a sizable working city with no cars or trucks at all.",
+   "The Venetian Arsenal, the Republic's state shipyard, is considered by several historians to be the first factory in history.",
+   "By 1482 Venice was the printing capital of the world, and its printer Aldus Manutius pioneered small, portable books.",
+   "The MOSE flood barrier, 78 gates across the lagoon's three inlets, was raised against a real high tide for the first time on 3 October 2020."
   ],
-  "bestTime": "The dry season, May to September, has the clearest skies; April and October are quieter with fewer crowds.",
-  "gettingThere": "Fly from New York to Lima (about 8 hours nonstop from JFK), connect to Cusco, then take the train to Aguas Calientes and the shuttle bus up to the site.",
-  "tip": "Spend a couple of days in Cusco or the Sacred Valley first to adjust to the altitude, and book timed entry tickets (and a Huayna Picchu permit) well ahead."
+  "bestTime": "April to June and September to October bring mild weather; late autumn and winter are quieter but are the main season for acqua alta flooding.",
+  "gettingThere": "Fly nonstop from New York to Venice Marco Polo Airport (Delta from JFK, plus seasonal United from Newark, roughly 8 to 9 hours), then take the Alilaguna water bus, a water taxi, or a bus to Piazzale Roma.",
+  "tip": "Day-trippers must pay the Venice access fee (started at €5 in 2024) on designated peak days, so check the calendar and book online; staying overnight exempts you and lets you see the city after the crowds leave."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 9 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
@@ -768,44 +775,51 @@
     "kick": "2026-11-15T18:00:00Z",
     "spread": "BUF −8.5",
     "total": "50.5",
-    "ml": "BUF −520 / NYJ +390",
+    "ml": "BUF −395 / NYJ +310",
     "bills": true
    },
    {
-    "game": "USC @ Indiana",
-    "kick": "2026-11-14T20:30:00Z",
-    "spread": "IND −8.5",
-    "total": "50.5",
-    "ml": "IND −330 / USC +275"
+    "game": "LSU @ Tennessee",
+    "kick": "2026-11-21T20:30:00Z",
+    "spread": "LSU −1.5",
+    "total": "47.5",
+    "ml": "LSU −115 / TENN −105"
+   },
+   {
+    "game": "UCLA @ Michigan",
+    "kick": "2026-11-21T20:30:00Z",
+    "spread": "UCLA −7",
+    "total": "41.5",
+    "ml": "UCLA −258 / MICH +210"
    }
   ],
   "probs": [
    {
-    "game": "Middle Tennessee @ Liberty",
-    "fav": "Liberty",
+    "game": "Tennessee Tech @ Mississippi State",
+    "fav": "Mississippi State",
     "p": 95
    },
    {
-    "game": "Alabama @ Vanderbilt",
-    "fav": "Alabama",
-    "p": 95
+    "game": "Arkansas @ Texas",
+    "fav": "Texas",
+    "p": 94
    },
    {
-    "game": "Stanford @ Virginia Tech",
-    "fav": "Virginia Tech",
-    "p": 90
+    "game": "San Diego State @ Boise State",
+    "fav": "Boise State",
+    "p": 94
    },
    {
-    "game": "Missouri @ Georgia",
-    "fav": "Georgia",
-    "p": 89
+    "game": "Rutgers @ Penn State",
+    "fav": "Penn State",
+    "p": 94
    },
    {
-    "game": "Southern Miss @ Louisiana Tech",
-    "fav": "Louisiana Tech",
-    "p": 89
+    "game": "SMU @ Notre Dame",
+    "fav": "Notre Dame",
+    "p": 93
    }
   ],
-  "sources": "S&P 500: AP via La Nación (Nov 13). Movers: Trefis, StockTitan (Nov 13-14). Bills line: DraftKings via NBC Sports (Nov 10). USC-Indiana: CBS Sports (Nov 13). Win prob: ESPN FPI (Nov 14)."
+  "sources": "S&P 500: AP via La Nación (Nov 13). Movers: Trefis, StockTitan (Nov 13-14). Bills line: DraftKings via SI (Nov 13). College lines: DraftKings via ESPN (Nov 15). Win prob: ESPN Matchup Predictor/FPI (Nov 15)."
  }
 }
