@@ -16,7 +16,7 @@ The live site uses GitHub Pages and the existing custom domain. Changes to the g
 
 ## Match rules
 
-- Be the last groundhog flying. You are eliminated at zero HP or after 10 continuous seconds outside the shrinking safe circle.
+- Be the last groundhog flying. You are eliminated at zero HP. Leaving the shrinking safe circle shows a fog warning; after 1.5 seconds outside, the fog drains 8 HP per second plus 2 more for every time the circle has shrunk (`fogGrace`, `fogDps`). Shields don't block fog damage.
 - Desktop uses WASD to fly, mouse aim and left-click to fire, and E to activate a held power. Touch uses a left movement stick, a right aim-and-fire stick, and a Power button.
 - The arena is 3,200 world units across. Pilots spawn spaced around the map with five seconds of opening damage protection. Fixed landmarks block flight and shots. Igloo Wall provides temporary, destructible cover.
 - Shoot crates and fly over drops. Normal crates give a trait about 94% of the time and a power about 6%. Crates say **LOOT**. Only the **Irish Pot of Gold** uses the gold chest marked **GOLD**.
