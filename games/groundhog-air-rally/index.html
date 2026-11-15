@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Groundhog Air Rally</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#101c1a;color:#fff9dc;font:16px system-ui;overflow:hidden}canvas{display:block;width:100vw;height:100dvh;touch-action:none}main{position:absolute;inset:0;display:grid;place-items:center;background:#0b1918a0;padding:16px}section{background:#172b28;border:2px solid #4f7362;border-radius:24px;padding:clamp(18px,4vw,44px);max-width:620px;box-shadow:0 18px 70px #0009}h1{font-size:clamp(32px,7vw,67px);line-height:.95;margin:8px 0 18px;color:#ffda79}p{line-height:1.4}button{font:inherit;font-weight:750;border:0;border-radius:12px;padding:12px;background:#2f5045;color:white;cursor:pointer;touch-action:manipulation}button[aria-pressed=true],#start{background:#ffda79;color:#1c2922}#pilots{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}#start{margin-top:14px;width:100%}#hud{position:absolute;inset:12px 12px auto;display:flex;justify-content:space-between;gap:8px;pointer-events:none}#hud span,#power{background:#142824ed;border:1px solid #74967f;padding:9px;border-radius:10px}#power{position:absolute;right:14px;bottom:120px} [hidden]{display:none!important}small{display:block;margin-top:12px;color:#c7dbc9}@media(max-width:420px){#pilots{grid-template-columns:repeat(2,1fr)}#hud{font-size:12px}}
-#results{text-align:center;width:min(440px,100%)}#results h2{font-size:clamp(32px,8vw,58px);margin:4px 0}#results[data-win=true]{border-color:#ffda79}#results[data-win=false]{border-color:#ed9789}#place{font-size:clamp(52px,14vw,102px);font-weight:900;line-height:1.05;color:#ffda79}#resultStats{display:flex;justify-content:center;gap:24px;margin:18px 0}#results button{margin:4px}#again{background:#ffda79;color:#172b28}#menu{overflow:auto}#menu section{margin:auto;width:min(620px,100%)}#pilots{grid-template-columns:repeat(4,minmax(0,1fr))}#pilots button{padding:7px 3px;font-size:13px;border-bottom:3px solid var(--accent)}#loadout{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}#loadout label{font-size:13px;color:#d5e9d7}#loadout input,#loadout select{display:block;width:100%;background:#101f1d;color:white;border:1px solid #74967f;border-radius:8px;padding:8px;font:inherit;margin-top:3px}#pilotDetail{display:flex;align-items:center;gap:10px;margin:8px 0}#badge{font-size:24px;border:2px solid var(--accent);border-radius:100%;width:40px;height:40px;display:grid;place-items:center}#origin{color:#d5e9d7;font-size:13px}@media(max-height:650px){#menu section{padding:15px}#menu h1{font-size:32px;margin:4px 0}#menu h1 br{display:none}#menu p{margin:5px 0}}#levels{position:absolute;left:12px;bottom:14px;background:#142824ed;border:1px solid #74967f;border-radius:10px;padding:8px;pointer-events:none;font-size:clamp(10px,2.9vw,14px);white-space:nowrap}</style>
+#results{text-align:center;width:min(440px,100%)}#results h2{font-size:clamp(32px,8vw,58px);margin:4px 0}#results[data-win=true]{border-color:#ffda79}#results[data-win=false]{border-color:#ed9789}#place{font-size:clamp(52px,14vw,102px);font-weight:900;line-height:1.05;color:#ffda79}#resultStats{display:flex;justify-content:center;gap:24px;margin:18px 0}#results button{margin:4px}#again{background:#ffda79;color:#172b28}#menu{overflow:auto}#menu section{margin:auto;width:min(620px,100%)}#pilots{grid-template-columns:repeat(4,minmax(0,1fr))}#pilots button{padding:7px 3px;font-size:13px;border-bottom:3px solid var(--accent)}#loadout{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}#loadout label{font-size:13px;color:#d5e9d7}#loadout input,#loadout select{display:block;width:100%;background:#101f1d;color:white;border:1px solid #74967f;border-radius:8px;padding:8px;font:inherit;margin-top:3px}#pilotDetail{display:flex;align-items:center;gap:10px;margin:8px 0}#badge{font-size:24px;border:2px solid var(--accent);border-radius:100%;width:40px;height:40px;display:grid;place-items:center}#origin{color:#d5e9d7;font-size:13px}@media(max-height:650px){#menu section{padding:15px}#menu h1{font-size:32px;margin:4px 0}#menu h1 br{display:none}#menu p{margin:5px 0}}#levels{position:absolute;left:12px;bottom:14px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;pointer-events:none;width:min(280px,calc(100% - 24px))}.upgrade{background:#142824ed;border:1px solid #74967f;border-left:3px solid var(--accent);border-radius:8px;padding:6px}.upgrade span{display:flex;justify-content:space-between;font-size:12px;font-weight:750}.upgrade b{color:var(--accent)}.upgrade i{display:flex;gap:3px;margin-top:4px}.upgrade em{height:5px;flex:1;background:#49605a;border-radius:2px}.upgrade em.on{background:var(--accent)}@media(pointer:coarse){#levels{bottom:auto;top:58px;width:min(204px,calc(100% - 124px))}.upgrade span{font-size:10px}}</style>
 <canvas id="field" aria-label="Groundhog Air Rally arena"></canvas><div id="hud" hidden><span id="stats"></span><span id="zone"></span></div><div id="levels" hidden></div><button id="power" hidden>Power</button>
 <main id="menu"><section><div>GROUNDHOG BATTLE ROYALE</div><h1>Groundhog<br>Air Rally</h1><p id="brief">Knock out rival groundhogs, grab crate loot, and stay ahead of the fog. Last groundhog flying wins.</p><div id="pilots" aria-label="Choose pilot"></div><div id="pilotDetail"><span id="badge" aria-hidden="true"></span><span id="origin"></span></div><div id="loadout"><label>Callsign<input id="callsign" maxlength="20" autocomplete="off" placeholder="Use pilot name"></label><label>Shot stream<select id="stream"></select></label><label>Outfit<select id="outfit"></select></label><label>Hit sounds<select id="soundMode"><option value="on">On</option><option value="off">Off</option></select></label></div><button id="start">Start match</button><small>Desktop · WASD, mouse to aim and fire, E for power<br>Touch · Left stick to fly, right stick to aim and fire</small></section></main>
 <main id="end" hidden><section id="results" aria-labelledby="outcome"><h2 id="outcome"></h2><div id="place"></div><div id="placement"></div><div id="resultStats"><span id="resultKills"></span><span id="resultTime"></span></div><p id="cause"></p><button id="again">Play again</button><button id="changePilot">Change pilot</button></section></main><script>
@@ -66,6 +66,25 @@ function spawn(radius){
 }
 const maxLevel=5;
 const upgrades={Speed:'speed',Health:'health',Shield:'shield', 'Fire rate':'rate'};
+const upgradeColors=['#74e3ff','#ff9ba5','#b9a5ff','#ffda79'];
+const upgradeIcons=['»','♥','⬟','↑'];
+const meters=Object.entries(upgrades).map(([name,key],index)=>{
+ const card=document.createElement('div');
+ card.className='upgrade';
+ card.style.setProperty('--accent',upgradeColors[index]);
+ card.innerHTML='<span>'+upgradeIcons[index]+' '+name+'<b></b></span><i aria-hidden="true">'+'<em></em>'.repeat(maxLevel)+'</i>';
+ $('levels').append(card);
+ return {key,value:card.querySelector('b'),slots:[...card.querySelectorAll('em')],previous:-1};
+});
+function drawUpgradeLevels(){
+ for(const meter of meters){
+  const level=player[meter.key];
+  if(level===meter.previous)continue;
+  meter.previous=level;
+  meter.value.textContent=level===maxLevel?'MAX':level+'/'+maxLevel;
+  meter.slots.forEach((slot,index)=>slot.classList.toggle('on',index<level));
+ }
+}
 const maxHealth=s=>100+s.health*15;
 function collect(s,type){
  const stat=upgrades[type];
@@ -110,7 +129,7 @@ function begin(){
  for(const [i,rival] of ships.slice(1).entries())rival.stream=streams[i%streams.length][0];
  crates=[...locations.map(p=>({x:p.x+(center-p.x)*.065,y:p.y+(center-p.y)*.065})).filter(p=>!blocked(p.x,p.y,20)),...Array.from({length:85},()=>spawn(1440))].map((p,i)=>({...p,hp:2,bonus:i%9===0}));
  drops=[];bolts=[];sparks=[];cam={x:player.x,y:player.y};live=true;
- $('end').hidden=true;$('menu').hidden=true;$('hud').hidden=false;$('levels').hidden=false;$('power').hidden=false;
+ $('end').hidden=true;$('menu').hidden=true;$('hud').hidden=false;$('levels').hidden=false;drawUpgradeLevels();$('power').hidden=false;
 }
 function select(i){
  choice=i;
@@ -230,7 +249,7 @@ function step(dt){
  cam.x+=(player.x-cam.x)*Math.min(1,dt*10);cam.y+=(player.y-cam.y)*Math.min(1,dt*10);
  const count=ships.filter(s=>s.hp>0).length;
  $('stats').textContent='HP '+player.hp+'/'+maxHealth(player)+' · '+count+' flying · '+kills+' KO';
- $('levels').textContent=Object.entries(upgrades).map(([name,key])=>name+' '+player[key]+'/'+maxLevel).join(' · ');
+ drawUpgradeLevels();
  $('zone').textContent=player.out>0?'FOG · '+Math.max(0,Math.ceil(10-player.out))+'s':ring===95?'Final zone':'Fog moves in '+Math.ceil(time<18?18-time:10-(time-18)%10)+'s';
  $('power').disabled=!player.power;$('power').textContent=player.power?player.power+' · E':player.buff>0?player.effect+' '+Math.ceil(player.buff)+'s':'Power · empty';
  if(!player.hp||count===1)finish(player.hp>0);
