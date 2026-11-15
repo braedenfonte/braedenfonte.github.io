@@ -43,11 +43,15 @@ Selecting a pilot applies their preset. **Custom** enables editing, and clicking
 | Bridger Beck | Kenai, AK | Icy blue and white | Salmon | Fishing pole |
 | Jimmy Benne | San Antonio, TX | Navy and orange Bears-inspired C | Deep-dish pizzas | Cowboy boots (on the back feet) |
 | Cole Bryant | West, TX | Texas flag | Cowboy spurs | Cowboy hat |
-| Jess Joe Augustine | Mount Sinai, NY | Black M and red S | Pringles | Bacon, egg, and cheese |
+| Jess Joe Augustine | Mount Sinai, NY | Black M and red S | Pringles | Pringles can |
 
 The CM, MS, and Bears-inspired C crests sit upright on the pilot's back and are drawn larger in the match view on phone-sized zoom (`emblemBoost`). Ethan has short blond hair on the crown, leaving the eyes clear. The MS crest interlocks a small red S inside a large black M. The selected outline is black. Alternative projectiles and gear are available in the cosmetic picker. Cosmetic projectiles share collision and base combat behavior even when their artwork differs in size. The hangar includes a live rotating preview and test fire.
 
 The nine playable pilots are excluded from the bot pool. Side characters include Maggie, Molly, Lili, Carli, Jade, Sophia, Adriann, Adrianna, Mila, Robin, Rachel, Ramon, CPT William Reynolds, MAJ P, CPT Derek Swanson, LTC Dusty Turner, MAJ Austin Semmel, Claude, Reese, Irish Woman, and Emma Beck. Reese and Irish Woman are side characters with Scrapbook cameos, just like the other non-playable friends. Adriann and Adrianna are separate people.
+
+## Bots
+
+`botThink` picks close, weak, visible targets; holds a preferred range and circle-strafes; flanks when cover blocks the shot; only fires with a clear line of sight; leads moving targets; retreats behind the nearest cover when hurt; heads inward before the circle shrinks; and uses Lotion, Salmon Shield, Froot Loops, Kia Turbo, Igloo Wall and the camera when they make sense (never MAJ P's Blabber). `botSkill` rises with your Amex rank, tightening aim and making retreats and power use smarter.
 
 ## Progression and arenas
 
