@@ -88,7 +88,7 @@ const streams=[
  ['snow','Igloo Snowballs',['#eaffff','#93dcff']],
  ['basketball','Basketballs',['#ff9950','#ee813e']]
 ];
-const pilotKits={"Braeden":["BF","Maroon & White","#812d4d","#fff"],"Ethan":["EP","Spain Flag","#c60b1e","#ffc400"],"Josh":["JB","Green & Orange","#27854c","#ff953d"],"Casey":["CA","Tito's Handle","#d9cfb4","#c2512a"],"Owen":["OB","Sunset Orange","#a74721","#ffe1ae"],"Bridger":["BB","Icy Blue & White","#9cdcff","#fff"],"Jimmy":["JB","Navy & Orange","#17294f","#ff963f"],"Cole":["CB","Texas Blue & Red","#285fb5","#e64c55"],"Jess Joe":["JJA","Black & Red","#22252b","#ef4956"]};
+const pilotKits={"Braeden":["BF","Maroon & White","#812d4d","#fff"],"Ethan":["EP","Spain Flag","#c60b1e","#ffc400"],"Josh":["JB","Green & Orange","#27854c","#ff953d"],"Casey":["CA","Tito's Handle","#f881ad","#c2512a"],"Owen":["OB","Sunset Orange","#a74721","#ffe1ae"],"Bridger":["BB","Icy Blue & White","#9cdcff","#fff"],"Jimmy":["JB","Navy & Orange","#17294f","#ff963f"],"Cole":["CB","Texas Blue & Red","#285fb5","#e64c55"],"Jess Joe":["JJA","Black & Red","#22252b","#ef4956"]};
 const outfits=[...Object.values(pilotKits).map(([,label])=>[label,label]),['maroon','Caledonia Maroon'],['signature','Pilot signature'],['gold','Credit Card Gold'],['ice','Kenai Ice'],['purple','Phebes Purple'],['mint','Kia Mint']];
 const outfitColors={...Object.fromEntries(Object.values(pilotKits).map(([,label,color])=>[label,color])),maroon:'#812d4d',gold:'#ffdb71',ice:'#a8e6ff',purple:'#bc8af8',mint:'#73e5b9'};
 const storageKey='groundhog-air-rally-loadout';
@@ -663,7 +663,7 @@ function mpStartMatch(){
  if(MP.role!=='host')return;const guests=MP.conns.filter(c=>c.open&&c.card).slice(0,4);
  $('friends').close();begin();MP.inMatch=true;MP.events=[];MP.sendAt=0;
  guests.forEach((conn,i)=>{const s=ships[i+1],c=conn.card,kitRow=Object.values(pilotKits).find(k=>k[1]===c.outfit);
-  Object.assign(s,{name:c.name,remote:conn,input:{},kills:0,assists:0,stream:streams.some(x=>x[0]===c.stream)?c.stream:'loops',accessory:c.accessory||'none',color:outfitColors[c.outfit]||colors[(i+1)%4],trim:kitRow?.[3]});conn.ship=s});
+  Object.assign(s,{name:c.name,pilot:c.pilot,remote:conn,input:{},kills:0,assists:0,stream:streams.some(x=>x[0]===c.stream)?c.stream:'loops',accessory:c.accessory||'none',color:outfitColors[c.outfit]||colors[(i+1)%4],trim:kitRow?.[3]});conn.ship=s});
  const roster=ships.map(s=>({x:r1(s.x),y:r1(s.y),name:s.name,color:s.color,trim:s.trim||null,stream:s.stream,accessory:s.accessory}));
  const base={type:'start',arena:arenas.indexOf(arena),props:props.map(o=>({...o})),roster,crates:crates.map(c=>[r1(c.x),r1(c.y),c.bonus?1:0]),dropTime};
  guests.forEach(conn=>conn.send({...base,me:ships.indexOf(conn.ship)}));
@@ -865,7 +865,7 @@ function eliminate(s,reason,attacker){
  if(s.remote)mpSendEnd(s,false,reason);
  if(s!==player&&attacker&&attacker!==player&&time-(s.playerHit??-Infinity)<=8){assists++;announce('Assist · '+s.name)}
  if(s===player){eliminationPlace=ships.filter(t=>t===s||t.hp>0).length;cause=reason;player.killer=attacker}
- if(attacker&&attacker!==player&&attacker.hp>0&&Math.random()<.45)say(attacker,botLines[Math.floor(Math.random()*botLines.length)]);
+ if(attacker&&attacker.hp>0){const line=attacker===player?catchphrases[pilots[choice][0]]:attacker.pilot?catchphrases[attacker.pilot]:catchphrases[attacker.name];if(line)say(attacker,line);else if(Math.random()<.45)say(attacker,botLines[Math.floor(Math.random()*botLines.length)])}
  if(s.power){drops.push({x:s.x,y:s.y,type:s.power,fromPilot:true});s.power=''}
  s.hp=0;if(s===player)sfx('death');else if(attacker===player)sfx('kill');else sfx('ko',s);burst(s.x,s.y,s.color,18);burst(s.x,s.y,'#ffd27a',10,'chunk');
  for(const c of ['#ff7d7d','#ffd65a','#8ae692','#7cbdff','#c29aff'])burst(s.x,s.y,c,5,'confetti');
@@ -1264,15 +1264,20 @@ function drawPattern(s){
   if(pattern==='western'){rect(-17,-11,24,22,'#142747');rect(-17,-3,24,2,'#fa7629');rect(-17,1,24,2,'#fa7629')}
   if(pattern==='sunset'){for(let i=0;i<8;i++){g.save();g.translate(-5,0);g.rotate(i*Math.PI/4);rect(6,-.7,5,1.4,'#ffbc62');g.restore()}circle(-5,0,5,'#ffe4a7')}
   if(pattern==='titos'){
-   // Casey: a handle of Tito's vodka, neck toward the head, handle on the side.
-   rect(-17,-11,24,22,'#1d2b45');
-   g.beginPath();g.arc(-7,6.6,3.2,Math.PI,0);g.strokeStyle='#cfe3e8';g.lineWidth=1.4;g.stroke();
-   g.beginPath();g.roundRect(-15.5,-6.4,13.5,12.8,2.6);g.moveTo(-2,-6);g.quadraticCurveTo(1.2,-5.2,1.6,-2.2);g.lineTo(1.6,2.2);g.quadraticCurveTo(1.2,5.2,-2,6);
-   g.fillStyle='#dcefF3';g.fill();g.strokeStyle='#7aa6b0';g.lineWidth=.6;g.stroke();
-   rect(1.5,-1.7,3.2,3.4,'#dcefF3');rect(4.5,-2,2.2,4,'#2a2a2a');rect(-15,-5.6,1.2,11.2,'#ffffff90');
-   rect(-13,-5.2,9.4,10.4,'#f3ead2');g.strokeStyle='#c2512a';g.lineWidth=.4;g.strokeRect(-12.6,-4.8,8.6,9.6);
-   g.save();g.translate(-8.3,0);g.rotate(Math.PI/2);
-   label('TITO\'S',0,-.6,'#c2512a','900 3.3px Georgia');label('HANDMADE',0,1.6,'#3a2a1a','800 1.5px system-ui');label('VODKA',0,3.4,'#3a2a1a','900 1.9px system-ui');g.restore();
+   // Casey: a Tito's handle on pink, shaped like the real jug (neck toward the head, built-in handle on the side).
+   rect(-17,-11,24,22,'#f6a6c1');
+   const glass='#e6f3f6';g.strokeStyle='#8fb3bc';g.lineWidth=.55;
+   g.beginPath();g.roundRect(-8.4,4.6,7.6,5,1.8);g.fillStyle=glass;g.fill();g.stroke();
+   g.beginPath();g.roundRect(-6.9,6,4.6,2.2,1);g.fillStyle='#f6a6c1';g.fill();g.stroke();
+   g.beginPath();g.moveTo(-15.6,-5.4);g.quadraticCurveTo(-15.6,-6.2,-14.8,-6.2);g.lineTo(-2.6,-6.2);g.quadraticCurveTo(-1,-6,.4,-2.6);g.lineTo(.4,2.6);g.quadraticCurveTo(-1,6,-2.6,6.2);
+   g.lineTo(-14.8,6.2);g.quadraticCurveTo(-15.6,6.2,-15.6,5.4);g.closePath();g.fillStyle=glass;g.fill();g.stroke();
+   rect(.3,-2,2.3,4,glass);g.strokeRect(.3,-2,2.3,4);rect(2.5,-2.5,3.2,5,'#c8642a');for(let i=0;i<4;i++)rect(2.9+i*.75,-2.5,.3,5,'#8a3e14');
+   rect(-15,-5.4,.9,10.8,'#ffffffb0');rect(-1.6,-4.8,.5,9.6,'#ffffff90');
+   rect(-13.8,-4.8,10.2,9.6,'#ead6ad');g.strokeStyle='#7a4a22';g.lineWidth=.35;g.strokeRect(-13.4,-4.4,9.4,8.8);
+   g.save();g.translate(-8.7,0);g.rotate(Math.PI/2);
+   label('Tito’s',0,-2,'#2a1608','italic 900 2.7px Georgia');
+   g.beginPath();g.ellipse(0,0,2.4,1.2,0,0,Math.PI*2);g.fillStyle='#5a3418';g.fill();g.strokeStyle='#c8642a';g.lineWidth=.25;g.stroke();circle(-.4,.1,.5,'#c8642a');rect(.2,-.5,.9,1,'#c8642a');
+   label('Handmade',0,2.4,'#2a1608','italic 800 1.8px Georgia');label('VODKA',0,3.8,'#2a1608','800 1.2px system-ui');g.restore();
   }
   if(pattern==='spain'){
    // Ethan: Spanish flag, red-yellow-red with the yellow band doubled and a simple crest.
