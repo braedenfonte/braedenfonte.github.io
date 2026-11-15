@@ -63,6 +63,10 @@ The named reference landmarks (and their Scrapbook pages) are shared, but each a
 
 Keep the references recognizable through scenery and play. Examples include Iona vs. University of Alaska Anchorage women's volleyball, Turner vs. Semmel boxing, the lost Marist camera, Phebes, the Kia Soul, the Kenai salmon run and 10-mile trail, and the Dena’ina homelands postcard. The `finds` array is the source for current Scrapbook details, including names, schools, and locations. Keep the Scrapbook, but look for opportunities to make important references visible or interactive on the map.
 
+## Achievements and daily challenge
+
+The hangar's **Achievements & daily challenge** button lists 11 achievements (for example Triple KO, Pot of Gold, Fog Dancer, Hangar Regular) and today's challenge. One challenge rotates each local day from `dailyList`; completing it once per day adds 10 Amex points. New unlocks appear on the results screen.
+
 ## Code tour
 
 | Area | Where to look |
@@ -83,6 +87,7 @@ These `localStorage` values are local to the browser and origin. Preserve their 
 - `groundhog-air-rally-amex-points` — rank points.
 - `groundhog-air-rally-amex-points-history` — last three match results.
 - `groundhog-air-rally-scrapbook` — collected entries.
+- `groundhog-air-rally-achievements` — unlocked achievements, pilots who have won, and today's daily-challenge status.
 - `groundhog-air-rally-rules-seen` — first-visit rules dismissal. The How to play button always reopens the rules.
 
 ## What to preserve and verify
