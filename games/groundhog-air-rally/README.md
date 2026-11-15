@@ -33,16 +33,16 @@ Selecting a pilot applies their preset. **Custom** enables editing, and clicking
 | Pilot | Home | Skin | Projectile | Accessory |
 |---|---|---|---|---|
 | Braeden Fonte | Caledonia, NY | White with overlapping maroon C and M | Basketballs | Blue-light glasses |
-| Ethan Ploetz | Alexandria, VA | Black and blue | Volleyballs | Blond comb-over with high fade |
+| Ethan Ploetz | Alexandria, VA | Black and blue | Volleyballs | Blond hair |
 | Josh Brancamp | Fishkill, NY | Irish flag | Spinning Beers | Irish baby shoes |
 | Casey Adams | Cleveland, OH | Pink and black | Froot Loops | Camera |
 | Owen Beckwith | San Diego, CA | Sunset orange and pale sun | Milky shot glasses | Surfboard |
 | Bridger Beck | Kenai, AK | Icy blue and white | Salmon | Fishing pole |
-| Jimmy Benne | San Antonio, TX | Navy and orange Bears-inspired C | Deep-dish pizzas | Cowboy boots |
+| Jimmy Benne | San Antonio, TX | Navy and orange Bears-inspired C | Deep-dish pizzas | Cowboy boots (on the back feet) |
 | Cole Bryant | West, TX | Texas flag | Cowboy spurs | Cowboy hat |
 | Jess Joe Augustine | Mount Sinai, NY | Black M and red S | Pringles | Bacon, egg, and cheese |
 
-The CM, MS, and Bears-inspired C crests sit upright on the pilot's back and are drawn larger in the match view on phone-sized zoom (`emblemBoost`). Ethan's hair keeps the blond comb-over on the crown with a dark faded ring and a visible side part, leaving the eyes uncovered. Pilot buttons use names and outfit colors. The selected outline is black. Alternative projectiles and gear are available in the cosmetic picker. Cosmetic projectiles share collision and base combat behavior even when their artwork differs in size. The hangar includes a live rotating preview and test fire.
+The CM, MS, and Bears-inspired C crests sit upright on the pilot's back and are drawn larger in the match view on phone-sized zoom (`emblemBoost`). Ethan has short blond hair on the crown, leaving the eyes clear. The MS crest interlocks a small red S inside a large black M. The selected outline is black. Alternative projectiles and gear are available in the cosmetic picker. Cosmetic projectiles share collision and base combat behavior even when their artwork differs in size. The hangar includes a live rotating preview and test fire.
 
 The nine playable pilots are excluded from the bot pool. Side characters include Maggie, Molly, Lili, Carli, Jade, Sophia, Adriann, Adrianna, Mila, Robin, Rachel, Ramon, CPT William Reynolds, MAJ P, CPT Derek Swanson, LTC Dusty Turner, MAJ Austin Semmel, Claude, Reese, Irish Woman, and Emma Beck. Reese and Irish Woman are side characters with Scrapbook cameos, just like the other non-playable friends. Adriann and Adrianna are separate people.
 

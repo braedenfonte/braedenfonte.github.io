@@ -68,7 +68,7 @@ try{saved=JSON.parse(localStorage.getItem(storageKey))||{}}catch{}
 function saveLoadout(){
  try{localStorage.setItem(storageKey,JSON.stringify({pilot:pilots[choice][0],callsign:$('callsign').value.trim(),stream:$('stream').value,outfit:$('outfit').value,sound:$('soundMode').value,mode:$('mode').value,accessory:$('accessory').value}))}catch{}
 }
-const accessories=[['combover','Blond comb-over',''],['pole','Fishing pole','🎣'],['sandwich','Bacon, egg & cheese','🥪'],['glasses','Blue-light glasses','👓'],['boots','Cowboy boots','🥾'],['igloo','Igloo charm','🧊'],['none','None',''],['camera','Camera','📷'],['hat','Cowboy hat','🤠'],['surf','Surfboard','🏄'],['shorts','Spandex shorts','🩳'],['shoes','Irish baby shoes','👟'],['pringles','Pringles can','🥫']];
+const accessories=[['combover','Blond hair',''],['pole','Fishing pole','🎣'],['sandwich','Bacon, egg & cheese','🥪'],['glasses','Blue-light glasses','👓'],['boots','Cowboy boots','🥾'],['igloo','Igloo charm','🧊'],['none','None',''],['camera','Camera','📷'],['hat','Cowboy hat','🤠'],['surf','Surfboard','🏄'],['shorts','Spandex shorts','🩳'],['shoes','Irish baby shoes','👟'],['pringles','Pringles can','🥫']];
 const rankKey='groundhog-air-rally-amex-points';
 const ranks=[['Starter',0],['Green',150],['Gold',450],['Platinum',950],['Reserve',1800],['Centurion',3200]];
 const placementPoints=[65,42,28,17,8,0,-8,-15,-23,-30,-38,-45];
@@ -921,13 +921,21 @@ const skinPatterns=['chevrons','circuit','diagonal','spots','sunset','ice','west
 function drawPattern(s){
  g.save();g.beginPath();g.arc(-5,0,11,0,Math.PI*2);g.clip();
  const pattern=skinPatterns[Object.values(pilotKits).findIndex(kit=>kit[2]===s.color)]||'chevrons';
- if(['chevrons','diagonal','sunset','western','texas','flames'].includes(pattern)){
+ if(['chevrons','diagonal','sunset','western','texas','flames','ice'].includes(pattern)){
   if(pattern==='diagonal'){rect(-16,-11,8,22,'#178657');rect(-8,-11,7,22,'#faf8ed');rect(-1,-11,8,22,'#ef8839')}
   if(pattern==='chevrons'){rect(-17,-11,24,22,'#fff9ee');rect(-17,-11,24,3,'#812d4d');rect(-17,8,24,3,'#812d4d')}
   if(pattern==='flames'){rect(-17,-11,24,22,'#1b1d22');rect(-17,-4,24,3,'#cb2034');rect(-17,2,24,3,'#cb2034')}
   if(pattern==='texas'){rect(-16,-11,8,22,'#214784');rect(-8,-11,15,11,'#fff9ea');rect(-8,0,15,11,'#c73246');label('★',-12,3,'#fff','8px system-ui')}
   if(pattern==='western'){rect(-17,-11,24,22,'#142747');label('C',-5,8,'#f4edde','bold 22px Georgia');label('C',-5,7,'#fa7629','bold 19px Georgia')}
   if(pattern==='sunset'){for(let i=0;i<8;i++){g.save();g.translate(-5,0);g.rotate(i*Math.PI/4);rect(6,-.7,5,1.4,'#ffbc62');g.restore()}circle(-5,0,5,'#ffe4a7')}
+  if(pattern==='ice'){
+   // Bridger: glacier-blue ice with white shards and a snowflake.
+   const ice=g.createLinearGradient(-16,-11,6,11);ice.addColorStop(0,'#e9f8ff');ice.addColorStop(.5,'#9cdcff');ice.addColorStop(1,'#4fa6d8');rect(-17,-11,24,22,ice);
+   g.fillStyle='#ffffffb0';for(const [a,b,c] of [[[-16,-11],[-9,-11],[-14,-2]],[[-2,11],[6,11],[2,2]],[[3,-11],[7,-11],[6,-4]]]){g.beginPath();g.moveTo(...a);g.lineTo(...b);g.lineTo(...c);g.closePath();g.fill()}
+   g.strokeStyle='#ffffff';g.lineWidth=1.3;g.save();g.translate(-5,0);
+   for(let i=0;i<6;i++){g.rotate(Math.PI/3);g.beginPath();g.moveTo(0,0);g.lineTo(0,-7);g.moveTo(0,-4.5);g.lineTo(-2,-6);g.moveTo(0,-4.5);g.lineTo(2,-6);g.stroke()}
+   g.restore();
+  }
   g.restore();return;
  }
  g.strokeStyle=s.trim;g.fillStyle=s.trim;g.lineWidth=2;
@@ -949,26 +957,15 @@ function drawGear(gear){
  const line=(x,y,u,v,color,width=1)=>{g.beginPath();g.moveTo(x,y);g.lineTo(u,v);g.strokeStyle=color;g.lineWidth=width;g.stroke()};
  if(gear==='glasses'){g.lineWidth=2;circle(12,-6,4,'#40627b','#a2eaff');circle(12,6,4,'#40627b','#a2eaff');rect(11,-2,2,4,'#a2eaff');line(10,-8,12,-10,'#fff');line(10,4,12,2,'#fff')}
  else if(gear==='combover'){
-  // High-and-tight: dark buzzed sides fading into the fur, blond top on the crown only, so the eyes stay visible.
-  const fade=g.createRadialGradient(3,0,3,3,0,14);
-  fade.addColorStop(0,'#33241a');fade.addColorStop(.62,'#46311f');fade.addColorStop(1,'#ba835600');
-  g.save();g.beginPath();g.arc(8,0,13,0,Math.PI*2);g.clip();circle(3,0,14,fade);g.restore();
-  // Short strip on the far side of the part.
-  g.beginPath();g.roundRect(-3,-9.6,11,2.6,1.3);g.fillStyle='#d6a24a';g.fill();
-  // Main comb-over: crisp straight part edge, volume swept across the crown and up at the front.
-  const sweep=g.createLinearGradient(0,-6,3,7);sweep.addColorStop(0,'#fff2b0');sweep.addColorStop(1,'#dda243');
-  g.beginPath();g.moveTo(-3.5,-5.6);g.lineTo(9,-5.6);g.quadraticCurveTo(12.6,-2.5,11.2,1.6);
-  g.quadraticCurveTo(9.8,5.4,5.5,6.6);g.quadraticCurveTo(0,8,-3.5,6);g.quadraticCurveTo(-6,0,-3.5,-5.6);
-  g.fillStyle=sweep;g.fill();g.strokeStyle='#7d5222';g.lineWidth=1;g.stroke();
-  // Parallel comb lines running away from the part, bending forward like a styled sweep.
-  for(const sx of [-1.5,2.5,6.5]){
-   g.beginPath();g.moveTo(sx,-4.6);g.bezierCurveTo(sx+.5,-1,sx+2.5,2,sx+3.2,5.2);g.strokeStyle='#c28a34';g.lineWidth=.9;g.stroke();
-  }
-  g.beginPath();g.moveTo(9.4,-4.5);g.quadraticCurveTo(11.6,-1.5,10.3,2);g.strokeStyle='#fffbe0';g.lineWidth=1.2;g.stroke();
-  // Visible side part (scalp line).
-  line(-3.5,-6.3,9,-6.3,'#f7e4cc',1.4);
-  // Eyes drawn back on top of the hair line.
-  circle(12,-6,2,'#241b18');circle(12,6,2,'#241b18');
+  // Ethan: full head of short blond hair on the crown and back of the head, eyes and face left clear.
+  g.beginPath();g.moveTo(10,-10);g.quadraticCurveTo(0,-15,-4,-6);g.quadraticCurveTo(-6,0,-4,6);g.quadraticCurveTo(0,15,10,10);
+  g.quadraticCurveTo(8.5,0,10,-10);g.closePath();
+  const hair=g.createRadialGradient(2,-3,1,3,0,13);hair.addColorStop(0,'#fff0a8');hair.addColorStop(.6,'#f2c95a');hair.addColorStop(1,'#c9932e');
+  g.fillStyle=hair;g.fill();g.strokeStyle='#8a5e1e';g.lineWidth=1;g.stroke();
+  g.strokeStyle='#d9a640';g.lineWidth=.8;
+  for(let i=0;i<22;i++){const hy=-10+((i*7)%21),hx=-3+((i*5)%11);g.beginPath();g.moveTo(hx+3,hy);g.lineTo(hx,hy+(hy>0?.6:-.6));g.stroke()}
+  g.strokeStyle='#fff6c8';g.lineWidth=.9;g.beginPath();g.moveTo(0,-7);g.quadraticCurveTo(4,-9,7,-6);g.stroke();
+  for(const y of [-6,6]){circle(12,y,2.4,'#1c1412');circle(11.3,y-.8,.9,'#ffffff')}
  }
  else if(gear==='hat'){g.beginPath();g.ellipse(5,0,9,15,0,0,Math.PI*2);g.fillStyle='#70462b';g.fill();g.strokeStyle='#e4ab70';g.stroke();circle(5,0,8,'#c18950','#573922');rect(3,-7,3,14,'#573922');rect(3,-2,3,4,'#dbac60')}
  else if(gear==='shorts'){rect(-17,-9,11,18,'#232942');rect(-17,-8,2,16,'#58adff');line(-16,0,-9,0,'#7588ad')}
@@ -983,7 +980,16 @@ function drawGear(gear){
   }
  }
  else if(gear==='boots'){
-  for(const y of [-9,9]){const boot=gear==='boots';rect(-20,y-3,8,6,boot?'#794929':'#208254');circle(-11,y,4,boot?'#ae703e':'#55b577','#243b32');rect(-20,y+2,12,2,boot?'#38261e':'#fff1db');rect(-15,y-2,5,1,boot?'#eab276':'#f7aa48');if(!boot)rect(-14,y-4,2,3,'#fff1db')}
+  // Cowboy boots on the back feet, toes pointing out behind like the paws they replace.
+  for(const side of [-1,1]){
+   g.save();g.translate(-6,side*18);g.rotate(side*1.1);
+   g.beginPath();g.moveTo(5,-4);g.lineTo(-4,-4);g.quadraticCurveTo(-10,-3.5,-12,0);g.quadraticCurveTo(-10,3.5,-4,4);g.lineTo(5,4);g.closePath();
+   g.fillStyle='#8a5228';g.fill();g.strokeStyle='#2e1a0c';g.lineWidth=1.1;g.stroke();
+   rect(1,-4.5,5,9,'#c58a4a');rect(1,-4.5,5,1.5,'#e9c08a');
+   g.strokeStyle='#f0c890';g.lineWidth=.7;g.beginPath();g.moveTo(-1,-2);g.quadraticCurveTo(-6,0,-1,2);g.stroke();
+   rect(-3,-4.5,2,9,'#3a2312');
+   g.restore();
+  }
  }else if(gear==='surf'){g.beginPath();g.ellipse(-3,14,17,4,0,0,Math.PI*2);g.fillStyle='#ff9562';g.fill();rect(-15,13,21,2,'#fff0cc');rect(10,13,3,2,'#5a7897')}
  else if(gear==='pole'){line(-19,11,15,13,'#c78f59',2);line(12,13,20,15,'#e3b982');circle(-8,13,3,'#b6d3de','#343b46');line(20,15,18,24,'#fff');circle(18,24,2,'#ff785a')}
  else if(gear==='camera'){rect(-12,7,15,11,'#283644');rect(-10,6,6,3,'#526a7c');rect(-10,8,3,2,'#fff3b0');circle(-4,13,4,'#12232c','#b6c8d1');circle(-4,13,2.5,'#72bde8');circle(-5,12,1,'#fff')}
@@ -1044,7 +1050,7 @@ function drawPilot(s){
    const bears=crest==='bears';
    circle(0,0,12.5,bears?'#17294f':'#fffaf0');g.lineWidth=2;circle(0,0,12.5,null,bears?'#ff8c40':'#1d1518');
    if(crest==='cm'){crestLetter('M',2.5,7.5,'#812d4d','900 17px Georgia','#fffaf0');crestLetter('C',-4.5,1.5,'#812d4d','900 14px Georgia','#fffaf0')}
-   else if(crest==='ms'){crestLetter('M',-3,2,'#121418','900 14px Georgia','#fffaf0');crestLetter('S',4,9,'#d3192e','900 15px Georgia','#fffaf0')}
+   else if(crest==='ms'){crestLetter('M',0,7,'#121418','900 20px Georgia','#fffaf0');crestLetter('S',0,9,'#d3192e','900 12px Georgia','#fffaf0',2.4)}
    else crestLetter('C',0,8,'#ff8c40','900 23px Georgia','#fff7e5',3);
    g.restore();
   }
@@ -1063,11 +1069,28 @@ function drawSalmon(tint){
 function drawShot(b,now){
   g.lineWidth=2.5;
   if(b.style==='loops')circle(b.x,b.y,6,null,b.tint);
-  else if(b.style==='basketball'){circle(b.x,b.y,6,b.tint);rect(b.x-5,b.y,10,1,'#663c2a');rect(b.x,b.y-5,1,10,'#663c2a')}
+  else if(b.style==='basketball'){
+   // Orange ball with black seams that spins as it flies.
+   g.save();g.translate(b.x,b.y);g.rotate(now*.012);
+   const ball=g.createRadialGradient(-2.5,-2.5,1,0,0,8);ball.addColorStop(0,'#ffb36b');ball.addColorStop(1,'#d9601c');
+   g.lineWidth=1.2;circle(0,0,7.5,ball,'#3a1a0c');
+   g.strokeStyle='#2a140a';g.lineWidth=1;g.beginPath();g.moveTo(-7.5,0);g.lineTo(7.5,0);g.moveTo(0,-7.5);g.lineTo(0,7.5);g.stroke();
+   g.beginPath();g.arc(-9,0,6.5,-.9,.9);g.stroke();g.beginPath();g.arc(9,0,6.5,Math.PI-.9,Math.PI+.9);g.stroke();
+   g.restore();
+  }
   else if(['beers','shotglass','pizza','spurs','chips'].includes(b.style)){
    g.save();g.translate(b.x,b.y);g.rotate(b.style==='beers'?now*.014:Math.atan2(b.dy,b.dx));
-   if(b.style==='beers'||b.style==='shotglass'){
-    rect(-5,-6,10,12,b.style==='beers'?'#c58f47':'#98bbc4');rect(-4,-4,8,9,b.tint);rect(-4,-5,8,2,'#fff');rect(-4,-1,2,5,'#fff5');if(b.style==='beers'){rect(-4,0,8,3,'#365349');rect(-5,-7,10,2,'#ebe3ca')}g.strokeStyle='#e1f4ec';g.strokeRect(-5,-6,10,12);
+   if(b.style==='beers'){
+    // Spinning pint mug: amber beer, foam head, handle, glass highlight.
+    g.beginPath();g.arc(6.5,1,3.5,-1.4,1.4);g.strokeStyle='#e8eef0';g.lineWidth=2;g.stroke();
+    g.beginPath();g.roundRect(-5.5,-5,11,12,2);g.fillStyle='#e8a33a';g.fill();g.strokeStyle='#7a4a12';g.lineWidth=1;g.stroke();
+    rect(-4,-3,2,9,'#ffd98a');for(let i=0;i<3;i++)circle(-1+i*2,2+((i*3)%4),.7,'#fff2c8');
+    for(const fx of [-4,-1,2,4.5])circle(fx,-5.5,2.6,'#fffaf0');g.lineWidth=.8;circle(-1,-6.5,2.2,'#fffaf0');
+   }else if(b.style==='shotglass'){
+    // Milky shot glass: clear tapered glass with a white milky pour.
+    g.beginPath();g.moveTo(-6,-5);g.lineTo(6,-5);g.lineTo(4,6);g.lineTo(-4,6);g.closePath();g.fillStyle='#dff2f7aa';g.fill();g.strokeStyle='#ffffff';g.lineWidth=1.3;g.stroke();
+    g.beginPath();g.moveTo(-5,-1);g.lineTo(5,-1);g.lineTo(3.8,4.8);g.lineTo(-3.8,4.8);g.closePath();g.fillStyle='#fbf6ea';g.fill();
+    rect(-4.5,-1.5,9,1.2,'#ffffff');rect(-4,4.8,8,1.5,'#9ab8c2');rect(-4.2,-4,1.2,8,'#ffffffcc');
    }else if(b.style==='pizza'){
     circle(0,0,6,'#b66c37');circle(0,0,5,b.tint);circle(2,-1,1.4,'#ad3934');circle(-2,2,1.3,'#ad3934');
    }else if(b.style==='spurs'){
@@ -1075,7 +1098,15 @@ function drawShot(b,now){
    }else{g.beginPath();g.ellipse(0,0,6,4,0,0,Math.PI*2);g.fillStyle=b.tint;g.fill()}
    g.restore();
   }
-  else if(b.style==='volley'){circle(b.x,b.y,6,b.tint,'#516979');g.lineWidth=.9;for(let i=0;i<3;i++){g.save();g.translate(b.x,b.y);g.rotate(i*2.094);g.beginPath();g.moveTo(0,0);g.quadraticCurveTo(4,-1,5,-3);g.strokeStyle=i===1?'#c6a04b':'#477a9b';g.stroke();g.restore()}}
+  else if(b.style==='volley'){
+   // Volleyball: white, blue and yellow curved panels, spinning.
+   g.save();g.translate(b.x,b.y);g.rotate(now*.009);
+   g.beginPath();g.arc(0,0,7.5,0,Math.PI*2);g.fillStyle='#fbfbf5';g.fill();g.save();g.clip();
+   for(let i=0;i<3;i++){g.save();g.rotate(i*2.094);g.beginPath();g.moveTo(0,0);g.bezierCurveTo(3,-3,6,-3,9,-1);g.lineTo(9,4);g.bezierCurveTo(6,1.5,3,1.5,0,0);g.closePath();g.fillStyle=i===1?'#f2c230':'#2d5fc0';g.fill();g.restore()}
+   g.restore();g.lineWidth=1.1;circle(0,0,7.5,null,'#2b3a4a');
+   g.strokeStyle='#2b3a4a';g.lineWidth=.7;for(let i=0;i<3;i++){g.save();g.rotate(i*2.094);g.beginPath();g.moveTo(0,0);g.bezierCurveTo(3,-3,6,-3,7.5,-1.5);g.stroke();g.restore()}
+   g.restore();
+  }
   else if(b.style==='snow'){circle(b.x,b.y,6,b.tint);circle(b.x-2,b.y-2,2,'#fff')}
   else{
    g.save();g.translate(b.x,b.y);g.rotate(Math.atan2(b.dy,b.dx));
