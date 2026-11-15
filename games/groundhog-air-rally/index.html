@@ -180,7 +180,7 @@ let choice=0, live=false, player, ships=[], bolts=[], crates=[], drops=[], spark
 const random=(a,b)=>a+Math.random()*(b-a);
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 const clamp=(n,a,b)=>Math.min(b,Math.max(a,n));
-function blocked(x,y,pad=0){return props.some(o=>!o.court&&x>o.x-pad&&x<o.x+o.w+pad&&y>o.y-pad&&y<o.y+o.h+pad)}
+function blocked(x,y,pad=0){return props.some(o=>x>o.x-pad&&x<o.x+o.w+pad&&y>o.y-pad&&y<o.y+o.h+pad)}
 function spawn(radius){
  for(let i=0;i<100;i++){
   const a=random(0,Math.PI*2),r=Math.sqrt(Math.random())*radius;
@@ -512,8 +512,7 @@ function drawArenaScene(now){
  }else if(lane<=1){
   g.strokeStyle='#bfb29b';g.strokeRect(-180,-128,360,94);g.beginPath();g.arc(0,-81,23,0,Math.PI*2);g.stroke();
   rect(-181,-132,362,4,tint);rect(-181,-33,362,4,tint);
-  const x=Math.sin(now/720)*145,y=-81-Math.abs(Math.sin(now/190))*33;circle(x,y,5,'#f5e5be','#716456');
- }else{
+  }else{
   for(let i=0;i<7;i++){
    const x=i*47-162, beam=g.createLinearGradient(x,-130,x,-52);
    beam.addColorStop(0,tint+'85');beam.addColorStop(1,tint+'00');
@@ -543,13 +542,30 @@ function drawArenaScene(now){
 function drawLocation(o,now){
  const {x,y,w,h,kind}=o;
  g.save();g.translate(x,y);
- if(kind==='lake'||kind==='mountain'){
-  rect(0,0,w,h,kind==='lake'?'#496e78':'#70685c');
+ if(kind==='lake'){
+  rect(0,0,w,h,'#244b5a');
+  rect(0,0,w,3,'#5f8185');
+  for(let i=0;i<8;i++){
+   const y=9+i*8;
+   rect(67+(i*13)%25,y,25+(i*17)%32,1,'#416b76');
+  }
+  function ridge(points,fill){
+   g.beginPath();points.forEach(([px,py],i)=>i?g.lineTo(px,py):g.moveTo(px,py));
+   g.closePath();g.fillStyle=fill;g.fill();
+  }
+  ridge([[0,3],[35,7],[58,24],[115,28],[129,39],[108,55],[65,58],[44,71],[0,76]],'#aaa18a');
+  ridge([[0,3],[33,4],[59,19],[113,23],[126,34],[110,46],[66,49],[41,62],[0,68]],'#4e684a');
+  ridge([[0,11],[35,15],[61,28],[112,30],[117,34],[104,39],[60,40],[33,28],[0,23]],'#82906c');
+  for(const [px,py] of [[12,27],[29,36],[17,49],[46,46]]){
+   circle(px+2,py+3,6,'#35483d');circle(px,py,5,'#435d43');
+  }
+  g.strokeStyle='#e7d7ae';g.lineWidth=2;g.beginPath();g.moveTo(105,28);g.lineTo(116,31);g.lineTo(115,37);g.stroke();
+ }else if(kind==='mountain'){
+  rect(0,0,w,h,'#5b574e');
   for(let i=0;i<5;i++){
    g.beginPath();g.ellipse(w*.56,h*.52,18+i*10,9+i*6,-.36,0,Math.PI*2);
-   g.strokeStyle=kind==='lake'?'#87aab0':'#9a9281';g.stroke();
+   g.strokeStyle='#a39a88';g.stroke();
   }
-  if(kind==='lake'){g.beginPath();g.moveTo(0,h);g.lineTo(88,40);g.lineTo(58,h);g.fillStyle='#6d805e';g.fill()}
  }else if(kind==='pool'||kind==='plaza'){
   for(let i=0;i<7;i++)for(let j=0;j<4;j++)rect(i*21+2,j*21+2,19,19,(i+j)%2?'#84796d':'#9b8a78');
   if(kind==='pool'){rect(13,12,77,42,'#c8d8d4');rect(17,16,69,34,'#4c909d');rect(90,10,45,49,'#5d4c48');for(let i=0;i<4;i++)circle(22+i*11,23+Math.sin(now/420+i)*5,2,'#a4d4dd')}
@@ -726,7 +742,6 @@ function render(now){
    rect(o.x+o.w/2-2,o.y+8,4,o.h-16,'#ffe5a5');
    for(const edge of [24,o.w-26])rect(o.x+edge,o.y+10,2,o.h-20,'#ffe5a5');
    circle(o.x+o.w/2,o.y+o.h/2,10,'#ffdfa3');
-   for(let i=0;i<7;i++){rect(o.x+i*30,o.y-12,26,7,'#79634d');rect(o.x+i*30,o.y+o.h+5,26,7,'#79634d')}
   }else if(o.label==='KIA SOUL'){
    rect(o.x+9,o.y+9,o.w-18,o.h-18,'#acd8d8');rect(o.x+29,o.y+8,27,o.h-16,'#33565b');
    for(const x of [12,o.w-24])for(const y of [-4,o.h-3])rect(o.x+x,o.y+y,12,7,'#24343a');
