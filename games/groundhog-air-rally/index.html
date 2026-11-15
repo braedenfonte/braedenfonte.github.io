@@ -1369,23 +1369,45 @@ function drawGear(gear){
 }
 let emblemBoost=1,animNow=0;
 const lootColorsAll={'Marist Camera':'#fff4ad','Kia Turbo':'#ffab62','Igloo Wall':'#aadfff','Froot Loops Burst':'#ff88bd','Salmon Shield':'#67f2dc','MAJ P’s Blabber':'#c9b6ff'};
-// Pilot crests, drawn in a 25-unit disc: Bears-style wishbone C, varsity block CM, Mount Sinai MS.
-const blockFont=n=>'900 '+n+'px "Arial Black","Arial Bold",Impact,sans-serif';
-function varsity(text,x,y,size,fill,inner,outer,sx=1){
- g.save();g.translate(x,y);g.scale(sx,1);g.font=blockFont(size);g.textAlign='center';g.lineJoin='miter';g.miterLimit=2;
- g.lineWidth=size*.34;g.strokeStyle=outer;g.strokeText(text,0,0);g.lineWidth=size*.18;g.strokeStyle=inner;g.strokeText(text,0,0);g.fillStyle=fill;g.fillText(text,0,0);g.restore();
+// Pilot crests drawn as custom shapes (no fonts) so they match the real logos at any size.
+// Each fits a 25-unit square centered on the origin.
+const crestShapes={
+ // Collegiate block C: chamfered outer corners, square counter, slab terminals on the right.
+ C:[[2.2,0],[10,0],[10,4.4],[7.2,4.4],[7.2,3.2],[3.8,3.2],[3.2,3.8],[3.2,8.2],[3.8,8.8],[7.2,8.8],[7.2,7.6],[10,7.6],[10,12],[2.2,12],[0,9.8],[0,2.2]],
+ // Collegiate block M with slab serifs.
+ M:[[0,0],[3.8,0],[6,4.8],[8.2,0],[12,0],[12,1.6],[11,1.6],[11,10.4],[12,10.4],[12,12],[7.6,12],[7.6,10.4],[8.4,10.4],[8.4,5.6],[6,10],[3.6,5.6],[3.6,10.4],[4.4,10.4],[4.4,12],[0,12],[0,10.4],[1,10.4],[1,1.6],[0,1.6]],
+ // Block S.
+ S:[[2,0],[14,0],[14,3.4],[4.2,3.4],[4.2,4.4],[12,4.4],[14,6.4],[14,10],[12,12],[0,12],[0,8.6],[9.8,8.6],[9.8,7.6],[2,7.6],[0,5.6],[0,2]]
+};
+function crestPath(pts,ox,oy,sx,sy){g.beginPath();pts.forEach(([x,y],i)=>{const X=ox+x*sx,Y=oy+y*sy;i?g.lineTo(X,Y):g.moveTo(X,Y)});g.closePath()}
+function crestLayer(build,fill,inner,outer,w=1){
+ g.lineJoin='miter';g.miterLimit=3;
+ build();g.lineWidth=2.8*w;g.strokeStyle=outer;g.stroke();build();g.lineWidth=1.2*w;g.strokeStyle=inner;g.stroke();build();g.fillStyle=fill;g.fill();
 }
 function bearsC(){
- const R=10,r=5.6,a=.78;
- const path=()=>{g.beginPath();g.arc(0,0,R,-a,Math.PI+.2,true);g.lineTo(-R-3.2,0);g.lineTo(Math.cos(Math.PI-.2)*R,Math.sin(Math.PI-.2)*R);g.arc(0,0,R,Math.PI-.2,a,true);
-  g.lineTo(Math.cos(a)*r,Math.sin(a)*r);g.arc(0,0,r,a,-a,false);g.closePath()};
- g.lineJoin='miter';path();g.lineWidth=3.6;g.strokeStyle='#ffffff';g.stroke();path();g.lineWidth=1.8;g.strokeStyle='#0b1630';g.stroke();path();g.fillStyle='#c83803';g.fill();
+ // Wishbone C: wider than tall, pointed at the left on the outside and inside, flat-cut ends.
+ const RX=12,RY=10,rx=6.8,ry=4.9,a=.6,b=.26,ia=.62,ib=.42;
+ const E=(x,y,t)=>[Math.cos(t)*x,Math.sin(t)*y];
+ const path=()=>{g.beginPath();
+  g.ellipse(0,0,RX,RY,0,-a,Math.PI+b,true);g.lineTo(-RX-3.4,0);let p=E(RX,RY,Math.PI-b);g.lineTo(p[0],p[1]);g.ellipse(0,0,RX,RY,0,Math.PI-b,a,true);
+  p=E(rx,ry,ia);g.lineTo(p[0],p[1]);g.ellipse(0,0,rx,ry,0,ia,Math.PI-ib,false);g.lineTo(-rx-2.6,0);p=E(rx,ry,Math.PI+ib);g.lineTo(p[0],p[1]);g.ellipse(0,0,rx,ry,0,Math.PI+ib,-ia,false);g.closePath()};
+ g.lineJoin='miter';g.miterLimit=4;
+ path();g.lineWidth=4.2;g.strokeStyle='#ffffff';g.stroke();path();g.lineWidth=2;g.strokeStyle='#0b1630';g.stroke();path();g.fillStyle='#c83803';g.fill();
 }
 function drawCrest(kind){
- if(kind==='bears'){circle(0,0,12.5,'#f4f4f2');g.lineWidth=1.6;circle(0,0,12.5,null,'#0b1630');g.save();g.translate(1,0);bearsC();g.restore();return}
- circle(0,0,12.5,'#f6f3ef');g.lineWidth=1.6;circle(0,0,12.5,null,kind==='cm'?'#5a1a2c':'#111');
- if(kind==='cm'){varsity('M',3.2,8.6,15,'#7a1e36','#ffffff','#7a1e36');varsity('C',-3.8,2.4,14,'#7a1e36','#ffffff','#7a1e36')}
- else{varsity('S',0,8.6,20,'#e11d2a','#ffffff','#111111',1.25);varsity('M',0,4.6,9.5,'#111111','#ffffff','#111111',1.15)}
+ if(kind==='bears'){g.save();g.translate(1.2,0);bearsC();g.restore();return}
+ g.beginPath();g.roundRect(-12.5,-12.5,25,25,4);g.fillStyle='#f7f5f2';g.fill();g.lineWidth=1;g.strokeStyle=kind==='cm'?'#5a1a2c':'#111';g.stroke();
+ if(kind==='cm'){
+  // Varsity CM: M lower right, C overlapping its upper left.
+  crestLayer(()=>crestPath(crestShapes.M,-2.6,-1.4,1.02,1.02),'#7a1e36','#ffffff','#7a1e36');
+  crestLayer(()=>crestPath(crestShapes.C,-10.6,-10.8,1.08,1.08),'#7a1e36','#ffffff','#7a1e36');
+ }else{
+  // Mount Sinai MS: big black M with a wide red S running through it; the M's middle crosses back over the S.
+  const M=()=>crestPath(crestShapes.M,-10.4,-10.4,1.73,1.73);
+  crestLayer(M,'#111111','#ffffff','#111111',.9);
+  crestLayer(()=>crestPath(crestShapes.S,-11.2,-5.6,1.6,.93),'#e11d2a','#ffffff','#111111',.9);
+  g.save();g.beginPath();g.rect(-3.4,-4.2,6.8,7.6);g.clip();crestLayer(M,'#111111','#ffffff','#111111',.9);g.restore();
+ }
 }
 function crestLetter(text,x,y,fill,font,edge,width=2.2){
  g.font=font;g.textAlign='center';g.lineJoin='round';g.lineWidth=width;g.strokeStyle=edge;g.strokeText(text,x,y);g.fillStyle=fill;g.fillText(text,x,y);
