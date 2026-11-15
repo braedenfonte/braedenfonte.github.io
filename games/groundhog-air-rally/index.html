@@ -61,7 +61,7 @@ html,body{touch-action:manipulation;-webkit-user-select:none;user-select:none;-w
 <div id="rotate" role="dialog" aria-label="Rotate your phone"><section><div>📱</div><p>Turn your phone sideways</p><small>The match is paused until you rotate.</small><br><button id="portraitOk">Play upright anyway</button></section></div><main id="menu"><section class="hangar"><div class="hangarStage"><div id="rankCard"><span class="rankChip" aria-hidden="true"></span><strong id="rankTitle"></strong><progress id="rankProgress" aria-label="Progress toward next rank"></progress><span id="rankNext"></span><button id="historyButton">Last 3 matches</button></div><div>GROUNDHOG BATTLE ROYALE</div><h1>Groundhog<br>Air Rally</h1><p id="brief">Knock out rival groundhogs, grab crate loot, and stay ahead of the fog. Last groundhog flying wins.</p><div class="previewBay"><canvas id="pilotCanvas" aria-label="Live pilot and projectile preview"></canvas><button id="testShot" type="button">Test fire</button></div></div><div class="hangarControls"><h2 class="loadoutTitle">Choose your pilot</h2><div id="pilots" aria-label="Choose pilot"></div><div id="pilotDetail"><span id="badge" aria-hidden="true"></span><span id="origin"></span></div><h2 class="loadoutTitle">Customize your groundhog</h2><input type="hidden" id="mode" value="preset"><div id="loadout"><select id="accessory" hidden aria-label="Accessories"></select><label>In-match name<input id="callsign" maxlength="20" autocomplete="off" placeholder="Use pilot name"></label><select id="stream" hidden aria-label="Projectiles"></select><select id="outfit" hidden aria-label="Skins"></select><label>Kill cam<select id="killcam"><option value="on">On</option><option value="off">Off</option></select></label><label>Sound effects<select id="soundMode"><option value="on">On</option><option value="off">Off</option></select></label><label>Music<select id="musicMode"><option value="on">On</option><option value="off">Off</option></select></label></div><div id="loadoutPreview"><span id="previewHog" aria-hidden="true">🦫</span><span><strong id="previewName"></strong><br><span id="previewShot"></span></span></div><label class="arenaPicker">Arena<select id="arenaSelect"></select></label><div id="cosmeticLab"></div><button id="start">Start match</button><button id="rulesButton">How to play</button> <button id="openAlbum">Scrapbook</button><button id="openFriends" hidden>Play with friends (beta)</button><button id="openAchievements">Achievements &amp; daily challenge</button><small>Desktop · WASD, mouse to aim and fire, E for power<br>Touch · Left stick to fly, right stick to aim and fire</small></div></section></main>
 <div id="feed" hidden></div><div id="ko" role="status" hidden></div><main id="end" hidden><section id="results" aria-labelledby="outcome"><h2 id="outcome"></h2><div id="place"></div><div id="placement"></div><div id="resultStats"><span id="resultKills"></span><span id="resultAssists"></span><span id="resultTime"></span></div><p id="cause"></p><div id="rankResult"></div><div id="achieveResult" hidden></div><button id="again">Play again</button><button id="changePilot">Change pilot</button></section></main><main id="album" hidden><section><h2>Scrapbook</h2><p id="albumCount"></p><ul id="albumList"></ul><button id="closeAlbum">Back to loadout</button></section></main><dialog id="history"><h2>Last 3 matches</h2><ol id="historyList"></ol><form method="dialog"><button>Close</button></form></dialog><dialog id="friends"><h2>Play with friends</h2><p class="labHint">Up to 5 players on any network. One phone hosts and shares the 4-letter code.</p>
 <div id="mpChoose"><button id="mpHost">Host a room</button><div class="mpJoinRow"><input id="mpCode" maxlength="4" placeholder="CODE" autocomplete="off" autocapitalize="characters"><button id="mpJoin">Join</button></div></div>
-<div id="mpRoom" hidden><div id="mpCodeBig"></div><ol id="mpPlayers"></ol><button id="mpStart" disabled>Start match (sync coming next)</button></div>
+<div id="mpRoom" hidden><div id="mpCodeBig"></div><ol id="mpPlayers"></ol><button id="mpStart">Start match</button></div>
 <p id="mpStatus" role="status"></p><form method="dialog"><button id="mpLeave">Leave</button></form></dialog><dialog id="achievements"><h2>Achievements</h2><p id="dailyTask"></p><p id="achieveCount"></p><ul id="achieveList"></ul><form method="dialog"><button>Close</button></form></dialog><dialog id="rules"><h2>How to play</h2><p>Be the last groundhog flying. Shoot crates and fly over loot to collect it. Each stat stacks to level 5. The Irish Pot of Gold drops two different +3 trait boosts and a power. Health upgrades raise your maximum HP. After 5 seconds without damage, recover 6 HP per second inside the safe zone. Ramon’s Healthy Lotion heals instantly. MAJ P’s Blabber puts nearby rivals to sleep for a few seconds (a hit wakes them). Eliminated pilots drop their held power.</p><p>Leaving the ring triggers a fog warning. After 1.5 seconds the fog starts draining health, and it drains faster as the circle shrinks.</p><p><b>Computer</b> · WASD to fly, mouse to aim and fire, E to use a power, 1–4 to emote.<br><b>Phone</b> · Left stick to fly, right stick to aim and fire, Power button to activate, 💬 to emote.</p><form method="dialog"><button>Got it</button></form></dialog><script>
 'use strict';
 const $=id=>document.getElementById(id);
@@ -183,7 +183,7 @@ try{const entries=JSON.parse(localStorage.getItem(albumKey));if(Array.isArray(en
 $('openAchievements').onclick=()=>showAchievements();
 if(/[?&]friends\b/.test(location.search))$('openFriends').hidden=false;
 $('openFriends').onclick=()=>{renderLobby();$('friends').showModal()};
-$('mpHost').onclick=()=>mpHost();$('mpJoin').onclick=()=>mpJoin();$('mpLeave').onclick=()=>mpLeave();
+$('mpHost').onclick=()=>mpHost();$('mpStart').onclick=()=>mpStartMatch();$('mpJoin').onclick=()=>mpJoin();$('mpLeave').onclick=()=>mpLeave();
 $('mpCode').oninput=()=>{$('mpCode').value=$('mpCode').value.toUpperCase().replace(/[^A-Z]/g,'')};
 $('openAlbum').onclick=()=>{
  $('albumCount').textContent=finds.filter(([title])=>discovered.has(title)).length+' / '+finds.length+' found · Fly near gold markers to collect pages.';
@@ -649,12 +649,92 @@ const emoteSet=()=>[catchphrases[pilots[choice][0]]||'Let’s fly!','GG 🤝','�
 const botLines=['GG','😂','Too easy','👋','Nice try','Oops'];
 let emoteReady=0;
 function say(s,text){s.emote={text,until:time+2.2}}
-function emote(i=0){if(!live||!player.hp||time<emoteReady)return;emoteReady=time+1.2;say(player,emoteSet()[i]);sfx('emote')}
+function emote(i=0){if(!live||!player.hp||time<emoteReady)return;emoteReady=time+1.2;say(player,emoteSet()[i]);sfx('emote');if(MP.role==='guest'&&MP.inMatch)MP.wantEmote=emoteSet()[i]}
 let killCam=null;
 // Multiplayer lobby (beta, opened with ?friends). PeerJS's free public server only introduces the phones;
 // after that they talk directly. Gameplay sync lands in a later change.
 const MP={peer:null,conns:[],role:'',code:'',players:[]};
 const mpLetters='ABCDEFGHJKMNPQRSTUVWXYZ';
+
+// ---- Multiplayer match: the host simulates; guests send inputs and draw the host's snapshots. ----
+const r1=v=>Math.round(v*10)/10;
+function mpEvent(e){if(MP.role==='host'&&MP.inMatch)(MP.events??=[]).push(e)}
+function mpStartMatch(){
+ if(MP.role!=='host')return;const guests=MP.conns.filter(c=>c.open&&c.card).slice(0,4);
+ $('friends').close();begin();MP.inMatch=true;MP.events=[];MP.sendAt=0;
+ guests.forEach((conn,i)=>{const s=ships[i+1],c=conn.card,kitRow=Object.values(pilotKits).find(k=>k[1]===c.outfit);
+  Object.assign(s,{name:c.name,remote:conn,input:{},kills:0,assists:0,stream:streams.some(x=>x[0]===c.stream)?c.stream:'loops',accessory:c.accessory||'none',color:outfitColors[c.outfit]||colors[(i+1)%4],trim:kitRow?.[3]});conn.ship=s});
+ const roster=ships.map(s=>({x:r1(s.x),y:r1(s.y),name:s.name,color:s.color,trim:s.trim||null,stream:s.stream,accessory:s.accessory}));
+ const base={type:'start',arena:arenas.indexOf(arena),props:props.map(o=>({...o})),roster,crates:crates.map(c=>[r1(c.x),r1(c.y),c.bonus?1:0]),dropTime};
+ guests.forEach(conn=>conn.send({...base,me:ships.indexOf(conn.ship)}));
+}
+function mpSendEnd(s,won,reason){const conn=s.remote;if(!conn?.open)return;conn.send({type:'end',won,place:won?1:ships.filter(t=>t===s||t.hp>0).length,kills:s.kills||0,assists:s.assists||0,cause:reason||''})}
+function mpHostTick(dt){
+ if(MP.role!=='host'||!MP.inMatch)return;
+ MP.sendAt-=dt;if(MP.sendAt>0)return;MP.sendAt=.05;
+ const base={type:'snap',t:time,
+  ships:ships.map(s=>[r1(s.x),r1(s.y),Math.round(s.angle*100)/100,s.hp,maxHealth(s),s.buff>0?s.effect:'',s.sleep>time?1:0,s.emote&&s.emote.until>time?s.emote.text:'']),
+  bolts:bolts.map(b=>[r1(b.x),r1(b.y),Math.round(b.dx*100)/100,Math.round(b.dy*100)/100,b.style,b.tint,b.life]),
+  drops:drops.map(d=>[r1(d.x),r1(d.y),d.type,d.tier||1,d.gold?1:0]),
+  crates:crates.map(c=>c.hp),supply:supply?[r1(supply.x),r1(supply.y),supply.hp,supply.landedAt]:null,
+  walls:walls.filter(w=>w.hp>0&&w.until>time).map(w=>[r1(w.x),r1(w.y),w.hp]),ev:MP.events};
+ MP.events=[];
+ for(const s of ships)if(s.remote?.open)s.remote.send({...base,you:{speed:s.speed,health:s.health,shield:s.shield,rate:s.rate,power:s.power,out:s.out,buff:s.buff,effect:s.effect,kills:s.kills||0,assists:s.assists||0,lastDamage:s.lastDamage}});
+ const alive=ships.filter(s=>s.hp>0);if(alive.length===1&&alive[0].remote){mpSendEnd(alive[0],true);MP.inMatch=false}
+}
+function guestStart(d){
+ $('friends').open&&$('friends').close();
+ arena=arenas[d.arena]||arenas[0];props=d.props;dropTime=d.dropTime;$('arenaName').textContent=arena[0];
+ ships=d.roster.map(r=>({...ship(r.name,r.color,{x:r.x,y:r.y}),trim:r.trim||undefined,stream:r.stream,accessory:r.accessory,tx:r.x,ty:r.y}));
+ player=ships[d.me];crates=d.crates.map(([x,y,b])=>({x,y,hp:2,bonus:!!b}));drops=[];bolts=[];walls=[];sparks=[];rings=[];floaters=[];supply=null;supplyCalled=false;
+ time=0;kills=0;assists=0;eliminationPlace=0;cause='';notice=0;hitFlash=0;killCam=null;resetMatchStats();
+ feed=[];koUntil=0;$('feed').replaceChildren();$('feed').hidden=false;$('ko').hidden=true;
+ cam={x:player.x,y:player.y};live=true;MP.inMatch=true;MP.you=null;MP.sendAt=0;
+ $('end').hidden=true;$('menu').hidden=true;$('hud').hidden=false;$('levels').hidden=false;$('power').hidden=false;$('emote').hidden=false;
+ document.body.classList.add('playing');drawUpgradeLevels();startMusic();goLandscape();
+}
+function guestSnap(d){
+ if(!MP.inMatch)return;time=d.t;
+ d.ships.forEach(([x,y,a,hp,max,effect,sleep,emote],i)=>{const s=ships[i];if(!s)return;s.tx=x;s.ty=y;if(s!==player||s.hp<=0)s.angle=a;s.hp=hp;s.health=(max-100)/15;s.effect=effect;s.buff=effect?1:0;s.sleep=sleep?time+.2:0;if(emote&&s.emote?.text!==emote)s.emote={text:emote,until:time+2.2}});
+ bolts=d.bolts.map(([x,y,dx,dy,style,tint,life])=>({x,y,dx,dy,style,tint,life}));
+ drops=d.drops.map(([x,y,type,tier,gold])=>({x,y,type,tier,gold:!!gold}));
+ if(d.supply&&!supply){supply={x:d.supply[0],y:d.supply[1],hp:d.supply[2],landedAt:d.supply[3],supply:true,bonus:true};crates.push(supply)}
+ if(supply&&d.supply)supply.hp=d.supply[2];
+ d.crates.forEach((hp,i)=>{if(crates[i])crates[i].hp=hp});
+ walls=d.walls.map(([x,y,hp])=>({x,y,hp,until:time+1}));
+ const you=d.you;MP.you=you;Object.assign(player,{speed:you.speed,health:you.health,shield:you.shield,rate:you.rate,power:you.power,out:you.out,buff:you.buff,effect:you.effect,lastDamage:you.lastDamage});kills=you.kills;assists=you.assists;
+ for(const e of d.ev||[]){
+  if(e[0]==='ko'){const v=ships[e[1]],a=e[2]>=0?ships[e[2]]:null;if(!v)continue;reportKO(v,e[3],a);v.hp=0;burst(v.x,v.y,v.color,18);for(const c of ['#ff7d7d','#ffd65a','#8ae692','#7cbdff'])burst(v.x,v.y,c,5,'confetti');rings.push({x:v.x,y:v.y,life:.5,max:.5,size:70,color:'#fff1c2'});
+   if(v===player)sfx('death');else if(a===player)sfx('kill');else sfx('ko',v)}
+  else if(e[0]==='hit'){const v=ships[e[1]],o=ships[e[2]];if(!v)continue;burst(v.x,v.y,v.color,5);if(distance(v,cam)<900)floatText(v.x,v.y-22,'-'+e[3],o===player?'#ffe08a':'#ffb3a8');
+   if(v===player){hitFlash=.55;shake=Math.max(shake,5);if(o)hitFrom=Math.atan2(o.y-v.y,o.x-v.x);sfx('hurt')}else if(o===player)sfx('hitmark')}
+  else if(e[0]==='crate'){burst(e[1],e[2],e[3]?'#ffd76f':'#a8743f',14,'chunk');sfx('crate',{x:e[1],y:e[2]})}
+  else if(e[0]==='pot'){sfx('potdrop');burst(e[1],e[2],'#ffdc75',32)}
+  else if(e[0]==='pickup'&&ships[e[1]]===player){sfx(e[3]?'goldpickup':upgrades[e[2]]?'pickup':'powerpickup');announce(e[2]);if(upgrades[e[2]])matchStats.upgrades++;if(e[3])matchStats.gold=true}
+ }
+}
+function guestTick(dt){
+ time+=dt;notice-=dt;hitFlash-=dt;
+ while(feed.length&&feed[0].expires<=time)feed.shift().row.remove();
+ if(koUntil&&time>=koUntil){$('ko').hidden=true;koUntil=0}
+ for(const s of ships){if(s.tx==null)continue;s.x+=(s.tx-s.x)*Math.min(1,dt*14);s.y+=(s.ty-s.y)*Math.min(1,dt*14)}
+ for(const b of bolts){b.x+=b.dx*565*dt;b.y+=b.dy*565*dt}
+ // Local aim and input, sent to the host about 30 times a second.
+ let dx=Number(keys.has('d'))-Number(keys.has('a')),dy=Number(keys.has('s'))-Number(keys.has('w')),fireNow=false;
+ if(sticks.move){dx=sticks.move.dx/48;dy=sticks.move.dy/48}
+ const aim=sticks.aim;
+ if(player.hp>0){if(aim&&Math.hypot(aim.dx,aim.dy)>9){player.angle=Math.atan2(aim.dy,aim.dx);fireNow=true}else if(mouse.active&&!aim){player.angle=Math.atan2((mouse.y-h/2)/zoom+cam.y-player.y,(mouse.x-w/2)/zoom+cam.x-player.x);fireNow=mouse.down}}
+ MP.sendAt-=dt;const conn=MP.conns[0];
+ if(MP.sendAt<=0&&conn?.open){MP.sendAt=1/30;conn.send({type:'input',dx,dy,angle:player.angle,fire:fireNow,power:!!MP.wantPower,emote:MP.wantEmote||''});MP.wantPower=false;MP.wantEmote=''}
+ if(player.out>0&&time>=fogBeep){fogBeep=time+.7;sfx('fog')}
+ updateEffects(dt);
+ const focus=player.hp>0?player:(ships.find(s=>s.hp>0)||player);cam.x+=(focus.x-cam.x)*Math.min(1,dt*10);cam.y+=(focus.y-cam.y)*Math.min(1,dt*10);
+ updateHud(radius(),ships.filter(s=>s.hp>0).length);
+}
+function guestEnd(d){
+ if(!MP.inMatch)return;MP.inMatch=false;kills=d.kills;assists=d.assists;eliminationPlace=d.place;cause=d.cause||cause;
+ if(live)finish(!!d.won);
+}
 function mpStatus(t){$('mpStatus').textContent=t}
 function loadPeer(){return window.Peer?Promise.resolve():new Promise((ok,fail)=>{const sc=document.createElement('script');sc.src='https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js';sc.onload=ok;sc.onerror=()=>fail(new Error('Could not load the connection library'));document.head.append(sc)})}
 function myCard(){return {name:($('callsign').value.trim()||pilots[choice][0]).slice(0,20),pilot:pilots[choice][0],outfit:$('outfit').value,stream:$('stream').value,accessory:$('accessory').value}}
@@ -673,8 +753,8 @@ async function mpHost(tries=0){
  peer.on('error',e=>{if(e.type==='unavailable-id'&&tries<4){peer.destroy();mpHost(tries+1)}else mpStatus('Connection problem: '+e.type)});
  peer.on('connection',conn=>{
   conn.on('open',()=>{if(MP.conns.length>=4){conn.send({type:'full'});setTimeout(()=>conn.close(),300);return}MP.conns.push(conn)});
-  conn.on('data',d=>{if(d&&d.type==='hello'&&d.card){conn.card={...d.card,name:String(d.card.name||'Friend').slice(0,20)};broadcastLobby();mpStatus(conn.card.name+' joined')}});
-  conn.on('close',()=>{MP.conns=MP.conns.filter(c=>c!==conn);broadcastLobby()});
+  conn.on('data',d=>{if(d?.type==='input'&&conn.ship){conn.ship.input={...conn.ship.input,...d,power:conn.ship.input?.power||d.power,emote:d.emote||conn.ship.input?.emote}}else if(d&&d.type==='hello'&&d.card){conn.card={...d.card,name:String(d.card.name||'Friend').slice(0,20)};broadcastLobby();mpStatus(conn.card.name+' joined')}});
+  conn.on('close',()=>{MP.conns=MP.conns.filter(c=>c!==conn);if(conn.ship){delete conn.ship.remote;conn.ship=null}broadcastLobby()});
  });
 }
 async function mpJoin(){
@@ -683,8 +763,8 @@ async function mpJoin(){
  const peer=new Peer();
  peer.on('open',()=>{const conn=peer.connect('ghar-room-'+code.toLowerCase(),{reliable:true});Object.assign(MP,{peer,role:'guest',code,conns:[conn]});
   conn.on('open',()=>{conn.send({type:'hello',card:myCard()});mpStatus('Joined. Waiting for the host to start.')});
-  conn.on('data',d=>{if(d?.type==='lobby'){MP.players=d.players;renderLobby()}else if(d?.type==='full'){mpStatus('That room is full');mpLeave()}});
-  conn.on('close',()=>{if(MP.role==='guest'){mpStatus('The host closed the room');Object.assign(MP,{role:'',players:[]});renderLobby()}});
+  conn.on('data',d=>{if(d?.type==='lobby'){MP.players=d.players;renderLobby()}else if(d?.type==='full'){mpStatus('That room is full');mpLeave()}else if(d?.type==='start')guestStart(d);else if(d?.type==='snap')guestSnap(d);else if(d?.type==='end')guestEnd(d)});
+  conn.on('close',()=>{if(MP.role==='guest'){if(MP.inMatch&&live){MP.inMatch=false;cause='The host left';finish(false)}mpStatus('The host closed the room');Object.assign(MP,{role:'',players:[]});renderLobby()}});
  });
  peer.on('error',e=>mpStatus(e.type==='peer-unavailable'?'No room with that code':'Connection problem: '+e.type));
 }
@@ -698,6 +778,7 @@ function lootTag(text,x,y,color,font='bold 11px system-ui'){
 }
 let walls=[];
 function activate(){
+ if(MP.role==='guest'&&MP.inMatch){if(live&&player.hp>0&&MP.you?.power)MP.wantPower=true;return}
  if(!live||!player.power)return;
  const power=player.power;
  if(power==='Igloo Wall'){
@@ -762,7 +843,7 @@ const fogGrace=1.5;
 function fogDps(ring){return 8+2*Math.max(0,Math.round((1460-ring)/120))}
 function radius(){return Math.max(95,1460-Math.max(0,Math.floor((time-18)/10)+1)*120)}
 function finish(alive){
- live=false;mouse.down=false;document.body.classList.remove('playing');stopMusic();sfx(alive?'victory':'defeat');for(const side of Object.keys(sticks))delete sticks[side];
+ live=false;mouse.down=false;document.body.classList.remove('playing');if(MP.role==='host'&&MP.inMatch){for(const t of ships)if(t.remote&&t.hp>0)mpSendEnd(t,ships.filter(u=>u.hp>0).length===1);MP.inMatch=false}stopMusic();sfx(alive?'victory':'defeat');for(const side of Object.keys(sticks))delete sticks[side];
  $('hud').hidden=$('levels').hidden=$('power').hidden=$('emote').hidden=true;$('end').hidden=false;
  $('results').dataset.win=alive;
  $('outcome').textContent=alive?'Victory!':'Eliminated';
@@ -778,7 +859,10 @@ function finish(alive){
  $('again').focus();
 }
 function eliminate(s,reason,attacker){
- reportKO(s,reason,attacker);
+ reportKO(s,reason,attacker);mpEvent(['ko',ships.indexOf(s),attacker?ships.indexOf(attacker):-1,reason]);
+ if(attacker&&attacker.remote)attacker.kills=(attacker.kills||0)+1;
+ for(const h of ships)if(h.remote&&h!==attacker&&h!==s&&time-((s.hitters||{})[ships.indexOf(h)]??-Infinity)<=8)h.assists=(h.assists||0)+1;
+ if(s.remote)mpSendEnd(s,false,reason);
  if(s!==player&&attacker&&attacker!==player&&time-(s.playerHit??-Infinity)<=8){assists++;announce('Assist · '+s.name)}
  if(s===player){eliminationPlace=ships.filter(t=>t===s||t.hp>0).length;cause=reason;player.killer=attacker}
  if(attacker&&attacker!==player&&attacker.hp>0&&Math.random()<.45)say(attacker,botLines[Math.floor(Math.random()*botLines.length)]);
@@ -795,6 +879,16 @@ function recoverHealth(s,dt){
  s.hp=Math.min(maxHealth(s),s.hp+heal);
  s.regen-=heal;
 }
+function updateHud(ring,count){
+ $('hpValue').textContent=player.hp+' / '+maxHealth(player);
+ $('hpBar').max=maxHealth(player);$('hpBar').value=player.hp;
+ $('hpBar').classList.toggle('recovering',player.out===0&&time-player.lastDamage>=5&&player.hp<maxHealth(player));
+ $('killValue').textContent=kills;$('aliveValue').textContent=count;
+ $('dropAlert').hidden=!supply||time>=supply.landedAt+4;
+ drawUpgradeLevels();
+ $('zone').classList.toggle('danger',player.out>0);$('zone').textContent=player.out>0?(player.out<=fogGrace?'⚠ FOG · get back in the circle!':'IN THE FOG · −'+fogDps(ring)+' HP/s'):ring===95?'Final zone':'Fog moves in '+Math.ceil(time<18?18-time:10-(time-18)%10)+'s';
+ $('power').disabled=!player.power;$('power').textContent=player.power?player.power+' · E':player.buff>0?player.effect+' '+Math.ceil(player.buff)+'s':'Power · empty';
+}
 function step(dt){
  time+=dt;notice-=dt;
  while(feed.length&&feed[0].expires<=time)feed.shift().row.remove();
@@ -809,20 +903,23 @@ function step(dt){
   const point=dropPoint();
   if(point){
    supplyCalled=true;supply={...point,hp:3,bonus:true,supply:true,landedAt:time};
-   crates.push(supply);burst(supply.x,supply.y,'#ffdc75',32);sfx('potdrop');
+   crates.push(supply);burst(supply.x,supply.y,'#ffdc75',32);sfx('potdrop');mpEvent(['pot',supply.x,supply.y]);
   }
  }hitFlash-=dt;const ring=radius(),centerPoint={x:center,y:center};
  for(const s of ships){
   if(s.hp<=0)continue;
   s.cd-=dt;s.buff-=dt;
   let dx=0,dy=0;
-  if(s===player){
+  if(s===player&&s.sleep>time){s.vx*=.85;s.vy*=.85}
+  else if(s===player){
    dx=Number(keys.has('d'))-Number(keys.has('a'));dy=Number(keys.has('s'))-Number(keys.has('w'));
    if(sticks.move){dx=sticks.move.dx/48;dy=sticks.move.dy/48}
    const aim=sticks.aim;
    if(aim&&Math.hypot(aim.dx,aim.dy)>9){s.angle=Math.atan2(aim.dy,aim.dx);fire(s)}
    else if(mouse.active&&!aim){s.angle=Math.atan2((mouse.y-h/2)/zoom+cam.y-s.y,(mouse.x-w/2)/zoom+cam.x-s.x);if(mouse.down)fire(s)}
-  }else if(s.sleep>time){s.vx*=.85;s.vy*=.85}else{
+  }else if(s.sleep>time){s.vx*=.85;s.vy*=.85}
+  else if(s.remote){const inp=s.input||{};dx=clamp(+inp.dx||0,-1,1);dy=clamp(+inp.dy||0,-1,1);if(Number.isFinite(inp.angle))s.angle=inp.angle;if(inp.fire)fire(s);if(inp.power){inp.power=false;activateFor(s)}if(inp.emote){say(s,String(inp.emote).slice(0,40));inp.emote=''}}
+  else{
    const ai=botThink(s,ring);if(!ai)continue;dx=ai.dx;dy=ai.dy;
   }
   const magnitude=Math.max(1,Math.hypot(dx,dy)),speed=(190+s.speed*23)*(s.buff>0&&s.effect==='Kia Turbo'?1.5:1);
@@ -850,7 +947,7 @@ function step(dt){
   if(crate){
    b.life=0;crate.hp--;burst(b.x,b.y,'#ffcf83',5);
    if(!crate.hp){
-    sfx('crate',crate);burst(crate.x,crate.y,crate.supply?'#ffd76f':'#a8743f',14,'chunk');if(crate.supply){rings.push({x:crate.x,y:crate.y,life:.6,max:.6,size:90,color:'#ffd76f'});burst(crate.x,crate.y,'#2f9a57',16,'confetti')}
+    mpEvent(['crate',crate.x,crate.y,crate.supply?1:0]);sfx('crate',crate);burst(crate.x,crate.y,crate.supply?'#ffd76f':'#a8743f',14,'chunk');if(crate.supply){rings.push({x:crate.x,y:crate.y,life:.6,max:.6,size:90,color:'#ffd76f'});burst(crate.x,crate.y,'#2f9a57',16,'confetti')}
     const stats=Object.keys(upgrades);
     const take=list=>list[Math.floor(random(0,list.length))];
     const drop=(type,x=0,y=0,tier=1,gold=false)=>drops.push({x:crate.x+x,y:crate.y+y,type,tier,gold});
@@ -863,27 +960,23 @@ function step(dt){
    continue;
   }
   const s=ships.find(t=>t!==b.owner&&t.hp>0&&distance(t,b)<18);
-  if(s){b.life=0;if(time<5)continue;if(s===player){hitFrom=Math.atan2(-b.dy,-b.dx);hitFlash=.55;sound(s.buff>0&&s.effect==='Salmon Shield')}burst(b.x,b.y,s.color,5);if(s.buff>0&&s.effect==='Salmon Shield'){burst(s.x,s.y,'#7ef1f5',9);if(distance(s,cam)<900)floatText(s.x,s.y-22,'BLOCK','#9ff6f8');continue;}if(s===player)shake=Math.max(shake,5);if(distance(s,cam)<900)floatText(s.x+random(-6,6),s.y-22,'-'+(20-2*s.shield),b.owner===player?'#ffe08a':'#ffb3a8');if(b.owner===player){s.playerHit=time;sfx('hitmark')}s.lastDamage=time;s.regen=0;s.sleep=0;s.hp=Math.max(0,s.hp-(20-2*s.shield));if(!s.hp){eliminate(s,'Shot down by '+b.owner.name,b.owner);if(b.owner===player)kills++}}
+  if(s){b.life=0;if(time<5)continue;if(s===player){hitFrom=Math.atan2(-b.dy,-b.dx);hitFlash=.55;sound(s.buff>0&&s.effect==='Salmon Shield')}burst(b.x,b.y,s.color,5);if(s.buff>0&&s.effect==='Salmon Shield'){burst(s.x,s.y,'#7ef1f5',9);if(distance(s,cam)<900)floatText(s.x,s.y-22,'BLOCK','#9ff6f8');continue;}if(s===player)shake=Math.max(shake,5);if(distance(s,cam)<900)floatText(s.x+random(-6,6),s.y-22,'-'+(20-2*s.shield),b.owner===player?'#ffe08a':'#ffb3a8');if(b.owner===player){s.playerHit=time;sfx('hitmark')}(s.hitters??={})[ships.indexOf(b.owner)]=time;mpEvent(['hit',ships.indexOf(s),ships.indexOf(b.owner),20-2*s.shield]);s.lastDamage=time;s.regen=0;s.sleep=0;s.hp=Math.max(0,s.hp-(20-2*s.shield));if(!s.hp){eliminate(s,'Shot down by '+b.owner.name,b.owner);if(b.owner===player)kills++}}
  }
  bolts=bolts.filter(b=>b.life>0);
  drops=drops.filter(d=>{
   const s=ships.find(t=>t.hp>0&&distance(t,d)<25&&(upgrades[d.type]?t[upgrades[d.type]]<maxLevel:d.type!=='Repair'||t.hp<maxHealth(t)));
   if(!s||!collect(s,d.type,d.tier))return true;
+  if(s.remote)mpEvent(['pickup',ships.indexOf(s),d.type,d.gold?1:0]);
   if(s===player){sfx(d.gold?'goldpickup':upgrades[d.type]?'pickup':'powerpickup');if(upgrades[d.type])matchStats.upgrades++;if(d.gold)matchStats.gold=true;if(Object.values(upgrades).some(k=>player[k]>=maxLevel))matchStats.maxed=true}
   return false;
  });
  updateEffects(dt);
- const focus=killCam?.focus||player;cam.x+=(focus.x-cam.x)*Math.min(1,dt*10);cam.y+=(focus.y-cam.y)*Math.min(1,dt*10);
+ const focus=killCam?.focus||(player.hp>0?player:(ships.find(t=>t.remote&&t.hp>0)||player));cam.x+=(focus.x-cam.x)*Math.min(1,dt*10);cam.y+=(focus.y-cam.y)*Math.min(1,dt*10);
  const count=ships.filter(s=>s.hp>0).length;
- $('hpValue').textContent=player.hp+' / '+maxHealth(player);
- $('hpBar').max=maxHealth(player);$('hpBar').value=player.hp;
- $('hpBar').classList.toggle('recovering',player.out===0&&time-player.lastDamage>=5&&player.hp<maxHealth(player));
- $('killValue').textContent=kills;$('aliveValue').textContent=count;
- $('dropAlert').hidden=!supply||time>=supply.landedAt+4;
- drawUpgradeLevels();
- $('zone').classList.toggle('danger',player.out>0);$('zone').textContent=player.out>0?(player.out<=fogGrace?'⚠ FOG · get back in the circle!':'IN THE FOG · −'+fogDps(ring)+' HP/s'):ring===95?'Final zone':'Fog moves in '+Math.ceil(time<18?18-time:10-(time-18)%10)+'s';
- $('power').disabled=!player.power;$('power').textContent=player.power?player.power+' · E':player.buff>0?player.effect+' '+Math.ceil(player.buff)+'s':'Power · empty';
- if((!player.hp||count===1)&&!killCam){
+ updateHud(ring,count);
+ mpHostTick(dt);
+ const humansLeft=ships.some(t=>t.remote&&t.hp>0);
+ if((count===1||(!player.hp&&!humansLeft))&&!killCam){
   const won=player.hp>0,focus=won?player:(player.killer?.hp>0?player.killer:player);
   if($('killcam').value==='on'){$('levels').hidden=$('power').hidden=$('emote').hidden=true;$('feed').hidden=true}
   if($('killcam').value==='on')killCam={end:animNow+2600,won,focus,text:won?'FINAL KNOCKOUT':player.killer?'KNOCKED OUT BY '+player.killer.name.toUpperCase():'CAUGHT IN THE FOG'};
@@ -1857,7 +1950,7 @@ function render(now){
 function frame(now){
  const dt=Math.min(.034,(now-last)/1000)*(killCam?.3:1);last=now;animNow=now;
  if(killCam&&live&&now>=killCam.end){const won=killCam.won;killCam=null;finish(won)}
- if(live&&!rotatePaused())step(dt);
+ if(live&&!rotatePaused())(MP.role==='guest'&&MP.inMatch?guestTick:step)(dt);
  else updateEffects(dt);
  render(now);renderHangar(now);requestAnimationFrame(frame);
 }
