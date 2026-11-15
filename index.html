@@ -27,10 +27,10 @@ var lite=m==="lite"||(m!=="3d"&&(r||slow||g("bf-slow")));   /* phones get the 3D
 d.setAttribute("data-mode",lite?"lite":"3d");window.BF_MODE={pref:m,lite:lite,why:r?"reduced motion":phone?"phone":slow?"slow device":""};})();
 </script>
 <link rel="preload" href="/vendor/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/site.css?v=20261114t">
+<link rel="stylesheet" href="/css/site.css?v=20261115games">
 <link rel="stylesheet" href="/css/shell.css?v=20261115e">
 <script defer src="/js/mapdata.js?v=20261113"></script>
-<script defer src="/js/app.js?v=20261114t"></script>
+<script defer src="/js/app.js?v=20261115games"></script>
 <script defer src="/js/campusmap.js?v=20261115e"></script>
 <script defer src="/js/shell.js?v=20261115e"></script>
 </head>
@@ -52,6 +52,8 @@ d.setAttribute("data-mode",lite?"lite":"3d");window.BF_MODE={pref:m,lite:lite,wh
     <a href="#football" data-v="football"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="10" ry="6" transform="rotate(-35 12 12)"/><path d="M9 15l6-6M10 11l1 1M12 9l1 1M11 13l1 1"/></svg>Football</a>
     <a href="#daily" data-v="daily"><svg viewBox="0 0 24 24"><path d="M12 3v14"/><path d="M12 3l7 3-7 3"/><ellipse cx="12" cy="19" rx="7" ry="2"/></svg>Daily Golf</a>
     <a href="#place" data-v="place"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Place of the Day</a>
+    <div class="nav-group">Games</div>
+    <a href="#games" data-v="games"><svg viewBox="0 0 24 24"><path d="M6 10h4M8 8v4"/><circle cx="15.5" cy="10.5" r="1"/><circle cx="17.5" cy="12.5" r="1"/><path d="M7 5h10a5 5 0 015 5v3a4 4 0 01-7 2.6L14 14h-4l-1 1.6A4 4 0 012 13v-3a5 5 0 015-5z"/></svg>Groundhog Air Rally</a>
     <div class="nav-group">Career</div>
     <a href="#about" data-v="about"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>About</a>
     <a href="#resume" data-v="resume"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg>Resume</a>
@@ -225,6 +227,17 @@ d.setAttribute("data-mode",lite?"lite":"3d");window.BF_MODE={pref:m,lite:lite,wh
     <div class="sec-h"><h3>Coming up</h3></div>
     <div class="up-list" id="fbUpcoming"></div>
   </div>
+  </div>
+</section>
+
+<!-- GAMES -->
+<section class="view" id="v-games">
+  <div class="page-h"><span class="eyebrow">Games</span><h2>Groundhog Air Rally</h2><p>A top-down battle royale with flying groundhogs. Pick a pilot, customize them in the 3D hangar, shoot open crates for upgrades, grab the Irish Pot of Gold, and stay ahead of the fog. Last groundhog flying wins.</p></div>
+  <div class="gar-acts"><a class="btn primary" href="games/groundhog-air-rally/">Play full screen <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn" href="games/groundhog-air-rally/">Play with friends (up to 5)</a></div>
+  <div class="panel gar-frame"><iframe title="Groundhog Air Rally" loading="lazy" data-src="games/groundhog-air-rally/" allow="fullscreen; autoplay" allowfullscreen></iframe></div>
+  <div class="grid g2 sec">
+    <div class="panel"><span class="eyebrow">How to play</span><ul class="list-tight"><li>Computer: WASD to fly, mouse to aim and shoot, E for your power, 1–4 to emote.</li><li>Phone: turn it sideways. Left stick flies, right stick aims and shoots, tap Power and 💬.</li><li>Shoot LOOT crates for Speed, Health, Shield and Fire Rate upgrades (up to level 5).</li><li>Stay inside the circle. The fog warns you, then drains health.</li></ul></div>
+    <div class="panel"><span class="eyebrow">Features</span><ul class="list-tight"><li>Nine pilots with their own skins, projectiles and accessories, plus a spinnable 3D hangar.</li><li>18 real-life locations, six arenas unlocked by CPT Swanson's Amex rank.</li><li>Powers like MAJ P's Blabber, Kia Turbo, Igloo Wall and Ramon's Healthy Lotion.</li><li>Achievements, a daily challenge, a Scrapbook and multiplayer with room codes.</li></ul></div>
   </div>
 </section>
 

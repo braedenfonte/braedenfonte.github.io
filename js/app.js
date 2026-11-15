@@ -256,7 +256,7 @@ if (matchMedia("(hover:hover)").matches) {
 }
 
 /* ---------- routing ---------- */
-const VIEWS = ["home","brief","flights","football","daily","place","schedule","about","resume","courses","study","projects","business","finance","memory","personal","contact"];
+const VIEWS = ["home","brief","flights","football","daily","games","place","schedule","about","resume","courses","study","projects","business","finance","memory","personal","contact"];
 let curView = null;
 function showView(v){
   curView = v;
@@ -266,6 +266,7 @@ function showView(v){
   window.scrollTo(0,0);
   if (v === "projects") drawArt();
   if (v === "daily") GG.draw();
+  if (v === "games") { const f = document.querySelector("#v-games iframe"); if (f && !f.src) f.src = f.dataset.src; }
   if (v === "memory") GX.open(); else GX.close();
   revealView($("#v-"+v));
   document.body.dataset.view = v;
