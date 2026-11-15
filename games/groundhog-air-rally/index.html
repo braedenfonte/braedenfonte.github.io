@@ -3,7 +3,7 @@
 *{box-sizing:border-box}body{margin:0;background:#101c1a;color:#fff9dc;font:16px system-ui;overflow:hidden}canvas{display:block;width:100vw;height:100dvh;touch-action:none}main{position:absolute;inset:0;display:grid;place-items:center;background:#0b1918a0;padding:16px}section{background:#172b28;border:2px solid #4f7362;border-radius:24px;padding:clamp(18px,4vw,44px);max-width:620px;box-shadow:0 18px 70px #0009}h1{font-size:clamp(32px,7vw,67px);line-height:.95;margin:8px 0 18px;color:#ffda79}p{line-height:1.4}button{font:inherit;font-weight:750;border:0;border-radius:12px;padding:12px;background:#2f5045;color:white;cursor:pointer;touch-action:manipulation}button[aria-pressed=true],#start{background:#ffda79;color:#1c2922}#pilots{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}#start{margin-top:14px;width:100%}#hud{position:absolute;inset:12px 12px auto;display:flex;justify-content:space-between;gap:8px;pointer-events:none}#hud span,#power{background:#142824ed;border:1px solid #74967f;padding:9px;border-radius:10px}#power{position:absolute;right:14px;bottom:120px} [hidden]{display:none!important}small{display:block;margin-top:12px;color:#c7dbc9}@media(max-width:420px){#pilots{grid-template-columns:repeat(2,1fr)}#hud{font-size:12px}}
 #results{text-align:center;width:min(440px,100%)}#results h2{font-size:clamp(32px,8vw,58px);margin:4px 0}#results[data-win=true]{border-color:#ffda79}#results[data-win=false]{border-color:#ed9789}#place{font-size:clamp(52px,14vw,102px);font-weight:900;line-height:1.05;color:#ffda79}#resultStats{display:flex;justify-content:center;gap:24px;margin:18px 0}#results button{margin:4px}#again{background:#ffda79;color:#172b28}</style>
 <canvas id="field" aria-label="Groundhog Air Rally arena"></canvas><div id="hud" hidden><span id="stats"></span><span id="zone"></span></div><button id="power" hidden>Power</button>
-<main id="menu"><section><div>RC BATTLE ROYALE</div><h1>Groundhog<br>Air Rally</h1><p id="brief">Pop rival copters, grab crate loot, and stay ahead of the fog. Last copter flying wins.</p><div id="pilots" aria-label="Choose pilot"></div><button id="start">Start match</button><small>Desktop · WASD, mouse to aim and fire, E for power<br>Touch · Left stick to fly, right stick to aim and fire</small></section></main>
+<main id="menu"><section><div>GROUNDHOG BATTLE ROYALE</div><h1>Groundhog<br>Air Rally</h1><p id="brief">Knock out rival groundhogs, grab crate loot, and stay ahead of the fog. Last groundhog flying wins.</p><div id="pilots" aria-label="Choose pilot"></div><button id="start">Start match</button><small>Desktop · WASD, mouse to aim and fire, E for power<br>Touch · Left stick to fly, right stick to aim and fire</small></section></main>
 <main id="end" hidden><section id="results" aria-labelledby="outcome"><h2 id="outcome"></h2><div id="place"></div><div id="placement"></div><div id="resultStats"><span id="resultKills"></span><span id="resultTime"></span></div><p id="cause"></p><button id="again">Play again</button><button id="changePilot">Change pilot</button></section></main><script>
 'use strict';
 const $=id=>document.getElementById(id);
@@ -25,6 +25,7 @@ props.push(
  {x:2600,y:1520,w:125,h:80,label:'FISHKILL',color:'#9c735d'}
 );
 const size=3200, center=size/2, keys=new Set(), sticks={};
+let hitFrom=0,hitFlash=0;
 let eliminationPlace=0, cause="";
 let choice=0, live=false, player, ships=[], bolts=[], crates=[], drops=[], sparks=[], time=0, kills=0, mouse={x:0,y:0,down:false,active:false}, cam={x:800,y:800}, w,h,zoom=1,last=0,toast='',notice=0;
 const random=(a,b)=>a+Math.random()*(b-a);
@@ -40,8 +41,18 @@ function spawn(radius){
  return {x:800,y:800};
 }
 function ship(name,color,point){return {...point,name,color,hp:100,angle:0,vx:0,vy:0,cd:0,out:0,speed:0,rate:0,power:'',effect:'',buff:0}}
+let audio;
+function sound(shield){
+ if(!audio||audio.state!=='running')return;
+ const osc=audio.createOscillator(),volume=audio.createGain(),t=audio.currentTime;
+ osc.type=shield?'sine':'triangle';osc.frequency.setValueAtTime(shield?780:210,t);
+ osc.frequency.exponentialRampToValueAtTime(shield?390:85,t+.12);
+ volume.gain.setValueAtTime(.09,t);volume.gain.exponentialRampToValueAtTime(.001,t+.13);
+ osc.connect(volume).connect(audio.destination);osc.start(t);osc.stop(t+.14);
+}
 function begin(){
- time=0;kills=0;notice=0;mouse.down=false;keys.clear();
+ if(window.AudioContext){audio??=new AudioContext();audio.resume().catch(()=>{})}
+ time=0;kills=0;notice=0;hitFlash=0;mouse.down=false;keys.clear();
  eliminationPlace=0;cause='';
  const phase=random(0,Math.PI*2);
  const locations=Array.from({length:rivals.length+1},(_,i)=>{
@@ -54,7 +65,7 @@ function begin(){
  });
  player=ship(names[choice],colors[choice],locations[0]);
  ships=[player,...rivals.map((name,i)=>ship(name,colors[(i+1)%4],locations[i+1]))];
- crates=[...locations.map(p=>({x:p.x+(center-p.x)*.09,y:p.y+(center-p.y)*.09})).filter(p=>!blocked(p.x,p.y,20)),...Array.from({length:85},()=>spawn(1440))].map((p,i)=>({...p,hp:2,bonus:i%9===0}));
+ crates=[...locations.map(p=>({x:p.x+(center-p.x)*.065,y:p.y+(center-p.y)*.065})).filter(p=>!blocked(p.x,p.y,20)),...Array.from({length:85},()=>spawn(1440))].map((p,i)=>({...p,hp:2,bonus:i%9===0}));
  drops=[];bolts=[];sparks=[];cam={x:player.x,y:player.y};live=true;
  $('end').hidden=true;$('menu').hidden=true;$('hud').hidden=false;$('power').hidden=false;
 }
@@ -84,7 +95,7 @@ function fire(s){
  if(s.cd>0)return;
  s.cd=Math.max(.10,.35-s.rate*.045)*(s.buff>0&&s.effect==='Froot Loops Burst'?.48:1);
  const dx=Math.cos(s.angle),dy=Math.sin(s.angle);
- bolts.push({x:s.x+dx*21,y:s.y+dy*21,dx,dy,owner:s,life:.84,tint:s.buff>0&&s.effect==='Froot Loops Burst'?'#ff91be':'#fff0a2'});
+ bolts.push({x:s.x+dx*21,y:s.y+dy*21,dx,dy,owner:s,life:.84,tint:s.buff>0&&s.effect==='Froot Loops Burst'?'#ff91be':['#ff755d','#ffd65a','#8ae692','#b9a1ff'][Math.floor(random(0,4))]});
 }
 function burst(x,y,color,n=9){for(let i=0;i<n;i++)sparks.push({x,y,vx:random(-100,100),vy:random(-100,100),life:random(.2,.55),color})}
 function radius(){return Math.max(95,1460-Math.max(0,Math.floor((time-18)/10)+1)*120)}
@@ -97,7 +108,7 @@ function finish(alive){
  $('placement').textContent='of '+ships.length+' pilots';
  $('resultKills').textContent=kills+' eliminations';
  $('resultTime').textContent=Math.floor(time)+'s survived';
- $('cause').textContent=alive?'Last copter flying':cause||'Your copter is down';
+ $('cause').textContent=alive?'Last groundhog flying':cause||'Your copter is down';
  $('again').focus();
 }
 function eliminate(s,reason){
@@ -105,7 +116,7 @@ function eliminate(s,reason){
  s.hp=0;burst(s.x,s.y,s.color,18);
 }
 function step(dt){
- time+=dt;notice-=dt;const ring=radius(),centerPoint={x:center,y:center};
+ time+=dt;notice-=dt;hitFlash-=dt;const ring=radius(),centerPoint={x:center,y:center};
  for(const s of ships){
   if(s.hp<=0)continue;
   s.cd-=dt;s.buff-=dt;
@@ -120,10 +131,12 @@ function step(dt){
    const target=ships.filter(t=>t!==s&&t.hp>0).reduce((a,t)=>!a||distance(s,t)<distance(s,a)?t:a,null);
    if(!target)continue;
    const d=distance(s,target),a=Math.atan2(target.y-s.y,target.x-s.x);
-   const steer=distance(s,centerPoint)>ring-55?Math.atan2(center-s.y,center-s.x):a+Math.sin(time*1.1+ships.indexOf(s))*1.2+(d<125?2.2:0);
+   const loot=drops.find(item=>distance(s,item)<220&&(s.hp>=75||item.type==='Repair')) || (d>290&&time>5?crates.find(item=>item.hp>0&&distance(s,item)<260):null);
+   const lootAngle=loot?Math.atan2(loot.y-s.y,loot.x-s.x):a;
+   const steer=distance(s,centerPoint)>ring-55?Math.atan2(center-s.y,center-s.x):s.hp<40&&d<240?a+Math.PI:loot?lootAngle:a+Math.sin(time*1.1+ships.indexOf(s))*1.2+(d<125?2.2:0);
    dx=Math.cos(steer)*.72;dy=Math.sin(steer)*.72;s.angle=a+Math.sin(time*3+ships.indexOf(s))*.19;
    if(blocked(s.x+dx*56,s.y+dy*56,15)){dx=Math.cos(steer+1.5);dy=Math.sin(steer+1.5)}
-   if(time>=5&&d<390)fire(s);
+   if(loot&&d>290&&loot.hp){s.angle=lootAngle;fire(s)}else if(time>=5&&d<390&&!blocked(s.x+Math.cos(a)*35,s.y+Math.sin(a)*35))fire(s);
    if(s.power&&d<250&&s.hp<75){s.effect=s.power;s.power='';s.buff=4}
   }
   const magnitude=Math.max(1,Math.hypot(dx,dy)),speed=190+s.speed*23;
@@ -144,7 +157,7 @@ function step(dt){
    continue;
   }
   const s=ships.find(t=>t!==b.owner&&t.hp>0&&distance(t,b)<18);
-  if(s){b.life=0;if(time<5)continue;burst(b.x,b.y,s.color,5);if(s.buff>0&&s.effect==='Salmon Shield')continue;s.hp=Math.max(0,s.hp-20);if(!s.hp){eliminate(s,'Shot down by '+b.owner.name);if(b.owner===player)kills++}}
+  if(s){b.life=0;if(time<5)continue;if(s===player){hitFrom=Math.atan2(-b.dy,-b.dx);hitFlash=.55;sound(s.buff>0&&s.effect==='Salmon Shield')}burst(b.x,b.y,s.color,5);if(s.buff>0&&s.effect==='Salmon Shield'){burst(s.x,s.y,'#7ef1f5',9);continue;}s.hp=Math.max(0,s.hp-20);if(!s.hp){eliminate(s,'Shot down by '+b.owner.name);if(b.owner===player)kills++}}
  }
  bolts=bolts.filter(b=>b.life>0);
  drops=drops.filter(d=>{
@@ -187,18 +200,33 @@ function render(now){
  for(const s of ships)if(s.hp>0){
   circle(s.x+5,s.y+9,19,'#233a3d80');
   g.save();g.translate(s.x,s.y);g.rotate(s.angle);
-  rect(-27,-4,31,8,s.color);circle(2,0,16,s.color,'#203638');circle(9,0,7,'#24484c');
-  circle(0,0,25,'#f5fff32b');g.rotate(now*.028);rect(-24,-2,48,4,'#f2ffde');rect(-2,-22,4,44,'#dbeada');circle(0,0,4,'#29423d');g.restore();
+  circle(-18,0,9,'#77503a');circle(-4,0,16,'#9b6849');circle(-5,0,11,s.color);
+  circle(4,-11,5,'#77503a');circle(4,11,5,'#77503a');circle(8,0,13,'#ba8356','#583b30');
+  circle(12,-6,2,'#241b18');circle(12,6,2,'#241b18');circle(18,0,5,'#efd2a0');circle(21,0,2.5,'#33221d');
+  g.restore();
   if(s.buff>0&&s.effect==='Salmon Shield')circle(s.x,s.y,28,null,'#7ef1f5');
   label(s.name,s.x,s.y-32);
   rect(s.x-17,s.y+27,34,4,'#233e3c');rect(s.x-17,s.y+27,34*s.hp/100,4,s.color);
  }
- for(const b of bolts)circle(b.x,b.y,4,b.tint);
+ for(const b of bolts){g.lineWidth=3;circle(b.x,b.y,5,null,b.tint)}
  for(const p of sparks)circle(p.x,p.y,3,p.color);
  g.beginPath();g.rect(-4000,-4000,9600,9600);g.arc(center,center,radius(),0,Math.PI*2);g.fillStyle='#67508cad';g.fill('evenodd');
  g.lineWidth=4;circle(center,center,radius(),null,'#ddaff4');
  g.restore();
  if(live){
+  const m=Math.min(110,w*.24),mx=w-m-14,my=58,scale=m/size;
+  rect(mx,my,m,m,'#142824ed');
+  for(const o of props)rect(mx+o.x*scale,my+o.y*scale,o.w*scale,o.h*scale,o.color);
+  g.lineWidth=1.5;circle(mx+center*scale,my+center*scale,radius()*scale,null,'#ddaaf4');
+  const nextRadius=Math.max(95,radius()-120);
+  g.setLineDash([3,3]);circle(mx+center*scale,my+center*scale,nextRadius*scale,null,'#d0e5cb');g.setLineDash([]);
+  circle(mx+player.x*scale,my+player.y*scale,3,'#ffda79');
+  if(player.out>0){
+   const dir=Math.atan2(center-player.y,center-player.x);
+   g.save();g.translate(w/2+Math.cos(dir)*65,h/2+Math.sin(dir)*65);g.rotate(dir);
+   g.beginPath();g.moveTo(12,0);g.lineTo(-7,8);g.lineTo(-7,-8);g.closePath();g.fillStyle='#ffda79';g.fill();g.restore();
+  }
+  if(hitFlash>0){g.lineWidth=5;g.beginPath();g.arc(w/2,h/2,43,hitFrom-.38,hitFrom+.38);g.strokeStyle='#ff7869';g.stroke()}
   if(time<5)label('Spawn protection · '+Math.ceil(5-time)+'s',w/2,112,'#ffdf89','bold 16px system-ui');
   if(notice>0)label(toast,w/2,85,'#ffdf89','bold 20px system-ui');
   for(const s of Object.values(sticks)){circle(s.x,s.y,46,'#142a2b66','#d9edcf77');const m=Math.max(1,Math.hypot(s.dx,s.dy)/43);circle(s.x+s.dx/m,s.y+s.dy/m,19,'#e5f6dbaa')}
