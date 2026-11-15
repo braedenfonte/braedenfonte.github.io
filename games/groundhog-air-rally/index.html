@@ -31,10 +31,11 @@ button:not(:disabled):active{transform:translateY(1px) scale(.98)}
 #rankResult.promotion{background:linear-gradient(120deg,#5a4520,#243c38);border-color:#ffe093}
 #rankResult.promotion::before{content:'★ PROMOTED ★';display:block;font-weight:900;letter-spacing:.2em;color:#ffe093;font-size:12px}
 #openAchievements{width:100%;margin-top:6px}#achievements{background:#172b28;color:#fff9dc;border:2px solid #cba658;border-radius:18px;width:min(560px,92vw);max-height:86dvh}#achievements::backdrop{background:#071715cc}#dailyTask{background:#2b3f2f;border:1px solid #9fd38a;border-radius:10px;padding:10px;font-weight:800}#achieveList{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}#achieveList li{background:#22332f;border:1px solid #4f6a61;border-radius:10px;padding:9px;opacity:.6}#achieveList li.got{opacity:1;border-color:#ffda79;background:linear-gradient(135deg,#4a3f22,#22332f);box-shadow:0 0 12px #ffda7930}#achieveList strong,#achieveList span{display:block}#achieveList span{font-size:12px;color:#c7dbc9;margin-top:3px}#achieveResult{margin:8px 0;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}.badgeNew{background:linear-gradient(135deg,#ffe596,#f5b746);color:#2a1d0c;font-weight:900;padding:6px 10px;border-radius:999px;box-shadow:0 0 16px #f5b74660}.dailyLine{flex-basis:100%;font-size:13px;color:#cfe8c7}
+#emote{position:absolute;right:14px;bottom:176px;width:52px;height:52px;border-radius:50%;padding:0;font-size:24px;background:linear-gradient(180deg,#2d4a43,#162a26);border:1px solid #74967f;box-shadow:0 4px 0 #0c1714}
 </style>
-<canvas id="field" aria-label="Groundhog Air Rally arena"></canvas><div id="hud" hidden><div id="matchCards"><div id="arenaName"></div><div class="matchStats"><div><small>HEALTH</small><strong id="hpValue"></strong><progress id="hpBar" aria-label="Health"></progress></div><div><small>ELIMINATIONS</small><strong id="killValue"></strong></div><div><small>ALIVE</small><strong id="aliveValue"></strong></div></div></div><div id="dropAlert" role="status" hidden>An Irish Pot of Gold is Dropping!</div><span id="zone"></span></div><div id="levels" hidden></div><button id="power" hidden>Power</button>
-<main id="menu"><section class="hangar"><div class="hangarStage"><div id="rankCard"><span class="rankChip" aria-hidden="true"></span><strong id="rankTitle"></strong><progress id="rankProgress" aria-label="Progress toward next rank"></progress><span id="rankNext"></span><button id="historyButton">Last 3 matches</button></div><div>GROUNDHOG BATTLE ROYALE</div><h1>Groundhog<br>Air Rally</h1><p id="brief">Knock out rival groundhogs, grab crate loot, and stay ahead of the fog. Last groundhog flying wins.</p><div class="previewBay"><canvas id="pilotCanvas" aria-label="Live pilot and projectile preview"></canvas><button id="testShot" type="button">Test fire</button></div></div><div class="hangarControls"><h2 class="loadoutTitle">Choose your pilot</h2><div id="pilots" aria-label="Choose pilot"></div><div id="pilotDetail"><span id="badge" aria-hidden="true"></span><span id="origin"></span></div><h2 class="loadoutTitle">Customize your groundhog</h2><input type="hidden" id="mode" value="preset"><div id="loadout"><select id="accessory" hidden aria-label="Accessories"></select><label>In-match name<input id="callsign" maxlength="20" autocomplete="off" placeholder="Use pilot name"></label><select id="stream" hidden aria-label="Projectiles"></select><select id="outfit" hidden aria-label="Skins"></select><label>Hit sounds<select id="soundMode"><option value="on">On</option><option value="off">Off</option></select></label></div><div id="loadoutPreview"><span id="previewHog" aria-hidden="true">🦫</span><span><strong id="previewName"></strong><br><span id="previewShot"></span></span></div><label class="arenaPicker">Arena<select id="arenaSelect"></select></label><div id="cosmeticLab"></div><button id="start">Start match</button><button id="rulesButton">How to play</button> <button id="openAlbum">Scrapbook</button><button id="openAchievements">Achievements &amp; daily challenge</button><small>Desktop · WASD, mouse to aim and fire, E for power<br>Touch · Left stick to fly, right stick to aim and fire</small></div></section></main>
-<div id="feed" hidden></div><div id="ko" role="status" hidden></div><main id="end" hidden><section id="results" aria-labelledby="outcome"><h2 id="outcome"></h2><div id="place"></div><div id="placement"></div><div id="resultStats"><span id="resultKills"></span><span id="resultAssists"></span><span id="resultTime"></span></div><p id="cause"></p><div id="rankResult"></div><div id="achieveResult" hidden></div><button id="again">Play again</button><button id="changePilot">Change pilot</button></section></main><main id="album" hidden><section><h2>Scrapbook</h2><p id="albumCount"></p><ul id="albumList"></ul><button id="closeAlbum">Back to loadout</button></section></main><dialog id="history"><h2>Last 3 matches</h2><ol id="historyList"></ol><form method="dialog"><button>Close</button></form></dialog><dialog id="achievements"><h2>Achievements</h2><p id="dailyTask"></p><p id="achieveCount"></p><ul id="achieveList"></ul><form method="dialog"><button>Close</button></form></dialog><dialog id="rules"><h2>How to play</h2><p>Be the last groundhog flying. Shoot crates and fly over loot to collect it. Each stat stacks to level 5. The Irish Pot of Gold drops two different +3 trait boosts and a power. Health upgrades raise your maximum HP. After 5 seconds without damage, recover 6 HP per second inside the safe zone. Ramon’s Healthy Lotion heals instantly. MAJ P’s Blabber puts nearby rivals to sleep for a few seconds (a hit wakes them). Eliminated pilots drop their held power.</p><p>Leaving the ring triggers a fog warning. After 1.5 seconds the fog starts draining health, and it drains faster as the circle shrinks.</p><p><b>Computer</b> · WASD to fly, mouse to aim and fire, E to use a power.<br><b>Phone</b> · Left stick to fly, right stick to aim and fire, Power button to activate.</p><form method="dialog"><button>Got it</button></form></dialog><script>
+<canvas id="field" aria-label="Groundhog Air Rally arena"></canvas><div id="hud" hidden><div id="matchCards"><div id="arenaName"></div><div class="matchStats"><div><small>HEALTH</small><strong id="hpValue"></strong><progress id="hpBar" aria-label="Health"></progress></div><div><small>ELIMINATIONS</small><strong id="killValue"></strong></div><div><small>ALIVE</small><strong id="aliveValue"></strong></div></div></div><div id="dropAlert" role="status" hidden>An Irish Pot of Gold is Dropping!</div><span id="zone"></span></div><div id="levels" hidden></div><button id="power" hidden>Power</button><button id="emote" hidden aria-label="Emote">💬</button>
+<main id="menu"><section class="hangar"><div class="hangarStage"><div id="rankCard"><span class="rankChip" aria-hidden="true"></span><strong id="rankTitle"></strong><progress id="rankProgress" aria-label="Progress toward next rank"></progress><span id="rankNext"></span><button id="historyButton">Last 3 matches</button></div><div>GROUNDHOG BATTLE ROYALE</div><h1>Groundhog<br>Air Rally</h1><p id="brief">Knock out rival groundhogs, grab crate loot, and stay ahead of the fog. Last groundhog flying wins.</p><div class="previewBay"><canvas id="pilotCanvas" aria-label="Live pilot and projectile preview"></canvas><button id="testShot" type="button">Test fire</button></div></div><div class="hangarControls"><h2 class="loadoutTitle">Choose your pilot</h2><div id="pilots" aria-label="Choose pilot"></div><div id="pilotDetail"><span id="badge" aria-hidden="true"></span><span id="origin"></span></div><h2 class="loadoutTitle">Customize your groundhog</h2><input type="hidden" id="mode" value="preset"><div id="loadout"><select id="accessory" hidden aria-label="Accessories"></select><label>In-match name<input id="callsign" maxlength="20" autocomplete="off" placeholder="Use pilot name"></label><select id="stream" hidden aria-label="Projectiles"></select><select id="outfit" hidden aria-label="Skins"></select><label>Kill cam<select id="killcam"><option value="on">On</option><option value="off">Off</option></select></label><label>Hit sounds<select id="soundMode"><option value="on">On</option><option value="off">Off</option></select></label></div><div id="loadoutPreview"><span id="previewHog" aria-hidden="true">🦫</span><span><strong id="previewName"></strong><br><span id="previewShot"></span></span></div><label class="arenaPicker">Arena<select id="arenaSelect"></select></label><div id="cosmeticLab"></div><button id="start">Start match</button><button id="rulesButton">How to play</button> <button id="openAlbum">Scrapbook</button><button id="openAchievements">Achievements &amp; daily challenge</button><small>Desktop · WASD, mouse to aim and fire, E for power<br>Touch · Left stick to fly, right stick to aim and fire</small></div></section></main>
+<div id="feed" hidden></div><div id="ko" role="status" hidden></div><main id="end" hidden><section id="results" aria-labelledby="outcome"><h2 id="outcome"></h2><div id="place"></div><div id="placement"></div><div id="resultStats"><span id="resultKills"></span><span id="resultAssists"></span><span id="resultTime"></span></div><p id="cause"></p><div id="rankResult"></div><div id="achieveResult" hidden></div><button id="again">Play again</button><button id="changePilot">Change pilot</button></section></main><main id="album" hidden><section><h2>Scrapbook</h2><p id="albumCount"></p><ul id="albumList"></ul><button id="closeAlbum">Back to loadout</button></section></main><dialog id="history"><h2>Last 3 matches</h2><ol id="historyList"></ol><form method="dialog"><button>Close</button></form></dialog><dialog id="achievements"><h2>Achievements</h2><p id="dailyTask"></p><p id="achieveCount"></p><ul id="achieveList"></ul><form method="dialog"><button>Close</button></form></dialog><dialog id="rules"><h2>How to play</h2><p>Be the last groundhog flying. Shoot crates and fly over loot to collect it. Each stat stacks to level 5. The Irish Pot of Gold drops two different +3 trait boosts and a power. Health upgrades raise your maximum HP. After 5 seconds without damage, recover 6 HP per second inside the safe zone. Ramon’s Healthy Lotion heals instantly. MAJ P’s Blabber puts nearby rivals to sleep for a few seconds (a hit wakes them). Eliminated pilots drop their held power.</p><p>Leaving the ring triggers a fog warning. After 1.5 seconds the fog starts draining health, and it drains faster as the circle shrinks.</p><p><b>Computer</b> · WASD to fly, mouse to aim and fire, E to use a power, 1–4 to emote.<br><b>Phone</b> · Left stick to fly, right stick to aim and fire, Power button to activate, 💬 to emote.</p><form method="dialog"><button>Got it</button></form></dialog><script>
 'use strict';
 const $=id=>document.getElementById(id);
 const canvas=$('field');let g=canvas.getContext('2d');
@@ -66,7 +67,7 @@ const storageKey='groundhog-air-rally-loadout';
 let saved={};
 try{saved=JSON.parse(localStorage.getItem(storageKey))||{}}catch{}
 function saveLoadout(){
- try{localStorage.setItem(storageKey,JSON.stringify({pilot:pilots[choice][0],callsign:$('callsign').value.trim(),stream:$('stream').value,outfit:$('outfit').value,sound:$('soundMode').value,mode:$('mode').value,accessory:$('accessory').value}))}catch{}
+ try{localStorage.setItem(storageKey,JSON.stringify({pilot:pilots[choice][0],callsign:$('callsign').value.trim(),stream:$('stream').value,outfit:$('outfit').value,sound:$('soundMode').value,killcam:$('killcam').value,mode:$('mode').value,accessory:$('accessory').value}))}catch{}
 }
 const accessories=[['combover','Blond hair',''],['pole','Fishing pole','🎣'],['sandwich','Bacon, egg & cheese','🥪'],['glasses','Blue-light glasses','👓'],['boots','Cowboy boots','🥾'],['igloo','Igloo charm','🧊'],['none','None',''],['camera','Camera','📷'],['hat','Cowboy hat','🤠'],['surf','Surfboard','🏄'],['shorts','Spandex shorts','🩳'],['shoes','Irish baby shoes','👟'],['pringles','Pringles can','🥫']];
 const rankKey='groundhog-air-rally-amex-points';
@@ -358,7 +359,7 @@ function begin(){
  }
  crates=[...locations.map(p=>({x:p.x+(center-p.x)*.065,y:p.y+(center-p.y)*.065})).filter(p=>!blocked(p.x,p.y,20)),...Array.from({length:85},()=>spawn(1440))].map((p,i)=>({...p,hp:2,bonus:i%9===0}));
  drops=[];bolts=[];sparks=[];rings=[];floaters=[];shake=0;cam={x:player.x,y:player.y};live=true;
- $('end').hidden=true;$('menu').hidden=true;$('hud').hidden=false;$('levels').hidden=false;drawUpgradeLevels();$('power').hidden=false;
+ $('end').hidden=true;$('menu').hidden=true;$('hud').hidden=false;$('levels').hidden=false;drawUpgradeLevels();$('power').hidden=false;$('emote').hidden=false;killCam=null;
 }
 function select(i){
  choice=i;
@@ -411,9 +412,9 @@ $('rules').onclose=()=>{try{localStorage.setItem(rulesKey,'yes')}catch{}};
 let seen=false;try{seen=localStorage.getItem(rulesKey)==='yes'}catch{}
 if(!seen)$('rules').showModal();
 $('callsign').value=typeof saved.callsign==='string'?saved.callsign.slice(0,20):'';
-$('soundMode').value=saved.sound==='off'?'off':'on';
+$('soundMode').value=saved.sound==='off'?'off':'on';$('killcam').value=saved.killcam==='off'?'off':'on';
 select(Math.max(0,pilots.findIndex(p=>p[0]===saved.pilot)));
-for(const id of ['stream','outfit','accessory','callsign','soundMode'])$(id).onchange=()=>{if($('mode').value==='custom')custom=Object.fromEntries(fields.map(key=>[key,$(key).value]));select(choice);saveLoadout()};
+for(const id of ['stream','outfit','accessory','callsign','soundMode','killcam'])$(id).onchange=()=>{if($('mode').value==='custom')custom=Object.fromEntries(fields.map(key=>[key,$(key).value]));select(choice);saveLoadout()};
 $('start').onclick=begin;$('again').onclick=begin;$('changePilot').onclick=()=>{$('end').hidden=true;$('menu').hidden=false;$('start').focus()};
 // Achievements and a daily challenge, saved under their own localStorage key.
 const achieveKey='groundhog-air-rally-achievements';
@@ -469,6 +470,14 @@ function showAchievements(){
  }));
  $('achievements').showModal();
 }
+// Emotes: each pilot has a catchphrase (key 1 or the 💬 button), plus GG, laugh and wave (keys 2-4).
+const catchphrases={Braeden:'Buckets! 🏀',Ethan:'¡Vamos! 🏐',Josh:'Sláinte! 🍺',Casey:'Say cheese! 📷',Owen:'Surf’s up! 🏄',Bridger:'Fish on! 🎣',Jimmy:'Deep dish only 🍕',Cole:'Yeehaw! 🤠','Jess Joe':'BEC time 🥪'};
+const emoteSet=()=>[catchphrases[pilots[choice][0]]||'Let’s fly!','GG 🤝','😂','👋'];
+const botLines=['GG','😂','Too easy','👋','Nice try','Oops'];
+let emoteReady=0;
+function say(s,text){s.emote={text,until:time+2.2}}
+function emote(i=0){if(!live||!player.hp||time<emoteReady)return;emoteReady=time+1.2;say(player,emoteSet()[i])}
+let killCam=null;
 function announce(message){toast=message;notice=2.8}
 const powers=['Marist Camera','Froot Loops Burst','Salmon Shield','Kia Turbo','Igloo Wall','Ramon’s Healthy Lotion','MAJ P’s Blabber'];
 const blabberRange=280,blabberSleep=3.5;
@@ -501,7 +510,8 @@ function activate(){
  player.power='';announce(power);matchStats.usedPower=true;
 }
 $('power').onclick=activate;
-addEventListener('keydown',e=>{if(live&&['w','a','s','d','ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();keys.add(e.key.toLowerCase());if(e.key.toLowerCase()==='e'&&!e.repeat)activate()});
+$('emote').onclick=()=>emote(0);
+addEventListener('keydown',e=>{if(live&&['1','2','3','4'].includes(e.key)){emote(Number(e.key)-1);return}if(live&&['w','a','s','d','ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();keys.add(e.key.toLowerCase());if(e.key.toLowerCase()==='e'&&!e.repeat)activate()});
 addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));
 addEventListener('blur',()=>{keys.clear();mouse.down=false;for(const side of Object.keys(sticks))delete sticks[side]});
 canvas.onpointerdown=e=>{
@@ -533,7 +543,7 @@ function fogDps(ring){return 8+2*Math.max(0,Math.round((1460-ring)/120))}
 function radius(){return Math.max(95,1460-Math.max(0,Math.floor((time-18)/10)+1)*120)}
 function finish(alive){
  live=false;mouse.down=false;for(const side of Object.keys(sticks))delete sticks[side];
- $('hud').hidden=$('levels').hidden=$('power').hidden=true;$('end').hidden=false;
+ $('hud').hidden=$('levels').hidden=$('power').hidden=$('emote').hidden=true;$('end').hidden=false;
  $('results').dataset.win=alive;
  $('outcome').textContent=alive?'Victory!':'Eliminated';
  const place=alive?1:eliminationPlace||1+ships.filter(s=>s.hp>0).length;
@@ -550,7 +560,8 @@ function finish(alive){
 function eliminate(s,reason,attacker){
  reportKO(s,reason,attacker);
  if(s!==player&&attacker&&attacker!==player&&time-(s.playerHit??-Infinity)<=8){assists++;announce('Assist · '+s.name)}
- if(s===player){eliminationPlace=ships.filter(t=>t===s||t.hp>0).length;cause=reason}
+ if(s===player){eliminationPlace=ships.filter(t=>t===s||t.hp>0).length;cause=reason;player.killer=attacker}
+ if(attacker&&attacker!==player&&attacker.hp>0&&Math.random()<.45)say(attacker,botLines[Math.floor(Math.random()*botLines.length)]);
  if(s.power){drops.push({x:s.x,y:s.y,type:s.power,fromPilot:true});s.power=''}
  s.hp=0;burst(s.x,s.y,s.color,18);burst(s.x,s.y,'#ffd27a',10,'chunk');
  for(const c of ['#ff7d7d','#ffd65a','#8ae692','#7cbdff','#c29aff'])burst(s.x,s.y,c,5,'confetti');
@@ -650,7 +661,7 @@ function step(dt){
   return false;
  });
  updateEffects(dt);
- cam.x+=(player.x-cam.x)*Math.min(1,dt*10);cam.y+=(player.y-cam.y)*Math.min(1,dt*10);
+ const focus=killCam?.focus||player;cam.x+=(focus.x-cam.x)*Math.min(1,dt*10);cam.y+=(focus.y-cam.y)*Math.min(1,dt*10);
  const count=ships.filter(s=>s.hp>0).length;
  $('hpValue').textContent=player.hp+' / '+maxHealth(player);
  $('hpBar').max=maxHealth(player);$('hpBar').value=player.hp;
@@ -660,7 +671,12 @@ function step(dt){
  drawUpgradeLevels();
  $('zone').classList.toggle('danger',player.out>0);$('zone').textContent=player.out>0?(player.out<=fogGrace?'⚠ FOG · get back in the circle!':'IN THE FOG · −'+fogDps(ring)+' HP/s'):ring===95?'Final zone':'Fog moves in '+Math.ceil(time<18?18-time:10-(time-18)%10)+'s';
  $('power').disabled=!player.power;$('power').textContent=player.power?player.power+' · E':player.buff>0?player.effect+' '+Math.ceil(player.buff)+'s':'Power · empty';
- if(!player.hp||count===1)finish(player.hp>0);
+ if((!player.hp||count===1)&&!killCam){
+  const won=player.hp>0,focus=won?player:(player.killer?.hp>0?player.killer:player);
+  if($('killcam').value==='on'){$('levels').hidden=$('power').hidden=$('emote').hidden=true;$('feed').hidden=true}
+  if($('killcam').value==='on')killCam={end:animNow+2600,won,focus,text:won?'FINAL KNOCKOUT':player.killer?'KNOCKED OUT BY '+player.killer.name.toUpperCase():'CAUGHT IN THE FOG'};
+  else finish(won);
+ }
 }
 function circle(x,y,r,fill,stroke){g.beginPath();g.arc(x,y,r,0,Math.PI*2);if(fill){g.fillStyle=fill;g.fill()}if(stroke){g.strokeStyle=stroke;g.stroke()}}
 function rect(x,y,a,b,color){g.fillStyle=color;g.fillRect(x,y,a,b)}
@@ -1261,7 +1277,7 @@ function drawTrail(b){
 function render(now){
  rect(0,0,w,h,'#172b2b');
  const calm=typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches,sx=shake&&!calm?random(-shake,shake):0,sy=shake&&!calm?random(-shake,shake):0;
- g.save();g.translate(w/2+sx,h/2+sy);g.scale(zoom,zoom);g.translate(-cam.x,-cam.y);
+ g.save();g.translate(w/2+sx,h/2+sy);g.scale(zoom*(killCam?1.4:1),zoom*(killCam?1.4:1));g.translate(-cam.x,-cam.y);
  g.fillStyle=groundPattern();g.fillRect(0,0,size,size);
  // Roads: asphalt with curbs, worn edges and a dashed centre line.
  const roadList=layoutFor(arena).roads;
@@ -1377,6 +1393,13 @@ function render(now){
   }
   if(s.buff>0&&s.effect==='Salmon Shield')circle(s.x,s.y,28,null,'#7ef1f5');
   label(s.name,s.x,s.y-32);
+  if(s.emote&&s.emote.until>time){
+   g.font='800 13px system-ui';const tw=g.measureText(s.emote.text).width+14,by=s.y-62;
+   g.globalAlpha=Math.min(1,(s.emote.until-time)*3);g.fillStyle='#fffaf0';g.strokeStyle='#2a2320';g.lineWidth=1.5;
+   g.beginPath();g.roundRect(s.x-tw/2,by-12,tw,22,9);g.fill();g.stroke();
+   g.beginPath();g.moveTo(s.x-5,by+10);g.lineTo(s.x,by+16);g.lineTo(s.x+5,by+10);g.closePath();g.fill();
+   label(s.emote.text,s.x,by+4,'#2a2320','800 13px system-ui');g.globalAlpha=1;
+  }
   rect(s.x-17,s.y+27,34,4,'#233e3c');rect(s.x-17,s.y+27,34*s.hp/maxHealth(s),4,s.color);
  }
  emblemBoost=1;
@@ -1392,7 +1415,8 @@ function render(now){
  g.lineWidth=4;circle(center,center,radius(),null,'#ddaff4');
  g.restore();
  const vig=g.createRadialGradient(w/2,h/2,Math.min(w,h)*.38,w/2,h/2,Math.max(w,h)*.75);vig.addColorStop(0,'#00000000');vig.addColorStop(1,'#00000066');rect(0,0,w,h,vig);
- if(live){
+ if(killCam){const bar=h*.11;rect(0,0,w,bar,'#000');rect(0,h-bar,w,bar,'#000');lootTag('KILL CAM',w/2,bar*.6,'#ffd27a','900 14px system-ui');let fs=26;g.font='900 '+fs+'px system-ui';while(fs>11&&g.measureText(killCam.text).width>w-30){fs--;g.font='900 '+fs+'px system-ui'}lootTag(killCam.text,w/2,h-bar*.4,'#fff1cf','900 '+fs+'px system-ui')}
+ if(live&&!killCam){
   if(arena===arenas[2])for(let i=0;i<64;i++){
    const x=(i*137+now*(.024+(i%3)*.009))%w,y=(i*211+now*(.045+(i%4)*.013))%h;
    circle(x,y,1+(i%3)*.45,i%3===0?'#ffffffc0':'#eef8ff70');
@@ -1424,7 +1448,8 @@ function render(now){
  }
 }
 function frame(now){
- const dt=Math.min(.034,(now-last)/1000);last=now;animNow=now;
+ const dt=Math.min(.034,(now-last)/1000)*(killCam?.3:1);last=now;animNow=now;
+ if(killCam&&live&&now>=killCam.end){const won=killCam.won;killCam=null;finish(won)}
  if(live)step(dt);
  else updateEffects(dt);
  render(now);renderHangar(now);requestAnimationFrame(frame);

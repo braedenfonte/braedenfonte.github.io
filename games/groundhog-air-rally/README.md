@@ -24,6 +24,8 @@ The live site uses GitHub Pages and the existing custom domain. Changes to the g
 - Speed, Health, Shield, and Fire Rate cap at 5 each match. Pickup color shows the level you would reach. Grey 1, green 2, blue 3, purple 4, gold 5. Icons identify the trait. Fire Rate uses an arrow aimed at a ball.
 - Health adds 15 maximum HP per level without healing you. After five seconds without taking damage, pilots heal 6 HP per second inside the circle. Ramon's Healthy Lotion heals up to 65 HP instantly.
 - One held power slot. Eliminated pilots drop their unused power. Other powers are Froot Loops Burst (rapid fire), Salmon Shield (temporary shot immunity), Kia Turbo (speed burst), Igloo Wall (temporary cover), Marist Camera (briefly reveals nearby opponents on the minimap), and MAJ P’s Blabber (rivals within 280 units fall asleep for 3.5 seconds and can't move or shoot; a hit wakes them).
+- Emotes: 1 (or the 💬 button on touch) shows the pilot's catchphrase in a speech bubble; 2–4 are GG, 😂 and 👋. Bots sometimes taunt after a knockout. Catchphrases live in `catchphrases`.
+- Kill cam (hangar setting, on by default, saved in the loadout): when you're knocked out or win, the camera zooms in slow motion on the killer or the final knockout for about 2.5 seconds before the results.
 - The kill feed lists eliminations. The player gets a big knockout notice for their own kills and an assist if another pilot finishes a target within eight seconds of the player's last damaging hit.
 
 ## Pilots and cosmetics
