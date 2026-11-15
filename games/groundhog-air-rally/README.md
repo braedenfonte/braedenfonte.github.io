@@ -71,6 +71,10 @@ The named reference landmarks (and their Scrapbook pages) are shared, but each a
 
 Keep the references recognizable through scenery and play. Examples include Iona vs. University of Alaska Anchorage women's volleyball, Turner vs. Semmel boxing, the lost Marist camera, Phebes, the Kia Soul, the Kenai salmon run and 10-mile trail, and the Dena’ina homelands postcard. The `finds` array is the source for current Scrapbook details, including names, schools, and locations. Keep the Scrapbook, but look for opportunities to make important references visible or interactive on the map.
 
+## Multiplayer (in progress)
+
+Open the game with `?friends` (for example `/games/groundhog-air-rally/?friends`) to see **Play with friends (beta)**. One player hosts and gets a 4-letter code; up to 4 others join with it. The lobby uses PeerJS: the library loads from unpkg only when you open a room, and PeerJS's free public server only introduces the devices (it sees connection setup, not gameplay); after that the devices talk directly. The host will run the match and the guests send inputs. Done so far: lobby, room codes, join/leave, room-full handling. Next: multiple humans in one match, then syncing every screen.
+
 ## Achievements and daily challenge
 
 The hangar's **Achievements & daily challenge** button lists 11 achievements (for example Triple KO, Pot of Gold, Fog Dancer, Hangar Regular) and today's challenge. One challenge rotates each local day from `dailyList`; completing it once per day adds 10 Amex points. New unlocks appear on the results screen.
