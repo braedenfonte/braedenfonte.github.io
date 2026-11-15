@@ -1,10 +1,10 @@
 <!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Groundhog Air Rally</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#101c1a;color:#fff9dc;font:16px system-ui;overflow:hidden}canvas{display:block;width:100vw;height:100dvh;touch-action:none}main{position:absolute;inset:0;display:grid;place-items:center;background:#0b1918a0;padding:16px}section{background:#172b28;border:2px solid #4f7362;border-radius:24px;padding:clamp(18px,4vw,44px);max-width:620px;box-shadow:0 18px 70px #0009}h1{font-size:clamp(32px,7vw,67px);line-height:.95;margin:8px 0 18px;color:#ffda79}p{line-height:1.4}button{font:inherit;font-weight:750;border:0;border-radius:12px;padding:12px;background:#2f5045;color:white;cursor:pointer;touch-action:manipulation}button[aria-pressed=true],#start{background:#ffda79;color:#1c2922}#pilots{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}#start{margin-top:14px;width:100%}#hud{position:absolute;inset:12px 12px auto;display:flex;justify-content:space-between;gap:8px;pointer-events:none}#hud span,#power{background:#142824ed;border:1px solid #74967f;padding:9px;border-radius:10px}#power{position:absolute;right:14px;bottom:120px} [hidden]{display:none!important}small{display:block;margin-top:12px;color:#c7dbc9}@media(max-width:420px){#pilots{grid-template-columns:repeat(2,1fr)}#hud{font-size:12px}}
-</style>
+#results{text-align:center;width:min(440px,100%)}#results h2{font-size:clamp(32px,8vw,58px);margin:4px 0}#results[data-win=true]{border-color:#ffda79}#results[data-win=false]{border-color:#ed9789}#place{font-size:clamp(52px,14vw,102px);font-weight:900;line-height:1.05;color:#ffda79}#resultStats{display:flex;justify-content:center;gap:24px;margin:18px 0}#results button{margin:4px}#again{background:#ffda79;color:#172b28}</style>
 <canvas id="field" aria-label="Groundhog Air Rally arena"></canvas><div id="hud" hidden><span id="stats"></span><span id="zone"></span></div><button id="power" hidden>Power</button>
 <main id="menu"><section><div>RC BATTLE ROYALE</div><h1>Groundhog<br>Air Rally</h1><p id="brief">Pop rival copters, grab crate loot, and stay ahead of the fog. Last copter flying wins.</p><div id="pilots" aria-label="Choose pilot"></div><button id="start">Start match</button><small>Desktop · WASD, mouse to aim and fire, E for power<br>Touch · Left stick to fly, right stick to aim and fire</small></section></main>
-<script>
+<main id="end" hidden><section id="results" aria-labelledby="outcome"><h2 id="outcome"></h2><div id="place"></div><div id="placement"></div><div id="resultStats"><span id="resultKills"></span><span id="resultTime"></span></div><p id="cause"></p><button id="again">Play again</button><button id="changePilot">Change pilot</button></section></main><script>
 'use strict';
 const $=id=>document.getElementById(id);
 const canvas=$('field'), g=canvas.getContext('2d');
@@ -18,7 +18,14 @@ const props=[
  {x:1190,y:420,w:170,h:86,label:'PHEBES · 18+',color:'#734f79'},
  {x:810,y:1170,w:140,h:70,label:'KENAI IGLOO',color:'#83a9b7'}
 ];
-const size=1600, center=800, keys=new Set(), sticks={};
+props.push(
+ {x:2400,y:700,w:180,h:92,label:'DUBLIN',color:'#6b945b'},
+ {x:700,y:2420,w:190,h:90,label:'CALEDONIA',color:'#ac814f'},
+ {x:2320,y:2350,w:170,h:110,label:'CLEVELAND',color:'#606c91'},
+ {x:2600,y:1520,w:125,h:80,label:'FISHKILL',color:'#9c735d'}
+);
+const size=3200, center=size/2, keys=new Set(), sticks={};
+let eliminationPlace=0, cause="";
 let choice=0, live=false, player, ships=[], bolts=[], crates=[], drops=[], sparks=[], time=0, kills=0, mouse={x:0,y:0,down:false,active:false}, cam={x:800,y:800}, w,h,zoom=1,last=0,toast='',notice=0;
 const random=(a,b)=>a+Math.random()*(b-a);
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
@@ -35,15 +42,25 @@ function spawn(radius){
 function ship(name,color,point){return {...point,name,color,hp:100,angle:0,vx:0,vy:0,cd:0,out:0,speed:0,rate:0,power:'',effect:'',buff:0}}
 function begin(){
  time=0;kills=0;notice=0;mouse.down=false;keys.clear();
- player=ship(names[choice],colors[choice],{x:800,y:795});
- ships=[player,...rivals.map((name,i)=>ship(name,colors[(i+1)%4],spawn(663)))];
- crates=Array.from({length:34},(_,i)=>({...spawn(690),hp:2,bonus:i%9===0}));
+ eliminationPlace=0;cause='';
+ const phase=random(0,Math.PI*2);
+ const locations=Array.from({length:rivals.length+1},(_,i)=>{
+  const angle=phase+i*Math.PI*2/(rivals.length+1),x=center+Math.cos(angle)*1080,y=center+Math.sin(angle)*1080;
+  for(let offset=0;offset<=220;offset+=20){
+   const point={x:x-Math.cos(angle)*offset,y:y-Math.sin(angle)*offset};
+   if(!blocked(point.x,point.y,40))return point;
+  }
+  return {x,y};
+ });
+ player=ship(names[choice],colors[choice],locations[0]);
+ ships=[player,...rivals.map((name,i)=>ship(name,colors[(i+1)%4],locations[i+1]))];
+ crates=[...locations.map(p=>({x:p.x+(center-p.x)*.09,y:p.y+(center-p.y)*.09})).filter(p=>!blocked(p.x,p.y,20)),...Array.from({length:85},()=>spawn(1440))].map((p,i)=>({...p,hp:2,bonus:i%9===0}));
  drops=[];bolts=[];sparks=[];cam={x:player.x,y:player.y};live=true;
- $('menu').hidden=true;$('hud').hidden=false;$('power').hidden=false;
+ $('end').hidden=true;$('menu').hidden=true;$('hud').hidden=false;$('power').hidden=false;
 }
 function select(i){choice=i;[...$('pilots').children].forEach((b,j)=>b.setAttribute('aria-pressed',i===j))}
 names.forEach((n,i)=>{const b=document.createElement('button');b.textContent=n;b.onclick=()=>select(i);$('pilots').append(b)});
-select(0);$('start').onclick=begin;
+select(0);$('start').onclick=begin;$('again').onclick=begin;$('changePilot').onclick=()=>{$('end').hidden=true;$('menu').hidden=false;$('start').focus()};
 function announce(message){toast=message;notice=2.8}
 function activate(){if(!live||!player.power)return;player.effect=player.power;player.power='';player.buff=5;announce(player.effect)}
 $('power').onclick=activate;
@@ -70,12 +87,22 @@ function fire(s){
  bolts.push({x:s.x+dx*21,y:s.y+dy*21,dx,dy,owner:s,life:.84,tint:s.buff>0&&s.effect==='Froot Loops Burst'?'#ff91be':'#fff0a2'});
 }
 function burst(x,y,color,n=9){for(let i=0;i<n;i++)sparks.push({x,y,vx:random(-100,100),vy:random(-100,100),life:random(.2,.55),color})}
-function radius(){return Math.max(95,730-Math.floor(time/10)*70)}
+function radius(){return Math.max(95,1460-Math.max(0,Math.floor((time-18)/10)+1)*120)}
 function finish(alive){
  live=false;mouse.down=false;for(const side of Object.keys(sticks))delete sticks[side];
- $('hud').hidden=$('power').hidden=true;$('menu').hidden=false;
- $('brief').textContent=(alive?'You won the rally!':'Placed #'+(1+ships.filter(s=>s.hp>0).length))+ ' · '+kills+' eliminations · '+Math.floor(time)+'s flown.';
- $('start').textContent='Play again';
+ $('hud').hidden=$('power').hidden=true;$('end').hidden=false;
+ $('results').dataset.win=alive;
+ $('outcome').textContent=alive?'Victory!':'Eliminated';
+ $('place').textContent='#'+(alive?1:eliminationPlace||1+ships.filter(s=>s.hp>0).length);
+ $('placement').textContent='of '+ships.length+' pilots';
+ $('resultKills').textContent=kills+' eliminations';
+ $('resultTime').textContent=Math.floor(time)+'s survived';
+ $('cause').textContent=alive?'Last copter flying':cause||'Your copter is down';
+ $('again').focus();
+}
+function eliminate(s,reason){
+ if(s===player){eliminationPlace=ships.filter(t=>t===s||t.hp>0).length;cause=reason}
+ s.hp=0;burst(s.x,s.y,s.color,18);
 }
 function step(dt){
  time+=dt;notice-=dt;const ring=radius(),centerPoint={x:center,y:center};
@@ -96,7 +123,7 @@ function step(dt){
    const steer=distance(s,centerPoint)>ring-55?Math.atan2(center-s.y,center-s.x):a+Math.sin(time*1.1+ships.indexOf(s))*1.2+(d<125?2.2:0);
    dx=Math.cos(steer)*.72;dy=Math.sin(steer)*.72;s.angle=a+Math.sin(time*3+ships.indexOf(s))*.19;
    if(blocked(s.x+dx*56,s.y+dy*56,15)){dx=Math.cos(steer+1.5);dy=Math.sin(steer+1.5)}
-   if(d<390)fire(s);
+   if(time>=5&&d<390)fire(s);
    if(s.power&&d<250&&s.hp<75){s.effect=s.power;s.power='';s.buff=4}
   }
   const magnitude=Math.max(1,Math.hypot(dx,dy)),speed=190+s.speed*23;
@@ -105,7 +132,7 @@ function step(dt){
   if(!blocked(nx,s.y,14))s.x=nx;else s.vx=0;
   if(!blocked(s.x,ny,14))s.y=ny;else s.vy=0;
   s.out=distance(s,centerPoint)>ring?s.out+dt:0;
-  if(s.out>=10){s.hp=0;burst(s.x,s.y,s.color)}
+  if(s.out>=10){eliminate(s,'Caught in the fog')}
  }
  for(const b of bolts){
   b.life-=dt;b.x+=b.dx*565*dt;b.y+=b.dy*565*dt;
@@ -117,7 +144,7 @@ function step(dt){
    continue;
   }
   const s=ships.find(t=>t!==b.owner&&t.hp>0&&distance(t,b)<18);
-  if(s){b.life=0;burst(b.x,b.y,s.color,5);if(s.buff>0&&s.effect==='Salmon Shield')continue;s.hp=Math.max(0,s.hp-20);if(!s.hp){burst(s.x,s.y,s.color,18);if(b.owner===player)kills++}}
+  if(s){b.life=0;if(time<5)continue;burst(b.x,b.y,s.color,5);if(s.buff>0&&s.effect==='Salmon Shield')continue;s.hp=Math.max(0,s.hp-20);if(!s.hp){eliminate(s,'Shot down by '+b.owner.name);if(b.owner===player)kills++}}
  }
  bolts=bolts.filter(b=>b.life>0);
  drops=drops.filter(d=>{
@@ -135,7 +162,7 @@ function step(dt){
  cam.x+=(player.x-cam.x)*Math.min(1,dt*10);cam.y+=(player.y-cam.y)*Math.min(1,dt*10);
  const count=ships.filter(s=>s.hp>0).length;
  $('stats').textContent='HP '+player.hp+' · '+count+' flying · '+kills+' KO';
- $('zone').textContent=player.out>0?'FOG · '+Math.max(0,Math.ceil(10-player.out))+'s':'Fog moves in '+(10-Math.floor(time)%10)+'s';
+ $('zone').textContent=player.out>0?'FOG · '+Math.max(0,Math.ceil(10-player.out))+'s':ring===95?'Final zone':'Fog moves in '+Math.ceil(time<18?18-time:10-(time-18)%10)+'s';
  $('power').disabled=!player.power;$('power').textContent=player.power?player.power+' · E':player.buff>0?player.effect+' '+Math.ceil(player.buff)+'s':'Power · empty';
  if(!player.hp||count===1)finish(player.hp>0);
 }
@@ -172,6 +199,7 @@ function render(now){
  g.lineWidth=4;circle(center,center,radius(),null,'#ddaff4');
  g.restore();
  if(live){
+  if(time<5)label('Spawn protection · '+Math.ceil(5-time)+'s',w/2,112,'#ffdf89','bold 16px system-ui');
   if(notice>0)label(toast,w/2,85,'#ffdf89','bold 20px system-ui');
   for(const s of Object.values(sticks)){circle(s.x,s.y,46,'#142a2b66','#d9edcf77');const m=Math.max(1,Math.hypot(s.dx,s.dy)/43);circle(s.x+s.dx/m,s.y+s.dy/m,19,'#e5f6dbaa')}
  }
