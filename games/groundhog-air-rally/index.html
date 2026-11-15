@@ -1073,7 +1073,10 @@ function drawSalmon(tint){
  g.beginPath();g.moveTo(-3,-5);g.lineTo(1,-8);g.lineTo(4,-5);g.fillStyle='#97575c';g.fill();
  circle(9,-2,1.5,'#292434');
 }
-function drawShot(b,now){
+// Every projectile is drawn to the same on-screen size (about 16 units across); hit size is identical for all.
+const shotScale={loops:1.05,basketball:1,volley:1,beers:.92,shotglass:1.15,pizza:1,spurs:1,chips:1.3,snow:1.25,flash:1.25,salmon:.6};
+function drawShot(b,now){const k=shotScale[b.style]||1;g.save();g.translate(b.x,b.y);g.scale(k,k);g.translate(-b.x,-b.y);drawShotRaw(b,now);g.restore()}
+function drawShotRaw(b,now){
   g.lineWidth=2.5;
   if(b.style==='loops')circle(b.x,b.y,6,null,b.tint);
   else if(b.style==='basketball'){
@@ -1086,7 +1089,7 @@ function drawShot(b,now){
    g.restore();
   }
   else if(['beers','shotglass','pizza','spurs','chips'].includes(b.style)){
-   g.save();g.translate(b.x,b.y);g.rotate(b.style==='beers'?now*.014:Math.atan2(b.dy,b.dx));
+   g.save();g.translate(b.x,b.y);g.rotate(b.style==='beers'?now*.014:b.style==='spurs'?now*.03:b.style==='pizza'?now*.008:Math.atan2(b.dy,b.dx));
    if(b.style==='beers'){
     // Spinning pint mug: amber beer, foam head, handle, glass highlight.
     g.beginPath();g.arc(6.5,1,3.5,-1.4,1.4);g.strokeStyle='#e8eef0';g.lineWidth=2;g.stroke();
@@ -1099,9 +1102,17 @@ function drawShot(b,now){
     g.beginPath();g.moveTo(-5,-1);g.lineTo(5,-1);g.lineTo(3.8,4.8);g.lineTo(-3.8,4.8);g.closePath();g.fillStyle='#fbf6ea';g.fill();
     rect(-4.5,-1.5,9,1.2,'#ffffff');rect(-4,4.8,8,1.5,'#9ab8c2');rect(-4.2,-4,1.2,8,'#ffffffcc');
    }else if(b.style==='pizza'){
-    circle(0,0,6,'#b66c37');circle(0,0,5,b.tint);circle(2,-1,1.4,'#ad3934');circle(-2,2,1.3,'#ad3934');
+    // Chicago deep dish: tall golden crust, chunky tomato top, cheese pulls, pepperoni, slice cuts.
+    const crust=g.createRadialGradient(-2,-2,2,0,0,8);crust.addColorStop(0,'#f0b860');crust.addColorStop(1,'#a8641e');
+    g.lineWidth=1.2;circle(0,0,7.8,crust,'#5a2e0c');circle(0,0,5.8,'#c8321e','#7a1a0c');
+    for(const [cx,cy] of [[-2.5,-1.5],[2,2.2],[1.8,-2.6]])circle(cx,cy,1.5,'#ffd66b');
+    for(const [cx,cy] of [[-1.8,2.6],[2.8,-.2],[-3,-3.2]])circle(cx,cy,1.2,'#7a160e');
+    g.strokeStyle='#5a1a0c80';g.lineWidth=.6;for(let i=0;i<3;i++){g.beginPath();g.moveTo(Math.cos(i*2.09)*-5.8,Math.sin(i*2.09)*-5.8);g.lineTo(Math.cos(i*2.09)*5.8,Math.sin(i*2.09)*5.8);g.stroke()}
    }else if(b.style==='spurs'){
-    for(let i=0;i<6;i++){rect(-1,-6,2,12,b.tint);g.rotate(Math.PI/6)}circle(0,0,2,'#34434d');
+    // Spinning spur rowel: eight-point silver star around a hub.
+    g.beginPath();for(let i=0;i<16;i++){const r=i%2?3:7.6,a=i*Math.PI/8;g.lineTo(Math.cos(a)*r,Math.sin(a)*r)}g.closePath();
+    const steel=g.createLinearGradient(-7,-7,7,7);steel.addColorStop(0,'#ffffff');steel.addColorStop(1,'#8c98a8');g.fillStyle=steel;g.fill();g.strokeStyle='#3a4450';g.lineWidth=1;g.stroke();
+    circle(0,0,2.4,'#c9a24a','#5a4320');
    }else{g.beginPath();g.ellipse(0,0,6,4,0,0,Math.PI*2);g.fillStyle=b.tint;g.fill()}
    g.restore();
   }
