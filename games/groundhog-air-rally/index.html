@@ -59,7 +59,7 @@ const streams=[
  ['snow','Igloo Snowballs',['#eaffff','#93dcff']],
  ['basketball','Basketballs',['#ff9950','#ee813e']]
 ];
-const pilotKits={"Braeden":["BF","Maroon & White","#812d4d","#fff"],"Ethan":["EP","Black & Blue","#222630","#408eff"],"Josh":["JB","Green & Orange","#27854c","#ff953d"],"Casey":["CA","Pink & Black","#f881ad","#24232b"],"Owen":["OB","Sunset Orange","#a74721","#ffe1ae"],"Bridger":["BB","Icy Blue & White","#9cdcff","#fff"],"Jimmy":["JB","Navy & Orange","#17294f","#ff963f"],"Cole":["CB","Texas Blue & Red","#285fb5","#e64c55"],"Jess Joe":["JJA","Black & Red","#22252b","#ef4956"]};
+const pilotKits={"Braeden":["BF","Maroon & White","#812d4d","#fff"],"Ethan":["EP","Spain Flag","#c60b1e","#ffc400"],"Josh":["JB","Green & Orange","#27854c","#ff953d"],"Casey":["CA","Pink & Black","#f881ad","#24232b"],"Owen":["OB","Sunset Orange","#a74721","#ffe1ae"],"Bridger":["BB","Icy Blue & White","#9cdcff","#fff"],"Jimmy":["JB","Navy & Orange","#17294f","#ff963f"],"Cole":["CB","Texas Blue & Red","#285fb5","#e64c55"],"Jess Joe":["JJA","Black & Red","#22252b","#ef4956"]};
 const outfits=[...Object.values(pilotKits).map(([,label])=>[label,label]),['maroon','Caledonia Maroon'],['signature','Pilot signature'],['gold','Credit Card Gold'],['ice','Kenai Ice'],['purple','Phebes Purple'],['mint','Kia Mint']];
 const outfitColors={...Object.fromEntries(Object.values(pilotKits).map(([,label,color])=>[label,color])),maroon:'#812d4d',gold:'#ffdb71',ice:'#a8e6ff',purple:'#bc8af8',mint:'#73e5b9'};
 const storageKey='groundhog-air-rally-loadout';
@@ -392,6 +392,7 @@ customButton.onclick=()=>{
  $('callsign').focus();
 };
 $('pilots').append(customButton);
+if(saved.outfit==='Black & Blue')saved.outfit='Spain Flag';
 options('stream',streams,saved.stream);options('outfit',outfits,saved.outfit);options('accessory',accessories,saved.accessory);
 const fields=['outfit','stream','accessory','callsign'];
 let custom={outfit:$('outfit').value,stream:$('stream').value,accessory:$('accessory').value,callsign:typeof saved.callsign==='string'?saved.callsign.slice(0,20):''};
@@ -930,17 +931,23 @@ function drawLocation(o,now,kindOverride){
  plate(name,w,h);
  g.restore();
 }
-const skinPatterns=['chevrons','circuit','diagonal','spots','sunset','ice','western','texas','flames'];
+const skinPatterns=['chevrons','spain','diagonal','spots','sunset','ice','western','texas','flames'];
 function drawPattern(s){
  g.save();g.beginPath();g.arc(-5,0,11,0,Math.PI*2);g.clip();
  const pattern=skinPatterns[Object.values(pilotKits).findIndex(kit=>kit[2]===s.color)]||'chevrons';
- if(['chevrons','diagonal','sunset','western','texas','flames','ice'].includes(pattern)){
+ if(['chevrons','diagonal','sunset','western','texas','flames','ice','spain'].includes(pattern)){
   if(pattern==='diagonal'){rect(-16,-11,8,22,'#178657');rect(-8,-11,7,22,'#faf8ed');rect(-1,-11,8,22,'#ef8839')}
   if(pattern==='chevrons'){rect(-17,-11,24,22,'#fff9ee');rect(-17,-11,24,3,'#812d4d');rect(-17,8,24,3,'#812d4d')}
   if(pattern==='flames'){rect(-17,-11,24,22,'#1b1d22');rect(-17,-4,24,3,'#cb2034');rect(-17,2,24,3,'#cb2034')}
   if(pattern==='texas'){rect(-16,-11,8,22,'#214784');rect(-8,-11,15,11,'#fff9ea');rect(-8,0,15,11,'#c73246');label('★',-12,3,'#fff','8px system-ui')}
   if(pattern==='western'){rect(-17,-11,24,22,'#142747');label('C',-5,8,'#f4edde','bold 22px Georgia');label('C',-5,7,'#fa7629','bold 19px Georgia')}
   if(pattern==='sunset'){for(let i=0;i<8;i++){g.save();g.translate(-5,0);g.rotate(i*Math.PI/4);rect(6,-.7,5,1.4,'#ffbc62');g.restore()}circle(-5,0,5,'#ffe4a7')}
+  if(pattern==='spain'){
+   // Ethan: Spanish flag, red-yellow-red with the yellow band doubled and a simple crest.
+   rect(-17,-11,24,22,'#c60b1e');rect(-10.5,-11,11,22,'#ffc400');
+   g.save();g.translate(-5,-5);g.rotate(Math.PI/2);rect(-3,-3,6,6,'#c60b1e');rect(-3,-3,3,3,'#e8b44a');rect(0,0,3,3,'#e8b44a');g.strokeStyle='#7a5a14';g.lineWidth=.6;g.strokeRect(-3,-3,6,6);
+   rect(-3.4,-4.6,6.8,1.6,'#c9a24a');rect(-5,-3,1.2,6,'#d8d8d8');rect(3.8,-3,1.2,6,'#d8d8d8');g.restore();
+  }
   if(pattern==='ice'){
    // Bridger: glacier-blue ice with white shards and a snowflake.
    const ice=g.createLinearGradient(-16,-11,6,11);ice.addColorStop(0,'#e9f8ff');ice.addColorStop(.5,'#9cdcff');ice.addColorStop(1,'#4fa6d8');rect(-17,-11,24,22,ice);

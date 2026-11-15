@@ -33,7 +33,7 @@ Selecting a pilot applies their preset. **Custom** enables editing, and clicking
 | Pilot | Home | Skin | Projectile | Accessory |
 |---|---|---|---|---|
 | Braeden Fonte | Caledonia, NY | White with overlapping maroon C and M | Basketballs | Blue-light glasses |
-| Ethan Ploetz | Alexandria, VA | Black and blue | Volleyballs | Blond hair |
+| Ethan Ploetz | Alexandria, VA | Spanish flag | Volleyballs | Blond hair |
 | Josh Brancamp | Fishkill, NY | Irish flag | Spinning Beers | Irish baby shoes |
 | Casey Adams | Cleveland, OH | Pink and black | Froot Loops | Camera |
 | Owen Beckwith | San Diego, CA | Sunset orange and pale sun | Milky shot glasses | Surfboard |
