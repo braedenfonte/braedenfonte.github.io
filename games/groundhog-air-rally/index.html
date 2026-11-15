@@ -55,10 +55,10 @@ html,body{touch-action:manipulation;-webkit-user-select:none;user-select:none;-w
  #ko{top:22%;font-size:28px}#dropAlert{top:62px;font-size:12px;padding:4px 8px}
  #power{right:12px;bottom:auto;top:60%;font-size:12px;padding:7px 9px}#emote{right:12px;bottom:auto;top:calc(60% - 52px);width:42px;height:42px;font-size:19px}
 }
-#openFriends{width:100%;margin-top:6px;background:linear-gradient(180deg,#3a5a8a,#24406a)}#friends{background:#172b28;color:#fff9dc;border:2px solid #7cbdff;border-radius:18px;width:min(460px,92vw)}#friends::backdrop{background:#071715cc}#mpChoose{display:grid;gap:10px}.mpJoinRow{display:flex;gap:8px}#mpCode{flex:1;font:800 24px system-ui;letter-spacing:.3em;text-transform:uppercase;text-align:center;background:#101f1d;color:#fff;border:1px solid #74967f;border-radius:10px;padding:8px}#mpCodeBig{font:900 46px system-ui;letter-spacing:.25em;text-align:center;color:#ffda79}#mpPlayers{padding-left:22px}#mpPlayers li{padding:6px 0;font-weight:750}#mpStatus{color:#c7dbc9;min-height:1.2em}
+#openFriends{width:100%;margin:8px 0 10px;font-size:19px;padding:14px;text-transform:uppercase;letter-spacing:.05em;color:#fff;background:linear-gradient(180deg,#6fb4ff,#2f6fd0);box-shadow:0 5px 0 #1d4a8f,0 10px 24px #2f6fd055}#openFriends small{display:block;margin:2px 0 0;font-size:11px;text-transform:none;letter-spacing:0;color:#e3efff}#friends{background:#172b28;color:#fff9dc;border:2px solid #7cbdff;border-radius:18px;width:min(460px,92vw)}#friends::backdrop{background:#071715cc}#mpChoose{display:grid;gap:10px}.mpJoinRow{display:flex;gap:8px}#mpCode{flex:1;font:800 24px system-ui;letter-spacing:.3em;text-transform:uppercase;text-align:center;background:#101f1d;color:#fff;border:1px solid #74967f;border-radius:10px;padding:8px}#mpCodeBig{font:900 46px system-ui;letter-spacing:.25em;text-align:center;color:#ffda79}#mpPlayers{padding-left:22px}#mpPlayers li{padding:6px 0;font-weight:750}#mpStatus{color:#c7dbc9;min-height:1.2em}
 </style>
 <canvas id="field" aria-label="Groundhog Air Rally arena"></canvas><div id="hud" hidden><div id="matchCards"><div id="arenaName"></div><div class="matchStats"><div><small>HEALTH</small><strong id="hpValue"></strong><progress id="hpBar" aria-label="Health"></progress></div><div><small>ELIMINATIONS</small><strong id="killValue"></strong></div><div><small>ALIVE</small><strong id="aliveValue"></strong></div></div></div><div id="dropAlert" role="status" hidden>An Irish Pot of Gold is Dropping!</div><span id="zone"></span></div><div id="levels" hidden></div><button id="power" hidden>Power</button><button id="emote" hidden aria-label="Emote">💬</button>
-<div id="rotate" role="dialog" aria-label="Rotate your phone"><section><div>📱</div><p>Turn your phone sideways</p><small>The match is paused until you rotate.</small><br><button id="portraitOk">Play upright anyway</button></section></div><main id="menu"><section class="hangar"><div class="hangarStage"><div id="rankCard"><span class="rankChip" aria-hidden="true"></span><strong id="rankTitle"></strong><progress id="rankProgress" aria-label="Progress toward next rank"></progress><span id="rankNext"></span><button id="historyButton">Last 3 matches</button></div><div>GROUNDHOG BATTLE ROYALE</div><h1>Groundhog<br>Air Rally</h1><p id="brief">Knock out rival groundhogs, grab crate loot, and stay ahead of the fog. Last groundhog flying wins.</p><div class="previewBay"><canvas id="pilotCanvas" aria-label="Live pilot and projectile preview"></canvas><button id="testShot" type="button">Test fire</button></div></div><div class="hangarControls"><h2 class="loadoutTitle">Choose your pilot</h2><div id="pilots" aria-label="Choose pilot"></div><div id="pilotDetail"><span id="badge" aria-hidden="true"></span><span id="origin"></span></div><h2 class="loadoutTitle">Customize your groundhog</h2><input type="hidden" id="mode" value="preset"><div id="loadout"><select id="accessory" hidden aria-label="Accessories"></select><label>In-match name<input id="callsign" maxlength="20" autocomplete="off" placeholder="Use pilot name"></label><select id="stream" hidden aria-label="Projectiles"></select><select id="outfit" hidden aria-label="Skins"></select><label>Kill cam<select id="killcam"><option value="on">On</option><option value="off">Off</option></select></label><label>Sound effects<select id="soundMode"><option value="on">On</option><option value="off">Off</option></select></label><label>Music<select id="musicMode"><option value="on">On</option><option value="off">Off</option></select></label></div><div id="loadoutPreview"><span id="previewHog" aria-hidden="true">🦫</span><span><strong id="previewName"></strong><br><span id="previewShot"></span></span></div><label class="arenaPicker">Arena<select id="arenaSelect"></select></label><div id="cosmeticLab"></div><button id="start">Start match</button><button id="rulesButton">How to play</button> <button id="openAlbum">Scrapbook</button><button id="openFriends" hidden>Play with friends (beta)</button><button id="openAchievements">Achievements &amp; daily challenge</button><small>Desktop · WASD, mouse to aim and fire, E for power<br>Touch · Left stick to fly, right stick to aim and fire</small></div></section></main>
+<div id="rotate" role="dialog" aria-label="Rotate your phone"><section><div>📱</div><p>Turn your phone sideways</p><small>The match is paused until you rotate.</small><br><button id="portraitOk">Play upright anyway</button></section></div><main id="menu"><section class="hangar"><div class="hangarStage"><div id="rankCard"><span class="rankChip" aria-hidden="true"></span><strong id="rankTitle"></strong><progress id="rankProgress" aria-label="Progress toward next rank"></progress><span id="rankNext"></span><button id="historyButton">Last 3 matches</button></div><div>GROUNDHOG BATTLE ROYALE</div><h1>Groundhog<br>Air Rally</h1><p id="brief">Knock out rival groundhogs, grab crate loot, and stay ahead of the fog. Last groundhog flying wins.</p><div class="previewBay"><canvas id="pilotCanvas" aria-label="Live pilot and projectile preview"></canvas><button id="testShot" type="button">Test fire</button></div></div><div class="hangarControls"><h2 class="loadoutTitle">Choose your pilot</h2><div id="pilots" aria-label="Choose pilot"></div><div id="pilotDetail"><span id="badge" aria-hidden="true"></span><span id="origin"></span></div><h2 class="loadoutTitle">Customize your groundhog</h2><input type="hidden" id="mode" value="preset"><div id="loadout"><select id="accessory" hidden aria-label="Accessories"></select><label>In-match name<input id="callsign" maxlength="20" autocomplete="off" placeholder="Use pilot name"></label><select id="stream" hidden aria-label="Projectiles"></select><select id="outfit" hidden aria-label="Skins"></select><label>Kill cam<select id="killcam"><option value="on">On</option><option value="off">Off</option></select></label><label>Sound effects<select id="soundMode"><option value="on">On</option><option value="off">Off</option></select></label><label>Music<select id="musicMode"><option value="on">On</option><option value="off">Off</option></select></label></div><div id="loadoutPreview"><span id="previewHog" aria-hidden="true">🦫</span><span><strong id="previewName"></strong><br><span id="previewShot"></span></span></div><label class="arenaPicker">Arena<select id="arenaSelect"></select></label><div id="cosmeticLab"></div><button id="start">Start match</button><button id="openFriends">👥 Play with friends <small>up to 5 · beta</small></button><button id="rulesButton">How to play</button> <button id="openAlbum">Scrapbook</button><button id="openAchievements">Achievements &amp; daily challenge</button><small>Desktop · WASD, mouse to aim and fire, E for power<br>Touch · Left stick to fly, right stick to aim and fire</small></div></section></main>
 <div id="feed" hidden></div><div id="ko" role="status" hidden></div><main id="end" hidden><section id="results" aria-labelledby="outcome"><h2 id="outcome"></h2><div id="place"></div><div id="placement"></div><div id="resultStats"><span id="resultKills"></span><span id="resultAssists"></span><span id="resultTime"></span></div><p id="cause"></p><div id="rankResult"></div><div id="achieveResult" hidden></div><button id="again">Play again</button><button id="changePilot">Change pilot</button></section></main><main id="album" hidden><section><h2>Scrapbook</h2><p id="albumCount"></p><ul id="albumList"></ul><button id="closeAlbum">Back to loadout</button></section></main><dialog id="history"><h2>Last 3 matches</h2><ol id="historyList"></ol><form method="dialog"><button>Close</button></form></dialog><dialog id="friends"><h2>Play with friends</h2><p class="labHint">Up to 5 players on any network. One phone hosts and shares the 4-letter code.</p>
 <div id="mpChoose"><button id="mpHost">Host a room</button><div class="mpJoinRow"><input id="mpCode" maxlength="4" placeholder="CODE" autocomplete="off" autocapitalize="characters"><button id="mpJoin">Join</button></div></div>
 <div id="mpRoom" hidden><div id="mpCodeBig"></div><ol id="mpPlayers"></ol><button id="mpStart">Start match</button></div>
@@ -181,7 +181,6 @@ const albumKey='groundhog-air-rally-scrapbook';
 let discovered=new Set(),supply=null,supplyCalled=false;
 try{const entries=JSON.parse(localStorage.getItem(albumKey));if(Array.isArray(entries))discovered=new Set(entries)}catch{}
 $('openAchievements').onclick=()=>showAchievements();
-if(/[?&]friends\b/.test(location.search))$('openFriends').hidden=false;
 $('openFriends').onclick=()=>{renderLobby();$('friends').showModal()};
 $('mpHost').onclick=()=>mpHost();$('mpStart').onclick=()=>mpStartMatch();$('mpJoin').onclick=()=>mpJoin();$('mpLeave').onclick=()=>mpLeave();
 $('mpCode').oninput=()=>{$('mpCode').value=$('mpCode').value.toUpperCase().replace(/[^A-Z]/g,'')};
@@ -1261,7 +1260,7 @@ function drawPattern(s){
   if(pattern==='chevrons'){rect(-17,-11,24,22,'#fff9ee');rect(-17,-11,24,3,'#812d4d');rect(-17,8,24,3,'#812d4d')}
   if(pattern==='flames'){rect(-17,-11,24,22,'#1b1d22');rect(-17,-4,24,3,'#cb2034');rect(-17,2,24,3,'#cb2034')}
   if(pattern==='texas'){rect(-16,-11,8,22,'#214784');rect(-8,-11,15,11,'#fff9ea');rect(-8,0,15,11,'#c73246');label('★',-12,3,'#fff','8px system-ui')}
-  if(pattern==='western'){rect(-17,-11,24,22,'#142747');label('C',-5,8,'#f4edde','bold 22px Georgia');label('C',-5,7,'#fa7629','bold 19px Georgia')}
+  if(pattern==='western'){rect(-17,-11,24,22,'#142747');rect(-17,-3,24,2,'#fa7629');rect(-17,1,24,2,'#fa7629')}
   if(pattern==='sunset'){for(let i=0;i<8;i++){g.save();g.translate(-5,0);g.rotate(i*Math.PI/4);rect(6,-.7,5,1.4,'#ffbc62');g.restore()}circle(-5,0,5,'#ffe4a7')}
   if(pattern==='spain'){
    // Ethan: Spanish flag, red-yellow-red with the yellow band doubled and a simple crest.
@@ -1514,7 +1513,7 @@ $('testShot').onclick=()=>{previewFire=performance.now();view3d.idleAt=performan
 // 3D hangar groundhog: shaded ellipsoids, cylinders and boxes plus artwork mapped onto planes, painter-sorted.
 // Model space: +x forward (nose), +y the pilot's right, +z up. Drag the preview to spin and tilt.
 const view3d={yaw:.7,pitch:.55,drag:null,idleAt:0};
-const furPoints=(()=>{const out=[];for(let i=0;i<14;i++)for(let j=0;j<22;j++){const th=(i+.5)/14*Math.PI,ph=j/22*Math.PI*2+(i%2)*.14;out.push([Math.sin(th)*Math.cos(ph),Math.sin(th)*Math.sin(ph),Math.cos(th),(i*7+j*3)%4])}return out})();
+const furPoints=(()=>{const out=[];for(let i=0;i<22;i++)for(let j=0;j<36;j++){const th=(i+.5)/22*Math.PI,ph=j/36*Math.PI*2+(i%2)*.09;out.push([Math.sin(th)*Math.cos(ph),Math.sin(th)*Math.sin(ph),Math.cos(th),(i*7+j*3)%4])}return out})();
 function draw3DHog(ox,oy,scale,kit,now){
  const cyaw=Math.cos(view3d.yaw),syaw=Math.sin(view3d.yaw),cp=Math.cos(view3d.pitch),sp=Math.sin(view3d.pitch);
  const rot=([x,y,z])=>{const x1=x*cyaw-y*syaw,y1=x*syaw+y*cyaw;return [x1*cp+z*sp,y1,-x1*sp+z*cp]};
@@ -1555,18 +1554,18 @@ function draw3DHog(ox,oy,scale,kit,now){
  const fur=(c,r,cols,bias=.2,step=1)=>{const p=P(c);add(p.d+bias,()=>{g.lineCap='round';
   for(let i=0;i<furPoints.length;i+=step){const [nx,ny,nz,k]=furPoints[i],n=[nx/r[0],ny/r[1],nz/r[2]];if(rot(n)[0]<.18)continue;
    const s=[c[0]+nx*r[0],c[1]+ny*r[1],c[2]+nz*r[2]],e=add3(s,[-1.6,ny*.4,-.6-Math.abs(nz)*.3]),A=P(s),B=P(e);
-   g.beginPath();g.moveTo(A.x,A.y);g.lineTo(B.x,B.y);g.strokeStyle=cols[k]+'b0';g.lineWidth=scale*.2;g.stroke()}g.lineCap='butt'})};
+   g.beginPath();g.moveTo(A.x,A.y);g.lineTo(B.x,B.y);g.strokeStyle=cols[k]+'90';g.lineWidth=scale*.14;g.stroke()}g.lineCap='butt'})};
  const t=now/1000,flap=.45+.45*Math.sin(t*9),wag=Math.sin(t*6)*.3,trim=kit.trim||'#d8423a',main=kit.color||'#9b6849';
  // Ground shadow.
  const sh=P([0,0,-24]);g.save();g.translate(sh.x,sh.y);g.scale(1,.32);const shg=g.createRadialGradient(0,0,4,0,0,40*scale);shg.addColorStop(0,'#00000070');shg.addColorStop(1,'#00000000');circle(0,0,40*scale,shg);g.restore();
  // Body with fur, belly and chest fluff.
  ell([0,0,0],[20,16,14],'#9b6849');fur([0,0,0],[20,16,14],['#7a4f36','#b57f58','#8a5a40','#c48d64'],.2);
- ell([4,0,-6],[16,12,8.5],'#d1a77d',{bias:-2});ell([12,0,-3],[7,9,6],'#e0bf96',{bias:1,line:false});
+ ell([4,0,-6],[16,12,8.5],'#d1a77d',{bias:-2});fur([4,0,-6],[16,12,8.5],['#b98f66','#e6c49c','#c9a179','#f0d4ae'],-1.8,2);ell([12,0,-3],[7,9,6],'#e0bf96',{bias:1,line:false});
  // Tail: striped and fluffy, wagging.
  for(let i=0;i<4;i++){const k=i/3;ell([-20-i*3.6,Math.sin(wag+k)*4*k,2+i*1.2],[5.5-i*.6,5.5-i*.5,5-i*.5],i%2?'#5f3d2c':'#7a5038',{bias:-.5*i})}
  // Head, cheeks, brow, snout, nose with nostrils, mouth and big buck teeth.
  ell([19,0,6],[12,12,11],'#ba8356');fur([19,0,6],[12,12,11],['#9a6a45','#d29a6a','#a8754d','#c88f5f'],.25,2);
- for(const s of [-1,1]){ell([24,s*7.5,2.5],[6,5,5],'#c9946a',{bias:.4});ell([25.5,s*5.4,13.6],[3.6,2.4,.8],'#7a5038',{bias:2,line:false})}
+ for(const s of [-1,1])ell([24,s*7.5,2.5],[6,5,5],'#c9946a',{bias:.4});
  ell([29,0,3],[6.5,7,5.5],'#f1d7ae',{bias:.5});
  ell([34.8,0,5],[2.8,3.4,2.4],'#2b1b17',{bias:1});ell([35.6,-1,6],[.9,.9,.6],'#8a6a60',{bias:1.2,line:false,flat:true});
  decal([35.2,0,4.8],[0,1,0],[0,0,-1],()=>{circle(-1.1,.6,.5,'#120a08');circle(1.1,.6,.5,'#120a08')},{cull:true,bias:1.3,text:true});
@@ -1584,19 +1583,16 @@ function draw3DHog(ox,oy,scale,kit,now){
   for(const k of [0,1,2])line3([31.5,s*3,1.5+k*1.5],[39,s*(8+k*2.5),1+k*3],'#2a1a12cc',.45,3);
   // Paws with claws.
   ell([16,s*9,-12],[4.2,3.6,3],'#6b4636');for(const k of [-1,0,1])ell([19.6,s*9+k*1.4,-12.6],[.9,.5,.5],'#f3ead8',{bias:.5,line:false});
-  ell([-12,s*11,-11],[5.2,4.2,3.6],'#5f3d2c');for(const k of [-1,0,1])ell([-16.6,s*11+k*1.5,-12],[.9,.5,.5],'#f3ead8',{bias:-.3,line:false});
+  if(!['boots','shoes'].includes(kit.accessory)){ell([-12,s*11,-11],[5.2,4.2,3.6],'#5f3d2c');for(const k of [-1,0,1])ell([-7.6,s*11+k*1.5,-12],[.9,.5,.5],'#f3ead8',{bias:-.3,line:false})}
   // Feathered wings, two layers, flapping.
   const fy=Math.cos(flap),fz=Math.sin(flap);
-  decal([-2,s*15,5],[1,0,0],[0,s*fy,fz],()=>{
+  decal([-2,s*15,5],[1,0,0],[0,s*fy,fz],f=>{if(Math.abs(f)<.2)return;
    const wing=g.createLinearGradient(0,0,0,22);wing.addColorStop(0,'#fffaf0');wing.addColorStop(1,'#d9c6a6');
    for(let f=0;f<6;f++){const fx=-11+f*4;g.beginPath();g.moveTo(fx+2,1);g.quadraticCurveTo(fx-2,14+f%2*2,fx+1.5,22-Math.abs(f-2.5)*1.6);g.quadraticCurveTo(fx+5,12,fx+4.5,1);g.closePath();g.fillStyle=wing;g.fill();g.strokeStyle='#8a6a4e';g.lineWidth=.6;g.stroke();
     g.beginPath();g.moveTo(fx+3,2);g.lineTo(fx+1.8,18-Math.abs(f-2.5)*1.6);g.strokeStyle='#b39a7a';g.lineWidth=.4;g.stroke()}
    g.beginPath();g.moveTo(-11,0);g.quadraticCurveTo(0,6,12,0);g.lineTo(12,-2);g.quadraticCurveTo(0,4,-11,-2);g.closePath();g.fillStyle='#c9a982';g.fill();g.strokeStyle='#6d4e3a';g.lineWidth=.6;g.stroke();
   });
  }
- // Pilot scarf in the kit's trim colour, with a tail streaming back.
- for(let i=0;i<16;i++){const a=i/16*Math.PI*2;ell([11,Math.cos(a)*10.6,4+Math.sin(a)*9.8],[3.2,3.4,3.4],shadeColor(trim,-.08*(i%2)),{bias:.6,line:false})}
- decal([4,7,13],[-1,0,0],[0,.4,.9],()=>{g.beginPath();g.moveTo(0,-2);for(let x=0;x<=20;x+=2)g.lineTo(x,-2+Math.sin(t*10-x*.4)*1.6);for(let x=20;x>=0;x-=2)g.lineTo(x,3+Math.sin(t*10-x*.4)*1.6);g.closePath();g.fillStyle=trim;g.fill();g.strokeStyle=shadeColor(trim,-.4);g.lineWidth=.5;g.stroke();for(let x=4;x<20;x+=5)rect(x,-2+Math.sin(t*10-x*.4)*1.6,1,5,'#ffffff40')},{bias:2});
  // Skin pattern and crest on the back.
  decal([-3,0,13.8],[1,0,0],[0,1,0],()=>{g.save();g.translate(5,0);drawPattern({color:main,trim:kit.trim});g.restore();
   g.beginPath();g.arc(0,0,11,0,Math.PI*2);g.strokeStyle='#00000055';g.lineWidth=1;g.stroke()},{cull:true,bias:1});
@@ -1632,19 +1628,21 @@ function draw3DHog(ox,oy,scale,kit,now){
  }else if(acc==='boots'){
   // Cowboy boots: tall stitched shaft, pull straps, pointed toe, stacked heel.
   for(const s of [-1,1]){
-   cyl([-11,s*12,-6],[0,0,1],3.8,10,'#a8692f',{bias:1,cap:'#5a3416'});
-   for(const k of [-1,1])ell([-11+k*3.4,s*12,-.6],[.8,.6,1.6],'#7a4a22',{bias:1.3});
-   decal([-11,s*15.9,-6.5],[1,0,0],[0,0,-1],()=>{g.strokeStyle='#ffd9a0';g.lineWidth=.45;for(const k of [-1,1]){g.beginPath();g.moveTo(k*1.2,-4);g.bezierCurveTo(k*3,-2,k*.5,0,k*2.4,2.4);g.stroke()}g.beginPath();g.arc(0,-1,1,0,Math.PI*2);g.stroke();
+   const bx=-13,by=s*11.5;
+   cyl([bx,by,-6],[0,0,1],3.8,10,'#a8692f',{bias:1,cap:'#5a3416'});
+   for(const k of [-1,1])ell([bx,by+k*3.4,-.6],[.6,.8,1.6],'#7a4a22',{bias:1.3});
+   decal([bx,by+s*3.9,-6.5],[1,0,0],[0,0,-1],()=>{g.strokeStyle='#ffd9a0';g.lineWidth=.45;for(const k of [-1,1]){g.beginPath();g.moveTo(k*1.2,-4);g.bezierCurveTo(k*3,-2,k*.5,0,k*2.4,2.4);g.stroke()}g.beginPath();g.arc(0,-1,1,0,Math.PI*2);g.stroke();
     g.setLineDash([.7,.7]);g.strokeRect(-3.2,-4.6,6.4,9.2);g.setLineDash([])},{cull:true,bias:1.4,text:true});
-   decal([-11,s*8.1,-6.5],[1,0,0],[0,0,-1],()=>{g.strokeStyle='#ffd9a0';g.lineWidth=.45;g.setLineDash([.7,.7]);g.strokeRect(-3.2,-4.6,6.4,9.2);g.setLineDash([])},{cull:true,bias:1.4,text:true});
-   ell([-15,s*12,-13],[7.4,3.9,3],'#7a4520',{bias:1.1});ell([-21.5,s*12,-13.6],[3.2,2.4,2],'#7a4520',{bias:1.15});ell([-24.4,s*12,-13.8],[1.2,1.2,1.1],'#5a3416',{bias:1.2});
-   box([-9.6,s*12,-15.6],[1.8,2.6,1.4],'#2e1a0c',{bias:1.05});ell([-15,s*12,-15.9],[8.5,3.9,.5],'#2e1a0c',{bias:1,line:false});
+   ell([bx+3.5,by,-13],[7.4,3.9,3],'#7a4520',{bias:1.1});ell([bx+10,by,-13.6],[3.2,2.4,2],'#7a4520',{bias:1.15});ell([bx+12.9,by,-13.8],[1.2,1.2,1.1],'#5a3416',{bias:1.2});
+   box([bx-1.6,by,-15.4],[1.8,2.6,1.4],'#2e1a0c',{bias:1.05});ell([bx+3.5,by,-15.9],[8.5,3.9,.5],'#2e1a0c',{bias:1,line:false});
   }
  }else if(acc==='shoes'){
   // Irish baby shoes: green leather, white sole and laces, orange shamrock tab.
-  for(const s of [-1,1]){ell([-13,s*11,-14.2],[7,4.2,1],'#fbf6ea',{bias:1});ell([-12.6,s*11,-12.4],[6,3.6,2.6],'#1f8a4c',{bias:1.2});ell([-17.6,s*11,-12.8],[2.6,3.2,2.2],'#f7f1e2',{bias:1.25});
-   for(const k of [0,1,2])line3([-12+k*1.8,s*(11-2.6),-10.4],[-12+k*1.8,s*(11+2.6),-10.4],'#ffffff',.6,1.5);
-   decal([-9.4,s*11,-11.6],[0,1,0],[0,0,-1],()=>{for(const [a,b] of [[-1,-1],[1,-1],[0,.6]])circle(a,b,1.1,'#ff8c2a');rect(-.2,.6,.4,1.6,'#2a6a2a')},{cull:true,bias:1.5,text:true})}
+  for(const s of [-1,1]){const fx=-11,fy=s*11;
+   ell([fx,fy,-14.6],[7.2,4.4,1],'#fbf6ea',{bias:1});ell([fx,fy,-12.2],[6.2,4,3.2],'#1f8a4c',{bias:1.2});ell([fx+5.2,fy,-13],[2.8,3.4,2.2],'#f7f1e2',{bias:1.25});
+   ell([fx-3.6,fy,-10.4],[2.4,3.6,1.6],'#17703c',{bias:1.3});
+   for(const k of [0,1,2])line3([fx-1+k*1.8,fy-2.6,-9.4],[fx-1+k*1.8,fy+2.6,-9.4],'#ffffff',.6,1.5);
+   decal([fx+7.9,fy,-12.6],[0,1,0],[0,0,-1],()=>{for(const [a,b] of [[-1,-1],[1,-1],[0,.6]])circle(a,b,1.1,'#ff8c2a');rect(-.2,.6,.4,1.6,'#2a6a2a')},{cull:true,bias:1.5,text:true})}
  }else if(acc==='camera'){
   // Camera on a strap: body, grip, lens barrel with glass, flash and shutter button.
   for(const s of [-1,1])line3([24,s*6,-4],[15,s*10,8],'#1a1a1a',1,1);
