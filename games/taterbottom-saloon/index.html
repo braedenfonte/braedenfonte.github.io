@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taterbottom Saloon</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#160e0a;color:#ffebc7;font:1.05rem Georgia,serif}
+main{width:min(100% - 2rem,64rem);margin:2rem auto}
+a{color:#ffc576}
+h1{font-size:clamp(2rem,6vw,4rem);margin:.5em 0}
+button{font:inherit;color:inherit;background:#351b0f;border:1px solid #c59150;border-radius:.3rem;padding:.75rem 1rem;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid #ffd18e;outline-offset:4px}
+.stage{position:relative;isolation:isolate;overflow:hidden;perspective:850px;min-height:clamp(23rem,62vw,36rem);display:grid;place-items:center;border:6px solid #60391f;border-radius:.65rem;background:#24150f}
+.room{position:absolute;inset:0;display:grid;place-content:end center;gap:1rem;text-align:center;padding:1.5rem;background:radial-gradient(ellipse at 50% 26%,#f3b05980,transparent 50%),linear-gradient(0deg,#100805 0%,#432317 32%,transparent 33%),repeating-linear-gradient(90deg,#392317 0 7%,#24140d 7% 7.5%);transition:transform .85s ease-out;transform:scale(.91)}
+.open .room{transform:scale(1)}
+.bar{display:flex;flex-wrap:wrap;justify-content:center;gap:.65rem;background:#241008;padding:.8rem;border-top:5px solid #9c5d30;border-radius:.35rem}
+.door{position:absolute;top:0;bottom:0;width:50%;background:linear-gradient(0deg,#21100655,transparent 60%,#24120988),repeating-linear-gradient(90deg,#603119 0 11%,#4c2412 11% 12%,#774226 12% 15%);border:6px solid #2d150a;box-shadow:inset 0 0 2rem #1a0b05;transition:transform .8s cubic-bezier(.2,.65,.22,1),visibility 0s .8s;pointer-events:none}
+.left{left:0;transform-origin:left}.right{right:0;transform-origin:right}
+.open .left{transform:rotateY(105deg);visibility:hidden}
+.open .right{transform:rotateY(-105deg);visibility:hidden}
+.enter{z-index:1;box-shadow:0 4px 18px #000b;background:#261109}
+dialog{width:min(30rem,calc(100% - 2rem));border:1px solid #c59150;border-radius:.5rem;background:#24130c;color:inherit;padding:1.5rem}
+dialog::backdrop{background:#100805bd}
+@media(prefers-reduced-motion:reduce){.door,.room{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<a href="/#games">← Back to the site</a>
+<h1>Taterbottom Saloon</h1>
+<section class="stage" aria-label="Saloon entrance">
+  <div class="room" inert>
+    <div class="bar" aria-label="At the bar">
+      <button type="button" data-cowboy="slim">Slim Pickens Taterbottom</button>
+      <button type="button" data-cowboy="dusty">Dusty Two Teeth Carson</button>
+    </div>
+  </div>
+  <div class="door left" aria-hidden="true"></div>
+  <div class="door right" aria-hidden="true"></div>
+  <button class="enter" type="button">Push open the doors</button>
+</section>
+<dialog aria-labelledby="conversation-title">
+  <h2 id="conversation-title">At the bar</h2>
+  <p id="cowboy-line"></p>
+  <p id="reply-line"></p>
+  <form method="dialog"><button>Back to the bar</button></form>
+</dialog>
+</main>
+<script>
+const stage = document.querySelector(".stage");
+const room = document.querySelector(".room");
+const enter = document.querySelector(".enter");
+const dialog = document.querySelector("dialog");
+const conversations = {
+  slim: ["Slim: You're about as subtle as a mule in a church choir.", "Dusty: Mule could carry a tune. You just carried on."],
+  dusty: ["Dusty: That plan's got more holes than my Sunday socks.", "Slim: That's a hell of a thing to say with two teeth and a harmonica."]
+};
+enter.addEventListener("click", () => {
+  stage.classList.add("open");
+  room.inert = false;
+  enter.hidden = true;
+  room.querySelector("button").focus();
+});
+room.querySelectorAll("[data-cowboy]").forEach(button => {
+  button.addEventListener("click", () => {
+    const [opening, reply] = conversations[button.dataset.cowboy];
+    document.querySelector("#cowboy-line").textContent = opening;
+    document.querySelector("#reply-line").textContent = reply;
+    dialog.showModal();
+  });
+});
+</script>
+</body>
+</html>
