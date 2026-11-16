@@ -17,9 +17,11 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
   const activate = info.project.use.hasTouch
     ? (x, y) => page.touchscreen.tap(x, y)
     : (x, y) => page.mouse.click(x, y);
-  const enter = page.getByRole('button', { name: /push open/i });
-  if (info.project.use.hasTouch) await enter.tap();
-  else await enter.click();
+  const leaf = page.locator(info.project.use.hasTouch ? '.door.right' : '.door.left');
+  const door = await leaf.boundingBox();
+  await expect(page.locator('.doorway')).toHaveJSProperty('naturalWidth', 1122);
+  await activate(door.x + door.width / 2, door.y + door.height / 2);
+
 
   // Freeze the entry partway through so the swing and camera framing are reproducible.
   const animations = await page.locator('.stage').evaluateHandle(async stage => {
@@ -33,6 +35,10 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
     await Promise.all(transitions.map(transition => transition.ready));
     return transitions;
   });
+  const [leftDepth, rightDepth] = await page.locator('.door').evaluateAll(doors =>
+    doors.map(door => new DOMMatrix(getComputedStyle(door).transform).m13));
+  expect(leftDepth).toBeLessThan(0);
+  expect(rightDepth).toBeGreaterThan(0);
   await page.screenshot({ path: info.outputPath('door-swing.png') });
   await animations.evaluate(transitions => transitions.forEach(transition => transition.finish()));
   await expect(page.locator('.storefront')).toHaveCSS('opacity', '0');
@@ -47,20 +53,20 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
   expect(art.x + art.width).toBeLessThanOrEqual(info.project.use.viewport.width);
   const hit = (x, y) => activate(art.x + art.width * x, art.y + art.height * y);
   const dialog = page.getByRole('dialog', { name: 'At the bar' });
-  for (const [x, y, speaker] of [[.30, .25, 'Slim'], [.57, .30, 'Dusty']]) {
+  for (const [x, y, speaker] of [[.35, .34, 'Slim'], [.59, .35, 'Dusty']]) {
     await hit(x, y);
     await expect(dialog).toBeVisible();
     await expect(dialog.locator('#cowboy-line')).toHaveText(new RegExp('^' + speaker + ':'));
     await dialog.getByRole('button', { name: 'Back to the bar' }).click();
     await expect(dialog).toBeHidden();
   }
-  await hit(.15, .80);
+  await hit(.16, .85);
   await expect(page.getByRole('status')).toHaveText('Hmmmm...');
   await page.screenshot({ path: info.outputPath('sock.png') });
   expect(await page.evaluate(({ x, y }) => document.elementFromPoint(x, y).tagName, {
-    x: art.x + art.width * .89, y: art.y + art.height * .4,
+    x: art.x + art.width * .92, y: art.y + art.height * .4,
   })).toBe('IMG');
-  await hit(.89, .40);
+  await hit(.92, .40);
   await expect(dialog).toBeHidden();
   await expect(page.getByRole('status')).toHaveText('Hmmmm...');
   expect(page.url()).toBe(url);
@@ -69,7 +75,7 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
 
 test('keyboard entry, modal dismissal and focus restoration', async ({ page }) => {
   await page.goto(url);
-  const enter = page.getByRole('button', { name: /push open/i });
+  const enter = page.getByRole('button', { name: /push open the saloon doors/i });
   await page.keyboard.press('Tab');
   await expect(page.getByRole('link', { name: 'Back to website' })).toBeFocused();
   await page.keyboard.press('Tab');
@@ -97,7 +103,7 @@ test('keyboard entry, modal dismissal and focus restoration', async ({ page }) =
 test('reduced motion enters immediately', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto(url);
-  await page.getByRole('button', { name: /push open/i }).click();
+  await page.getByRole('button', { name: /push open the saloon doors/i }).click();
   await expect(page.locator('.storefront')).toHaveCSS('opacity', '0');
   await expect(page.locator('.room')).toHaveCSS('transform', 'none');
   expect(await page.locator('.stage').evaluate(stage => stage.getAnimations({ subtree: true }).length)).toBe(0);
