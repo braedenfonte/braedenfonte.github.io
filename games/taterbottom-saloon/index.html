@@ -14,48 +14,49 @@ h1{text-align:center;font-size:clamp(2rem,6.5vw,4rem);letter-spacing:-.035em;mar
 button{font:inherit;color:inherit;background:#351b0f;border:1px solid #c59150;border-radius:.3rem;padding:.75rem 1rem;cursor:pointer}
 button:focus-visible,a:focus-visible{outline:3px solid #ffd18e;outline-offset:4px}
 .stage{width:100%;aspect-ratio:1672 / 941;position:relative;isolation:isolate;overflow:hidden;perspective:850px;display:grid;place-items:center;border:6px solid #60391f;border-radius:.65rem;background:#24150f}
-.room{position:absolute;inset:0;display:grid;place-items:center;grid-template-columns:minmax(0,1fr);background:#180e09;transform:scale(.93);filter:brightness(.36);transition:transform .85s ease-out,filter .7s ease-out}
-.open .room{transform:none;filter:brightness(1)}
+.room{position:absolute;inset:0;display:grid;place-items:center;grid-template-columns:minmax(0,1fr);background:#180e09;transform:scale(.96);transition:transform .5s ease-out .42s}
+.open .room{transform:none}
 .scene{width:100%;position:relative}
 .scene img{display:block;width:100%;height:auto}
 .hotspot{position:absolute;background:transparent;border:0;padding:0;min-width:44px;min-height:44px;-webkit-tap-highlight-color:transparent}
 .hotspot:is(:hover,:focus-visible){outline:2px solid #ffd18e;outline-offset:-2px}
-[data-cowboy="slim"]{left:21%;top:13%;width:20%;height:54%}
-[data-cowboy="dusty"]{left:47.5%;top:20%;width:24%;height:48%}
-.sock{left:6%;top:68%;width:18%;height:20%}
-.sock-response{position:absolute;left:6%;top:66%;transform:translateY(-100%);margin:0;pointer-events:none}
+[data-cowboy="slim"]{left:25%;top:26%;width:17.5%;height:29%}
+[data-cowboy="dusty"]{left:49%;top:27%;width:25.5%;height:28.5%}
+.sock{left:7%;top:74%;width:18%;height:19%}
+.sock-response{position:absolute;left:7%;top:73%;transform:translateY(-100%);margin:0;pointer-events:none}
 .sock-response:not(:empty){background:#24130c;color:#ffebc7;border:1px solid #c59150;border-radius:.3rem;padding:.4rem .65rem}
-.storefront{position:absolute;inset:0;perspective:850px;pointer-events:none;transform-origin:50% 48%;transition:transform .85s cubic-bezier(.55,.05,.27,1) .12s,opacity .28s .6s}
-.open .storefront{transform:translate(-2%,2%) scale(2.8);opacity:0}
-.door{position:absolute;transition:transform .7s cubic-bezier(.42,0,.25,1)}
+.storefront{position:absolute;inset:0;perspective:850px;pointer-events:none;transform-origin:50% 48%;transition:transform .79s cubic-bezier(.53,.08,.36,1) .2s,opacity .38s .48s}
+.open .storefront{transform:translate(-1.5%,2%) scale(3.5);opacity:0}
+.door{position:absolute;transition:transform .65s cubic-bezier(.2,.75,.32,1.12)}
 .left{transform-origin:left}.right{transform-origin:right}
-.open .left{transform:rotateY(-88deg)}
-.open .right{transform:rotateY(88deg)}
+.open .left{transform:rotateY(96deg)}
+.open .right{transform:rotateY(-96deg);transition-delay:.055s}
 .pull{position:absolute;border:3px solid #2e271e;border-left-color:#a18a65;border-bottom-color:#15100b;border-radius:42%;background:#22130977;box-shadow:3px 5px 5px #190b08a8}
 .left .pull{right:8%}.right .pull{left:8%}
-.enter{z-index:1;align-self:center;max-width:calc(100% - 2rem);padding:.85em 1.25em;border:2px solid #ffe0a0;border-radius:.4rem;background:linear-gradient(#f7d48b,#ce954c);color:#261309;font-size:clamp(1.1rem,3.5vw,1.6rem);font-weight:bold;box-shadow:0 5px 0 #633817,0 9px 25px #120702d9;transition:background-color .2s,transform .2s}
-.enter:hover{background:#ffe0a0;transform:translateY(-2px)}
-.enter:active{transform:translateY(3px)}
-.enter span{margin-left:.4em}
-.enter[hidden]{display:none}
+.enter{position:absolute;z-index:1;inset:43% 31.65% 25%;background:transparent;border:0;padding:0;min-height:44px;
+  cursor:pointer;-webkit-tap-highlight-color:transparent}
+.enter:is(:hover,:focus-visible){box-shadow:0 0 16px #ffc07566}
+.stage:has(.enter:active) .left{transform:rotateY(7deg)}
+.stage:has(.enter:active) .right{transform:rotateY(-7deg)}
 dialog{width:min(30rem,calc(100% - 2rem));border:1px solid #c59150;border-radius:.5rem;background:#24130c;color:inherit;padding:1.5rem}
 dialog::backdrop{background:#100805bd}
-@media(prefers-reduced-motion:reduce){.door,.room,.enter,.storefront{transition:none}.enter:hover,.enter:active{transform:none}}
+@media(prefers-reduced-motion:reduce){.door,.room,.storefront{transition:none}.stage:has(.enter:active) .door{transform:none}}
 
 /* Match the cutout to the painted door jambs and threshold. */
 .facade{position:absolute;inset:0;width:100%;height:100%;
   clip-path:polygon(evenodd,0 0,100% 0,100% 100%,0 100%,0 0,31.65% 13.4%,31.65% 83.2%,68.35% 83.2%,68.35% 13.4%,31.65% 13.4%,0 0)}
-.enter{align-self:end;margin-bottom:3%;font-size:clamp(1rem,2.6vw,1.35rem)}
+.doorway{position:absolute;inset:13.4% 31.65% 16.8%;width:36.7%;height:69.8%;object-fit:cover;object-position:center 80%;filter:brightness(.79) sepia(.13)}
 /* Shaped café door leaves meet at the crown and rise toward the outer hinges. */
-.door{top:24%;bottom:23%;width:18.35%;border:0;filter:drop-shadow(0 4px 5px #140804);background:none;overflow:visible}
+.door{top:43%;bottom:25%;width:18.35%;border:0;filter:drop-shadow(0 4px 5px #140804);background:none;overflow:visible}
 .left{left:31.65%}.right{right:31.65%}
-.door::before,.door::after{content:"";position:absolute}
-.door::before{inset:0;height:auto;border:0;border-radius:18% 39% 34% 13% / 12% 20% 17% 10%;background:
-  linear-gradient(103deg,#1a0b06aa,transparent 55%,#bc81504a),
-  url("../saloon/saloon-exterior.png") 0 100% / 350% 720%;box-shadow:inset 0 0 0 4px #422316,inset 0 0 0 7px #a06949,inset 0 0 18px #1b0c08}
+.door::before{content:"";position:absolute}
+.door::before{inset:0;background:
+  linear-gradient(105deg,#1f0c045e,transparent 52%,#e3a36528),
+  repeating-linear-gradient(91deg,transparent 0 3px,#28130b18 4px,transparent 6px 11px),
+  repeating-linear-gradient(90deg,#794621 0 23%,#4a2718 24% 25%,#8e5732 26% 49%);
+  box-shadow:inset 0 0 0 2px #2f170c,inset 0 0 0 5px #905b34,inset 0 0 14px #2d140c}
 .left::before{border-radius:39% 14% 27% 34% / 20% 7% 14% 17%}
 .right::before{border-radius:14% 39% 34% 27% / 7% 20% 17% 14%}
-.door::after{inset:auto 8% 20%;height:5%;border:0;background:#4f2a1c;box-shadow:0 2px #9e654333}
 .pull{top:42%;height:22%;width:13%;border-width:3px}
 .hinge{position:absolute;width:13%;height:8%;top:21%;background:linear-gradient(90deg,#2d2520,#ab957c,#51443b);border-radius:2px;box-shadow:0 2px 3px #25140e}
 .hinge:last-child{top:72%}
@@ -63,9 +64,9 @@ dialog::backdrop{background:#100805bd}
 .lamp-glow,.sock-shadow{position:absolute;pointer-events:none;opacity:0}
 .lamp-glow{width:15%;height:25%;transform:translate(-50%,-50%);
   background:radial-gradient(ellipse,#ffc36d55,transparent 66%);mix-blend-mode:screen}
-.lamp-glow.hanging{left:34.7%;top:8%}
-.lamp-glow.counter{left:77.4%;top:33%}
-.sock-shadow{left:18%;top:80%;width:4%;height:2%;border-radius:50%;
+.lamp-glow.hanging{left:63.7%;top:8.5%}
+.lamp-glow.counter{left:46%;top:41%}
+.sock-shadow{left:19%;top:91%;width:4%;height:2%;border-radius:50%;
   background:#22120b;filter:blur(2px)}
 @media(prefers-reduced-motion:no-preference){
   .open .lamp-glow{animation:lamp-flicker 4.8s .95s infinite alternate}
@@ -83,7 +84,7 @@ dialog::backdrop{background:#100805bd}
 <section class="stage" aria-label="Saloon entrance">
   <div class="room" inert>
     <div class="scene">
-      <img src="../saloon/saloon-interior.png" width="1672" height="941" alt="Two cowboys sit at the bar. A sock lies on a crate at left, and a closed backdoor stands at right.">
+      <img src="../saloon/saloon-crowded-interior.png" width="1672" height="941" alt="Two cowboys face each other at the bar in a crowded saloon. A sock lies on a table at left, and a closed backdoor stands at right.">
       <span class="lamp-glow hanging" aria-hidden="true"></span>
       <span class="lamp-glow counter" aria-hidden="true"></span>
       <span class="sock-shadow" aria-hidden="true"></span>
@@ -94,11 +95,12 @@ dialog::backdrop{background:#100805bd}
     </div>
   </div>
   <div class="storefront" aria-hidden="true">
+    <img class="doorway" src="../saloon/saloon-doorway.png" width="1122" height="1402" alt="">
     <div class="door left"><span class="pull"></span><span class="hinge"></span><span class="hinge"></span></div>
     <div class="door right"><span class="pull"></span><span class="hinge"></span><span class="hinge"></span></div>
     <img class="facade" src="../saloon/saloon-exterior.png" width="1672" height="941" alt="">
   </div>
-  <button class="enter" type="button">Push open the doors <span aria-hidden="true">→</span></button>
+  <button class="enter" type="button" aria-label="Push open the saloon doors"></button>
 </section>
 <dialog aria-labelledby="conversation-title">
   <h2 id="conversation-title">At the bar</h2>

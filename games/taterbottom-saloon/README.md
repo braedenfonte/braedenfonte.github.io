@@ -4,6 +4,11 @@ Continue from the latest main branch in braedenfonte/braedenfonte.github.io. The
 
 ## Current checkpoint
 
+- Click or tap either café door to enter. The doors also share a keyboard-focusable entrance control. Clean, warm wood panels swing inward with a slight stagger, then the camera pushes through the threshold.
+- The entrance shows a crowded bar through the doorway. Crossing the threshold brings up matching closer artwork, with Slim and Dusty as the two interactive men at the bar, the sock on the foreground table, and the inactive backdoor at right.
+- All six Chromium checks passed at 1440×900 and 390×844. Reviewed the entrance, mid-swing, and interior frames. The tests check both inward hinge directions and use image-relative coordinates for the characters, sock, and backdoor.
+
+
 - The illustrated storefront uses the interior's amber lamps, worn timber, and dusk-blue windows. Its doorway is cut out along the painted jambs so the interior and independently swinging café doors appear behind it. The moving leaves use timber sampled from the storefront.
 - Inside, two lamp glows flicker on different cycles and a small shadow shifts beneath the sock. Both effects respect reduced motion. All six Playwright checks passed at 1440×900 and 390×844, and screenshots were reviewed for doorway alignment and mobile framing.
 
