@@ -4,6 +4,12 @@ Continue from the latest main branch in braedenfonte/braedenfonte.github.io. The
 
 ## Current checkpoint
 
+- The standalone game fills the viewport. Compact controls go back to the site, return to the entrance, or look left and right. Portrait screens crop the wide scene and use those same controls to reveal the sides.
+- Entry opens on an anonymous crowd and an aisle through the card tables. The camera turns past a foreground post into a closer view of Slim and Dusty at the bar. Reduced motion goes directly to the bar.
+- The sock is in the right-hand floor shadows, with two visible bumps that lift the fabric in succession. It still responds with “Hmmmm...”.
+- All six Chromium checks passed at 1440×900 and 390×844. The suite checks viewport coverage, the crowd reveal, both side views, return to the entrance, and the existing interaction and accessibility checks.
+
+
 - The doorway and playable room now share one image. After the doors swing inward, a first-person-style camera move clears the threshold, looks toward the card tables, and settles on Slim and Dusty. The scene becomes interactive at the end. Reduced motion skips straight to the settled view.
 - The café doors use weathered timber artwork with iron hardware. The sock is smaller and tucked beside a tin cup. Two independently timed movements hint at the rats beneath the fabric. Fully animated rats are a later step.
 - All six Playwright checks passed in Chromium at 1440×900 and 390×844. The suite captures the doorway, swing, pan, settled interior, and sock response.
