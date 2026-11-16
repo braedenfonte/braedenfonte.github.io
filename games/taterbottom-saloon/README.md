@@ -4,6 +4,11 @@ Continue from the latest main branch in braedenfonte/braedenfonte.github.io. The
 
 ## Current checkpoint
 
+- The doorway and playable room now share one image. After the doors swing inward, a first-person-style camera move clears the threshold, looks toward the card tables, and settles on Slim and Dusty. The scene becomes interactive at the end. Reduced motion skips straight to the settled view.
+- The café doors use weathered timber artwork with iron hardware. The sock is smaller and tucked beside a tin cup. Two independently timed movements hint at the rats beneath the fabric. Fully animated rats are a later step.
+- All six Playwright checks passed in Chromium at 1440×900 and 390×844. The suite captures the doorway, swing, pan, settled interior, and sock response.
+
+
 - Click or tap either café door to enter. The doors also share a keyboard-focusable entrance control. Clean, warm wood panels swing inward with a slight stagger, then the camera pushes through the threshold.
 - The entrance shows a crowded bar through the doorway. Crossing the threshold brings up matching closer artwork, with Slim and Dusty as the two interactive men at the bar, the sock on the foreground table, and the inactive backdoor at right.
 - All six Chromium checks passed at 1440×900 and 390×844. Reviewed the entrance, mid-swing, and interior frames. The tests check both inward hinge directions and use image-relative coordinates for the characters, sock, and backdoor.

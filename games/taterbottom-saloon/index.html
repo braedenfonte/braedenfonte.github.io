@@ -14,25 +14,24 @@ h1{text-align:center;font-size:clamp(2rem,6.5vw,4rem);letter-spacing:-.035em;mar
 button{font:inherit;color:inherit;background:#351b0f;border:1px solid #c59150;border-radius:.3rem;padding:.75rem 1rem;cursor:pointer}
 button:focus-visible,a:focus-visible{outline:3px solid #ffd18e;outline-offset:4px}
 .stage{width:100%;aspect-ratio:1672 / 941;position:relative;isolation:isolate;overflow:hidden;perspective:850px;display:grid;place-items:center;border:6px solid #60391f;border-radius:.65rem;background:#24150f}
-.room{position:absolute;inset:0;display:grid;place-items:center;grid-template-columns:minmax(0,1fr);background:#180e09;transform:scale(.96);transition:transform .5s ease-out .42s}
-.open .room{transform:none}
+.room{position:absolute;inset:0;display:grid;place-items:center;grid-template-columns:minmax(0,1fr);background:#180e09;transform:scale(1.12);filter:brightness(.72)}
+.open .room{transform:none;filter:none}
 .scene{width:100%;position:relative}
 .scene img{display:block;width:100%;height:auto}
 .hotspot{position:absolute;background:transparent;border:0;padding:0;min-width:44px;min-height:44px;-webkit-tap-highlight-color:transparent}
 .hotspot:is(:hover,:focus-visible){outline:2px solid #ffd18e;outline-offset:-2px}
-[data-cowboy="slim"]{left:25%;top:26%;width:17.5%;height:29%}
-[data-cowboy="dusty"]{left:49%;top:27%;width:25.5%;height:28.5%}
-.sock{left:7%;top:74%;width:18%;height:19%}
-.sock-response{position:absolute;left:7%;top:73%;transform:translateY(-100%);margin:0;pointer-events:none}
+[data-cowboy="slim"]{left:26%;top:26%;width:18%;height:30%}
+[data-cowboy="dusty"]{left:51%;top:27%;width:26%;height:29%}
+.sock{left:16%;top:80%;width:11%;height:18%}
+.sock-response{position:absolute;left:16%;top:79%;transform:translateY(-100%);margin:0;pointer-events:none}
 .sock-response:not(:empty){background:#24130c;color:#ffebc7;border:1px solid #c59150;border-radius:.3rem;padding:.4rem .65rem}
 .storefront{position:absolute;inset:0;perspective:850px;pointer-events:none;transform-origin:50% 48%;transition:transform .79s cubic-bezier(.53,.08,.36,1) .2s,opacity .38s .48s}
 .open .storefront{transform:translate(-1.5%,2%) scale(3.5);opacity:0}
+.open .enter{pointer-events:none;opacity:0}
 .door{position:absolute;transition:transform .65s cubic-bezier(.2,.75,.32,1.12)}
 .left{transform-origin:left}.right{transform-origin:right}
 .open .left{transform:rotateY(96deg)}
 .open .right{transform:rotateY(-96deg);transition-delay:.055s}
-.pull{position:absolute;border:3px solid #2e271e;border-left-color:#a18a65;border-bottom-color:#15100b;border-radius:42%;background:#22130977;box-shadow:3px 5px 5px #190b08a8}
-.left .pull{right:8%}.right .pull{left:8%}
 .enter{position:absolute;z-index:1;inset:43% 31.65% 25%;background:transparent;border:0;padding:0;min-height:44px;
   cursor:pointer;-webkit-tap-highlight-color:transparent}
 .enter:is(:hover,:focus-visible){box-shadow:0 0 16px #ffc07566}
@@ -45,33 +44,33 @@ dialog::backdrop{background:#100805bd}
 /* Match the cutout to the painted door jambs and threshold. */
 .facade{position:absolute;inset:0;width:100%;height:100%;
   clip-path:polygon(evenodd,0 0,100% 0,100% 100%,0 100%,0 0,31.65% 13.4%,31.65% 83.2%,68.35% 83.2%,68.35% 13.4%,31.65% 13.4%,0 0)}
-.doorway{position:absolute;inset:13.4% 31.65% 16.8%;width:36.7%;height:69.8%;object-fit:cover;object-position:center 80%;filter:brightness(.79) sepia(.13)}
-/* Shaped café door leaves meet at the crown and rise toward the outer hinges. */
-.door{top:43%;bottom:25%;width:18.35%;border:0;filter:drop-shadow(0 4px 5px #140804);background:none;overflow:visible}
+/* Both leaves use the same photographed-style timber and ironwork. */
+.door{top:43%;bottom:25%;width:18.35%;filter:drop-shadow(0 3px 4px #140804)}
 .left{left:31.65%}.right{right:31.65%}
-.door::before{content:"";position:absolute}
-.door::before{inset:0;background:
-  linear-gradient(105deg,#1f0c045e,transparent 52%,#e3a36528),
-  repeating-linear-gradient(91deg,transparent 0 3px,#28130b18 4px,transparent 6px 11px),
-  repeating-linear-gradient(90deg,#794621 0 23%,#4a2718 24% 25%,#8e5732 26% 49%);
-  box-shadow:inset 0 0 0 2px #2f170c,inset 0 0 0 5px #905b34,inset 0 0 14px #2d140c}
-.left::before{border-radius:39% 14% 27% 34% / 20% 7% 14% 17%}
-.right::before{border-radius:14% 39% 34% 27% / 7% 20% 17% 14%}
-.pull{top:42%;height:22%;width:13%;border-width:3px}
-.hinge{position:absolute;width:13%;height:8%;top:21%;background:linear-gradient(90deg,#2d2520,#ab957c,#51443b);border-radius:2px;box-shadow:0 2px 3px #25140e}
-.hinge:last-child{top:72%}
-.left .hinge{left:0}.right .hinge{right:0}
+.door img{display:block;width:100%;height:100%}
+.right img{transform:scaleX(-1)}
 .lamp-glow,.sock-shadow{position:absolute;pointer-events:none;opacity:0}
 .lamp-glow{width:15%;height:25%;transform:translate(-50%,-50%);
   background:radial-gradient(ellipse,#ffc36d55,transparent 66%);mix-blend-mode:screen}
-.lamp-glow.hanging{left:63.7%;top:8.5%}
-.lamp-glow.counter{left:46%;top:41%}
-.sock-shadow{left:19%;top:91%;width:4%;height:2%;border-radius:50%;
+.lamp-glow.hanging{left:65.5%;top:8.5%}
+.lamp-glow.counter{left:47.6%;top:41%}
+.sock-shadow{left:19.4%;top:88%;width:2.2%;height:1%;border-radius:50%;
   background:#22120b;filter:blur(2px)}
+.sock-shadow.second{left:22.1%;top:91%}
 @media(prefers-reduced-motion:no-preference){
+  .open .room{animation:walk-to-bar 2.75s both}
   .open .lamp-glow{animation:lamp-flicker 4.8s .95s infinite alternate}
   .open .lamp-glow.counter{animation-delay:1.65s;animation-duration:6.2s}
   .open .sock-shadow{animation:sock-stir 13s 2s infinite}
+  .open .sock-shadow.second{animation-delay:2.6s}
+}
+/* A glance toward the card tables, followed by a turn back to the bar. */
+@keyframes walk-to-bar{
+  0%{transform:scale(1.12);filter:brightness(.72);animation-timing-function:ease-in-out}
+  25%{transform:translate(1%,1%) scale(1.24);filter:brightness(1);animation-timing-function:ease-in-out}
+  53%{transform:translate(13%,0) scale(1.34);animation-timing-function:ease-in-out}
+  83%{transform:translate(-7%,6%) scale(1.25);animation-timing-function:ease-out}
+  100%{transform:none;filter:none}
 }
 @keyframes lamp-flicker{0%,20%,44%,78%,100%{opacity:.15} 23%,52%,82%{opacity:.65} 25%,80%{opacity:.3}}
 @keyframes sock-stir{0%,45%,57%,100%{opacity:0;transform:translateX(0)} 49%{opacity:.48;transform:translateX(18%)} 52%{opacity:.22;transform:translateX(-9%)}}
@@ -84,10 +83,11 @@ dialog::backdrop{background:#100805bd}
 <section class="stage" aria-label="Saloon entrance">
   <div class="room" inert>
     <div class="scene">
-      <img src="../saloon/saloon-crowded-interior.png" width="1672" height="941" alt="Two cowboys face each other at the bar in a crowded saloon. A sock lies on a table at left, and a closed backdoor stands at right.">
+      <img src="../saloon/saloon-interior-tucked-sock.png" width="1672" height="941" alt="Two cowboys face each other at the bar in a crowded saloon. A crowded card table is on the left, and a closed backdoor stands on the right.">
       <span class="lamp-glow hanging" aria-hidden="true"></span>
       <span class="lamp-glow counter" aria-hidden="true"></span>
       <span class="sock-shadow" aria-hidden="true"></span>
+      <span class="sock-shadow second" aria-hidden="true"></span>
       <button class="hotspot" type="button" data-cowboy="slim" aria-label="Slim Pickens Taterbottom" aria-haspopup="dialog"></button>
       <button class="hotspot" type="button" data-cowboy="dusty" aria-label="Dusty Two Teeth Carson" aria-haspopup="dialog"></button>
       <button class="hotspot sock" type="button" aria-label="Inspect the sock"></button>
@@ -95,9 +95,8 @@ dialog::backdrop{background:#100805bd}
     </div>
   </div>
   <div class="storefront" aria-hidden="true">
-    <img class="doorway" src="../saloon/saloon-doorway.png" width="1122" height="1402" alt="">
-    <div class="door left"><span class="pull"></span><span class="hinge"></span><span class="hinge"></span></div>
-    <div class="door right"><span class="pull"></span><span class="hinge"></span><span class="hinge"></span></div>
+    <div class="door left"><img src="../saloon/saloon-door-leaf.png" alt=""></div>
+    <div class="door right"><img src="../saloon/saloon-door-leaf.png" alt=""></div>
     <img class="facade" src="../saloon/saloon-exterior.png" width="1672" height="941" alt="">
   </div>
   <button class="enter" type="button" aria-label="Push open the saloon doors"></button>
@@ -118,9 +117,12 @@ const conversations = {
   slim: ["Slim: You're about as subtle as a mule in a church choir.", "Dusty: Mule could carry a tune. You just carried on."],
   dusty: ["Dusty: That plan's got more holes than my Sunday socks.", "Slim: That's a hell of a thing to say with two teeth and a harmonica."]
 };
-enter.addEventListener("click", () => {
+enter.addEventListener("click", async () => {
+  if (stage.classList.contains("open")) return;
   stage.classList.add("open");
   stage.setAttribute("aria-label", "Inside the saloon");
+  const walk = room.getAnimations().find(animation => animation.animationName === "walk-to-bar");
+  if (walk) await walk.finished.catch(() => {});
   room.inert = false;
   room.querySelector("button").focus();
   enter.hidden = true;
