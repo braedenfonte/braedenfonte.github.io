@@ -596,17 +596,24 @@ async function renderPrep(){
   const today = key(new Date()), next = list.find(p => p.date >= today);
   const body = $("#prepBody");
   const hasLinks = linkCount(prepCode) > 0;
-  body.innerHTML = '<div class="prep-head"><input class="prep-search" id="prepSearch" type="search" placeholder="Search this class folder" aria-label="Search prep sheets and files in '+esc(prepCode)+'" value="'+esc(prepQ)+'"></div><div class="fold-sec"><h3>Prep sheets <span>'+list.length+' · in lesson order</span></h3>'+
+  const last = PREP.find(p => p.file === store.get("bf-prep-last", ""));
+  const resume = last ? '<button class="small-btn" type="button" data-prepf="'+esc(last.file)+'">Where I Left Off · '+esc(last.course)+' L'+esc(last.lesson)+'</button>' : "";
+  body.innerHTML = '<div class="prep-head"><input class="prep-search" id="prepSearch" type="search" placeholder="Search this class folder" aria-label="Search prep sheets and files in '+esc(prepCode)+'" value="'+esc(prepQ)+'">'+resume+'</div><div class="fold-sec"><h3>Prep sheets <span>'+list.length+' · in lesson order</span></h3>'+
     (list.length ? '<div class="panel prep-list" id="prepList"><p class="fine" style="padding:12px 14px">Opening sheets…</p></div>'
       : '<div class="panel empty-state">No prep sheets yet. They are added each night the class-prep task runs for '+esc(prepCode)+'.</div>')+'</div>'+
     (hasLinks ? '<div class="fold-sec"><h3>Files &amp; study help <span>'+linkCount(prepCode)+'</span></h3><div class="panel lk-list" id="prepLinks"><p class="fine" style="padding:12px 14px">Opening…</p></div></div>' : '');
   const search = $("#prepSearch"), rowsEl = $("#prepList"), linksEl = $("#prepLinks");
   let got = list.map(() => null);
+  let sheetsLoaded = false;
+  function matches(value){
+    const text = value.toLowerCase();
+    return prepQ.toLowerCase().trim().split(/\s+/).every(term => text.includes(term));
+  }
   function drawLinks(){
     if (!search.isConnected || !linksEl) return;
     const q = prepQ.trim().toLowerCase();
     const links = [...linksEl.querySelectorAll(".lk")];
-    links.forEach(a => { a.hidden = !!q && !a.textContent.toLowerCase().includes(q); a.style.display = a.hidden ? "none" : ""; });
+    links.forEach(a => { a.hidden = !matches(a.textContent); a.style.display = a.hidden ? "none" : ""; });
     let empty = linksEl.querySelector("[data-search-empty]");
     if (!empty){ empty = document.createElement("p"); empty.className = "fine"; empty.style.padding = "12px 14px"; empty.dataset.searchEmpty = ""; linksEl.appendChild(empty); }
     empty.textContent = "No files match your search.";
@@ -616,10 +623,10 @@ async function renderPrep(){
   $("#prepSearch").addEventListener("input", e => { prepQ = e.target.value; drawRows(); drawLinks(); });
   got = await Promise.all(list.map(p => prepSheet(p).catch(() => null)));
   if (!search.isConnected || cView !== "prep" || prepOpen) return;
+  sheetsLoaded = true;
   function drawRows(){
-    if (!rowsEl || !search.isConnected) return;
-    const q = prepQ.trim().toLowerCase();
-    const rows = list.map((p,i) => ({p, s: got[i]})).filter(({p,s}) => !q || ("l"+p.lesson+" lesson "+p.lesson+" "+p.date+" "+prepFmt(p.date)+" "+(s ? s.title+" "+(s.day || "") : "")).toLowerCase().includes(q));
+    if (!rowsEl || !search.isConnected || !sheetsLoaded) return;
+    const rows = list.map((p,i) => ({p, s: got[i]})).filter(({p,s}) => matches("l"+p.lesson+" lesson "+p.lesson+" "+p.date+" "+prepFmt(p.date)+" "+(s ? s.title+" "+(s.day || "") : "")));
     rowsEl.innerHTML = rows.length ? rows.map(({p,s}) =>
       '<button type="button" class="prep-row'+(next && p.file===next.file?' next':'')+'" data-prepf="'+esc(p.file)+'"><span class="prep-l">L'+p.lesson+'</span><span class="prep-t">'+esc(s ? s.title : "Couldn't open this sheet")+'</span><span class="prep-d">'+(next && p.file===next.file ? 'Next · ' : '')+prepFmt(p.date)+(s && s.day ? ' · '+esc(s.day) : '')+'</span></button>'
     ).join("") : '<p class="fine" style="padding:12px 14px">No sheets match “'+esc(prepQ)+'”.</p>';
@@ -642,14 +649,26 @@ async function renderPrepSheet(list){
     $("#prepTitle").textContent = "Lesson "+p.lesson+": "+s.title;
     $("#prepSub").textContent = prepFmt(p.date)+(s.day ? " · "+s.day : "");
     const doc = /^\s*<(!doctype|html)/i.test(s.html) ? s.html : '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base target="_blank"></head><body>'+s.html+'</body></html>';
-    $("#prepFrame").srcdoc = doc;
+    const frame = $("#prepFrame");
+    if (!frame) return;
+    frame.srcdoc = doc;
+    store.set("bf-prep-last", p.file);
     $("#prepNew").addEventListener("click", () => { const u = URL.createObjectURL(new Blob([doc], {type: "text/html"})); window.open(u, "_blank", "noopener"); setTimeout(() => URL.revokeObjectURL(u), 60000); });
-  }catch(e){ $("#prepFrame").replaceWith(Object.assign(document.createElement("div"), {className: "panel empty-state", textContent: "Couldn't open this sheet."})); }
+  }catch(e){ if (prepOpen?.file === p.file) $("#prepFrame")?.replaceWith(Object.assign(document.createElement("div"), {className: "panel empty-state", textContent: "Couldn't open this sheet."})); }
 }
 $("#cvCourses").addEventListener("click", () => setCView("courses"));
 $("#cvPrep").addEventListener("click", () => setCView("prep"));
 $("#prepTabs").addEventListener("click", e => { const b = e.target.closest("[data-prept]"); if (b){ prepCode = b.dataset.prept; store.set("bf-prepc", prepCode); prepOpen = null; prepQ = ""; renderPrep(); } });
-$("#prepBody").addEventListener("click", e => { const b = e.target.closest("[data-prepf]"); if (b && b.dataset.prepf){ prepOpen = PREP.find(p => p.file === b.dataset.prepf) || null; renderPrep(); window.scrollTo({top: $("#v-courses").offsetTop - 70, behavior: "smooth"}); } });
+$("#prepBody").addEventListener("click", e => { const b = e.target.closest("[data-prepf]"); if (b && finKey){
+  const sheet = PREP.find(p => p.file === b.dataset.prepf);
+  if (!sheet) return;
+  if (prepCode !== sheet.course){
+    prepCode = sheet.course;
+    store.set("bf-prepc", prepCode);
+    prepQ = "";
+  }
+  prepOpen = sheet;
+  renderPrep(); window.scrollTo({top: $("#v-courses").offsetTop - 70, behavior: "smooth"}); } });
 document.addEventListener("click", e => { const b = e.target.closest("[data-prepc]"); if (b){ prepCode = b.dataset.prepc; store.set("bf-prepc", prepCode); prepOpen = null; prepQ = ""; setCView("prep"); } });
 
 /* ---------- projects ---------- */
