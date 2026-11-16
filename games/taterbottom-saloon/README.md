@@ -4,6 +4,8 @@ Continue from the latest main branch in braedenfonte/braedenfonte.github.io. The
 
 ## Current checkpoint
 
+- Reference pass: shaped, waist-high café doors with open space above and below, visible hinges, two hanging lassos, diagonal porch braces, and darker recessed lighting. The storefront and props are CSS. Browser visual verification is pending.
+
 - The closed entrance now shows a full CSS storefront with windows, timber posts, and a porch around the unlabeled swing doors. On entry, the doors pivot and the storefront scales and drifts sideways to give the impression of stepping through. The final interior artwork is the next checkpoint.
 
 - The entrance opens with two independently hinged doors and honors reduced motion. The facade has layered plank grain, cross rails, bolts, iron pulls, and warm top light. A prominent entrance button and a button-style home link frame the experience.
