@@ -7,39 +7,48 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#160e0a;color:#ffebc7;font:1.05rem Georgia,serif}
-main{width:min(100% - 2rem,64rem);margin:2rem auto}
-.back-link{display:inline-flex;align-items:center;gap:.6rem;min-height:44px;padding:.55rem .95rem;color:#ffe1b6;background:#2a1910;border:1px solid #815938;border-radius:.35rem;text-decoration:none;font:600 .9rem system-ui,sans-serif}
-.back-link:hover{background:#422719;border-color:#cf9b60}
-h1{text-align:center;font-size:clamp(2rem,6.5vw,4rem);letter-spacing:-.035em;margin:.55em 0 .4em;text-shadow:0 3px #472717}
 button{font:inherit;color:inherit;background:#351b0f;border:1px solid #c59150;border-radius:.3rem;padding:.75rem 1rem;cursor:pointer}
 button:focus-visible,a:focus-visible{outline:3px solid #ffd18e;outline-offset:4px}
-.stage{width:100%;aspect-ratio:1672 / 941;position:relative;isolation:isolate;overflow:hidden;perspective:850px;display:grid;place-items:center;border:6px solid #60391f;border-radius:.65rem;background:#24150f}
-.room{position:absolute;inset:0;display:grid;place-items:center;grid-template-columns:minmax(0,1fr);background:#180e09;transform:scale(1.12);filter:brightness(.72)}
-.open .room{transform:none;filter:none}
-.scene{width:100%;position:relative}
+.stage{--frame:max(100vw, 177.68dvh);--edge:calc((var(--frame) - 100vw) / 2);
+  position:relative;width:100%;height:100dvh;isolation:isolate;overflow:clip;background:#24150f}
+.controls{position:fixed;z-index:3;display:flex;gap:.4rem;top:max(.6rem,env(safe-area-inset-top));left:max(.6rem,env(safe-area-inset-left))}
+.controls[hidden],.controls [hidden]{display:none}
+.controls :is(a,button){display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid #b18a60;
+  border-radius:.35rem;background:#1d100bd9;color:#ffebc7;text-decoration:none;font:1.2rem system-ui,sans-serif}
+.look-controls{left:auto;right:max(.6rem,env(safe-area-inset-right))}
+.controls button[aria-disabled="true"]{opacity:.5;cursor:default}
+.room{position:absolute;inset:0;display:grid;place-items:center;grid-template-columns:minmax(0,1fr);background:#180e09}
+.arrival{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;
+  transform:scale(1.09);filter:brightness(.72);mask-image:linear-gradient(90deg,#000 98%,transparent)}
+.open .arrival{visibility:hidden}
+.scene{position:absolute;left:50%;top:50%;width:var(--frame);
+  translate:calc(-50% + min(var(--edge), var(--frame) * .027)) -50%;
+  transition:translate .48s cubic-bezier(.22,.68,.28,1)}
+.stage[data-look="left"] .scene{translate:calc(-50% + var(--edge)) -50%}
+.stage[data-look="right"] .scene{translate:calc(-50% - var(--edge)) -50%}
 .scene img{display:block;width:100%;height:auto}
 .hotspot{position:absolute;background:transparent;border:0;padding:0;min-width:44px;min-height:44px;-webkit-tap-highlight-color:transparent}
 .hotspot:is(:hover,:focus-visible){outline:2px solid #ffd18e;outline-offset:-2px}
 [data-cowboy="slim"]{left:26%;top:26%;width:18%;height:30%}
 [data-cowboy="dusty"]{left:51%;top:27%;width:26%;height:29%}
-.sock{left:16%;top:80%;width:11%;height:18%}
-.sock-response{position:absolute;left:16%;top:79%;transform:translateY(-100%);margin:0;pointer-events:none}
+.sock{right:6%;bottom:1%;width:9%;height:13%}
+.sock-response{position:absolute;right:6%;top:85%;transform:translateY(-100%);margin:0;pointer-events:none}
 .sock-response:not(:empty){background:#24130c;color:#ffebc7;border:1px solid #c59150;border-radius:.3rem;padding:.4rem .65rem}
-.storefront{position:absolute;inset:0;perspective:850px;pointer-events:none;transform-origin:50% 48%;transition:transform .79s cubic-bezier(.53,.08,.36,1) .2s,opacity .38s .48s}
+.storefront{position:absolute;left:50%;top:0;width:var(--frame);height:100%;translate:-50% 0;perspective:850px;pointer-events:none;transform-origin:50% 48%;transition:transform .79s cubic-bezier(.53,.08,.36,1) .2s,opacity .38s .48s}
 .open .storefront{transform:translate(-1.5%,2%) scale(3.5);opacity:0}
 .open .enter{pointer-events:none;opacity:0}
 .door{position:absolute;transition:transform .65s cubic-bezier(.2,.75,.32,1.12)}
 .left{transform-origin:left}.right{transform-origin:right}
 .open .left{transform:rotateY(96deg)}
 .open .right{transform:rotateY(-96deg);transition-delay:.055s}
-.enter{position:absolute;z-index:1;inset:43% 31.65% 25%;background:transparent;border:0;padding:0;min-height:44px;
+.enter{position:absolute;z-index:1;top:43%;bottom:25%;left:50%;width:min(100%, var(--frame) * .367);translate:-50% 0;background:transparent;border:0;padding:0;min-height:44px;
   cursor:pointer;-webkit-tap-highlight-color:transparent}
 .enter:is(:hover,:focus-visible){box-shadow:0 0 16px #ffc07566}
 .stage:has(.enter:active) .left{transform:rotateY(7deg)}
 .stage:has(.enter:active) .right{transform:rotateY(-7deg)}
 dialog{width:min(30rem,calc(100% - 2rem));border:1px solid #c59150;border-radius:.5rem;background:#24130c;color:inherit;padding:1.5rem}
 dialog::backdrop{background:#100805bd}
-@media(prefers-reduced-motion:reduce){.door,.room,.storefront{transition:none}.stage:has(.enter:active) .door{transform:none}}
+@media(prefers-reduced-motion:reduce){.door,.room,.storefront,.scene{transition:none}.stage:has(.enter:active) .door{transform:none}}
 
 /* Match the cutout to the painted door jambs and threshold. */
 .facade{position:absolute;inset:0;width:100%;height:100%;
@@ -54,36 +63,48 @@ dialog::backdrop{background:#100805bd}
   background:radial-gradient(ellipse,#ffc36d55,transparent 66%);mix-blend-mode:screen}
 .lamp-glow.hanging{left:65.5%;top:8.5%}
 .lamp-glow.counter{left:47.6%;top:41%}
-.sock-shadow{left:19.4%;top:88%;width:2.2%;height:1%;border-radius:50%;
-  background:#22120b;filter:blur(2px)}
-.sock-shadow.second{left:22.1%;top:91%}
+.sock-shadow{inset:0;background:url("../saloon/saloon-interior-corner-sock.png") center / 100% 100%;
+  mask-image:radial-gradient(ellipse 1.35% 2.25% at 89.8% 91.65%,#000 38%,transparent 100%)}
+.sock-shadow.second{mask-image:radial-gradient(ellipse 1.35% 2.25% at 91.65% 92%,#000 38%,transparent 100%)}
 @media(prefers-reduced-motion:no-preference){
-  .open .room{animation:walk-to-bar 2.75s both}
+  .open .room{animation:walk-to-bar 2.85s both}
+  .open .arrival{animation:look-through-crowd 2.85s both}
   .open .lamp-glow{animation:lamp-flicker 4.8s .95s infinite alternate}
   .open .lamp-glow.counter{animation-delay:1.65s;animation-duration:6.2s}
-  .open .sock-shadow{animation:sock-stir 13s 2s infinite}
-  .open .sock-shadow.second{animation-delay:2.6s}
+  .open .sock-shadow{animation:sock-stir 6s 2s infinite}
+  .open .sock-shadow.second{animation-delay:2.42s}
 }
-/* A glance toward the card tables, followed by a turn back to the bar. */
+/* Turn past the foreground post and reveal the closer angle on the bar. */
+@keyframes look-through-crowd{
+  0%{visibility:visible;transform:scale(1.09);filter:brightness(.72);mask-image:linear-gradient(90deg,#000 98%,transparent)}
+  40%{transform:translate(4%,1%) scale(1.18);filter:brightness(1);animation-timing-function:ease-in}
+
+  76%{visibility:visible;transform:translateX(-108%) scale(1.24)}
+  100%{visibility:hidden;transform:translateX(-108%) scale(1.24)}
+}
 @keyframes walk-to-bar{
-  0%{transform:scale(1.12);filter:brightness(.72);animation-timing-function:ease-in-out}
-  25%{transform:translate(1%,1%) scale(1.24);filter:brightness(1);animation-timing-function:ease-in-out}
-  53%{transform:translate(13%,0) scale(1.34);animation-timing-function:ease-in-out}
-  83%{transform:translate(-7%,6%) scale(1.25);animation-timing-function:ease-out}
+  0%,42%{transform:translate(14%,3%) scale(1.34);filter:brightness(.8)}
+  74%{transform:translate(-7%,5%) scale(1.23);filter:brightness(1);animation-timing-function:ease-out}
   100%{transform:none;filter:none}
 }
 @keyframes lamp-flicker{0%,20%,44%,78%,100%{opacity:.15} 23%,52%,82%{opacity:.65} 25%,80%{opacity:.3}}
-@keyframes sock-stir{0%,45%,57%,100%{opacity:0;transform:translateX(0)} 49%{opacity:.48;transform:translateX(18%)} 52%{opacity:.22;transform:translateX(-9%)}}
+@keyframes sock-stir{0%,14%,34%,100%{opacity:0;transform:translateY(0)} 20%,28%{opacity:1;transform:translateY(-.8%);filter:brightness(1.36)} 24%{opacity:.85;transform:translateY(-.35%)}}
 </style>
 </head>
 <body>
 <main>
-<a class="back-link" href="/"><span aria-hidden="true">←</span> Back to website</a>
-<h1>Taterbottom Saloon</h1>
+<div class="controls">
+  <a href="/" aria-label="Back to website" title="Back to website">⌂</a>
+  <button class="return" type="button" aria-label="Return to entrance" title="Return to entrance" hidden>↶</button>
+</div>
+<nav class="controls look-controls" aria-label="Look around the saloon" hidden>
+  <button type="button" data-pan="-1" aria-label="Look left" title="Look left">‹</button>
+  <button type="button" data-pan="1" aria-label="Look right" title="Look right">›</button>
+</nav>
 <section class="stage" aria-label="Saloon entrance">
   <div class="room" inert>
     <div class="scene">
-      <img src="../saloon/saloon-interior-tucked-sock.png" width="1672" height="941" alt="Two cowboys face each other at the bar in a crowded saloon. A crowded card table is on the left, and a closed backdoor stands on the right.">
+      <img src="../saloon/saloon-interior-corner-sock.png" width="1671" height="941" alt="Two cowboys face each other at the bar in a crowded saloon. A crowded card table is on the left, and a closed backdoor stands on the right.">
       <span class="lamp-glow hanging" aria-hidden="true"></span>
       <span class="lamp-glow counter" aria-hidden="true"></span>
       <span class="sock-shadow" aria-hidden="true"></span>
@@ -94,6 +115,7 @@ dialog::backdrop{background:#100805bd}
       <p class="sock-response" role="status"></p>
     </div>
   </div>
+  <img class="arrival" src="../saloon/saloon-crowd-arrival.png" width="1672" height="941" alt="">
   <div class="storefront" aria-hidden="true">
     <div class="door left"><img src="../saloon/saloon-door-leaf.png" alt=""></div>
     <div class="door right"><img src="../saloon/saloon-door-leaf.png" alt=""></div>
@@ -113,6 +135,36 @@ const stage = document.querySelector(".stage");
 const room = document.querySelector(".room");
 const enter = document.querySelector(".enter");
 const dialog = document.querySelector("dialog");
+const back = document.querySelector(".return");
+const look = document.querySelector(".look-controls");
+const [turnLeft, turnRight] = look.querySelectorAll("button");
+const views = ["left", "center", "right"];
+let view = 1;
+
+function setView(next) {
+  view = Math.max(0, Math.min(views.length - 1, next));
+  stage.dataset.look = views[view];
+  // Keep the buttons focusable when reaching the end of the panorama.
+  turnLeft.setAttribute("aria-disabled", view === 0);
+  turnRight.setAttribute("aria-disabled", view === views.length - 1);
+}
+
+look.addEventListener("click", event => {
+  const turn = event.target.closest("[data-pan]");
+  if (turn) setView(view + Number(turn.dataset.pan));
+});
+
+back.addEventListener("click", () => {
+  room.inert = true;
+  look.hidden = true;
+  back.hidden = true;
+  stage.classList.remove("open");
+  stage.setAttribute("aria-label", "Saloon entrance");
+  room.querySelector(".sock-response").textContent = "";
+  setView(1);
+  enter.hidden = false;
+  enter.focus({ preventScroll: true });
+});
 const conversations = {
   slim: ["Slim: You're about as subtle as a mule in a church choir.", "Dusty: Mule could carry a tune. You just carried on."],
   dusty: ["Dusty: That plan's got more holes than my Sunday socks.", "Slim: That's a hell of a thing to say with two teeth and a harmonica."]
@@ -124,9 +176,19 @@ enter.addEventListener("click", async () => {
   const walk = room.getAnimations().find(animation => animation.animationName === "walk-to-bar");
   if (walk) await walk.finished.catch(() => {});
   room.inert = false;
-  room.querySelector("button").focus();
+  back.hidden = false;
+  look.hidden = false;
+  setView(1);
+  room.querySelector("button").focus({ preventScroll: true });
   enter.hidden = true;
 });
+room.addEventListener("focusin", event => {
+  if (!event.target.matches(".hotspot:focus-visible")) return;
+  const bounds = event.target.getBoundingClientRect();
+  if (bounds.right <= 0) setView(0);
+  else if (bounds.left >= stage.clientWidth) setView(2);
+});
+
 room.querySelector(".sock").addEventListener("click", () => {
   room.querySelector(".sock-response").textContent = "Hmmmm...";
 });
