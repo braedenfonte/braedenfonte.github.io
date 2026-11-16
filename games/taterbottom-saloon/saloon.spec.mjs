@@ -26,7 +26,7 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
   // Freeze the entry partway through so the swing and camera framing are reproducible.
   const animations = await page.locator('.stage').evaluateHandle(async stage => {
     const transitions = stage.getAnimations({ subtree: true })
-      .filter(animation => animation instanceof CSSTransition || ["walk-to-bar", "look-through-crowd"].includes(animation.animationName));
+      .filter(animation => animation instanceof CSSTransition || animation.animationName === "walk-to-bar");
     if (!transitions.length) throw new Error("Expected entry transitions");
     for (const transition of transitions) {
       transition.pause();
@@ -43,23 +43,24 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
   await expect(page.locator('.room')).toHaveJSProperty('inert', true);
   await animations.evaluate(animations => {
     for (const animation of animations) {
-      if (animation instanceof CSSAnimation) animation.currentTime = 1120;
+      if (animation instanceof CSSAnimation) animation.currentTime = 710;
       else animation.finish();
     }
   });
-  await expect(page.locator('.arrival')).toHaveJSProperty('naturalWidth', 1672);
-  await expect(page.locator('.arrival')).toBeVisible();
+  const wide = await artwork.boundingBox();
+  await expect(artwork).toBeVisible();
   await page.screenshot({ path: info.outputPath('crowd-arrival.png') });
   await animations.evaluate(animations => {
     for (const animation of animations) {
       if (animation instanceof CSSAnimation) animation.currentTime = 1800;
     }
   });
-  await page.screenshot({ path: info.outputPath('camera-pan.png') });
+  await page.screenshot({ path: info.outputPath('camera-zoom.png') });
   await animations.evaluate(transitions => transitions.forEach(transition => transition.finish()));
   await expect(page.locator('.storefront')).toHaveCSS('opacity', '0');
   await expect(page.locator('.lamp-glow').first()).toHaveCSS('animation-name', 'lamp-flicker');
   await expect(page.locator('.sock-shadow').first()).toHaveCSS('animation-name', 'sock-stir');
+  expect((await artwork.boundingBox()).width).toBeGreaterThan(wide.width * 1.25);
   await page.screenshot({ path: info.outputPath('interior.png') });
 
   const frame = await page.locator('.stage').boundingBox();
@@ -69,7 +70,7 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
     await activate(art.x + art.width * x, art.y + art.height * y);
   };
   const dialog = page.getByRole('dialog', { name: 'At the bar' });
-  for (const [x, y, speaker] of [[.35, .34, 'Slim'], [.59, .35, 'Dusty']]) {
+  for (const [x, y, speaker] of [[.475, .386, 'Slim'], [.572, .389, 'Dusty']]) {
     await hit(x, y);
     await expect(dialog).toBeVisible();
     await expect(dialog.locator('#cowboy-line')).toHaveText(new RegExp('^' + speaker + ':'));
@@ -78,18 +79,26 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
   }
   await page.getByRole('button', { name: 'Look right' }).click();
   await expect(page.locator('.stage')).toHaveAttribute('data-look', 'right');
+  // Reduce the usable height and reserve a bottom strip as a taskbar overlay.
+  const { width, height } = info.project.use.viewport;
+  await page.setViewportSize({ width, height: height - 48 });
+  await page.locator('.scene').evaluate(async scene => {
+    await Promise.all(scene.getAnimations().map(animation => animation.finished.catch(() => {})));
+  });
+  const sock = page.getByRole('button', { name: 'Inspect the sock' });
   await expect.poll(async () => {
-    const art = await artwork.boundingBox();
-    return Math.round(art.x + art.width);
-  }).toBe(info.project.use.viewport.width);
-  await hit(.90, .92);
+    const area = await sock.boundingBox();
+    return area.x >= 0 && area.x + area.width <= width &&
+      area.y >= 0 && area.y + area.height < height - 112;
+  }).toBe(true);
+  await hit(.714, .603);
   const art = await artwork.boundingBox();
   await expect(page.getByRole('status')).toHaveText('Hmmmm...');
   await page.screenshot({ path: info.outputPath('sock.png') });
   expect(await page.evaluate(({ x, y }) => document.elementFromPoint(x, y).tagName, {
-    x: art.x + art.width * .94, y: art.y + art.height * .4,
+    x: art.x + art.width * .773, y: art.y + art.height * .45,
   })).toBe('IMG');
-  await hit(.94, .40);
+  await hit(.773, .45);
   await expect(dialog).toBeHidden();
   await expect(page.getByRole('status')).toHaveText('Hmmmm...');
   expect(page.url()).toBe(url);
@@ -99,7 +108,7 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
   await expect(page.locator('.stage')).toHaveAttribute('data-look', 'left');
   await page.getByRole('button', { name: 'Return to entrance' }).click();
   await expect(page.getByRole('button', { name: /push open the saloon doors/i })).toBeFocused();
-  await expect(page.locator('.arrival')).toBeVisible();
+  await expect(artwork).toBeVisible();
   await expect(page.locator('.room')).toHaveJSProperty('inert', true);
   expect(errors).toEqual([]);
 });
@@ -136,8 +145,8 @@ test('reduced motion enters immediately', async ({ page }) => {
   await page.goto(url);
   await page.getByRole('button', { name: /push open the saloon doors/i }).click();
   await expect(page.locator('.storefront')).toHaveCSS('opacity', '0');
-  await expect(page.locator('.room')).toHaveCSS('transform', 'none');
-  await expect(page.locator('.arrival')).toBeHidden();
+  await expect(page.locator('.room')).not.toHaveCSS('transform', 'none');
+
   expect(await page.locator('.stage').evaluate(stage => stage.getAnimations({ subtree: true }).length)).toBe(0);
   await expect(page.getByRole('button', { name: slim })).toBeFocused();
 });
