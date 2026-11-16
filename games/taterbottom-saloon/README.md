@@ -4,6 +4,16 @@ Continue from the latest main branch in braedenfonte/braedenfonte.github.io. The
 
 ## Current checkpoint
 
+- The supplied artwork at `../saloon/saloon-interior.png` now fills the interior scene. Image-relative hotspots follow Slim, Dusty, and the sock on desktop and mobile. Either cowboy opens the bar dialogue, the sock announces “Hmmmm...”, and the backdoor remains scenery.
+- The façade and door leaves share the camera move. The leaves swing inward before the storefront pushes forward and fades. Reduced motion switches scenes immediately.
+- Verified in Playwright Chromium at 1440×900 and 390×844 with touch emulation. All six checks passed, covering entry, both conversations, sock text, the inactive backdoor, keyboard activation, Escape and focus restoration, and reduced motion. Reviewed entrance, mid-swing, interior, and sock screenshots.
+
+## Reproduce browser checks
+
+From `games/taterbottom-saloon`, run `npm ci`, `npx playwright install chromium`, then `npm test`. The tests open the standalone page directly and save screenshots under `test-results/`.
+
+## Earlier checkpoints
+
 - Reference pass: shaped, waist-high café doors with open space above and below, visible hinges, two hanging lassos, diagonal porch braces, and darker recessed lighting. The storefront and props are CSS. Browser visual verification is pending.
 
 - The closed entrance now shows a full CSS storefront with windows, timber posts, and a porch around the unlabeled swing doors. On entry, the doors pivot and the storefront scales and drifts sideways to give the impression of stepping through. The final interior artwork is the next checkpoint.
@@ -14,6 +24,5 @@ Continue from the latest main branch in braedenfonte/braedenfonte.github.io. The
 
 ## Build order
 
-1. Generate one cinematic, warm-lit Western saloon interior that matches the entrance. Compose both cowboys at the bar, a suspicious sock and a visible backdoor in one shot. Overlay accessible, responsive hotspots directly over the two cowboys and the sock. Each cowboy opens the bar conversation. Clicking the sock shows exactly “Hmmmm...”. Reserve the backdoor hotspot location and leave the door inactive.
-2. Bring the still to life with subtle, ambiguous movement under the sock, flickering lights, and optional ambient chatter. Preserve reduced-motion behavior and add a mute control for audio.
-3. Daily Bad Bet, more Western idioms, and functional backdoor remain later additions.
+1. Bring the still to life with subtle, ambiguous movement under the sock, flickering lights, and optional ambient chatter. Preserve reduced-motion behavior and add a mute control for audio.
+2. Daily Bad Bet, more Western idioms, and a functional backdoor remain later additions.
