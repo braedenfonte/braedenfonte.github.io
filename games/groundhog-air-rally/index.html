@@ -742,6 +742,9 @@ let mpIce=null;
 async function mpIceServers(){
  if(mpIce)return mpIce;
  mpIce=[{urls:'stun:stun.l.google.com:19302'},{urls:'stun:stun1.l.google.com:19302'},{urls:'stun:global.stun.twilio.com:3478'}];
+ // Metered.ca TURN relay (groundhog-air-rally app). Public by design: every player's browser needs it to reach friends on networks that block direct connections.
+ const tu='b983bddd83f19806d9421e37',tc='jNvuhhFhu1E7U2gw';
+ mpIce=mpIce.concat(['turn:global.relay.metered.ca:80','turn:global.relay.metered.ca:80?transport=tcp','turn:global.relay.metered.ca:443','turns:global.relay.metered.ca:443?transport=tcp'].map(urls=>({urls,username:tu,credential:tc})));
  if(MP_TURN_URL){try{const r=await fetch(MP_TURN_URL);if(r.ok){const list=await r.json();if(Array.isArray(list))mpIce=mpIce.concat(list)}}catch{}}
  return mpIce;
 }
