@@ -735,6 +735,18 @@ function guestEnd(d){
  if(!MP.inMatch)return;MP.inMatch=false;kills=d.kills;assists=d.assists;eliminationPlace=d.place;cause=d.cause||cause;
  if(live)finish(!!d.won);
 }
+// Network setup. STUN finds a direct route; a TURN relay is needed when a network blocks device-to-device
+// traffic (common on campus/base Wi-Fi). Paste a Metered.ca TURN credentials URL into MP_TURN_URL to enable it.
+const MP_TURN_URL='';
+let mpIce=null;
+async function mpIceServers(){
+ if(mpIce)return mpIce;
+ mpIce=[{urls:'stun:stun.l.google.com:19302'},{urls:'stun:stun1.l.google.com:19302'},{urls:'stun:global.stun.twilio.com:3478'}];
+ if(MP_TURN_URL){try{const r=await fetch(MP_TURN_URL);if(r.ok){const list=await r.json();if(Array.isArray(list))mpIce=mpIce.concat(list)}}catch{}}
+ return mpIce;
+}
+async function mpPeer(id){const config={iceServers:await mpIceServers()};return id?new Peer(id,{config}):new Peer({config})}
+const mpBlocked='Couldn’t connect to the host. Your network is probably blocking direct connections (common on school and base Wi-Fi). Try both devices on the same phone hotspot, then tap Join again.';
 function mpStatus(t){$('mpStatus').textContent=t}
 function loadPeer(){return window.Peer?Promise.resolve():new Promise((ok,fail)=>{const sc=document.createElement('script');sc.src='https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js';sc.onload=ok;sc.onerror=()=>fail(new Error('Could not load the connection library'));document.head.append(sc)})}
 function myCard(){return {name:($('callsign').value.trim()||pilots[choice][0]).slice(0,20),pilot:pilots[choice][0],outfit:$('outfit').value,stream:$('stream').value,accessory:$('accessory').value}}
@@ -748,9 +760,10 @@ function broadcastLobby(){MP.players=[{...myCard(),host:true},...MP.conns.filter
 async function mpHost(tries=0){
  mpStatus('Opening a room…');try{await loadPeer()}catch(e){mpStatus(e.message);return}
  const code=Array.from({length:4},()=>mpLetters[Math.floor(Math.random()*mpLetters.length)]).join('');
- const peer=new Peer('ghar-room-'+code.toLowerCase());
+ const peer=await mpPeer('ghar-room-'+code.toLowerCase());
  peer.on('open',()=>{Object.assign(MP,{peer,role:'host',code,conns:[]});broadcastLobby();mpStatus('Share the code. Up to 4 friends can join.')});
- peer.on('error',e=>{if(e.type==='unavailable-id'&&tries<4){peer.destroy();mpHost(tries+1)}else mpStatus('Connection problem: '+e.type)});
+ peer.on('error',e=>{if(e.type==='unavailable-id'&&tries<4){peer.destroy();mpHost(tries+1)}else mpStatus(e.type==='network'||e.type==='server-error'||e.type==='socket-error'?'Can’t reach the matchmaking server from this network. Try a phone hotspot.':'Connection problem: '+e.type)});
+ setTimeout(()=>{if(!MP.code&&!peer.open)mpStatus('Still reaching the matchmaking server… if this hangs, this network may block it. Try a phone hotspot.')},8000);
  peer.on('connection',conn=>{
   conn.on('open',()=>{if(MP.conns.length>=4){conn.send({type:'full'});setTimeout(()=>conn.close(),300);return}MP.conns.push(conn)});
   conn.on('data',d=>{if(d?.type==='input'&&conn.ship){conn.ship.input={...conn.ship.input,...d,power:conn.ship.input?.power||d.power,emote:d.emote||conn.ship.input?.emote}}else if(d&&d.type==='hello'&&d.card){conn.card={...d.card,name:String(d.card.name||'Friend').slice(0,20)};broadcastLobby();mpStatus(conn.card.name+' joined')}});
@@ -759,14 +772,17 @@ async function mpHost(tries=0){
 }
 async function mpJoin(){
  const code=$('mpCode').value.trim().toUpperCase();if(!/^[A-Z]{4}$/.test(code)){mpStatus('Enter the 4-letter code');return}
- mpStatus('Connecting…');try{await loadPeer()}catch(e){mpStatus(e.message);return}
- const peer=new Peer();
- peer.on('open',()=>{const conn=peer.connect('ghar-room-'+code.toLowerCase(),{reliable:true});Object.assign(MP,{peer,role:'guest',code,conns:[conn]});
-  conn.on('open',()=>{conn.send({type:'hello',card:myCard()});mpStatus('Joined. Waiting for the host to start.')});
+ mpLeave();mpStatus('Reaching the matchmaking server…');try{await loadPeer()}catch(e){mpStatus(e.message);return}
+ const peer=await mpPeer();let stage='server';
+ const watchdog=setTimeout(()=>{if(stage==='server')mpStatus('Can’t reach the matchmaking server from this network. Try a phone hotspot.')},10000);
+ peer.on('open',()=>{stage='host';mpStatus('Found the server. Connecting to the host’s room '+code+'…');
+  setTimeout(()=>{if(stage==='host'){mpStatus(mpBlocked);try{peer.destroy()}catch{}Object.assign(MP,{peer:null,conns:[],role:''});renderLobby()}},16000);
+  const conn=peer.connect('ghar-room-'+code.toLowerCase(),{reliable:true});Object.assign(MP,{peer,role:'guest',code,conns:[conn]});
+  conn.on('open',()=>{stage='joined';clearTimeout(watchdog);conn.send({type:'hello',card:myCard()});mpStatus('Joined! Waiting for the host to start.')});
   conn.on('data',d=>{if(d?.type==='lobby'){MP.players=d.players;renderLobby()}else if(d?.type==='full'){mpStatus('That room is full');mpLeave()}else if(d?.type==='start')guestStart(d);else if(d?.type==='snap')guestSnap(d);else if(d?.type==='end')guestEnd(d)});
   conn.on('close',()=>{if(MP.role==='guest'){if(MP.inMatch&&live){MP.inMatch=false;cause='The host left';finish(false)}mpStatus('The host closed the room');Object.assign(MP,{role:'',players:[]});renderLobby()}});
  });
- peer.on('error',e=>mpStatus(e.type==='peer-unavailable'?'No room with that code':'Connection problem: '+e.type));
+ peer.on('error',e=>{stage='failed';clearTimeout(watchdog);mpStatus(e.type==='peer-unavailable'?'No room with that code. Check the 4 letters and that the host’s room is still open.':e.type==='network'||e.type==='server-error'||e.type==='socket-error'?'Can’t reach the matchmaking server from this network. Try a phone hotspot.':'Connection problem: '+e.type)});
 }
 function announce(message){toast=message;notice=2.8}
 const powers=['Marist Camera','Froot Loops Burst','Salmon Shield','Kia Turbo','Igloo Wall','Ramon’s Healthy Lotion','MAJ P’s Blabber'];
