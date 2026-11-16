@@ -14,7 +14,7 @@ h1{text-align:center;font-size:clamp(2rem,6.5vw,4rem);letter-spacing:-.035em;mar
 button{font:inherit;color:inherit;background:#351b0f;border:1px solid #c59150;border-radius:.3rem;padding:.75rem 1rem;cursor:pointer}
 button:focus-visible,a:focus-visible{outline:3px solid #ffd18e;outline-offset:4px}
 .stage{position:relative;isolation:isolate;overflow:hidden;perspective:850px;min-height:clamp(23rem,62vw,36rem);display:grid;place-items:center;border:6px solid #60391f;border-radius:.65rem;background:#24150f}
-.room{position:absolute;inset:0;display:grid;place-content:end center;gap:1rem;text-align:center;padding:1.5rem;background:radial-gradient(ellipse at 50% 26%,#f3b05980,transparent 50%),linear-gradient(0deg,#100805 0%,#432317 32%,transparent 33%),repeating-linear-gradient(90deg,#392317 0 7%,#24140d 7% 7.5%);transition:transform .85s ease-out;transform:scale(.91)}
+.room{position:absolute;inset:0;display:grid;place-content:end center;gap:1rem;text-align:center;padding:1.5rem;background:radial-gradient(ellipse at 50% 26%,#f3b05980,transparent 50%),linear-gradient(0deg,#100805 0%,#432317 32%,transparent 33%),repeating-linear-gradient(90deg,#392317 0 7%,#24140d 7% 7.5%);transition:transform .85s ease-out;transform:scale(.91) translateX(3%)}
 .open .room{transform:scale(1)}
 .bar{display:flex;flex-wrap:wrap;justify-content:center;gap:.65rem;background:#241008;padding:.8rem;border-top:5px solid #9c5d30;border-radius:.35rem}
 .door{position:absolute;inset-block:0;width:50%;border:clamp(7px,1.5vw,17px) solid #472616;box-shadow:inset 0 0 0 2px #a16b464d,inset 0 0 2.5rem #140702d9,0 0 0 2px #160904;background:
@@ -43,6 +43,25 @@ button:focus-visible,a:focus-visible{outline:3px solid #ffd18e;outline-offset:4p
 dialog{width:min(30rem,calc(100% - 2rem));border:1px solid #c59150;border-radius:.5rem;background:#24130c;color:inherit;padding:1.5rem}
 dialog::backdrop{background:#100805bd}
 @media(prefers-reduced-motion:reduce){.door,.room,.enter{transition:none}.enter:hover,.enter:active{transform:none}}
+
+/* The opening is cut out of the storefront so only the door leaves move. */
+.facade{position:absolute;inset:0;pointer-events:none;transition:transform .85s cubic-bezier(.55,.05,.27,1),opacity .25s .58s;transform-origin:50% 50%}
+.facade-wall,.facade-beam,.porch{position:absolute;box-shadow:inset 0 0 1.4rem #170905}
+.facade-wall{inset-block:0;width:32%;display:grid;place-items:center;background:repeating-linear-gradient(90deg,#643925 0 8%,#432315 9%,#784b32 10%);border-inline:clamp(7px,1.6vw,20px) solid #8c593a}
+.facade-wall:first-child{left:0}.facade-wall:nth-child(2){right:0}
+.facade-window{width:72%;height:34%;border:clamp(4px,1vw,12px) ridge #a4734e;background:linear-gradient(90deg,transparent 47%,#805437 48% 52%,transparent 53%),linear-gradient(transparent 47%,#805437 48% 52%,transparent 53%),linear-gradient(#172739,#435764 65%,#956540);box-shadow:0 5px 10px #241008,inset 0 0 12px #160c09}
+.facade-beam{inset:0 0 auto;height:13%;background:linear-gradient(#aa7652,#52311e 74%,#301c11);border-bottom:4px solid #29160c}
+.porch{inset:auto 0 0;height:17%;background:repeating-conic-gradient(from -41deg at 50% -125%,#75492e 0 8deg,#432718 8.2deg 9deg);border-bottom:9px solid #4c2b18}
+.door{width:18%;top:13%;bottom:17%;border-width:clamp(4px,1vw,10px)}
+.left{left:32%}.right{right:32%}
+.open .facade{transform:scale(3.7) translateX(-4%);opacity:0;transition-delay:0s,.58s}
+.enter{align-self:end;margin-bottom:5%;white-space:normal}
+@media(max-width:550px){
+  .facade-wall{width:27%}
+  .door{width:23%}
+  .left{left:27%}.right{right:27%}
+}
+@media(prefers-reduced-motion:reduce){.facade,.open .facade{transition:none}}
 </style>
 </head>
 <body>
@@ -58,6 +77,12 @@ dialog::backdrop{background:#100805bd}
   </div>
   <div class="door left" aria-hidden="true"><span class="pull"></span></div>
   <div class="door right" aria-hidden="true"><span class="pull"></span></div>
+  <div class="facade" aria-hidden="true">
+    <div class="facade-wall"><span class="facade-window"></span></div>
+    <div class="facade-wall"><span class="facade-window"></span></div>
+    <div class="facade-beam"></div>
+    <div class="porch"></div>
+  </div>
   <button class="enter" type="button">Push open the doors <span aria-hidden="true">→</span></button>
 </section>
 <dialog aria-labelledby="conversation-title">
