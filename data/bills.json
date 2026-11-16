@@ -1,13 +1,13 @@
 {
- "updated": "2026-11-15T06:45:00-05:00",
+ "updated": "2026-11-16T06:35:00-05:00",
  "team": "Buffalo Bills",
  "record": {
-  "w": 7,
+  "w": 8,
   "l": 1
  },
- "standing": "Leads the AFC East",
- "pf": 256,
- "pa": 187,
+ "standing": "Leads the AFC East by 3.5 games",
+ "pf": 287,
+ "pa": 199,
  "results": [
   {
    "wk": 1,
@@ -76,67 +76,69 @@
    "os": 6,
    "res": "W",
    "note": "Monday night"
+  },
+  {
+   "wk": 9,
+   "date": "Nov 15",
+   "opp": "at NY Jets",
+   "bs": 31,
+   "os": 12,
+   "res": "W",
+   "note": "Best start since 1991"
   }
  ],
  "afcEast": [
   {
    "team": "Buffalo Bills",
-   "w": 7,
+   "w": 8,
    "l": 1,
    "me": true
   },
   {
    "team": "New England Patriots",
    "w": 5,
-   "l": 4
+   "l": 5
   },
   {
    "team": "New York Jets",
    "w": 2,
-   "l": 7
+   "l": 8
   },
   {
    "team": "Miami Dolphins",
    "w": 1,
-   "l": 7
+   "l": 8
   }
  ],
  "lastGame": {
-  "title": "Bills 23, Vikings 6",
+  "title": "Bills 31, Jets 12",
   "stats": [
-   "Josh Allen: 21-of-31, 234 yards, 1 TD, 1 INT; 25-yard TD pass to Keleki Latu (Latu's first career TD)",
-   "James Cook: 31 carries, 107 yards, 1 rushing TD (5 yards)",
-   "Tyler Bass: 3 field goals (39, 25 and 52 yards)",
-   "Defense: 3 turnovers, 2 INTs (Dorian Williams, Terrel Bernard); Vikings 0-for-7 on third down",
-   "Carson Wentz: 8-of-25, 81 yards, 2 INTs for Minnesota"
+   "Josh Allen: 11-of-21, 196 yards, 1 TD, 1 INT; 2 rushing TDs (both 1 yard); passed Peyton Manning for most total TDs in a player's first 10 seasons",
+   "James Cook III: 18 carries, 157 yards, 74-yard TD run (career long, Bills' longest rushing TD since 2016)",
+   "DJ Moore: 4 catches, 90 yards, 45-yard TD; Dalton Kincaid had a career-long 54-yard catch",
+   "Defense: no TDs allowed, Jets 3-of-13 on third down; T.J. Parker 2 sacks, Dorian Williams first career sack",
+   "Jets QBs: Geno Smith 13-of-21, 148 yards before an ankle injury; rookie Cade Klubnik 11-of-20, 137 yards, 1 INT"
   ]
  },
  "news": [
   {
-   "h": "Hancock activated, Buechele elevated",
-   "b": "The Bills activated DB Jordan Hancock from injured reserve (hamstring) and released DB Te'Cory Couch to make room. QB Shane Buechele was elevated from the practice squad for the Jets game, his first elevation of the season."
+   "h": "Bills 8-1, best start in 35 years",
+   "b": "Buffalo won its fifth straight and first AFC East game, 31-12 at MetLife. Joe Brady called it the team's best win so far, and he is the third NFL coach to win his first five road games in his first season."
   },
   {
-   "h": "Spencer Brown doubtful at Jets",
-   "b": "Right tackle Spencer Brown (ankle) is doubtful, and Tylan Grable would likely start in his place. Christian Benford, Sam Franklin Jr. and Tyrell Shavers are questionable."
+   "h": "Benford, Alford and Williams hurt",
+   "b": "CB Christian Benford (groin) and DB Dee Alford (concussion) were ruled out in the fourth quarter. LB Dorian Williams left with a calf injury after 9 tackles and a sack. WR Keon Coleman was checked for a concussion and cleared to return."
   },
   {
-   "h": "Jets activate VJ Payne",
-   "b": "New York activated S VJ Payne from injured reserve and waived OL Kohl Levao on Saturday. Garrett Wilson (concussion) practiced fully Friday, is listed questionable and is expected to play."
+   "h": "Defense hasn't allowed a TD in 33 drives",
+   "b": "That is the NFL's longest active streak and the Bills' longest since 1999. The Jets reached the Buffalo 20 twice and settled for four Jason Sanders field goals."
   },
   {
-   "h": "Preview: run game vs. fumble-forcing Jets",
-   "b": "Buffalo ran a season-high 44 times at Minnesota, and the Jets have allowed about 140 rushing yards per game over their last four. New York leads the NFL with 13 forced fumbles; kickoff is 1 p.m. ET on CBS from MetLife Stadium."
+   "h": "Next: Dolphins at Highmark",
+   "b": "Miami (1-8) visits Sunday at 1 p.m. ET on CBS. Dolphins QB Malik Willis is on injured reserve (groin), and Kyle McCord was named the starter in his place."
   }
  ],
  "schedule": [
-  {
-   "kick": "2026-11-15T13:00-05:00",
-   "opp": "New York Jets",
-   "home": false,
-   "venue": "MetLife Stadium",
-   "note": "CBS (Harlan, Green)"
-  },
   {
    "kick": "2026-11-22T13:00-05:00",
    "opp": "Miami Dolphins",
@@ -194,5 +196,5 @@
    "note": "Date and time may flex"
   }
  ],
- "source": "buffalobills.com roster moves (Nov 14), injury report (Nov 13), storylines (Nov 11) and schedule; newyorkjets.com Payne move (Nov 14) and Friday injury report (Nov 13); Fox Sports standings and NFL.com Week 10 schedule (Nov 15)."
+ "source": "buffalobills.com recap, takeaways and injury update (Nov 15); AP via ABC News and CBS Sports/Rotowire game notes (Nov 15); Fox Sports and CBS Sports standings, NFL.com Week 10 scores; CBS12 Dolphins QB report (Nov 10)."
 }

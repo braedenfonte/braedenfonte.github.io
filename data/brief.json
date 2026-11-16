@@ -1,8 +1,12 @@
 {
- "date": "2026-11-15",
- "updated": "2026-11-15T06:39:05-05:00",
- "dayCode": "N/A",
- "classes": [],
+ "date": "2026-11-16",
+ "updated": "2026-11-16T06:40:35-05:00",
+ "dayCode": "1-32",
+ "classes": [
+  "MA376 0740",
+  "SS388 0905",
+  "EM481 1410"
+ ],
  "due": [
   {
    "course": "MA486",
@@ -10,19 +14,9 @@
    "due": "2026-11-16T07:00"
   },
   {
-   "course": "MA481X",
-   "title": "Consultant Reflection (Firm 5 briefing, L32)",
-   "due": "2026-11-17T08:45"
-  },
-  {
-   "course": "MA376",
-   "title": "Memo 5 (hard copy in class; Canvas says Nov 22)",
-   "due": "2026-11-18T07:40"
-  },
-  {
-   "course": "MA481X",
-   "title": "Consultant Reflection (Firm 4 briefing, L33)",
-   "due": "2026-11-19T08:45"
+   "course": "MA486",
+   "title": "Project 2 presentations (in class)",
+   "due": "2026-11-19T07:40"
   },
   {
    "course": "EM481",
@@ -31,14 +25,19 @@
   },
   {
    "course": "MA481X",
-   "title": "Consultant Reflection (Firm 3 briefing, L34)",
+   "title": "Firm 3 Client Briefing (L34 Minimax/Maximin)",
    "due": "2026-11-20T08:45"
+  },
+  {
+   "course": "MA376",
+   "title": "Memo 5 (calendar: in class Wed 18 Nov)",
+   "due": "2026-11-22T23:59"
   }
  ],
  "tests": [
   {
    "course": "MA376",
-   "title": "B4 Quiz",
+   "title": "Block 4 Quiz",
    "date": "2026-11-18"
   },
   {
@@ -53,9 +52,9 @@
   }
  ],
  "headlines": [
-  "Bills 7-1, at Jets today 1 PM (CBS)",
+  "Bills 8-1 after 31-12 win at NYJ, next vs MIA Sun 1 PM (CBS)",
   "Army vs East Carolina Sat Nov 21, noon (CBSSN)",
-  "S&P 500 −0.40% Fri, +2.5% for the week"
+  "S&P 500 −0.40% Fri"
  ],
  "alerts": []
 }

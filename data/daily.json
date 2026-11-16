@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-15T06:39:05-05:00",
+ "updated": "2026-11-16T06:40:35-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -517,15 +517,6 @@
     "stats": []
    },
    {
-    "away": "South Carolina",
-    "home": "Arkansas",
-    "as": 6,
-    "hs": 34,
-    "awayRank": 20,
-    "blurb": "Arkansas blew out No. 20 South Carolina in Fayetteville.",
-    "stats": []
-   },
-   {
     "away": "Houston",
     "home": "Colorado",
     "as": 32,
@@ -533,6 +524,18 @@
     "awayRank": 14,
     "blurb": "Colorado knocked off No. 14 Houston in Boulder on Friday night.",
     "stats": []
+   },
+   {
+    "away": "Ole Miss",
+    "home": "Oklahoma",
+    "as": 17,
+    "hs": 24,
+    "awayRank": 19,
+    "blurb": "Oklahoma beat No. 19 Ole Miss in Norman on Sunday after Friday's FAA ground stop pushed the game back a day.",
+    "stats": [
+     "John Mateer (OU): 10/19, 111 yds; 16 rushes, 70 yds, TD",
+     "Trinidad Chambliss (MISS): 14/27, 127 yds, TD; 11 rushes, 84 yds"
+    ]
    },
    {
     "away": "San José State",
@@ -558,13 +561,6 @@
     "note": "Fri · The CW · Falcon Stadium"
    },
    {
-    "away": "New Mexico",
-    "home": "Wyoming",
-    "kick": "2026-11-21T02:00:00Z",
-    "note": "Fri · FS1",
-    "awayRank": 23
-   },
-   {
     "away": "East Carolina",
     "home": "Army",
     "kick": "2026-11-21T17:00:00Z",
@@ -575,7 +571,7 @@
     "away": "Memphis",
     "home": "Navy",
     "kick": "2026-11-21T17:00:00Z",
-    "note": "Navy-Marine Corps Memorial Stadium · TV TBA"
+    "note": "ESPN2 · Navy-Marine Corps Memorial Stadium"
    },
    {
     "away": "Ohio State",
@@ -585,45 +581,24 @@
     "awayRank": 21
    },
    {
-    "away": "Utah",
-    "home": "TCU",
-    "kick": "2026-11-21T17:00:00Z",
-    "note": "Time TBA",
-    "awayRank": 2
-   },
-   {
-    "away": "Virginia Tech",
-    "home": "Miami",
-    "kick": "2026-11-21T17:00:00Z",
-    "note": "Time TBA",
-    "homeRank": 5
-   },
-   {
     "away": "BYU",
     "home": "Kansas",
     "kick": "2026-11-21T17:00:00Z",
-    "note": "Time TBA",
+    "note": "ABC",
     "awayRank": 12
-   },
-   {
-    "away": "Texas Tech",
-    "home": "Baylor",
-    "kick": "2026-11-21T17:00:00Z",
-    "note": "Time TBA",
-    "awayRank": 10
    },
    {
     "away": "Wake Forest",
     "home": "Georgia Tech",
     "kick": "2026-11-21T17:00:00Z",
-    "note": "Time TBA",
+    "note": "ESPN",
     "awayRank": 11
    },
    {
     "away": "Houston",
     "home": "West Virginia",
-    "kick": "2026-11-21T17:00:00Z",
-    "note": "Time TBA",
+    "kick": "2026-11-21T18:00:00Z",
+    "note": "TNT",
     "awayRank": 14
    },
    {
@@ -644,14 +619,14 @@
     "away": "Arkansas",
     "home": "Texas",
     "kick": "2026-11-21T20:30:00Z",
-    "note": "TV TBA",
+    "note": "ESPN",
     "homeRank": 8
    },
    {
     "away": "LSU",
     "home": "Tennessee",
     "kick": "2026-11-21T20:30:00Z",
-    "note": "TV TBA",
+    "note": "ABC",
     "awayRank": 24,
     "homeRank": 9
    },
@@ -661,6 +636,27 @@
     "kick": "2026-11-21T20:30:00Z",
     "note": "Peacock",
     "awayRank": 6
+   },
+   {
+    "away": "Texas Tech",
+    "home": "Baylor",
+    "kick": "2026-11-21T20:30:00Z",
+    "note": "FOX",
+    "awayRank": 10
+   },
+   {
+    "away": "Maryland",
+    "home": "USC",
+    "kick": "2026-11-21T23:15:00Z",
+    "note": "BTN",
+    "homeRank": 15
+   },
+   {
+    "away": "Virginia Tech",
+    "home": "Miami",
+    "kick": "2026-11-22T00:00:00Z",
+    "note": "ESPN",
+    "homeRank": 5
    },
    {
     "away": "Georgia",
@@ -684,47 +680,54 @@
     "kick": "2026-11-22T00:30:00Z",
     "note": "SEC Network",
     "awayRank": 13
+   },
+   {
+    "away": "Utah",
+    "home": "TCU",
+    "kick": "2026-11-22T02:00:00Z",
+    "note": "FOX",
+    "awayRank": 2
    }
   ],
   "poll": "AP Top 25, Week 11 (Nov 8)"
  },
  "location": {
-  "name": "Venice",
-  "wiki": "Venice",
-  "country": "Italy",
-  "region": "Veneto, Venetian Lagoon",
-  "lat": 45.4375,
-  "lon": 12.3358,
-  "tagline": "A car-free city of canals and palaces floating on more than a hundred islands in a lagoon",
-  "intro": "Venice is a city in northeastern Italy built on a group of 126 islands in the Venetian Lagoon, separated by canals and linked by hundreds of bridges. For roughly a thousand years it was the capital of the Republic of Venice, a maritime power that grew rich on trade until Napoleon ended it in 1797. Today fewer than 50,000 people live in the historic island city, which is visited by tens of millions of tourists a year.",
+  "name": "Table Mountain",
+  "wiki": "Table_Mountain",
+  "country": "South Africa",
+  "region": "Western Cape, above Cape Town",
+  "lat": -33.9622,
+  "lon": 18.4099,
+  "tagline": "A flat-topped sandstone mountain that towers over Cape Town and gets its own cloud 'tablecloth'",
+  "intro": "Table Mountain is the flat-topped mountain that forms the backdrop to Cape Town, South Africa, with a level plateau about 3 km (2 mi) from side to side. It sits inside Table Mountain National Park, the most visited national park in South Africa, and was named one of the New7Wonders of Nature in 2011. Visitors reach the top on foot or by a cableway that has run since 1929.",
   "stats": [
    {
-    "label": "Islands",
-    "value": "126"
+    "label": "Highest point",
+    "value": "1,085 m (3,558 ft)"
    },
    {
-    "label": "Grand Canal",
-    "value": "3.8 km (2.4 mi) long"
+    "label": "Plateau",
+    "value": "About 3 km (2 mi) wide"
    },
    {
-    "label": "UNESCO World Heritage",
-    "value": "1987"
+    "label": "Cableway opened",
+    "value": "4 October 1929"
    },
    {
-    "label": "Historic-city residents",
-    "value": "Nearly 50,000"
+    "label": "Rock age",
+    "value": "450-510 million years"
    }
   ],
   "facts": [
-   "Much of the city stands on closely spaced piles of alder-tree trunks driven into the lagoon mud, topped with Istrian limestone.",
-   "Venice is Europe's largest car-free urban area: a sizable working city with no cars or trucks at all.",
-   "The Venetian Arsenal, the Republic's state shipyard, is considered by several historians to be the first factory in history.",
-   "By 1482 Venice was the printing capital of the world, and its printer Aldus Manutius pioneered small, portable books.",
-   "The MOSE flood barrier, 78 gates across the lagoon's three inlets, was raised against a real high tide for the first time on 3 October 2020."
+   "It is the only land feature on Earth that gave its name to a constellation: Mensa ('the table'), named by Nicolas de Lacaille in the 18th century.",
+   "The famous 'tablecloth' cloud forms when southeasterly wind pushes moist air up the slopes into colder air; legend blames a smoking contest between the Devil and a pirate named Van Hunks.",
+   "The modern cableway cars rotate a full 360 degrees on the way up and carry 65 passengers.",
+   "The mountain is flat-topped because it is a syncline: its summit rock was once the floor of a valley.",
+   "About 1,500 plant species grow on Table Mountain and the Back Table alone, most of them fynbos, and the Table Mountain ghost frog lives nowhere else."
   ],
-  "bestTime": "April to June and September to October bring mild weather; late autumn and winter are quieter but are the main season for acqua alta flooding.",
-  "gettingThere": "Fly nonstop from New York to Venice Marco Polo Airport (Delta from JFK, plus seasonal United from Newark, roughly 8 to 9 hours), then take the Alilaguna water bus, a water taxi, or a bus to Piazzale Roma.",
-  "tip": "Day-trippers must pay the Venice access fee (started at €5 in 2024) on designated peak days, so check the calendar and book online; staying overnight exempts you and lets you see the city after the crowds leave."
+  "bestTime": "October to April (the southern summer) brings the driest, clearest days; go early, since the cableway closes when wind or the tablecloth cloud rolls in.",
+  "gettingThere": "United flies nonstop from Newark to Cape Town (roughly 15 hours, a few times a week); from the city the cableway's lower station is about a 15-minute drive.",
+  "tip": "Check the cableway's live status before heading up, as it shuts in high wind; fit hikers can climb Platteklip Gorge, the route of the first recorded ascent in 1503, in about 2.5 hours."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 9 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
@@ -771,26 +774,26 @@
   ],
   "lines": [
    {
-    "game": "Bills @ Jets",
-    "kick": "2026-11-15T18:00:00Z",
-    "spread": "BUF −8.5",
-    "total": "50.5",
-    "ml": "BUF −395 / NYJ +310",
+    "game": "Dolphins @ Bills",
+    "kick": "2026-11-22T18:00:00Z",
+    "spread": "BUF −16.5",
+    "total": "46.5",
+    "ml": "BUF −1800 / MIA +975",
     "bills": true
-   },
-   {
-    "game": "LSU @ Tennessee",
-    "kick": "2026-11-21T20:30:00Z",
-    "spread": "LSU −1.5",
-    "total": "47.5",
-    "ml": "LSU −115 / TENN −105"
    },
    {
     "game": "UCLA @ Michigan",
     "kick": "2026-11-21T20:30:00Z",
-    "spread": "UCLA −7",
-    "total": "41.5",
-    "ml": "UCLA −258 / MICH +210"
+    "spread": "UCLA −5.5",
+    "total": "38.5",
+    "ml": "UCLA −230 / MICH +190"
+   },
+   {
+    "game": "East Carolina @ Army",
+    "kick": "2026-11-21T17:00:00Z",
+    "spread": "ARMY −4.5",
+    "total": "44.5",
+    "ml": "ARMY −192 / ECU +160"
    }
   ],
   "probs": [
@@ -820,6 +823,6 @@
     "p": 93
    }
   ],
-  "sources": "S&P 500: AP via La Nación (Nov 13). Movers: Trefis, StockTitan (Nov 13-14). Bills line: DraftKings via SI (Nov 13). College lines: DraftKings via ESPN (Nov 15). Win prob: ESPN Matchup Predictor/FPI (Nov 15)."
+  "sources": "S&P 500: AP via La Nación (Nov 13). Movers: Trefis, StockTitan (Nov 13-14). Bills line: bet365 via Fox Sports (Nov 16). College lines: DraftKings via ESPN (Nov 16). Win prob: ESPN Matchup Predictor/FPI (Nov 16)."
  }
 }
