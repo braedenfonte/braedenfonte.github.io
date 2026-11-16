@@ -13,8 +13,8 @@ main{width:min(100% - 2rem,64rem);margin:2rem auto}
 h1{text-align:center;font-size:clamp(2rem,6.5vw,4rem);letter-spacing:-.035em;margin:.55em 0 .4em;text-shadow:0 3px #472717}
 button{font:inherit;color:inherit;background:#351b0f;border:1px solid #c59150;border-radius:.3rem;padding:.75rem 1rem;cursor:pointer}
 button:focus-visible,a:focus-visible{outline:3px solid #ffd18e;outline-offset:4px}
-.stage{width:100%;aspect-ratio:1672 / 941;position:relative;isolation:isolate;overflow:hidden;perspective:850px;min-height:clamp(15rem,42vw,36rem);display:grid;place-items:center;border:6px solid #60391f;border-radius:.65rem;background:#24150f}
-.room{position:absolute;inset:0;display:grid;place-items:center;grid-template-columns:minmax(0,1fr);background:#180e09;transform:scale(.93);filter:brightness(.38);transition:transform .85s ease-out,filter .7s ease-out}
+.stage{width:100%;aspect-ratio:1672 / 941;position:relative;isolation:isolate;overflow:hidden;perspective:850px;display:grid;place-items:center;border:6px solid #60391f;border-radius:.65rem;background:#24150f}
+.room{position:absolute;inset:0;display:grid;place-items:center;grid-template-columns:minmax(0,1fr);background:#180e09;transform:scale(.93);filter:brightness(.36);transition:transform .85s ease-out,filter .7s ease-out}
 .open .room{transform:none;filter:brightness(1)}
 .scene{width:100%;position:relative}
 .scene img{display:block;width:100%;height:auto}
@@ -42,23 +42,17 @@ dialog{width:min(30rem,calc(100% - 2rem));border:1px solid #c59150;border-radius
 dialog::backdrop{background:#100805bd}
 @media(prefers-reduced-motion:reduce){.door,.room,.enter,.storefront{transition:none}.enter:hover,.enter:active{transform:none}}
 
-/* The opening is cut out of the storefront so only the door leaves move. */
-.facade{position:absolute;inset:0;pointer-events:none}
-.facade-wall,.facade-beam,.porch{position:absolute;box-shadow:inset 0 0 1.4rem #170905}
-.facade-wall{inset-block:0;width:32%;display:grid;place-items:center;background:repeating-linear-gradient(90deg,#643925 0 8%,#432315 9%,#784b32 10%);border-inline:clamp(7px,1.6vw,20px) solid #8c593a}
-.facade-wall:first-child{left:0}.facade-wall:nth-child(2){right:0}
-.facade-window{width:72%;height:34%;border:clamp(4px,1vw,12px) ridge #a4734e;background:linear-gradient(90deg,transparent 47%,#805437 48% 52%,transparent 53%),linear-gradient(transparent 47%,#805437 48% 52%,transparent 53%),linear-gradient(#172739,#435764 65%,#956540);box-shadow:0 5px 10px #241008,inset 0 0 12px #160c09}
-.facade-beam{inset:0 0 auto;height:13%;background:linear-gradient(#aa7652,#52311e 74%,#301c11);border-bottom:4px solid #29160c}
-.porch{inset:auto 0 0;height:17%;background:repeating-conic-gradient(from -41deg at 50% -125%,#75492e 0 8deg,#432718 8.2deg 9deg);border-bottom:9px solid #4c2b18}
-.enter{align-self:end;margin-bottom:5%;white-space:normal}
-
+/* Match the cutout to the painted door jambs and threshold. */
+.facade{position:absolute;inset:0;width:100%;height:100%;
+  clip-path:polygon(evenodd,0 0,100% 0,100% 100%,0 100%,0 0,31.65% 13.4%,31.65% 83.2%,68.35% 83.2%,68.35% 13.4%,31.65% 13.4%,0 0)}
+.enter{align-self:end;margin-bottom:3%;font-size:clamp(1rem,2.6vw,1.35rem)}
 /* Shaped café door leaves meet at the crown and rise toward the outer hinges. */
-.door{top:23%;bottom:25%;width:16%;border:0;filter:drop-shadow(0 4px 5px #140804);background:none;overflow:visible}
-.left{left:34%}.right{right:34%}
+.door{top:24%;bottom:23%;width:18.35%;border:0;filter:drop-shadow(0 4px 5px #140804);background:none;overflow:visible}
+.left{left:31.65%}.right{right:31.65%}
 .door::before,.door::after{content:"";position:absolute}
 .door::before{inset:0;height:auto;border:0;border-radius:18% 39% 34% 13% / 12% 20% 17% 10%;background:
-  linear-gradient(103deg,#2c110d55,transparent 55%,#bc81504a),
-  repeating-linear-gradient(1deg,#633823 0 11%,#402419 11.4% 12%,#885638 12.5% 13.5%);box-shadow:inset 0 0 0 4px #422316,inset 0 0 0 7px #a06949,inset 0 0 18px #1b0c08}
+  linear-gradient(103deg,#1a0b06aa,transparent 55%,#bc81504a),
+  url("../saloon/saloon-exterior.png") 0 100% / 350% 720%;box-shadow:inset 0 0 0 4px #422316,inset 0 0 0 7px #a06949,inset 0 0 18px #1b0c08}
 .left::before{border-radius:39% 14% 27% 34% / 20% 7% 14% 17%}
 .right::before{border-radius:14% 39% 34% 27% / 7% 20% 17% 14%}
 .door::after{inset:auto 8% 20%;height:5%;border:0;background:#4f2a1c;box-shadow:0 2px #9e654333}
@@ -66,25 +60,20 @@ dialog::backdrop{background:#100805bd}
 .hinge{position:absolute;width:13%;height:8%;top:21%;background:linear-gradient(90deg,#2d2520,#ab957c,#51443b);border-radius:2px;box-shadow:0 2px 3px #25140e}
 .hinge:last-child{top:72%}
 .left .hinge{left:0}.right .hinge{right:0}
-.facade-wall{width:34%;place-items:center start;background:
- repeating-linear-gradient(92deg,transparent 0 5px,#210c092b 6px,transparent 7px 12px),
- repeating-linear-gradient(90deg,#683a29 0 7%,#3a1e15 8%,#865339 9% 10%);border-color:#915c40}
-.facade-wall:nth-child(2){place-items:center end}
-.facade-window{height:39%;width:76%;border-color:#ae7452;box-shadow:0 4px 12px #170a06,inset 0 0 0 2px #201712}
-.facade-wall::before{content:"";position:absolute;width:56%;height:6%;top:20%;left:-8%;transform:rotate(-38deg);background:linear-gradient(#ac7655,#613522);box-shadow:0 4px 7px #2c160e}
-.facade-wall:nth-child(2)::before{left:auto;right:-8%;transform:rotate(38deg)}
-.lasso{position:absolute;top:31%;width:18%;height:37%;border:clamp(2px,.55vw,6px) ridge #c29b69;border-radius:49% 49% 46% 46% / 78% 78% 24% 24%;filter:drop-shadow(3px 4px 2px #29170f);transform:rotate(8deg);right:2%}
-.lasso::before{content:"";position:absolute;inset:0 14% 8%;border:2px solid #d0a773;border-radius:inherit}
-.facade-wall:nth-child(2) .lasso{right:auto;left:2%;transform:rotate(-9deg)}
-.porch{height:21%;border-top:3px solid #352018;background:repeating-conic-gradient(from -46deg at 50% -190%,#825339 0 7deg,#4d2d20 7.15deg 8deg)}
-.facade-beam{height:11%;box-shadow:inset 0 2px #ca9373,0 4px 12px #1b0a06}
-.enter{margin-bottom:3%;font-size:clamp(1rem,2.6vw,1.35rem)}
-@media(max-width:550px){
- .facade-wall{width:29%}
- .door{width:21%}
- .left{left:29%}.right{right:29%}
- .lasso{width:25%}
+.lamp-glow,.sock-shadow{position:absolute;pointer-events:none;opacity:0}
+.lamp-glow{width:15%;height:25%;transform:translate(-50%,-50%);
+  background:radial-gradient(ellipse,#ffc36d55,transparent 66%);mix-blend-mode:screen}
+.lamp-glow.hanging{left:34.7%;top:8%}
+.lamp-glow.counter{left:77.4%;top:33%}
+.sock-shadow{left:18%;top:80%;width:4%;height:2%;border-radius:50%;
+  background:#22120b;filter:blur(2px)}
+@media(prefers-reduced-motion:no-preference){
+  .open .lamp-glow{animation:lamp-flicker 4.8s .95s infinite alternate}
+  .open .lamp-glow.counter{animation-delay:1.65s;animation-duration:6.2s}
+  .open .sock-shadow{animation:sock-stir 13s 2s infinite}
 }
+@keyframes lamp-flicker{0%,20%,44%,78%,100%{opacity:.15} 23%,52%,82%{opacity:.65} 25%,80%{opacity:.3}}
+@keyframes sock-stir{0%,45%,57%,100%{opacity:0;transform:translateX(0)} 49%{opacity:.48;transform:translateX(18%)} 52%{opacity:.22;transform:translateX(-9%)}}
 </style>
 </head>
 <body>
@@ -95,6 +84,9 @@ dialog::backdrop{background:#100805bd}
   <div class="room" inert>
     <div class="scene">
       <img src="../saloon/saloon-interior.png" width="1672" height="941" alt="Two cowboys sit at the bar. A sock lies on a crate at left, and a closed backdoor stands at right.">
+      <span class="lamp-glow hanging" aria-hidden="true"></span>
+      <span class="lamp-glow counter" aria-hidden="true"></span>
+      <span class="sock-shadow" aria-hidden="true"></span>
       <button class="hotspot" type="button" data-cowboy="slim" aria-label="Slim Pickens Taterbottom" aria-haspopup="dialog"></button>
       <button class="hotspot" type="button" data-cowboy="dusty" aria-label="Dusty Two Teeth Carson" aria-haspopup="dialog"></button>
       <button class="hotspot sock" type="button" aria-label="Inspect the sock"></button>
@@ -104,12 +96,7 @@ dialog::backdrop{background:#100805bd}
   <div class="storefront" aria-hidden="true">
     <div class="door left"><span class="pull"></span><span class="hinge"></span><span class="hinge"></span></div>
     <div class="door right"><span class="pull"></span><span class="hinge"></span><span class="hinge"></span></div>
-    <div class="facade">
-      <div class="facade-wall"><span class="facade-window"></span><span class="lasso"></span></div>
-      <div class="facade-wall"><span class="facade-window"></span><span class="lasso"></span></div>
-      <div class="facade-beam"></div>
-      <div class="porch"></div>
-    </div>
+    <img class="facade" src="../saloon/saloon-exterior.png" width="1672" height="941" alt="">
   </div>
   <button class="enter" type="button">Push open the doors <span aria-hidden="true">→</span></button>
 </section>

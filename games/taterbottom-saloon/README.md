@@ -4,6 +4,10 @@ Continue from the latest main branch in braedenfonte/braedenfonte.github.io. The
 
 ## Current checkpoint
 
+- The illustrated storefront uses the interior's amber lamps, worn timber, and dusk-blue windows. Its doorway is cut out along the painted jambs so the interior and independently swinging café doors appear behind it. The moving leaves use timber sampled from the storefront.
+- Inside, two lamp glows flicker on different cycles and a small shadow shifts beneath the sock. Both effects respect reduced motion. All six Playwright checks passed at 1440×900 and 390×844, and screenshots were reviewed for doorway alignment and mobile framing.
+
+
 - The supplied artwork at `../saloon/saloon-interior.png` now fills the interior scene. Image-relative hotspots follow Slim, Dusty, and the sock on desktop and mobile. Either cowboy opens the bar dialogue, the sock announces “Hmmmm...”, and the backdoor remains scenery.
 - The façade and door leaves share the camera move. The leaves swing inward before the storefront pushes forward and fades. Reduced motion switches scenes immediately.
 - Verified in Playwright Chromium at 1440×900 and 390×844 with touch emulation. All six checks passed, covering entry, both conversations, sock text, the inactive backdoor, keyboard activation, Escape and focus restoration, and reduced motion. Reviewed entrance, mid-swing, interior, and sock screenshots.
@@ -24,5 +28,5 @@ From `games/taterbottom-saloon`, run `npm ci`, `npx playwright install chromium`
 
 ## Build order
 
-1. Bring the still to life with subtle, ambiguous movement under the sock, flickering lights, and optional ambient chatter. Preserve reduced-motion behavior and add a mute control for audio.
+1. Add optional ambient chatter with a mute control.
 2. Daily Bad Bet, more Western idioms, and a functional backdoor remain later additions.

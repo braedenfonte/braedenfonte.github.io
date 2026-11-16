@@ -8,6 +8,7 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto(url);
+  await expect(page.locator('.facade')).toHaveJSProperty('naturalWidth', 1672);
   const artwork = page.locator('.scene img');
   await expect(artwork).toHaveJSProperty('naturalWidth', 1672);
   await expect(page.locator('.room')).toHaveJSProperty('inert', true);
@@ -22,7 +23,8 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
 
   // Freeze the entry partway through so the swing and camera framing are reproducible.
   const animations = await page.locator('.stage').evaluateHandle(async stage => {
-    const transitions = stage.getAnimations({ subtree: true });
+    const transitions = stage.getAnimations({ subtree: true })
+      .filter(animation => animation instanceof CSSTransition);
     if (!transitions.length) throw new Error("Expected entry transitions");
     for (const transition of transitions) {
       transition.pause();
@@ -34,6 +36,10 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
   await page.screenshot({ path: info.outputPath('door-swing.png') });
   await animations.evaluate(transitions => transitions.forEach(transition => transition.finish()));
   await expect(page.locator('.storefront')).toHaveCSS('opacity', '0');
+  await expect(page.locator('.lamp-glow').first()).toHaveCSS('animation-name', 'lamp-flicker');
+  await expect(page.locator('.sock-shadow')).toHaveCSS('animation-name', 'sock-stir');
+  await expect(page.locator('.lamp-glow').first()).toHaveCSS('animation-name', 'lamp-flicker');
+  await expect(page.locator('.sock-shadow')).toHaveCSS('animation-name', 'sock-stir');
   await page.screenshot({ path: info.outputPath('interior.png') });
 
   const art = await artwork.boundingBox();
