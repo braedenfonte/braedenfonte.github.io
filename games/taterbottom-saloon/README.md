@@ -4,6 +4,11 @@ Continue from the latest main branch in braedenfonte/braedenfonte.github.io. The
 
 ## Current checkpoint
 
+- The doorway, wide view, and close bar view now use one image. Slim and Dusty face the entrance from the far counter. The doors clear before the camera zooms toward them, and all interactive areas stay attached to the artwork.
+- The sock remains in the shadows by the right end of the bar. On a narrow screen, look right to see it. The floor corner sits above the bottom of the viewport, with room for browser chrome or a taskbar.
+- The browser suite captures the open doorway and the zoom, taps both cowboys, and checks the sock at shorter viewport heights with a further 64 px of bottom clearance.
+
+
 - The standalone game fills the viewport. Compact controls go back to the site, return to the entrance, or look left and right. Portrait screens crop the wide scene and use those same controls to reveal the sides.
 - Entry opens on an anonymous crowd and an aisle through the card tables. The camera turns past a foreground post into a closer view of Slim and Dusty at the bar. Reduced motion goes directly to the bar.
 - The sock is in the right-hand floor shadows, with two visible bumps that lift the fabric in succession. It still responds with “Hmmmm...”.
