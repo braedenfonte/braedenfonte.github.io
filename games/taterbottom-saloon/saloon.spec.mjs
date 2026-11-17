@@ -58,6 +58,8 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
   await page.screenshot({ path: info.outputPath('camera-zoom.png') });
   await animations.evaluate(transitions => transitions.forEach(transition => transition.finish()));
   await expect(page.locator('.storefront')).toHaveCSS('opacity', '0');
+  await expect(page.locator('.floor-light')).toHaveCSS('animation-name', 'floor-flicker');
+  await expect(page.locator('.dust').first()).toHaveCSS('animation-name', 'dust-drift');
   await expect(page.locator('.lamp-glow').first()).toHaveCSS('animation-name', 'lamp-flicker');
   await expect(page.locator('.sock-shadow').first()).toHaveCSS('animation-name', 'sock-stir');
   expect((await artwork.boundingBox()).width).toBeGreaterThan(wide.width * 1.25);
@@ -73,7 +75,19 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
   for (const [x, y, speaker] of [[.475, .386, 'Slim'], [.572, .389, 'Dusty']]) {
     await hit(x, y);
     await expect(dialog).toBeVisible();
-    await expect(dialog.locator('#cowboy-line')).toHaveText(new RegExp('^' + speaker + ':'));
+    const lines = dialog.getByRole('log').locator('p');
+    await expect(lines).toHaveCount(1);
+    await expect(lines.first()).toHaveText(new RegExp('^' + speaker + ':'));
+    const cards = dialog.getByRole('button', { name: 'Ask about the card game' });
+    const town = dialog.getByRole('button', { name: /what’s happening in town/i });
+    await cards.click();
+    await expect(cards).toBeDisabled();
+    await expect(lines.nth(2)).toHaveText(new RegExp('^' + speaker + ':'));
+    await expect(lines.nth(3)).toHaveText(new RegExp('^' + (speaker === 'Slim' ? 'Dusty' : 'Slim') + ':'));
+    await town.click();
+    await expect(town).toBeDisabled();
+    await expect(lines).toHaveCount(7);
+    await page.screenshot({ path: info.outputPath('conversation-' + speaker.toLowerCase() + '.png') });
     await dialog.getByRole('button', { name: 'Back to the bar' }).click();
     await expect(dialog).toBeHidden();
   }

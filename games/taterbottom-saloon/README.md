@@ -4,6 +4,11 @@ Continue from the latest main branch in braedenfonte/braedenfonte.github.io. The
 
 ## Current checkpoint
 
+- Once the camera settles, dust drifts through the lamplight and warm reflections pulse on the floor. The lamp and sock effects remain active, and reduced motion disables the ambient loops.
+- Clicking Slim or Dusty starts a conversation with that cowboy. Ask about the card game or the town and both men respond in a speaker-labeled transcript. Reopening either cowboy starts a fresh conversation. Escape or Back to the bar closes the panel.
+- All six Chromium checks passed at 1440×900 and 390×844, including both dialogue topics, focus restoration, and reduced motion. Reviewed the conversation screenshots.
+
+
 - The doorway, wide view, and close bar view now use one image. Slim and Dusty face the entrance from the far counter. The doors clear before the camera zooms toward them, and all interactive areas stay attached to the artwork.
 - The sock remains in the shadows by the right end of the bar. On a narrow screen, look right to see it. The floor corner sits above the bottom of the viewport, with room for browser chrome or a taskbar.
 - The browser suite captures the open doorway and the zoom, taps both cowboys, and checks the sock at shorter viewport heights with a further 64 px of bottom clearance.
