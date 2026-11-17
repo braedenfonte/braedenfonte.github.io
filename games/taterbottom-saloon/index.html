@@ -68,9 +68,6 @@ dialog::backdrop{background:#10080580}
 .left{left:31.65%}.right{right:31.65%}
 .door img{display:block;width:100%;height:100%}
 .right img{transform:scaleX(-1)}
-.floor-light,.dust{position:absolute;pointer-events:none;opacity:0;mix-blend-mode:screen}
-.floor-light{inset:65% 34% 4% 37%;
-  background:radial-gradient(ellipse,#e19a432e 0%,transparent 66%)}
 .dust{inset:0;background:
   radial-gradient(circle at 42% 28%,#ffcc8d 0 1px,transparent 2px),
   radial-gradient(circle at 48% 32%,#ffdbaf 0 1px,transparent 2px),
@@ -78,34 +75,22 @@ dialog::backdrop{background:#10080580}
   radial-gradient(circle at 65% 35%,#ffe1b4 0 1px,transparent 2px),
   radial-gradient(circle at 54% 48%,#ffd5a4 0 1px,transparent 2px)}
 .dust.second{scale:-1 1}
-.patron-motion{position:absolute;inset:0;pointer-events:none;opacity:0;
-  background:url("../saloon/saloon-wide-to-bar.png") center / 100% 100%}
-.patron-motion.slim{mask-image:radial-gradient(ellipse 4.6% 7.2% at 47.6% 40%,#000 45%,transparent 100%)}
-.patron-motion.dusty{mask-image:radial-gradient(ellipse 4.3% 6.7% at 57.2% 39%,#000 45%,transparent 100%)}
-.patron-motion.cards{mask-image:radial-gradient(ellipse 5% 9% at 32.8% 50%,#000 48%,transparent 100%)}
-.haze{position:absolute;inset:26% 22% 38% 16%;pointer-events:none;opacity:0;mix-blend-mode:screen;
-  background:radial-gradient(ellipse at 38% 55%,#efb47365,transparent 45%),
-    radial-gradient(ellipse at 63% 40%,#efba8860,transparent 51%);filter:blur(12px)}
-.lamp-glow,.sock-shadow{position:absolute;pointer-events:none;opacity:0}
-.lamp-glow{width:15%;height:25%;transform:translate(-50%,-50%);
-  background:radial-gradient(ellipse,#ffc36d55,transparent 66%);mix-blend-mode:screen}
-.lamp-glow.hanging{left:60%;top:15%}
-.lamp-glow.counter{left:41.3%;top:41%}
+.lamp,.sock-shadow{position:absolute;pointer-events:none;opacity:0}
+.lamp{left:var(--x);top:var(--y);width:6%;height:10%;translate:-50% -50%;
+  background:radial-gradient(ellipse,#ffaf483f,transparent 69%);mix-blend-mode:screen}
+.lamp::after{content:"";position:absolute;inset:37% 43% 40%;
+  background:radial-gradient(ellipse at 50% 61%,#fff8ca 0 14%,#ffc45c8c 34%,transparent 68%);
+  transform-origin:50% 74%}
 .sock-shadow{inset:0;background:url("../saloon/saloon-wide-to-bar.png") center / 100% 100%;
   mask-image:radial-gradient(ellipse .63% 1.1% at 71% 60.1%,#000 38%,transparent 100%)}
 .sock-shadow.second{mask-image:radial-gradient(ellipse .58% 1.05% at 71.85% 60.4%,#000 38%,transparent 100%)}
 @media(prefers-reduced-motion:no-preference){
   .open .room{animation:walk-to-bar 2.35s both}
 
-  .settled .patron-motion{animation:lean-at-bar 4.8s ease-in-out infinite}
-  .settled .patron-motion.dusty{animation-duration:6s;animation-delay:-2s}
-  .settled .patron-motion.cards{animation-duration:4.2s;animation-delay:-1s}
-  .settled .haze{animation:haze-roll 7s ease-in-out infinite alternate}
-  .settled .floor-light{animation:floor-flicker 5.4s ease-in-out infinite alternate}
+  .settled .lamp{animation:lamp-flicker var(--cycle) var(--phase) steps(1,end) infinite}
+  .settled .lamp::after{animation:flame-shape var(--cycle) var(--phase) linear infinite}
   .settled .dust{animation:dust-drift 8s linear infinite}
   .settled .dust.second{animation-delay:-4s}
-  .open .lamp-glow{animation:lamp-flicker 4.8s .95s infinite alternate}
-  .open .lamp-glow.counter{animation-delay:1.65s;animation-duration:6.2s}
   .open .sock-shadow{animation:sock-stir 6s 2s infinite}
   .open .sock-shadow.second{animation-delay:2.42s}
 }
@@ -115,20 +100,17 @@ dialog::backdrop{background:#10080580}
   30%{transform:scale(1);filter:brightness(1);animation-timing-function:cubic-bezier(.36,.13,.22,1)}
   100%{transform:scale(var(--zoom));filter:brightness(1)}
 }
-@keyframes lean-at-bar{
-  0%,22%,72%,100%{opacity:0;transform:none}
-  34%{opacity:1;transform:translate(.12%,-.29%)}
-  48%{opacity:1;transform:translate(.27%,-.53%)}
-  59%{opacity:.9;transform:translate(.17%,-.21%)}
-}
-@keyframes haze-roll{
-  from{opacity:.22;transform:translateX(-9%) scale(.94)}
-  to{opacity:.76;transform:translate(11%,-8%) scale(1.12)}
-}
-@keyframes floor-flicker{0%,40%{opacity:.18} 18%,70%{opacity:.53} 100%{opacity:.32}}
 @keyframes dust-drift{0%{opacity:0;transform:translate(-2%,2%)} 30%,65%{opacity:.55}
   100%{opacity:0;transform:translate(2%,-4%)}}
-@keyframes lamp-flicker{0%,20%,44%,78%,100%{opacity:.15} 23%,52%,82%{opacity:.65} 25%,80%{opacity:.3}}
+@keyframes lamp-flicker{
+  0%,100%{opacity:.55} 8%{opacity:.31} 17%{opacity:.8} 24%{opacity:.58}
+  39%{opacity:.42} 44%{opacity:.65} 62%{opacity:.38} 72%{opacity:.76} 89%{opacity:.46}
+}
+@keyframes flame-shape{
+  0%,100%{transform:scale(.8,.92) rotate(-4deg)}
+  17%,62%{transform:scale(.96,.76) rotate(6deg)}
+  34%,77%{transform:scale(.74,1.16) rotate(-7deg)}
+}
 @keyframes sock-stir{0%,14%,34%,100%{opacity:0;transform:translateY(0)} 20%,28%{opacity:1;transform:translateY(-.43%);filter:brightness(1.36)} 24%{opacity:.85;transform:translateY(-.2%)}}
 </style>
 </head>
@@ -146,15 +128,13 @@ dialog::backdrop{background:#10080580}
   <div class="room" inert>
     <div class="scene">
       <img src="../saloon/saloon-wide-to-bar.png" width="1671" height="941" alt="Slim and Dusty face the entrance from the far bar, with card players to the left and a closed backdoor to the right.">
-      <span class="patron-motion slim" aria-hidden="true"></span>
-      <span class="patron-motion dusty" aria-hidden="true"></span>
-      <span class="patron-motion cards" aria-hidden="true"></span>
-      <span class="haze" aria-hidden="true"></span>
-      <span class="floor-light" aria-hidden="true"></span>
       <span class="dust" aria-hidden="true"></span>
       <span class="dust second" aria-hidden="true"></span>
-      <span class="lamp-glow hanging" aria-hidden="true"></span>
-      <span class="lamp-glow counter" aria-hidden="true"></span>
+      <span class="lamp" style="--x:27.3%;--y:21.7%;--cycle:1.8s;--phase:-.4s" aria-hidden="true"></span>
+      <span class="lamp" style="--x:42.4%;--y:27.5%;--cycle:2.1s;--phase:-1.3s" aria-hidden="true"></span>
+      <span class="lamp" style="--x:60.2%;--y:15.3%;--cycle:1.6s;--phase:-.7s" aria-hidden="true"></span>
+      <span class="lamp" style="--x:73.9%;--y:26.8%;--cycle:2.4s;--phase:-1s" aria-hidden="true"></span>
+      <span class="lamp" style="--x:41.3%;--y:40.9%;--cycle:1.9s;--phase:-.9s" aria-hidden="true"></span>
       <span class="sock-shadow" aria-hidden="true"></span>
       <span class="sock-shadow second" aria-hidden="true"></span>
       <button class="hotspot" type="button" data-cowboy="slim" aria-label="Slim Pickens Taterbottom" aria-haspopup="dialog"></button>
@@ -297,6 +277,14 @@ const roastEnds = [
 ];
 let speaker = "slim";
 let lastRoast = -1;
+const comebacks = [
+  ["Deal me in", "Sure. Put your money in this hat. Saves us both the trouble of dealing."],
+  ["Run for mayor", "On what platform? Last fella who stood on one out here dropped six feet."],
+  ["Pour me one", "You want it in a glass, or straight into whatever's eating the finish off your boots?"],
+  ["Buy Dusty a drink", "Get him the soft whiskey. Last time we served it neat he tried to chew it."],
+  ["Bet on the horse", "Already did. Only honest thing in town and the bastard still owes me five dollars."],
+  ["Blame the whiskey", "Funny. The whiskey just told me to blame you."]
+];
 
 function showTurn(who, text, choices) {
   exchange.querySelector(".speaker").textContent = cowboyNames[who];
@@ -314,22 +302,22 @@ function showTurn(who, text, choices) {
 
 function showTopics(text = greetings[speaker]) {
   showTurn(speaker, text, [
-    ...stories.map(story => [story.label, () => tellStory(story)]),
+    ...stories.map((story, index) => [story.label, () => tellStory(story, comebacks[index])]),
     ["Roast me", roast, true]
   ]);
 }
 
-function tellStory(story) {
+function tellStory(story, [move, punchline]) {
   const other = speaker === "slim" ? "dusty" : "slim";
+  const nextChoices = [
+    ["Change the subject", () => showTopics("All right, what else?")],
+    ["Roast me", roast, true]
+  ];
   showTurn(speaker, speaker === "dusty" ? story.dustyLead : story.slim, [
-    [cowboyNames[other] + ", is that true?", () => showTurn(other, story[other], [
-      ["Ask something else", () => showTopics("What else you got?")],
-      ["Roast me", roast, true]
-    ])],
-    ["Ask something else", () => showTopics("What else you got?")]
+    [move, () => showTurn(speaker, punchline, nextChoices)],
+    [cowboyNames[other] + ", is that true?", () => showTurn(other, story[other], nextChoices)]
   ]);
 }
-
 function roast() {
   const count = roastStarts.length * roastEnds.length;
   const offset = 1 + Math.floor(Math.random() * (count - 1));

@@ -59,19 +59,19 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
   await page.screenshot({ path: info.outputPath('camera-zoom.png') });
   await animations.evaluate(transitions => transitions.forEach(transition => transition.finish()));
   await expect(page.locator('.storefront')).toHaveCSS('opacity', '0');
-  const patron = page.locator('.patron-motion.slim');
-  await expect(patron).toHaveCSS('animation-name', 'lean-at-bar');
-  await patron.evaluate(async element => {
-    const motion = element.getAnimations()[0];
-    motion.pause();
-    motion.currentTime = 2304;
-    await motion.ready;
+  const lamp = page.locator('.lamp').first();
+  await expect(lamp).toHaveCSS('animation-name', 'lamp-flicker');
+  const levels = await lamp.evaluate(async element => {
+    const flicker = element.getAnimations().find(animation => animation.animationName === 'lamp-flicker');
+    flicker.pause();
+    await flicker.ready;
+    return [725, 900].map(time => {
+      flicker.currentTime = time;
+      return getComputedStyle(element).opacity;
+    });
   });
-  await expect(patron).not.toHaveCSS('transform', 'none');
-  await expect(page.locator('.haze')).toHaveCSS('animation-name', 'haze-roll');
-  await expect(page.locator('.floor-light')).toHaveCSS('animation-name', 'floor-flicker');
-  await expect(page.locator('.dust').first()).toHaveCSS('animation-name', 'dust-drift');
-  await expect(page.locator('.lamp-glow').first()).toHaveCSS('animation-name', 'lamp-flicker');
+  expect(levels[0]).not.toBe(levels[1]);
+  await expect(page.locator('.patron-motion')).toHaveCount(0);
   await expect(page.locator('.sock-shadow').first()).toHaveCSS('animation-name', 'sock-stir');
   expect((await artwork.boundingBox()).width).toBeGreaterThan(wide.width * 1.25);
   await page.screenshot({ path: info.outputPath('interior.png') });
@@ -96,7 +96,10 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
     await dialog.getByRole('button', { name: other + ', is that true?' }).click();
     await expect(name).toHaveText(other);
     await expect(line).toHaveCount(1);
-    await dialog.getByRole('button', { name: 'Ask something else' }).click();
+    await dialog.getByRole('button', { name: 'Change the subject' }).click();
+    await dialog.getByRole('button', { name: 'Who’s cheating at cards?' }).click();
+    await dialog.getByRole('button', { name: 'Deal me in' }).click();
+    await expect(line).toContainText('put your money in this hat', { ignoreCase: true });
     await dialog.getByRole('button', { name: 'Roast me' }).click();
     const firstRoast = await line.textContent();
     await dialog.getByRole('button', { name: 'Give me another' }).click();
