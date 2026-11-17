@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-16T06:40:35-05:00",
+ "updated": "2026-11-17T06:39:56-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -552,7 +552,7 @@
     "home": "Michigan State",
     "kick": "2026-11-21T01:00:00Z",
     "note": "Fri · FOX",
-    "awayRank": 18
+    "awayRank": 14
    },
    {
     "away": "UTEP",
@@ -571,14 +571,15 @@
     "away": "Memphis",
     "home": "Navy",
     "kick": "2026-11-21T17:00:00Z",
-    "note": "ESPN2 · Navy-Marine Corps Memorial Stadium"
+    "note": "ESPN2 · Navy-Marine Corps Memorial Stadium",
+    "awayRank": 24
    },
    {
     "away": "Ohio State",
     "home": "Nebraska",
     "kick": "2026-11-21T17:00:00Z",
     "note": "FOX",
-    "awayRank": 21
+    "awayRank": 16
    },
    {
     "away": "BYU",
@@ -592,21 +593,14 @@
     "home": "Georgia Tech",
     "kick": "2026-11-21T17:00:00Z",
     "note": "ESPN",
-    "awayRank": 11
-   },
-   {
-    "away": "Houston",
-    "home": "West Virginia",
-    "kick": "2026-11-21T18:00:00Z",
-    "note": "TNT",
-    "awayRank": 14
+    "awayRank": 10
    },
    {
     "away": "Iowa",
     "home": "Illinois",
     "kick": "2026-11-21T19:30:00Z",
     "note": "BTN",
-    "awayRank": 16
+    "awayRank": 13
    },
    {
     "away": "UCLA",
@@ -627,7 +621,6 @@
     "home": "Tennessee",
     "kick": "2026-11-21T20:30:00Z",
     "note": "ABC",
-    "awayRank": 24,
     "homeRank": 9
    },
    {
@@ -642,14 +635,14 @@
     "home": "Baylor",
     "kick": "2026-11-21T20:30:00Z",
     "note": "FOX",
-    "awayRank": 10
+    "awayRank": 11
    },
    {
     "away": "Maryland",
     "home": "USC",
     "kick": "2026-11-21T23:15:00Z",
     "note": "BTN",
-    "homeRank": 15
+    "homeRank": 18
    },
    {
     "away": "Virginia Tech",
@@ -663,15 +656,13 @@
     "home": "South Carolina",
     "kick": "2026-11-22T00:30:00Z",
     "note": "ABC",
-    "awayRank": 1,
-    "homeRank": 20
+    "awayRank": 1
    },
    {
     "away": "SMU",
     "home": "Notre Dame",
     "kick": "2026-11-22T00:30:00Z",
     "note": "NBC",
-    "awayRank": 25,
     "homeRank": 3
    },
    {
@@ -679,7 +670,7 @@
     "home": "Missouri",
     "kick": "2026-11-22T00:30:00Z",
     "note": "SEC Network",
-    "awayRank": 13
+    "awayRank": 17
    },
    {
     "away": "Utah",
@@ -687,89 +678,96 @@
     "kick": "2026-11-22T02:00:00Z",
     "note": "FOX",
     "awayRank": 2
+   },
+   {
+    "away": "San Diego State",
+    "home": "Boise State",
+    "kick": "2026-11-22T02:30:00Z",
+    "note": "USA Network",
+    "homeRank": 15
    }
   ],
-  "poll": "AP Top 25, Week 11 (Nov 8)"
+  "poll": "AP Top 25, Week 12 (Nov 16)"
  },
  "location": {
-  "name": "Table Mountain",
-  "wiki": "Table_Mountain",
-  "country": "South Africa",
-  "region": "Western Cape, above Cape Town",
-  "lat": -33.9622,
-  "lon": 18.4099,
-  "tagline": "A flat-topped sandstone mountain that towers over Cape Town and gets its own cloud 'tablecloth'",
-  "intro": "Table Mountain is the flat-topped mountain that forms the backdrop to Cape Town, South Africa, with a level plateau about 3 km (2 mi) from side to side. It sits inside Table Mountain National Park, the most visited national park in South Africa, and was named one of the New7Wonders of Nature in 2011. Visitors reach the top on foot or by a cableway that has run since 1929.",
+  "name": "Bora Bora",
+  "wiki": "Bora_Bora",
+  "country": "French Polynesia (France)",
+  "region": "Leeward Islands, Society Islands, South Pacific",
+  "lat": -16.501,
+  "lon": -151.74,
+  "tagline": "A sunken volcano wrapped in a turquoise lagoon and a ring of palm-covered islets",
+  "intro": "Bora Bora is a small island in French Polynesia, about 230 km (143 mi) northwest of Tahiti, built from the remains of an extinct volcano. Its jagged central peaks rise from a vivid lagoon enclosed by a barrier reef and a ring of sandy islets called motu. Once a quiet WWII supply base, it is now famous for resorts with bungalows built on stilts over the water.",
   "stats": [
    {
     "label": "Highest point",
-    "value": "1,085 m (3,558 ft)"
+    "value": "Mount Otemanu, 727 m (2,385 ft)"
    },
    {
-    "label": "Plateau",
-    "value": "About 3 km (2 mi) wide"
+    "label": "Area",
+    "value": "30.55 km² (11.8 sq mi)"
    },
    {
-    "label": "Cableway opened",
-    "value": "4 October 1929"
+    "label": "Population",
+    "value": "10,605 (2017)"
    },
    {
-    "label": "Rock age",
-    "value": "450-510 million years"
+    "label": "Volcano last active",
+    "value": "3.45-3.10 million years ago"
    }
   ],
   "facts": [
-   "It is the only land feature on Earth that gave its name to a constellation: Mensa ('the table'), named by Nicolas de Lacaille in the 18th century.",
-   "The famous 'tablecloth' cloud forms when southeasterly wind pushes moist air up the slopes into colder air; legend blames a smoking contest between the Devil and a pirate named Van Hunks.",
-   "The modern cableway cars rotate a full 360 degrees on the way up and carry 65 passengers.",
-   "The mountain is flat-topped because it is a syncline: its summit rock was once the floor of a valley.",
-   "About 1,500 plant species grow on Table Mountain and the Back Table alone, most of them fynbos, and the Table Mountain ghost frog lives nowhere else."
+   "In World War II the US Navy set up a supply base there under 'Operation Bobcat', with nine ships and nearly 7,000 troops. The island never saw combat, and eight 7-inch naval guns still sit on its hills.",
+   "The wartime airstrip on the islet of Motu Mute was French Polynesia's only international airport until Tahiti's Faa'a airport opened in 1960. Arriving flyers still take a boat from the airport to the main island.",
+   "The barrier reef has just one opening to the ocean, the Teavanui Pass, which is how cruise and cargo ships get into the lagoon.",
+   "The name comes from the Tahitian 'Porapora', meaning 'first born'. 'Bora Bora' is the spelling Jacob Roggeveen's Dutch crew used when they sighted it in 1722.",
+   "The first overwater bungalows were built about nine years after the Hotel Bora Bora opened in 1961. Today most of the island's resorts have them."
   ],
-  "bestTime": "October to April (the southern summer) brings the driest, clearest days; go early, since the cableway closes when wind or the tablecloth cloud rolls in.",
-  "gettingThere": "United flies nonstop from Newark to Cape Town (roughly 15 hours, a few times a week); from the city the cableway's lower station is about a 15-minute drive.",
-  "tip": "Check the cableway's live status before heading up, as it shuts in high wind; fit hikers can climb Platteklip Gorge, the route of the first recorded ascent in 1503, in about 2.5 hours."
+  "bestTime": "June to October, the dry season, brings the most sunshine and the least rain; November to April is the wetter, more humid season.",
+  "gettingThere": "There are no nonstops from New York. Connect on the West Coast (Los Angeles, San Francisco or Seattle) for a roughly 8-hour flight to Papeete, Tahiti, then take a 45-50 minute Air Tahiti flight to Bora Bora and a short boat ride from the airport islet.",
+  "tip": "The airport sits on its own islet, so plan for the free Air Tahiti shuttle boat to Vaitape or your resort's boat transfer. There is no public transport on the island, so rent a bicycle or car to get around the main island."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 9 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
-  "asOf": "Fri Nov 13 close",
-  "story": "Stocks fell in choppy trading as chipmakers sold off again, with Nvidia down a second day after CEO Jensen Huang's resignation and Treasury yields rising. The S&P 500 still gained 2.5% for the week, its first weekly gain since early October.",
+  "asOf": "Mon Nov 16 close",
+  "story": "Nvidia led another sell-off in tech and AI stocks as fallout from CEO Jensen Huang's resignation continued, giving the S&P 500 its third straight loss. Treasury yields eased and oil fell, but that did little to help.",
   "indices": [
    {
     "name": "S&P 500",
-    "value": "7,562",
-    "chg": -0.4
+    "value": "7,417",
+    "chg": -1.92
    }
   ],
   "movers": [
    {
-    "sym": "AMD",
-    "move": "−8.8%",
-    "dir": -1,
-    "why": "AMD led S&P 500 decliners as chip stocks fell, after a 30% gain earlier in the week."
-   },
-   {
-    "sym": "CSCO",
-    "move": "−6.2%",
-    "dir": -1,
-    "why": "Cisco fell a day after record quarterly revenue, as gross margin slipped to 63.7% and it guided to $18.0-18.2 billion."
-   },
-   {
     "sym": "NVDA",
-    "move": "−2%",
+    "move": "−4.1%",
     "dir": -1,
-    "why": "Nvidia fell again after Huang's resignation; CFO Colette Kress is interim CEO."
+    "why": "Nvidia was again the biggest drag on the market; it has lost about $735 billion in value since the scandal around Huang broke. Earnings are due Tuesday."
    },
    {
-    "sym": "DELL",
-    "move": "−7.2%",
+    "sym": "AMD",
+    "move": "−5.6%",
     "dir": -1,
-    "why": "Dell was among the day's biggest S&P 500 losers with hardware stocks."
+    "why": "AMD fell with other chipmakers as the AI sell-off spread."
    },
    {
-    "sym": "CHTR",
-    "move": "+4.3%",
+    "sym": "LHX",
+    "move": "−3.9%",
+    "dir": -1,
+    "why": "L3Harris dropped after Trump administration officials suggested the FAA contractor may be to blame for Friday's nationwide ground stop."
+   },
+   {
+    "sym": "SMMT",
+    "move": "−16.5%",
+    "dir": -1,
+    "why": "Summit Therapeutics plunged after the FDA indicated it cannot approve its lung cancer therapy application."
+   },
+   {
+    "sym": "TSN",
+    "move": "+8.7%",
     "dir": 1,
-    "why": "Charter Communications led S&P 500 gainers, extending a longer run."
+    "why": "Tyson Foods jumped as quarterly profit beat expectations, even though revenue fell short."
    }
   ],
   "lines": [
@@ -823,6 +821,6 @@
     "p": 93
    }
   ],
-  "sources": "S&P 500: AP via La Nación (Nov 13). Movers: Trefis, StockTitan (Nov 13-14). Bills line: bet365 via Fox Sports (Nov 16). College lines: DraftKings via ESPN (Nov 16). Win prob: ESPN Matchup Predictor/FPI (Nov 16)."
+  "sources": "S&P 500 and movers: AP via BNN Bloomberg and La Nación (Nov 16)."
  }
 }
