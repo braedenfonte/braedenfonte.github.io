@@ -264,19 +264,77 @@ room.querySelector(".sock").addEventListener("click", () => {
 });
 const exchange = dialog.querySelector(".exchange");
 const topics = dialog.querySelector(".topics");
-const roastStarts = [
-  "You're about as handy as", "You've got all the charm of",
-  "You've got the instincts of", "I've seen more good judgment in",
-  "I'd sooner take advice from", "You've got the swagger of"
+const roasts = [
+  // Familiar sayings and stock insults.
+  "You're all hat and no cattle.",
+  "You're a few steers short of a stampede.",
+  "You couldn't pour piss out of a boot with the instructions on the heel.",
+  "You couldn't find your own ass with both hands and a map.",
+  "If brains were dynamite, you wouldn't have enough to blow your nose.",
+  "You're about as useful as a saddle on a sow.",
+  "You couldn't hit the broad side of a barn from the inside.",
+  "You're about as welcome as a skunk at a lawn party.",
+  "You've got more brass than brains.",
+  "You could start an argument in an empty house.",
+  "You're slicker than a greased pig and twice as hard to get a straight answer out of.",
+  "You're so full of shit your eyes are brown.",
+  "You could fuck up a two-car funeral.",
+  "You'd lose a battle of wits with a fence post.",
+  "You're as full of wind as a corn-fed horse.",
+  "You're about as much use as a chocolate teapot.",
+
+  // Saloon originals.
+  "I'd ask you to hold my beer, but I ain't got time to explain which end goes up.",
+  "I saw a mule kick you in the head. Damned if the mule didn't walk away smarter.",
+  "The last time you had a good idea, the bartender called it out for lost and found.",
+  "If your poker face got any worse, it'd start showing me your damn cards.",
+  "I'd call you two-faced, but I reckon you'd have worn the other one tonight.",
+  "I bought you a drink once. Even the whiskey tried to get out of it.",
+  "You ride so poorly the horse keeps a little flask under the saddle.",
+  "You got the stride of a man who's just lost a fight with his own spurs.",
+  "I heard your horse threw you. First sensible thing that animal's done all week.",
+  "You spend so long telling a story, the lie grows old enough to order a drink.",
+  "You make a hell of a first impression. It's the second sentence that ruins it.",
+  "The preacher prayed for rain, the crops, and a good excuse to leave before you got to the point.",
+  "Your plan has three steps. Bad idea, worse idea, and asking me for bail.",
+  "I'd let you count the winnings, but the deck's short enough already.",
+  "If the sheriff wanted to watch you think, he'd have to bring a bedroll.",
+  "You've been on your high horse all night. Somebody get the poor bastard a chair.",
+  "That's a mighty fine belt buckle. Must be doing all the work, holding up that much bullshit.",
+  "I wouldn't say you're slow. I'd just tell you the joke on Thursday if I wanted you laughing by Sunday.",
+  "I reckon the only thing you've ever drawn fast is a conclusion.",
+  "You'd sell the town well for drinking money and come back asking where the water went.",
+  "A rattler bit you once. It spent the rest of the day trying to suck the poison back out.",
+  "You got a face that makes a wanted poster look like a missing-person request.",
+  "You smell like the inside of a boot that died of natural causes.",
+  "I can see why the barber charges you up front. He doesn't want to be associated with the result.",
+  "When you say 'trust me,' even the piano stops playing.",
+  "You'd get caught bluffing at solitaire and still ask for a rematch.",
+  "I like hearing your plans. It reminds me to keep my own horse saddled.",
+  "The town drunk heard you explain yourself and ordered a coffee.",
+  "You bring a lot to the table. Mostly elbows and bad news.",
+  "If borrowing money were honest work, you'd be the hardest-working bastard in the territory.",
+  "Your alibi would hold water if we put it in a bucket and stopped listening to it.",
+  "You tipped your hat to the mirror and waited for the other fella to go first.",
+  "You'd haggle over free pie and still get charged for the plate.",
+  "Hell, I've seen better timing from a rooster with a hangover.",
+  "You got a future in politics. I haven't met another man who can forget a promise before he's done making it.",
+  "I'd follow you into hell, but only because you'd miss the turn.",
+  "They ought to put your picture on the whiskey bottle, right under 'may impair judgment.'",
+  "If you ever get a statue, the pigeons are gonna take it personally.",
+  "Your horse don't know the way home. It just knows where you usually fall off.",
+  "You're the only man I know who can lose his temper and somehow get dumber looking for it.",
+  "I heard you invented a faster way to shovel shit. You just open your mouth.",
+  "You walked in like you owned the place and ordered like you owed it money.",
+  "I've seen you tip. The bartender thought you were showing him a rash.",
+  "You got the confidence of a man who hears the word 'warrant' and assumes he won something.",
+  "You talk faster when you're lying. Some nights I can barely see your mouth move.",
+  "I'd tell you to quit while you're ahead, but I haven't seen you ahead since you cut in line.",
+  "You got thrown out of a ghost town. I'd ask how, but I'm sure you'd take credit for it.",
+  "You look like you washed up for church and got baptized in the horse trough by mistake."
 ];
-const roastEnds = [
-  "a saddle on a damn saloon stool", "a wet match in a gunfight",
-  "a one-legged mule on payday", "a sack of shit with a sheriff's badge",
-  "a buzzard circling its own lunch", "a drunken rooster in a thunderstorm",
-  "a boot full of horse piss", "a rattlesnake trying to sell life insurance"
-];
-let speaker = "slim";
-let lastRoast = -1;
+const remainingRoasts = [];
+let lastRoast;
 const comebacks = [
   ["Deal me in", "Sure. Put your money in this hat. Saves us both the trouble of dealing."],
   ["Run for mayor", "On what platform? Last fella who stood on one out here dropped six feet."],
@@ -319,12 +377,16 @@ function tellStory(story, [move, punchline]) {
   ]);
 }
 function roast() {
-  const count = roastStarts.length * roastEnds.length;
-  const offset = 1 + Math.floor(Math.random() * (count - 1));
-  lastRoast = (lastRoast + offset) % count;
-  const start = roastStarts[Math.floor(lastRoast / roastEnds.length)];
-  const end = roastEnds[lastRoast % roastEnds.length];
-  showTurn(speaker, start + " " + end + ".", [
+  const refilling = remainingRoasts.length === 0;
+  if (refilling) remainingRoasts.push(...roasts);
+
+  // Skip the previous line on the first draw of a new round.
+  const lastIndex = refilling ? remainingRoasts.indexOf(lastRoast) : -1;
+  const eligible = remainingRoasts.length - Number(lastIndex !== -1);
+  let pick = Math.floor(Math.random() * eligible);
+  if (lastIndex !== -1 && pick >= lastIndex) pick++;
+  [lastRoast] = remainingRoasts.splice(pick, 1);
+  showTurn(speaker, lastRoast, [
     ["Give me another", roast, true],
     ["Ask something else", () => showTopics("Still got questions after that?")]
   ]);
