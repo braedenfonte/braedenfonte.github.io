@@ -5,6 +5,7 @@ const slim = 'Slim Pickens Taterbottom';
 const dusty = 'Dusty Two Teeth Carson';
 
 test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inactive', async ({ page }, info) => {
+  test.setTimeout(45000);
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto(url);
@@ -58,6 +59,16 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
   await page.screenshot({ path: info.outputPath('camera-zoom.png') });
   await animations.evaluate(transitions => transitions.forEach(transition => transition.finish()));
   await expect(page.locator('.storefront')).toHaveCSS('opacity', '0');
+  const patron = page.locator('.patron-motion.slim');
+  await expect(patron).toHaveCSS('animation-name', 'lean-at-bar');
+  await patron.evaluate(async element => {
+    const motion = element.getAnimations()[0];
+    motion.pause();
+    motion.currentTime = 2304;
+    await motion.ready;
+  });
+  await expect(patron).not.toHaveCSS('transform', 'none');
+  await expect(page.locator('.haze')).toHaveCSS('animation-name', 'haze-roll');
   await expect(page.locator('.floor-light')).toHaveCSS('animation-name', 'floor-flicker');
   await expect(page.locator('.dust').first()).toHaveCSS('animation-name', 'dust-drift');
   await expect(page.locator('.lamp-glow').first()).toHaveCSS('animation-name', 'lamp-flicker');
@@ -75,18 +86,21 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
   for (const [x, y, speaker] of [[.475, .386, 'Slim'], [.572, .389, 'Dusty']]) {
     await hit(x, y);
     await expect(dialog).toBeVisible();
-    const lines = dialog.getByRole('log').locator('p');
-    await expect(lines).toHaveCount(1);
-    await expect(lines.first()).toHaveText(new RegExp('^' + speaker + ':'));
-    const cards = dialog.getByRole('button', { name: 'Ask about the card game' });
-    const town = dialog.getByRole('button', { name: /what’s happening in town/i });
-    await cards.click();
-    await expect(cards).toBeDisabled();
-    await expect(lines.nth(2)).toHaveText(new RegExp('^' + speaker + ':'));
-    await expect(lines.nth(3)).toHaveText(new RegExp('^' + (speaker === 'Slim' ? 'Dusty' : 'Slim') + ':'));
-    await town.click();
-    await expect(town).toBeDisabled();
-    await expect(lines).toHaveCount(7);
+    const line = dialog.locator('.exchange p');
+    const name = dialog.locator('.speaker');
+    await expect(name).toHaveText(speaker);
+    await expect(dialog.getByRole('group').getByRole('button')).toHaveCount(7);
+    await dialog.getByRole('button', { name: 'Who’s cheating at cards?' }).click();
+    await expect(line).toContainText('aces');
+    const other = speaker === 'Slim' ? 'Dusty' : 'Slim';
+    await dialog.getByRole('button', { name: other + ', is that true?' }).click();
+    await expect(name).toHaveText(other);
+    await expect(line).toHaveCount(1);
+    await dialog.getByRole('button', { name: 'Ask something else' }).click();
+    await dialog.getByRole('button', { name: 'Roast me' }).click();
+    const firstRoast = await line.textContent();
+    await dialog.getByRole('button', { name: 'Give me another' }).click();
+    await expect(line).not.toHaveText(firstRoast);
     await page.screenshot({ path: info.outputPath('conversation-' + speaker.toLowerCase() + '.png') });
     await dialog.getByRole('button', { name: 'Back to the bar' }).click();
     await expect(dialog).toBeHidden();

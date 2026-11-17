@@ -4,6 +4,11 @@ Continue from the latest main branch in braedenfonte/braedenfonte.github.io. The
 
 ## Current checkpoint
 
+- Slim, Dusty, and a card player move on staggered loops after the camera settles. Haze rolls across the room, and reduced motion disables the ambient effects.
+- The conversation shows one response at a time. Six subjects have a follow-up from the other cowboy. The roast option combines six openings with eight endings, including some vulgar ones, and prevents immediate repeats.
+- The Chromium suite checks a moving patron frame, topic choices, follow-up speaker changes, repeat roasts, and reduced motion at both viewport sizes.
+
+
 - Once the camera settles, dust drifts through the lamplight and warm reflections pulse on the floor. The lamp and sock effects remain active, and reduced motion disables the ambient loops.
 - Clicking Slim or Dusty starts a conversation with that cowboy. Ask about the card game or the town and both men respond in a speaker-labeled transcript. Reopening either cowboy starts a fresh conversation. Escape or Back to the bar closes the panel.
 - All six Chromium checks passed at 1440×900 and 390×844, including both dialogue topics, focus restoration, and reduced motion. Reviewed the conversation screenshots.
