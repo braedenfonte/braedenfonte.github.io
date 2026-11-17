@@ -4,6 +4,10 @@ Continue from the latest main branch in braedenfonte/braedenfonte.github.io. The
 
 ## Current checkpoint
 
+- Character artwork stays fixed. Five small light overlays follow the pictured flames and flicker at different rates. Reduced motion leaves the original artwork still.
+- Topic replies now offer a specific action with its own punchline or a chance to hear the other cowboy dispute the story. Either route can return to the topic menu or start a roast.
+
+
 - Slim, Dusty, and a card player move on staggered loops after the camera settles. Haze rolls across the room, and reduced motion disables the ambient effects.
 - The conversation shows one response at a time. Six subjects have a follow-up from the other cowboy. The roast option combines six openings with eight endings, including some vulgar ones, and prevents immediate repeats.
 - The Chromium suite checks a moving patron frame, topic choices, follow-up speaker changes, repeat roasts, and reduced motion at both viewport sizes.
