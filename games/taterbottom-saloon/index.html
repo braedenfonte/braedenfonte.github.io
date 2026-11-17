@@ -51,11 +51,11 @@ dialog::backdrop{background:#10080580}
   max-height:calc(100dvh - 2rem);overflow:auto;box-shadow:0 12px 48px #090402cc}
 .conversation h2{margin:0 0 .6rem;font-size:1.35rem;color:#f5cf94}
 .exchange{font-size:1rem;line-height:1.5}
-.exchange p{margin:.45rem 0}
+.exchange p{margin:.45rem 0}.exchange{min-height:5.3rem}
 .speaker{color:#f5cf94}
-.topics{display:flex;flex-wrap:wrap;gap:.45rem;margin:1rem 0}
+.topics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.45rem;margin:1rem 0}
 .topics button{background:#603820;text-align:left}
-.topics button:disabled{opacity:.55;cursor:default}
+.topics button{min-height:44px;padding:.5rem .65rem}.topics button[data-roast]{border-color:#ffd18e;background:#71361c}
 .topics button:enabled:hover,.conversation form button:hover{background:#80512e}
 .conversation form button{font:inherit;font-size:.9rem}
 @media(prefers-reduced-motion:reduce){.door,.room,.storefront,.scene{transition:none}.stage:has(.enter:active) .door{transform:none}}
@@ -78,6 +78,14 @@ dialog::backdrop{background:#10080580}
   radial-gradient(circle at 65% 35%,#ffe1b4 0 1px,transparent 2px),
   radial-gradient(circle at 54% 48%,#ffd5a4 0 1px,transparent 2px)}
 .dust.second{scale:-1 1}
+.patron-motion{position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:url("../saloon/saloon-wide-to-bar.png") center / 100% 100%}
+.patron-motion.slim{mask-image:radial-gradient(ellipse 4.6% 7.2% at 47.6% 40%,#000 45%,transparent 100%)}
+.patron-motion.dusty{mask-image:radial-gradient(ellipse 4.3% 6.7% at 57.2% 39%,#000 45%,transparent 100%)}
+.patron-motion.cards{mask-image:radial-gradient(ellipse 5% 9% at 32.8% 50%,#000 48%,transparent 100%)}
+.haze{position:absolute;inset:26% 22% 38% 16%;pointer-events:none;opacity:0;mix-blend-mode:screen;
+  background:radial-gradient(ellipse at 38% 55%,#efb47365,transparent 45%),
+    radial-gradient(ellipse at 63% 40%,#efba8860,transparent 51%);filter:blur(12px)}
 .lamp-glow,.sock-shadow{position:absolute;pointer-events:none;opacity:0}
 .lamp-glow{width:15%;height:25%;transform:translate(-50%,-50%);
   background:radial-gradient(ellipse,#ffc36d55,transparent 66%);mix-blend-mode:screen}
@@ -89,6 +97,10 @@ dialog::backdrop{background:#10080580}
 @media(prefers-reduced-motion:no-preference){
   .open .room{animation:walk-to-bar 2.35s both}
 
+  .settled .patron-motion{animation:lean-at-bar 4.8s ease-in-out infinite}
+  .settled .patron-motion.dusty{animation-duration:6s;animation-delay:-2s}
+  .settled .patron-motion.cards{animation-duration:4.2s;animation-delay:-1s}
+  .settled .haze{animation:haze-roll 7s ease-in-out infinite alternate}
   .settled .floor-light{animation:floor-flicker 5.4s ease-in-out infinite alternate}
   .settled .dust{animation:dust-drift 8s linear infinite}
   .settled .dust.second{animation-delay:-4s}
@@ -102,6 +114,16 @@ dialog::backdrop{background:#10080580}
   0%{transform:scale(1);filter:brightness(.77)}
   30%{transform:scale(1);filter:brightness(1);animation-timing-function:cubic-bezier(.36,.13,.22,1)}
   100%{transform:scale(var(--zoom));filter:brightness(1)}
+}
+@keyframes lean-at-bar{
+  0%,22%,72%,100%{opacity:0;transform:none}
+  34%{opacity:1;transform:translate(.12%,-.29%)}
+  48%{opacity:1;transform:translate(.27%,-.53%)}
+  59%{opacity:.9;transform:translate(.17%,-.21%)}
+}
+@keyframes haze-roll{
+  from{opacity:.22;transform:translateX(-9%) scale(.94)}
+  to{opacity:.76;transform:translate(11%,-8%) scale(1.12)}
 }
 @keyframes floor-flicker{0%,40%{opacity:.18} 18%,70%{opacity:.53} 100%{opacity:.32}}
 @keyframes dust-drift{0%{opacity:0;transform:translate(-2%,2%)} 30%,65%{opacity:.55}
@@ -124,6 +146,10 @@ dialog::backdrop{background:#10080580}
   <div class="room" inert>
     <div class="scene">
       <img src="../saloon/saloon-wide-to-bar.png" width="1671" height="941" alt="Slim and Dusty face the entrance from the far bar, with card players to the left and a closed backdoor to the right.">
+      <span class="patron-motion slim" aria-hidden="true"></span>
+      <span class="patron-motion dusty" aria-hidden="true"></span>
+      <span class="patron-motion cards" aria-hidden="true"></span>
+      <span class="haze" aria-hidden="true"></span>
       <span class="floor-light" aria-hidden="true"></span>
       <span class="dust" aria-hidden="true"></span>
       <span class="dust second" aria-hidden="true"></span>
@@ -146,11 +172,11 @@ dialog::backdrop{background:#10080580}
 </section>
 <dialog class="conversation" aria-labelledby="conversation-title">
   <h2 id="conversation-title">At the bar</h2>
-  <div class="exchange" role="log" aria-label="Conversation" aria-live="polite"></div>
-  <div class="topics" role="group" aria-label="Choose what to ask">
-    <button type="button" data-topic="cardGame" autofocus>Ask about the card game</button>
-    <button type="button" data-topic="town">Ask what’s happening in town</button>
+  <div class="exchange" aria-live="polite" aria-atomic="true">
+    <strong class="speaker"></strong>
+    <p></p>
   </div>
+  <div class="topics" role="group" aria-label="Choose what to say"></div>
   <form method="dialog"><button>Back to the bar</button></form>
 </dialog>
 </main>
@@ -194,18 +220,44 @@ const greetings = {
   slim: "Pull up a stool. Dusty's been trying to sell me a story all evening.",
   dusty: "Evening, stranger. If Slim says I owe him money, ask him to show you the receipt."
 };
-const stories = {
-  cardGame: {
-    question: "What's the story with the card game?",
-    slim: "The fella in the corner hasn't lost a hand all night. Funny how he only deals when the lamp goes low.",
-    dusty: "That ain't a tell. That's a man who knows his lighting."
+const stories = [
+  {
+    label: "Who’s cheating at cards?",
+    slim: "Man on the left has five aces. I know because I sold him four.",
+    dustyLead: "That dealer's got five aces. One of 'em is mine, but I ain't saying which.",
+    dusty: "Fifth one's mine. That's the trouble with lending to friends."
   },
-  town: {
-    question: "What's happening in town?",
-    slim: "The mayor's fixing the clock again. Last time he did that, we had two Thursdays.",
-    dusty: "Which suited me fine. My tab wasn't due till Friday."
+  {
+    label: "What’s new in town?",
+    slim: "Mayor promised to drain the swamp. Turns out he meant his bathtub.",
+    dustyLead: "Mayor put a committee in charge of his bathtub. That's the biggest thing he's drained all year.",
+    dusty: "And he hired a committee to watch the plug."
+  },
+  {
+    label: "What’s in the whiskey?",
+    slim: "Grain, water, and whatever peeled off the inside of the barrel.",
+    dustyLead: "Whiskey's got enough wood in it to count as a vegetable.",
+    dusty: "Don't ruin the recipe. That's the only fiber I get."
+  },
+  {
+    label: "How’d Dusty lose his teeth?",
+    slim: "He tried to open a bottle with his teeth. Then he tried to open the dentist's door with his head.",
+    dustyLead: "I lost the teeth opening a bottle. I lost the hat trying to pay the dentist.",
+    dusty: "The bottle opened. Put that in the damn story."
+  },
+  {
+    label: "Tell me about the sheriff",
+    slim: "He arrested his own horse for leaving the scene of a crime.",
+    dustyLead: "Sheriff locked up his own horse. The horse has a better lawyer.",
+    dusty: "Horse made bail. Sheriff couldn't raise it last time."
+  },
+  {
+    label: "What’s that smell?",
+    slim: "If it follows you out, charge it for the room.",
+    dustyLead: "Got a smell in here so mean the flies wouldn't testify.",
+    dusty: "If it follows me out, I'm charging it for the damn whiskey."
   }
-};
+];
 enter.addEventListener("click", async () => {
   if (stage.classList.contains("open")) return;
   stage.classList.add("open");
@@ -232,38 +284,70 @@ room.querySelector(".sock").addEventListener("click", () => {
 });
 const exchange = dialog.querySelector(".exchange");
 const topics = dialog.querySelector(".topics");
-const topicButtons = [...topics.querySelectorAll("button")];
+const roastStarts = [
+  "You're about as handy as", "You've got all the charm of",
+  "You've got the instincts of", "I've seen more good judgment in",
+  "I'd sooner take advice from", "You've got the swagger of"
+];
+const roastEnds = [
+  "a saddle on a damn saloon stool", "a wet match in a gunfight",
+  "a one-legged mule on payday", "a sack of shit with a sheriff's badge",
+  "a buzzard circling its own lunch", "a drunken rooster in a thunderstorm",
+  "a boot full of horse piss", "a rattlesnake trying to sell life insurance"
+];
 let speaker = "slim";
+let lastRoast = -1;
 
-function addLine(name, text) {
-  const line = document.createElement("p");
-  const label = document.createElement("strong");
-  label.className = "speaker";
-  label.textContent = name + ": ";
-  line.append(label, text);
-  exchange.append(line);
+function showTurn(who, text, choices) {
+  exchange.querySelector(".speaker").textContent = cowboyNames[who];
+  exchange.querySelector("p").textContent = text;
+  topics.replaceChildren(...choices.map(([label, action, roast]) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = label;
+    if (roast) button.dataset.roast = "";
+    button.addEventListener("click", action);
+    return button;
+  }));
+  if (dialog.open) topics.firstElementChild.focus();
 }
 
-topics.addEventListener("click", event => {
-  const choice = event.target.closest("[data-topic]");
-  if (!choice || choice.disabled) return;
+function showTopics(text = greetings[speaker]) {
+  showTurn(speaker, text, [
+    ...stories.map(story => [story.label, () => tellStory(story)]),
+    ["Roast me", roast, true]
+  ]);
+}
+
+function tellStory(story) {
   const other = speaker === "slim" ? "dusty" : "slim";
-  const story = stories[choice.dataset.topic];
-  addLine("You", story.question);
-  addLine(cowboyNames[speaker], story[speaker]);
-  addLine(cowboyNames[other], story[other]);
-  const next = topicButtons.find(button => button !== choice && !button.disabled);
-  (next || dialog.querySelector("form button")).focus();
-  choice.disabled = true;
-});
+  showTurn(speaker, speaker === "dusty" ? story.dustyLead : story.slim, [
+    [cowboyNames[other] + ", is that true?", () => showTurn(other, story[other], [
+      ["Ask something else", () => showTopics("What else you got?")],
+      ["Roast me", roast, true]
+    ])],
+    ["Ask something else", () => showTopics("What else you got?")]
+  ]);
+}
+
+function roast() {
+  const count = roastStarts.length * roastEnds.length;
+  const offset = 1 + Math.floor(Math.random() * (count - 1));
+  lastRoast = (lastRoast + offset) % count;
+  const start = roastStarts[Math.floor(lastRoast / roastEnds.length)];
+  const end = roastEnds[lastRoast % roastEnds.length];
+  showTurn(speaker, start + " " + end + ".", [
+    ["Give me another", roast, true],
+    ["Ask something else", () => showTopics("Still got questions after that?")]
+  ]);
+}
 
 room.querySelectorAll("[data-cowboy]").forEach(button => {
   button.addEventListener("click", () => {
     speaker = button.dataset.cowboy;
-    exchange.replaceChildren();
-    topicButtons.forEach(choice => { choice.disabled = false; });
-    addLine(cowboyNames[speaker], greetings[speaker]);
+    showTopics();
     dialog.showModal();
+    topics.firstElementChild.focus();
   });
 });
 </script>
