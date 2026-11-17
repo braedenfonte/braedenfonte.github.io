@@ -4,6 +4,8 @@ Continue from the latest main branch in braedenfonte/braedenfonte.github.io. The
 
 ## Current checkpoint
 
+- The roast menu now draws from 64 complete lines, including familiar sayings and original saloon insults. Either cowboy draws from the same pool, with each line served once per round and no immediate repeat across rounds. The browser suite draws a full round to verify uniqueness.
+
 - Character artwork stays fixed. Five small light overlays follow the pictured flames and flicker at different rates. Reduced motion leaves the original artwork still.
 - Topic replies now offer a specific action with its own punchline or a chance to hear the other cowboy dispute the story. Either route can return to the topic menu or start a roast.
 

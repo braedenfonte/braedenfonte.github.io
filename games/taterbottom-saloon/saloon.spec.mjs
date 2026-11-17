@@ -104,6 +104,18 @@ test('enter, talk to each cowboy, inspect the sock, and leave the backdoor inact
     const firstRoast = await line.textContent();
     await dialog.getByRole('button', { name: 'Give me another' }).click();
     await expect(line).not.toHaveText(firstRoast);
+    if (speaker === 'Slim') {
+      const draws = await dialog.evaluate(panel => {
+        const lines = [panel.querySelector('.exchange p').textContent];
+        for (let index = 0; index < 63; index++) {
+          panel.querySelector('[data-roast]').click();
+          lines.push(panel.querySelector('.exchange p').textContent);
+        }
+        return lines;
+      });
+      expect(new Set([firstRoast, ...draws.slice(0, -1)]).size).toBe(64);
+      expect(draws.at(-1)).not.toBe(draws.at(-2));
+    }
     await page.screenshot({ path: info.outputPath('conversation-' + speaker.toLowerCase() + '.png') });
     await dialog.getByRole('button', { name: 'Back to the bar' }).click();
     await expect(dialog).toBeHidden();
