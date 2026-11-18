@@ -1,22 +1,22 @@
 {
- "date": "2026-11-17",
- "updated": "2026-11-17T06:39:56-05:00",
- "dayCode": "2-32",
+ "date": "2026-11-18",
+ "updated": "2026-11-18T07:25:19-05:00",
+ "dayCode": "1-33",
  "classes": [
-  "MA486 0740",
-  "MA481X 0845",
-  "MS300 1035"
+  "MA376 0740",
+  "SS388 0905",
+  "EM481 1410"
  ],
  "due": [
   {
-   "course": "MA376",
-   "title": "L33 project speed-dating: bring research question, methods, prelim results, a plot (in class)",
-   "due": "2026-11-18T07:40"
+   "course": "MA486",
+   "title": "Project 2 oral presentation (in class, 5 min + Q&A)",
+   "due": "2026-11-19T07:40"
   },
   {
-   "course": "MA486",
-   "title": "Project 2 presentations (in class, 5-6 min)",
-   "due": "2026-11-19T07:40"
+   "course": "MA481X",
+   "title": "Consultant Reflection, one page (start of class, L33 Firm 4 briefing day)",
+   "due": "2026-11-19T08:45"
   },
   {
    "course": "EM481",
@@ -25,46 +25,56 @@
   },
   {
    "course": "MA481X",
-   "title": "Firm 3 Client Briefing (L34 Minimax/Maximin), date to confirm",
+   "title": "Firm 3 Client Briefing: Minimax and Maximin (L34) + Consultant Reflection",
    "due": "2026-11-20T08:45"
   },
   {
    "course": "MA376",
-   "title": "Memo 5 (calendar: in class Wed 18 Nov)",
+   "title": "Memo 5",
    "due": "2026-11-22T23:59"
   },
   {
    "course": "SS388",
-   "title": "Homework 5 (Ch 13 #5,#7; Ch 14 #1,#2; handwritten PDF)",
+   "title": "Homework 5",
    "due": "2026-11-23T09:05"
   }
  ],
  "tests": [
   {
    "course": "MA376",
-   "title": "Block 4 Quiz (per course calendar; not posted on Canvas)",
+   "title": "B4 quiz (course calendar; L33 changed to project speed-dating, confirm)",
    "date": "2026-11-18"
   },
   {
    "course": "MA486",
-   "title": "Project 2 presentations (in class)",
+   "title": "Project 2 presentations (in class, 35 pts)",
    "date": "2026-11-19"
   },
   {
    "course": "MA481X",
-   "title": "Firm 3 Client Briefing: Minimax and Maximin (date to confirm)",
+   "title": "Firm 3 Client Briefing: Minimax and Maximin (L34)",
    "date": "2026-11-20"
   },
   {
    "course": "SS388",
    "title": "Quiz 5",
    "date": "2026-11-23"
+  },
+  {
+   "course": "MA481X",
+   "title": "Technical Certification 4 (L36 Two-Phase Optimization)",
+   "date": "2026-12-01"
+  },
+  {
+   "course": "SS388",
+   "title": "WPR 2 (Ch 9-15)",
+   "date": "2026-12-02"
   }
  ],
  "headlines": [
   "Army vs East Carolina Sat Nov 21, noon (CBSSN)",
   "Bills 8-1, next vs MIA Sun 1 PM (CBS)",
-  "S&P 500 −1.92% Mon"
+  "S&P 500 −1.03% Tue"
  ],
  "alerts": []
 }

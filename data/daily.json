@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17T06:39:56-05:00",
+ "updated": "2026-11-18T07:25:11-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -505,7 +505,11 @@
     "awayRank": 11,
     "homeRank": 25,
     "blurb": "Wake Forest routed SMU on the road in a top-25 ACC matchup.",
-    "stats": []
+    "stats": [
+     "Gio Lopez: 14/25, 201 yds, TD",
+     "Ty Clark III: 11 carries, 77 yds, TD",
+     "Carlos Hernandez: 6 catches, 94 yds, TD"
+    ]
    },
    {
     "away": "Florida",
@@ -514,7 +518,10 @@
     "hs": 14,
     "homeRank": 13,
     "blurb": "Unranked Florida upset No. 13 Kentucky in Lexington.",
-    "stats": []
+    "stats": [
+     "Aaron Philo: 16/24, 119 yds; 15 rushes, 102 yds, TD",
+     "Kenny Minchey (UK): 15/26, 181 yds, TD"
+    ]
    },
    {
     "away": "Houston",
@@ -523,7 +530,11 @@
     "hs": 42,
     "awayRank": 14,
     "blurb": "Colorado knocked off No. 14 Houston in Boulder on Friday night.",
-    "stats": []
+    "stats": [
+     "Richard Young (COLO): 21 carries, 99 yds, 2 TD",
+     "Isaac Wilson (COLO): 17/25, 217 yds, TD, INT",
+     "Conner Weigman (HOU): 26/42, 272 yds, 3 TD, INT"
+    ]
    },
    {
     "away": "Ole Miss",
@@ -543,7 +554,10 @@
     "as": 3,
     "hs": 24,
     "blurb": "Air Force's defense held San José State to a field goal at Falcon Stadium.",
-    "stats": []
+    "stats": [
+     "Evan Medders: 13 carries, 146 yds, TD",
+     "Luke Weaver (SJSU): 11/24, 138 yds"
+    ]
    }
   ],
   "upcoming": [
@@ -690,84 +704,84 @@
   "poll": "AP Top 25, Week 12 (Nov 16)"
  },
  "location": {
-  "name": "Bora Bora",
-  "wiki": "Bora_Bora",
-  "country": "French Polynesia (France)",
-  "region": "Leeward Islands, Society Islands, South Pacific",
-  "lat": -16.501,
-  "lon": -151.74,
-  "tagline": "A sunken volcano wrapped in a turquoise lagoon and a ring of palm-covered islets",
-  "intro": "Bora Bora is a small island in French Polynesia, about 230 km (143 mi) northwest of Tahiti, built from the remains of an extinct volcano. Its jagged central peaks rise from a vivid lagoon enclosed by a barrier reef and a ring of sandy islets called motu. Once a quiet WWII supply base, it is now famous for resorts with bungalows built on stilts over the water.",
+  "name": "Yosemite National Park",
+  "wiki": "Yosemite_National_Park",
+  "country": "United States",
+  "region": "Sierra Nevada, California",
+  "lat": 37.85,
+  "lon": -119.517,
+  "tagline": "Glacier-carved granite walls, giant sequoias and some of North America's tallest waterfalls",
+  "intro": "Yosemite is a national park in California's Sierra Nevada, famous for sheer granite cliffs like El Capitan and Half Dome, waterfalls, and groves of giant sequoias. Glaciers carved its U-shaped Yosemite Valley about a million years ago. Almost 95 percent of the park is designated wilderness, yet most of its roughly four million yearly visitors stay in the valley's seven square miles.",
   "stats": [
    {
-    "label": "Highest point",
-    "value": "Mount Otemanu, 727 m (2,385 ft)"
-   },
-   {
     "label": "Area",
-    "value": "30.55 km² (11.8 sq mi)"
+    "value": "1,187 sq mi (3,070 km²)"
    },
    {
-    "label": "Population",
-    "value": "10,605 (2017)"
+    "label": "Highest point",
+    "value": "Mount Lyell, 13,120 ft (4,000 m)"
    },
    {
-    "label": "Volcano last active",
-    "value": "3.45-3.10 million years ago"
+    "label": "Yosemite Falls",
+    "value": "2,425 ft (739 m) total drop"
+   },
+   {
+    "label": "World Heritage Site",
+    "value": "Since 1984"
    }
   ],
   "facts": [
-   "In World War II the US Navy set up a supply base there under 'Operation Bobcat', with nine ships and nearly 7,000 troops. The island never saw combat, and eight 7-inch naval guns still sit on its hills.",
-   "The wartime airstrip on the islet of Motu Mute was French Polynesia's only international airport until Tahiti's Faa'a airport opened in 1960. Arriving flyers still take a boat from the airport to the main island.",
-   "The barrier reef has just one opening to the ocean, the Teavanui Pass, which is how cruise and cargo ships get into the lagoon.",
-   "The name comes from the Tahitian 'Porapora', meaning 'first born'. 'Bora Bora' is the spelling Jacob Roggeveen's Dutch crew used when they sighted it in 1722.",
-   "The first overwater bungalows were built about nine years after the Hotel Bora Bora opened in 1961. Today most of the island's resorts have them."
+   "Abraham Lincoln signed the Yosemite Grant in 1864, setting the land aside for protection years before Yellowstone became the first national park.",
+   "From 1899 to 1913 the US Army patrolled the park, including troops of the all-Black 9th Cavalry, the 'Buffalo Soldiers'.",
+   "In 1903 President Theodore Roosevelt camped with John Muir near Glacier Point for three days; Muir convinced him to bring Yosemite Valley and the Mariposa Grove under federal control.",
+   "For decades the park staged the 'Firefall', pushing red-hot embers off a cliff near Glacier Point at night; the Park Service dropped it as it cut back artificial attractions.",
+   "On rare evenings in mid- to late February, Horsetail Fall on El Capitan glows orange when backlit by the sunset."
   ],
-  "bestTime": "June to October, the dry season, brings the most sunshine and the least rain; November to April is the wetter, more humid season.",
-  "gettingThere": "There are no nonstops from New York. Connect on the West Coast (Los Angeles, San Francisco or Seattle) for a roughly 8-hour flight to Papeete, Tahiti, then take a 45-50 minute Air Tahiti flight to Bora Bora and a short boat ride from the airport islet.",
-  "tip": "The airport sits on its own islet, so plan for the free Air Tahiti shuttle boat to Vaitape or your resort's boat transfer. There is no public transport on the island, so rent a bicycle or car to get around the main island."
+  "bestTime": "Late spring (May and June) for the biggest waterfalls from snowmelt; September and October bring fewer crowds. Tioga Road and the high country close for the winter snow season.",
+  "gettingThere": "There are no direct flights to the park. Fly from New York to Fresno (connecting) and drive about 1.5-2 hours to the south entrance, or fly nonstop to San Francisco or Oakland and drive about 4 hours east.",
+  "tip": "Check the NPS Yosemite site for current road conditions and any entry reservation rules before you go, and start early: valley parking fills by mid-morning in busy seasons."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 9 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
-  "asOf": "Mon Nov 16 close",
-  "story": "Nvidia led another sell-off in tech and AI stocks as fallout from CEO Jensen Huang's resignation continued, giving the S&P 500 its third straight loss. Treasury yields eased and oil fell, but that did little to help.",
+  "asOf": "Tue Nov 17 close",
+  "story": "Stocks fell for a fourth straight day as traders sold chipmakers ahead of Nvidia's earnings and a report that a classified NSA network had gone down pushed the averages to session lows, leaving the S&P 500 at its lowest close since late July. After the bell, Nvidia beat profit and revenue estimates and raised its guidance, and its shares rose about 4% in extended trading.",
   "indices": [
    {
     "name": "S&P 500",
-    "value": "7,417",
-    "chg": -1.92
+    "value": "7,341",
+    "chg": -1.03
    }
   ],
   "movers": [
    {
     "sym": "NVDA",
-    "move": "−4.1%",
+    "move": "−0.5%",
     "dir": -1,
-    "why": "Nvidia was again the biggest drag on the market; it has lost about $735 billion in value since the scandal around Huang broke. Earnings are due Tuesday."
+    "why": "Nvidia slipped during the regular session amid leadership worries, then rose about 4% after hours after beating quarterly profit and revenue estimates and raising guidance."
    },
    {
-    "sym": "AMD",
-    "move": "−5.6%",
+    "sym": "CRM",
+    "move": "−10%",
     "dir": -1,
-    "why": "AMD fell with other chipmakers as the AI sell-off spread."
+    "why": "Salesforce fell nearly 10% in a broad software sell-off as traders shunned tech."
    },
    {
-    "sym": "LHX",
-    "move": "−3.9%",
+    "sym": "ORCL",
+    "move": "−4%",
     "dir": -1,
-    "why": "L3Harris dropped after Trump administration officials suggested the FAA contractor may be to blame for Friday's nationwide ground stop."
+    "why": "Oracle dropped with other software names in the sell-off."
    },
    {
-    "sym": "SMMT",
-    "move": "−16.5%",
-    "dir": -1,
-    "why": "Summit Therapeutics plunged after the FDA indicated it cannot approve its lung cancer therapy application."
-   },
-   {
-    "sym": "TSN",
-    "move": "+8.7%",
+    "sym": "COHR",
+    "move": "+11%",
     "dir": 1,
-    "why": "Tyson Foods jumped as quarterly profit beat expectations, even though revenue fell short."
+    "why": "Coherent jumped on a reported plan to block Chinese data center equipment imports."
+   },
+   {
+    "sym": "HD",
+    "move": "−2%",
+    "dir": -1,
+    "why": "Home Depot fell nearly 2% after naming Richard McPhail CEO to succeed Ted Decker, who stays on as chairman."
    }
   ],
   "lines": [
@@ -782,16 +796,16 @@
    {
     "game": "UCLA @ Michigan",
     "kick": "2026-11-21T20:30:00Z",
-    "spread": "UCLA −5.5",
-    "total": "38.5",
-    "ml": "UCLA −230 / MICH +190"
+    "spread": "UCLA −3.5",
+    "total": "37.5",
+    "ml": "UCLA −185 / MICH +154"
    },
    {
     "game": "East Carolina @ Army",
     "kick": "2026-11-21T17:00:00Z",
-    "spread": "ARMY −4.5",
-    "total": "44.5",
-    "ml": "ARMY −192 / ECU +160"
+    "spread": "ARMY −5",
+    "total": "45.5",
+    "ml": "ARMY −218 / ECU +208"
    }
   ],
   "probs": [
@@ -821,6 +835,6 @@
     "p": 93
    }
   ],
-  "sources": "S&P 500 and movers: AP via BNN Bloomberg and La Nación (Nov 16)."
+  "sources": "S&P 500, story and movers: CNBC (Nov 17); odds: DraftKings via NBC Sports, BetRivers via Dimers; probs: ESPN FPI (kept)."
  }
 }
