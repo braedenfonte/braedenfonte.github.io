@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18T07:25:11-05:00",
+ "updated": "2026-11-19T06:37:53-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -704,111 +704,116 @@
   "poll": "AP Top 25, Week 12 (Nov 16)"
  },
  "location": {
-  "name": "Yosemite National Park",
-  "wiki": "Yosemite_National_Park",
-  "country": "United States",
-  "region": "Sierra Nevada, California",
-  "lat": 37.85,
-  "lon": -119.517,
-  "tagline": "Glacier-carved granite walls, giant sequoias and some of North America's tallest waterfalls",
-  "intro": "Yosemite is a national park in California's Sierra Nevada, famous for sheer granite cliffs like El Capitan and Half Dome, waterfalls, and groves of giant sequoias. Glaciers carved its U-shaped Yosemite Valley about a million years ago. Almost 95 percent of the park is designated wilderness, yet most of its roughly four million yearly visitors stay in the valley's seven square miles.",
+  "name": "Kyoto",
+  "wiki": "Kyoto",
+  "country": "Japan",
+  "region": "Kansai, Honshu",
+  "lat": 35.0116,
+  "lon": 135.7681,
+  "tagline": "Japan's imperial capital for over a thousand years, with about 2,000 temples and shrines",
+  "intro": "Kyoto was chosen as Japan's imperial seat in 794, when it was called Heian-kyō, and it stayed the capital until the move to Tokyo in 1869. Today it is a city of about 1.4 million people that still holds roughly 2,000 temples and shrines, from the gold-covered Kinkaku-ji to the torii tunnels of Fushimi Inari. Seventeen of its historic monuments were listed together as a UNESCO World Heritage Site in 1994.",
   "stats": [
    {
+    "label": "Population",
+    "value": "1.43 million (2026)"
+   },
+   {
     "label": "Area",
-    "value": "1,187 sq mi (3,070 km²)"
+    "value": "828 km² (320 sq mi)"
    },
    {
-    "label": "Highest point",
-    "value": "Mount Lyell, 13,120 ft (4,000 m)"
+    "label": "Imperial capital",
+    "value": "794 to 1869"
    },
    {
-    "label": "Yosemite Falls",
-    "value": "2,425 ft (739 m) total drop"
-   },
-   {
-    "label": "World Heritage Site",
-    "value": "Since 1984"
+    "label": "World Heritage",
+    "value": "17 monuments, listed 1994"
    }
   ],
   "facts": [
-   "Abraham Lincoln signed the Yosemite Grant in 1864, setting the land aside for protection years before Yellowstone became the first national park.",
-   "From 1899 to 1913 the US Army patrolled the park, including troops of the all-Black 9th Cavalry, the 'Buffalo Soldiers'.",
-   "In 1903 President Theodore Roosevelt camped with John Muir near Glacier Point for three days; Muir convinced him to bring Yosemite Valley and the Mariposa Grove under federal control.",
-   "For decades the park staged the 'Firefall', pushing red-hot embers off a cliff near Glacier Point at night; the Park Service dropped it as it cut back artificial attractions.",
-   "On rare evenings in mid- to late February, Horsetail Fall on El Capitan glows orange when backlit by the sunset."
+   "Kyoto was on the US list of atomic-bomb targets in 1945; Secretary of War Henry Stimson insisted it be removed, and Nagasaki took its place.",
+   "Fushimi Inari-taisha has roughly 10,000 torii gates, each donated by a Japanese business; the trails up Mount Inari take about 2 hours to walk.",
+   "The Golden Pavilion you see today dates only from 1955: a 22-year-old novice monk burned the original down in 1950.",
+   "When Kinkaku-ji was regilded in 1986-87, the new gold leaf was five times thicker than the original and weighed 20 kg.",
+   "Nintendo is headquartered in Kyoto, and the 1997 Kyoto Protocol on greenhouse gas emissions was signed at a conference here."
   ],
-  "bestTime": "Late spring (May and June) for the biggest waterfalls from snowmelt; September and October bring fewer crowds. Tioga Road and the high country close for the winter snow season.",
-  "gettingThere": "There are no direct flights to the park. Fly from New York to Fresno (connecting) and drive about 1.5-2 hours to the south entrance, or fly nonstop to San Francisco or Oakland and drive about 4 hours east.",
-  "tip": "Check the NPS Yosemite site for current road conditions and any entry reservation rules before you go, and start early: valley parking fills by mid-morning in busy seasons."
+  "bestTime": "Late March to early April for cherry blossoms and mid-November to early December for fall colors; both are busy, so book early. Summers are hot and humid.",
+  "gettingThere": "Fly nonstop from JFK or Newark to Tokyo (Haneda or Narita), then take the Tokaido Shinkansen to Kyoto Station, about 2 hours 15 minutes on the Nozomi. Or connect to Osaka's Kansai Airport and ride the Haruka express to Kyoto.",
+  "tip": "Start at Fushimi Inari at sunrise, before the tour groups, and walk past the first gates up the mountain: the crowds thin out fast the higher you go."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 9 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
-  "asOf": "Tue Nov 17 close",
-  "story": "Stocks fell for a fourth straight day as traders sold chipmakers ahead of Nvidia's earnings and a report that a classified NSA network had gone down pushed the averages to session lows, leaving the S&P 500 at its lowest close since late July. After the bell, Nvidia beat profit and revenue estimates and raised its guidance, and its shares rose about 4% in extended trading.",
+  "asOf": "Wed Nov 18 close",
+  "story": "The S&P 500 slipped for a fifth straight day, its longest losing streak since June, as investors questioned how much room the AI boom has left and Nvidia gave up an early gain after its earnings report. Lower oil prices weighed on energy stocks, while TJX and Target rallied on better-than-expected results.",
   "indices": [
    {
     "name": "S&P 500",
-    "value": "7,341",
-    "chg": -1.03
+    "value": "7,324",
+    "chg": -0.23
    }
   ],
   "movers": [
    {
     "sym": "NVDA",
-    "move": "−0.5%",
+    "move": "−2.9%",
     "dir": -1,
-    "why": "Nvidia slipped during the regular session amid leadership worries, then rose about 4% after hours after beating quarterly profit and revenue estimates and raising guidance."
+    "why": "Nvidia rose as much as 2.7% after beating profit and revenue estimates and forecasting a better-than-expected quarter, then reversed amid uncertainty over growth after Jensen Huang's exit."
    },
    {
-    "sym": "CRM",
-    "move": "−10%",
-    "dir": -1,
-    "why": "Salesforce fell nearly 10% in a broad software sell-off as traders shunned tech."
+    "sym": "TJX",
+    "move": "+8%",
+    "dir": 1,
+    "why": "TJX rallied after reporting slightly better-than-expected earnings."
    },
    {
-    "sym": "ORCL",
+    "sym": "TGT",
+    "move": "+4%",
+    "dir": 1,
+    "why": "Target climbed after a better-than-expected profit report that included its strongest quarterly sales gain in about five years."
+   },
+   {
+    "sym": "TTWO",
+    "move": "+6.2%",
+    "dir": 1,
+    "why": "Take-Two rose on glowing reviews of its latest Grand Theft Auto game."
+   },
+   {
+    "sym": "XOM",
     "move": "−4%",
     "dir": -1,
-    "why": "Oracle dropped with other software names in the sell-off."
-   },
-   {
-    "sym": "COHR",
-    "move": "+11%",
-    "dir": 1,
-    "why": "Coherent jumped on a reported plan to block Chinese data center equipment imports."
-   },
-   {
-    "sym": "HD",
-    "move": "−2%",
-    "dir": -1,
-    "why": "Home Depot fell nearly 2% after naming Richard McPhail CEO to succeed Ted Decker, who stays on as chairman."
+    "why": "ExxonMobil fell as Brent crude dropped 1.3% to $91.95 a barrel."
    }
   ],
   "lines": [
    {
-    "game": "Dolphins @ Bills",
-    "kick": "2026-11-22T18:00:00Z",
-    "spread": "BUF −16.5",
-    "total": "46.5",
-    "ml": "BUF −1800 / MIA +975",
-    "bills": true
+    "game": "East Carolina @ Army",
+    "kick": "2026-11-21T17:00:00Z",
+    "spread": "ARMY −6",
+    "total": "45.5",
+    "ml": "ARMY −230 / ECU +190"
    },
    {
     "game": "UCLA @ Michigan",
     "kick": "2026-11-21T20:30:00Z",
     "spread": "UCLA −3.5",
     "total": "37.5",
-    "ml": "UCLA −185 / MICH +154"
+    "ml": "UCLA −175 / MICH +145"
    },
    {
-    "game": "East Carolina @ Army",
-    "kick": "2026-11-21T17:00:00Z",
-    "spread": "ARMY −5",
+    "game": "Dolphins @ Bills",
+    "kick": "2026-11-22T18:00:00Z",
+    "spread": "BUF −16.5",
     "total": "45.5",
-    "ml": "ARMY −218 / ECU +208"
+    "ml": "BUF −1450 / MIA +850",
+    "bills": true
    }
   ],
   "probs": [
+   {
+    "game": "Dolphins @ Bills",
+    "fav": "Bills",
+    "p": 95
+   },
    {
     "game": "Tennessee Tech @ Mississippi State",
     "fav": "Mississippi State",
@@ -828,13 +833,8 @@
     "game": "Rutgers @ Penn State",
     "fav": "Penn State",
     "p": 94
-   },
-   {
-    "game": "SMU @ Notre Dame",
-    "fav": "Notre Dame",
-    "p": 93
    }
   ],
-  "sources": "S&P 500, story and movers: CNBC (Nov 17); odds: DraftKings via NBC Sports, BetRivers via Dimers; probs: ESPN FPI (kept)."
+  "sources": "S&P 500, story and movers: AP and CNBC (Nov 18); odds: DraftKings via ESPN (Nov 19); probs: ESPN FPI (Nov 19)."
  }
 }

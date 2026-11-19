@@ -1,11 +1,11 @@
 {
- "date": "2026-11-18",
- "updated": "2026-11-18T07:25:19-05:00",
- "dayCode": "1-33",
+ "date": "2026-11-19",
+ "updated": "2026-11-19T06:37:53-05:00",
+ "dayCode": "2-33",
  "classes": [
-  "MA376 0740",
-  "SS388 0905",
-  "EM481 1410"
+  "MA486 0740",
+  "MA481X 0845",
+  "MS300 1035"
  ],
  "due": [
   {
@@ -14,18 +14,13 @@
    "due": "2026-11-19T07:40"
   },
   {
-   "course": "MA481X",
-   "title": "Consultant Reflection, one page (start of class, L33 Firm 4 briefing day)",
-   "due": "2026-11-19T08:45"
-  },
-  {
    "course": "EM481",
    "title": "Project 2B",
    "due": "2026-11-19T23:59"
   },
   {
    "course": "MA481X",
-   "title": "Firm 3 Client Briefing: Minimax and Maximin (L34) + Consultant Reflection",
+   "title": "Firm 3 Client Briefing: Minimax and Maximin (L34)",
    "due": "2026-11-20T08:45"
   },
   {
@@ -35,16 +30,11 @@
   },
   {
    "course": "SS388",
-   "title": "Homework 5",
+   "title": "Homework 5 (handwritten, one PDF)",
    "due": "2026-11-23T09:05"
   }
  ],
  "tests": [
-  {
-   "course": "MA376",
-   "title": "B4 quiz (course calendar; L33 changed to project speed-dating, confirm)",
-   "date": "2026-11-18"
-  },
   {
    "course": "MA486",
    "title": "Project 2 presentations (in class, 35 pts)",
@@ -74,7 +64,7 @@
  "headlines": [
   "Army vs East Carolina Sat Nov 21, noon (CBSSN)",
   "Bills 8-1, next vs MIA Sun 1 PM (CBS)",
-  "S&P 500 −1.03% Tue"
+  "S&P 500 −0.23% Wed"
  ],
  "alerts": []
 }
