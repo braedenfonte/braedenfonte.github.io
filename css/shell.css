@@ -236,3 +236,15 @@ html[data-mode="lite"] .btn:hover,html[data-mode="lite"] .proj:hover{transform:n
 @keyframes lgIn{from{opacity:0;transform:translateX(-50%) scale(.6)}to{opacity:1;transform:translateX(-50%) scale(1)}}
 @keyframes lgGlow{from{box-shadow:0 0 0 4px rgba(212,175,55,.2),0 10px 40px rgba(0,0,0,.5),0 0 24px rgba(212,175,55,.35)}to{box-shadow:0 0 0 6px rgba(212,175,55,.45),0 10px 40px rgba(0,0,0,.5),0 0 60px rgba(212,175,55,.75)}}
 @media (max-width:860px){.legend-banner{top:62px;padding:10px 16px;width:86%}.legend-banner b{font-size:17px}}
+/* building info card (game style) */
+.bcard{position:absolute;left:16px;bottom:16px;z-index:8;max-width:320px;padding:14px 16px 14px;border-radius:14px;color:#f3eefe;
+  background:linear-gradient(160deg,rgba(28,14,60,.94),rgba(10,8,28,.94));border:1px solid #7c4dff;box-shadow:0 0 0 1px rgba(45,226,255,.25),0 0 28px rgba(124,77,255,.45);animation:bcIn .25s ease-out}
+.bcard .bc-t{display:inline-block;font:700 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#2de2ff;border:1px solid #2de2ff;border-radius:999px;padding:4px 8px}
+.bcard .bc-n{display:block;margin:8px 0 4px;font:800 19px/1.2 var(--body)}
+.bcard .bc-d{margin:0;font:500 13px/1.45 var(--body);color:#d6cdee}
+.bcard .bc-x{position:absolute;right:8px;top:6px;border:0;background:none;color:#fff;font-size:20px;cursor:pointer}
+@keyframes bcIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (max-width:860px){.bcard{left:10px;right:10px;bottom:62px;max-width:none}}
+.wx-panel .cat-h-style{color:#7c4dff}
+.wx-panel button[data-style]{border-color:#7c4dff}
+.wx-panel button[data-style].on{background:#7c4dff;border-color:#7c4dff;color:#fff}

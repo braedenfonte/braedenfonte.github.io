@@ -257,7 +257,7 @@ async function start3D(){
   loading = true;
   try{
     await MAP.load(); resolveLandmarks();
-    const mod = await import("/js/westpoint3d.js?v=20261115e");
+    const mod = await import("/js/westpoint3d.js?v=20261119c");
     if (MODE.lite) { loading = false; return; }
     campus = await mod.create({
       stage, canvas: $("#campus3d"),

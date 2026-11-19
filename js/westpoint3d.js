@@ -5,7 +5,9 @@ import * as THREE from "/vendor/three.module.min.js";
 
 export async function create(o){
   const { stage, canvas, map } = o, D = map.data, BB = map.bounds;
-  const S = 0.05, VE = 1.0;                                   // world units per meter, vertical stretch
+  const S = 0.05, VE = 1.0;
+  const NEON = (() => { const q = location.search; if (/style=real/.test(q)) return false; if (/style=neon/.test(q)) return true; try{ return localStorage.getItem("bf-style") === "neon"; }catch(x){ return false; } })();
+  const PHONE = matchMedia("(pointer: coarse)").matches;                                   // world units per meter, vertical stretch
   const gy = (x, y) => Math.max(map.heightAt(x, y), 0.2)*S*VE; // ground height in world units
   const V = (x, y, h) => new THREE.Vector3(x*S, gy(x, y) + (h || 0)*S, -y*S);
   const dark = () => o.dark();
@@ -26,7 +28,15 @@ export async function create(o){
   const e = D.elev, tcv = document.createElement("canvas");
   const tex = keep(new THREE.CanvasTexture(tcv)); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
   let onPhoto = false;   // true while the Google photo ground is showing (our ground texture is then painted in daylight)
-  function paintGround(){ map.paint(tcv, { pxPerM: 0.85, dark: dark() && !onPhoto, footprintOnly: true }); tex.needsUpdate = true; }
+  function paintGround(){ map.paint(tcv, { pxPerM: 0.85, dark: NEON || (dark() && !onPhoto), footprintOnly: true });
+    if (NEON){ const x = tcv.getContext("2d"), k = tcv.width/(BB.x1 - BB.x0), X = v => (v - BB.x0)*k, Y = v => (BB.y1 - v)*k;
+      x.fillStyle = "rgba(8,6,24,.78)"; x.fillRect(0, 0, tcv.width, tcv.height);
+      x.strokeStyle = "rgba(140,90,255,.16)"; x.lineWidth = 1; for (let g = Math.ceil(BB.x0/50)*50; g < BB.x1; g += 50){ x.beginPath(); x.moveTo(X(g), 0); x.lineTo(X(g), tcv.height); x.stroke(); } for (let g = Math.ceil(BB.y0/50)*50; g < BB.y1; g += 50){ x.beginPath(); x.moveTo(0, Y(g)); x.lineTo(tcv.width, Y(g)); x.stroke(); }
+      const line = (r, col, wd) => { x.strokeStyle = col; x.lineWidth = wd; x.beginPath(); for (let i = 0; i < r.p.length; i += 2) i ? x.lineTo(X(r.p[i]), Y(r.p[i + 1])) : x.moveTo(X(r.p[0]), Y(r.p[1])); x.stroke(); };
+      x.lineCap = "round"; D.roads.forEach(r => line(r, r.c <= 1 ? "rgba(45,226,255,.35)" : r.c === 2 ? "rgba(45,226,255,.22)" : "rgba(255,60,172,.28)", r.c <= 1 ? 7*k + 4 : 3*k + 2));
+      D.roads.forEach(r => line(r, r.c <= 1 ? "#5ff0ff" : r.c === 2 ? "#3ab8d0" : "#ff5cc0", r.c <= 1 ? 1.6 : 1));
+      D.areas.forEach(a => { if (!/pitch|plain|stadium/.test(a.k)) return; x.strokeStyle = "rgba(255,225,77,.55)"; x.lineWidth = 1.2; x.beginPath(); for (let i = 0; i < a.p.length; i += 2) i ? x.lineTo(X(a.p[i]), Y(a.p[i + 1])) : x.moveTo(X(a.p[0]), Y(a.p[1])); x.closePath(); x.stroke(); }); }
+    tex.needsUpdate = true; }
   { const pos = [], uv = [], idx = [];
     for (let j = 0; j < e.rows; j++) for (let i = 0; i < e.cols; i++){ const h = e.h[j*e.cols + i]; pos.push((e.x0 + i*e.step)*S, (h < 0.4 ? -4 : h)*S*VE, -(e.y0 + j*e.step)*S); uv.push(i/(e.cols - 1), j/(e.rows - 1)); }
     for (let j = 0; j < e.rows - 1; j++) for (let i = 0; i < e.cols - 1; i++){ const a = j*e.cols + i, b = a + 1, c = a + e.cols, d = c + 1; idx.push(a, b, d, a, d, c); }
@@ -56,14 +66,14 @@ export async function create(o){
     for (let j = 0; j < 4; j++) for (let i = 0; i < 4; i++){ const x = i*64 + 25, y = j*64 + 12;   // narrow, tall windows with a pointed head
       a.fillStyle = "#2f3640"; a.fillRect(x, y + 4, 14, 38);
       a.fillStyle = "#8c939b"; a.fillRect(x + 6, y + 6, 2, 36); a.fillRect(x - 2, y + 42, 18, 3);
-      if (rnd() < 0.4){ b.fillStyle = rnd() < 0.8 ? "#ffd89a" : "#cfe4ff"; b.fillRect(x, y + 6, 14, 36); } } }
+      if (rnd() < 0.4){ b.fillStyle = NEON ? ["#ff3cac", "#2de2ff", "#b388ff", "#ffe14d", "#2de2ff"][Math.floor(rnd()*5)] : rnd() < 0.8 ? "#ffd89a" : "#cfe4ff"; b.fillRect(x, y + 6, 14, 36); } } }
   const wT = keep(new THREE.CanvasTexture(wallTex)), gT = keep(new THREE.CanvasTexture(glowTex));
   [wT, gT].forEach(t => { t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 4; }); wT.colorSpace = THREE.SRGBColorSpace; gT.colorSpace = THREE.SRGBColorSpace;
   const wallMat = keep(new THREE.MeshStandardMaterial({ map: wT, emissiveMap: gT, emissive: 0xffffff, vertexColors: true, roughness: 0.9, side: THREE.DoubleSide }));
   const roofMat = keep(new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.95, side: THREE.DoubleSide }));
   const WALL = { barracks: [0.70, 0.68, 0.64], hall: [0.74, 0.72, 0.67] }, HOUSE = [[0.9, 0.88, 0.83], [0.78, 0.72, 0.62], [0.62, 0.4, 0.33], [0.82, 0.8, 0.74]];
   const ROOF = { barracks: [0.3, 0.33, 0.38], hall: [0.38, 0.4, 0.44], house: [0.42, 0.27, 0.22] };
-  const PLAIN_FRONT_RX = /^(Washington Hall|MacArthur Barracks|Eisenhower Barracks)$/; let shelfY = null; const forest = [];   // forest: tree meshes recolored by season. shelfY: Davis shelf deck height (people on it walk at this height)
+  const PLAIN_FRONT_RX = /^(Washington Hall|MacArthur Barracks|Eisenhower Barracks)$/; let shelfY = null, nightNow = false; const forest = [];   // forest: tree meshes recolored by season. shelfY: Davis shelf deck height (people on it walk at this height)
   const wp = [], wu = [], wc = [], wl = [], rp = [], rc = [], rl = [];   // wl / rl: which landmark each triangle belongs to (-1 = none)
   const lmOf = {}; o.landmarks.forEach((l, i) => { if (l.bi != null) lmOf[l.bi] = i; });
   const tops = {};
@@ -346,6 +356,10 @@ export async function create(o){
   function meshOf(P, C, U, mat){ const g = keep(new THREE.BufferGeometry()); g.setAttribute("position", new THREE.Float32BufferAttribute(P, 3)); g.setAttribute("color", new THREE.Float32BufferAttribute(C, 3));
     if (U) g.setAttribute("uv", new THREE.Float32BufferAttribute(U, 2)); g.computeVertexNormals(); const m = new THREE.Mesh(g, mat); m.castShadow = m.receiveShadow = true; scene.add(m); return m; }
   const walls = meshOf(wp, wc, wu, wallMat), roofs = meshOf(rp, rc, null, roofMat); walls.userData.lm = wl; roofs.userData.lm = rl;
+  const edgeOf = T => { const pts = [], n = T.P.length; for (let k = 0; k < n; k++){ const a = T.P[k], b = T.P[(k + 1) % n]; pts.push(a[0]*S, T.top + 0.02, -a[1]*S, b[0]*S, T.top + 0.02, -b[1]*S, a[0]*S, T.lo, -a[1]*S, a[0]*S, T.top, -a[1]*S); } return pts; };
+  if (NEON){ const groups = { barracks: [], hall: [], house: [] }; D.buildings.forEach(b => { const T = tops[b.i]; if (T) groups[b.k].push(...edgeOf(T)); });
+    [["barracks", 0xff2bd6], ["hall", 0x29f0ff], ["house", 0xffb02e]].forEach(([k, c]) => { const g = keep(new THREE.BufferGeometry()); g.setAttribute("position", new THREE.Float32BufferAttribute(groups[k], 3));
+      const l = new THREE.LineSegments(g, keep(new THREE.LineBasicMaterial({ color: c, toneMapped: false }))); l.userData.keep = true; scene.add(l); }); }
 
   /* ---------- trees on the open hillsides ---------- */
   { const grid = map.busyGrid(), spots = []; let s = 3; const rnd = () => (s = (s*9301 + 49297) % 233280)/233280;
@@ -425,7 +439,10 @@ export async function create(o){
     o.minor.forEach((m, i) => { v.copy(V(m.x, m.y, m.h + 5)).project(cam); const x = (v.x*0.5 + 0.5)*vw, y = (-v.y*0.5 + 0.5)*vh; o.placeMinor(i, x, y, false && v.z < 1 && x > 30 && x < vw - 30 && y > 60 && y < vh - 10); });
   }
 
-  /* ---------- draw only when needed ---------- */
+  /* ---------- draw only when needed. Neon look renders through a bloom (glow) pass ---------- */
+  let composer = null; const draw = () => composer ? composer.render() : renderer.render(scene, cam);
+  if (NEON) import("/vendor/post.module.min.js?v=20261119c").then(P => { if (dead) return; composer = new P.EffectComposer(renderer); composer.setPixelRatio(Math.min(window.devicePixelRatio || 1, PHONE ? 1 : 1.5));
+    composer.addPass(new P.RenderPass(scene, cam)); composer.addPass(new P.UnrealBloomPass(new THREE.Vector2(vw/2, vh/2), PHONE ? 0.7 : 1.05, 0.55, 0.18)); composer.addPass(new P.OutputPass()); composer.setSize(vw, vh); invalidate(); }).catch(() => {});
   let watched = false, lastT = 0;
   function frame(now){
     raf = 0; if (dead || !active) return;
@@ -435,7 +452,7 @@ export async function create(o){
       if (o.watch && !watched && tween.frames > 34){ watched = true; if (tween.slowMs/(tween.frames - 5) > 45){ if (tween.done) tween.done(); tween = null; o.onSlow(); return; } }
       if (k >= 1){ const d = tween.done; tween = null; if (d) d(); } }
     lastT = tween ? now : 0;
-    applyCam(); if (tiles){ cam.updateMatrixWorld(); tiles.update(); } renderer.render(scene, cam); placeLabels();
+    applyCam(); if (tiles){ cam.updateMatrixWorld(); tiles.update(); } draw(); placeLabels();
     if (tiles && tiles.stats.downloading + tiles.stats.parsing > 0) tilesAct = now;
     const busy = tiles && now - tilesAct < 2500;   // the tile loader only asks for the next, sharper pieces when update() runs, so keep running until it settles
     world.step(now); life.step(now); movers.step(now); sky.step(now); events.step(now); rip.offset.set(now*0.000011, now*0.000007);
@@ -443,7 +460,7 @@ export async function create(o){
   }
   function invalidate(){ if (!raf && active && !dead) raf = requestAnimationFrame(frame); }
   function resize(){ const r = stage.getBoundingClientRect(); if (!r.width || !r.height) return; vw = r.width; vh = r.height; renderer.setSize(vw, vh, false); cam.aspect = vw/vh; cam.updateProjectionMatrix();
-    if (tiles) tiles.setResolutionFromRenderer(cam, renderer);
+    if (tiles) tiles.setResolutionFromRenderer(cam, renderer); if (composer) composer.setSize(vw, vh);
     if (atHome && !tween) Object.assign(cur, homeFor()); invalidate(); }
   const ro = "ResizeObserver" in window ? new ResizeObserver(resize) : null; if (ro) ro.observe(stage); else addEventListener("resize", resize);
 
@@ -467,13 +484,25 @@ export async function create(o){
       if (drag && drag.id === ev.pointerId){ const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y; drag.moved += Math.abs(dx) + Math.abs(dy); drag.x = ev.clientX; drag.y = ev.clientY;
         if (drag.moved > 5){ if (!drag.cap){ drag.cap = true; try{ canvas.setPointerCapture(ev.pointerId); }catch(x){} } if (drag.rot){ cur.az -= dx*0.005; cur.pol = Math.min(tilesOn ? 1.5 : 1.4, Math.max(0.3, cur.pol - dy*0.003)); } else pan(dx, dy); atHome = false; invalidate(); } return; }
       if (ev.pointerType === "mouse" && !tween){ const id = pickAt(ev); if (o.tip) o.tip(overName, ev.clientX, ev.clientY); if (id !== hot){ highlight(id); o.onHover(id); } } }),
-    L(canvas, "pointerup", ev => { touches.delete(ev.pointerId); if (pinch){ if (touches.size < 2) pinch = null; drag = null; return; } const d = drag; drag = null; if (d && d.moved <= 5 && !tween){ const id = pickAt(ev); if (id) o.onOpen(id); } }),
+    L(canvas, "pointerup", ev => { touches.delete(ev.pointerId); if (pinch){ if (touches.size < 2) pinch = null; drag = null; return; } const d = drag; drag = null; if (d && d.moved <= 5 && !tween){ const id = pickAt(ev); if (id) o.onOpen(id); else if (overName) showCard(overName); } }),
     L(canvas, "pointercancel", ev => { touches.delete(ev.pointerId); pinch = null; drag = null; }),
     L(canvas, "pointerleave", () => { if (o.tip) o.tip(null); if (hot){ highlight(null); o.onHover(null); } }),
     L(canvas, "wheel", ev => { if (tween) return; ev.preventDefault(); zoomAt(1 + Math.max(-0.3, Math.min(0.3, ev.deltaY*0.0015)), ev); }, { passive: false }),   // scroll = zoom toward the cursor
     L(document, "keydown", ev => { if (!active || /input|textarea/i.test(ev.target.tagName)) return; const k = { ArrowLeft: [-40, 0], ArrowRight: [40, 0], ArrowUp: [0, -40], ArrowDown: [0, 40], a: [-40, 0], d: [40, 0], w: [0, -40], s: [0, 40] }[ev.key]; if (k){ pan(-k[0], -k[1]); atHome = false; invalidate(); } }),   // arrows / WASD move around
     L(document, "visibilitychange", () => { if (!document.hidden) invalidate(); })
   ];
+  /* ---------- building info cards: tap/click a named building for a game-style card; the building lights up */
+  const INFO = { "Washington Hall": ["Dining hall", "The cadet mess. All 4,400 cadets eat lunch here at the same time, run from the Poop Deck."], "Cadet Chapel": ["Chapel", "Gothic chapel on the hill (1910) with one of the largest church organs in the world."],
+    "Thayer Hall": ["Academic", "The old riding hall, now classrooms. The math department is on the 2nd floor on the river side."], "Bartlett Hall": ["Academic", "Science center: physics, chemistry and engineering labs."],
+    "Jefferson Hall Library": ["Library", "The library and learning center at the edge of the Plain."], "Taylor Hall": ["Headquarters", "Superintendent's headquarters, with the big tower."], "Mahan Hall": ["Academic", "Engineering and computer science classrooms and labs."],
+    "Eisenhower Hall": ["Theater", "Ike Hall: the big theater and club on the river."], "Arvin Gymnasium": ["Gym", "Arvin Cadet Physical Development Center: the gym, pools and the IOCT."], "Cullum Hall": ["Memorial hall", "Ballroom and memorial hall on the bluff above the river."],
+    "Holleder Center": ["Arena", "Army hockey and basketball arena."], "Thayer Hotel": ["Hotel", "The historic hotel just inside Thayer Gate."] };
+  let card = null, cardLine = null;
+  function showCard(name){ const b = D.buildings.find(q => q.n === name), T = b && tops[b.i]; if (!b) return; const typ = (INFO[name] || [])[0] || (/Barracks/.test(name) ? "Barracks" : b.k === "house" ? "Housing" : "Academic / support"), txt = (INFO[name] || [])[1] || (/Barracks/.test(name) ? "Cadet barracks: rooms for the companies of a regiment." : "Part of the U.S. Military Academy at West Point.");
+    if (card) card.remove(); card = document.createElement("div"); card.className = "bcard"; card.innerHTML = '<button type="button" class="bc-x" aria-label="Close">×</button><span class="bc-t"></span><b class="bc-n"></b><p class="bc-d"></p>';
+    card.querySelector(".bc-t").textContent = typ; card.querySelector(".bc-n").textContent = name; card.querySelector(".bc-d").textContent = txt; stage.appendChild(card);
+    card.querySelector(".bc-x").onclick = () => { card.remove(); card = null; if (cardLine){ cardLine.removeFromParent(); cardLine = null; } invalidate(); };
+    if (cardLine) cardLine.removeFromParent(); if (T){ const g = keep(new THREE.BufferGeometry()); g.setAttribute("position", new THREE.Float32BufferAttribute(edgeOf(T), 3)); cardLine = new THREE.LineSegments(g, keep(new THREE.LineBasicMaterial({ color: 0xffffff, toneMapped: false }))); cardLine.userData.keep = true; scene.add(cardLine); } invalidate(); }
   function zoom(f){ cur.dist = Math.min(230, Math.max(tilesOn ? 1.6 : 9, cur.dist*f)); atHome = false; invalidate(); }
   // move the point the camera looks at across the ground, so you can go anywhere on the map (stays inside the map edges)
   function pan(dx, dy){ const k = 2*cur.dist*Math.tan(cam.fov*Math.PI/360)/Math.max(1, vh), sa = Math.sin(cur.az), ca = Math.cos(cur.az);
@@ -549,9 +578,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261115e").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261119c").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261115e"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261119c"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -615,12 +644,15 @@ export async function create(o){
     const KIND = cars.map((a, i) => i % 15 === 0 && a.l.c <= 1 ? 3 : i % 4 === 1 ? 1 : i % 7 === 3 ? 2 : 0), CM = [sedan, suv, pickup, bus].map((g, k) => im(g, KIND.filter(q => q === k).length, paint()));
     const walkM = im(person, walkers.length, cloth()), runM = im(person.clone(), runners.length, cloth());
     const legs = im(legG, (walkers.length + runners.length)*2, new THREE.MeshStandardMaterial({ roughness: 0.9 }));
-    const c = new THREE.Color(), CAR = [0x1d1f24, 0xe8e8e6, 0x8c929a, 0x24365e, 0x7b1c22, 0x2f4a3a, 0xc9c2b4, 0x3b3f46];
+    const c = new THREE.Color(), CAR = NEON ? [0xff2bd6, 0x29f0ff, 0xffe14d, 0x7c4dff, 0x39ff88, 0xff6b3d, 0xffffff, 0x29f0ff] : [0x1d1f24, 0xe8e8e6, 0x8c929a, 0x24365e, 0x7b1c22, 0x2f4a3a, 0xc9c2b4, 0x3b3f46];
     const slot = KIND.map((k, i) => KIND.slice(0, i).filter(q => q === k).length); cars.forEach((a, i) => CM[KIND[i]].setColorAt(slot[i], c.set(KIND[i] === 3 ? 0xf2f2ee : CAR[i % CAR.length])));
     // cadets in OCP (tan-green), Army gray and black; a few visitors in color. Runners in gray Army PT shirts, black shorts.
-    const UNI = [0x7d7a5c, 0x6f6c50, 0x5a606a, 0x2a2e35, 0x7d7a5c, 0x3d6fb5, 0xb03a2e]; walkers.forEach((a, i) => walkM.setColorAt(i, c.set(UNI[i % UNI.length])));
-    runners.forEach((a, i) => runM.setColorAt(i, c.set(i % 5 ? 0xa3a8ae : 0x1f2226)));
+    const UNI = NEON ? [0x29f0ff, 0x7c4dff, 0x29f0ff, 0xff2bd6, 0x39ff88, 0xffe14d, 0xff6b3d] : [0x7d7a5c, 0x6f6c50, 0x5a606a, 0x2a2e35, 0x7d7a5c, 0x3d6fb5, 0xb03a2e]; walkers.forEach((a, i) => walkM.setColorAt(i, c.set(UNI[i % UNI.length])));
+    runners.forEach((a, i) => runM.setColorAt(i, c.set(NEON ? (i % 2 ? 0x39ff88 : 0xffe14d) : i % 5 ? 0xa3a8ae : 0x1f2226)));
+    if (NEON) [walkM, runM].concat(CM).forEach(m => { m.material = keep(new THREE.MeshBasicMaterial({ vertexColors: true })); });   // neon: bright, unlit
     let li = 0; [walkers, runners].forEach((arr, r) => arr.forEach((a, i) => { const col = r ? 0x141414 : UNI[i % UNI.length] === 0x7d7a5c || UNI[i % UNI.length] === 0x6f6c50 ? 0x6b6850 : 0x22252a; legs.setColorAt(li++, c.set(col)); legs.setColorAt(li++, c.set(col)); }));
+    const lightPts = (col, size) => { const g = keep(new THREE.BufferGeometry()); g.setAttribute("position", new THREE.Float32BufferAttribute(new Float32Array(cars.length*3), 3)); const p = new THREE.Points(g, keep(new THREE.PointsMaterial({ color: col, size, sizeAttenuation: false, toneMapped: false, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }))); p.frustumCulled = false; p.userData.keep = true; p.visible = false; scene.add(p); return p; };
+    const head = lightPts(0xfff6d8, 5), tail = lightPts(0xff2030, 4);
     const o = new THREE.Object3D(); let last = 0;
     const move = (a, k) => { a.d += a.v*k; if (a.d < 0 || a.d > a.l.L){ a.v = -a.v; a.d = Math.max(0, Math.min(a.l.L, a.d)); } const p = at(a.l, a.d), h = p[2] + (a.v < 0 ? Math.PI : 0);
       return [p[0] - Math.sin(p[2])*a.side, p[1] + Math.cos(p[2])*a.side, h]; };
@@ -630,7 +662,9 @@ export async function create(o){
           if (near(GATE, 14)){ a.wait = 5 + Math.random()*3; a.cool = 25; }   // ID check at Thayer Gate
           else if (KIND[i] === 3 && BUSSTOPS.some(P => near(P, 16))){ a.wait = 8; a.cool = 25; }   // bus stop
           else if (STOPS.some(P => near(P, 6))){ a.wait = 1 + Math.random()*1.5; a.cool = 6; } }   // stop sign
-        o.position.set(x*S, gy(x, y), -y*S); o.rotation.set(0, q[2], 0); o.scale.setScalar(S*1.9); o.updateMatrix(); CM[KIND[i]].setMatrixAt(n[KIND[i]]++, o.matrix); }); CM.forEach(m => { m.instanceMatrix.needsUpdate = true; }); }
+        o.position.set(x*S, gy(x, y), -y*S); o.rotation.set(0, q[2], 0); o.scale.setScalar(S*1.9); o.updateMatrix(); CM[KIND[i]].setMatrixAt(n[KIND[i]]++, o.matrix);
+        const hc = Math.cos(q[2]), hs = Math.sin(q[2]), gl = gy(x, y) + 1.4*S; head.geometry.attributes.position.setXYZ(i, (x + hc*4.6)*S, gl, -(y + hs*4.6)*S); tail.geometry.attributes.position.setXYZ(i, (x - hc*4.6)*S, gl, -(y - hs*4.6)*S); });
+      CM.forEach(m => { m.instanceMatrix.needsUpdate = true; }); head.visible = tail.visible = nightNow; head.geometry.attributes.position.needsUpdate = tail.geometry.attributes.position.needsUpdate = true; }
     // people face the way they walk: the figure's front is its local +z, so turn it a quarter more than the path heading; legs swing front to back
     function placePeople(arr, mesh, run, k, now, l0){ const Z = 2.6, sp = run ? 95 : 190, amp = run ? 0.85 : 0.42; arr.forEach((a, i) => {
         if (a.cc && !classChange){ o.scale.setScalar(0); o.updateMatrix(); mesh.setMatrixAt(i, o.matrix); legs.setMatrixAt(l0++, o.matrix); legs.setMatrixAt(l0++, o.matrix); return; }
@@ -688,7 +722,7 @@ export async function create(o){
         else { blk(x, y, h, 20, 8, 3.2, 0, w0, 0x9b2a24); blk(x, y, h, 7, 6, 4, 3.2, w0, 0xf0efe9, -3); blk(x, y, h, 1, 1, 3, 7.2, w0, 0x222222, -3);   // tug pushing
           for (let k = 0; k < b.barges; k++){ const f = 10 + 32 + k*62; blk(x, y, h, 60, 11, 3, 0, w0, 0x3b3a38, f); blk(x, y, h, 54, 9.5, 1.6, 3, w0, k % 2 ? 0x6b5a45 : 0x4a4f55, f); } } }
       mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
-    fetch("/campus/movers.json?v=20261115e").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
+    fetch("/campus/movers.json?v=20261119c").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
     return { step };
   })();
 
@@ -846,6 +880,18 @@ export async function create(o){
     lamps.visible = false; lamps.userData.keep = true; scene.add(lamps);
     // seasons: fall reds/oranges/golds, bare winter branches (evergreens stay), fresh spring green, full summer green
     const base = new Map(), cc = new THREE.Color(), FALL = [0xc8551e, 0xb5321e, 0xd99a22, 0xe0b23a, 0x8a3a1c];
+    const stars = (() => { const pos = []; for (let i = 0; i < 1400; i++){ const a = Math.random()*6.283, z = 0.08 + Math.random()*0.92, r = 900; pos.push(Math.cos(a)*Math.sqrt(1 - z*z)*r + cur.tx, z*r*0.6, Math.sin(a)*Math.sqrt(1 - z*z)*r + cur.tz); }
+      const g = keep(new THREE.BufferGeometry()); g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3)); const p = new THREE.Points(g, keep(new THREE.PointsMaterial({ color: 0xffffff, size: 1.6, sizeAttenuation: false, transparent: true, opacity: 0.9, fog: false })));
+      p.visible = false; p.userData.keep = true; scene.add(p); return p; })();
+    function neonize(night, dusk, kind){
+      scene.background = skyTex(night ? ["#04020d", "#140a33", "#2b1158"] : dusk ? ["#1a0b3d", "#b0306a", "#ff9a3c"] : ["#1a0b3d", "#5e2a8c", "#ff6fb5"]);
+      stars.visible = night; scene.fog = new THREE.Fog(kind === "fog" ? 0x3a1a5a : night ? 0x0a0620 : 0x2a1550, cur.dist*(kind === "fog" ? 0.6 : 2.5), cur.dist*(kind === "fog" ? 3 : 9)); fogK = kind === "fog" ? [0.6, 3] : [2.5, 9];
+      wallMat.color.set(0x23264a); wallMat.emissive.set(0xffffff); wallMat.emissiveIntensity = night ? 1.6 : 1.1; roofMat.color.set(0x1a1b36);
+      waterMat.color.set(0x07142e); waterMat.emissive = waterMat.emissive || new THREE.Color(); waterMat.emissive.set(0x0b3b8c); waterMat.emissiveIntensity = 0.55; waterMat.metalness = 0.7; waterMat.roughness = 0.15;
+      hemi.color.set(0x8a6cff); hemi.groundColor.set(0x120a2a); hemi.intensity = 0.75; sun.color.set(dusk ? 0xff6b9a : 0xb388ff); sun.intensity = 0.7;
+      rainMat.color.set(0x5ff0ff); rainMat.opacity = 0.85; snowMat.size = 3.4; snowMat.color.set(0xe6f7ff); snowMat.blending = THREE.AdditiveBlending;
+      forest.forEach(m => { if (!m.userData.neon){ m.userData.neon = true; m.material = keep(new THREE.MeshBasicMaterial({ color: 0x6f6f78 })); } });
+      renderer.toneMappingExposure = 1.15; }
     function applySeason(){ const se = seasonNow(); forest.forEach(m => { if (!m.instanceColor) return; if (!base.has(m)) base.set(m, m.instanceColor.array.slice()); const b = base.get(m), a = m.instanceColor.array;
       for (let i = 0; i < m.count; i++){ const k = i*3, h = (i*2654435761 >>> 0) % 100; cc.setRGB(b[k], b[k + 1], b[k + 2]);
         if (se === "fall" && h < 78) cc.lerp(new THREE.Color(FALL[h % FALL.length]), 0.75);
@@ -862,7 +908,7 @@ export async function create(o){
       const tint = night ? 0x7380a0 : dusk ? 0xffd2b0 : kind === "rain" ? 0xb4b8bd : kind === "snow" ? 0xe9edf2 : kind === "fog" ? 0xd0d3d6 : 0xffffff;
       tintNow = tint; tileMats.forEach(m => m.color && m.color.set(tint));
       hemi.intensity = night ? 0.9 : kind === "clear" ? 1.5 : 1.15; sun.intensity = night ? 0.25 : kind === "clear" ? (dusk ? 1.6 : 2.5) : 0.9; sun.color.set(dusk ? 0xffb37a : night ? 0x9fb4ff : 0xfff3df);
-      wallMat.emissiveIntensity = night ? 0.9 : 0; lamps.visible = night || dusk; applySeason(); renderer.shadowMap.needsUpdate = true;
+      wallMat.emissiveIntensity = night ? 0.9 : 0; lamps.visible = night || dusk; nightNow = night || dusk; applySeason(); if (NEON) neonize(night, dusk, kind); renderer.shadowMap.needsUpdate = true;
       panel.querySelectorAll("button[data-k]").forEach(b => b.classList.toggle("on", st[b.dataset.k] === b.dataset.v)); invalidate();
     }
     let fogK = null;
@@ -880,15 +926,17 @@ export async function create(o){
     panel.innerHTML = '<span class="wx-h">Weather</span>' + [["live", "Live"], ["clear", "Sun"], ["rain", "Rain"], ["snow", "Snow"], ["fog", "Fog"]].map(([v, t]) => '<button type="button" data-k="wx" data-v="' + v + '">' + t + '</button>').join("") +
       '<span class="wx-h">Time</span>' + [["live", "Live"], ["day", "Day"], ["sunset", "Sunset"], ["night", "Night"]].map(([v, t]) => '<button type="button" data-k="tod" data-v="' + v + '">' + t + '</button>').join("") +
       '<span class="wx-h">Season</span>' + [["live", "Live"], ["spring", "Spring"], ["summer", "Summer"], ["fall", "Fall"], ["winter", "Winter"]].map(([v, t]) => '<button type="button" data-k="season" data-v="' + v + '">' + t + '</button>').join("") +
+      '<span class="wx-h">Style</span><button type="button" data-style="neon"' + (NEON ? ' class="on"' : '') + '>Neon game</button><button type="button" data-style="real"' + (NEON ? '' : ' class="on"') + '>Real look</button>' +
       '<span class="wx-h">Start an event</span>' + [["chute", "Parachute drop"], ["cannon", "Fire cannon"], ["parade", "Parade"], ["retreat", "Retreat"], ["pt", "PT run"], ["game", "Game day"], ["ball", "Ball games"]].map(([v, t]) => '<button type="button" data-ev="' + v + '">' + t + '</button>').join("");
     { const ICON = { "wx:live": "📡", "wx:clear": "☀️", "wx:rain": "🌧️", "wx:snow": "❄️", "wx:fog": "🌫️", "tod:live": "🕑", "tod:day": "🌤️", "tod:sunset": "🌇", "tod:night": "🌙",
         "season:live": "📅", "season:spring": "🌷", "season:summer": "🌳", "season:fall": "🍂", "season:winter": "⛄", "ev:chute": "🪂", "ev:cannon": "💥", "ev:parade": "🎖️", "ev:retreat": "🇺🇸", "ev:pt": "🏃", "ev:game": "🏈", "ev:ball": "⚾" };
       panel.querySelectorAll("button").forEach(b => { const k = b.dataset.ev ? "ev:" + b.dataset.ev : b.dataset.k + ":" + b.dataset.v; if (ICON[k]) b.insertAdjacentHTML("afterbegin", '<span class="wx-i" aria-hidden="true">' + ICON[k] + '</span>'); b.classList.add("cat-" + (b.dataset.ev ? "ev" : b.dataset.k)); });
-      panel.querySelectorAll(".wx-h").forEach((h, i) => h.classList.add("cat-h", ["cat-h-wx", "cat-h-tod", "cat-h-season", "cat-h-ev"][i] || "")); }
+      panel.querySelectorAll(".wx-h").forEach((h, i) => h.classList.add("cat-h", ["cat-h-wx", "cat-h-tod", "cat-h-season", "cat-h-style", "cat-h-ev"][i] || "cat-h-x")); }
     panel.insertAdjacentHTML("afterbegin", '<button type="button" class="wx-toggle" aria-expanded="true">Controls</button>');
     if (matchMedia("(max-width:860px)").matches) panel.classList.add("closed");
     panel.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return;
       if (b.classList.contains("wx-toggle")){ panel.classList.toggle("closed"); b.setAttribute("aria-expanded", panel.classList.contains("closed") ? "false" : "true"); return; }
+      if (b.dataset.style){ try{ localStorage.setItem("bf-style", b.dataset.style); }catch(x){} location.href = location.pathname + "?style=" + b.dataset.style + location.hash; return; }
       if (b.dataset.ev === "chute"){ sky.drop(); return; } if (b.dataset.ev){ events.start(b.dataset.ev); return; } st[b.dataset.k] = b.dataset.v; apply(); });
     stage.appendChild(panel);
     // live: real weather + daylight at West Point right now (falls back to clear/day if offline)
@@ -900,8 +948,8 @@ export async function create(o){
   })();
 
   worldReady = true;
-  retheme(); resize(); applyCam(); renderer.render(scene, cam); placeLabels();
-  startTiles().catch(e => stopTiles(e));
+  retheme(); resize(); applyCam(); draw(); placeLabels();
+  if (!NEON) startTiles().catch(e => stopTiles(e));
   return {
     highlight, retheme, skip, zoom,
     setActive(on){ active = on; if (on){ resize(); invalidate(); } else { skip(); if (raf){ cancelAnimationFrame(raf); raf = 0; } } },
