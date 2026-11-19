@@ -951,7 +951,7 @@ export async function create(o){
 
   worldReady = true;
   retheme(); resize(); applyCam(); draw(); placeLabels();
-  if (!NEON) startTiles().catch(e => stopTiles(e));
+  if (!NEON && /tiles=google/.test(location.search)) startTiles().catch(e => stopTiles(e));   // our own LiDAR-measured model is the default; Google photo tiles only on request
   return {
     highlight, retheme, skip, zoom,
     setActive(on){ active = on; if (on){ resize(); invalidate(); } else { skip(); if (raf){ cancelAnimationFrame(raf); raf = 0; } } },
