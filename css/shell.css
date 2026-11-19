@@ -74,6 +74,8 @@ main:focus{outline:none}
 .campus-hud p{color:var(--muted);font-size:13.5px}
 .campus-ctl{position:absolute;right:max(40px,env(safe-area-inset-right,0px));top:28px;display:flex;gap:8px;align-items:center}
 .campus-ctl .chip{background:color-mix(in srgb,var(--surface) 85%,transparent);border:1px solid var(--line)}
+.campus-toggle{cursor:pointer;transition:background .15s,border-color .15s}
+.campus-toggle:hover,.campus-toggle:focus-visible{background:var(--accent-soft);border-color:var(--accent);color:var(--fg)}
 .campus-help{margin:10px 0 0}
 .home-cta{margin-top:14px}
 .campus + .campus-help + .home-cta + .grad{margin-top:26px}

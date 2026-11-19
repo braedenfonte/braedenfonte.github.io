@@ -20,7 +20,7 @@
 /* Runs before first paint: saved theme + display mode (3D campus or low-power 2D). */
 (function(){var d=document.documentElement,g=function(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
 var t=g("bf-theme");if(t)d.setAttribute("data-theme",t);
-var m=g("bf-mode")||"auto",r=matchMedia("(prefers-reduced-motion: reduce)").matches,
+var m=g("bf-mode")||"3d",r=matchMedia("(prefers-reduced-motion: reduce)").matches,
 phone=matchMedia("(max-width:860px)").matches||(matchMedia("(pointer:coarse)").matches&&Math.min(screen.width,screen.height)<700),
 slow=(navigator.hardwareConcurrency||8)<4||(navigator.deviceMemory||8)<4||(navigator.connection&&navigator.connection.saveData);
 var lite=m==="lite"||(m!=="3d"&&(r||slow||g("bf-slow")));   /* phones get the 3D campus too; only slow devices, data saver or reduced motion start in 2D */
@@ -102,7 +102,7 @@ d.setAttribute("data-mode",lite?"lite":"3d");window.BF_MODE={pref:m,lite:lite,wh
       <button class="small-btn" id="campusIn" type="button" hidden aria-label="Zoom in">+</button>
       <button class="small-btn" id="campusOut" type="button" hidden aria-label="Zoom out">−</button>
       <button class="small-btn" id="campusReset" type="button" hidden>Reset view</button>
-      <span class="chip" id="campusMode">2D map</span>
+      <button class="chip campus-toggle" id="campusMode" type="button" aria-label="Switch between 3D campus and 2D map">3D campus</button>
     </div>
     <div class="intro" id="intro" hidden>
       <div class="intro-txt"><span class="eyebrow">Hudson River · West Point</span><b>Braeden Fonte</b></div>
@@ -171,6 +171,10 @@ d.setAttribute("data-mode",lite?"lite":"3d");window.BF_MODE={pref:m,lite:lite,wh
   </div>
   <div class="panel mk sec" id="mkCard" hidden></div>
   <div class="panel song sec" id="songCard"></div>
+  <div class="sec" id="piSection" hidden>
+    <div class="sec-h"><h3>Product Lab</h3><span class="chip" id="piCount">0</span></div>
+    <div class="pi-grid" id="piGrid"></div>
+  </div>
   <div class="sec">
     <div class="sec-h"><h3>Due this week</h3><span class="chip" id="bDueCount">0</span></div>
     <div class="up-list" id="briefDue"></div>

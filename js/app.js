@@ -1353,6 +1353,29 @@ function renderBrief(){
   $("#dailyDate").textContent = "Daily · "+MON[now.getMonth()]+" "+now.getDate();
 }
 
+/* ---------- product ideas (data/product-ideas.json) ---------- */
+try { fetch("/data/product-ideas.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(j=>{
+  if(!j||!j.ideas||!j.ideas.length) return;
+  const grid=$("#piGrid"), sec=$("#piSection"), ct=$("#piCount");
+  ct.textContent=j.ideas.length; sec.hidden=false;
+  grid.innerHTML=j.ideas.map(id=>{
+    const diff=id.difficulty||""; const cost=id.cost||"";
+    const steps=(id.steps||[]).map(s=>`<div class="pi-step"><b>${s.label}</b><span>${s.detail}</span></div>`).join("");
+    const comps=(id.competitors||[]).length?`<div class="pi-comps">Competitors: ${id.competitors.join(" · ")}</div>`:"";
+    return `<div class="panel pi-card" data-pi="${id.id}">
+      <div class="pi-head"><span class="pi-icon">${id.icon}</span><div class="pi-info"><b>${id.title}</b><span>${id.tagline}</span></div></div>
+      <div class="pi-tags">${diff?`<span class="chip">${diff}</span>`:""}${cost?`<span class="chip">${cost}</span>`:""}</div>
+      <div class="pi-body">
+        <div class="pi-summary">${id.summary}</div>
+        <div class="pi-steps">${steps}</div>
+        ${id.product_angle?`<div class="pi-angle"><b>Your angle</b>${id.product_angle}</div>`:""}
+        ${comps}
+      </div>
+    </div>`;
+  }).join("");
+  grid.addEventListener("click",e=>{const c=e.target.closest(".pi-card");if(c)c.classList.toggle("open")});
+}).catch(()=>{}); } catch(e){}
+
 /* ---------- to-do list (data/todos.json; checkmarks are saved in this browser) ---------- */
 let TDL = null, tdView = store.get("bf-todoview", "next");
 const tdDone = new Set(store.get("bf-tododone", []));

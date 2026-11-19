@@ -485,6 +485,31 @@ footer p{max-width:70ch}
 .brief-tile span:last-child{color:var(--muted);font-size:14px}
 .fine{color:var(--faint);font-size:12.5px;margin-top:14px}
 
+/* ---------- product ideas ---------- */
+.pi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.pi-card{padding:0;overflow:hidden;cursor:pointer;transition:border-color .2s,transform .2s}
+.pi-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.pi-head{display:flex;align-items:center;gap:12px;padding:18px 20px}
+.pi-icon{font-size:28px;line-height:1;flex-shrink:0}
+.pi-info{min-width:0}
+.pi-info b{font:700 16px/1.2 var(--display);display:block}
+.pi-info span{font-size:13px;color:var(--muted);display:block;margin-top:2px}
+.pi-tags{display:flex;gap:6px;padding:0 20px 14px;flex-wrap:wrap}
+.pi-tags .chip{font-size:11px;padding:2px 8px}
+.pi-body{display:none;border-top:1px solid var(--line);padding:18px 20px;font-size:14px;line-height:1.55;color:var(--muted)}
+.pi-card.open .pi-body{display:block}
+.pi-card.open{border-color:var(--accent)}
+.pi-summary{margin-bottom:14px;color:var(--fg)}
+.pi-steps{display:grid;gap:10px;counter-reset:pistep}
+.pi-step{display:grid;grid-template-columns:28px 1fr;gap:0 10px;align-items:start}
+.pi-step::before{counter-increment:pistep;content:counter(pistep);font:700 13px/28px var(--display);text-align:center;width:28px;height:28px;border-radius:50%;background:var(--accent-soft);color:var(--accent-strong)}
+.pi-step b{font:600 14px/28px var(--body);color:var(--fg)}
+.pi-step span{grid-column:2;font-size:13px;color:var(--muted);margin-top:2px}
+.pi-angle{margin-top:14px;padding:12px 14px;background:var(--surface-2);border-radius:10px;font-size:13px}
+.pi-angle b{display:block;font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+.pi-comps{margin-top:10px;font:500 12px var(--mono);color:var(--faint)}
+@media (max-width:560px){.pi-grid{grid-template-columns:1fr}.pi-head{padding:16px}.pi-body{padding:16px}}
+
 /* ---------- flights ---------- */
 .flight-list{display:grid;gap:10px}
 .flight{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:18px;align-items:center;padding:16px 18px;text-decoration:none;transition:border-color .2s,transform .2s}

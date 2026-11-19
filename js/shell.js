@@ -230,7 +230,8 @@ function paintMode(){
   modeBtn.setAttribute("aria-pressed", lite ? "true" : "false");
   modeBtn.setAttribute("aria-label", lite ? "Low-power mode is on. Switch to the 3D campus" : "Low-power mode is off. Switch to the fast flat 2D version");
   modeLbl.textContent = lite ? "Low power on" : "Low power";
-  modeChip.textContent = campus ? "3D campus" : lite ? "2D · low power" : "2D map";
+  modeChip.textContent = campus ? "3D campus" : "2D map";
+  modeChip.setAttribute("aria-label", campus ? "Currently 3D campus. Click to switch to 2D map" : "Currently 2D map. Click to switch to 3D campus");
   resetBtn.hidden = !campus; zin.hidden = zout.hidden = !campus;
   help.textContent = campus ? "Drag to move around, scroll to zoom where your mouse points, right-drag (or Shift-drag) to turn and tilt, arrow keys or WASD to move. Hover a labeled building for its status, click to fly there. Everything is also in the menu."
     : "Pick a landmark to open that part of the site, or use the menu.";
@@ -246,6 +247,7 @@ function setLite(lite, auto){
   if (lite) to2D(); else { paintMode(); start3D(); }
 }
 modeBtn.addEventListener("click", () => setLite(!MODE.lite, false));
+modeChip.addEventListener("click", () => setLite(!MODE.lite, false));
 const rm = matchMedia("(prefers-reduced-motion: reduce)");
 (rm.addEventListener ? rm.addEventListener.bind(rm, "change") : rm.addListener.bind(rm))(() => { if (rm.matches && MODE.pref !== "3d") setLite(true, true); });
 

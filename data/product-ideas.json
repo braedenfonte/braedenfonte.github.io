@@ -1,0 +1,154 @@
+{
+  "generated": "2026-11-18",
+  "ideas": [
+    {
+      "id": "wearables",
+      "icon": "⌚",
+      "title": "AI Wearables",
+      "tagline": "Build a wearable AI assistant for under $15",
+      "difficulty": "Easy–Medium",
+      "cost": "$10–$50 prototype",
+      "summary": "Tiny AI-powered devices you wear that can answer questions, translate, coach health, or take notes — all using cheap off-the-shelf parts and cloud AI APIs.",
+      "steps": [
+        {
+          "label": "Get the hardware",
+          "detail": "An ESP32-S3 dev board ($4–6), a 0.96\" OLED screen ($2), and an I2S microphone ($2). All on AliExpress or Amazon. No soldering needed for the basic version — just jumper wires and USB."
+        },
+        {
+          "label": "Flash the firmware",
+          "detail": "Use MicroPython or Arduino IDE. Connect the ESP32 to WiFi and wire it to call the Claude or ChatGPT API. Free guides exist for the full code — search 'ESP32 Claude wearable build guide.'"
+        },
+        {
+          "label": "Make it wearable",
+          "detail": "3D-print a wrist case, clip it to a lanyard, or just tape it to a watchband. The ESP32 is tiny — about the size of a thumb drive."
+        },
+        {
+          "label": "Customize the AI",
+          "detail": "Change one system prompt string and your device becomes a translator, health coach, study quiz tool, or meditation guide. Add sensors (heart rate, temp, motion) for $1–3 each."
+        }
+      ],
+      "product_angle": "Sell pre-built units or kits on Etsy/Amazon for $30–60. The parts cost under $15, so margins are strong. Or build a niche version (e.g., 'AI Study Buddy for cadets') and sell the firmware as a subscription.",
+      "existing": ["OmiGPT ($89 wearable)", "Friend (open-source AI pendant)", "OpenGlass ($20 DIY smart glasses)"]
+    },
+    {
+      "id": "tap-to-pay",
+      "icon": "💳",
+      "title": "Tap-to-Pay P2P",
+      "tagline": "Phone-tap payments between friends",
+      "difficulty": "Hard",
+      "cost": "$5K–$50K+ (regulatory + dev)",
+      "summary": "Instead of opening Venmo and typing in an amount, two people just tap their phones together to send money instantly. Samsung Wallet already launched 'Tap to Transfer' — proving the concept works.",
+      "steps": [
+        {
+          "label": "Understand the tech",
+          "detail": "NFC (Near Field Communication) has three modes: card emulation (Apple Pay), tag reading, and peer-to-peer. P2P mode lets two phones talk directly. The tech exists — the bottleneck is payment regulations."
+        },
+        {
+          "label": "Pick your approach",
+          "detail": "Option A: Build on top of Stripe/PayPal APIs and use NFC just to exchange payment links (easier, less regulated). Option B: Use blockchain/crypto for the actual transfer (harder but fewer middlemen). Option C: Build a full fintech app with bank integrations (hardest, needs licenses)."
+        },
+        {
+          "label": "Start with a hackathon MVP",
+          "detail": "Build an app where tapping phones exchanges a Venmo/CashApp deep link with the amount pre-filled. That alone is a useful product — no banking license needed."
+        },
+        {
+          "label": "Scale up",
+          "detail": "If the MVP gets traction, partner with a payment processor (Stripe, Square) to handle actual money movement. They handle compliance; you handle the UX."
+        }
+      ],
+      "product_angle": "The 'easy entry' version is an app that uses NFC to auto-open Venmo/CashApp/Zelle with the amount pre-filled. No banking license needed. Monetize with premium features or small transaction fees.",
+      "existing": ["Samsung Tap to Transfer", "Bump Pay (defunct)", "Various hackathon projects (InterTapp, MyPay)"]
+    },
+    {
+      "id": "audio-ai",
+      "icon": "🎧",
+      "title": "Audio AI Device",
+      "tagline": "A wearable that listens, transcribes, and summarizes",
+      "difficulty": "Medium",
+      "cost": "$50–$250 for a prototype",
+      "summary": "A small clip-on or earbud device that records conversations, lectures, or meetings and uses AI to create searchable transcripts and summaries. The market is booming — Plaud, Omi, Viaim are all shipping products in this space.",
+      "steps": [
+        {
+          "label": "Choose your form factor",
+          "detail": "Clip-on recorder (like Plaud NotePin), earbuds (like Plaud One at $250), or a pendant/necklace. Clip-ons are easiest to build yourself. Earbuds require real manufacturing."
+        },
+        {
+          "label": "Software-first approach",
+          "detail": "Skip hardware entirely at first. Build an app that uses your phone's mic to record, then sends audio to Whisper (free, open-source transcription) + Claude/GPT for summarization. Test the AI pipeline before spending on hardware."
+        },
+        {
+          "label": "Add hardware later",
+          "detail": "Once the software works, pair it with an ESP32 + I2S microphone ($10 total) in a 3D-printed case. The device records and streams to your phone via Bluetooth; the phone does the AI processing."
+        },
+        {
+          "label": "Niche down for West Point",
+          "detail": "A 'lecture capture' device for cadets — records class, auto-generates study notes and flashcards. That's a real product with a built-in market of 4,000+ cadets."
+        }
+      ],
+      "product_angle": "Start as an app (zero hardware cost). Once validated, sell a companion clip-on device for $50–80. The real money is in the subscription for AI processing ($5–10/month).",
+      "existing": ["Plaud NotePin ($169)", "Plaud One earbuds ($250)", "Omi ($89)", "Viaim RecDot earbuds", "Limitless Pendant (discontinued, acquired by Meta)"]
+    },
+    {
+      "id": "local-ai",
+      "icon": "🖥️",
+      "title": "Local AI Models",
+      "tagline": "Run AI on your own desktop — no cloud, no fees",
+      "difficulty": "Easy",
+      "cost": "$0 (if you have a GPU) to $300 for a GPU upgrade",
+      "summary": "Instead of paying OpenAI or Anthropic per message, you download an AI model and run it on your own computer. It's completely private, works offline, and costs nothing per query after the initial hardware.",
+      "steps": [
+        {
+          "label": "Check your hardware",
+          "detail": "You need a GPU with VRAM (video memory). An NVIDIA RTX 3060 12GB ($300 used) runs all 7–8 billion parameter models smoothly. If your desktop has any recent NVIDIA GPU, you're probably good to start. Visit canirun.ai to check."
+        },
+        {
+          "label": "Install LM Studio (easiest)",
+          "detail": "Download from lmstudio.ai. It's a free desktop app — looks like ChatGPT but runs on your machine. Click 'Discover', search for 'Llama 3.1 8B', download it, and start chatting. Under 5 minutes to set up."
+        },
+        {
+          "label": "Or use Ollama (developer-friendly)",
+          "detail": "Install from ollama.com. Open a terminal and type: ollama run llama3.1 — that's it. It downloads the model and starts a chat. Ollama also has a REST API so you can build apps on top of it."
+        },
+        {
+          "label": "What you can run",
+          "detail": "With 12GB VRAM: Llama 3.1 8B, Mistral 7B, Qwen 3 — these handle conversation, coding help, and writing. With 24GB VRAM (RTX 3090, ~$800 used): 70B parameter models that rival ChatGPT-4 quality. Everything runs offline and free forever."
+        }
+      ],
+      "product_angle": "Not a product to sell — but a power tool for everything else you build. Run AI locally to prototype wearable firmware, process audio transcriptions, or power automations without paying API fees. Also great for privacy-sensitive projects.",
+      "existing": ["Ollama (free CLI tool)", "LM Studio (free GUI app)", "GPT4All (free desktop app)"]
+    },
+    {
+      "id": "automations",
+      "icon": "⚡",
+      "title": "Personal API Automations",
+      "tagline": "Scripts that handle your repetitive tasks",
+      "difficulty": "Easy–Medium",
+      "cost": "$0–$20/month",
+      "summary": "Connect apps and services with code or no-code tools to automate tedious parts of cadet life — schedule tracking, assignment reminders, news briefings, and more.",
+      "steps": [
+        {
+          "label": "Morning brief auto-builder",
+          "detail": "A script that pulls weather (OpenWeather API, free), your schedule (scrape or calendar ICS feed), news headlines (NewsAPI), and study flashcards — then compiles them into one page or text message every morning. You already have this on your website — extend it."
+        },
+        {
+          "label": "Assignment deadline tracker",
+          "detail": "Scrape Canvas/Blackboard for due dates, push them to your calendar automatically, and get a text 24 hours before each one. Use Python + BeautifulSoup or a Canvas API token."
+        },
+        {
+          "label": "Email auto-sorter",
+          "detail": "Use the Gmail API to auto-label, archive, or summarize incoming emails. Flag anything from your chain of command, auto-archive newsletters, and get a daily digest of what matters."
+        },
+        {
+          "label": "Fitness log automation",
+          "detail": "Pull workout data from your phone's health app or a fitness tracker API, log it to a spreadsheet, and track APFT/ACFT trends automatically."
+        },
+        {
+          "label": "Smart study scheduler",
+          "detail": "Build a spaced-repetition system that pulls from your class notes and quizzes you via text or a simple web app. Use the Claude API to generate questions from your notes automatically."
+        }
+      ],
+      "product_angle": "Build these for yourself, then package the best ones as tools other cadets can use. A 'Cadet Automation Toolkit' — open-source or sold as a small subscription — could serve the whole Corps.",
+      "existing": ["Zapier (no-code, $20/mo)", "n8n (free, self-hosted)", "Python scripts (free)", "IFTTT (free tier available)"]
+    }
+  ]
+}
