@@ -33,8 +33,8 @@ export async function create(o){
       x.fillStyle = "rgba(8,6,24,.78)"; x.fillRect(0, 0, tcv.width, tcv.height);
       x.strokeStyle = "rgba(140,90,255,.16)"; x.lineWidth = 1; for (let g = Math.ceil(BB.x0/50)*50; g < BB.x1; g += 50){ x.beginPath(); x.moveTo(X(g), 0); x.lineTo(X(g), tcv.height); x.stroke(); } for (let g = Math.ceil(BB.y0/50)*50; g < BB.y1; g += 50){ x.beginPath(); x.moveTo(0, Y(g)); x.lineTo(tcv.width, Y(g)); x.stroke(); }
       const line = (r, col, wd) => { x.strokeStyle = col; x.lineWidth = wd; x.beginPath(); for (let i = 0; i < r.p.length; i += 2) i ? x.lineTo(X(r.p[i]), Y(r.p[i + 1])) : x.moveTo(X(r.p[0]), Y(r.p[1])); x.stroke(); };
-      x.lineCap = "round"; D.roads.forEach(r => line(r, r.c <= 1 ? "rgba(45,226,255,.35)" : r.c === 2 ? "rgba(45,226,255,.22)" : "rgba(255,60,172,.28)", r.c <= 1 ? 7*k + 4 : 3*k + 2));
-      D.roads.forEach(r => line(r, r.c <= 1 ? "#5ff0ff" : r.c === 2 ? "#3ab8d0" : "#ff5cc0", r.c <= 1 ? 1.6 : 1));
+      x.lineCap = "round"; D.roads.forEach(r => line(r, r.c <= 1 ? "rgba(45,226,255,.12)" : r.c === 2 ? "rgba(45,226,255,.08)" : "rgba(255,60,172,.08)", r.c <= 1 ? 7*k + 4 : 3*k + 2));
+      D.roads.forEach(r => line(r, r.c <= 1 ? "#4aa9bd" : r.c === 2 ? "#3a8496" : "#9a4f86", r.c <= 1 ? 1.6 : 1));
       D.areas.forEach(a => { if (!/pitch|plain|stadium/.test(a.k)) return; x.strokeStyle = "rgba(255,225,77,.55)"; x.lineWidth = 1.2; x.beginPath(); for (let i = 0; i < a.p.length; i += 2) i ? x.lineTo(X(a.p[i]), Y(a.p[i + 1])) : x.moveTo(X(a.p[0]), Y(a.p[1])); x.closePath(); x.stroke(); }); }
     tex.needsUpdate = true; }
   { const pos = [], uv = [], idx = [];
@@ -358,7 +358,7 @@ export async function create(o){
   const walls = meshOf(wp, wc, wu, wallMat), roofs = meshOf(rp, rc, null, roofMat); walls.userData.lm = wl; roofs.userData.lm = rl;
   const edgeOf = T => { const pts = [], n = T.P.length; for (let k = 0; k < n; k++){ const a = T.P[k], b = T.P[(k + 1) % n]; pts.push(a[0]*S, T.top + 0.02, -a[1]*S, b[0]*S, T.top + 0.02, -b[1]*S, a[0]*S, T.lo, -a[1]*S, a[0]*S, T.top, -a[1]*S); } return pts; };
   if (NEON){ const groups = { barracks: [], hall: [], house: [] }; D.buildings.forEach(b => { const T = tops[b.i]; if (T) groups[b.k].push(...edgeOf(T)); });
-    [["barracks", 0xff2bd6], ["hall", 0x29f0ff], ["house", 0xffb02e]].forEach(([k, c]) => { const g = keep(new THREE.BufferGeometry()); g.setAttribute("position", new THREE.Float32BufferAttribute(groups[k], 3));
+    [["barracks", 0x9a3f8e], ["hall", 0x3f8f9c], ["house", 0x8a6a3a]].forEach(([k, c]) => { const g = keep(new THREE.BufferGeometry()); g.setAttribute("position", new THREE.Float32BufferAttribute(groups[k], 3));
       const l = new THREE.LineSegments(g, keep(new THREE.LineBasicMaterial({ color: c, toneMapped: false }))); l.userData.keep = true; scene.add(l); }); }
 
   /* ---------- trees on the open hillsides ---------- */
@@ -441,8 +441,8 @@ export async function create(o){
 
   /* ---------- draw only when needed. Neon look renders through a bloom (glow) pass ---------- */
   let composer = null; const draw = () => composer ? composer.render() : renderer.render(scene, cam);
-  if (NEON) import("/vendor/post.module.min.js?v=20261119c").then(P => { if (dead) return; composer = new P.EffectComposer(renderer); composer.setPixelRatio(Math.min(window.devicePixelRatio || 1, PHONE ? 1 : 1.5));
-    composer.addPass(new P.RenderPass(scene, cam)); composer.addPass(new P.UnrealBloomPass(new THREE.Vector2(vw/2, vh/2), PHONE ? 0.7 : 1.05, 0.55, 0.18)); composer.addPass(new P.OutputPass()); composer.setSize(vw, vh); invalidate(); }).catch(() => {});
+  if (NEON) import("/vendor/post.module.min.js?v=20261119d").then(P => { if (dead) return; composer = new P.EffectComposer(renderer); composer.setPixelRatio(Math.min(window.devicePixelRatio || 1, PHONE ? 1 : 1.5));
+    composer.addPass(new P.RenderPass(scene, cam)); composer.addPass(new P.UnrealBloomPass(new THREE.Vector2(vw/2, vh/2), PHONE ? 0.22 : 0.32, 0.35, 0.6)); composer.addPass(new P.OutputPass()); composer.setSize(vw, vh); invalidate(); }).catch(() => {});
   let watched = false, lastT = 0;
   function frame(now){
     raf = 0; if (dead || !active) return;
@@ -578,9 +578,9 @@ export async function create(o){
   async function startTiles(){
     const nc = navigator.connection; if (nc && nc.saveData) return;
     if (!/(^|\.)braedenfonte\.com$|^localhost$/.test(location.hostname)) return;   // the key only works there anyway
-    const key = await import("/js/mapkey.js?v=20261119c").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
+    const key = await import("/js/mapkey.js?v=20261119d").then(m => (m.GOOGLE_TILES_KEY || "").trim()).catch(() => "");
     if (!key || dead) return;
-    const T = await import("/vendor/tiles3d.module.min.js?v=20261119c"); if (dead) return;
+    const T = await import("/vendor/tiles3d.module.min.js?v=20261119d"); if (dead) return;
     const t = tiles = new T.TilesRenderer("https://tile.googleapis.com/v1/3dtiles/root.json"), auth = new T.GoogleCloudAuthPlugin({ apiToken: key, autoRefreshToken: false });
     const f0 = auth.fetchData.bind(auth);   // any refused request (quota hit, bad key, outage) -> back to the built-in map
     auth.fetchData = (uri, opt) => f0(uri, opt).then(r => { if (r.status === 403 || r.status === 429 || (!r.ok && /root\.json/.test(uri))) setTimeout(() => stopTiles("HTTP " + r.status)); return r; },
@@ -722,7 +722,7 @@ export async function create(o){
         else { blk(x, y, h, 20, 8, 3.2, 0, w0, 0x9b2a24); blk(x, y, h, 7, 6, 4, 3.2, w0, 0xf0efe9, -3); blk(x, y, h, 1, 1, 3, 7.2, w0, 0x222222, -3);   // tug pushing
           for (let k = 0; k < b.barges; k++){ const f = 10 + 32 + k*62; blk(x, y, h, 60, 11, 3, 0, w0, 0x3b3a38, f); blk(x, y, h, 54, 9.5, 1.6, 3, w0, k % 2 ? 0x6b5a45 : 0x4a4f55, f); } } }
       mesh.count = n; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
-    fetch("/campus/movers.json?v=20261119c").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
+    fetch("/campus/movers.json?v=20261119d").then(r => r.json()).then(j => { data = { rail: j.rail.map(r => Object.assign(prep(r.p), { name: r.name })), river: prep(j.river) }; }).catch(() => {});
     return { step };
   })();
 
@@ -884,13 +884,13 @@ export async function create(o){
       const g = keep(new THREE.BufferGeometry()); g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3)); const p = new THREE.Points(g, keep(new THREE.PointsMaterial({ color: 0xffffff, size: 1.6, sizeAttenuation: false, transparent: true, opacity: 0.9, fog: false })));
       p.visible = false; p.userData.keep = true; scene.add(p); return p; })();
     function neonize(night, dusk, kind){
-      scene.background = skyTex(night ? ["#04020d", "#140a33", "#2b1158"] : dusk ? ["#1a0b3d", "#b0306a", "#ff9a3c"] : ["#1a0b3d", "#5e2a8c", "#ff6fb5"]);
+      scene.background = skyTex(night ? ["#04020d", "#140a33", "#2b1158"] : dusk ? ["#1a0b3d", "#b0306a", "#ff9a3c"] : ["#1b1f45", "#3b4f8c", "#8f7fb8"]);
       stars.visible = night; scene.fog = new THREE.Fog(kind === "fog" ? 0x3a1a5a : night ? 0x0a0620 : 0x2a1550, cur.dist*(kind === "fog" ? 0.6 : 2.5), cur.dist*(kind === "fog" ? 3 : 9)); fogK = kind === "fog" ? [0.6, 3] : [2.5, 9];
-      wallMat.color.set(0x23264a); wallMat.emissive.set(0xffffff); wallMat.emissiveIntensity = night ? 1.6 : 1.1; roofMat.color.set(0x1a1b36);
+      wallMat.color.set(0x23264a); wallMat.emissive.set(0xffffff); wallMat.emissiveIntensity = night ? 0.55 : 0.18; roofMat.color.set(0x1a1b36);
       waterMat.color.set(0x07142e); waterMat.emissive = waterMat.emissive || new THREE.Color(); waterMat.emissive.set(0x0b3b8c); waterMat.emissiveIntensity = 0.55; waterMat.metalness = 0.7; waterMat.roughness = 0.15;
       hemi.color.set(0x8a6cff); hemi.groundColor.set(0x120a2a); hemi.intensity = 0.75; sun.color.set(dusk ? 0xff6b9a : 0xb388ff); sun.intensity = 0.7;
       rainMat.color.set(0x5ff0ff); rainMat.opacity = 0.85; snowMat.size = 3.4; snowMat.color.set(0xe6f7ff); snowMat.blending = THREE.AdditiveBlending;
-      forest.forEach(m => { if (!m.userData.neon){ m.userData.neon = true; m.material = keep(new THREE.MeshBasicMaterial({ color: 0x6f6f78 })); } });
+      forest.forEach(m => { if (!m.userData.neon){ m.userData.neon = true; m.material = keep(new THREE.MeshLambertMaterial({ color: 0x9a9aa4 })); } });
       renderer.toneMappingExposure = 1.15; }
     function applySeason(){ const se = seasonNow(); forest.forEach(m => { if (!m.instanceColor) return; if (!base.has(m)) base.set(m, m.instanceColor.array.slice()); const b = base.get(m), a = m.instanceColor.array;
       for (let i = 0; i < m.count; i++){ const k = i*3, h = (i*2654435761 >>> 0) % 100; cc.setRGB(b[k], b[k + 1], b[k + 2]);
