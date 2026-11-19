@@ -2,8 +2,13 @@
 Units: meters. x = east, y = north, measured from lat0/lon0. Map data (c) OpenStreetMap contributors (ODbL)."""
 import gzip, json, math, sys
 d = json.load(gzip.open(__file__.replace('build.py', 'westpoint-raw.json.gz'))); E = d['elems']; ev = d['elev']
-try: ev = json.load(gzip.open(__file__.replace('build.py', 'westpoint-elev-wide.json.gz')))   # wider terrain from widen.py: whole Hudson + Garrison shore
+try: ev = json.load(gzip.open(__file__.replace('build.py', 'westpoint-elev-1m.json.gz')))   # 2022 USGS 1 m DEM sampled every 10 m (dem_to_grid.py)
 except FileNotFoundError: pass
+if ev is d['elev']:
+  try: ev = json.load(gzip.open(__file__.replace('build.py', 'westpoint-elev-wide.json.gz')))   # wider terrain from widen.py: whole Hudson + Garrison shore
+  except FileNotFoundError: pass
+try: LID = {(round(m['cx']), round(m['cy'])): m for m in json.load(open(__file__.replace('build.py', 'lidar-buildings.json')))}   # lidar_heights.py output
+except FileNotFoundError: LID = {}
 def ring(g): return [(g[i]/10, g[i+1]/10) for i in range(0, len(g), 2)]
 def area(p): return abs(sum(p[i][0]*p[(i+1)%len(p)][1] - p[(i+1)%len(p)][0]*p[i][1] for i in range(len(p))))/2
 def cen(p): return (sum(q[0] for q in p)/len(p), sum(q[1] for q in p)/len(p))
@@ -42,6 +47,8 @@ for e in E:
             h = HEIGHT.get(name) or (float(t['height']) if 'height' in t else float(t['building:levels'])*3.6 if 'building:levels' in t else 5.5 if a < 150 else 8 if a < 500 else 12 if a < 1800 else 16)
             if t['building'] == 'roof': h = 6
             b = {'h': h, 'p': flat(q)}
+            fx, fy = b['p'][0::2], b['p'][1::2]; m = LID.get((round(sum(fx)/len(fx)), round(sum(fy)/len(fy))))
+            if m and m['best_cover'] >= 0.6 and m['pts'] >= 50: b['r'], b['t'] = round(m['ground'] + m['main'], 1), round(m['ground'] + m['top'], 1)   # measured roof / highest point, metres above sea level (2022 LiDAR)
             if name: b['n'] = name
             kind = 'barracks' if name and 'Barracks' in name else 'house' if (a < 320 and not name) else 'hall'
             b['k'] = kind; B.append(b)

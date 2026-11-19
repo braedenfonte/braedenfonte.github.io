@@ -96,7 +96,7 @@ export async function create(o){
   D.buildings.forEach(b => {
     const P = map.pts(b.p); let lo = 1e9, hi = -1e9; P.forEach(p => { const h = gy(p[0], p[1]); if (h < lo) lo = h; if (h > hi) hi = h; });
     const F = 4.2, hh = { "Washington Hall": 16, "Pershing Barracks": 4*F, "Bradley Barracks": 6*F, "Eisenhower Barracks": 6*F, "MacArthur Barracks": 6*F, "Scott Barracks": 4*F, "Thayer Hall": 4*F }[b.n] || b.h;   // real floor counts
-    const floors = Math.max(1, Math.round(hh/4.2)), top = hi + floors*4.2*S, lm = lmOf[b.i] != null ? lmOf[b.i] : -1; tops[b.i] = { P, lo, top, floors, yF: top - floors*4.2*S };   // roof sits exactly N floors above the highest ground
+    const floors = Math.max(1, Math.round(hh/4.2)), top = b.r ? Math.max(b.r*S*VE, hi + 3*S) : hi + floors*4.2*S, lm = lmOf[b.i] != null ? lmOf[b.i] : -1; tops[b.i] = { P, lo, top, floors, yF: top - floors*4.2*S };   // roof at the 2022 LiDAR-measured height (b.r, m above sea level) when known, else N floors above the highest ground
     const jit = 0.94 + ((b.i*37) % 13)/100, wcol = (b.k === "house" ? HOUSE[b.i % HOUSE.length] : b.n && PLAIN_FRONT_RX.test(b.n) ? [0.8, 0.8, 0.77] : WALL[b.k]).map(v => v*jit);
     curB = b.n ? b.i : -1;
     extrude(P, lo - 2*S, top, wcol, ROOF[b.k].map(v => v*jit), lm, false, floors);

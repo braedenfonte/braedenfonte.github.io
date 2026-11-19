@@ -1,0 +1,2569 @@
+[
+{
+"n": "Foley Indoor Practice Center",
+"cx": -375.9,
+"cy": -27.1,
+"ground": 102.6,
+"ground_med": 102.8,
+"main": 19.1,
+"top": 22.6,
+"map_h": 20,
+"cover": 0.95,
+"best_cover": 0.95,
+"shift": [
+0,
+0
+],
+"pts": 36286
+},
+{
+"n": "",
+"cx": -297.9,
+"cy": 199.1,
+"ground": 100.1,
+"ground_med": 100.4,
+"main": 6.6,
+"top": 10.4,
+"map_h": 16,
+"cover": 0.73,
+"best_cover": 0.83,
+"shift": [
+4,
+0
+],
+"pts": 19093
+},
+{
+"n": "",
+"cx": -371.1,
+"cy": 170.0,
+"ground": 100.3,
+"ground_med": 100.7,
+"main": 17.8,
+"top": 42.8,
+"map_h": 16,
+"cover": 0.84,
+"best_cover": 0.86,
+"shift": [
+-2,
+0
+],
+"pts": 56352
+},
+{
+"n": "Holleder Center",
+"cx": -466.9,
+"cy": 27.3,
+"ground": 103.5,
+"ground_med": 106.7,
+"main": 17.3,
+"top": 24.0,
+"map_h": 22,
+"cover": 0.98,
+"best_cover": 0.98,
+"shift": [
+0,
+0
+],
+"pts": 47608
+},
+{
+"n": "Truxtun Lacrosse Center",
+"cx": -356.4,
+"cy": -163.8,
+"ground": 99.2,
+"ground_med": 102.1,
+"main": 6.8,
+"top": 7.0,
+"map_h": 12,
+"cover": 0.83,
+"best_cover": 0.87,
+"shift": [
+-2,
+0
+],
+"pts": 2167
+},
+{
+"n": "",
+"cx": 360.8,
+"cy": 111.0,
+"ground": 1.2,
+"ground_med": 1.6,
+"main": 6.0,
+"top": 9.4,
+"map_h": 12,
+"cover": 0.5,
+"best_cover": 0.59,
+"shift": [
+2,
+0
+],
+"pts": 3667
+},
+{
+"n": "Enger Hall",
+"cx": -453.2,
+"cy": 1240.2,
+"ground": 23.8,
+"ground_med": 27.1,
+"main": 17.0,
+"top": 19.0,
+"map_h": 12,
+"cover": 0.85,
+"best_cover": 0.94,
+"shift": [
+0,
+6
+],
+"pts": 6241
+},
+{
+"n": "Thayer Hotel",
+"cx": -103.1,
+"cy": -955.2,
+"ground": 45.5,
+"ground_med": 45.8,
+"main": 27.9,
+"top": 31.4,
+"map_h": 26,
+"cover": 0.78,
+"best_cover": 0.91,
+"shift": [
+0,
+-6
+],
+"pts": 2693
+},
+{
+"n": "Thayer Gate",
+"cx": -29.6,
+"cy": -796.3,
+"ground": 46.0,
+"ground_med": 46.5,
+"main": 6.2,
+"top": 8.0,
+"map_h": 6,
+"cover": 0.52,
+"best_cover": 0.92,
+"shift": [
+0,
+-6
+],
+"pts": 355
+},
+{
+"n": "West Point Jewish Chapel",
+"cx": -232.3,
+"cy": 822.6,
+"ground": 70.0,
+"ground_med": 78.2,
+"main": 11.2,
+"top": 23.7,
+"map_h": 14,
+"cover": 0.89,
+"best_cover": 0.92,
+"shift": [
+-2,
+2
+],
+"pts": 4954
+},
+{
+"n": "Most Holy Trinity Chapel",
+"cx": -243.4,
+"cy": 955.5,
+"ground": 55.2,
+"ground_med": 60.2,
+"main": 11.2,
+"top": 15.7,
+"map_h": 14,
+"cover": 0.76,
+"best_cover": 0.86,
+"shift": [
+0,
+4
+],
+"pts": 1457
+},
+{
+"n": "Cadet Chapel",
+"cx": 5.5,
+"cy": 488.6,
+"ground": 74.7,
+"ground_med": 85.3,
+"main": 32.0,
+"top": 51.9,
+"map_h": 30,
+"cover": 0.94,
+"best_cover": 0.98,
+"shift": [
+2,
+0
+],
+"pts": 5588
+},
+{
+"n": "Bradley Barracks",
+"cx": 176.9,
+"cy": 549.5,
+"ground": 47.2,
+"ground_med": 47.5,
+"main": 18.0,
+"top": 22.0,
+"map_h": 24,
+"cover": 0.92,
+"best_cover": 0.97,
+"shift": [
+2,
+4
+],
+"pts": 16233
+},
+{
+"n": "MacArthur Barracks",
+"cx": 103.4,
+"cy": 706.6,
+"ground": 47.7,
+"ground_med": 48.2,
+"main": 17.9,
+"top": 21.5,
+"map_h": 24,
+"cover": 0.92,
+"best_cover": 0.98,
+"shift": [
+0,
+4
+],
+"pts": 17996
+},
+{
+"n": "Eisenhower Barracks",
+"cx": 201.3,
+"cy": 630.3,
+"ground": 47.4,
+"ground_med": 47.7,
+"main": 17.8,
+"top": 21.5,
+"map_h": 24,
+"cover": 0.89,
+"best_cover": 0.98,
+"shift": [
+0,
+4
+],
+"pts": 12748
+},
+{
+"n": "West Point Post Office",
+"cx": -132.8,
+"cy": -614.2,
+"ground": 51.4,
+"ground_med": 53.2,
+"main": 7.9,
+"top": 24.2,
+"map_h": 8,
+"cover": 0.7,
+"best_cover": 0.84,
+"shift": [
+0,
+-6
+],
+"pts": 1442
+},
+{
+"n": "Grant Barracks",
+"cx": 268.4,
+"cy": 461.9,
+"ground": 45.6,
+"ground_med": 45.8,
+"main": 16.0,
+"top": 19.1,
+"map_h": 20,
+"cover": 0.94,
+"best_cover": 0.97,
+"shift": [
+0,
+2
+],
+"pts": 8382
+},
+{
+"n": "Sherman Barracks",
+"cx": 228.4,
+"cy": 402.8,
+"ground": 51.2,
+"ground_med": 54.9,
+"main": 17.2,
+"top": 20.6,
+"map_h": 22,
+"cover": 0.92,
+"best_cover": 0.97,
+"shift": [
+-2,
+4
+],
+"pts": 8102
+},
+{
+"n": "Ridgway Barracks",
+"cx": 290.1,
+"cy": 402.9,
+"ground": 45.7,
+"ground_med": 46.1,
+"main": 20.6,
+"top": 25.0,
+"map_h": 22,
+"cover": 0.87,
+"best_cover": 0.94,
+"shift": [
+-2,
+0
+],
+"pts": 5780
+},
+{
+"n": "Administration Building",
+"cx": 250.5,
+"cy": 351.9,
+"ground": 47.1,
+"ground_med": 55.4,
+"main": 20.0,
+"top": 23.2,
+"map_h": 20,
+"cover": 0.71,
+"best_cover": 0.78,
+"shift": [
+-4,
+2
+],
+"pts": 10264
+},
+{
+"n": "Davis Barracks",
+"cx": 144.6,
+"cy": 458.6,
+"ground": 53.0,
+"ground_med": 60.3,
+"main": 34.3,
+"top": 37.1,
+"map_h": 26,
+"cover": 0.89,
+"best_cover": 0.95,
+"shift": [
+2,
+4
+],
+"pts": 30075
+},
+{
+"n": "Mahan Hall",
+"cx": 356.2,
+"cy": 348.0,
+"ground": 17.7,
+"ground_med": 41.8,
+"main": 42.5,
+"top": 52.2,
+"map_h": 30,
+"cover": 0.7,
+"best_cover": 0.76,
+"shift": [
+-2,
+0
+],
+"pts": 14008
+},
+{
+"n": "Johnson Stadium",
+"cx": 426.9,
+"cy": 822.2,
+"ground": 49.7,
+"ground_med": 50.0,
+"main": 3.7,
+"top": 6.5,
+"map_h": 12,
+"cover": 0.14,
+"best_cover": 0.39,
+"shift": [
+0,
+6
+],
+"pts": 4070
+},
+{
+"n": "Thayer Hall",
+"cx": 425.7,
+"cy": 468.6,
+"ground": 1.4,
+"ground_med": 10.3,
+"main": 48.0,
+"top": 52.3,
+"map_h": 22,
+"cover": 0.98,
+"best_cover": 0.98,
+"shift": [
+0,
+0
+],
+"pts": 42105
+},
+{
+"n": "",
+"cx": 503.6,
+"cy": 432.6,
+"ground": 0.8,
+"ground_med": 1.8,
+"main": 5.5,
+"top": 7.0,
+"map_h": 12,
+"cover": 0.83,
+"best_cover": 0.86,
+"shift": [
+0,
+2
+],
+"pts": 3703
+},
+{
+"n": "Caufield Crew & Sailing Center",
+"cx": 523.5,
+"cy": 515.8,
+"ground": 1.8,
+"ground_med": 2.5,
+"main": 8.6,
+"top": 12.1,
+"map_h": 12,
+"cover": 0.87,
+"best_cover": 0.95,
+"shift": [
+0,
+2
+],
+"pts": 2877
+},
+{
+"n": "Cullum Hall",
+"cx": 510.9,
+"cy": 703.6,
+"ground": 31.6,
+"ground_med": 48.3,
+"main": 33.9,
+"top": 36.2,
+"map_h": 18,
+"cover": 0.79,
+"best_cover": 0.91,
+"shift": [
+2,
+6
+],
+"pts": 3755
+},
+{
+"n": "West Point Club",
+"cx": 490.8,
+"cy": 648.7,
+"ground": 33.2,
+"ground_med": 45.4,
+"main": 25.3,
+"top": 28.8,
+"map_h": 12,
+"cover": 0.77,
+"best_cover": 0.88,
+"shift": [
+-2,
+4
+],
+"pts": 5304
+},
+{
+"n": "Lincoln Hall",
+"cx": 563.2,
+"cy": 757.0,
+"ground": 32.8,
+"ground_med": 40.7,
+"main": 27.6,
+"top": 31.4,
+"map_h": 18,
+"cover": 0.67,
+"best_cover": 0.94,
+"shift": [
+-2,
+6
+],
+"pts": 2899
+},
+{
+"n": "Jefferson Hall Library",
+"cx": 357.2,
+"cy": 637.7,
+"ground": 47.0,
+"ground_med": 47.6,
+"main": 30.3,
+"top": 33.4,
+"map_h": 28,
+"cover": 0.87,
+"best_cover": 0.92,
+"shift": [
+0,
+2
+],
+"pts": 8973
+},
+{
+"n": "Pershing Barracks",
+"cx": 277.8,
+"cy": 572.3,
+"ground": 45.7,
+"ground_med": 46.7,
+"main": 21.2,
+"top": 26.4,
+"map_h": 24,
+"cover": 0.93,
+"best_cover": 0.95,
+"shift": [
+2,
+0
+],
+"pts": 7798
+},
+{
+"n": "Old Central Barracks",
+"cx": 244.2,
+"cy": 583.8,
+"ground": 47.2,
+"ground_med": 47.4,
+"main": 17.0,
+"top": 19.9,
+"map_h": 18,
+"cover": 0.76,
+"best_cover": 0.91,
+"shift": [
+-2,
+4
+],
+"pts": 1250
+},
+{
+"n": "Scott Barracks",
+"cx": 16.0,
+"cy": 667.4,
+"ground": 48.7,
+"ground_med": 62.8,
+"main": 19.4,
+"top": 28.1,
+"map_h": 22,
+"cover": 0.74,
+"best_cover": 0.76,
+"shift": [
+0,
+2
+],
+"pts": 10828
+},
+{
+"n": "Washington Hall",
+"cx": 119.3,
+"cy": 604.3,
+"ground": 47.4,
+"ground_med": 48.5,
+"main": 23.6,
+"top": 28.5,
+"map_h": 26,
+"cover": 0.92,
+"best_cover": 0.95,
+"shift": [
+0,
+2
+],
+"pts": 25027
+},
+{
+"n": "First Class Club",
+"cx": 118.1,
+"cy": 1016.0,
+"ground": 36.3,
+"ground_med": 38.3,
+"main": 6.5,
+"top": 15.5,
+"map_h": 12,
+"cover": 0.68,
+"best_cover": 0.85,
+"shift": [
+0,
+6
+],
+"pts": 3792
+},
+{
+"n": "Eisenhower Hall",
+"cx": -5.3,
+"cy": 1112.3,
+"ground": 15.0,
+"ground_med": 24.0,
+"main": 28.2,
+"top": 40.1,
+"map_h": 26,
+"cover": 0.79,
+"best_cover": 0.81,
+"shift": [
+4,
+2
+],
+"pts": 35610
+},
+{
+"n": "Office of the Directorate of Intercollegiate Athletics",
+"cx": 127.9,
+"cy": 1100.8,
+"ground": 26.5,
+"ground_med": 27.9,
+"main": 12.6,
+"top": 19.3,
+"map_h": 12,
+"cover": 0.79,
+"best_cover": 0.98,
+"shift": [
+0,
+6
+],
+"pts": 4793
+},
+{
+"n": "Tronsrue Marksmanship Center",
+"cx": -206.7,
+"cy": 1214.0,
+"ground": 2.9,
+"ground_med": 5.6,
+"main": 7.6,
+"top": 7.9,
+"map_h": 16,
+"cover": 0.83,
+"best_cover": 0.95,
+"shift": [
+0,
+6
+],
+"pts": 13567
+},
+{
+"n": "Gillis Field House",
+"cx": -82.5,
+"cy": 1228.8,
+"ground": 2.0,
+"ground_med": 3.8,
+"main": 21.3,
+"top": 27.4,
+"map_h": 20,
+"cover": 0.9,
+"best_cover": 0.94,
+"shift": [
+2,
+4
+],
+"pts": 27197
+},
+{
+"n": "Uniform Factory",
+"cx": -462.1,
+"cy": 1342.5,
+"ground": 23.8,
+"ground_med": 27.2,
+"main": 20.1,
+"top": 22.1,
+"map_h": 12,
+"cover": 0.77,
+"best_cover": 0.91,
+"shift": [
+-2,
+6
+],
+"pts": 5597
+},
+{
+"n": "Fort Putnam",
+"cx": -318.0,
+"cy": 465.3,
+"ground": 129.3,
+"ground_med": 138.2,
+"main": 19.6,
+"top": 26.2,
+"map_h": 5,
+"cover": 0.58,
+"best_cover": 0.58,
+"shift": [
+0,
+0
+],
+"pts": 13734
+},
+{
+"n": "Old Cadet Chapel",
+"cx": -587.8,
+"cy": 1341.0,
+"ground": 51.0,
+"ground_med": 51.2,
+"main": 12.1,
+"top": 13.6,
+"map_h": 12,
+"cover": 0.57,
+"best_cover": 0.81,
+"shift": [
+0,
+6
+],
+"pts": 1574
+},
+{
+"n": "Arvin Gymnasium",
+"cx": -52.8,
+"cy": 776.4,
+"ground": 49.0,
+"ground_med": 50.2,
+"main": 23.0,
+"top": 34.8,
+"map_h": 24,
+"cover": 0.97,
+"best_cover": 0.99,
+"shift": [
+2,
+4
+],
+"pts": 44157
+},
+{
+"n": "",
+"cx": -394.3,
+"cy": -924.8,
+"ground": 53.3,
+"ground_med": 54.2,
+"main": 9.8,
+"top": 13.5,
+"map_h": 12,
+"cover": 0.64,
+"best_cover": 0.87,
+"shift": [
+0,
+-6
+],
+"pts": 3384
+},
+{
+"n": "",
+"cx": -343.1,
+"cy": -819.1,
+"ground": 48.0,
+"ground_med": 48.6,
+"main": 6.7,
+"top": 10.8,
+"map_h": 16,
+"cover": 0.86,
+"best_cover": 0.94,
+"shift": [
+0,
+-6
+],
+"pts": 8858
+},
+{
+"n": "",
+"cx": -393.8,
+"cy": -800.5,
+"ground": 53.3,
+"ground_med": 58.8,
+"main": 12.8,
+"top": 15.0,
+"map_h": 12,
+"cover": 0.81,
+"best_cover": 0.93,
+"shift": [
+2,
+-4
+],
+"pts": 2477
+},
+{
+"n": "",
+"cx": -294.9,
+"cy": -684.3,
+"ground": 48.2,
+"ground_med": 49.6,
+"main": 8.8,
+"top": 11.9,
+"map_h": 16,
+"cover": 0.81,
+"best_cover": 0.89,
+"shift": [
+2,
+-2
+],
+"pts": 7514
+},
+{
+"n": "",
+"cx": -186.1,
+"cy": -585.4,
+"ground": 55.7,
+"ground_med": 57.8,
+"main": 8.2,
+"top": 11.9,
+"map_h": 12,
+"cover": 0.68,
+"best_cover": 0.93,
+"shift": [
+0,
+-4
+],
+"pts": 2300
+},
+{
+"n": "",
+"cx": -559.0,
+"cy": 1199.2,
+"ground": 50.8,
+"ground_med": 52.0,
+"main": 11.6,
+"top": 13.3,
+"map_h": 8,
+"cover": 0.71,
+"best_cover": 0.89,
+"shift": [
+0,
+6
+],
+"pts": 1212
+},
+{
+"n": "",
+"cx": -531.8,
+"cy": 1142.4,
+"ground": 50.3,
+"ground_med": 51.2,
+"main": 11.3,
+"top": 13.7,
+"map_h": 8,
+"cover": 0.76,
+"best_cover": 0.96,
+"shift": [
+0,
+4
+],
+"pts": 958
+},
+{
+"n": "",
+"cx": -498.4,
+"cy": 1090.7,
+"ground": 49.9,
+"ground_med": 51.6,
+"main": 12.3,
+"top": 14.9,
+"map_h": 8,
+"cover": 0.64,
+"best_cover": 0.95,
+"shift": [
+0,
+6
+],
+"pts": 770
+},
+{
+"n": "",
+"cx": -460.5,
+"cy": 1052.1,
+"ground": 49.6,
+"ground_med": 50.7,
+"main": 10.8,
+"top": 13.8,
+"map_h": 8,
+"cover": 0.67,
+"best_cover": 0.93,
+"shift": [
+0,
+6
+],
+"pts": 809
+},
+{
+"n": "Garrison Headquarters",
+"cx": -407.5,
+"cy": 1159.9,
+"ground": 20.2,
+"ground_med": 24.6,
+"main": 14.1,
+"top": 19.3,
+"map_h": 12,
+"cover": 0.73,
+"best_cover": 0.94,
+"shift": [
+2,
+6
+],
+"pts": 4672
+},
+{
+"n": "",
+"cx": -330.8,
+"cy": 1226.1,
+"ground": 8.9,
+"ground_med": 11.2,
+"main": 8.1,
+"top": 9.8,
+"map_h": 8,
+"cover": 0.43,
+"best_cover": 0.78,
+"shift": [
+0,
+6
+],
+"pts": 733
+},
+{
+"n": "",
+"cx": -295.8,
+"cy": 1262.9,
+"ground": 2.9,
+"ground_med": 3.7,
+"main": 10.1,
+"top": 12.0,
+"map_h": 12,
+"cover": 0.67,
+"best_cover": 0.89,
+"shift": [
+0,
+6
+],
+"pts": 3276
+},
+{
+"n": "",
+"cx": -311.7,
+"cy": 1209.8,
+"ground": 8.8,
+"ground_med": 12.6,
+"main": 8.1,
+"top": 8.9,
+"map_h": 12,
+"cover": 0.73,
+"best_cover": 0.94,
+"shift": [
+0,
+6
+],
+"pts": 1947
+},
+{
+"n": "",
+"cx": -143.1,
+"cy": 953.6,
+"ground": 49.2,
+"ground_med": 49.5,
+"main": 8.9,
+"top": 11.5,
+"map_h": 8,
+"cover": 0.72,
+"best_cover": 0.97,
+"shift": [
+-2,
+6
+],
+"pts": 1126
+},
+{
+"n": "",
+"cx": -184.4,
+"cy": 947.4,
+"ground": 49.6,
+"ground_med": 52.2,
+"main": 13.4,
+"top": 15.6,
+"map_h": 8,
+"cover": 0.85,
+"best_cover": 0.96,
+"shift": [
+-2,
+6
+],
+"pts": 1357
+},
+{
+"n": "",
+"cx": -92.0,
+"cy": 954.7,
+"ground": 49.2,
+"ground_med": 49.5,
+"main": 7.8,
+"top": 11.7,
+"map_h": 8,
+"cover": 0.71,
+"best_cover": 0.89,
+"shift": [
+0,
+6
+],
+"pts": 1349
+},
+{
+"n": "",
+"cx": -39.1,
+"cy": 952.6,
+"ground": 47.9,
+"ground_med": 48.6,
+"main": 9.3,
+"top": 13.2,
+"map_h": 12,
+"cover": 0.57,
+"best_cover": 0.96,
+"shift": [
+0,
+6
+],
+"pts": 1774
+},
+{
+"n": "",
+"cx": 11.3,
+"cy": 926.7,
+"ground": 47.2,
+"ground_med": 47.9,
+"main": 7.5,
+"top": 14.5,
+"map_h": 8,
+"cover": 0.73,
+"best_cover": 0.88,
+"shift": [
+0,
+4
+],
+"pts": 649
+},
+{
+"n": "",
+"cx": 36.5,
+"cy": 887.0,
+"ground": 46.9,
+"ground_med": 47.2,
+"main": 6.8,
+"top": 12.1,
+"map_h": 8,
+"cover": 0.86,
+"best_cover": 0.97,
+"shift": [
+0,
+4
+],
+"pts": 665
+},
+{
+"n": "",
+"cx": 45.9,
+"cy": 828.6,
+"ground": 47.3,
+"ground_med": 47.7,
+"main": 10.5,
+"top": 12.6,
+"map_h": 8,
+"cover": 0.75,
+"best_cover": 0.98,
+"shift": [
+0,
+4
+],
+"pts": 1263
+},
+{
+"n": "",
+"cx": -263.6,
+"cy": 956.2,
+"ground": 58.9,
+"ground_med": 60.0,
+"main": 7.4,
+"top": 10.8,
+"map_h": 8,
+"cover": 0.76,
+"best_cover": 0.83,
+"shift": [
+2,
+6
+],
+"pts": 498
+},
+{
+"n": "",
+"cx": -311.8,
+"cy": 968.0,
+"ground": 57.7,
+"ground_med": 58.7,
+"main": 10.1,
+"top": 14.3,
+"map_h": 5.5,
+"cover": 0.6,
+"best_cover": 0.89,
+"shift": [
+0,
+6
+],
+"pts": 491
+},
+{
+"n": "",
+"cx": -342.0,
+"cy": 970.5,
+"ground": 57.3,
+"ground_med": 58.3,
+"main": 9.4,
+"top": 11.7,
+"map_h": 5.5,
+"cover": 0.47,
+"best_cover": 0.91,
+"shift": [
+0,
+6
+],
+"pts": 363
+},
+{
+"n": "",
+"cx": -405.0,
+"cy": 1012.8,
+"ground": 49.8,
+"ground_med": 50.8,
+"main": 11.6,
+"top": 14.0,
+"map_h": 12,
+"cover": 0.47,
+"best_cover": 0.83,
+"shift": [
+0,
+4
+],
+"pts": 1475
+},
+{
+"n": "",
+"cx": -424.5,
+"cy": 992.1,
+"ground": 50.9,
+"ground_med": 53.6,
+"main": 22.6,
+"top": 30.7,
+"map_h": 8,
+"cover": 0.02,
+"best_cover": 0.09,
+"shift": [
+4,
+-6
+],
+"pts": 1254
+},
+{
+"n": "",
+"cx": 51.0,
+"cy": 1037.1,
+"ground": 37.5,
+"ground_med": 38.9,
+"main": 5.1,
+"top": 9.6,
+"map_h": 5.5,
+"cover": 0.13,
+"best_cover": 0.46,
+"shift": [
+0,
+6
+],
+"pts": 338
+},
+{
+"n": "Taylor Hall",
+"cx": 343.7,
+"cy": 463.5,
+"ground": 36.1,
+"ground_med": 45.6,
+"main": 25.4,
+"top": 47.6,
+"map_h": 34,
+"cover": 0.84,
+"best_cover": 0.86,
+"shift": [
+0,
+2
+],
+"pts": 14189
+},
+{
+"n": "",
+"cx": 223.2,
+"cy": -38.2,
+"ground": 58.2,
+"ground_med": 60.2,
+"main": 12.9,
+"top": 15.6,
+"map_h": 8,
+"cover": 0.91,
+"best_cover": 0.91,
+"shift": [
+0,
+0
+],
+"pts": 1921
+},
+{
+"n": "",
+"cx": 208.1,
+"cy": -82.7,
+"ground": 60.3,
+"ground_med": 62.0,
+"main": 12.6,
+"top": 15.3,
+"map_h": 8,
+"cover": 0.84,
+"best_cover": 0.9,
+"shift": [
+0,
+-2
+],
+"pts": 1889
+},
+{
+"n": "",
+"cx": 191.4,
+"cy": -127.2,
+"ground": 61.8,
+"ground_med": 63.2,
+"main": 12.9,
+"top": 15.6,
+"map_h": 8,
+"cover": 0.86,
+"best_cover": 0.93,
+"shift": [
+0,
+-2
+],
+"pts": 1882
+},
+{
+"n": "",
+"cx": 171.2,
+"cy": -171.1,
+"ground": 63.7,
+"ground_med": 65.2,
+"main": 11.9,
+"top": 15.4,
+"map_h": 8,
+"cover": 0.75,
+"best_cover": 0.87,
+"shift": [
+0,
+-2
+],
+"pts": 1040
+},
+{
+"n": "",
+"cx": 149.7,
+"cy": -212.8,
+"ground": 65.5,
+"ground_med": 67.1,
+"main": 12.6,
+"top": 15.4,
+"map_h": 8,
+"cover": 0.82,
+"best_cover": 0.85,
+"shift": [
+0,
+-2
+],
+"pts": 858
+},
+{
+"n": "",
+"cx": 119.1,
+"cy": -253.2,
+"ground": 64.8,
+"ground_med": 66.9,
+"main": 13.4,
+"top": 15.3,
+"map_h": 8,
+"cover": 0.82,
+"best_cover": 0.9,
+"shift": [
+0,
+-2
+],
+"pts": 1244
+},
+{
+"n": "",
+"cx": -70.7,
+"cy": 468.7,
+"ground": 94.5,
+"ground_med": 98.6,
+"main": 9.0,
+"top": 12.4,
+"map_h": 12,
+"cover": 0.29,
+"best_cover": 0.33,
+"shift": [
+6,
+0
+],
+"pts": 7038
+},
+{
+"n": "",
+"cx": 96.7,
+"cy": -372.2,
+"ground": 49.8,
+"ground_med": 52.3,
+"main": 13.2,
+"top": 16.1,
+"map_h": 8,
+"cover": 0.98,
+"best_cover": 0.98,
+"shift": [
+0,
+0
+],
+"pts": 913
+},
+{
+"n": "",
+"cx": 89.3,
+"cy": -423.3,
+"ground": 50.1,
+"ground_med": 53.3,
+"main": 13.0,
+"top": 23.0,
+"map_h": 8,
+"cover": 0.67,
+"best_cover": 0.78,
+"shift": [
+2,
+-4
+],
+"pts": 673
+},
+{
+"n": "",
+"cx": 44.2,
+"cy": -415.1,
+"ground": 53.3,
+"ground_med": 53.6,
+"main": 4.5,
+"top": 16.2,
+"map_h": 5.5,
+"cover": 0.77,
+"best_cover": 0.89,
+"shift": [
+0,
+-2
+],
+"pts": 346
+},
+{
+"n": "",
+"cx": 22.5,
+"cy": -458.3,
+"ground": 54.2,
+"ground_med": 54.7,
+"main": 4.0,
+"top": 13.3,
+"map_h": 5.5,
+"cover": 0.74,
+"best_cover": 0.86,
+"shift": [
+0,
+-2
+],
+"pts": 266
+},
+{
+"n": "",
+"cx": 86.2,
+"cy": -456.9,
+"ground": 50.8,
+"ground_med": 54.8,
+"main": 14.0,
+"top": 16.6,
+"map_h": 8,
+"cover": 0.64,
+"best_cover": 0.87,
+"shift": [
+0,
+-4
+],
+"pts": 510
+},
+{
+"n": "",
+"cx": 72.3,
+"cy": -490.6,
+"ground": 54.5,
+"ground_med": 54.8,
+"main": 10.4,
+"top": 12.0,
+"map_h": 8,
+"cover": 0.56,
+"best_cover": 0.73,
+"shift": [
+0,
+-4
+],
+"pts": 446
+},
+{
+"n": "",
+"cx": 58.5,
+"cy": -523.7,
+"ground": 53.6,
+"ground_med": 54.3,
+"main": 12.3,
+"top": 18.6,
+"map_h": 8,
+"cover": 0.79,
+"best_cover": 0.83,
+"shift": [
+2,
+0
+],
+"pts": 471
+},
+{
+"n": "",
+"cx": 1.4,
+"cy": -520.3,
+"ground": 54.7,
+"ground_med": 55.1,
+"main": 3.7,
+"top": 13.8,
+"map_h": 5.5,
+"cover": 0.64,
+"best_cover": 0.84,
+"shift": [
+0,
+-4
+],
+"pts": 239
+},
+{
+"n": "",
+"cx": -35.1,
+"cy": -452.9,
+"ground": 63.4,
+"ground_med": 66.6,
+"main": 14.4,
+"top": 16.5,
+"map_h": 12,
+"cover": 0.75,
+"best_cover": 0.84,
+"shift": [
+2,
+-2
+],
+"pts": 1259
+},
+{
+"n": "",
+"cx": -24.3,
+"cy": -385.9,
+"ground": 66.5,
+"ground_med": 68.0,
+"main": 12.1,
+"top": 15.5,
+"map_h": 12,
+"cover": 0.82,
+"best_cover": 0.86,
+"shift": [
+0,
+-2
+],
+"pts": 1495
+},
+{
+"n": "",
+"cx": -46.5,
+"cy": -386.8,
+"ground": 67.8,
+"ground_med": 68.1,
+"main": 3.5,
+"top": 4.3,
+"map_h": 5.5,
+"cover": 0.55,
+"best_cover": 0.7,
+"shift": [
+0,
+-2
+],
+"pts": 192
+},
+{
+"n": "",
+"cx": -56.6,
+"cy": -449.2,
+"ground": 65.3,
+"ground_med": 66.6,
+"main": 4.9,
+"top": 5.6,
+"map_h": 5.5,
+"cover": 0.54,
+"best_cover": 0.82,
+"shift": [
+0,
+-4
+],
+"pts": 231
+},
+{
+"n": "",
+"cx": -76.9,
+"cy": -495.1,
+"ground": 59.6,
+"ground_med": 62.7,
+"main": 14.3,
+"top": 16.6,
+"map_h": 12,
+"cover": 0.58,
+"best_cover": 0.91,
+"shift": [
+0,
+-4
+],
+"pts": 1116
+},
+{
+"n": "",
+"cx": -7.1,
+"cy": -291.1,
+"ground": 67.7,
+"ground_med": 75.4,
+"main": 19.0,
+"top": 22.4,
+"map_h": 12,
+"cover": 0.86,
+"best_cover": 0.88,
+"shift": [
+0,
+-2
+],
+"pts": 1481
+},
+{
+"n": "",
+"cx": -38.6,
+"cy": -293.6,
+"ground": 75.1,
+"ground_med": 76.2,
+"main": 4.5,
+"top": 19.6,
+"map_h": 5.5,
+"cover": 0.68,
+"best_cover": 0.68,
+"shift": [
+0,
+0
+],
+"pts": 353
+},
+{
+"n": "",
+"cx": -52.6,
+"cy": -290.9,
+"ground": 75.4,
+"ground_med": 77.1,
+"main": 11.8,
+"top": 20.9,
+"map_h": 5.5,
+"cover": 0.5,
+"best_cover": 0.56,
+"shift": [
+-2,
+0
+],
+"pts": 413
+},
+{
+"n": "",
+"cx": -85.7,
+"cy": -136.7,
+"ground": 104.5,
+"ground_med": 105.7,
+"main": 8.0,
+"top": 17.1,
+"map_h": 8,
+"cover": 0.83,
+"best_cover": 0.88,
+"shift": [
+0,
+-2
+],
+"pts": 1437
+},
+{
+"n": "",
+"cx": -121.8,
+"cy": -91.4,
+"ground": 100.8,
+"ground_med": 104.9,
+"main": 11.8,
+"top": 20.1,
+"map_h": 8,
+"cover": 0.76,
+"best_cover": 0.76,
+"shift": [
+0,
+0
+],
+"pts": 1219
+},
+{
+"n": "",
+"cx": -93.2,
+"cy": -15.1,
+"ground": 107.9,
+"ground_med": 110.9,
+"main": 10.2,
+"top": 13.7,
+"map_h": 8,
+"cover": 0.74,
+"best_cover": 0.74,
+"shift": [
+0,
+0
+],
+"pts": 1508
+},
+{
+"n": "",
+"cx": -68.6,
+"cy": 33.7,
+"ground": 108.4,
+"ground_med": 109.7,
+"main": 10.3,
+"top": 17.3,
+"map_h": 8,
+"cover": 0.84,
+"best_cover": 0.84,
+"shift": [
+0,
+0
+],
+"pts": 1011
+},
+{
+"n": "",
+"cx": -16.2,
+"cy": 50.1,
+"ground": 107.4,
+"ground_med": 108.8,
+"main": 9.3,
+"top": 11.9,
+"map_h": 8,
+"cover": 0.79,
+"best_cover": 0.79,
+"shift": [
+0,
+0
+],
+"pts": 1347
+},
+{
+"n": "",
+"cx": 73.9,
+"cy": -81.8,
+"ground": 97.4,
+"ground_med": 99.2,
+"main": 10.4,
+"top": 14.4,
+"map_h": 8,
+"cover": 0.86,
+"best_cover": 0.86,
+"shift": [
+0,
+0
+],
+"pts": 2279
+},
+{
+"n": "",
+"cx": 85.2,
+"cy": -29.2,
+"ground": 98.2,
+"ground_med": 100.0,
+"main": 10.8,
+"top": 13.2,
+"map_h": 8,
+"cover": 0.86,
+"best_cover": 0.86,
+"shift": [
+0,
+0
+],
+"pts": 2511
+},
+{
+"n": "",
+"cx": 95.8,
+"cy": 21.4,
+"ground": 99.3,
+"ground_med": 101.5,
+"main": 10.6,
+"top": 14.5,
+"map_h": 8,
+"cover": 0.83,
+"best_cover": 0.83,
+"shift": [
+0,
+0
+],
+"pts": 1110
+},
+{
+"n": "",
+"cx": 29.2,
+"cy": 29.2,
+"ground": 103.7,
+"ground_med": 104.6,
+"main": 9.4,
+"top": 17.5,
+"map_h": 8,
+"cover": 0.75,
+"best_cover": 0.78,
+"shift": [
+-2,
+0
+],
+"pts": 1070
+},
+{
+"n": "",
+"cx": 100.8,
+"cy": 75.7,
+"ground": 99.3,
+"ground_med": 101.0,
+"main": 10.1,
+"top": 12.3,
+"map_h": 8,
+"cover": 0.79,
+"best_cover": 0.79,
+"shift": [
+0,
+0
+],
+"pts": 2026
+},
+{
+"n": "",
+"cx": 10.6,
+"cy": 105.5,
+"ground": 102.3,
+"ground_med": 103.5,
+"main": 10.7,
+"top": 24.9,
+"map_h": 8,
+"cover": 0.88,
+"best_cover": 0.88,
+"shift": [
+0,
+0
+],
+"pts": 1238
+},
+{
+"n": "",
+"cx": -34.8,
+"cy": 105.4,
+"ground": 105.8,
+"ground_med": 107.4,
+"main": 9.3,
+"top": 12.5,
+"map_h": 8,
+"cover": 0.76,
+"best_cover": 0.76,
+"shift": [
+0,
+0
+],
+"pts": 1520
+},
+{
+"n": "",
+"cx": 100.5,
+"cy": 128.0,
+"ground": 99.0,
+"ground_med": 100.2,
+"main": 9.3,
+"top": 14.9,
+"map_h": 8,
+"cover": 0.76,
+"best_cover": 0.76,
+"shift": [
+0,
+0
+],
+"pts": 1348
+},
+{
+"n": "",
+"cx": 88.5,
+"cy": 180.7,
+"ground": 97.3,
+"ground_med": 100.5,
+"main": 11.8,
+"top": 18.2,
+"map_h": 8,
+"cover": 0.84,
+"best_cover": 0.84,
+"shift": [
+0,
+0
+],
+"pts": 2141
+},
+{
+"n": "",
+"cx": 61.4,
+"cy": 272.3,
+"ground": 101.1,
+"ground_med": 103.7,
+"main": 11.3,
+"top": 13.8,
+"map_h": 8,
+"cover": 0.83,
+"best_cover": 0.83,
+"shift": [
+0,
+0
+],
+"pts": 442
+},
+{
+"n": "",
+"cx": 70.2,
+"cy": 231.4,
+"ground": 100.3,
+"ground_med": 102.2,
+"main": 11.3,
+"top": 14.3,
+"map_h": 8,
+"cover": 0.84,
+"best_cover": 0.86,
+"shift": [
+-2,
+0
+],
+"pts": 2600
+},
+{
+"n": "",
+"cx": 52.0,
+"cy": 292.6,
+"ground": 102.1,
+"ground_med": 103.7,
+"main": 10.4,
+"top": 14.7,
+"map_h": 5.5,
+"cover": 0.85,
+"best_cover": 0.9,
+"shift": [
+-2,
+2
+],
+"pts": 434
+},
+{
+"n": "",
+"cx": 32.6,
+"cy": 338.8,
+"ground": 101.7,
+"ground_med": 102.9,
+"main": 10.0,
+"top": 12.0,
+"map_h": 5.5,
+"cover": 0.88,
+"best_cover": 0.88,
+"shift": [
+0,
+0
+],
+"pts": 328
+},
+{
+"n": "Herbert Alumni Center",
+"cx": -170.0,
+"cy": -186.6,
+"ground": 82.2,
+"ground_med": 83.4,
+"main": 12.8,
+"top": 16.6,
+"map_h": 12,
+"cover": 0.91,
+"best_cover": 0.94,
+"shift": [
+2,
+-2
+],
+"pts": 4951
+},
+{
+"n": "",
+"cx": -215.2,
+"cy": -242.9,
+"ground": 85.0,
+"ground_med": 87.3,
+"main": 8.0,
+"top": 12.9,
+"map_h": 12,
+"cover": 0.88,
+"best_cover": 0.95,
+"shift": [
+0,
+-2
+],
+"pts": 1573
+},
+{
+"n": "",
+"cx": -197.3,
+"cy": -230.2,
+"ground": 80.7,
+"ground_med": 85.3,
+"main": 8.6,
+"top": 22.8,
+"map_h": 5.5,
+"cover": 0.9,
+"best_cover": 0.96,
+"shift": [
+0,
+-2
+],
+"pts": 144
+},
+{
+"n": "",
+"cx": -212.0,
+"cy": -277.3,
+"ground": 83.2,
+"ground_med": 85.2,
+"main": 5.8,
+"top": 11.6,
+"map_h": 8,
+"cover": 0.93,
+"best_cover": 0.95,
+"shift": [
+0,
+-2
+],
+"pts": 473
+},
+{
+"n": "",
+"cx": -217.1,
+"cy": -316.0,
+"ground": 79.0,
+"ground_med": 81.1,
+"main": 10.8,
+"top": 13.1,
+"map_h": 5.5,
+"cover": 0.93,
+"best_cover": 0.93,
+"shift": [
+0,
+0
+],
+"pts": 321
+},
+{
+"n": "",
+"cx": -352.2,
+"cy": -307.9,
+"ground": 85.2,
+"ground_med": 87.8,
+"main": 6.9,
+"top": 12.0,
+"map_h": 12,
+"cover": 0.89,
+"best_cover": 0.93,
+"shift": [
+0,
+-2
+],
+"pts": 2406
+},
+{
+"n": "",
+"cx": -333.6,
+"cy": -409.6,
+"ground": 79.9,
+"ground_med": 82.2,
+"main": 9.1,
+"top": 10.1,
+"map_h": 8,
+"cover": 0.8,
+"best_cover": 0.9,
+"shift": [
+0,
+-4
+],
+"pts": 605
+},
+{
+"n": "",
+"cx": -333.9,
+"cy": -452.1,
+"ground": 76.8,
+"ground_med": 79.1,
+"main": 9.5,
+"top": 10.4,
+"map_h": 8,
+"cover": 0.8,
+"best_cover": 0.94,
+"shift": [
+0,
+-4
+],
+"pts": 577
+},
+{
+"n": "",
+"cx": -427.0,
+"cy": -721.6,
+"ground": 60.6,
+"ground_med": 65.2,
+"main": 13.0,
+"top": 18.1,
+"map_h": 12,
+"cover": 0.75,
+"best_cover": 0.94,
+"shift": [
+0,
+-6
+],
+"pts": 4512
+},
+{
+"n": "",
+"cx": -379.2,
+"cy": -594.0,
+"ground": 67.3,
+"ground_med": 73.2,
+"main": 13.4,
+"top": 15.1,
+"map_h": 8,
+"cover": 0.6,
+"best_cover": 0.88,
+"shift": [
+0,
+-4
+],
+"pts": 602
+},
+{
+"n": "",
+"cx": -358.2,
+"cy": -556.6,
+"ground": 68.5,
+"ground_med": 72.9,
+"main": 12.3,
+"top": 13.9,
+"map_h": 8,
+"cover": 0.72,
+"best_cover": 0.92,
+"shift": [
+0,
+-4
+],
+"pts": 566
+},
+{
+"n": "",
+"cx": -345.1,
+"cy": -516.6,
+"ground": 71.3,
+"ground_med": 75.5,
+"main": 11.6,
+"top": 14.4,
+"map_h": 8,
+"cover": 0.84,
+"best_cover": 0.96,
+"shift": [
+0,
+-4
+],
+"pts": 573
+},
+{
+"n": "",
+"cx": -323.5,
+"cy": -574.9,
+"ground": 62.3,
+"ground_med": 68.2,
+"main": 10.3,
+"top": 11.0,
+"map_h": 5.5,
+"cover": 0.7,
+"best_cover": 0.96,
+"shift": [
+0,
+-6
+],
+"pts": 351
+},
+{
+"n": "",
+"cx": -272.6,
+"cy": -573.4,
+"ground": 58.8,
+"ground_med": 60.3,
+"main": 6.9,
+"top": 7.9,
+"map_h": 8,
+"cover": 0.87,
+"best_cover": 0.96,
+"shift": [
+0,
+-4
+],
+"pts": 886
+},
+{
+"n": "",
+"cx": -253.9,
+"cy": -516.2,
+"ground": 64.1,
+"ground_med": 68.1,
+"main": 9.0,
+"top": 11.0,
+"map_h": 12,
+"cover": 0.66,
+"best_cover": 0.77,
+"shift": [
+0,
+-4
+],
+"pts": 1374
+},
+{
+"n": "",
+"cx": 36.5,
+"cy": -565.5,
+"ground": 49.0,
+"ground_med": 53.4,
+"main": 14.9,
+"top": 16.5,
+"map_h": 8,
+"cover": 0.79,
+"best_cover": 0.84,
+"shift": [
+0,
+-2
+],
+"pts": 1098
+},
+{
+"n": "",
+"cx": 1.9,
+"cy": -622.7,
+"ground": 47.3,
+"ground_med": 52.1,
+"main": 15.9,
+"top": 17.4,
+"map_h": 8,
+"cover": 0.72,
+"best_cover": 0.88,
+"shift": [
+0,
+-4
+],
+"pts": 1108
+},
+{
+"n": "",
+"cx": -180.6,
+"cy": -621.9,
+"ground": 51.0,
+"ground_med": 53.0,
+"main": 6.9,
+"top": 10.9,
+"map_h": 12,
+"cover": 0.67,
+"best_cover": 0.96,
+"shift": [
+0,
+-4
+],
+"pts": 1901
+},
+{
+"n": "",
+"cx": 257.9,
+"cy": 14.2,
+"ground": 50.5,
+"ground_med": 55.6,
+"main": 13.0,
+"top": 15.7,
+"map_h": 8,
+"cover": 0.79,
+"best_cover": 0.79,
+"shift": [
+0,
+0
+],
+"pts": 467
+},
+{
+"n": "",
+"cx": 269.7,
+"cy": 60.1,
+"ground": 47.1,
+"ground_med": 51.7,
+"main": 13.6,
+"top": 21.9,
+"map_h": 8,
+"cover": 0.85,
+"best_cover": 0.85,
+"shift": [
+0,
+0
+],
+"pts": 508
+},
+{
+"n": "Lichtenberg Tennis Center",
+"cx": -537.1,
+"cy": 486.8,
+"ground": 138.1,
+"ground_med": 142.0,
+"main": 14.3,
+"top": 16.3,
+"map_h": 16,
+"cover": 0.96,
+"best_cover": 0.96,
+"shift": [
+0,
+0
+],
+"pts": 19787
+},
+{
+"n": "Gross Olympic Center",
+"cx": -615.0,
+"cy": 531.1,
+"ground": 141.5,
+"ground_med": 142.4,
+"main": 12.9,
+"top": 15.5,
+"map_h": 16,
+"cover": 0.94,
+"best_cover": 0.97,
+"shift": [
+0,
+2
+],
+"pts": 9354
+},
+{
+"n": "",
+"cx": -569.1,
+"cy": 416.6,
+"ground": 139.5,
+"ground_med": 140.1,
+"main": 7.2,
+"top": 9.4,
+"map_h": 12,
+"cover": 0.95,
+"best_cover": 0.95,
+"shift": [
+0,
+0
+],
+"pts": 5120
+},
+{
+"n": "Delafield Pond Bathhouse",
+"cx": -546.4,
+"cy": 820.9,
+"ground": 87.6,
+"ground_med": 91.1,
+"main": 11.8,
+"top": 13.8,
+"map_h": 8,
+"cover": 0.8,
+"best_cover": 0.97,
+"shift": [
+0,
+4
+],
+"pts": 1468
+},
+{
+"n": "",
+"cx": 73.9,
+"cy": 1065.4,
+"ground": 30.1,
+"ground_med": 35.9,
+"main": 13.2,
+"top": 13.6,
+"map_h": 5.5,
+"cover": 0.34,
+"best_cover": 0.9,
+"shift": [
+0,
+6
+],
+"pts": 503
+},
+{
+"n": "",
+"cx": 98.0,
+"cy": 1055.6,
+"ground": 34.5,
+"ground_med": 36.0,
+"main": 9.1,
+"top": 11.1,
+"map_h": 7.2,
+"cover": 0.51,
+"best_cover": 0.83,
+"shift": [
+0,
+6
+],
+"pts": 577
+},
+{
+"n": "Foley Enners Nathe Lacrosse Center",
+"cx": -297.8,
+"cy": 288.3,
+"ground": 100.6,
+"ground_med": 101.6,
+"main": 10.2,
+"top": 11.8,
+"map_h": 12,
+"cover": 0.83,
+"best_cover": 0.86,
+"shift": [
+-2,
+0
+],
+"pts": 2919
+},
+{
+"n": "",
+"cx": -362.1,
+"cy": 305.7,
+"ground": 108.3,
+"ground_med": 110.5,
+"main": 4.8,
+"top": 4.9,
+"map_h": 8,
+"cover": 0.11,
+"best_cover": 0.17,
+"shift": [
+-4,
+6
+],
+"pts": 365
+},
+{
+"n": "",
+"cx": 129.2,
+"cy": 1046.7,
+"ground": 35.4,
+"ground_med": 36.0,
+"main": 8.3,
+"top": 8.9,
+"map_h": 5.5,
+"cover": 0.14,
+"best_cover": 0.95,
+"shift": [
+0,
+6
+],
+"pts": 195
+},
+{
+"n": "",
+"cx": 159.2,
+"cy": 1033.6,
+"ground": 36.0,
+"ground_med": 37.9,
+"main": 9.7,
+"top": 20.4,
+"map_h": 5.5,
+"cover": 0.61,
+"best_cover": 0.86,
+"shift": [
+0,
+6
+],
+"pts": 591
+},
+{
+"n": "",
+"cx": -12.8,
+"cy": -560.8,
+"ground": 54.1,
+"ground_med": 54.6,
+"main": 3.7,
+"top": 4.2,
+"map_h": 5.5,
+"cover": 0.25,
+"best_cover": 0.74,
+"shift": [
+0,
+-4
+],
+"pts": 114
+},
+{
+"n": "",
+"cx": -98.8,
+"cy": -475.5,
+"ground": 60.7,
+"ground_med": 63.5,
+"main": 6.9,
+"top": 16.5,
+"map_h": 5.5,
+"cover": 0.28,
+"best_cover": 0.43,
+"shift": [
+0,
+-2
+],
+"pts": 162
+},
+{
+"n": "",
+"cx": -98.6,
+"cy": 1325.4,
+"ground": 1.7,
+"ground_med": 2.0,
+"main": 4.2,
+"top": 8.1,
+"map_h": 8,
+"cover": 0.32,
+"best_cover": 0.55,
+"shift": [
+4,
+6
+],
+"pts": 1763
+},
+{
+"n": "",
+"cx": 188.3,
+"cy": 1188.9,
+"ground": 1.8,
+"ground_med": 6.5,
+"main": 12.1,
+"top": 16.7,
+"map_h": 5.5,
+"cover": 0.42,
+"best_cover": 0.46,
+"shift": [
+-2,
+0
+],
+"pts": 520
+},
+{
+"n": "",
+"cx": 399.4,
+"cy": 1124.9,
+"ground": 48.5,
+"ground_med": 50.0,
+"main": 7.5,
+"top": 8.3,
+"map_h": 5.5,
+"cover": 0.38,
+"best_cover": 0.84,
+"shift": [
+0,
+6
+],
+"pts": 552
+},
+{
+"n": "Cyber & Engineering Center",
+"cx": 259.2,
+"cy": 219.7,
+"ground": 42.9,
+"ground_med": 46.9,
+"main": 9.7,
+"top": 13.4,
+"map_h": 24,
+"cover": 0.04,
+"best_cover": 0.04,
+"shift": [
+0,
+0
+],
+"pts": 19197
+},
+{
+"n": "Cadet Barbershop and Salon",
+"cx": 214.8,
+"cy": 596.0,
+"ground": 47.3,
+"ground_med": 47.4,
+"main": 4.3,
+"top": 4.4,
+"map_h": 8,
+"cover": 0.64,
+"best_cover": 0.87,
+"shift": [
+0,
+4
+],
+"pts": 807
+},
+{
+"n": "Trophy Point Amphitheatre",
+"cx": 231.6,
+"cy": 1051.7,
+"ground": 35.4,
+"ground_med": 42.6,
+"main": 15.6,
+"top": 23.3,
+"map_h": 16,
+"cover": 0.04,
+"best_cover": 0.04,
+"shift": [
+0,
+0
+],
+"pts": 13039
+},
+{
+"n": "Bartlett Hall",
+"cx": 379.0,
+"cy": 554.2,
+"ground": 38.0,
+"ground_med": 45.8,
+"main": 29.5,
+"top": 36.3,
+"map_h": 24,
+"cover": 0.9,
+"best_cover": 0.93,
+"shift": [
+2,
+4
+],
+"pts": 36593
+},
+{
+"n": "West Point Department of Public Works",
+"cx": -209.9,
+"cy": 1150.6,
+"ground": 6.2,
+"ground_med": 14.0,
+"main": 22.0,
+"top": 33.2,
+"map_h": 16,
+"cover": 0.65,
+"best_cover": 0.73,
+"shift": [
+2,
+6
+],
+"pts": 20429
+}
+]
