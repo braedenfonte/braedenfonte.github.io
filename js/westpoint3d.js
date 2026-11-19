@@ -100,6 +100,8 @@ export async function create(o){
     const jit = 0.94 + ((b.i*37) % 13)/100, wcol = (b.k === "house" ? HOUSE[b.i % HOUSE.length] : b.n && PLAIN_FRONT_RX.test(b.n) ? [0.8, 0.8, 0.77] : WALL[b.k]).map(v => v*jit);
     curB = b.n ? b.i : -1;
     extrude(P, lo - 2*S, top, wcol, ROOF[b.k].map(v => v*jit), lm, false, floors);
+    if (b.tw){ const [tx, ty, tw, td, tz] = b.tw, Q = map.pts([tx - tw/2, ty - td/2, tx + tw/2, ty - td/2, tx + tw/2, ty + td/2, tx - tw/2, ty + td/2]);   // tower measured in the 2022 LiDAR
+      if (tz*S*VE > top + 2*S) extrude(Q, top - S, tz*S*VE, wcol.map(v => v*0.97), ROOF[b.k].map(v => v*jit*0.9), lm); }
     if (b.k !== "house" && b.h >= 16 && P.length >= 4 && !(b.n && PLAIN_FRONT_RX.test(b.n))){ // a low parapet block so big halls don't look like plain boxes
       const c = b.c, Q = P.map(p => [c[0] + (p[0] - c[0])*0.9, c[1] + (p[1] - c[1])*0.9]); extrude(Q, top, top + 1.6*S, wcol.map(v => v*0.93), ROOF[b.k].map(v => v*0.9), lm); }
   });

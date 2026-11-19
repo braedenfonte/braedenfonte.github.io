@@ -10,7 +10,7 @@ ept = json.loads(get('ept.json')); bx0, by0, bz0, bx1 = ept['bounds'][0], ept['b
 d = json.load(open(repo + '/campus/westpoint.json')); lat0, lon0 = d['lat0'], d['lon0']
 R = 6378137.0; MY = math.pi/180*R; MX = MY*math.cos(math.radians(lat0))
 xs = [v for b in d['buildings'] for v in b['p'][0::2]]; ys = [v for b in d['buildings'] for v in b['p'][1::2]]
-X0, X1 = max(min(xs), -600) - 30, min(max(xs), 1400) + 30; Y0, Y1 = max(min(ys), -900) - 30, min(max(ys), 2100) + 30
+X0, X1 = min(xs) - 30, max(xs) + 30; Y0, Y1 = min(ys) - 30, max(ys) + 30   # every building on the map
 def merc(x, y):
     lon = lon0 + x/MX; lat = lat0 + y/MY
     return R*math.radians(lon), R*math.log(math.tan(math.pi/4 + math.radians(lat)/2))

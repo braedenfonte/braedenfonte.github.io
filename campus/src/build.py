@@ -9,6 +9,11 @@ if ev is d['elev']:
   except FileNotFoundError: pass
 try: LID = {(round(m['cx']), round(m['cy'])): m for m in json.load(open(__file__.replace('build.py', 'lidar-buildings.json')))}   # lidar_heights.py output
 except FileNotFoundError: LID = {}
+def lid(cx, cy):   # LiDAR record whose footprint centroid matches (tolerant to float rounding)
+    for k in ((round(cx + dx), round(cy + dy)) for dx in (-0.4, 0, 0.4) for dy in (-0.4, 0, 0.4)):
+        m = LID.get(k)
+        if m and abs(m['cx'] - cx) < 0.3 and abs(m['cy'] - cy) < 0.3: return m
+TOWERS = {'Taylor Hall', 'Cadet Chapel', 'Thayer Hotel', 'Bartlett Hall', 'Holy Innocents Church'}
 def ring(g): return [(g[i]/10, g[i+1]/10) for i in range(0, len(g), 2)]
 def area(p): return abs(sum(p[i][0]*p[(i+1)%len(p)][1] - p[(i+1)%len(p)][0]*p[i][1] for i in range(len(p))))/2
 def cen(p): return (sum(q[0] for q in p)/len(p), sum(q[1] for q in p)/len(p))
@@ -44,11 +49,13 @@ for e in E:
             q = poly(p, 0.5)
             if not q or area(q) < 30: continue
             name = RENAME.get(t.get('name'), t.get('name')); a = area(q)
+            if name in ('Johnson Stadium', 'Trophy Point Amphitheatre'): continue   # open stands / seating, not roofed buildings (LiDAR shows no roof)
             h = HEIGHT.get(name) or (float(t['height']) if 'height' in t else float(t['building:levels'])*3.6 if 'building:levels' in t else 5.5 if a < 150 else 8 if a < 500 else 12 if a < 1800 else 16)
             if t['building'] == 'roof': h = 6
             b = {'h': h, 'p': flat(q)}
-            fx, fy = b['p'][0::2], b['p'][1::2]; m = LID.get((round(sum(fx)/len(fx)), round(sum(fy)/len(fy))))
-            if m and m['best_cover'] >= 0.6 and m['pts'] >= 50: b['r'], b['t'] = round(m['ground'] + m['main'], 1), round(m['ground'] + m['top'], 1)   # measured roof / highest point, metres above sea level (2022 LiDAR)
+            fx, fy = b['p'][0::2], b['p'][1::2]; m = lid(sum(fx)/len(fx), sum(fy)/len(fy))
+            if m and m['best_cover'] >= 0.6 and m['pts'] >= 50: b['r'], b['t'] = round(m['ground'] + m['main'], 1), round(m['ground'] + m['top'], 1)
+            if m and m.get('tw') and 'r' in b and name in TOWERS: b['tw'] = m['tw']   # only real towers; other raised clusters are trees over roofs   # measured roof / highest point, metres above sea level (2022 LiDAR)
             if name: b['n'] = name
             kind = 'barracks' if name and 'Barracks' in name else 'house' if (a < 320 and not name) else 'hall'
             b['k'] = kind; B.append(b)
