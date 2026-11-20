@@ -1,7 +1,7 @@
 // Builds data/days.json, which Braeden's iPhone Shortcuts read.
 // For every date in routines/day-codes.json:
 //   "alarm": "on" on class days, "off" on weekends / N/A days
-//   "7", "8", "10", "14": class reminder text for the automation that fires in that hour
+//   "0730", "0835", "0855", "1025", "1400": class reminder text, keyed by when the reminder fires
 //     (10 minutes before class: 7:30, 8:35 or 8:55, 10:25, 2:00 PM)
 // Run after day-codes.json changes:  node tools/makedays.js
 const fs = require("fs"), path = require("path");
@@ -11,7 +11,7 @@ const codes = JSON.parse(fs.readFileSync(path.join(__dirname, "../routines/day-c
 const NAME = {MA376:"Stats (MA376)", SS388:"Macro (SS388)", EM481:"Simulation (EM481)",
               MA481X:"Optimization (MA481X)", MA486:"MA486", MS300:"MS300"};
 const pretty = hm => { let h = +hm.slice(0,2); const m = hm.slice(2); const ap = h >= 12 ? "PM" : "AM"; if (h > 12) h -= 12; return h + ":" + m + " " + ap; };
-const hourOfReminder = hm => { const mins = +hm.slice(0,2)*60 + +hm.slice(2) - 10; return String(Math.floor(mins/60)); };
+const hourOfReminder = hm => { const mins = +hm.slice(0,2)*60 + +hm.slice(2) - 10; return String(Math.floor(mins/60)).padStart(2,"0") + String(mins%60).padStart(2,"0"); };
 
 const out = {};
 for (const ds of Object.keys(codes).sort()){
