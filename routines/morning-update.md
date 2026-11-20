@@ -4,7 +4,7 @@ Refresh the daily data, the study decks and the weekend flight deals, then commi
 Follow `routines/common.md` (Canvas, run log, alerts, committing). Routine name for the log: `morning-update`.
 
 Edit ONLY: `data/daily.json`, `data/places_history.json`, `data/bills.json`, `data/finance.enc`,
-`data/study.enc`, `data/trip.enc`, `data/brief.json`, `routines/runs.log`. Keep every field name exactly as in the current files (read them
+`data/study.enc`, `data/trip.enc`, `data/brief.json`, `data/alarm.txt`, `routines/runs.log`. Keep every field name exactly as in the current files (read them
 first and use them as templates). Set "updated" in daily.json to the current ISO time with offset.
 If one part fails, keep that part's previous content, finish the others, and log which part failed.
 
@@ -141,8 +141,22 @@ alerts (each one short line, else []):
   for the cheapest one only.
 Validate it with the others in part 8.
 
+## 7d) Alarm script (data/alarm.txt, PUBLIC, plain text read aloud by his iPhone alarm Shortcut)
+Write it every run right after brief.json, from the same data plus `node tools/daypicks.js`. Rules: written
+to be HEARD, so full sentences, no emojis, no bullets, no symbols (say "at seven forty" not "0740", "Wednesday" not
+"Wed"), under about 120 words. Same privacy rules as brief.json. Shape:
+Good morning Braeden. It's Friday, November 20th. Day 2.
+Today you have MA486 at seven forty, MA481X at eight forty-five, and MS300 at ten thirty-five.
+Due this week: MA376 Memo 5 on Wednesday, and SS388 Quiz 5 on Friday.
+Coming up: SS388 WPR 2 on December 2nd.
+Army plays Navy Saturday at three. The Bills are 8 and 1. The S&P 500 was up four tenths of a percent.
+Song of the day: Hotline Bling by Drake.
+Quote of the day: "Do what you can, with what you have, where you are." Theodore Roosevelt.
+Now get up and go win the day.
+Skip any sentence with nothing in it. Start with any alerts ("Heads up: ...").
+
 ## 8) Validate and publish
-Run `python3 -c "import json;[json.load(open(f)) for f in ['data/daily.json','data/bills.json','data/places_history.json','data/finance.enc','data/study.enc','data/trip.enc','data/brief.json']]"`
+Run `python3 -c "import json;[json.load(open(f)) for f in ['data/daily.json','data/bills.json','data/places_history.json','data/finance.enc','data/study.enc','data/trip.enc','data/brief.json']]"` and check data/alarm.txt is not empty,
 and fix any error. `git status`: only the allowed files changed, no plain finance/study JSON staged.
 Append the run log line (common.md), then commit everything ONCE with message "Morning update YYYY-MM-DD"
 (name any skipped or failed part) and push as in common.md. Alert only on failure.
