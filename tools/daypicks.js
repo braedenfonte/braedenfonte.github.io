@@ -8,16 +8,18 @@ const root = path.join(__dirname, "..");
 const arg = process.argv[2] || new Date().toLocaleDateString("en-CA", {timeZone: "America/New_York"});
 const [y, m, d] = arg.split("-").map(Number);
 const n = Math.round((Date.UTC(y, m - 1, d) - Date.UTC(2026, 0, 1)) / 864e5);
-const pick = list => list[((n % list.length) + list.length) % list.length];
+const pick = (list, shift = 0) => { const i = n + shift; return list[((i % list.length) + list.length) % list.length]; };
+// per-date swaps (data/picks.json), same as the website
+const P = JSON.parse(fs.readFileSync(path.join(root, "data/picks.json"), "utf8"));
 
 // 2) song list lives inside js/app.js, so read it from there
 const app = fs.readFileSync(path.join(root, "js/app.js"), "utf8");
 const block = app.slice(app.indexOf("const SONGS = ["), app.indexOf("function renderSong"));
 const SONGS = eval(block.replace("const SONGS =", "(") .replace(/;\s*$/, "") + ")");
-const s = pick(SONGS);
+const s = pick(SONGS, (P.song || {})[arg] || 0);
 
 // 3) quotes live in data/quotes.json
-const q = pick(JSON.parse(fs.readFileSync(path.join(root, "data/quotes.json"), "utf8")).quotes);
+const q = pick(JSON.parse(fs.readFileSync(path.join(root, "data/quotes.json"), "utf8")).quotes, (P.quote || {})[arg] || 0);
 
 // 4) compliment of the day (alarm only) lives in data/compliments.json
 const c = pick(JSON.parse(fs.readFileSync(path.join(root, "data/compliments.json"), "utf8")).compliments);

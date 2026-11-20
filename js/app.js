@@ -1051,10 +1051,14 @@ function renderBills(){
 
 /* ---------- quote of the day ---------- */
 let QUOTES = [{q:"What stands in the way becomes the way.", a:"Marcus Aurelius"}];
+/* per-date swaps for the song/quote of the day (data/picks.json) */
+let PICKS = {song:{}, quote:{}};
+const pickKey = () => { const d = new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); };
+try { fetch("/data/picks.json").then(r => r.json()).then(j => { PICKS = {song:j.song||{}, quote:j.quote||{}}; renderQuote(); renderSong(); }).catch(() => {}); } catch(e){}
 function renderQuote(){
   if (!$("#quoteText")) return;
   const d = new Date(), n = Math.floor((new Date(d.getFullYear(),d.getMonth(),d.getDate()) - new Date(2026,0,1))/864e5);
-  const q = QUOTES[((n % QUOTES.length) + QUOTES.length) % QUOTES.length];
+  const m = n + (PICKS.quote[pickKey()] || 0), q = QUOTES[((m % QUOTES.length) + QUOTES.length) % QUOTES.length];
   $("#quoteText").textContent = "“"+q.q+"”"; $("#quoteBy").textContent = "— "+q.a;
 }
 try { fetch("/data/quotes.json").then(r => r.json()).then(j => { if (j.quotes && j.quotes.length){ QUOTES = j.quotes; renderQuote(); } }).catch(() => {}); } catch(e){}
@@ -1521,7 +1525,7 @@ const SONGS = [
 ].filter(s => s[2] >= 2010 && s[2] <= 2023);
 function renderSong(){
   const now = new Date(), day = Math.floor((new Date(now.getFullYear(), now.getMonth(), now.getDate()) - new Date(2026,0,1)) / 864e5);
-  const s = SONGS[((day % SONGS.length) + SONGS.length) % SONGS.length], q = encodeURIComponent(s[0]+" "+s[1].split(" ft.")[0]);
+  const dd = day + (PICKS.song[pickKey()] || 0), s = SONGS[((dd % SONGS.length) + SONGS.length) % SONGS.length], q = encodeURIComponent(s[0]+" "+s[1].split(" ft.")[0]);
   $("#songCard").innerHTML = '<div class="disc" aria-hidden="true"></div><div style="min-width:0"><span class="eyebrow">Song of the day</span><h3>'+esc(s[0])+'</h3><div class="meta">'+esc(s[1])+' · '+s[2]+' · '+esc(s[3])+'</div>'+
     (s[4] ? '<p class="fact">'+esc(s[4])+'</p>' : '')+
     '<div class="acts"><a class="small-btn" href="https://open.spotify.com/search/'+q+'" target="_blank" rel="noopener">Spotify ↗</a><a class="small-btn" href="https://music.apple.com/us/search?term='+q+'" target="_blank" rel="noopener">Apple Music ↗</a><a class="small-btn" href="https://www.youtube.com/results?search_query='+q+'" target="_blank" rel="noopener">YouTube ↗</a><a class="small-btn" href="https://genius.com/search?q='+q+'" target="_blank" rel="noopener">Chorus lyrics on Genius ↗</a></div></div>';

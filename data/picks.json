@@ -1,0 +1,5 @@
+{
+ "_note": "Per-date shift for song/quote of the day (used by js/app.js and tools/daypicks.js). Add a date to swap that day's pick.",
+ "song": {"2026-11-20": 26},
+ "quote": {"2026-11-20": 40}
+}
