@@ -29,10 +29,12 @@ d.setAttribute("data-mode",lite?"lite":"3d");window.BF_MODE={pref:m,lite:lite,wh
 <link rel="preload" href="/vendor/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/site.css?v=20261115games">
 <link rel="stylesheet" href="/css/shell.css?v=20261119d">
+<link rel="stylesheet" href="/css/walkhours.css?v=20261119a">
 <script defer src="/js/mapdata.js?v=20261113"></script>
 <script defer src="/js/app.js?v=20261116courses"></script>
 <script defer src="/js/campusmap.js?v=20261120a"></script>
 <script defer src="/js/shell.js?v=20261120a"></script>
+<script defer src="/js/walkhours.js?v=20261119a"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -332,6 +334,7 @@ d.setAttribute("data-mode",lite?"lite":"3d");window.BF_MODE={pref:m,lite:lite,wh
 <!-- SCHEDULE -->
 <section class="view" id="v-schedule">
   <div class="page-h"><span class="eyebrow">AY27-1 Calendar</span><h2>Schedule</h2><p>Every due date, exam, game, and Corps event this term. Tap any event for a live countdown, and star the ones you want on the Home page.</p></div>
+  <div class="panel walk" id="walkBox"></div>
   <div class="panel next-hero" id="nextHero"></div>
   <div class="toolbar">
     <div class="seg" role="tablist" aria-label="Schedule view">
