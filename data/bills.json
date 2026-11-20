@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19T06:35:27-05:00",
+ "updated": "2026-11-20T06:50:00-05:00",
  "team": "Buffalo Bills",
  "record": {
   "w": 8,
@@ -122,20 +122,20 @@
  },
  "news": [
   {
-   "h": "Benford, Alford, Williams and Kincaid sit out Wednesday",
-   "b": "The Bills opened Miami week with a walk-through on Wednesday. CB Christian Benford (groin), CB Dee Alford (concussion), LB Dorian Williams (calf), TE Dalton Kincaid (thumb/ankle) and G O'Cyrus Torrence (personal) did not take part. Safeties Cole Bishop, Amani Hooker and Damar Hamlin were limited, and head coach Joe Brady said he'd know more about Benford later in the week."
+   "h": "Benford, Kincaid, Williams and Hamlin miss Thursday practice",
+   "b": "CB Christian Benford (groin), TE Dalton Kincaid (thumb/ankle), LB Dorian Williams (calf) and S Damar Hamlin (toe) did not practice Thursday, and Benford, Kincaid and Williams have now missed both days. CB Dee Alford (concussion) was limited in a red non-contact jersey, G O'Cyrus Torrence (personal) was back as a full participant, and S Cole Bishop (shoulder) moved up to full. Game statuses come out with Friday's report."
   },
   {
-   "h": "WR Tyrell Shavers activated to 53-man roster",
-   "b": "Buffalo activated Tyrell Shavers on Wednesday, finishing his comeback from an ACL tear suffered in last season's Wild Card game at Jacksonville. His practice window opened Oct. 28, and he is eligible to play Sunday, though Brady said a decision on his game-day status will come later. Shavers had 23 catches for 245 yards and a TD in 2025."
+   "h": "Tyrell Shavers practicing in full after activation",
+   "b": "Activated to the 53-man roster on Wednesday, WR Tyrell Shavers was a full participant Wednesday and Thursday as he returns from the ACL tear he suffered in last season's Wild Card game at Jacksonville. Joe Brady said a decision on his game-day status would come later in the week. Shavers had 23 catches for 245 yards and a TD in 2025."
+  },
+  {
+   "h": "Dolphins banged up on special teams, still need a kicker",
+   "b": "Miami (1-8) waived K Zane Gonzalez on Nov. 16 after he missed two field goals and an extra point in a 24-22 loss at Indianapolis, and Jeff Hafley said the team would pick a replacement during the week. Punter Bradley Pinion (groin) did not practice Wednesday or Thursday, long snapper Tucker Addington (shoulder) was limited, and C Aaron Brewer (concussion) was limited Thursday."
   },
   {
    "h": "'One game at a time' with Thanksgiving looming",
    "b": "At 8-1 and on a five-game winning streak, Josh Allen called Sunday \"another opportunity to go 1-0 against a division opponent,\" with the Chiefs coming to town on Thanksgiving night. Ed Oliver has only one sack, but since Week 8 he ranks second in the NFL with 16 pressures and has a 23.5% pressure rate, per TruMedia."
-  },
-  {
-   "h": "Miami looking for a kicker; Bills 16.5-point favorites",
-   "b": "The Dolphins (1-8) waived K Zane Gonzalez on Nov. 16, a day after he missed two field goals and an extra point in a 24-22 loss at Indianapolis. Jeff Hafley said Miami had two kickers in mind and would decide during the week. DraftKings lists Buffalo at -16.5, with a -1450 moneyline and a 45.5 total."
   }
  ],
  "schedule": [
@@ -196,5 +196,5 @@
    "note": "Date and time may flex"
   }
  ],
- "source": "buffalobills.com Week 11 practice report and Shavers activation (Nov 18); SI/DraftKings odds (Nov 17); TSN/AP on Dolphins waiving Gonzalez (Nov 16); no AFC East games since Nov 15 (Thursday game is Colts at Texans)."
+ "source": "buffalobills.com Week 11 injury report (Wed/Thu, Bills and Dolphins) and Shavers activation; SI Bills OnSI Thursday practice update (Nov 19); UPI on Dolphins waiving Gonzalez (Nov 16); ESPN standings checked Nov 20 (no AFC East game Thursday; Colts beat Texans 26-3)."
 }

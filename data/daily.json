@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19T06:37:53-05:00",
+ "updated": "2026-11-20T07:05:00-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -549,11 +549,11 @@
     ]
    },
    {
-    "away": "San José State",
+    "away": "San Jos\u00e9 State",
     "home": "Air Force",
     "as": 3,
     "hs": 24,
-    "blurb": "Air Force's defense held San José State to a field goal at Falcon Stadium.",
+    "blurb": "Air Force's defense held San Jos\u00e9 State to a field goal at Falcon Stadium.",
     "stats": [
      "Evan Medders: 13 carries, 146 yds, TD",
      "Luke Weaver (SJSU): 11/24, 138 yds"
@@ -565,27 +565,27 @@
     "away": "Oregon",
     "home": "Michigan State",
     "kick": "2026-11-21T01:00:00Z",
-    "note": "Fri · FOX",
+    "note": "Fri \u00b7 FOX",
     "awayRank": 14
    },
    {
     "away": "UTEP",
     "home": "Air Force",
     "kick": "2026-11-21T01:00:00Z",
-    "note": "Fri · The CW · Falcon Stadium"
+    "note": "Fri \u00b7 The CW \u00b7 Falcon Stadium"
    },
    {
     "away": "East Carolina",
     "home": "Army",
     "kick": "2026-11-21T17:00:00Z",
-    "note": "Home at Michie Stadium · CBSSN",
+    "note": "Home at Michie Stadium \u00b7 CBSSN",
     "army": true
    },
    {
     "away": "Memphis",
     "home": "Navy",
     "kick": "2026-11-21T17:00:00Z",
-    "note": "ESPN2 · Navy-Marine Corps Memorial Stadium",
+    "note": "ESPN2 \u00b7 Navy-Marine Corps Memorial Stadium",
     "awayRank": 24
    },
    {
@@ -704,107 +704,107 @@
   "poll": "AP Top 25, Week 12 (Nov 16)"
  },
  "location": {
-  "name": "Kyoto",
-  "wiki": "Kyoto",
-  "country": "Japan",
-  "region": "Kansai, Honshu",
-  "lat": 35.0116,
-  "lon": 135.7681,
-  "tagline": "Japan's imperial capital for over a thousand years, with about 2,000 temples and shrines",
-  "intro": "Kyoto was chosen as Japan's imperial seat in 794, when it was called Heian-kyō, and it stayed the capital until the move to Tokyo in 1869. Today it is a city of about 1.4 million people that still holds roughly 2,000 temples and shrines, from the gold-covered Kinkaku-ji to the torii tunnels of Fushimi Inari. Seventeen of its historic monuments were listed together as a UNESCO World Heritage Site in 1994.",
+  "name": "Lalibela",
+  "wiki": "Lalibela",
+  "country": "Ethiopia",
+  "region": "North Wollo Zone, Amhara Region",
+  "lat": 12.0317,
+  "lon": 39.0411,
+  "tagline": "A highland town of 11 churches carved straight down into solid rock",
+  "intro": "Lalibela sits about 2,500 m up in Ethiopia's northern highlands. Its 11 medieval churches were not built but hewn out of the volcanic rock, mostly in the 12th and 13th centuries, and tradition credits King Gebre Meskel Lalibela of the Zagwe dynasty. They are still working churches and one of the holiest pilgrimage sites in Ethiopian Orthodox Christianity.",
   "stats": [
    {
+    "label": "Rock-hewn churches",
+    "value": "11"
+   },
+   {
+    "label": "Elevation",
+    "value": "about 2,500 m (8,200 ft)"
+   },
+   {
     "label": "Population",
-    "value": "1.43 million (2026)"
-   },
-   {
-    "label": "Area",
-    "value": "828 km² (320 sq mi)"
-   },
-   {
-    "label": "Imperial capital",
-    "value": "794 to 1869"
+    "value": "17,367 (2007 census)"
    },
    {
     "label": "World Heritage",
-    "value": "17 monuments, listed 1994"
+    "value": "Listed 1978"
    }
   ],
   "facts": [
-   "Kyoto was on the US list of atomic-bomb targets in 1945; Secretary of War Henry Stimson insisted it be removed, and Nagasaki took its place.",
-   "Fushimi Inari-taisha has roughly 10,000 torii gates, each donated by a Japanese business; the trails up Mount Inari take about 2 hours to walk.",
-   "The Golden Pavilion you see today dates only from 1955: a 22-year-old novice monk burned the original down in 1950.",
-   "When Kinkaku-ji was regilded in 1986-87, the new gold leaf was five times thicker than the original and weighed 20 kg.",
-   "Nintendo is headquartered in Kyoto, and the 1997 Kyoto Protocol on greenhouse gas emissions was signed at a conference here."
+   "Tradition says King Lalibela set out to build a second Jerusalem in Ethiopia, and the churches' layout and names symbolically echo Jerusalem.",
+   "Biete Medhane Alem is believed to be the largest monolithic church in the world.",
+   "The Church of Saint George (Bete Giyorgis) is cut in the shape of a cross and is considered the most finely executed and best preserved of the group.",
+   "The dating is still debated: one archaeologist argues some of the churches were carved around 600 to 800 CE, centuries before King Lalibela.",
+   "Many churches have wells beside them, fed by an artesian system that brings water up to the ridge the town sits on."
   ],
-  "bestTime": "Late March to early April for cherry blossoms and mid-November to early December for fall colors; both are busy, so book early. Summers are hot and humid.",
-  "gettingThere": "Fly nonstop from JFK or Newark to Tokyo (Haneda or Narita), then take the Tokaido Shinkansen to Kyoto Station, about 2 hours 15 minutes on the Nozomi. Or connect to Osaka's Kansai Airport and ride the Haruka express to Kyoto.",
-  "tip": "Start at Fushimi Inari at sunrise, before the tour groups, and walk past the first gates up the mountain: the crowds thin out fast the higher you go."
+  "bestTime": "October to March (dry season). Genna (Jan 7) and Timkat (Jan 19) bring huge pilgrim crowds.",
+  "gettingThere": "Fly Ethiopian Airlines from Newark to Addis Ababa (about 13 to 14 hours), then take a roughly one-hour domestic flight to Lalibela.",
+  "tip": "Check the State Department advisory first: the Amhara region has seen fighting since 2023. Go with a local guide, and bring socks since shoes come off inside every church."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 9 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
-  "asOf": "Wed Nov 18 close",
-  "story": "The S&P 500 slipped for a fifth straight day, its longest losing streak since June, as investors questioned how much room the AI boom has left and Nvidia gave up an early gain after its earnings report. Lower oil prices weighed on energy stocks, while TJX and Target rallied on better-than-expected results.",
+  "asOf": "Thu Nov 19 close",
+  "story": "The S&P 500 fell 2% for a sixth straight loss, its longest losing streak since 2024, as AI stocks kept sliding on worries the boom may be over; more than 90% of S&P 500 stocks fell. Anthropic got a strong welcome in its Nasdaq debut, but it did not offset the broader losses.",
   "indices": [
    {
     "name": "S&P 500",
-    "value": "7,324",
-    "chg": -0.23
+    "value": "7,176",
+    "chg": -2.02
    }
   ],
   "movers": [
    {
-    "sym": "NVDA",
-    "move": "−2.9%",
-    "dir": -1,
-    "why": "Nvidia rose as much as 2.7% after beating profit and revenue estimates and forecasting a better-than-expected quarter, then reversed amid uncertainty over growth after Jensen Huang's exit."
-   },
-   {
-    "sym": "TJX",
-    "move": "+8%",
+    "sym": "ANT",
+    "move": "IPO",
     "dir": 1,
-    "why": "TJX rallied after reporting slightly better-than-expected earnings."
+    "why": "Anthropic began trading on Nasdaq after pricing its IPO at $83 a share, above its $70 to $78 range."
    },
    {
-    "sym": "TGT",
+    "sym": "UNH",
+    "move": "\u221210%",
+    "dir": -1,
+    "why": "UnitedHealth fell after regulators proposed expanding Medicare Advantage audits to recover about $9 billion a year in overpayments."
+   },
+   {
+    "sym": "HUM",
+    "move": "\u221213%",
+    "dir": -1,
+    "why": "Humana dropped on the same Medicare audit proposal, a second straight down day for insurers."
+   },
+   {
+    "sym": "NVDA",
+    "move": "\u22123%",
+    "dir": -1,
+    "why": "Nvidia slipped again, a fifth straight loss, despite record quarterly revenue."
+   },
+   {
+    "sym": "AMZN",
     "move": "+4%",
     "dir": 1,
-    "why": "Target climbed after a better-than-expected profit report that included its strongest quarterly sales gain in about five years."
-   },
-   {
-    "sym": "TTWO",
-    "move": "+6.2%",
-    "dir": 1,
-    "why": "Take-Two rose on glowing reviews of its latest Grand Theft Auto game."
-   },
-   {
-    "sym": "XOM",
-    "move": "−4%",
-    "dir": -1,
-    "why": "ExxonMobil fell as Brent crude dropped 1.3% to $91.95 a barrel."
+    "why": "Amazon rose, a move tied to its investment in Anthropic on debut day."
    }
   ],
   "lines": [
    {
     "game": "East Carolina @ Army",
     "kick": "2026-11-21T17:00:00Z",
-    "spread": "ARMY −6",
+    "spread": "ARMY \u22126",
     "total": "45.5",
-    "ml": "ARMY −230 / ECU +190"
+    "ml": "ARMY \u2212230 / ECU +190"
    },
    {
     "game": "UCLA @ Michigan",
     "kick": "2026-11-21T20:30:00Z",
-    "spread": "UCLA −3.5",
+    "spread": "UCLA \u22123.5",
     "total": "37.5",
-    "ml": "UCLA −175 / MICH +145"
+    "ml": "UCLA \u2212175 / MICH +145"
    },
    {
     "game": "Dolphins @ Bills",
     "kick": "2026-11-22T18:00:00Z",
-    "spread": "BUF −16.5",
+    "spread": "BUF \u221216.5",
     "total": "45.5",
-    "ml": "BUF −1450 / MIA +850",
+    "ml": "BUF \u22121450 / MIA +850",
     "bills": true
    }
   ],
@@ -835,6 +835,6 @@
     "p": 94
    }
   ],
-  "sources": "S&P 500, story and movers: AP and CNBC (Nov 18); odds: DraftKings via ESPN (Nov 19); probs: ESPN FPI (Nov 19)."
+  "sources": "S&P 500 and story: AP via La Naci\u00f3n and Stock Analysis (Nov 19); movers: Mitrade and Stock Analysis (Nov 19); odds: DraftKings via ESPN (Nov 19); probs: ESPN FPI (Nov 19)."
  }
 }
