@@ -113,9 +113,12 @@ EXT = 0
 h2 = []
 for j in range(rows): h2 += [(-3.0 if water[j*cols + i] else max(h[j*cols + i], 1.3)) for i in range(cols)] + [-3.0]*EXT
 print('river level', LEVEL, 'water share', round(sum(water)/len(water), 3)); h = h2; ev = dict(ev, cols=cols + EXT)
-out = {'src': 'Map data (c) OpenStreetMap contributors, ODbL. Terrain: Mapzen/AWS terrain tiles (USGS 3DEP).', 'lat0': d['lat0'], 'lon0': d['lon0'],
+try: TR = json.load(open(__file__.replace('build.py', 'lidar-trees.json')))   # lidar_trees.py: real canopy positions + heights
+except FileNotFoundError: TR = []
+TR = [round(v) for v in TR]
+out = {'src': 'Map data (c) OpenStreetMap contributors, ODbL. Terrain and building/tree heights: USGS 3DEP 1 m DEM and 2022 LiDAR.', 'lat0': d['lat0'], 'lon0': d['lon0'],
        'elev': {'cols': ev['cols'], 'rows': ev['rows'], 'x0': ev['x0'], 'y0': ev['y0'], 'step': ev['step'], 'h': [round(v, 1) for v in h]},
-       'buildings': B, 'roads': R, 'areas': A, 'nodes': N}
+       'buildings': B, 'roads': R, 'areas': A, 'nodes': N, 'trees': TR}
 s = json.dumps(out, separators=(',', ':')); open(sys.argv[1], 'w').write(s)
 print(len(s), 'bytes |', len(B), 'buildings', len(R), 'roads', len(A), 'areas', len(N), 'nodes | gz', len(gzip.compress(s.encode())))
 for n in ['Pershing Barracks','Bradley Barracks','Davis Barracks','Eisenhower Barracks','Ridgway Barracks','MacArthur Barracks','Scott Barracks','Sherman Barracks','Grant Barracks','Washington Hall','Jefferson Hall Library','Thayer Hall','Taylor Hall','Cadet Chapel','Thayer Gate','Thayer Hotel','Eisenhower Hall','Arvin Gymnasium']:
