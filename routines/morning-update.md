@@ -4,7 +4,7 @@ Refresh the daily data, the study decks and the weekend flight deals, then commi
 Follow `routines/common.md` (Canvas, run log, alerts, committing). Routine name for the log: `morning-update`.
 
 Edit ONLY: `data/daily.json`, `data/places_history.json`, `data/bills.json`, `data/finance.enc`,
-`data/study.enc`, `data/trip.enc`, `data/brief.json`, `data/alarm.txt`, `routines/runs.log`. Keep every field name exactly as in the current files (read them
+`data/study.enc`, `data/trip.enc`, `data/brief.json`, `data/alarm.txt`, `data/tonight.txt`, `routines/runs.log`. Keep every field name exactly as in the current files (read them
 first and use them as templates). Set "updated" in daily.json to the current ISO time with offset.
 If one part fails, keep that part's previous content, finish the others, and log which part failed.
 
@@ -168,8 +168,13 @@ Today: M A four eighty-six at seven forty, and Optimization at eight forty-five.
 Next 3 days: your Optimization briefing this morning, Stats Memo 5 Sunday, then a Macro quiz and Macro homework Monday.
 Go win the day.
 
+## 7e) Barracks note (data/tonight.txt, PUBLIC, shown as a phone notification when he gets back to Pershing)
+Write it every run right after alarm.txt. ONE short written line (under 160 characters, no emojis), the tests/quizzes
+and assignments due in the next 3 days from brief.json, soonest first, by nickname, plus any data/todos.json sessions
+dated today. Example: "Tonight: Stats Memo 5 (Sun) · Macro Quiz 5 + HW 5 (Mon)". Nothing due: "Nothing due in the next 3 days. Go relax."
+
 ## 8) Validate and publish
-Run `python3 -c "import json;[json.load(open(f)) for f in ['data/daily.json','data/bills.json','data/places_history.json','data/finance.enc','data/study.enc','data/trip.enc','data/brief.json']]"` and check data/alarm.txt is not empty,
+Run `python3 -c "import json;[json.load(open(f)) for f in ['data/daily.json','data/bills.json','data/places_history.json','data/finance.enc','data/study.enc','data/trip.enc','data/brief.json']]"` and check data/alarm.txt and data/tonight.txt are not empty,
 and fix any error. `git status`: only the allowed files changed, no plain finance/study JSON staged.
 Append the run log line (common.md), then commit everything ONCE with message "Morning update YYYY-MM-DD"
 (name any skipped or failed part) and push as in common.md. Alert only on failure.

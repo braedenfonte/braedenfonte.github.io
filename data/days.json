@@ -1,0 +1,653 @@
+{
+ "2026-08-15": {
+  "alarm": "off"
+ },
+ "2026-08-16": {
+  "alarm": "off"
+ },
+ "2026-08-17": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-08-18": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-08-19": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-08-20": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-08-21": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "alarm": "on",
+  "drops": "MS300"
+ },
+ "2026-08-22": {
+  "alarm": "off"
+ },
+ "2026-08-23": {
+  "alarm": "off"
+ },
+ "2026-08-24": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-08-25": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-08-26": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-08-27": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-08-28": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "alarm": "on",
+  "drops": "Macro (SS388), Simulation (EM481)"
+ },
+ "2026-08-29": {
+  "alarm": "off"
+ },
+ "2026-08-30": {
+  "alarm": "off"
+ },
+ "2026-08-31": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-09-01": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-09-02": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-09-03": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-09-04": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "alarm": "on",
+  "drops": "MS300"
+ },
+ "2026-09-05": {
+  "alarm": "off"
+ },
+ "2026-09-06": {
+  "alarm": "off"
+ },
+ "2026-09-07": {
+  "alarm": "off"
+ },
+ "2026-09-08": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-09-09": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-09-10": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-09-11": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-09-12": {
+  "alarm": "off"
+ },
+ "2026-09-13": {
+  "alarm": "off"
+ },
+ "2026-09-14": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-09-15": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-09-16": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-09-17": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-09-18": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "alarm": "on",
+  "drops": "Macro (SS388), Simulation (EM481)"
+ },
+ "2026-09-19": {
+  "alarm": "off"
+ },
+ "2026-09-20": {
+  "alarm": "off"
+ },
+ "2026-09-21": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-09-22": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-09-23": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-09-24": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-09-25": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "alarm": "on",
+  "drops": "MS300"
+ },
+ "2026-09-26": {
+  "alarm": "off"
+ },
+ "2026-09-27": {
+  "alarm": "off"
+ },
+ "2026-09-28": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-09-29": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-09-30": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-10-01": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-10-02": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "alarm": "on",
+  "drops": "Macro (SS388), Simulation (EM481)"
+ },
+ "2026-10-03": {
+  "alarm": "off"
+ },
+ "2026-10-04": {
+  "alarm": "off"
+ },
+ "2026-10-05": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-10-06": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-10-07": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-10-08": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-10-09": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "alarm": "on",
+  "drops": "MS300"
+ },
+ "2026-10-10": {
+  "alarm": "off"
+ },
+ "2026-10-11": {
+  "alarm": "off"
+ },
+ "2026-10-12": {
+  "alarm": "off"
+ },
+ "2026-10-13": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-10-14": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-10-15": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-10-16": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-10-17": {
+  "alarm": "off"
+ },
+ "2026-10-18": {
+  "alarm": "off"
+ },
+ "2026-10-19": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-10-20": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-10-21": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-10-22": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-10-23": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "alarm": "on",
+  "drops": "Macro (SS388), Simulation (EM481)"
+ },
+ "2026-10-24": {
+  "alarm": "off"
+ },
+ "2026-10-25": {
+  "alarm": "off"
+ },
+ "2026-10-26": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-10-27": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-10-28": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-10-29": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-10-30": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "alarm": "on",
+  "drops": "MS300"
+ },
+ "2026-10-31": {
+  "alarm": "off"
+ },
+ "2026-11-01": {
+  "alarm": "off"
+ },
+ "2026-11-02": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-11-03": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-11-04": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-11-05": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-11-06": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "alarm": "on",
+  "drops": "Macro (SS388), Simulation (EM481)"
+ },
+ "2026-11-07": {
+  "alarm": "off"
+ },
+ "2026-11-08": {
+  "alarm": "off"
+ },
+ "2026-11-09": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-11-10": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-11-11": {
+  "alarm": "off"
+ },
+ "2026-11-12": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-11-13": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-11-14": {
+  "alarm": "off"
+ },
+ "2026-11-15": {
+  "alarm": "off"
+ },
+ "2026-11-16": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-11-17": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-11-18": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-11-19": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-11-20": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "alarm": "on",
+  "drops": "MS300"
+ },
+ "2026-11-21": {
+  "alarm": "off"
+ },
+ "2026-11-22": {
+  "alarm": "off"
+ },
+ "2026-11-23": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-11-24": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-11-25": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-11-26": {
+  "alarm": "off"
+ },
+ "2026-11-27": {
+  "alarm": "off"
+ },
+ "2026-11-28": {
+  "alarm": "off"
+ },
+ "2026-11-29": {
+  "alarm": "off"
+ },
+ "2026-11-30": {
+  "alarm": "off"
+ },
+ "2026-12-01": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-12-02": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-12-03": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-12-04": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-12-05": {
+  "alarm": "off"
+ },
+ "2026-12-06": {
+  "alarm": "off"
+ },
+ "2026-12-07": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-12-08": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-12-09": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "8": "Macro (SS388) starts at 9:05 AM. Tap to open your prep.",
+  "14": "Simulation (EM481) starts at 2:10 PM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-12-10": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-12-11": {
+  "7": "Stats (MA376) starts at 7:40 AM. Tap to open your prep.",
+  "alarm": "on",
+  "drops": "Macro (SS388), Simulation (EM481)"
+ },
+ "2026-12-12": {
+  "alarm": "off"
+ },
+ "2026-12-13": {
+  "alarm": "off"
+ },
+ "2026-12-14": {
+  "7": "MA486 starts at 7:40 AM. Tap to open your prep.",
+  "8": "Optimization (MA481X) starts at 8:45 AM. Tap to open your prep.",
+  "10": "MS300 starts at 10:35 AM. Tap to open your prep.",
+  "alarm": "on"
+ },
+ "2026-12-15": {
+  "alarm": "off"
+ },
+ "2026-12-16": {
+  "alarm": "off"
+ },
+ "2026-12-17": {
+  "alarm": "off"
+ },
+ "2026-12-18": {
+  "alarm": "off"
+ },
+ "2026-12-19": {
+  "alarm": "off"
+ },
+ "2026-12-20": {
+  "alarm": "off"
+ },
+ "2026-12-21": {
+  "alarm": "off"
+ },
+ "2026-12-22": {
+  "alarm": "off"
+ },
+ "2026-12-23": {
+  "alarm": "off"
+ },
+ "2026-12-24": {
+  "alarm": "off"
+ },
+ "2026-12-25": {
+  "alarm": "off"
+ },
+ "2026-12-26": {
+  "alarm": "off"
+ },
+ "2026-12-27": {
+  "alarm": "off"
+ },
+ "2026-12-28": {
+  "alarm": "off"
+ },
+ "2026-12-29": {
+  "alarm": "off"
+ },
+ "2026-12-30": {
+  "alarm": "off"
+ },
+ "2026-12-31": {
+  "alarm": "off"
+ }
+}

@@ -9,6 +9,19 @@ Follow `routines/common.md` (Canvas, run log, alerts, committing). Routine name 
 - No matter what happens, the run must END by appending a `nightly-prep` line to `routines/runs.log`
   (OK or FAIL with the reason), committing and pushing it, and sending the alert if it failed.
 
+## Rule 1: Phone files, EVERY run (even "no classes tomorrow" runs and failed runs)
+Right before the final commit, always do both (they ride along in the same commit):
+- `node tools/makedays.js` (rebuilds data/days.json for his auto-alarm and class-reminder Shortcuts).
+- Write data/night.txt, the bedtime brief his phone reads aloud when he plugs in at night. PUBLIC, spoken
+  plain text, no emojis/symbols, under 60 words. Classes from `node tools/classes.js <tomorrow>` by nickname
+  (MA376 "Stats", SS388 "Macro", EM481 "Simulation", MA481X "Optimization", MA486 "M A four eighty-six",
+  MS300 "M S three hundred"); due items from data/brief.json "due" that are due by the end of tomorrow;
+  data/todos.json sessions dated tomorrow. Example:
+  "Tomorrow is Monday. You've got Stats at seven forty, Macro at nine oh five, and Simulation at two ten.
+  Due by tomorrow night: Macro Homework 5. Your alarm is set. Phone down, get some sleep."
+  No class tomorrow: "No classes tomorrow. Your alarm is off. Sleep in, you earned it."
+Allowed to commit with these: data/days.json and data/night.txt.
+
 ## Step 1: Is tomorrow a Day 1, a Day 2, or no class?
 West Point alternates Day 1 / Day 2.
 - FIRST check the saved copy: `routines/day-codes.json` ({"YYYY-MM-DD": "1-23" | "2-24" | "N/A"}).
@@ -23,7 +36,7 @@ West Point alternates Day 1 / Day 2.
 - If tomorrow's code still can't be found (not saved and both downloads blocked): build nothing, log
   `FAIL | couldn't tell Day 1/Day 2: <error>. Fix: set Routines environment network access to Full`, alert, finish.
 - If tomorrow is "N/A", a weekend, a holiday or leave: build nothing. Append the log line
-  `OK | No classes tomorrow (<date>)`, commit just routines/runs.log, push, and finish.
+  `OK | No classes tomorrow (<date>)`, do Rule 1 (phone files), commit, push, and finish.
 
 ## Step 2: Pick the courses
 - Run `node tools/classes.js <tomorrow>`. Any course in its "dropped" list is a Friday drop (SS388/EM481/MS300
@@ -52,7 +65,7 @@ Never run Day 1 skills before a Day 2, or Day 2 skills before a Day 1.
   (If the HTML file is gone, read the artifact's index.html with the Artifact tool and pass that.)
   Re-running for the same course and date replaces that sheet. `pip install cryptography` if missing.
 - Validate: `python3 -c "import json;json.load(open('data/prep/manifest.json'))"`.
-- Allowed files to commit: `data/prep/`, `routines/day-codes.json` and `routines/runs.log`. Make sure no plain .json sheet is staged.
+- Allowed files to commit: `data/prep/`, `routines/day-codes.json`, `data/days.json`, `data/night.txt` and `routines/runs.log`. Make sure no plain .json sheet is staged.
 - Append the run log line (common.md) BEFORE committing, then commit once with message
   "Prep sheets <tomorrow's date>: <courses>" and push.
 
