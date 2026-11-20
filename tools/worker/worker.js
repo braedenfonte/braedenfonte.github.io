@@ -374,7 +374,7 @@ async function handleText(env, text) {
   const [todos, brief, codes] = await Promise.all([
     ghJson(env, "data/todos.json"), ghJson(env, "data/brief.json").catch(() => ({ data: {} })),
     ghJson(env, "routines/day-codes.json").catch(() => ({ data: {} }))]);
-  const soon = {}; for (let i = -1; i < 21; i++) {
+  const soon = {}; for (let i = -4; i < 21; i++) {
     const d = etParts(new Date(Date.now() + i * 864e5)).date; const c = codes.data[d] || (codes.data.codes || {})[d];
     soon[d + " " + new Date(d + "T12:00:00Z").toUTCString().slice(0, 3)] = c || "?";
   }
@@ -383,6 +383,7 @@ async function handleText(env, text) {
 Now: ${now.wd} ${now.date} ${now.time} ET.
 Day codes (date: code; "1-30" = Day 1 lesson 30, "2-30" = Day 2, "N/A" = no class): ${JSON.stringify(soon)}
 Class times: Day 1 = MA376 0740, SS388 0905, EM481 1410. Day 2 = MA486 0740, MA481X 0845, MS300 1035.
+Friday drop rule: on a Friday, SS388, MS300 and EM481 are DROPPED (no class) if that Day type already met twice Mon-Thu of the same week. Check the day codes above before listing Friday classes.
 Site to-do list (id, title, tag, sessions): ${JSON.stringify(todos.data.items || [])}
 Today's brief (due = next 7 days of assignments, tests, headlines; may be from an earlier day): ${JSON.stringify(brief.data)}
 Help menu (send it verbatim if he asks for help or what you can do): ${JSON.stringify(HELP)}
