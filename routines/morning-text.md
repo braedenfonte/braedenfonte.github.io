@@ -17,24 +17,22 @@ every section. Leave out any section that has nothing in it (no empty headers).
 ```
 ☀️ Mon Nov 9 · Day 1 (L30)
 
-📚 CLASSES
+📚 TODAY
 MA376 · 0740
 SS388 · 0905
 EM481 · 1410
 
-📝 DUE THIS WEEK
-• MA376 Memo 5 (Wed)
-• SS388 Quiz 5 (Fri)
+⏭️ NEXT SCHOOL DAY · Tue Nov 10 (Day 2)
+MA486 · 0740
+MA481X · 0845
+MS300 · 1035
 
-🎯 TESTS / QUIZZES
-• SS388 WPR 2 (Dec 2)
+📝 DUE IN 3 DAYS
+• MA376 Memo 5 (Wed)
+• SS388 Homework 5 (Thu)
 
 ✅ TO-DO TODAY
 • Turn in Memo 4
-
-🏈 Army @ Navy Sat 3PM
-🦬 Bills 6-2, next vs MIA Sun
-📈 S&P 500 +0.4%
 
 🎵 SONG OF THE DAY
 Hotline Bling · Drake
@@ -42,11 +40,13 @@ Hotline Bling · Drake
 💬 QUOTE OF THE DAY
 “Do what you can, with what you have, where you are.” — Theodore Roosevelt
 ```
-- No classes ("N/A" or weekend): put "📚 No classes today" in place of the Classes section.
+- No classes ("N/A" or weekend): put "📚 No classes today" in place of the Today section.
+- Next school day: the next date after today in routines/day-codes.json that is not "N/A" (Day 1: MA376 0740,
+  SS388 0905, EM481 1410; Day 2: MA486 0740, MA481X 0845, MS300 1035).
+- NO tests/quizzes section, NO Army, NO Bills, NO markets or headlines.
 - Song and quote always go last. Copy them exactly from tools/daypicks.js (song title and artist only, never lyrics).
-- Due list: from brief.json "due" (next 7 days, soonest first, max 6). Quizzes/tests within 14 days.
+- Due list: from brief.json "due", only items due today through 3 days out (soonest first, max 6).
 - To-do today: data/todos.json sessions dated today (max 3).
-- Headlines: brief.json "headlines" (max 3, one line each).
 - Alerts: if brief.json "alerts" is non-empty, start the text with "🚨 ALERT" on its own line, then each alert on its own line, then a blank line.
 
 ## 3) Send, log, done
