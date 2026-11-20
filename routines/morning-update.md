@@ -143,24 +143,28 @@ Validate it with the others in part 8.
 
 ## 7d) Alarm script (data/alarm.txt, PUBLIC, plain text read aloud by his iPhone alarm Shortcut)
 Write it every run right after brief.json, from the same data plus `node tools/daypicks.js`. Rules: written
-to be HEARD, so full sentences, no emojis, no bullets, no symbols (say "at seven forty" not "0740", "Sunday night" not
-"2026-11-22T23:59"), under about 100 words. Same privacy rules as brief.json.
-Only these parts, in this order (skip any with nothing in it):
-1. Greeting, date and day code. Any alerts next ("Heads up: ...").
-2. Today's classes (or "No classes today").
-3. The next school day's classes: the next date after today in routines/day-codes.json that is not "N/A"
-   (Day 1: MA376 0740, SS388 0905, EM481 1410; Day 2: MA486 0740, MA481X 0845, MS300 1035).
-4. Assignments due within 3 days (today through today+3), from brief.json "due".
-5. Song of the day, quote of the day, then "Now get up and go win the day."
-NO tests/quizzes list, NO Army, NO Bills, NO markets or headlines.
+to be HEARD, so short sentences, no emojis, no bullets, no symbols, UNDER 70 WORDS. Same privacy rules as brief.json.
+Say course codes letter by letter with the number in pairs, exactly like this (never "four hundred eighty-six"):
+MA376 = "M A three seventy-six", MA486 = "M A four eighty-six", MA481X = "M A four eighty-one X",
+SS388 = "S S three eighty-eight", EM481 = "E M four eighty-one", MS300 = "M S three hundred".
+Times like "seven forty", "nine oh five", "two ten". Order (skip any part with nothing in it):
+1. "Good morning Braeden. It's <Weekday>, <Month> <day>th."
+2. Song of the day, then quote of the day.
+3. Any alerts ("Heads up: ...").
+4. Today's classes with times (or "No classes today.").
+5. The next school day: weekday and course names only, no times (next date after today in routines/day-codes.json
+   that is not "N/A"; Day 1: MA376, SS388, EM481; Day 2: MA486, MA481X, MS300).
+6. Assignments due within 3 days (today through today+3) from brief.json "due": course + short title + day.
+7. "Go win the day."
+NO tests/quizzes list, NO Army, NO Bills, NO markets or headlines, NO day codes.
 Example:
-Good morning Braeden. It's Friday, November 20th. Day 2.
-Today you have MA486 at seven forty, MA481X at eight forty-five, and MS300 at ten thirty-five.
-Next school day is Monday, Day 1: MA376 at seven forty, SS388 at nine oh five, and EM481 at two ten.
-Due in the next 3 days: MA376 Memo 5 Sunday night, and SS388 Homework 5 Monday morning.
+Good morning Braeden. It's Friday, November 20th.
 Song of the day: Love the Way You Lie, by Eminem and Rihanna.
 Quote of the day: "The credit belongs to the man who is actually in the arena." Theodore Roosevelt.
-Now get up and go win the day.
+Today: M A four eighty-six at seven forty, M A four eighty-one X at eight forty-five, and M S three hundred at ten thirty-five.
+Monday: M A three seventy-six, S S three eighty-eight, and E M four eighty-one.
+Due soon: Memo 5 Sunday, and Homework 5 Monday.
+Go win the day.
 
 ## 8) Validate and publish
 Run `python3 -c "import json;[json.load(open(f)) for f in ['data/daily.json','data/bills.json','data/places_history.json','data/finance.enc','data/study.enc','data/trip.enc','data/brief.json']]"` and check data/alarm.txt is not empty,
