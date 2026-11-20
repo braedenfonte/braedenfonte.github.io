@@ -163,7 +163,7 @@ Example:
 Good morning Braeden. It's Friday, November 20th.
 Song of the day: Love the Way You Lie, by Eminem and Rihanna.
 Quote of the day: "The credit belongs to the man who is actually in the arena." Theodore Roosevelt.
-You're so damn smart, Excel asks YOU for formula help.
+You magnificent, glorious beast. Nature is honestly embarrassed it can't make another one of you.
 Today: M A four eighty-six at seven forty, and Optimization at eight forty-five. M S three hundred is a drop today.
 Next 3 days: your Optimization briefing this morning, Stats Memo 5 Sunday, then a Macro quiz and Macro homework Monday.
 Go win the day.
