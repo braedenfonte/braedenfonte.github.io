@@ -69,18 +69,34 @@ export async function create(o){
       if (rnd() < 0.4){ b.fillStyle = NEON ? ["#ff3cac", "#2de2ff", "#b388ff", "#ffe14d", "#2de2ff"][Math.floor(rnd()*5)] : rnd() < 0.8 ? "#ffd89a" : "#cfe4ff"; b.fillRect(x, y + 6, 14, 36); } } }
   const wT = keep(new THREE.CanvasTexture(wallTex)), gT = keep(new THREE.CanvasTexture(glowTex));
   [wT, gT].forEach(t => { t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 4; }); wT.colorSpace = THREE.SRGBColorSpace; gT.colorSpace = THREE.SRGBColorSpace;
+  const houseTex = document.createElement("canvas"), houseGlow = document.createElement("canvas"); houseTex.width = houseTex.height = houseGlow.width = houseGlow.height = 256;
+  { const a = houseTex.getContext("2d"), b = houseGlow.getContext("2d"); a.fillStyle = "#f4f2ec"; a.fillRect(0, 0, 256, 256); b.fillStyle = "#000"; b.fillRect(0, 0, 256, 256); let s = 9;
+    const rnd = () => (s = (s*9301 + 49297) % 233280)/233280;
+    for (let y = 0; y < 256; y += 6){ a.fillStyle = "rgba(0,0,0,0.10)"; a.fillRect(0, y + 5, 256, 1); a.fillStyle = "rgba(255,255,255,0.35)"; a.fillRect(0, y, 256, 1); }   // clapboard lines
+    for (let j = 0; j < 4; j++) for (let i = 0; i < 2; i++){ const x = i*128 + 46, y = j*64 + 16;   // 2 windows per 11 m bay, one row per floor
+      a.fillStyle = "#3a3f46"; a.fillRect(x - 9, y - 1, 6, 32); a.fillRect(x + 39, y - 1, 6, 32);   // shutters
+      a.fillStyle = "#fbfbf8"; a.fillRect(x - 3, y - 3, 42, 36); a.fillStyle = "#33404c"; a.fillRect(x, y, 36, 30);
+      a.fillStyle = "#e9ecef"; a.fillRect(x + 17, y, 2, 30); a.fillRect(x, y + 14, 36, 2);
+      if (rnd() < 0.45){ b.fillStyle = rnd() < 0.85 ? "#ffd08a" : "#cfe4ff"; b.fillRect(x, y, 36, 30); } } }
+  const hT = keep(new THREE.CanvasTexture(houseTex)), hgT = keep(new THREE.CanvasTexture(houseGlow));
+  [hT, hgT].forEach(t => { t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 4; t.colorSpace = THREE.SRGBColorSpace; });
   const wallMat = keep(new THREE.MeshStandardMaterial({ map: wT, emissiveMap: gT, emissive: 0xffffff, vertexColors: true, roughness: 0.9, side: THREE.DoubleSide }));
   const roofMat = keep(new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.95, side: THREE.DoubleSide }));
+  const houseMat = keep(new THREE.MeshStandardMaterial({ map: hT, emissiveMap: hgT, emissive: 0xffffff, emissiveIntensity: 0, vertexColors: true, roughness: 0.85, side: THREE.DoubleSide }));
+  const syncHouse = () => { houseMat.color.copy(wallMat.color); houseMat.emissive.copy(wallMat.emissive); houseMat.emissiveIntensity = wallMat.emissiveIntensity; };   // houses follow the day/night/neon look of the other walls
   const WALL = { barracks: [0.70, 0.68, 0.64], hall: [0.74, 0.72, 0.67] }, HOUSE = [[0.9, 0.88, 0.83], [0.78, 0.72, 0.62], [0.62, 0.4, 0.33], [0.82, 0.8, 0.74]];
   const ROOF = { barracks: [0.3, 0.33, 0.38], hall: [0.38, 0.4, 0.44], house: [0.42, 0.27, 0.22] };
   const PLAIN_FRONT_RX = /^(Washington Hall|MacArthur Barracks|Eisenhower Barracks)$/; let shelfY = null, nightNow = false; const forest = [];   // forest: tree meshes recolored by season. shelfY: Davis shelf deck height (people on it walk at this height)
-  const wp = [], wu = [], wc = [], wl = [], rp = [], rc = [], rl = [];   // wl / rl: which landmark each triangle belongs to (-1 = none)
+  const wp = [], wu = [], wc = [], wl = [], rp = [], rc = [], rl = [], hp = [], hu = [], hc = [], hl = [];   // hp..: house walls (siding texture)
+  let curHouse = false;   // wl / rl: which landmark each triangle belongs to (-1 = none)
   const lmOf = {}; o.landmarks.forEach((l, i) => { if (l.bi != null) lmOf[l.bi] = i; });
   const tops = {};
   let curB = -1;   // which named building is being built (for hover names)
   function tri(arrP, arrC, arrL, pts3, color, lm){ for (const p of pts3){ arrP.push(p[0]*S, p[1], -p[2]*S); arrC.push(color[0], color[1], color[2]); } arrL.push(lm); (arrL.b || (arrL.b = [])).push(curB); }
   // floors: when given, exactly that many rows of windows sit at the top of the wall (4.2 m each); below them is plain stone foundation
+  const WP0 = wp, WC0 = wc, WL0 = wl, WU0 = wu;
   function extrude(P, baseY, topY, wallColor, roofColor, lm, noRoof, floors){
+    const wp = curHouse ? hp : WP0, wc = curHouse ? hc : WC0, wl = curHouse ? hl : WL0, wu = curHouse ? hu : WU0;
     let u = 0; const n = P.length, yF = floors ? Math.max(baseY, topY - floors*4.2*S) : baseY, vh = floors ? floors/4 : (topY - baseY)/S/(4.2*4);
     for (let i = 0; i < n; i++){ const a = P[i], c = P[(i + 1) % n], len = Math.hypot(c[0] - a[0], c[1] - a[1]), u1 = u/(5.5*4), u2 = (u + len)/(5.5*4);
       tri(wp, wc, wl, [[a[0], yF, a[1]], [c[0], yF, c[1]], [c[0], topY, c[1]]], wallColor, lm); wu.push(u1, 0, u2, 0, u2, vh);
@@ -93,12 +109,28 @@ export async function create(o){
     const faces = THREE.ShapeUtils.triangulateShape(P.map(p => new THREE.Vector2(p[0], p[1])), []);
     faces.forEach(f => tri(rp, rc, rl, f.map(k => [P[k][0], topY, P[k][1]]), roofColor, lm));
   }
+  const HROOF = [[0.27, 0.28, 0.3], [0.33, 0.26, 0.22], [0.36, 0.36, 0.37], [0.25, 0.3, 0.28], [0.4, 0.31, 0.26]];   // asphalt shingle / slate colours
+  function gable(P, baseY, top, wcol, i, lm){   // pitched roof along the longest edge; LiDAR height (top) is mid-roof, so eaves sit below it and the ridge above
+    let best = 0, ux = 1, uy = 0; P.forEach((a, k) => { const c = P[(k + 1) % P.length], L = Math.hypot(c[0] - a[0], c[1] - a[1]); if (L > best){ best = L; ux = (c[0] - a[0])/L; uy = (c[1] - a[1])/L; } });
+    const vx = -uy, vy = ux; let a0 = 1e9, a1 = -1e9, d0 = 1e9, d1 = -1e9; P.forEach(p => { const a = p[0]*ux + p[1]*uy, d = p[0]*vx + p[1]*vy; a0 = Math.min(a0, a); a1 = Math.max(a1, a); d0 = Math.min(d0, d); d1 = Math.max(d1, d); });
+    const rise = Math.min(4.5, Math.max(1.6, (d1 - d0)*0.36)), eave = Math.max(baseY + 2.6*S, top - rise*0.5*S), ridge = eave + rise*S, o = 0.5, dm = (d0 + d1)/2;
+    curHouse = true; extrude(P, baseY, eave, wcol, null, lm, true, Math.max(1, Math.round((eave - baseY)/S/3.2))); curHouse = false;
+    const at = (a, d) => [a*ux + d*vx, a*uy + d*vy], rc = HROOF[i % HROOF.length];
+    const c00 = at(a0 - o, d0 - o), c10 = at(a1 + o, d0 - o), c11 = at(a1 + o, d1 + o), c01 = at(a0 - o, d1 + o), r0 = at(a0 - o, dm), r1 = at(a1 + o, dm);
+    const V = (p, y) => [p[0], y, p[1]];
+    tri(rp, rc_, rl, [V(c00, eave), V(c10, eave), V(r1, ridge)], rc, lm); tri(rp, rc_, rl, [V(c00, eave), V(r1, ridge), V(r0, ridge)], rc, lm);
+    tri(rp, rc_, rl, [V(c01, eave), V(r0, ridge), V(r1, ridge)], rc.map(v => v*0.9), lm); tri(rp, rc_, rl, [V(c01, eave), V(r1, ridge), V(c11, eave)], rc.map(v => v*0.9), lm);
+    const g0 = at(a0, d0), g1 = at(a0, d1), gr = at(a0, dm), h0 = at(a1, d0), h1 = at(a1, d1), hr = at(a1, dm);   // gable-end triangles in the wall colour
+    tri(rp, rc_, rl, [V(g0, eave), V(g1, eave), V(gr, ridge)], wcol.map(v => v*0.92), lm); tri(rp, rc_, rl, [V(h0, eave), V(h1, eave), V(hr, ridge)], wcol.map(v => v*0.92), lm);
+  }
+  const rc_ = rc;
   D.buildings.forEach(b => {
     const P = map.pts(b.p); let lo = 1e9, hi = -1e9; P.forEach(p => { const h = gy(p[0], p[1]); if (h < lo) lo = h; if (h > hi) hi = h; });
     const F = 4.2, hh = { "Washington Hall": 16, "Pershing Barracks": 4*F, "Bradley Barracks": 6*F, "Eisenhower Barracks": 6*F, "MacArthur Barracks": 6*F, "Scott Barracks": 4*F, "Thayer Hall": 4*F }[b.n] || b.h;   // real floor counts
     const floors = Math.max(1, Math.round(hh/4.2)), top = b.r ? Math.max(b.r*S*VE, hi + 3*S) : hi + floors*4.2*S, lm = lmOf[b.i] != null ? lmOf[b.i] : -1; tops[b.i] = { P, lo, top, floors, yF: top - floors*4.2*S };   // roof at the 2022 LiDAR-measured height (b.r, m above sea level) when known, else N floors above the highest ground
     const jit = 0.94 + ((b.i*37) % 13)/100, wcol = (b.k === "house" ? HOUSE[b.i % HOUSE.length] : b.n && PLAIN_FRONT_RX.test(b.n) ? [0.8, 0.8, 0.77] : WALL[b.k]).map(v => v*jit);
     curB = b.n ? b.i : -1;
+    if (b.k === "house" && P.length >= 4){ gable(P, lo - 2*S, top, wcol, b.i, lm); return; }
     extrude(P, lo - 2*S, top, wcol, ROOF[b.k].map(v => v*jit), lm, false, floors);
     if (b.tw){ const [tx, ty, tw, td, tz] = b.tw, Q = map.pts([tx - tw/2, ty - td/2, tx + tw/2, ty - td/2, tx + tw/2, ty + td/2, tx - tw/2, ty + td/2]);   // tower measured in the 2022 LiDAR
       if (tz*S*VE > top + 2*S) extrude(Q, top - S, tz*S*VE, wcol.map(v => v*0.97), ROOF[b.k].map(v => v*jit*0.9), lm); }
@@ -358,13 +390,29 @@ export async function create(o){
   function meshOf(P, C, U, mat){ const g = keep(new THREE.BufferGeometry()); g.setAttribute("position", new THREE.Float32BufferAttribute(P, 3)); g.setAttribute("color", new THREE.Float32BufferAttribute(C, 3));
     if (U) g.setAttribute("uv", new THREE.Float32BufferAttribute(U, 2)); g.computeVertexNormals(); const m = new THREE.Mesh(g, mat); m.castShadow = m.receiveShadow = true; scene.add(m); return m; }
   const walls = meshOf(wp, wc, wu, wallMat), roofs = meshOf(rp, rc, null, roofMat); walls.userData.lm = wl; roofs.userData.lm = rl;
+  if (hp.length){ const hw = meshOf(hp, hc, hu, houseMat); hw.userData.lm = hl; }
   const edgeOf = T => { const pts = [], n = T.P.length; for (let k = 0; k < n; k++){ const a = T.P[k], b = T.P[(k + 1) % n]; pts.push(a[0]*S, T.top + 0.02, -a[1]*S, b[0]*S, T.top + 0.02, -b[1]*S, a[0]*S, T.lo, -a[1]*S, a[0]*S, T.top, -a[1]*S); } return pts; };
   if (NEON){ const groups = { barracks: [], hall: [], house: [] }; D.buildings.forEach(b => { const T = tops[b.i]; if (T) groups[b.k].push(...edgeOf(T)); });
     [["barracks", 0x9a3f8e], ["hall", 0x3f8f9c], ["house", 0x8a6a3a]].forEach(([k, c]) => { const g = keep(new THREE.BufferGeometry()); g.setAttribute("position", new THREE.Float32BufferAttribute(groups[k], 3));
       const l = new THREE.LineSegments(g, keep(new THREE.LineBasicMaterial({ color: c, toneMapped: false }))); l.userData.keep = true; scene.add(l); }); }
 
   /* ---------- trees on the open hillsides ---------- */
-  { const grid = map.busyGrid(), spots = []; let s = 3; const rnd = () => (s = (s*9301 + 49297) % 233280)/233280;
+  if (D.trees && D.trees.length){ const T = D.trees, step = PHONE ? 2 : 1, n = Math.floor(T.length/3/step), d = new THREE.Object3D(), c = new THREE.Color();
+    const crownG = new THREE.IcosahedronGeometry(1, PHONE ? 0 : 1); { const pa = crownG.attributes.position; for (let i = 0; i < pa.count; i++){ const f = 0.8 + ((i*7919) % 23)/23*0.4; pa.setXYZ(i, pa.getX(i)*f, pa.getY(i)*f*0.9, pa.getZ(i)*f); } crownG.computeVertexNormals(); }
+    const leaves = new THREE.InstancedMesh(keep(crownG), keep(new THREE.MeshStandardMaterial({ roughness: 0.95, flatShading: true })), n);
+    const pines = new THREE.InstancedMesh(keep(new THREE.ConeGeometry(1, 1, 6)), keep(new THREE.MeshStandardMaterial({ roughness: 1, flatShading: true })), n);
+    const trunks = new THREE.InstancedMesh(keep(new THREE.CylinderGeometry(0.5, 0.7, 1, 5)), keep(new THREE.MeshStandardMaterial({ color: 0x4a3b2c, roughness: 1 })), n);
+    let nl = 0, np = 0, nt = 0;
+    for (let k = 0; k < n; k++){ const j = k*step*3, x = T[j], y = T[j + 1], h = Math.max(5, T[j + 2]); if (map.heightAt(x, y) < 1.5) continue;
+      const r1 = ((x*73856093 ^ y*19349663) >>> 0) % 1000/1000, g = gy(x, y), pine = r1 < 0.14;
+      const cr = Math.min(7.5, Math.max(2.6, h*(pine ? 0.16 : 0.27)))*(PHONE ? 1.35 : 1);
+      d.rotation.set(0, r1*6.28, 0);
+      if (pine){ d.position.set(x*S, g + (h*0.62)*S, -y*S); d.scale.set(cr*S, h*0.8*S, cr*S); d.updateMatrix(); pines.setMatrixAt(np, d.matrix); pines.setColorAt(np++, c.setRGB(0.1 + r1*0.06, 0.24 + r1*0.08, 0.15)); }
+      else { d.position.set(x*S, g + (h - cr*0.95)*S, -y*S); d.scale.set(cr*S, cr*0.9*S, cr*S); d.updateMatrix(); leaves.setMatrixAt(nl, d.matrix); leaves.setColorAt(nl++, c.setRGB(0.17 + r1*0.12, 0.33 + r1*0.13, 0.13 + r1*0.05)); }
+      if (!PHONE){ d.position.set(x*S, g + (h - cr)*0.5*S, -y*S); d.scale.set(S, Math.max(1, h - cr)*S, S); d.updateMatrix(); trunks.setMatrixAt(nt++, d.matrix); } }
+    leaves.count = nl; pines.count = np; trunks.count = nt;
+    [leaves, pines, trunks].forEach(m => { m.castShadow = !PHONE; m.receiveShadow = true; m.userData.keep = true; scene.add(m); }); forest.push(leaves, pines); }
+  else { const grid = map.busyGrid(), spots = []; let s = 3; const rnd = () => (s = (s*9301 + 49297) % 233280)/233280;
     for (let i = 0; i < 16000 && spots.length < 3400; i++){ const x = BB.x0 + rnd()*w, y = BB.y0 + rnd()*hgt; if (map.heightAt(x, y) < 2 || grid.busy(x, y)) continue; spots.push([x, y, 0.7 + rnd()*0.7, rnd()]); }
     const inst = new THREE.InstancedMesh(keep(new THREE.ConeGeometry(5*S, 15*S, 5)), keep(new THREE.MeshStandardMaterial({ roughness: 1, flatShading: true })), spots.length), d = new THREE.Object3D(), c = new THREE.Color();
     spots.forEach((t, i) => { d.position.set(t[0]*S, gy(t[0], t[1]) + 7*S*t[2], -t[1]*S); d.scale.setScalar(t[2]); d.rotation.y = i; d.updateMatrix(); inst.setMatrixAt(i, d.matrix);
@@ -442,7 +490,7 @@ export async function create(o){
   }
 
   /* ---------- draw only when needed. Neon look renders through a bloom (glow) pass ---------- */
-  let composer = null; const draw = () => composer ? composer.render() : renderer.render(scene, cam);
+  let composer = null; const draw = () => { syncHouse(); composer ? composer.render() : renderer.render(scene, cam); };
   if (NEON) import("/vendor/post.module.min.js?v=20261119d").then(P => { if (dead) return; composer = new P.EffectComposer(renderer); composer.setPixelRatio(Math.min(window.devicePixelRatio || 1, PHONE ? 1 : 1.5));
     composer.addPass(new P.RenderPass(scene, cam)); composer.addPass(new P.UnrealBloomPass(new THREE.Vector2(vw/2, vh/2), PHONE ? 0.22 : 0.32, 0.35, 0.6)); composer.addPass(new P.OutputPass()); composer.setSize(vw, vh); invalidate(); }).catch(() => {});
   let watched = false, lastT = 0;
