@@ -27,6 +27,8 @@ Shared rules for `morning-text.md` and `text-inbox.md`. Read `routines/common.md
 - `routines/day-codes.json`: date -> Day code ("1-30" = Day 1, lesson 30; "N/A" = no classes).
 - `data/todos.json`: the site's to-do list (format below).
 - Class times: Day 1 = MA376 0740, SS388 0905, EM481 1410. Day 2 = MA486 0740, MA481X 0845, MS300 1035.
+- Friday drop rule: on a Friday, SS388, MS300 and EM481 are dropped if they already met twice that week.
+  `node tools/classes.js YYYY-MM-DD` prints the real class list for any date.
 
 ## data/todos.json format
 `{"updated": "<ISO with offset>", "items": [{"id": "kebab-id", "title": "...", "tag": "MA376|SS388|EM481|MA486|MA481X|Military|Personal",

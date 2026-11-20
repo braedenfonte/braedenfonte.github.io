@@ -26,6 +26,8 @@ West Point alternates Day 1 / Day 2.
   `OK | No classes tomorrow (<date>)`, commit just routines/runs.log, push, and finish.
 
 ## Step 2: Pick the courses
+- Run `node tools/classes.js <tomorrow>`. Any course in its "dropped" list is a Friday drop (SS388/EM481/MS300
+  already met twice that week): build no prep for it and log it as "<course> drop", not a failure.
 - Day 1 -> MA376, SS388, EM481 (skills: ma376-class-prep, ss388-class-prep, em481-class-prep)
   SS388: tomorrow's lesson comes from `routines/ss388-schedule.json`; if tomorrow isn't in it, SS388 has no class (skip, not a failure).
 - Day 2 -> MA486, MA481X (skills: ma486-class-prep, ma481x-class-prep). MS300 has no prep skill; skip it.

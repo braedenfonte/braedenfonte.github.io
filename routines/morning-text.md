@@ -40,9 +40,11 @@ Hotline Bling · Drake
 💬 QUOTE OF THE DAY
 “Do what you can, with what you have, where you are.” — Theodore Roosevelt
 ```
+- Classes: use `node tools/classes.js <date>` (Friday drop rule: SS388, MS300, EM481 are dropped on a Friday
+  after meeting twice that week). If one is dropped, add a line like "MS300 · DROP".
 - No classes ("N/A" or weekend): put "📚 No classes today" in place of the Today section.
-- Next school day: the next date after today in routines/day-codes.json that is not "N/A" (Day 1: MA376 0740,
-  SS388 0905, EM481 1410; Day 2: MA486 0740, MA481X 0845, MS300 1035).
+- Next school day: the next date after today in routines/day-codes.json that is not "N/A"; list it with
+  `node tools/classes.js <that date>` so Friday drops are left out.
 - NO tests/quizzes section, NO Army, NO Bills, NO markets or headlines.
 - Song and quote always go last. Copy them exactly from tools/daypicks.js (song title and artist only, never lyrics).
 - Due list: from brief.json "due", only items due today through 3 days out (soonest first, max 6).

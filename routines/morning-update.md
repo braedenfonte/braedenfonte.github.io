@@ -126,7 +126,8 @@ SJU → BWI on Sat Jan 2, 2027. He tracks the round trip on Google Flights (emai
 ## 7c) Brief for the morning text (data/brief.json, PUBLIC: no balances, no grades, no San Juan prices)
 Write it every run, even if other parts failed (the 7:04 AM text reads it):
 {"date":"YYYY-MM-DD","updated":"<now ISO>","dayCode":"1-30 (from routines/day-codes.json)",
- "classes":["MA376 0740", ...] (Day 1: MA376 0740, SS388 0905, EM481 1410; Day 2: MA486 0740, MA481X 0845, MS300 1035; [] if N/A),
+ "classes":["MA376 0740", ...] (copy "classes" from `node tools/classes.js <today>`, which applies the Friday drop rule:
+   SS388, MS300, EM481 are dropped on a Friday after meeting twice that week; [] if N/A),
  "due":[{"course":"MA376","title":"Memo 5","due":"YYYY-MM-DDTHH:MM"}] (Canvas assignments due in the next 7 days for
    MA376, EM481, MA481X, SS388 via `tools/canvas.py` `/courses/<id>/assignments?bucket=upcoming`, plus graded events you saw
    while building the study decks; soonest first),
@@ -151,7 +152,8 @@ Times like "seven forty", "nine oh five", "two ten". Order (skip any part with n
 1. "Good morning Braeden. It's <Weekday>, <Month> <day>th."
 2. Song of the day, then quote of the day.
 3. Any alerts ("Heads up: ...").
-4. Today's classes with times (or "No classes today.").
+4. Today's classes with times from brief.json "classes" (Friday drops already left out; or "No classes today.").
+   If `node tools/classes.js <today>` lists a dropped class, add a short line like "M S three hundred is a drop today."
 5. Coming up in the next 3 days (today through today+3), ONE sentence: tests and quizzes from brief.json "tests"
    plus assignments from brief.json "due", soonest first, course + short title + day, no duplicates
    (an item in both lists is said once). Say "quiz"/"test"/"WPR" so big events stand out.
