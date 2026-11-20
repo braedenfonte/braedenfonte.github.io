@@ -19,4 +19,7 @@ const s = pick(SONGS);
 // 3) quotes live in data/quotes.json
 const q = pick(JSON.parse(fs.readFileSync(path.join(root, "data/quotes.json"), "utf8")).quotes);
 
-console.log(JSON.stringify({song: s[0] + " · " + s[1], quote: "“" + q.q + "” — " + q.a}, null, 1));
+// 4) compliment of the day (alarm only) lives in data/compliments.json
+const c = pick(JSON.parse(fs.readFileSync(path.join(root, "data/compliments.json"), "utf8")).compliments);
+
+console.log(JSON.stringify({song: s[0] + " · " + s[1], quote: "“" + q.q + "” — " + q.a, compliment: c}, null, 1));

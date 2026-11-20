@@ -144,16 +144,16 @@ Validate it with the others in part 8.
 
 ## 7d) Alarm script (data/alarm.txt, PUBLIC, plain text read aloud by his iPhone alarm Shortcut)
 Write it every run right after brief.json, from the same data plus `node tools/daypicks.js`. Rules: written
-to be HEARD, so short sentences, no emojis, no bullets, no symbols, UNDER 85 WORDS (about 35 seconds). Same privacy rules as brief.json.
-Say course codes letter by letter with the number in pairs, exactly like this (never "four hundred eighty-six"):
-MA376 = "M A three seventy-six", MA486 = "M A four eighty-six", MA481X = "M A four eighty-one X",
-SS388 = "S S three eighty-eight", EM481 = "E M four eighty-one", MS300 = "M S three hundred".
+to be HEARD, so short sentences, no emojis, no bullets, no symbols, UNDER 100 WORDS (about 40 seconds). Same privacy rules as brief.json.
+Say classes by NICKNAME, never the code: MA376 = "Stats", SS388 = "Macro", EM481 = "Simulation",
+MA481X = "Optimization", MA486 = "M A four eighty-six", MS300 = "M S three hundred".
 Times like "seven forty", "nine oh five", "two ten". Order (skip any part with nothing in it):
 1. "Good morning Braeden. It's <Weekday>, <Month> <day>th."
-2. Song of the day, then quote of the day.
+2. Song of the day, then quote of the day, then the compliment of the day ("compliment" from daypicks.js, read word for word,
+   no label before it).
 3. Any alerts ("Heads up: ...").
 4. Today's classes with times from brief.json "classes" (Friday drops already left out; or "No classes today.").
-   If `node tools/classes.js <today>` lists a dropped class, add a short line like "M S three hundred is a drop today."
+   If `node tools/classes.js <today>` lists a dropped class, add a short line like "Macro is a drop today."
 5. Coming up in the next 3 days (today through today+3), ONE sentence: tests and quizzes from brief.json "tests"
    plus assignments from brief.json "due", soonest first, course + short title + day, no duplicates
    (an item in both lists is said once). Say "quiz"/"test"/"WPR" so big events stand out.
@@ -163,8 +163,9 @@ Example:
 Good morning Braeden. It's Friday, November 20th.
 Song of the day: Love the Way You Lie, by Eminem and Rihanna.
 Quote of the day: "The credit belongs to the man who is actually in the arena." Theodore Roosevelt.
-Today: M A four eighty-six at seven forty, M A four eighty-one X at eight forty-five, and M S three hundred at ten thirty-five.
-Next 3 days: Memo 5 Sunday, then S S three eighty-eight Quiz 5 and Homework 5 Monday.
+You're so damn smart, Excel asks YOU for formula help.
+Today: M A four eighty-six at seven forty, and Optimization at eight forty-five. M S three hundred is a drop today.
+Next 3 days: your Optimization briefing this morning, Stats Memo 5 Sunday, then a Macro quiz and Macro homework Monday.
 Go win the day.
 
 ## 8) Validate and publish
