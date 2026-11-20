@@ -4,7 +4,7 @@ Refresh the daily data, the study decks and the weekend flight deals, then commi
 Follow `routines/common.md` (Canvas, run log, alerts, committing). Routine name for the log: `morning-update`.
 
 Edit ONLY: `data/daily.json`, `data/places_history.json`, `data/bills.json`, `data/finance.enc`,
-`data/study.enc`, `data/trip.enc`, `data/brief.json`, `data/alarm.txt`, `data/tonight.txt`, `data/song.txt`, `routines/runs.log`. Keep every field name exactly as in the current files (read them
+`data/study.enc`, `data/trip.enc`, `data/brief.json`, `data/alarm.txt`, `data/tonight.txt`, `data/song.txt`, `data/song-full.txt`, `routines/runs.log`. Keep every field name exactly as in the current files (read them
 first and use them as templates). Set "updated" in daily.json to the current ISO time with offset.
 If one part fails, keep that part's previous content, finish the others, and log which part failed.
 
@@ -168,8 +168,9 @@ Today: M A four eighty-six at seven forty, and Optimization at eight forty-five.
 Next 3 days: your Optimization briefing this morning, Stats Memo 5 Sunday, then a Macro quiz and Macro homework Monday.
 Go win the day.
 
-## 7d2) Song file (data/song.txt): one line, today's song title and main artist only, no "ft." part and no
-punctuation, from daypicks.js (e.g. "Highest in the Room Travis Scott"). His alarm Shortcut searches and plays it.
+## 7d2) Song files (from daypicks.js), one line each, no punctuation, no "ft." part:
+data/song.txt = song title only (e.g. "Highest in the Room"); data/song-full.txt = title + main artist
+(e.g. "Highest in the Room Travis Scott"). His alarm Shortcut plays the song from these.
 
 ## 7e) Barracks note (data/tonight.txt, PUBLIC, shown as a phone notification when he gets back to Pershing)
 Write it every run right after alarm.txt. ONE short written line (under 160 characters, no emojis), the tests/quizzes
