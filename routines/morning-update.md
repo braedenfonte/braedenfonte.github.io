@@ -143,7 +143,7 @@ Validate it with the others in part 8.
 
 ## 7d) Alarm script (data/alarm.txt, PUBLIC, plain text read aloud by his iPhone alarm Shortcut)
 Write it every run right after brief.json, from the same data plus `node tools/daypicks.js`. Rules: written
-to be HEARD, so short sentences, no emojis, no bullets, no symbols, UNDER 100 WORDS (about 40 seconds). Same privacy rules as brief.json.
+to be HEARD, so short sentences, no emojis, no bullets, no symbols, UNDER 85 WORDS (about 35 seconds). Same privacy rules as brief.json.
 Say course codes letter by letter with the number in pairs, exactly like this (never "four hundred eighty-six"):
 MA376 = "M A three seventy-six", MA486 = "M A four eighty-six", MA481X = "M A four eighty-one X",
 SS388 = "S S three eighty-eight", EM481 = "E M four eighty-one", MS300 = "M S three hundred".
@@ -152,18 +152,17 @@ Times like "seven forty", "nine oh five", "two ten". Order (skip any part with n
 2. Song of the day, then quote of the day.
 3. Any alerts ("Heads up: ...").
 4. Today's classes with times (or "No classes today.").
-5. The next school day: weekday and course names only, no times (next date after today in routines/day-codes.json
-   that is not "N/A"; Day 1: MA376, SS388, EM481; Day 2: MA486, MA481X, MS300).
-6. Assignments due within 3 days (today through today+3) from brief.json "due": course + short title + day.
-7. "Go win the day."
-NO tests/quizzes list, NO Army, NO Bills, NO markets or headlines, NO day codes.
+5. Coming up in the next 3 days (today through today+3), ONE sentence: tests and quizzes from brief.json "tests"
+   plus assignments from brief.json "due", soonest first, course + short title + day, no duplicates
+   (an item in both lists is said once). Say "quiz"/"test"/"WPR" so big events stand out.
+6. "Go win the day."
+NO next-school-day classes, NO Army, NO Bills, NO markets or headlines, NO day codes.
 Example:
 Good morning Braeden. It's Friday, November 20th.
 Song of the day: Love the Way You Lie, by Eminem and Rihanna.
 Quote of the day: "The credit belongs to the man who is actually in the arena." Theodore Roosevelt.
 Today: M A four eighty-six at seven forty, M A four eighty-one X at eight forty-five, and M S three hundred at ten thirty-five.
-Monday: M A three seventy-six, S S three eighty-eight, and E M four eighty-one.
-Due soon: Memo 5 Sunday, and Homework 5 Monday.
+Next 3 days: Memo 5 Sunday, then S S three eighty-eight Quiz 5 and Homework 5 Monday.
 Go win the day.
 
 ## 8) Validate and publish
