@@ -143,7 +143,7 @@ Validate it with the others in part 8.
 
 ## 7d) Alarm script (data/alarm.txt, PUBLIC, plain text read aloud by his iPhone alarm Shortcut)
 Write it every run right after brief.json, from the same data plus `node tools/daypicks.js`. Rules: written
-to be HEARD, so short sentences, no emojis, no bullets, no symbols, UNDER 70 WORDS. Same privacy rules as brief.json.
+to be HEARD, so short sentences, no emojis, no bullets, no symbols, UNDER 100 WORDS (about 40 seconds). Same privacy rules as brief.json.
 Say course codes letter by letter with the number in pairs, exactly like this (never "four hundred eighty-six"):
 MA376 = "M A three seventy-six", MA486 = "M A four eighty-six", MA481X = "M A four eighty-one X",
 SS388 = "S S three eighty-eight", EM481 = "E M four eighty-one", MS300 = "M S three hundred".
