@@ -1,17 +1,9 @@
 {
- "date": "2026-11-20",
- "updated": "2026-11-20T07:20:00-05:00",
- "dayCode": "2-34",
- "classes": [
-  "MA486 0740",
-  "MA481X 0845"
- ],
+ "date": "2026-11-21",
+ "updated": "2026-11-21T07:05:00-05:00",
+ "dayCode": "N/A",
+ "classes": [],
  "due": [
-  {
-   "course": "MA481X",
-   "title": "Firm 3 Client Briefing: Minimax and Maximin (L34)",
-   "due": "2026-11-20T08:45"
-  },
   {
    "course": "MA376",
    "title": "Memo 5",
@@ -19,16 +11,11 @@
   },
   {
    "course": "SS388",
-   "title": "Homework 5 (handwritten, one PDF)",
+   "title": "Homework 5",
    "due": "2026-11-23T09:05"
   }
  ],
  "tests": [
-  {
-   "course": "MA481X",
-   "title": "Firm 3 Client Briefing: Minimax and Maximin (L34)",
-   "date": "2026-11-20"
-  },
   {
    "course": "SS388",
    "title": "Quiz 5",
@@ -51,9 +38,9 @@
   }
  ],
  "headlines": [
-  "Army vs East Carolina Sat Nov 21, noon (CBSSN)",
+  "Army vs East Carolina Sat noon (CBSSN)",
   "Bills 8-1, next vs MIA Sun 1 PM (CBS)",
-  "S&P 500 −2.02% Thu"
+  "S&P 500 −3.70% Fri"
  ],
  "alerts": []
 }
