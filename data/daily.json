@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-21T07:00:00-05:00",
+ "updated": "2026-11-22T07:00:00-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -453,99 +453,92 @@
   }
  ],
  "football": {
-  "label": "Week 12 recap + Friday",
+  "label": "Week 13 recap",
   "results": [
    {
-    "away": "Utah",
-    "home": "Arizona",
-    "as": 40,
-    "hs": 39,
-    "awayRank": 2,
-    "homeRank": 22,
-    "blurb": "Utah survived in Tucson by a single point to stay unbeaten in the chase for No. 1.",
+    "away": "UCLA",
+    "home": "Michigan",
+    "as": 16,
+    "hs": 18,
+    "awayRank": 4,
+    "blurb": "Michigan handed unbeaten UCLA its first loss in a triple-overtime defensive grinder.",
     "stats": [
-     "Daniel Bray: 18 carries, 197 yds, TD",
-     "Devon Dampier: 13/25, 204 yds, 2 TD, INT; 14 rushes, 100 yds, 2 TD",
-     "Noah Fifita (ARIZ): 27/43, 356 yds, 3 TD, INT"
+     "Savion Hiter: 26 car, 104 yds",
+     "Bryce Underwood: 11/24, 127 yds, TD",
+     "Ty Dieffenbach: 19/30, 188 yds, INT"
     ]
    },
    {
-    "away": "Texas",
-    "home": "LSU",
-    "as": 22,
-    "hs": 21,
-    "awayRank": 8,
-    "homeRank": 24,
-    "blurb": "Texas edged LSU by one in Baton Rouge in a game with six combined turnovers.",
+    "away": "Georgia",
+    "home": "South Carolina",
+    "as": 34,
+    "hs": 6,
+    "awayRank": 1,
+    "blurb": "Top-ranked Georgia rolled in Columbia behind an efficient Gunner Stockton.",
     "stats": [
-     "Arch Manning: 19/35, 174 yds, TD, 3 INT; rushing TD",
-     "Dilin Jones (LSU): 19 carries, 125 yds, TD",
-     "Sam Leavitt (LSU): 27/37, 244 yds, 2 TD, 3 INT"
+     "Gunner Stockton: 19/23, 281 yds, TD",
+     "Nate Frazier: 23 car, 94 yds, 2 TD",
+     "LaNorris Sellers: 10/18, 87 yds, INT"
     ]
    },
    {
-    "away": "USC",
-    "home": "Indiana",
-    "as": 13,
+    "away": "Ohio State",
+    "home": "Nebraska",
+    "as": 28,
+    "hs": 31,
+    "awayRank": 16,
+    "blurb": "Nebraska upset Ohio State in Lincoln despite a big day from Jeremiah Smith.",
+    "stats": [
+     "Anthony Colandrea: 19/28, 200 yds, 3 TD",
+     "Jeremiah Smith: 6 rec, 165 yds, 2 TD",
+     "Luke Fahey: 16/27, 259 yds, 2 TD, INT"
+    ]
+   },
+   {
+    "away": "Indiana",
+    "home": "Washington",
+    "as": 24,
     "hs": 27,
-    "awayRank": 15,
-    "homeRank": 6,
-    "blurb": "Indiana's defense forced three Jayden Maiava interceptions to handle USC in Bloomington.",
+    "awayRank": 6,
+    "blurb": "Washington knocked off Indiana in overtime at Husky Stadium.",
     "stats": [
-     "Grant Wilson: 17/27, 305 yds, 2 TD, INT",
-     "Jayden Maiava (USC): 26/42, 311 yds, TD, 3 INT",
-     "Trent Mosley (USC): 9 catches, 130 yds"
+     "Demond Williams Jr.: 24/41, 227 yds, TD; 88 rush yds, TD",
+     "Charlie Becker: 6 rec, 167 yds, TD"
     ]
    },
    {
-    "away": "Wake Forest",
-    "home": "SMU",
-    "as": 49,
-    "hs": 7,
-    "awayRank": 11,
-    "homeRank": 25,
-    "blurb": "Wake Forest routed SMU on the road in a top-25 ACC matchup.",
+    "away": "Utah",
+    "home": "TCU",
+    "as": 38,
+    "hs": 17,
+    "awayRank": 2,
+    "blurb": "Unbeaten Utah stayed perfect with a comfortable road win in Fort Worth.",
     "stats": [
-     "Gio Lopez: 14/25, 201 yds, TD",
-     "Ty Clark III: 11 carries, 77 yds, TD",
-     "Carlos Hernandez: 6 catches, 94 yds, TD"
+     "Devon Dampier: 18/28, 278 yds, 2 TD; 2 rush TD",
+     "Larry Simmons: 3 rec, 114 yds, TD"
     ]
    },
    {
-    "away": "Florida",
-    "home": "Kentucky",
-    "as": 21,
-    "hs": 14,
-    "homeRank": 13,
-    "blurb": "Unranked Florida upset No. 13 Kentucky in Lexington.",
+    "away": "Memphis",
+    "home": "Navy",
+    "as": 34,
+    "hs": 38,
+    "awayRank": 24,
+    "blurb": "Navy outlasted No. 24 Memphis in a shootout in Annapolis.",
     "stats": [
-     "Aaron Philo: 16/24, 119 yds; 15 rushes, 102 yds, TD",
-     "Kenny Minchey (UK): 15/26, 181 yds, TD"
+     "Jackson Gutierrez: 35 car, 241 yds, 2 TD; 4/11, 110 yds, TD",
+     "Jaylin Carter (MEM): 23 car, 229 yds, 3 TD"
     ]
    },
    {
-    "away": "Houston",
-    "home": "Colorado",
-    "as": 32,
-    "hs": 42,
-    "awayRank": 14,
-    "blurb": "Colorado knocked off No. 14 Houston in Boulder on Friday night.",
+    "away": "East Carolina",
+    "home": "Army",
+    "as": 10,
+    "hs": 6,
+    "blurb": "Army's offense was held without a touchdown in a home loss to East Carolina at Michie Stadium.",
     "stats": [
-     "Richard Young (COLO): 21 carries, 99 yds, 2 TD",
-     "Isaac Wilson (COLO): 17/25, 217 yds, TD, INT",
-     "Conner Weigman (HOU): 26/42, 272 yds, 3 TD, INT"
-    ]
-   },
-   {
-    "away": "Ole Miss",
-    "home": "Oklahoma",
-    "as": 17,
-    "hs": 24,
-    "awayRank": 19,
-    "blurb": "Oklahoma beat No. 19 Ole Miss in Norman on Sunday after Friday's FAA ground stop pushed the game back a day.",
-    "stats": [
-     "John Mateer (OU): 10/19, 111 yds; 16 rushes, 70 yds, TD",
-     "Trinidad Chambliss (MISS): 14/27, 127 yds, TD; 11 rushes, 84 yds"
+     "Cale Hellums: 19 car, 62 yds; 7/16, 65 yds, INT",
+     "TJ Engleman Jr. (ECU): 22 car, 113 yds"
     ]
    },
    {
@@ -553,195 +546,194 @@
     "home": "Air Force",
     "as": 3,
     "hs": 52,
-    "blurb": "Air Force ran for 429 yards and routed UTEP at Falcon Stadium on Friday night to move to 9-2.",
+    "blurb": "Air Force routed UTEP on Friday night at Falcon Stadium.",
     "stats": [
-     "Evan Medders: 3/4, 122 yds, 2 TD; 6 rushes, 46 yds",
-     "Oswaldo Morales: 4 carries, 38 yds, TD",
-     "Raymond Moore III (UTEP): 13/19, 89 yds, INT"
+     "Evan Medders: 3/4, 122 yds, 2 TD",
+     "Connor Vasek: 3 sacks"
     ]
    }
   ],
   "upcoming": [
    {
-    "away": "East Carolina",
-    "home": "Army",
-    "kick": "2026-11-21T17:00:00Z",
-    "note": "Home at Michie Stadium · CBSSN",
-    "army": true
+    "away": "TCU",
+    "home": "Texas Tech",
+    "kick": "2026-11-27T01:00:00Z",
+    "note": "Thu \u00b7 ESPN \u00b7 Galaxy Stadium",
+    "homeRank": 11
    },
    {
-    "away": "Memphis",
-    "home": "Navy",
-    "kick": "2026-11-21T17:00:00Z",
-    "note": "ESPN2 · Navy-Marine Corps Memorial Stadium",
-    "awayRank": 24
+    "away": "Nebraska",
+    "home": "Iowa",
+    "kick": "2026-11-27T17:00:00Z",
+    "note": "Fri \u00b7 CBS \u00b7 Kinnick Stadium",
+    "homeRank": 13
    },
    {
-    "away": "Ohio State",
-    "home": "Nebraska",
-    "kick": "2026-11-21T17:00:00Z",
-    "note": "FOX",
-    "awayRank": 16
+    "away": "Mississippi State",
+    "home": "Ole Miss",
+    "kick": "2026-11-27T17:00:00Z",
+    "note": "Fri \u00b7 ABC \u00b7 Egg Bowl",
+    "homeRank": 25
    },
    {
-    "away": "BYU",
-    "home": "Kansas",
-    "kick": "2026-11-21T17:00:00Z",
-    "note": "ABC",
-    "awayRank": 12
+    "away": "Florida",
+    "home": "Florida State",
+    "kick": "2026-11-27T20:30:00Z",
+    "note": "Fri \u00b7 ABC \u00b7 Doak Campbell Stadium",
+    "awayRank": 23
    },
    {
-    "away": "Wake Forest",
-    "home": "Georgia Tech",
-    "kick": "2026-11-21T17:00:00Z",
-    "note": "ESPN",
-    "awayRank": 10
+    "away": "Air Force",
+    "home": "New Mexico",
+    "kick": "2026-11-27T21:30:00Z",
+    "note": "Fri \u00b7 CW \u00b7 Albuquerque"
    },
    {
-    "away": "Houston",
-    "home": "West Virginia",
-    "kick": "2026-11-21T18:00:00Z",
-    "note": "TNT",
-    "awayRank": 20
+    "away": "Texas",
+    "home": "Texas A&M",
+    "kick": "2026-11-28T00:30:00Z",
+    "note": "Fri \u00b7 ABC \u00b7 Kyle Field",
+    "awayRank": 8
    },
    {
-    "away": "Iowa",
-    "home": "Illinois",
-    "kick": "2026-11-21T19:30:00Z",
-    "note": "BTN",
-    "awayRank": 13
+    "away": "West Virginia",
+    "home": "Utah",
+    "kick": "2026-11-28T02:00:00Z",
+    "note": "Fri \u00b7 Fox \u00b7 Rice-Eccles Stadium",
+    "homeRank": 2
    },
    {
-    "away": "UCLA",
-    "home": "Michigan",
-    "kick": "2026-11-21T20:30:00Z",
-    "note": "CBS",
-    "awayRank": 4
+    "away": "Notre Dame",
+    "home": "Syracuse",
+    "kick": "2026-11-28T17:00:00Z",
+    "note": "ABC \u00b7 JMA Wireless Dome",
+    "awayRank": 3
    },
    {
-    "away": "Arkansas",
-    "home": "Texas",
-    "kick": "2026-11-21T20:30:00Z",
-    "note": "ESPN",
-    "homeRank": 8
-   },
-   {
-    "away": "LSU",
-    "home": "Tennessee",
-    "kick": "2026-11-21T20:30:00Z",
-    "note": "ABC",
-    "homeRank": 9
-   },
-   {
-    "away": "Indiana",
-    "home": "Washington",
-    "kick": "2026-11-21T20:30:00Z",
-    "note": "Peacock",
-    "awayRank": 6
-   },
-   {
-    "away": "Texas Tech",
-    "home": "Baylor",
-    "kick": "2026-11-21T20:30:00Z",
-    "note": "FOX",
-    "awayRank": 11
-   },
-   {
-    "away": "Maryland",
-    "home": "USC",
-    "kick": "2026-11-21T23:15:00Z",
-    "note": "BTN",
-    "homeRank": 18
-   },
-   {
-    "away": "Virginia Tech",
+    "away": "Boston College",
     "home": "Miami",
-    "kick": "2026-11-22T00:00:00Z",
-    "note": "ESPN",
+    "kick": "2026-11-28T17:00:00Z",
+    "note": "ESPN \u00b7 Hard Rock Stadium",
     "homeRank": 5
    },
    {
-    "away": "Arizona",
-    "home": "Kansas State",
-    "kick": "2026-11-22T00:00:00Z",
-    "note": "FS1",
-    "awayRank": 19
+    "away": "Michigan",
+    "home": "Ohio State",
+    "kick": "2026-11-28T17:00:00Z",
+    "note": "Fox \u00b7 Ohio Stadium",
+    "homeRank": 16
    },
    {
-    "away": "Georgia",
-    "home": "South Carolina",
-    "kick": "2026-11-22T00:30:00Z",
-    "note": "ABC",
-    "awayRank": 1
+    "away": "Louisville",
+    "home": "Kentucky",
+    "kick": "2026-11-28T17:00:00Z",
+    "note": "ESPN2 \u00b7 Kroger Field",
+    "awayRank": 21,
+    "homeRank": 17
    },
    {
-    "away": "SMU",
-    "home": "Notre Dame",
-    "kick": "2026-11-22T00:30:00Z",
-    "note": "NBC",
-    "homeRank": 3
+    "away": "Navy",
+    "home": "Charlotte",
+    "kick": "2026-11-28T17:00:00Z",
+    "note": "ESPN+ \u00b7 Jerry Richardson Stadium"
    },
    {
-    "away": "Kentucky",
-    "home": "Missouri",
-    "kick": "2026-11-22T00:30:00Z",
-    "note": "SEC Network",
-    "awayRank": 17
+    "away": "Army",
+    "home": "Rice",
+    "kick": "2026-11-28T19:00:00Z",
+    "note": "Away at Rice (First Community Stadium, Houston) \u00b7 ESPN+",
+    "army": true
    },
    {
-    "away": "Utah",
-    "home": "TCU",
-    "kick": "2026-11-22T02:00:00Z",
-    "note": "FOX",
-    "awayRank": 2
+    "away": "Georgia Tech",
+    "home": "Georgia",
+    "kick": "2026-11-28T20:30:00Z",
+    "note": "ABC \u00b7 Sanford Stadium",
+    "homeRank": 1
    },
    {
-    "away": "San Diego State",
-    "home": "Boise State",
-    "kick": "2026-11-22T02:30:00Z",
-    "note": "USA Network",
-    "homeRank": 15
+    "away": "USC",
+    "home": "UCLA",
+    "kick": "2026-11-28T20:30:00Z",
+    "note": "CBS \u00b7 Rose Bowl",
+    "awayRank": 18,
+    "homeRank": 4
+   },
+   {
+    "away": "Purdue",
+    "home": "Indiana",
+    "kick": "2026-11-29T00:00:00Z",
+    "note": "FS1 \u00b7 Bloomington",
+    "homeRank": 6
+   },
+   {
+    "away": "Tennessee",
+    "home": "Vanderbilt",
+    "kick": "2026-11-29T00:00:00Z",
+    "note": "ESPN \u00b7 FirstBank Stadium",
+    "awayRank": 9
+   },
+   {
+    "away": "Auburn",
+    "home": "Alabama",
+    "kick": "2026-11-29T00:30:00Z",
+    "note": "ABC \u00b7 Iron Bowl, Bryant-Denny Stadium",
+    "homeRank": 7
+   },
+   {
+    "away": "Washington",
+    "home": "Oregon",
+    "kick": "2026-11-29T00:30:00Z",
+    "note": "NBC \u00b7 Autzen Stadium",
+    "homeRank": 14
+   },
+   {
+    "away": "Arizona State",
+    "home": "Arizona",
+    "kick": "2026-11-29T02:00:00Z",
+    "note": "Fox \u00b7 Territorial Cup",
+    "homeRank": 19
    }
   ],
   "poll": "AP Top 25, Week 12 (Nov 16)"
  },
  "location": {
-  "name": "Jökulsárlón",
-  "wiki": "Jökulsárlón",
-  "country": "Iceland",
-  "region": "Vatnajökull National Park, southeast Iceland",
-  "lat": 64.0703,
-  "lon": -16.2117,
-  "tagline": "A glacier lagoon full of drifting icebergs beside Iceland's Ring Road",
-  "intro": "Jökulsárlón is a glacial lake at the foot of Breiðamerkurjökull, an outlet glacier of the huge Vatnajökull ice cap. Blocks of ice calve off the glacier, float across the lagoon and drift out to the Atlantic, and many wash up on a black sand beach next door. It only began forming in the 1930s and keeps growing as the glacier retreats.",
+  "name": "Sigiriya",
+  "wiki": "Sigiriya",
+  "country": "Sri Lanka",
+  "region": "Matale District, Central Province",
+  "lat": 7.9569,
+  "lon": 80.7597,
+  "tagline": "A 5th-century royal fortress on top of a 180-meter rock in the Sri Lankan jungle",
+  "intro": "Sigiriya, or Lion Rock, is a huge granite column rising out of the forest near Dambulla in central Sri Lanka. King Kashyapa built his palace on its flat summit in the late 5th century, with painted cliff galleries, a polished Mirror Wall and some of the oldest landscaped gardens in the world at its base. It is now one of the most visited sites in the country.",
   "stats": [
    {
-    "label": "Formed",
-    "value": "about 1934–35"
+    "label": "Rock height",
+    "value": "about 180 m (590 ft)"
    },
    {
-    "label": "Area",
-    "value": "about 25 km² (8 km² in 1975)"
-   },
-   {
-    "label": "Max depth",
-    "value": "over 284 m (932 ft)"
+    "label": "Built",
+    "value": "King Kashyapa, CE 477\u2013495"
    },
    {
     "label": "World Heritage",
-    "value": "Part of Vatnajökull NP, listed 2019"
+    "value": "Listed 1982"
+   },
+   {
+    "label": "Summit elevation",
+    "value": "349 m (1,145 ft)"
    }
   ],
   "facts": [
-   "The lagoon did not exist 100 years ago: it formed around 1934–35 as the glacier retreated during a warm period.",
-   "A 2009 report named it Iceland's deepest lake, at over 284 m deep.",
-   "Icebergs that reach the sea often wash ashore on Eystri-Fellsfjara, nicknamed Diamond Beach for the ice glittering on black sand.",
-   "It has appeared in two James Bond films, A View to a Kill and Die Another Day, plus Lara Croft: Tomb Raider and Batman Begins.",
-   "The lake keeps eating toward the Ring Road, and scientists say a fjord may eventually form here."
+   "The entrance to the summit passes between two giant carved lion paws; a lion's head once sat above them, which is where the name Lion Rock comes from.",
+   "The Mirror Wall was polished so well the king could see his reflection in it.",
+   "Visitors from the 8th to 10th centuries scratched poems onto the Mirror Wall, and scholar Senarath Paranavithana deciphered 685 of them.",
+   "The painted frescoes once covered an area about 140 m long and 40 m high; most of them have been lost.",
+   "Arthur C. Clarke based the fictional fortress Yakkagala in The Fountains of Paradise on Sigiriya."
   ],
-  "bestTime": "June to August for boat tours and long days; November to March for ice caves nearby and a chance at the northern lights.",
-  "gettingThere": "Fly nonstop from JFK or Newark to Keflavík (about 5.5 to 6 hours), then drive roughly 5 hours east on the Ring Road (Route 1).",
-  "tip": "Look for seals swimming between the icebergs, then walk across the road to Diamond Beach at sunrise. Stay back from the ice on the beach, since waves can roll it."
+  "bestTime": "January to April, the driest stretch in the Cultural Triangle. Start the climb right at opening to beat the heat and crowds.",
+  "gettingThere": "No nonstop flights: fly JFK to Colombo (CMB) with one stop in the Gulf (Doha or Dubai), about 20+ hours, then drive about 4 hours north to Sigiriya.",
+  "tip": "Climb neighboring Pidurangala Rock at sunrise for the classic view of Sigiriya itself."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 9 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
@@ -757,86 +749,86 @@
   "movers": [
    {
     "sym": "NVDA",
-    "move": "−14%",
+    "move": "\u221214%",
     "dir": -1,
     "why": "Nvidia had its lowest close in 18 months, falling despite strong earnings amid reports the SEC is examining its accounting after CEO Jensen Huang's exit."
    },
    {
     "sym": "ANT",
-    "move": "−9%",
+    "move": "\u22129%",
     "dir": -1,
     "why": "Anthropic fell to $88.91 in its second trading session, giving back much of its roughly 17% debut-day gain."
    },
    {
     "sym": "AMD",
-    "move": "−12 to 14%",
+    "move": "\u221212 to 14%",
     "dir": -1,
     "why": "AMD fell roughly 12% to 14% in the broad chip selloff."
    },
    {
     "sym": "MU",
-    "move": "−12 to 14%",
+    "move": "\u221212 to 14%",
     "dir": -1,
     "why": "Micron fell roughly 12% to 14% as AI-linked chip stocks slid."
    },
    {
     "sym": "AVGO",
-    "move": "−12 to 14%",
+    "move": "\u221212 to 14%",
     "dir": -1,
     "why": "Broadcom fell roughly 12% to 14% with the rest of the AI chip group."
    }
   ],
   "lines": [
    {
-    "game": "East Carolina @ Army",
-    "kick": "2026-11-21T17:00:00Z",
-    "spread": "ARMY −6",
-    "total": "46.5",
-    "ml": "ARMY −238 / ECU +195"
-   },
-   {
-    "game": "UCLA @ Michigan",
-    "kick": "2026-11-21T20:30:00Z",
-    "spread": "UCLA −3.5",
-    "total": "36.5",
-    "ml": "UCLA −180 / MICH +150"
-   },
-   {
     "game": "Dolphins @ Bills",
     "kick": "2026-11-22T18:00:00Z",
-    "spread": "BUF −16.5",
+    "spread": "BUF \u221216.5",
     "total": "44.5",
-    "ml": "BUF −1640 / MIA +920",
+    "ml": "BUF \u22121460 / MIA +860",
     "bills": true
+   },
+   {
+    "game": "USC @ UCLA",
+    "kick": "2026-11-28T20:30:00Z",
+    "spread": "USC \u22126.5",
+    "total": "47.5",
+    "ml": "USC \u2212245 / UCLA +200"
+   },
+   {
+    "game": "Chiefs @ Bills",
+    "kick": "2026-11-27T01:20:00Z",
+    "spread": "BUF \u22123",
+    "total": "51.5",
+    "ml": "BUF \u2212159 / KC +134"
    }
   ],
   "probs": [
+   {
+    "game": "Purdue @ Indiana",
+    "fav": "Indiana",
+    "p": 95
+   },
    {
     "game": "Dolphins @ Bills",
     "fav": "Bills",
     "p": 95
    },
    {
-    "game": "Tennessee Tech @ Mississippi State",
-    "fav": "Mississippi State",
-    "p": 95
-   },
-   {
-    "game": "Arkansas @ Texas",
-    "fav": "Texas",
+    "game": "Sacramento State @ Hawaii",
+    "fav": "Hawaii",
     "p": 94
    },
    {
-    "game": "San Diego State @ Boise State",
-    "fav": "Boise State",
+    "game": "West Virginia @ Utah",
+    "fav": "Utah",
     "p": 94
    },
    {
-    "game": "Rutgers @ Penn State",
-    "fav": "Penn State",
-    "p": 94
+    "game": "Temple @ Memphis",
+    "fav": "Memphis",
+    "p": 91
    }
   ],
-  "sources": "S&P 500 and story: AP via La Nación and HNGN (Nov 20); movers: Fox Business, HNGN and American Greatness (Nov 20); odds: DraftKings via ESPN (Nov 21); probs: ESPN FPI (Nov 21)."
+  "sources": "S&P 500 and story: AP via La Naci\u00f3n (Nov 20); movers: Fox Business, HNGN and American Greatness (Nov 20); odds: DraftKings via ESPN (Nov 22); probs: ESPN matchup predictor (Nov 22)."
  }
 }

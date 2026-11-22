@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-21T06:45:00-05:00",
+ "updated": "2026-11-22T07:00:00-05:00",
  "team": "Buffalo Bills",
  "record": {
   "w": 8,
@@ -122,20 +122,20 @@
  },
  "news": [
   {
-   "h": "Benford and Dorian Williams out; Kincaid doubtful vs. Miami",
-   "b": "Friday's final report ruled out CB Christian Benford (groin) and LB Dorian Williams (calf), neither of whom practiced all week; Joe Brady doesn't think either injury is long term. TE Dalton Kincaid (thumb/ankle) is doubtful, the same status Spencer Brown had last week before he played. S Damar Hamlin (toe), TE Jackson Hawes (shoulder) and DL T.J. Sanders (shoulder) are questionable."
+   "h": "Tre'Davious White and Shaq Thompson elevated",
+   "b": "With CB Christian Benford and LB Dorian Williams ruled out, the Bills elevated CB Tre'Davious White and LB Shaq Thompson from the practice squad Saturday. It's the first elevation this season for both former first-round picks. Maxwell Hairston and rookie Kaleb Elarms-Orr are expected to start in their places, with White and Thompson in rotational roles."
   },
   {
-   "h": "Elarms-Orr gets first start; Alford cleared",
-   "b": "Rookie LB Kaleb Elarms-Orr, who has played in every game this season, will make his first NFL start in place of Williams. CB Dee Alford cleared the concussion protocol and practiced fully Friday, and WR Tyrell Shavers, S Cole Bishop and G O'Cyrus Torrence carry no game status."
+   "h": "Fourth straight backup QB for Buffalo's defense",
+   "b": "Miami's Kyle McCord makes his second NFL start, the fourth straight game the Bills face a backup. He went 17-of-32 for 209 yards in a 24-22 loss at Indianapolis. Over the last three games, Buffalo has allowed 28 total points, opponents are 17.6% on third down, and the defense has eight takeaways."
   },
   {
-   "h": "Dolphins add Daniel Carlson; punter Pinion out",
-   "b": "Miami signed former All-Pro K Daniel Carlson to its practice squad after waiving Zane Gonzalez. Carlson was 14-of-18 on field goals for New Orleans before his Nov. 3 release. P Bradley Pinion (groin) and WR Jared Wayne (quad) are out, so practice-squad P Jack Browning is the fallback, and C Aaron Brewer (concussion) is questionable after practicing fully Friday."
+   "h": "Dolphins activate Baker; Carlson and Browning elevated",
+   "b": "Miami activated CB Darrell Baker Jr. from PUP on Saturday, and he is expected to debut at Buffalo. The Dolphins also elevated K Daniel Carlson and P Jack Browning for the game. RB Devon Achane and QB Malik Willis are unavailable, so Ollie Gordon leads the run game and McCord starts."
   },
   {
-   "h": "Salute to Service and Rivalries uniforms Sunday",
-   "b": "The Bills will wear their Rivalries uniforms for Sunday's 1 p.m. CBS game at Highmark Stadium, with a cold front moving in. Black Hawk and Apache helicopters from Fort Drum's 10th Combat Aviation Brigade will do the flyover, James Lofton is the Legend of the Game, and five Purple Heart recipients will be honored at halftime."
+   "h": "Win would push the division lead to 4.5 games",
+   "b": "New England (5-5) is on its bye after a 35-10 loss to Detroit, and the Jets (2-8) play at the Chargers at 4:05 p.m. A Bills win over Miami today would put Buffalo 4.5 games up in the AFC East before Thursday's Thanksgiving-night game against Kansas City."
   }
  ],
  "schedule": [
@@ -196,5 +196,5 @@
    "note": "Date and time may flex"
   }
  ],
- "source": "buffalobills.com Week 11 final injury report (Fri, Nov 20) and Highmark Stadium game-day preview; miamidolphins.com Week 11 injury report; Yahoo Sports on Carlson, Brewer and Pinion (Nov 19). Checked Nov 21: no AFC East game since the last update (Thursday's game was Colts-Texans)."
+ "source": "buffalobills.com Week 11 storylines (Nov 18); SI and Heavy on Bills elevations (Nov 21); Yahoo/SI on Dolphins moves (Nov 21); ESPN standings and schedule (checked Nov 22, no AFC East games since Nov 20)."
 }
