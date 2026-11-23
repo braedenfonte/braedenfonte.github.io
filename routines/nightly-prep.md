@@ -12,15 +12,31 @@ Follow `routines/common.md` (Canvas, run log, alerts, committing). Routine name 
 ## Rule 1: Phone files, EVERY run (even "no classes tomorrow" runs and failed runs)
 Right before the final commit, always do both (they ride along in the same commit):
 - `node tools/makedays.js` (rebuilds data/days.json for his auto-alarm and class-reminder Shortcuts).
-- Write data/night.txt, the bedtime brief his phone reads aloud when he plugs in at night. PUBLIC, spoken
-  plain text, no emojis/symbols, under 60 words. Classes from `node tools/classes.js <tomorrow>` by nickname
-  (MA376 "Stats", SS388 "Macro", EM481 "Simulation", MA481X "Optimization", MA486 "M A four eighty-six",
-  MS300 "M S three hundred"); due items from data/brief.json "due" that are due by the end of tomorrow;
-  data/todos.json sessions dated tomorrow. Example:
-  "Tomorrow is Monday. You've got Stats at seven forty, Macro at nine oh five, and Simulation at two ten.
-  Due by tomorrow night: Macro Homework 5. Your alarm is set. Phone down, get some sleep."
-  No class tomorrow: "No classes tomorrow. Your alarm is off. Sleep in, you earned it."
-Allowed to commit with these: data/days.json and data/night.txt.
+- Write the bedtime brief his phone reads aloud when he turns on his "Night" Focus. Two PUBLIC files, spoken
+  plain text, no emojis/symbols/bullets, numbers said naturally. His phone speaks night.txt, then adds his
+  hours of sleep and study minutes itself, then speaks night2.txt.
+  data/night.txt (under 50 words), in this order:
+    1. Tomorrow's classes from `node tools/classes.js <tomorrow>` by nickname (MA376 "Stats", SS388 "Macro",
+       EM481 "Simulation", MA481X "Optimization", MA486 "M A four eighty-six", MS300 "M S three hundred"),
+       with times, plus any Friday drop. No class: "No classes tomorrow."
+    2. Due by the end of tomorrow (brief.json "due" + Canvas if you checked it), then the next big thing this
+       week (test, quiz, WPR or major assignment) from brief.json "tests"/"due".
+  data/night2.txt (under 110 words), in this order:
+    8. Countdowns, whole days from TODAY's date: "<N> days until Christmas leave" (Dec 19, 2026) and
+       "<N> days until Puerto Rico" (Dec 26, 2026). Drop each once its date has passed.
+    10. Top 3 news headlines of today, one short sentence each (WebSearch; reliable outlets; neutral wording).
+    11. How the S&P 500 closed today (up/down and percent, only from a source that states it). Weekend or
+        market holiday: "Markets were closed today."
+    14. This day in history for TOMORROW's date: one notable, true event, one sentence.
+    15. The wild fact: copy "fact" from `node tools/daypicks.js <tomorrow>` word for word.
+    End with: "Phone down. Get some sleep."
+  Example night.txt: "Tomorrow is Tuesday. You've got M A four eighty-six at seven forty, Optimization at
+  eight forty-five, and M S three hundred at ten thirty-five. Nothing due tomorrow. Next big thing: Macro WPR 2
+  on Wednesday, December 2nd."
+  Example night2.txt: "26 days until Christmas leave, and 33 days until Puerto Rico. In the news: ... The S&P
+  500 closed up half a percent. On this day in 1863, Lincoln gave the Gettysburg Address. Wild fact: Wombats
+  poop cubes. ... Phone down. Get some sleep."
+Allowed to commit with these: data/days.json, data/night.txt and data/night2.txt.
 
 ## Step 1: Is tomorrow a Day 1, a Day 2, or no class?
 West Point alternates Day 1 / Day 2.
@@ -65,7 +81,7 @@ Never run Day 1 skills before a Day 2, or Day 2 skills before a Day 1.
   (If the HTML file is gone, read the artifact's index.html with the Artifact tool and pass that.)
   Re-running for the same course and date replaces that sheet. `pip install cryptography` if missing.
 - Validate: `python3 -c "import json;json.load(open('data/prep/manifest.json'))"`.
-- Allowed files to commit: `data/prep/`, `routines/day-codes.json`, `data/days.json`, `data/night.txt` and `routines/runs.log`. Make sure no plain .json sheet is staged.
+- Allowed files to commit: `data/prep/`, `routines/day-codes.json`, `data/days.json`, `data/night.txt`, `data/night2.txt` and `routines/runs.log`. Make sure no plain .json sheet is staged.
 - Append the run log line (common.md) BEFORE committing, then commit once with message
   "Prep sheets <tomorrow's date>: <courses>" and push.
 
