@@ -20,6 +20,7 @@
  *   POST /remove         {item_id} (admin)
  *   POST /mcp/<MEMORY_KEY>   shared memory bank (MCP) for Claude and ChatGPT
  *   GET  /memory         all memories, ENCRYPTED for the site's galaxy page
+ *   POST /study {m}      log a Study Focus session (minutes); GET /study -> today/week/streak totals
  * Extra secret for the memory bank:
  *   MEMORY_KEY       (secret)  a long random string; it becomes part of the connector URL
  *
@@ -63,6 +64,28 @@ export default {
     // Instant texting (Inkbox iMessage)
     if (path === "/inkbox" && req.method === "POST") return inkboxHook(req, env, ctx);
     if (path === "/inkbox/setup" && req.method === "GET") return inkboxSetup(req, env);
+    // Study log: the site POSTs each Study Focus session; the nightly routine GETs today/this-week totals.
+    //   POST /study {m: minutes}     GET /study -> {today, week, streak, sessions}
+    if (path === "/study") {
+      const day = d => d.toLocaleDateString("en-CA", { timeZone: "America/New_York" });  // YYYY-MM-DD in New York
+      let list = (await env.TOKENS.get("study", "json")) || [];
+      if (req.method === "POST") {
+        const b = await req.json().catch(() => ({}));
+        const m = Math.round(Number(b.m));
+        if (!(m > 0 && m <= 720)) return json({ error: "minutes must be 1-720" }, 400);
+        const now = Date.now();
+        if (!list.some(s => Math.abs(s.t - now) < 120000 && s.m === m)) list.push({ d: day(new Date()), m, t: now });
+        list = list.filter(s => now - s.t < 60 * 864e5);              // keep 60 days
+        await env.TOKENS.put("study", JSON.stringify(list));
+      }
+      const today = day(new Date());
+      const mins = k => list.filter(s => s.d === k).reduce((a, s) => a + s.m, 0);
+      // this week = Monday through today
+      const nowNY = new Date(new Date().toLocaleString("en-US", { timeZone: "America/New_York" }));
+      let week = 0; for (let i = 0; i <= (nowNY.getDay() + 6) % 7; i++) week += mins(day(new Date(Date.now() - i * 864e5)));
+      let streak = 0; for (let i = mins(today) ? 0 : 1; mins(day(new Date(Date.now() - i * 864e5))) > 0; i++) streak++;
+      return json({ today: mins(today), week, streak, sessions: list.slice(-50) });
+    }
     if (path === "/memory" && req.method === "GET") {
       try { return json(await seal({ memories: await loadMem(env), at: new Date().toISOString() })); }
       catch (e) { return json({ error: String(e.message || e) }, 500); }

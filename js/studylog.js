@@ -32,6 +32,8 @@ if (m > 0 && m < 600){
   const L = load(), now = Date.now();
   // ignore the same link opened twice within 2 minutes
   if (!L.some(s => Math.abs(s.t - now) < 120000 && s.m === m)){ L.push({d:key(new Date()), m, t:now}); save(L); }
+  // also save it in the cloud so the bedtime brief can say today's and this week's minutes
+  try { fetch("https://bf-finance.bfonte18.workers.dev/study", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({m})}).catch(() => {}); } catch(e){}
   logged = m;
   p.delete("study");
   history.replaceState(null, "", location.pathname + (p.toString() ? "?"+p : "") + (location.hash || "#study"));
