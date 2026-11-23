@@ -1,0 +1,12 @@
+/* Study session log (Study tab) */
+.slog{padding:20px 22px;margin-bottom:18px;border-left:4px solid var(--accent)}
+.slog-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center}
+.slog-stats b{display:block;font:800 26px/1.1 var(--display)}
+.slog-stats small{font:500 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.slog-bars{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;height:90px;margin-top:16px;align-items:end}
+.slog-bars div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px}
+.slog-bars i{display:block;width:100%;max-width:28px;min-height:3px;border-radius:6px 6px 2px 2px;background:var(--accent);transition:height .6s}
+.slog-bars small{font:500 10px var(--mono);color:var(--muted)}
+.slog-new{margin-top:12px;font-weight:700;color:var(--accent)}
+.slog-fine{margin-top:12px;font-size:12.5px;color:var(--muted)}
+@media (max-width:520px){.slog-stats b{font-size:20px}}
