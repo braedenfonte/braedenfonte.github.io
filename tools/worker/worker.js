@@ -72,40 +72,28 @@ export default {
       const get = async (f, type) => { try { const r = await fetch(site + f + "?t=" + Date.now()); return r.ok ? (type === "json" ? r.json() : r.text()) : null; } catch (e) { return null; } };
       const [a, b, sleep] = await Promise.all([get("night.txt"), get("night2.txt"), get("sleep.json", "json")]);
       const hhmm = new Date().toLocaleTimeString("en-GB", { timeZone: "America/New_York", hour: "2-digit", minute: "2-digit", hour12: false });
-      let study = "";
-      try { study = await (await fetch(new URL("/study?say", req.url))).text(); } catch (e) {}
-      const parts = [a, sleep && sleep[hhmm], study, b].filter(Boolean).map(s => String(s).trim());
+      let study = ""; try { study = (await studyStats(env)).line; } catch (e) {}
+      const parts = [a, sleep && sleep[hhmm], study, b].filter(Boolean).map(x => String(x).trim());
       return new Response(parts.join(" ") || "Goodnight, sir.", { headers: { ...cors, "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" } });
     }
     // Study log: the site POSTs each Study Focus session; the nightly routine GETs today/this-week totals.
     //   POST /study {m: minutes}     GET /study -> {today, week, streak, sessions}
     if (path === "/study") {
-      const day = d => d.toLocaleDateString("en-CA", { timeZone: "America/New_York" });  // YYYY-MM-DD in New York
-      let list = (await env.TOKENS.get("study", "json")) || [];
       if (req.method === "POST") {
-        const b = await req.json().catch(() => ({}));
-        const m = Math.round(Number(b.m));
+        const body = await req.json().catch(() => ({}));
+        const m = Math.round(Number(body.m));
         if (!(m > 0 && m <= 720)) return json({ error: "minutes must be 1-720" }, 400);
+        let list = (await env.TOKENS.get("study", "json")) || [];
         const now = Date.now();
-        if (!list.some(s => Math.abs(s.t - now) < 120000 && s.m === m)) list.push({ d: day(new Date()), m, t: now });
-        list = list.filter(s => now - s.t < 60 * 864e5);              // keep 60 days
+        if (!list.some(x => Math.abs(x.t - now) < 120000 && x.m === m)) list.push({ d: nyDay(new Date()), m, t: now });
+        list = list.filter(x => now - x.t < 60 * 864e5);              // keep 60 days
         await env.TOKENS.put("study", JSON.stringify(list));
       }
-      const today = day(new Date());
-      const mins = k => list.filter(s => s.d === k).reduce((a, s) => a + s.m, 0);
-      // this week = Monday through today
-      const nowNY = new Date(new Date().toLocaleString("en-US", { timeZone: "America/New_York" }));
-      let week = 0; for (let i = 0; i <= (nowNY.getDay() + 6) % 7; i++) week += mins(day(new Date(Date.now() - i * 864e5)));
-      let streak = 0; for (let i = mins(today) ? 0 : 1; mins(day(new Date(Date.now() - i * 864e5))) > 0; i++) streak++;
-      // GET /study?say -> one spoken sentence for the bedtime brief Shortcut
-      if (new URL(req.url).searchParams.has("say")) {
-        const hm = n => n < 60 ? n + " minutes" : Math.floor(n / 60) + " hour" + (n >= 120 ? "s" : "") + (n % 60 ? " " + (n % 60) + " minutes" : "");
-        const t = mins(today);
-        const line = (t ? "You studied " + hm(t) + " today" : "No study sessions today") +
-          (week ? ", and " + hm(week) + " this week." : ".") + (streak > 1 ? " That's a " + streak + " day streak." : "");
-        return new Response(line, { headers: { ...cors, "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" } });
-      }
-      return json({ today: mins(today), week, streak, sessions: list.slice(-50) });
+      const st = await studyStats(env);
+      // GET /study?say -> one spoken sentence
+      if (new URL(req.url).searchParams.has("say"))
+        return new Response(st.line, { headers: { ...cors, "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" } });
+      return json({ today: st.today, week: st.week, streak: st.streak, sessions: st.list.slice(-50) });
     }
     if (path === "/memory" && req.method === "GET") {
       try { return json(await seal({ memories: await loadMem(env), at: new Date().toISOString() })); }
@@ -161,6 +149,22 @@ export default {
   // Cloudflare cron: Sunday 7 PM ET "log in to CIS" text for the L&A tracker
   async scheduled(evt, env, ctx) { ctx.waitUntil(sundayPing(env)); },
 };
+
+/* ---------- study log totals (used by /study and /night) ---------- */
+function nyDay(d) { return d.toLocaleDateString("en-CA", { timeZone: "America/New_York" }); }   // YYYY-MM-DD in New York
+async function studyStats(env) {
+  const list = (await env.TOKENS.get("study", "json")) || [];
+  const mins = k => list.filter(x => x.d === k).reduce((a, x) => a + x.m, 0);
+  const today = mins(nyDay(new Date()));
+  // this week = Monday through today
+  const nowNY = new Date(new Date().toLocaleString("en-US", { timeZone: "America/New_York" }));
+  let week = 0; for (let i = 0; i <= (nowNY.getDay() + 6) % 7; i++) week += mins(nyDay(new Date(Date.now() - i * 864e5)));
+  let streak = 0; for (let i = today ? 0 : 1; i < 400 && mins(nyDay(new Date(Date.now() - i * 864e5))) > 0; i++) streak++;
+  const hm = n => n < 60 ? n + " minutes" : Math.floor(n / 60) + " hour" + (n >= 120 ? "s" : "") + (n % 60 ? " " + (n % 60) + " minutes" : "");
+  const line = (today ? "You studied " + hm(today) + " today" : "No study sessions today") +
+    (week ? ", and " + hm(week) + " this week." : ".") + (streak > 1 ? " That's a " + streak + " day streak." : "");
+  return { today, week, streak, list, line };
+}
 
 async function plaid(env, path, body) {
   const r = await fetch(PLAID + path, {
