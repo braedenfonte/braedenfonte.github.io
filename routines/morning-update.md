@@ -171,6 +171,7 @@ Go win the day.
 ## 7d2) Song files (from daypicks.js), one line each, no punctuation, no "ft." part:
 data/song.txt = song title only (e.g. "Highest in the Room"); data/song-full.txt = title + main artist
 (e.g. "Highest in the Room Travis Scott"). His alarm Shortcut plays the song from these.
+Write them with NO trailing newline (e.g. `printf '%s' "Alright" > data/song.txt`), or his Shortcut's title match fails.
 
 ## 7e) Barracks note (data/tonight.txt, PUBLIC, shown as a phone notification when he gets back to Pershing)
 Write it every run right after alarm.txt. ONE short written line (under 160 characters, no emojis), the tests/quizzes
