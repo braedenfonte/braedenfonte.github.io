@@ -10,7 +10,7 @@ function afc(t){
   if (t >= 60) return "No jacket, no gloves.";
   if (t >= 50) return "Black jacket. No gloves.";
   if (t >= 33) return "Black jacket + gloves.";
-  return "Black jacket + gloves + parka, knit hat, scarf.";
+  return "Parka + gloves + knit hat. No black jacket.";
 }
 function acu(t){
   if (t >= 50) return "No Gore-Tex, no gloves.";
@@ -30,7 +30,7 @@ for (const day of ["Monday","Tuesday","Wednesday","Thursday","Friday"]){
     out[day][String(t)] = name + " · feels " + t + "°: " + (isAcu ? acu(t) : afc(t));
   out.rain[day] = {};
   for (const c of RAIN) out.rain[day][String(c)] = isAcu ? " RAIN: wear Gore-Tex WITHOUT patches (Level VI) instead." : " RAIN: add raincoat.";
-  for (const c of SNOW) out.rain[day][String(c)] = isAcu ? " SNOW: Gore-Tex WITH patches (Level V)." : " SNOW: add raincoat.";
+  for (const c of SNOW) out.rain[day][String(c)] = isAcu ? " SNOW: Gore-Tex WITH patches (Level V)." : " SNOW/SLEET: add raincoat.";
 }
 fs.writeFileSync(path.join(__dirname, "../data/uniform.json"), JSON.stringify(out) + "\n");
 console.log("ok");
