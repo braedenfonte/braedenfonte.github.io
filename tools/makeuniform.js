@@ -5,17 +5,17 @@
 // Run after changing the rules:  node tools/makeuniform.js
 const fs = require("fs"), path = require("path");
 
+// Outer garments only (what to grab on the way out).
 function afc(t){
-  if (t >= 60) return "short-sleeve shirt and M/E trousers.";
-  if (t >= 50) return "short-sleeve shirt, M/E trousers, and black jacket.";
-  if (t >= 40) return "long-sleeve shirt, M/E trousers, black jacket, and black dress gloves.";
-  if (t >= 33) return "long-sleeve shirt, M/E trousers, black jacket, and black dress gloves. No short-sleeve shirt.";
-  return "long-sleeve shirt, M/E trousers, black jacket, black dress gloves, PLUS parka, knit hat, and scarf.";
+  if (t >= 60) return "No jacket, no gloves.";
+  if (t >= 50) return "Black jacket. No gloves.";
+  if (t >= 33) return "Black jacket + gloves.";
+  return "Black jacket + gloves + parka, knit hat, scarf.";
 }
 function acu(t){
-  if (t >= 50) return "ACU top, bottoms, and patrol cap.";
-  if (t >= 40) return "ACU top, bottoms, patrol cap, ECWCS Level V, and black gloves.";
-  return "ACU top, bottoms, ECWCS Level V, black gloves, and fleece cap (or patrol cap).";
+  if (t >= 50) return "No Gore-Tex, no gloves.";
+  if (t >= 40) return "Gore-Tex WITH patches (Level V) + gloves.";
+  return "Gore-Tex WITH patches (Level V) + gloves + fleece cap.";
 }
 
 // open-meteo weather codes
@@ -24,13 +24,13 @@ const SNOW = [71,73,75,77,85,86];
 
 const out = {rain: {}};
 for (const day of ["Monday","Tuesday","Wednesday","Thursday","Friday"]){
-  const isAcu = day === "Friday", name = isAcu ? "ACU" : "As For Class";
+  const isAcu = day === "Friday", name = isAcu ? "ACU" : "AFC";
   out[day] = {};
   for (let t = -40; t <= 115; t++)
-    out[day][String(t)] = name + " today (feels like " + t + "°): " + (isAcu ? acu(t) : afc(t));
+    out[day][String(t)] = name + " · feels " + t + "°: " + (isAcu ? acu(t) : afc(t));
   out.rain[day] = {};
-  for (const c of RAIN) out.rain[day][String(c)] = isAcu ? " Raining: add Gore-Tex (ECWCS Level VI)." : " Raining: bring the raincoat.";
-  for (const c of SNOW) out.rain[day][String(c)] = isAcu ? " Snowing: add ECWCS Level V." : " Snowing: bundle up and bring the raincoat.";
+  for (const c of RAIN) out.rain[day][String(c)] = isAcu ? " RAIN: wear Gore-Tex WITHOUT patches (Level VI) instead." : " RAIN: add raincoat.";
+  for (const c of SNOW) out.rain[day][String(c)] = isAcu ? " SNOW: Gore-Tex WITH patches (Level V)." : " SNOW: add raincoat.";
 }
 fs.writeFileSync(path.join(__dirname, "../data/uniform.json"), JSON.stringify(out) + "\n");
 console.log("ok");
