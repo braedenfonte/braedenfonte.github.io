@@ -12,6 +12,7 @@ Follow `routines/common.md` (Canvas, run log, alerts, committing). Routine name 
 ## Rule 1: Phone files, EVERY run (even "no classes tomorrow" runs and failed runs)
 Right before the final commit, always do both (they ride along in the same commit):
 - `node tools/makedays.js` (rebuilds data/days.json for his auto-alarm and class-reminder Shortcuts).
+- `node tools/makesleep.js <tomorrow>` (rebuilds data/sleep.json: hours-of-sleep line for every bedtime minute).
 - Write the bedtime brief his phone reads aloud when he turns on his "Night" Focus. Two PUBLIC files, spoken
   plain text, no emojis/symbols/bullets, numbers said naturally. His phone speaks night.txt, then adds his
   hours of sleep and study minutes itself, then speaks night2.txt.
@@ -36,7 +37,7 @@ Right before the final commit, always do both (they ride along in the same commi
   Example night2.txt: "26 days until Christmas leave, and 33 days until Puerto Rico. In the news: ... The S&P
   500 closed up half a percent. On this day in 1863, Lincoln gave the Gettysburg Address. Wild fact: Wombats
   poop cubes. ... Goodnight, sir. Sleep amazing."
-Allowed to commit with these: data/days.json, data/night.txt and data/night2.txt.
+Allowed to commit with these: data/days.json, data/sleep.json, data/night.txt and data/night2.txt.
 
 ## Step 1: Is tomorrow a Day 1, a Day 2, or no class?
 West Point alternates Day 1 / Day 2.
@@ -81,7 +82,7 @@ Never run Day 1 skills before a Day 2, or Day 2 skills before a Day 1.
   (If the HTML file is gone, read the artifact's index.html with the Artifact tool and pass that.)
   Re-running for the same course and date replaces that sheet. `pip install cryptography` if missing.
 - Validate: `python3 -c "import json;json.load(open('data/prep/manifest.json'))"`.
-- Allowed files to commit: `data/prep/`, `routines/day-codes.json`, `data/days.json`, `data/night.txt`, `data/night2.txt` and `routines/runs.log`. Make sure no plain .json sheet is staged.
+- Allowed files to commit: `data/prep/`, `routines/day-codes.json`, `data/days.json`, `data/sleep.json`, `data/night.txt`, `data/night2.txt` and `routines/runs.log`. Make sure no plain .json sheet is staged.
 - Append the run log line (common.md) BEFORE committing, then commit once with message
   "Prep sheets <tomorrow's date>: <courses>" and push.
 
