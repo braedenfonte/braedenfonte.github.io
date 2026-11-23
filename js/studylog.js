@@ -13,7 +13,7 @@ function save(L){ try{ localStorage.setItem("bf-study", JSON.stringify(L)); }cat
 
 /* 1) a new session coming in from the phone */
 let logged = 0;
-const p = new URLSearchParams(location.search), m = Math.round(Number(p.get("study")));
+const p = new URLSearchParams(location.search), m = Math.round(Math.abs(Number(p.get("study"))));
 if (m > 0 && m < 600){
   const L = load(), now = Date.now();
   // ignore the same link opened twice within 2 minutes
