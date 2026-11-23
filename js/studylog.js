@@ -13,7 +13,21 @@ function save(L){ try{ localStorage.setItem("bf-study", JSON.stringify(L)); }cat
 
 /* 1) a new session coming in from the phone */
 let logged = 0;
-const p = new URLSearchParams(location.search), m = Math.round(Math.abs(Number(p.get("study"))));
+const p = new URLSearchParams(location.search);
+// ?studystart = Study Focus turned on: remember the time
+if (p.has("studystart")){
+  try{ localStorage.setItem("bf-study-start", String(Date.now())); }catch(e){}
+  p.delete("studystart");
+  history.replaceState(null, "", location.pathname + (p.toString() ? "?"+p : "") + (location.hash || "#study"));
+}
+// ?studyend = Study Focus turned off: minutes since the start
+if (p.has("studyend")){
+  let st = 0; try{ st = Number(localStorage.getItem("bf-study-start")) || 0; localStorage.removeItem("bf-study-start"); }catch(e){}
+  const mins = st ? Math.round((Date.now() - st) / 60000) : 0;
+  if (mins > 0 && mins < 720) p.set("study", String(mins));
+  p.delete("studyend");
+}
+const m = Math.round(Math.abs(Number(p.get("study"))));
 if (m > 0 && m < 600){
   const L = load(), now = Date.now();
   // ignore the same link opened twice within 2 minutes
