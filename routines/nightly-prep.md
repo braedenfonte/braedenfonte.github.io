@@ -15,17 +15,14 @@ Right before the final commit, always do both (they ride along in the same commi
 - `node tools/makesleep.js <tomorrow>` (rebuilds data/sleep.json: hours-of-sleep line for every bedtime minute).
 - Write the bedtime brief his phone reads aloud when he turns on his "Night" Focus. Two PUBLIC files, spoken
   plain text, no emojis/symbols/bullets, numbers said naturally. His phone speaks night.txt, then adds his
-  hours of sleep (from data/sleep.json), then speaks night2.txt.
+  hours of sleep (data/sleep.json) and live study minutes (worker /study?say), then speaks night2.txt.
   data/night.txt (under 50 words), in this order:
     1. Tomorrow's classes from `node tools/classes.js <tomorrow>` by nickname (MA376 "Stats", SS388 "Macro",
        EM481 "Simulation", MA481X "Optimization", MA486 "M A four eighty-six", MS300 "M S three hundred"),
        with times, plus any Friday drop. No class: "No classes tomorrow."
     2. Due by the end of tomorrow (brief.json "due" + Canvas if you checked it), then the next big thing this
        week (test, quiz, WPR or major assignment) from brief.json "tests"/"due".
-  data/night2.txt (under 120 words), in this order:
-    6. Study: fetch https://bf-finance.bfonte18.workers.dev/study (JSON: today, week, streak minutes) and say
-       "You studied <today> minutes today and <week> this week." Say hours and minutes past 60 ("1 hour 20 minutes").
-       If today is 0: "No study sessions today." If the fetch fails, skip this line.
+  data/night2.txt (under 110 words), in this order:
     8. Countdowns, whole days from TODAY's date: "<N> days until Christmas leave" (Dec 19, 2026) and
        "<N> days until Puerto Rico" (Dec 26, 2026). Drop each once its date has passed.
     10. Top 3 news headlines of today, one short sentence each (WebSearch; reliable outlets; neutral wording).

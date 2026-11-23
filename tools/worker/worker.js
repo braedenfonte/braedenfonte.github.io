@@ -84,6 +84,14 @@ export default {
       const nowNY = new Date(new Date().toLocaleString("en-US", { timeZone: "America/New_York" }));
       let week = 0; for (let i = 0; i <= (nowNY.getDay() + 6) % 7; i++) week += mins(day(new Date(Date.now() - i * 864e5)));
       let streak = 0; for (let i = mins(today) ? 0 : 1; mins(day(new Date(Date.now() - i * 864e5))) > 0; i++) streak++;
+      // GET /study?say -> one spoken sentence for the bedtime brief Shortcut
+      if (new URL(req.url).searchParams.has("say")) {
+        const hm = n => n < 60 ? n + " minutes" : Math.floor(n / 60) + " hour" + (n >= 120 ? "s" : "") + (n % 60 ? " " + (n % 60) + " minutes" : "");
+        const t = mins(today);
+        const line = (t ? "You studied " + hm(t) + " today" : "No study sessions today") +
+          (week ? ", and " + hm(week) + " this week." : ".") + (streak > 1 ? " That's a " + streak + " day streak." : "");
+        return new Response(line, { headers: { ...cors, "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" } });
+      }
       return json({ today: mins(today), week, streak, sessions: list.slice(-50) });
     }
     if (path === "/memory" && req.method === "GET") {
