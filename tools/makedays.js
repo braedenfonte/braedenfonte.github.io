@@ -1,6 +1,7 @@
 // Builds data/days.json, which Braeden's iPhone Shortcuts read.
 // For every date in routines/day-codes.json:
 //   "alarm": "on" on class days, "off" on weekends / N/A days
+//   "wake": "6:40 AM" on class days, "9:00 AM" otherwise (bedtime brief: hours of sleep)
 //   "0730", "0835", "0855", "1025", "1400": class reminder text, keyed by when the reminder fires
 //     (10 minutes before class: 7:30, 8:35 or 8:55, 10:25, 2:00 PM)
 // Run after day-codes.json changes:  node tools/makedays.js
@@ -15,7 +16,7 @@ const hourOfReminder = hm => { const mins = +hm.slice(0,2)*60 + +hm.slice(2) - 1
 
 const out = {};
 for (const ds of Object.keys(codes).sort()){
-  const r = classesOn(ds), day = {alarm: r.classes.length ? "on" : "off"};
+  const r = classesOn(ds), day = {alarm: r.classes.length ? "on" : "off", wake: r.classes.length ? "6:40 AM" : "9:00 AM"};
   for (const c of r.classes){
     const [code, hm] = c.split(" ");
     day[hourOfReminder(hm)] = NAME[code] + " starts at " + pretty(hm) + ". Tap to open your prep.";
