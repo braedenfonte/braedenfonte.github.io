@@ -21,6 +21,7 @@
  *   POST /mcp/<MEMORY_KEY>   shared memory bank (MCP) for Claude and ChatGPT
  *   GET  /memory         all memories, ENCRYPTED for the site's galaxy page
  *   POST /study {m}      log a Study Focus session (minutes); GET /study -> today/week/streak totals
+ *   GET  /night          the whole bedtime brief as one spoken text (Night Focus Shortcut)
  * Extra secret for the memory bank:
  *   MEMORY_KEY       (secret)  a long random string; it becomes part of the connector URL
  *
@@ -64,6 +65,18 @@ export default {
     // Instant texting (Inkbox iMessage)
     if (path === "/inkbox" && req.method === "POST") return inkboxHook(req, env, ctx);
     if (path === "/inkbox/setup" && req.method === "GET") return inkboxSetup(req, env);
+    // Whole bedtime brief in ONE piece for the Night Focus Shortcut (no pauses between parts):
+    //   GET /night -> night.txt + hours of sleep + study minutes + night2.txt
+    if (path === "/night" && req.method === "GET") {
+      const site = "https://braedenfonte.com/data/";
+      const get = async (f, type) => { try { const r = await fetch(site + f + "?t=" + Date.now()); return r.ok ? (type === "json" ? r.json() : r.text()) : null; } catch (e) { return null; } };
+      const [a, b, sleep] = await Promise.all([get("night.txt"), get("night2.txt"), get("sleep.json", "json")]);
+      const hhmm = new Date().toLocaleTimeString("en-GB", { timeZone: "America/New_York", hour: "2-digit", minute: "2-digit", hour12: false });
+      let study = "";
+      try { study = await (await fetch(new URL("/study?say", req.url))).text(); } catch (e) {}
+      const parts = [a, sleep && sleep[hhmm], study, b].filter(Boolean).map(s => String(s).trim());
+      return new Response(parts.join(" ") || "Goodnight, sir.", { headers: { ...cors, "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" } });
+    }
     // Study log: the site POSTs each Study Focus session; the nightly routine GETs today/this-week totals.
     //   POST /study {m: minutes}     GET /study -> {today, week, streak, sessions}
     if (path === "/study") {
