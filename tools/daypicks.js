@@ -27,4 +27,8 @@ const c = pick(JSON.parse(fs.readFileSync(path.join(root, "data/compliments.json
 // 5) wild fact of the day (bedtime brief) lives in data/facts.json
 const f = pick(JSON.parse(fs.readFileSync(path.join(root, "data/facts.json"), "utf8")).facts);
 
-console.log(JSON.stringify({fact: f, song: s[0] + " · " + s[1], quote: "“" + q.q + "” — " + q.a, compliment: c}, null, 1));
+// 6) word of the day (alarm) lives in data/words.json
+const w = pick(JSON.parse(fs.readFileSync(path.join(root, "data/words.json"), "utf8")).words);
+const word = "Word of the day: " + w.w + ". It means " + w.d + ". As in: " + w.s;
+
+console.log(JSON.stringify({word, fact: f, song: s[0] + " · " + s[1], quote: "“" + q.q + "” — " + q.a, compliment: c}, null, 1));

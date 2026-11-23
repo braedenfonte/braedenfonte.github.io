@@ -144,13 +144,15 @@ Validate it with the others in part 8.
 
 ## 7d) Alarm script (data/alarm.txt, PUBLIC, plain text read aloud by his iPhone alarm Shortcut)
 Write it every run right after brief.json, from the same data plus `node tools/daypicks.js`. Rules: written
-to be HEARD, so short sentences, no emojis, no bullets, no symbols, UNDER 100 WORDS (about 40 seconds). Same privacy rules as brief.json.
+to be HEARD, so short sentences, no emojis, no bullets, no symbols, UNDER 140 WORDS (about 55 seconds). Same privacy rules as brief.json.
 Say classes by NICKNAME, never the code: MA376 = "Stats", SS388 = "Macro", EM481 = "Simulation",
 MA481X = "Optimization", MA486 = "M A four eighty-six", MS300 = "M S three hundred".
 Times like "seven forty", "nine oh five", "two ten". Order (skip any part with nothing in it):
 1. "Good morning Braeden. It's <Weekday>, <Month> <day>th."
 2. Song of the day, then quote of the day, then the compliment of the day ("compliment" from daypicks.js, read word for word,
    no label before it).
+2b. Word of the day: copy "word" from daypicks.js word for word (it already says the word,
+   what it means, and uses it in a sentence).
 3. Any alerts ("Heads up: ...").
 4. Today's classes with times from brief.json "classes" (Friday drops already left out; or "No classes today.").
    If `node tools/classes.js <today>` lists a dropped class, add a short line like "Macro is a drop today."
