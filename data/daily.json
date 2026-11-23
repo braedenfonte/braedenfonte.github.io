@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22T07:00:00-05:00",
+ "updated": "2026-11-23T07:00:00-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -502,7 +502,7 @@
     "awayRank": 6,
     "blurb": "Washington knocked off Indiana in overtime at Husky Stadium.",
     "stats": [
-     "Demond Williams Jr.: 24/41, 227 yds, TD; 88 rush yds, TD",
+     "Demond Williams Jr.: 24/41, 227 yds, TD, INT; 88 rush yds, TD",
      "Charlie Becker: 6 rec, 167 yds, TD"
     ]
    },
@@ -558,182 +558,182 @@
     "away": "TCU",
     "home": "Texas Tech",
     "kick": "2026-11-27T01:00:00Z",
-    "note": "Thu \u00b7 ESPN \u00b7 Galaxy Stadium",
-    "homeRank": 11
+    "note": "Thu · ESPN · Lubbock",
+    "homeRank": 9
    },
    {
     "away": "Nebraska",
     "home": "Iowa",
     "kick": "2026-11-27T17:00:00Z",
-    "note": "Fri \u00b7 CBS \u00b7 Kinnick Stadium",
+    "note": "Fri · CBS · Kinnick Stadium",
     "homeRank": 13
-   },
-   {
-    "away": "Mississippi State",
-    "home": "Ole Miss",
-    "kick": "2026-11-27T17:00:00Z",
-    "note": "Fri \u00b7 ABC \u00b7 Egg Bowl",
-    "homeRank": 25
-   },
-   {
-    "away": "Florida",
-    "home": "Florida State",
-    "kick": "2026-11-27T20:30:00Z",
-    "note": "Fri \u00b7 ABC \u00b7 Doak Campbell Stadium",
-    "awayRank": 23
    },
    {
     "away": "Air Force",
     "home": "New Mexico",
     "kick": "2026-11-27T21:30:00Z",
-    "note": "Fri \u00b7 CW \u00b7 Albuquerque"
+    "note": "Fri · CW · Albuquerque"
    },
    {
     "away": "Texas",
     "home": "Texas A&M",
     "kick": "2026-11-28T00:30:00Z",
-    "note": "Fri \u00b7 ABC \u00b7 Kyle Field",
-    "awayRank": 8
+    "note": "Fri · ABC · Kyle Field",
+    "awayRank": 5
    },
    {
     "away": "West Virginia",
     "home": "Utah",
     "kick": "2026-11-28T02:00:00Z",
-    "note": "Fri \u00b7 Fox \u00b7 Rice-Eccles Stadium",
+    "note": "Fri · Fox · Rice-Eccles Stadium",
     "homeRank": 2
    },
    {
     "away": "Notre Dame",
     "home": "Syracuse",
     "kick": "2026-11-28T17:00:00Z",
-    "note": "ABC \u00b7 JMA Wireless Dome",
+    "note": "ABC · JMA Wireless Dome",
     "awayRank": 3
    },
    {
     "away": "Boston College",
     "home": "Miami",
     "kick": "2026-11-28T17:00:00Z",
-    "note": "ESPN \u00b7 Hard Rock Stadium",
-    "homeRank": 5
+    "note": "ESPN · Hard Rock Stadium",
+    "homeRank": 4
    },
    {
     "away": "Michigan",
     "home": "Ohio State",
     "kick": "2026-11-28T17:00:00Z",
-    "note": "Fox \u00b7 Ohio Stadium",
-    "homeRank": 16
-   },
-   {
-    "away": "Louisville",
-    "home": "Kentucky",
-    "kick": "2026-11-28T17:00:00Z",
-    "note": "ESPN2 \u00b7 Kroger Field",
-    "awayRank": 21,
-    "homeRank": 17
+    "note": "Fox · Ohio Stadium",
+    "homeRank": 25
    },
    {
     "away": "Navy",
     "home": "Charlotte",
     "kick": "2026-11-28T17:00:00Z",
-    "note": "ESPN+ \u00b7 Jerry Richardson Stadium"
+    "note": "ESPN+ · Jerry Richardson Stadium"
    },
    {
     "away": "Army",
     "home": "Rice",
     "kick": "2026-11-28T19:00:00Z",
-    "note": "Away at Rice (First Community Stadium, Houston) \u00b7 ESPN+",
+    "note": "Away at Rice (First Community Stadium, Houston) · ESPN+",
     "army": true
    },
    {
     "away": "Georgia Tech",
     "home": "Georgia",
     "kick": "2026-11-28T20:30:00Z",
-    "note": "ABC \u00b7 Sanford Stadium",
+    "note": "ABC · Sanford Stadium",
     "homeRank": 1
    },
    {
     "away": "USC",
     "home": "UCLA",
     "kick": "2026-11-28T20:30:00Z",
-    "note": "CBS \u00b7 Rose Bowl",
-    "awayRank": 18,
-    "homeRank": 4
+    "note": "CBS · Rose Bowl",
+    "awayRank": 15,
+    "homeRank": 10
+   },
+   {
+    "away": "Cincinnati",
+    "home": "BYU",
+    "kick": "2026-11-28T20:30:00Z",
+    "note": "Fox · LaVell Edwards Stadium",
+    "homeRank": 11
+   },
+   {
+    "away": "Duke",
+    "home": "Wake Forest",
+    "kick": "2026-11-28T20:30:00Z",
+    "note": "ESPN · Winston-Salem",
+    "homeRank": 8
+   },
+   {
+    "away": "Oklahoma",
+    "home": "Missouri",
+    "kick": "2026-11-28T21:15:00Z",
+    "note": "SEC Network · Columbia, Mo.",
+    "awayRank": 19,
+    "homeRank": 24
    },
    {
     "away": "Purdue",
     "home": "Indiana",
     "kick": "2026-11-29T00:00:00Z",
-    "note": "FS1 \u00b7 Bloomington",
-    "homeRank": 6
+    "note": "FS1 · Bloomington",
+    "homeRank": 12
    },
    {
     "away": "Tennessee",
     "home": "Vanderbilt",
     "kick": "2026-11-29T00:00:00Z",
-    "note": "ESPN \u00b7 FirstBank Stadium",
-    "awayRank": 9
+    "note": "ESPN · FirstBank Stadium",
+    "awayRank": 7
    },
    {
     "away": "Auburn",
     "home": "Alabama",
     "kick": "2026-11-29T00:30:00Z",
-    "note": "ABC \u00b7 Iron Bowl, Bryant-Denny Stadium",
-    "homeRank": 7
+    "note": "ABC · Iron Bowl, Bryant-Denny Stadium",
+    "homeRank": 6
    },
    {
     "away": "Washington",
     "home": "Oregon",
     "kick": "2026-11-29T00:30:00Z",
-    "note": "NBC \u00b7 Autzen Stadium",
+    "note": "NBC · Autzen Stadium",
     "homeRank": 14
    },
    {
     "away": "Arizona State",
     "home": "Arizona",
     "kick": "2026-11-29T02:00:00Z",
-    "note": "Fox \u00b7 Territorial Cup",
-    "homeRank": 19
+    "note": "Fox · Territorial Cup",
+    "homeRank": 16
    }
   ],
-  "poll": "AP Top 25, Week 12 (Nov 16)"
+  "poll": "AP Top 25, Week 13 (Nov 22)"
  },
  "location": {
-  "name": "Sigiriya",
-  "wiki": "Sigiriya",
-  "country": "Sri Lanka",
-  "region": "Matale District, Central Province",
-  "lat": 7.9569,
-  "lon": 80.7597,
-  "tagline": "A 5th-century royal fortress on top of a 180-meter rock in the Sri Lankan jungle",
-  "intro": "Sigiriya, or Lion Rock, is a huge granite column rising out of the forest near Dambulla in central Sri Lanka. King Kashyapa built his palace on its flat summit in the late 5th century, with painted cliff galleries, a polished Mirror Wall and some of the oldest landscaped gardens in the world at its base. It is now one of the most visited sites in the country.",
+  "name": "Bryce Canyon National Park",
+  "wiki": "Bryce_Canyon_National_Park",
+  "country": "United States",
+  "region": "Garfield and Kane Counties, southern Utah",
+  "lat": 37.64,
+  "lon": -112.17,
+  "tagline": "A forest of orange stone spires carved into the edge of a high Utah plateau",
+  "intro": "Bryce Canyon is not really a canyon at all but a chain of giant natural amphitheaters cut into the eastern edge of the Paunsaugunt Plateau. Frost and running water have carved its soft pink and orange rock into thousands of thin spires called hoodoos. The park sits much higher than nearby Zion, with a rim between 8,000 and 9,000 feet.",
   "stats": [
    {
-    "label": "Rock height",
-    "value": "about 180 m (590 ft)"
+    "label": "Area",
+    "value": "35,835 acres (145 km²)"
    },
    {
-    "label": "Built",
-    "value": "King Kashyapa, CE 477\u2013495"
+    "label": "Highest point",
+    "value": "Rainbow Point, 9,105 ft (2,775 m)"
    },
    {
-    "label": "World Heritage",
-    "value": "Listed 1982"
+    "label": "National park since",
+    "value": "Feb 25, 1928 (monument 1923)"
    },
    {
-    "label": "Summit elevation",
-    "value": "349 m (1,145 ft)"
+    "label": "Visitors",
+    "value": "About 2.5 million (2024)"
    }
   ],
   "facts": [
-   "The entrance to the summit passes between two giant carved lion paws; a lion's head once sat above them, which is where the name Lion Rock comes from.",
-   "The Mirror Wall was polished so well the king could see his reflection in it.",
-   "Visitors from the 8th to 10th centuries scratched poems onto the Mirror Wall, and scholar Senarath Paranavithana deciphered 685 of them.",
-   "The painted frescoes once covered an area about 140 m long and 40 m high; most of them have been lost.",
-   "Arthur C. Clarke based the fictional fortress Yakkagala in The Fountains of Paradise on Sigiriya."
+   "It is named for Ebenezer Bryce, a Mormon settler who grazed cattle here and reputedly called it a \"helluva place to lose a cow.\"",
+   "Bryce Amphitheater, the largest of the park's amphitheaters, is 12 miles long, 3 miles wide and 800 feet deep.",
+   "Some hoodoos stand up to 200 feet tall; the oranges come from hematite, the yellows from limonite and the purples from pyrolusite.",
+   "The night sky is so dark that visitors can see about 7,500 stars, and it became an International Dark Sky Park in 2019.",
+   "The park holds the largest protected population of the threatened Utah prairie dog, which was reintroduced there."
   ],
-  "bestTime": "January to April, the driest stretch in the Cultural Triangle. Start the climb right at opening to beat the heat and crowds.",
-  "gettingThere": "No nonstop flights: fly JFK to Colombo (CMB) with one stop in the Gulf (Doha or Dubai), about 20+ hours, then drive about 4 hours north to Sigiriya.",
-  "tip": "Climb neighboring Pidurangala Rock at sunrise for the classic view of Sigiriya itself."
+  "bestTime": "May through October for open trails and mild days; winter brings snow-dusted hoodoos and far fewer people, but nights drop well below freezing.",
+  "gettingThere": "Fly nonstop from JFK, LGA or EWR to Las Vegas (LAS) or Salt Lake City (SLC), then drive about 4 hours to the park.",
+  "tip": "Watch sunrise from Sunrise Point, then hike down among the hoodoos on the Queen's Garden and Navajo Loop trails."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 9 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
@@ -749,68 +749,63 @@
   "movers": [
    {
     "sym": "NVDA",
-    "move": "\u221214%",
+    "move": "−14%",
     "dir": -1,
     "why": "Nvidia had its lowest close in 18 months, falling despite strong earnings amid reports the SEC is examining its accounting after CEO Jensen Huang's exit."
    },
    {
     "sym": "ANT",
-    "move": "\u22129%",
+    "move": "−9%",
     "dir": -1,
     "why": "Anthropic fell to $88.91 in its second trading session, giving back much of its roughly 17% debut-day gain."
    },
    {
     "sym": "AMD",
-    "move": "\u221212 to 14%",
+    "move": "−12 to 14%",
     "dir": -1,
     "why": "AMD fell roughly 12% to 14% in the broad chip selloff."
    },
    {
     "sym": "MU",
-    "move": "\u221212 to 14%",
+    "move": "−12 to 14%",
     "dir": -1,
     "why": "Micron fell roughly 12% to 14% as AI-linked chip stocks slid."
    },
    {
     "sym": "AVGO",
-    "move": "\u221212 to 14%",
+    "move": "−12 to 14%",
     "dir": -1,
     "why": "Broadcom fell roughly 12% to 14% with the rest of the AI chip group."
    }
   ],
   "lines": [
    {
-    "game": "Dolphins @ Bills",
-    "kick": "2026-11-22T18:00:00Z",
-    "spread": "BUF \u221216.5",
-    "total": "44.5",
-    "ml": "BUF \u22121460 / MIA +860",
+    "game": "Chiefs @ Bills",
+    "kick": "2026-11-27T01:20:00Z",
+    "spread": "BUF −3",
+    "total": "50.5",
+    "ml": "BUF −152 / KC +129",
     "bills": true
    },
    {
-    "game": "USC @ UCLA",
-    "kick": "2026-11-28T20:30:00Z",
-    "spread": "USC \u22126.5",
-    "total": "47.5",
-    "ml": "USC \u2212245 / UCLA +200"
+    "game": "Michigan @ Ohio State",
+    "kick": "2026-11-28T17:00:00Z",
+    "spread": "OSU −10",
+    "total": "38.5",
+    "ml": "OSU −395 / MICH +310"
    },
    {
-    "game": "Chiefs @ Bills",
-    "kick": "2026-11-27T01:20:00Z",
-    "spread": "BUF \u22123",
-    "total": "51.5",
-    "ml": "BUF \u2212159 / KC +134"
+    "game": "Auburn @ Alabama",
+    "kick": "2026-11-29T00:30:00Z",
+    "spread": "ALA −16.5",
+    "total": "48.5",
+    "ml": "ALA −800 / AUB +550"
    }
   ],
   "probs": [
    {
     "game": "Purdue @ Indiana",
     "fav": "Indiana",
-    "p": 95
-   },
-   {
-    "game": "Dolphins @ Bills",
-    "fav": "Bills",
     "p": 95
    },
    {
@@ -827,8 +822,13 @@
     "game": "Temple @ Memphis",
     "fav": "Memphis",
     "p": 91
+   },
+   {
+    "game": "Coastal Carolina @ James Madison",
+    "fav": "James Madison",
+    "p": 90
    }
   ],
-  "sources": "S&P 500 and story: AP via La Naci\u00f3n (Nov 20); movers: Fox Business, HNGN and American Greatness (Nov 20); odds: DraftKings via ESPN (Nov 22); probs: ESPN matchup predictor (Nov 22)."
+  "sources": "S&P 500 and story: CNBC and AP (Nov 20); movers: Fox Business, HNGN and American Greatness (Nov 20); odds: DraftKings via ESPN (Nov 23); probs: ESPN matchup predictor (Nov 23)."
  }
 }

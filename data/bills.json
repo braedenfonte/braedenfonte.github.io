@@ -1,13 +1,13 @@
 {
- "updated": "2026-11-22T07:00:00-05:00",
+ "updated": "2026-11-23T07:00:00-05:00",
  "team": "Buffalo Bills",
  "record": {
-  "w": 8,
+  "w": 9,
   "l": 1
  },
- "standing": "Leads the AFC East by 3.5 games",
- "pf": 287,
- "pa": 199,
+ "standing": "Leads the AFC East by 4 games",
+ "pf": 313,
+ "pa": 208,
  "results": [
   {
    "wk": 1,
@@ -85,12 +85,21 @@
    "os": 12,
    "res": "W",
    "note": "Best start since 1991"
+  },
+  {
+   "wk": 10,
+   "date": "Nov 22",
+   "opp": "vs Miami",
+   "bs": 26,
+   "os": 9,
+   "res": "W",
+   "note": "Sixth straight win"
   }
  ],
  "afcEast": [
   {
    "team": "Buffalo Bills",
-   "w": 8,
+   "w": 9,
    "l": 1,
    "me": true
   },
@@ -101,51 +110,44 @@
   },
   {
    "team": "New York Jets",
-   "w": 2,
+   "w": 3,
    "l": 8
   },
   {
    "team": "Miami Dolphins",
    "w": 1,
-   "l": 8
+   "l": 9
   }
  ],
  "lastGame": {
-  "title": "Bills 31, Jets 12",
+  "title": "Bills 26, Dolphins 9",
   "stats": [
-   "Josh Allen: 11-of-21, 196 yards, 1 TD, 1 INT; 2 rushing TDs (both 1 yard); passed Peyton Manning for most total TDs in a player's first 10 seasons",
-   "James Cook III: 18 carries, 157 yards, 74-yard TD run (career long, Bills' longest rushing TD since 2016)",
-   "DJ Moore: 4 catches, 90 yards, 45-yard TD; Dalton Kincaid had a career-long 54-yard catch",
-   "Defense: no TDs allowed, Jets 3-of-13 on third down; T.J. Parker 2 sacks, Dorian Williams first career sack",
-   "Jets QBs: Geno Smith 13-of-21, 148 yards before an ankle injury; rookie Cade Klubnik 11-of-20, 137 yards, 1 INT"
+   "Josh Allen: 27-of-45, 304 yards, 1 TD, 2 INT; threw to eight different receivers and had no rushing attempts",
+   "DJ Moore: 8 catches, 91 yards, 4-yard TD; Khalil Shakir 5 catches for 101 yards; Ty Johnson 7 catches for 55 yards",
+   "James Cook III: 89 rushing yards and a 1-yard TD, his 10th rushing TD of the season",
+   "Tyler Bass: 4-of-5 on field goals (54, 43, 40, 28); a 54-yard miss ended his streak of 33 straight makes",
+   "Defense: 185 yards allowed, Miami 2-of-14 on third down, Kyle McCord 12-of-33 for 102 yards; Greg Rousseau 2 sacks, Damar Hamlin INT; no TD allowed since Nov 1"
   ]
  },
  "news": [
   {
-   "h": "Tre'Davious White and Shaq Thompson elevated",
-   "b": "With CB Christian Benford and LB Dorian Williams ruled out, the Bills elevated CB Tre'Davious White and LB Shaq Thompson from the practice squad Saturday. It's the first elevation this season for both former first-round picks. Maxwell Hairston and rookie Kaleb Elarms-Orr are expected to start in their places, with White and Thompson in rotational roles."
+   "h": "DJ Moore's knee scare looks minor",
+   "b": "Moore left in the second quarter with a knee injury and was listed as questionable to return, but he came back and finished with 8 catches for 91 yards and a touchdown. He told NFL Network's Cameron Wolfe the knee buckle scared him, but the team checked him out and he's good. The Bills will watch him on the short week."
   },
   {
-   "h": "Fourth straight backup QB for Buffalo's defense",
-   "b": "Miami's Kyle McCord makes his second NFL start, the fourth straight game the Bills face a backup. He went 17-of-32 for 209 yards in a 24-22 loss at Indianapolis. Over the last three games, Buffalo has allowed 28 total points, opponents are 17.6% on third down, and the defense has eight takeaways."
+   "h": "Kincaid and Benford sat out against Miami",
+   "b": "TE Dalton Kincaid missed the game with thumb and ankle injuries, and CB Christian Benford missed it with a groin injury. With Thursday's game only four days away, their status for Kansas City is the main injury question this week."
   },
   {
-   "h": "Dolphins activate Baker; Carlson and Browning elevated",
-   "b": "Miami activated CB Darrell Baker Jr. from PUP on Saturday, and he is expected to debut at Buffalo. The Dolphins also elevated K Daniel Carlson and P Jack Browning for the game. RB Devon Achane and QB Malik Willis are unavailable, so Ollie Gordon leads the run game and McCord starts."
+   "h": "Chiefs visit Thursday night; Bills favored",
+   "b": "Kansas City (8-2) comes to Highmark Stadium on Thanksgiving night (8:20 p.m., NBC) after a 34-7 win over Arizona in which Patrick Mahomes threw for 324 yards and three TDs. FanDuel has Bills −2.5, total 50.5, moneylines Bills −142 and Chiefs +120, per Fox Sports."
   },
   {
-   "h": "Win would push the division lead to 4.5 games",
-   "b": "New England (5-5) is on its bye after a 35-10 loss to Detroit, and the Jets (2-8) play at the Chargers at 4:05 p.m. A Bills win over Miami today would put Buffalo 4.5 games up in the AFC East before Thursday's Thanksgiving-night game against Kansas City."
+   "h": "Division lead grows to four games",
+   "b": "Buffalo (9-1) is four games clear of New England (5-5), which was on its bye. The Jets (3-8) ended a five-game losing streak with a 27-24 win at the Chargers, and Miami fell to 1-9. The Bills play at New England on Dec 6."
   }
  ],
  "schedule": [
-  {
-   "kick": "2026-11-22T13:00-05:00",
-   "opp": "Miami Dolphins",
-   "home": true,
-   "venue": "Highmark Stadium",
-   "note": "CBS"
-  },
   {
    "kick": "2026-11-26T20:20-05:00",
    "opp": "Kansas City Chiefs",
@@ -196,5 +198,5 @@
    "note": "Date and time may flex"
   }
  ],
- "source": "buffalobills.com Week 11 storylines (Nov 18); SI and Heavy on Bills elevations (Nov 21); Yahoo/SI on Dolphins moves (Nov 21); ESPN standings and schedule (checked Nov 22, no AFC East games since Nov 20)."
+ "source": "ESPN, Yahoo Sports, Yardbarker and AP (via 104.5 The Zone) Bills-Dolphins recaps; Heavy on DJ Moore; Fox Sports on Jets-Chargers and Thanksgiving odds (FanDuel); CBS Sports standings and schedule (checked Nov 23)."
 }

@@ -1,14 +1,13 @@
 {
- "date": "2026-11-22",
- "updated": "2026-11-22T07:00:00-05:00",
- "dayCode": "N/A",
- "classes": [],
+ "date": "2026-11-23",
+ "updated": "2026-11-23T07:00:00-05:00",
+ "dayCode": "1-34",
+ "classes": [
+  "MA376 0740",
+  "SS388 0905",
+  "EM481 1410"
+ ],
  "due": [
-  {
-   "course": "MA376",
-   "title": "Memo 5",
-   "due": "2026-11-22T23:59"
-  },
   {
    "course": "SS388",
    "title": "Homework 5",
@@ -39,7 +38,7 @@
  ],
  "headlines": [
   "Army @ Rice Sat 2 PM (ESPN+)",
-  "Bills 8-1, vs MIA today 1 PM (CBS)",
+  "Bills 9-1, next vs KC Thu 8:20 PM (NBC)",
   "S&P 500 −3.70% Fri"
  ],
  "alerts": []
