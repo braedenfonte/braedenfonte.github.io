@@ -31,4 +31,7 @@ const f = pick(JSON.parse(fs.readFileSync(path.join(root, "data/facts.json"), "u
 const w = pick(JSON.parse(fs.readFileSync(path.join(root, "data/words.json"), "utf8")).words);
 const word = "Word of the day: " + w.w + ". It means " + w.d + ". As in: " + w.s;
 
-console.log(JSON.stringify({word, fact: f, song: s[0] + " · " + s[1], quote: "“" + q.q + "” — " + q.a, compliment: c}, null, 1));
+// 7) bedtime sign-off lives in data/signoffs.json (shifted so it doesn't sync up with the other lists)
+const so = pick(JSON.parse(fs.readFileSync(path.join(root, "data/signoffs.json"), "utf8")).signoffs, 5);
+
+console.log(JSON.stringify({signoff: so, word, fact: f, song: s[0] + " · " + s[1], quote: "“" + q.q + "” — " + q.a, compliment: c}, null, 1));

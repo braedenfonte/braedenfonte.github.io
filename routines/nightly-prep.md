@@ -29,13 +29,13 @@ Right before the final commit, always do both (they ride along in the same commi
         market holiday: "Markets were closed today."
     14. This day in history for TOMORROW's date: one notable, true event, one sentence.
     15. The wild fact: copy "fact" from `node tools/daypicks.js <tomorrow>` word for word.
-    End with: "Phone down. Get some sleep."
+    End with the sign-off: copy "signoff" from `node tools/daypicks.js <tomorrow>` word for word.
   Example night.txt: "Tomorrow is Tuesday. You've got M A four eighty-six at seven forty, Optimization at
   eight forty-five, and M S three hundred at ten thirty-five. Nothing due tomorrow. Next big thing: Macro WPR 2
   on Wednesday, December 2nd."
   Example night2.txt: "26 days until Christmas leave, and 33 days until Puerto Rico. In the news: ... The S&P
   500 closed up half a percent. On this day in 1863, Lincoln gave the Gettysburg Address. Wild fact: Wombats
-  poop cubes. ... Phone down. Get some sleep."
+  poop cubes. ... Goodnight, sir. Sleep amazing."
 Allowed to commit with these: data/days.json, data/night.txt and data/night2.txt.
 
 ## Step 1: Is tomorrow a Day 1, a Day 2, or no class?
