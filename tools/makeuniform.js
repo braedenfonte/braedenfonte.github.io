@@ -10,7 +10,7 @@ function afc(t){
   if (t >= 60) return "No jacket, no gloves.";
   if (t >= 50) return "Black jacket. No gloves.";
   if (t >= 33) return "Black jacket + gloves.";
-  return "Parka + gloves + knit hat. No black jacket.";
+  return "Parka + gloves + knit hat.";
 }
 function acu(t){
   if (t >= 50) return "No Gore-Tex, no gloves.";
