@@ -22,6 +22,7 @@
  *   GET  /memory         all memories, ENCRYPTED for the site's galaxy page
  *   POST /study {m}      log a Study Focus session (minutes); GET /study -> today/week/streak totals
  *   GET  /night          the whole bedtime brief as one spoken text (Night Focus Shortcut)
+ *   GET  /uniform        today's outer garments from live weather (lock screen notification)
  * Extra secret for the memory bank:
  *   MEMORY_KEY       (secret)  a long random string; it becomes part of the connector URL
  *
