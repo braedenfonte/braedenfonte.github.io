@@ -1,30 +1,20 @@
 {
- "date": "2026-11-23",
- "updated": "2026-11-23T07:00:00-05:00",
- "dayCode": "1-34",
+ "date": "2026-11-24",
+ "updated": "2026-11-24T07:00:00-05:00",
+ "dayCode": "2-35",
  "classes": [
-  "MA376 0740",
-  "SS388 0905",
-  "EM481 1410"
+  "MA486 0740",
+  "MA481X 0845",
+  "MS300 1035"
  ],
  "due": [
   {
-   "course": "SS388",
-   "title": "Homework 5",
-   "due": "2026-11-23T09:05"
+   "course": "MA486",
+   "title": "HW4",
+   "due": "2026-11-30T23:59"
   }
  ],
  "tests": [
-  {
-   "course": "SS388",
-   "title": "Quiz 5",
-   "date": "2026-11-23"
-  },
-  {
-   "course": "MA481X",
-   "title": "Technical Certification 4 (L36 Two-Phase Optimization)",
-   "date": "2026-12-01"
-  },
   {
    "course": "SS388",
    "title": "WPR 2 (Ch 9-15)",
@@ -34,12 +24,17 @@
    "course": "EM481",
    "title": "WPR 2 (lessons 11-31)",
    "date": "2026-12-04"
+  },
+  {
+   "course": "MA481X",
+   "title": "WPR II (may be replaced by app brief, confirm)",
+   "date": "2026-12-08"
   }
  ],
  "headlines": [
   "Army @ Rice Sat 2 PM (ESPN+)",
   "Bills 9-1, next vs KC Thu 8:20 PM (NBC)",
-  "S&P 500 −3.70% Fri"
+  "S&P 500 +4.73% Mon"
  ],
  "alerts": []
 }

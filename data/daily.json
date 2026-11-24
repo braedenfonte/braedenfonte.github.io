@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23T07:00:00-05:00",
+ "updated": "2026-11-24T07:00:00-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -698,84 +698,84 @@
   "poll": "AP Top 25, Week 13 (Nov 22)"
  },
  "location": {
-  "name": "Bryce Canyon National Park",
-  "wiki": "Bryce_Canyon_National_Park",
-  "country": "United States",
-  "region": "Garfield and Kane Counties, southern Utah",
-  "lat": 37.64,
-  "lon": -112.17,
-  "tagline": "A forest of orange stone spires carved into the edge of a high Utah plateau",
-  "intro": "Bryce Canyon is not really a canyon at all but a chain of giant natural amphitheaters cut into the eastern edge of the Paunsaugunt Plateau. Frost and running water have carved its soft pink and orange rock into thousands of thin spires called hoodoos. The park sits much higher than nearby Zion, with a rim between 8,000 and 9,000 feet.",
+  "name": "Matterhorn",
+  "wiki": "Matterhorn",
+  "country": "Switzerland and Italy",
+  "region": "Valais, Switzerland / Aosta Valley, Italy (Pennine Alps)",
+  "lat": 45.976,
+  "lon": 7.659,
+  "tagline": "The Alps' most famous pyramid, a lone four-sided peak on the Swiss-Italian border",
+  "intro": "The Matterhorn rises above the Swiss village of Zermatt and the Italian resort of Breuil-Cervinia, with its summit right on the border. Its four steep faces, split by the Hörnli, Furggen, Zmutt and Lion ridges, give it the near-perfect pyramid shape that made it a symbol of the Alps. It was one of the last major Alpine peaks to be climbed.",
   "stats": [
    {
-    "label": "Area",
-    "value": "35,835 acres (145 km²)"
+    "label": "Elevation",
+    "value": "4,478 m (14,692 ft)"
    },
    {
-    "label": "Highest point",
-    "value": "Rainbow Point, 9,105 ft (2,775 m)"
+    "label": "Prominence",
+    "value": "1,043 m (3,422 ft)"
    },
    {
-    "label": "National park since",
-    "value": "Feb 25, 1928 (monument 1923)"
+    "label": "First ascent",
+    "value": "July 14, 1865"
    },
    {
-    "label": "Visitors",
-    "value": "About 2.5 million (2024)"
+    "label": "Base hut",
+    "value": "Hörnli Hut, 3,260 m"
    }
   ],
   "facts": [
-   "It is named for Ebenezer Bryce, a Mormon settler who grazed cattle here and reputedly called it a \"helluva place to lose a cow.\"",
-   "Bryce Amphitheater, the largest of the park's amphitheaters, is 12 miles long, 3 miles wide and 800 feet deep.",
-   "Some hoodoos stand up to 200 feet tall; the oranges come from hematite, the yellows from limonite and the purples from pyrolusite.",
-   "The night sky is so dark that visitors can see about 7,500 stars, and it became an International Dark Sky Park in 2019.",
-   "The park holds the largest protected population of the threatened Utah prairie dog, which was reintroduced there."
+   "Edward Whymper's party of seven made the first ascent on July 14, 1865, but four of them (Croz, Hadow, Hudson and Douglas) died in a fall on the way down.",
+   "More than 500 climbers have died on the mountain, an average of about 12 deaths a year.",
+   "In summer, up to 150 climbers a day attempt the summit, most of them on the Hörnli ridge.",
+   "The peak has appeared on Toblerone chocolate bars since 1960, and a large replica stands at Disneyland.",
+   "The cable car to Klein Matterhorn (3,883 m) is the highest transport system in Europe, and since 2023 it links the Swiss and Italian sides."
   ],
-  "bestTime": "May through October for open trails and mild days; winter brings snow-dusted hoodoos and far fewer people, but nights drop well below freezing.",
-  "gettingThere": "Fly nonstop from JFK, LGA or EWR to Las Vegas (LAS) or Salt Lake City (SLC), then drive about 4 hours to the park.",
-  "tip": "Watch sunrise from Sunrise Point, then hike down among the hoodoos on the Queen's Garden and Navajo Loop trails."
+  "bestTime": "July to September for hiking, climbing and the clearest views; December to April for skiing at Zermatt and Cervinia.",
+  "gettingThere": "Fly nonstop from JFK or EWR to Zurich or Geneva, then take the train to Zermatt (about 3.5 to 4 hours, changing at Visp). Zermatt is almost car-free, so you arrive by train.",
+  "tip": "Be at the Riffelsee or Stellisee lakes at sunrise to catch the peak glowing pink and reflected in still water."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 9 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
-  "asOf": "Fri Nov 20 close",
-  "story": "The S&P 500 fell 3.7% for a seventh straight loss and slipped into a correction, more than 10% below its Oct. 6 record, as a sharp AI selloff gave it the worst week in more than 18 months. The Nasdaq dropped 5.3%, wiping out its gains for the year, with chip stocks hit hardest amid AI valuation worries, scrutiny of Nvidia and Treasury yields near 5%.",
+  "asOf": "Mon Nov 23 close",
+  "story": "Stocks had their best day since April 2025 and snapped a seven-session losing streak after Nvidia's board reinstated Jensen Huang as CEO, setting off a rebound in chip and AI shares after last week's selloff. Strategists also pointed to short-covering and options hedging behind the size of the move.",
   "indices": [
    {
     "name": "S&P 500",
-    "value": "6,910",
-    "chg": -3.7
+    "value": "7,237",
+    "chg": 4.73
    }
   ],
   "movers": [
    {
     "sym": "NVDA",
-    "move": "−14%",
-    "dir": -1,
-    "why": "Nvidia had its lowest close in 18 months, falling despite strong earnings amid reports the SEC is examining its accounting after CEO Jensen Huang's exit."
-   },
-   {
-    "sym": "ANT",
-    "move": "−9%",
-    "dir": -1,
-    "why": "Anthropic fell to $88.91 in its second trading session, giving back much of its roughly 17% debut-day gain."
-   },
-   {
-    "sym": "AMD",
-    "move": "−12 to 14%",
-    "dir": -1,
-    "why": "AMD fell roughly 12% to 14% in the broad chip selloff."
+    "move": "+31%",
+    "dir": 1,
+    "why": "Board reinstated Jensen Huang as CEO, effective immediately"
    },
    {
     "sym": "MU",
-    "move": "−12 to 14%",
-    "dir": -1,
-    "why": "Micron fell roughly 12% to 14% as AI-linked chip stocks slid."
+    "move": "+19%",
+    "dir": 1,
+    "why": "Chip stocks rebounded after last week's selloff"
    },
    {
-    "sym": "AVGO",
-    "move": "−12 to 14%",
+    "sym": "ZS",
+    "move": "+18%",
+    "dir": 1,
+    "why": "CrowdStrike agreed to buy Zscaler in a stock deal (~$43.9B)"
+   },
+   {
+    "sym": "CRWD",
+    "move": "−9%",
     "dir": -1,
-    "why": "Broadcom fell roughly 12% to 14% with the rest of the AI chip group."
+    "why": "Fell after agreeing to buy Zscaler"
+   },
+   {
+    "sym": "OTLY",
+    "move": "+109%",
+    "dir": 1,
+    "why": "Verlinvest raised its stake and made a $4.13/share tender offer"
    }
   ],
   "lines": [
@@ -784,7 +784,7 @@
     "kick": "2026-11-27T01:20:00Z",
     "spread": "BUF −3",
     "total": "50.5",
-    "ml": "BUF −152 / KC +129",
+    "ml": "BUF −149 / KC +126",
     "bills": true
    },
    {
@@ -799,7 +799,7 @@
     "kick": "2026-11-29T00:30:00Z",
     "spread": "ALA −16.5",
     "total": "48.5",
-    "ml": "ALA −800 / AUB +550"
+    "ml": "ALA −750 / AUB +525"
    }
   ],
   "probs": [
@@ -829,6 +829,6 @@
     "p": 90
    }
   ],
-  "sources": "S&P 500 and story: CNBC and AP (Nov 20); movers: Fox Business, HNGN and American Greatness (Nov 20); odds: DraftKings via ESPN (Nov 23); probs: ESPN matchup predictor (Nov 23)."
+  "sources": "S&P 500, story and movers: StockTitan and Yahoo Finance (Nov 23); odds: FanDuel via Fox Sports and DraftKings via SI (Nov 23); probs: ESPN matchup predictor (Nov 23)."
  }
 }
