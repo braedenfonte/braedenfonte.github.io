@@ -49,8 +49,9 @@ body.parentNode.insertBefore(box, body.previousElementSibling);
 function minsOn(L, k){ return L.filter(s => s.d === k).reduce((a,s) => a + s.m, 0); }
 const hm = n => n >= 60 ? Math.floor(n/60)+"h "+(n%60)+"m" : n+"m";
 
+let CLOUD = null;   // sessions saved in the worker (Study Focus on the phone logs there directly)
 function render(){
-  const L = load(), t = new Date();
+  const L = CLOUD || load(), t = new Date();
   // streak: days in a row with a session, counting back from today (or yesterday if nothing yet today)
   let streak = 0, d = new Date(t);
   if (!minsOn(L, key(d))) d.setDate(d.getDate()-1);
@@ -69,7 +70,12 @@ function render(){
       '<div><b>'+L.length+'</b><small>sessions</small></div>'+
     '</div>'+
     '<div class="slog-bars">'+days.map(x => '<div><i style="height:'+Math.round(x.m/max*100)+'%" title="'+x.m+' min"></i><small>'+x.lab+'</small></div>').join("")+'</div>'+
-    (logged ? '<p class="slog-new">+'+logged+' min logged. Nice work.</p>' : '<p class="slog-fine">Sessions log here when Study Focus turns off on your phone.</p>');
+    (logged ? '<p class="slog-new">+'+logged+' min logged. Nice work.</p>' : '<p class="slog-fine">Sessions log here automatically when Study Focus turns off on your phone.</p>');
 }
 render();
+try {
+  fetch("https://bf-finance.bfonte18.workers.dev/study", {cache:"no-store"}).then(r => r.json()).then(j => {
+    if (j && Array.isArray(j.sessions)){ CLOUD = j.sessions; render(); }
+  }).catch(() => {});
+} catch(e){}
 })();

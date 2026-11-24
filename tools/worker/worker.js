@@ -94,6 +94,27 @@ export default {
         return text((chart[dayName][t] || "Feels like " + t + "°.") + ((chart.rain[dayName] || {})[code] || ""));
       } catch (e) { return text("Couldn't get the weather. Check the uniform chart."); }
     }
+    // Study Focus straight from the phone, no browser:
+    //   GET /study/start -> remembers the start time     GET /study/end -> logs the minutes, returns a short line
+    if (path === "/study/start" && req.method === "GET") {
+      await env.TOKENS.put("study-start", String(Date.now()));
+      return new Response("Study session started. Lock in.", { headers: { ...cors, "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" } });
+    }
+    if (path === "/study/end" && req.method === "GET") {
+      const start = Number(await env.TOKENS.get("study-start")) || 0;
+      await env.TOKENS.delete("study-start");
+      const now = Date.now(), m = start ? Math.round((now - start) / 60000) : 0;
+      let msg = "No study start found.";
+      if (m > 0 && m <= 720) {
+        let list = (await env.TOKENS.get("study", "json")) || [];
+        list.push({ d: nyDay(new Date()), m, t: now });
+        list = list.filter(x => now - x.t < 60 * 864e5);
+        await env.TOKENS.put("study", JSON.stringify(list));
+        const st = await studyStats(env);
+        msg = "+" + m + " min logged. " + st.today + " min today" + (st.streak > 1 ? ", " + st.streak + " day streak." : ".");
+      } else if (start) msg = "Session under a minute, not logged.";
+      return new Response(msg, { headers: { ...cors, "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" } });
+    }
     if (path === "/study") {
       if (req.method === "POST") {
         const body = await req.json().catch(() => ({}));
