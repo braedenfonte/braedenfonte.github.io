@@ -79,6 +79,21 @@ export default {
     }
     // Study log: the site POSTs each Study Focus session; the nightly routine GETs today/this-week totals.
     //   POST /study {m: minutes}     GET /study -> {today, week, streak, sessions}
+    // Uniform heads-up for the lock screen (Night Focus turning off in the morning):
+    //   GET /uniform -> "AFC · feels 38°: Black jacket + gloves."  (live weather at West Point, wind chill included)
+    if (path === "/uniform" && req.method === "GET") {
+      const text = s => new Response(s, { headers: { ...cors, "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" } });
+      try {
+        const dayName = new Date().toLocaleDateString("en-US", { timeZone: "America/New_York", weekday: "long" });
+        const [wx, chart] = await Promise.all([
+          fetch("https://api.open-meteo.com/v1/forecast?latitude=41.39&longitude=-73.96&current=apparent_temperature,weather_code&temperature_unit=fahrenheit&timezone=America%2FNew_York").then(r => r.json()),
+          fetch("https://braedenfonte.com/data/uniform.json?t=" + Date.now()).then(r => r.json()),
+        ]);
+        const t = String(Math.round(wx.current.apparent_temperature)), code = String(wx.current.weather_code);
+        if (!chart[dayName]) return text("Weekend. Feels like " + t + "°.");
+        return text((chart[dayName][t] || "Feels like " + t + "°.") + ((chart.rain[dayName] || {})[code] || ""));
+      } catch (e) { return text("Couldn't get the weather. Check the uniform chart."); }
+    }
     if (path === "/study") {
       if (req.method === "POST") {
         const body = await req.json().catch(() => ({}));
