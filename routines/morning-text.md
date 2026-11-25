@@ -12,6 +12,8 @@ Edit ONLY `routines/runs.log`. Commit and push it as in common.md.
 - Song and quote of the day: run `node tools/daypicks.js` (same picks the website shows today).
 
 ## 2) Write one text (about 900 characters max)
+BREAK RULE: check routines/breaks.json. If TODAY is inside a break, leave out TODAY, NEXT SCHOOL DAY, DUE and TO-DO
+sections; keep the header, song and quote.
 Easy to read on a phone: a short header per section, one item per line, and a BLANK LINE between
 every section. Leave out any section that has nothing in it (no empty headers).
 ```

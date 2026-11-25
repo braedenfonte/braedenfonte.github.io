@@ -143,6 +143,8 @@ alerts (each one short line, else []):
 Validate it with the others in part 8.
 
 ## 7d) Alarm script (data/alarm.txt, PUBLIC, plain text read aloud by his iPhone alarm Shortcut)
+BREAK RULE: check routines/breaks.json. If TODAY is inside a break, leave out parts 3, 4 and 5 (alerts about school,
+today's classes, and the next-3-days list); keep the greeting, song, quote, compliment, word of the day and "Go win the day."
 Write it every run right after brief.json, from the same data plus `node tools/daypicks.js`. Rules: written
 to be HEARD, so short sentences, no emojis, no bullets, no symbols, UNDER 140 WORDS (about 55 seconds). Same privacy rules as brief.json.
 Say classes by NICKNAME, never the code: MA376 = "Stats", SS388 = "Macro", EM481 = "Simulation",

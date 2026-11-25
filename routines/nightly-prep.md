@@ -16,6 +16,8 @@ Right before the final commit, always do both (they ride along in the same commi
 - Write the bedtime brief his phone reads aloud when he turns on his "Night" Focus. Two PUBLIC files, spoken
   plain text, no emojis/symbols/bullets, numbers said naturally. His phone speaks night.txt, then adds his
   hours of sleep (data/sleep.json) and live study minutes (worker /study?say), then speaks night2.txt.
+  BREAK RULE: check routines/breaks.json. If TOMORROW is inside a break, data/night.txt is only "Tomorrow is <weekday>, and you're on <break name>."
+  (no classes, nothing due, no next big thing); night2.txt stays the same.
   data/night.txt (under 50 words), in this order:
     1. Tomorrow's classes from `node tools/classes.js <tomorrow>` by nickname (MA376 "Stats", SS388 "Macro",
        EM481 "Simulation", MA481X "Optimization", MA486 "M A four eighty-six", MS300 "M S three hundred"),

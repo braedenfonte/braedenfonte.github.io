@@ -1,0 +1,7 @@
+{
+ "_note": "School breaks. On these days the alarm brief, morning text and bedtime brief skip classes, due dates and the next big thing.",
+ "breaks": [
+  {"name": "Thanksgiving break", "from": "2026-11-25", "to": "2026-11-29"},
+  {"name": "Christmas break", "from": "2026-12-19", "to": "2027-01-02"}
+ ]
+}
