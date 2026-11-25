@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24T07:00:00-05:00",
+ "updated": "2026-11-25T06:50:00-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -698,84 +698,84 @@
   "poll": "AP Top 25, Week 13 (Nov 22)"
  },
  "location": {
-  "name": "Matterhorn",
-  "wiki": "Matterhorn",
-  "country": "Switzerland and Italy",
-  "region": "Valais, Switzerland / Aosta Valley, Italy (Pennine Alps)",
-  "lat": 45.976,
-  "lon": 7.659,
-  "tagline": "The Alps' most famous pyramid, a lone four-sided peak on the Swiss-Italian border",
-  "intro": "The Matterhorn rises above the Swiss village of Zermatt and the Italian resort of Breuil-Cervinia, with its summit right on the border. Its four steep faces, split by the Hörnli, Furggen, Zmutt and Lion ridges, give it the near-perfect pyramid shape that made it a symbol of the Alps. It was one of the last major Alpine peaks to be climbed.",
+  "name": "Great Barrier Reef",
+  "wiki": "Great_Barrier_Reef",
+  "country": "Australia",
+  "region": "Coral Sea, off the coast of Queensland",
+  "lat": -16.4,
+  "lon": 145.8,
+  "tagline": "The world's largest coral reef system, a living structure you can see from space",
+  "intro": "The Great Barrier Reef runs for more than 2,300 km along Queensland's coast in the Coral Sea. It is made up of over 2,900 individual reefs and about 900 islands, and it is the largest single structure built by living organisms. Most of it is protected inside the Great Barrier Reef Marine Park.",
   "stats": [
    {
-    "label": "Elevation",
-    "value": "4,478 m (14,692 ft)"
+    "label": "Length",
+    "value": "2,300+ km (1,400 mi)"
    },
    {
-    "label": "Prominence",
-    "value": "1,043 m (3,422 ft)"
+    "label": "Area",
+    "value": "about 344,400 km² (133,000 sq mi)"
    },
    {
-    "label": "First ascent",
-    "value": "July 14, 1865"
+    "label": "Individual reefs",
+    "value": "2,900+"
    },
    {
-    "label": "Base hut",
-    "value": "Hörnli Hut, 3,260 m"
+    "label": "World Heritage since",
+    "value": "1981"
    }
   ],
   "facts": [
-   "Edward Whymper's party of seven made the first ascent on July 14, 1865, but four of them (Croz, Hadow, Hudson and Douglas) died in a fall on the way down.",
-   "More than 500 climbers have died on the mountain, an average of about 12 deaths a year.",
-   "In summer, up to 150 climbers a day attempt the summit, most of them on the Hörnli ridge.",
-   "The peak has appeared on Toblerone chocolate bars since 1960, and a large replica stands at Disneyland.",
-   "The cable car to Klein Matterhorn (3,883 m) is the highest transport system in Europe, and since 2023 it links the Swiss and Italian sides."
+   "It is the world's biggest single structure made by living organisms, and it can be seen from outer space.",
+   "More than 1,500 fish species and close to 5,000 species of mollusc live on the reef.",
+   "Australia created the Great Barrier Reef Marine Park in 1975 to protect it.",
+   "Aboriginal Australian and Torres Strait Islander peoples, about 70 clan groups, have known and used the reef for at least 40,000 years.",
+   "The reef has suffered mass coral bleaching many times, including 1998, 2002, 2006, 2016, 2017, 2020 and 2022."
   ],
-  "bestTime": "July to September for hiking, climbing and the clearest views; December to April for skiing at Zermatt and Cervinia.",
-  "gettingThere": "Fly nonstop from JFK or EWR to Zurich or Geneva, then take the train to Zermatt (about 3.5 to 4 hours, changing at Visp). Zermatt is almost car-free, so you arrive by train.",
-  "tip": "Be at the Riffelsee or Stellisee lakes at sunrise to catch the peak glowing pink and reflected in still water."
+  "bestTime": "June to October: drier, cooler weather and clearer water, and it's outside the November to May stinger (jellyfish) season.",
+  "gettingThere": "No nonstop from New York: connect through Los Angeles or San Francisco to Sydney or Brisbane (about 22+ hours total), then a short domestic flight to Cairns or the Whitsundays, where reef boats leave daily.",
+  "tip": "Book an outer-reef trip rather than an inner-reef one; the water is clearer and the coral is in better shape farther from the coast."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 9 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
-  "asOf": "Mon Nov 23 close",
-  "story": "Stocks had their best day since April 2025 and snapped a seven-session losing streak after Nvidia's board reinstated Jensen Huang as CEO, setting off a rebound in chip and AI shares after last week's selloff. Strategists also pointed to short-covering and options hedging behind the size of the move.",
+  "asOf": "Tue Nov 24 close",
+  "story": "Chip stocks gave back part of Monday's Huang-reinstatement rally, dragging the S&P 500 and Nasdaq lower, while the Dow rose on gains in healthcare and consumer stocks. AI hardware names fell after HPE's lower margins, while strong retail earnings lifted Dollar Tree and Kohl's.",
   "indices": [
    {
     "name": "S&P 500",
-    "value": "7,237",
-    "chg": 4.73
+    "value": "7,201",
+    "chg": -0.49
    }
   ],
   "movers": [
    {
-    "sym": "NVDA",
-    "move": "+31%",
-    "dir": 1,
-    "why": "Board reinstated Jensen Huang as CEO, effective immediately"
-   },
-   {
-    "sym": "MU",
-    "move": "+19%",
-    "dir": 1,
-    "why": "Chip stocks rebounded after last week's selloff"
-   },
-   {
-    "sym": "ZS",
-    "move": "+18%",
-    "dir": 1,
-    "why": "CrowdStrike agreed to buy Zscaler in a stock deal (~$43.9B)"
-   },
-   {
-    "sym": "CRWD",
-    "move": "−9%",
+    "sym": "ADI",
+    "move": "−17%",
     "dir": -1,
-    "why": "Fell after agreeing to buy Zscaler"
+    "why": "Fell after Q4 results and its current-quarter forecast, amid a chip selloff"
    },
    {
-    "sym": "OTLY",
-    "move": "+109%",
+    "sym": "HPE",
+    "move": "−16%",
+    "dir": -1,
+    "why": "Adjusted gross margin fell 2.2 points despite 50% revenue growth"
+   },
+   {
+    "sym": "DLTR",
+    "move": "+11%",
     "dir": 1,
-    "why": "Verlinvest raised its stake and made a $4.13/share tender offer"
+    "why": "Raised full-year adjusted EPS outlook to $8.05–$8.25"
+   },
+   {
+    "sym": "INSM",
+    "move": "+14%",
+    "dir": 1,
+    "why": "Sanofi agreed to buy Insmed for about $41B in cash"
+   },
+   {
+    "sym": "NVDA",
+    "move": "−6%",
+    "dir": -1,
+    "why": "Gave back part of Monday's 31% jump"
    }
   ],
   "lines": [
@@ -829,6 +829,6 @@
     "p": 90
    }
   ],
-  "sources": "S&P 500, story and movers: StockTitan and Yahoo Finance (Nov 23); odds: FanDuel via Fox Sports and DraftKings via SI (Nov 23); probs: ESPN matchup predictor (Nov 23)."
+  "sources": "S&P 500 and Dow movers: Investing.com (Reuters data, Nov 24); story and movers: StockTitan (Nov 24); odds: FanDuel via Fox Sports and DraftKings (Nov 23)."
  }
 }
