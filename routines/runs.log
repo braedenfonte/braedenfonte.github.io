@@ -133,3 +133,4 @@
 2026-11-26T07:04-05:00 | morning-text | OK | sent (break day: header, song, quote only; 0 due, 0 alerts) |
 2026-11-26T07:46-05:00 | health-check | RETRY morning-update | FAIL: Canvas key expired (study decks/due dates not refreshed) |
 2026-11-26T07:50-05:00 | morning-update | FAIL | health-check re-run: data from 06:34 run kept (still current: market closed Thanksgiving, no games played since, place Taj Mahal), brief/alarm/tonight/song kept | Canvas key expired, make a new one (study decks and due dates not refreshed); flights and trip tracker skipped (Chrome not available; trip.enc kept)
+2026-11-26T17:46-05:00 | nightly-prep | OK | No classes tomorrow (2026-11-27, Thanksgiving break); phone files rebuilt |
