@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-25T06:50:00-05:00",
+ "updated": "2026-11-26T06:55:00-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -698,84 +698,84 @@
   "poll": "AP Top 25, Week 13 (Nov 22)"
  },
  "location": {
-  "name": "Great Barrier Reef",
-  "wiki": "Great_Barrier_Reef",
-  "country": "Australia",
-  "region": "Coral Sea, off the coast of Queensland",
-  "lat": -16.4,
-  "lon": 145.8,
-  "tagline": "The world's largest coral reef system, a living structure you can see from space",
-  "intro": "The Great Barrier Reef runs for more than 2,300 km along Queensland's coast in the Coral Sea. It is made up of over 2,900 individual reefs and about 900 islands, and it is the largest single structure built by living organisms. Most of it is protected inside the Great Barrier Reef Marine Park.",
+  "name": "Taj Mahal",
+  "wiki": "Taj_Mahal",
+  "country": "India",
+  "region": "Agra, Uttar Pradesh",
+  "lat": 27.175,
+  "lon": 78.0419,
+  "tagline": "A white-marble mausoleum built by an emperor for the wife he lost",
+  "intro": "The Taj Mahal stands on the bank of the Yamuna River in Agra. Mughal emperor Shah Jahan commissioned it in 1631 as a tomb for his wife Mumtaz Mahal, who died giving birth to their 14th child. Built in white Makrana marble inlaid with semi-precious stones, it is one of the most famous buildings on Earth.",
   "stats": [
    {
-    "label": "Length",
-    "value": "2,300+ km (1,400 mi)"
+    "label": "Height",
+    "value": "73 m (240 ft)"
    },
    {
-    "label": "Area",
-    "value": "about 344,400 km² (133,000 sq mi)"
+    "label": "Complex area",
+    "value": "17 hectares (42 acres)"
    },
    {
-    "label": "Individual reefs",
-    "value": "2,900+"
+    "label": "Mausoleum finished",
+    "value": "1648"
    },
    {
     "label": "World Heritage since",
-    "value": "1981"
+    "value": "1983"
    }
   ],
   "facts": [
-   "It is the world's biggest single structure made by living organisms, and it can be seen from outer space.",
-   "More than 1,500 fish species and close to 5,000 species of mollusc live on the reef.",
-   "Australia created the Great Barrier Reef Marine Park in 1975 to protect it.",
-   "Aboriginal Australian and Torres Strait Islander peoples, about 70 clan groups, have known and used the reef for at least 40,000 years.",
-   "The reef has suffered mass coral bleaching many times, including 1998, 2002, 2006, 2016, 2017, 2020 and 2022."
+   "More than 20,000 workers and artisans helped build it, led by court architect Ustad Ahmad Lahori.",
+   "Its four minarets lean slightly outward on purpose, so if one ever fell it would fall away from the tomb.",
+   "During World War II and the 1965 and 1971 India-Pakistan wars, scaffolding was put up to disguise it from air attack.",
+   "Shah Jahan himself is buried beside Mumtaz Mahal, after spending his last years under house arrest at Agra Fort.",
+   "The inlay work uses 28 kinds of precious and semi-precious stones, some brought from as far as China, Tibet and Sri Lanka."
   ],
-  "bestTime": "June to October: drier, cooler weather and clearer water, and it's outside the November to May stinger (jellyfish) season.",
-  "gettingThere": "No nonstop from New York: connect through Los Angeles or San Francisco to Sydney or Brisbane (about 22+ hours total), then a short domestic flight to Cairns or the Whitsundays, where reef boats leave daily.",
-  "tip": "Book an outer-reef trip rather than an inner-reef one; the water is clearer and the coral is in better shape farther from the coast."
+  "bestTime": "October to March: cool, dry weather. Go at sunrise for soft light and the smallest crowds.",
+  "gettingThere": "Fly nonstop from JFK or Newark to Delhi (about 14 hours), then take the Gatimaan Express train to Agra (about 1 hour 40 minutes) or drive the Yamuna Expressway (about 3 to 4 hours).",
+  "tip": "It's closed on Fridays. Buy your ticket online and enter at sunrise, when it opens an hour before the sun comes up."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 9 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
-  "asOf": "Tue Nov 24 close",
-  "story": "Chip stocks gave back part of Monday's Huang-reinstatement rally, dragging the S&P 500 and Nasdaq lower, while the Dow rose on gains in healthcare and consumer stocks. AI hardware names fell after HPE's lower margins, while strong retail earnings lifted Dollar Tree and Kohl's.",
+  "asOf": "Wed Nov 25 close",
+  "story": "Stocks clawed back most of a steep early AI selloff (the S&P 500 was down as much as 3.2%) as Nvidia slid for a second day. A hot October PCE inflation reading and new tariff plans raised rate-hike worries, while Treasury yields fell.",
   "indices": [
    {
     "name": "S&P 500",
-    "value": "7,201",
-    "chg": -0.49
+    "value": "7,183",
+    "chg": -0.25
    }
   ],
   "movers": [
    {
-    "sym": "ADI",
-    "move": "−17%",
-    "dir": -1,
-    "why": "Fell after Q4 results and its current-quarter forecast, amid a chip selloff"
-   },
-   {
-    "sym": "HPE",
-    "move": "−16%",
-    "dir": -1,
-    "why": "Adjusted gross margin fell 2.2 points despite 50% revenue growth"
-   },
-   {
-    "sym": "DLTR",
-    "move": "+11%",
-    "dir": 1,
-    "why": "Raised full-year adjusted EPS outlook to $8.05–$8.25"
-   },
-   {
-    "sym": "INSM",
-    "move": "+14%",
-    "dir": 1,
-    "why": "Sanofi agreed to buy Insmed for about $41B in cash"
-   },
-   {
     "sym": "NVDA",
-    "move": "−6%",
+    "move": "−3.9%",
     "dir": -1,
-    "why": "Gave back part of Monday's 31% jump"
+    "why": "Second straight drop on AI-profit and governance worries after falling more than 9% intraday"
+   },
+   {
+    "sym": "META",
+    "move": "+3.4%",
+    "dir": 1,
+    "why": "Rose as the market recovered from its early slide"
+   },
+   {
+    "sym": "CRM",
+    "move": "+2%",
+    "dir": 1,
+    "why": "Gained as software held up better than chip stocks"
+   },
+   {
+    "sym": "MA",
+    "move": "+1.9%",
+    "dir": 1,
+    "why": "Payment and financial stocks helped limit the market's losses"
+   },
+   {
+    "sym": "MSFT",
+    "move": "−1.2%",
+    "dir": -1,
+    "why": "Pared a slide of more than 3% in the AI pullback"
    }
   ],
   "lines": [
@@ -829,6 +829,6 @@
     "p": 90
    }
   ],
-  "sources": "S&P 500 and Dow movers: Investing.com (Reuters data, Nov 24); story and movers: StockTitan (Nov 24); odds: FanDuel via Fox Sports and DraftKings (Nov 23)."
+  "sources": "S&P 500 close and movers: AP via WTOP and Baltimore Sun (Nov 25); odds: FanDuel via Fox Sports and DraftKings (Nov 23)."
  }
 }

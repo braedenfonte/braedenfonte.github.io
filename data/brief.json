@@ -1,12 +1,8 @@
 {
- "date": "2026-11-25",
- "updated": "2026-11-25T07:10:00-05:00",
- "dayCode": "1-35",
- "classes": [
-  "MA376 0740",
-  "SS388 0905",
-  "EM481 1410"
- ],
+ "date": "2026-11-26",
+ "updated": "2026-11-26T06:55:00-05:00",
+ "dayCode": "N/A",
+ "classes": [],
  "due": [
   {
    "course": "MA486",
@@ -33,8 +29,8 @@
  ],
  "headlines": [
   "Army @ Rice Sat 2 PM (ESPN+)",
-  "Bills 9-1, next vs KC Thu 8:20 PM (NBC)",
-  "S&P 500 -0.49% Tue"
+  "Bills 9-1, vs KC tonight 8:20 PM (NBC)",
+  "S&P 500 -0.25% Wed"
  ],
  "alerts": []
 }
