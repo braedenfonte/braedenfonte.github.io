@@ -131,3 +131,4 @@
 2026-11-25T18:44-05:00 | health-check | OK | nightly-prep OK at 17:46 |
 2026-11-26T06:34-05:00 | morning-update | FAIL | Bills 9-1 (Wed final injury report news, vs KC tonight), place Taj Mahal, S&P 500 Nov 25 close (-0.25%), lines/probs kept (none kicked off), football Week 13 kept (no new games; AP Nov 22 poll current), brief/alarm (break version)/tonight/song; study decks kept (Nov 25 decks, same next lessons) | Canvas key expired, make a new one (study decks and due dates not refreshed); flights and trip tracker skipped (Chrome not available; trip.enc kept; Google Flights email Nov 26 6:19 AM not recorded)
 2026-11-26T07:04-05:00 | morning-text | OK | sent (break day: header, song, quote only; 0 due, 0 alerts) |
+2026-11-26T07:46-05:00 | health-check | RETRY morning-update | FAIL: Canvas key expired (study decks/due dates not refreshed) |
