@@ -137,3 +137,4 @@
 2026-11-26T18:43-05:00 | health-check | OK | nightly-prep OK at 17:46 |
 2026-11-27T06:36-05:00 | morning-update | FAIL | Bills 13-10 over KC (10-1), place Easter Island, football upcoming trimmed, markets kept (Wed close, Thanksgiving), MA486 deck L36 built, brief/alarm/tonight/song written | Canvas key expired, make a new one (MA376/EM481/MA481X/SS388 decks and due dates not refreshed); flights skipped (laptop off); trip tracker skipped (Chrome off, trip.enc kept)
 2026-11-27T07:05-05:00 | morning-text | OK | sent break text (0 due, 0 alerts) |
+2026-11-27T07:48-05:00 | health-check | RETRY morning-update | FAIL: Canvas key expired (MA376/EM481/MA481X/SS388 decks and due dates not refreshed) |
