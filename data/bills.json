@@ -1,13 +1,13 @@
 {
- "updated": "2026-11-26T06:55:00-05:00",
+ "updated": "2026-11-27T06:55:00-05:00",
  "team": "Buffalo Bills",
  "record": {
-  "w": 9,
+  "w": 10,
   "l": 1
  },
- "standing": "Leads the AFC East by 4 games",
- "pf": 313,
- "pa": 208,
+ "standing": "Leads the AFC East by 4.5 games",
+ "pf": 326,
+ "pa": 218,
  "results": [
   {
    "wk": 1,
@@ -94,12 +94,21 @@
    "os": 9,
    "res": "W",
    "note": "Sixth straight win"
+  },
+  {
+   "wk": 11,
+   "date": "Nov 26",
+   "opp": "vs Kansas City",
+   "bs": 13,
+   "os": 10,
+   "res": "W",
+   "note": "Thanksgiving night, 57-yard FG at the buzzer"
   }
  ],
  "afcEast": [
   {
    "team": "Buffalo Bills",
-   "w": 9,
+   "w": 10,
    "l": 1,
    "me": true
   },
@@ -120,41 +129,34 @@
   }
  ],
  "lastGame": {
-  "title": "Bills 26, Dolphins 9",
+  "title": "Bills 13, Chiefs 10",
   "stats": [
-   "Josh Allen: 27-of-45, 304 yards, 1 TD, 2 INT; threw to eight different receivers and had no rushing attempts",
-   "DJ Moore: 8 catches, 91 yards, 4-yard TD; Khalil Shakir 5 catches for 101 yards; Ty Johnson 7 catches for 55 yards",
-   "James Cook III: 89 rushing yards and a 1-yard TD, his 10th rushing TD of the season",
-   "Tyler Bass: 4-of-5 on field goals (54, 43, 40, 28); a 54-yard miss ended his streak of 33 straight makes",
-   "Defense: 185 yards allowed, Miami 2-of-14 on third down, Kyle McCord 12-of-33 for 102 yards; Greg Rousseau 2 sacks, Damar Hamlin INT; no TD allowed since Nov 1"
+   "Tyler Bass: 54-yard FG to tie it 10-10, then a 57-yard game-winner as time expired (28.8% make probability per Next Gen Stats)",
+   "James Cook III: 32 carries, 117 yards, 5-yard TD; career-high 108 yards after contact",
+   "Josh Allen: 10-of-21, 81 yards, 2 INT (18.3 passer rating, second-lowest of his career); 7 carries for 43 yards",
+   "Greg Dortch: 17-yard punt return to the KC 39 with 4 seconds left set up the winning kick",
+   "Defense: Patrick Mahomes held to 16-of-29 for 174 yards; Greg Rousseau's 11th sack of the season; Harrison Butker missed from 46"
   ]
  },
  "news": [
   {
-   "h": "Five Bills questionable for Thanksgiving night",
-   "b": "Wednesday's final report lists CB Christian Benford, TE Dalton Kincaid (thumb, ankle), DT T.J. Sanders (shoulder), RG O'Cyrus Torrence (ankle) and LB Dorian Williams (calf) as questionable. Nine of the 14 players first listed were full participants Wednesday and cleared to play."
+   "h": "Bass wins it from 57 at the buzzer",
+   "b": "Tyler Bass hit a 54-yarder to tie the game and a 57-yarder as time expired in rain and wind to beat Kansas City 13-10 in the Bills' first home Thanksgiving game."
   },
   {
-   "h": "Hairston ready if Benford can't go",
-   "b": "Second-year CB Maxwell Hairston would start if Benford sits. Defensive coordinator Jim Leonhard said Hairston's game against Miami was \"probably the most consistent he's been all season.\" Austin Corbett is likely first up if Torrence, who has never missed a start in 61 games, can't play."
+   "h": "Bills 10-1, best start since 1991",
+   "b": "The win was Buffalo's seventh straight. Kansas City fell to 8-3 and a game behind Denver in the AFC West."
   },
   {
-   "h": "Chiefs rule out Kenneth Walker III",
-   "b": "Kansas City ruled out RB Kenneth Walker III (groin) for a third straight game, along with RT Jaylon Moore (ankle) and DT Omarr Norman-Lott. RG Trey Smith appears set to return from a concussion; TE Noah Gray and DL Peter Woods are questionable."
+   "h": "Allen struggles in the weather",
+   "b": "Josh Allen went 10-of-21 for 81 yards with two interceptions inside the Chiefs' 20. He is the first QB since Ben Roethlisberger in 2008 to win a prime-time game with a passer rating under 20."
   },
   {
-   "h": "Bills favored by 3 for Thanksgiving night",
-   "b": "FanDuel had Buffalo as a 3-point favorite over Kansas City (8-2) as of Nov. 23, with the total at 50.5 and the Bills at −149 on the moneyline. The 9-1 Bills hold the AFC's No. 1 seed going into tonight's 8:20 p.m. ET kickoff on NBC at Highmark Stadium."
+   "h": "Cook and special teams carry the offense",
+   "b": "James Cook III ran 32 times for 117 yards and the only Bills touchdown, and punter Tommy Doman dropped three punts inside the 20. Next up: at New England on Sunday, Dec. 6 at 4:25 p.m."
   }
  ],
  "schedule": [
-  {
-   "kick": "2026-11-26T20:20-05:00",
-   "opp": "Kansas City Chiefs",
-   "home": true,
-   "venue": "Highmark Stadium",
-   "note": "Thanksgiving night, NBC"
-  },
   {
    "kick": "2026-12-06T16:25-05:00",
    "opp": "New England Patriots",
@@ -198,5 +200,5 @@
    "note": "Date and time may flex"
   }
  ],
- "source": "Wednesday final injury reports (Yahoo Sports, NFL.com, Heavy), Fox Sports Thanksgiving odds (FanDuel), AFC East records via Yahoo Sports; earlier recaps from ESPN and AP (checked Nov 26)."
+ "source": "Recaps from buffalobills.com, NFL.com and AP via NBC (Nov 26 Thanksgiving game); AFC East records via Yahoo Sports (checked Nov 27)."
 }

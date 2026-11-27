@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-26T06:55:00-05:00",
+ "updated": "2026-11-27T06:55:00-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -555,13 +555,6 @@
   ],
   "upcoming": [
    {
-    "away": "TCU",
-    "home": "Texas Tech",
-    "kick": "2026-11-27T01:00:00Z",
-    "note": "Thu · ESPN · Lubbock",
-    "homeRank": 9
-   },
-   {
     "away": "Nebraska",
     "home": "Iowa",
     "kick": "2026-11-27T17:00:00Z",
@@ -698,42 +691,42 @@
   "poll": "AP Top 25, Week 13 (Nov 22)"
  },
  "location": {
-  "name": "Taj Mahal",
-  "wiki": "Taj_Mahal",
-  "country": "India",
-  "region": "Agra, Uttar Pradesh",
-  "lat": 27.175,
-  "lon": 78.0419,
-  "tagline": "A white-marble mausoleum built by an emperor for the wife he lost",
-  "intro": "The Taj Mahal stands on the bank of the Yamuna River in Agra. Mughal emperor Shah Jahan commissioned it in 1631 as a tomb for his wife Mumtaz Mahal, who died giving birth to their 14th child. Built in white Makrana marble inlaid with semi-precious stones, it is one of the most famous buildings on Earth.",
+  "name": "Easter Island",
+  "wiki": "Easter_Island",
+  "country": "Chile",
+  "region": "Valparaíso Region, South Pacific Ocean",
+  "lat": -27.12,
+  "lon": -109.35,
+  "tagline": "One of the most remote inhabited islands on Earth, watched over by giant stone heads",
+  "intro": "Easter Island, or Rapa Nui, is a small volcanic island in the southeastern Pacific, 3,512 km (2,182 mi) off the coast of Chile. Its Polynesian settlers carved nearly 1,000 monumental statues called moai. Much of the island is protected as Rapa Nui National Park, a UNESCO World Heritage Site since 1995.",
   "stats": [
    {
-    "label": "Height",
-    "value": "73 m (240 ft)"
+    "label": "Area",
+    "value": "163.6 km² (63.2 sq mi)"
    },
    {
-    "label": "Complex area",
-    "value": "17 hectares (42 acres)"
+    "label": "Population",
+    "value": "7,750 (2017 census)"
    },
    {
-    "label": "Mausoleum finished",
-    "value": "1648"
+    "label": "Highest point",
+    "value": "507 m (1,663 ft)"
    },
    {
     "label": "World Heritage since",
-    "value": "1983"
+    "value": "1995"
    }
   ],
   "facts": [
-   "More than 20,000 workers and artisans helped build it, led by court architect Ustad Ahmad Lahori.",
-   "Its four minarets lean slightly outward on purpose, so if one ever fell it would fall away from the tomb.",
-   "During World War II and the 1965 and 1971 India-Pakistan wars, scaffolding was put up to disguise it from air attack.",
-   "Shah Jahan himself is buried beside Mumtaz Mahal, after spending his last years under house arrest at Agra Fort.",
-   "The inlay work uses 28 kinds of precious and semi-precious stones, some brought from as far as China, Tibet and Sri Lanka."
+   "Its nearest inhabited neighbor is Pitcairn Island, 2,075 km (1,289 mi) away, home to only about 50 people.",
+   "It got its English name because Dutch navigator Jacob Roggeveen arrived on Easter Sunday, April 5, 1722.",
+   "All but 53 of the more than 900 known moai were carved from volcanic tuff at the Rano Raraku quarry, where 394 statues are still visible.",
+   "The tallest moai ever erected, Paro, stood almost 10 m (33 ft) high and weighed 82 tonnes; an unfinished one in the quarry would have been about 21 m (69 ft) tall.",
+   "Most moai face inland toward the villages, but the seven at Ahu Akivi face out to sea."
   ],
-  "bestTime": "October to March: cool, dry weather. Go at sunrise for soft light and the smallest crowds.",
-  "gettingThere": "Fly nonstop from JFK or Newark to Delhi (about 14 hours), then take the Gatimaan Express train to Agra (about 1 hour 40 minutes) or drive the Yamuna Expressway (about 3 to 4 hours).",
-  "tip": "It's closed on Fridays. Buy your ticket online and enter at sunrise, when it opens an hour before the sun comes up."
+  "bestTime": "January to March for warm summer weather; early February brings the Tapati Rapa Nui festival.",
+  "gettingThere": "Fly overnight from JFK to Santiago, Chile (about 11 hours), then take LATAM's flight to Mataveri Airport on the island (about 5 hours).",
+  "tip": "Buy your Rapa Nui National Park ticket before you go; it is required to visit the moai sites, and Rano Raraku and Orongo can only be entered once."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 9 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
@@ -780,14 +773,6 @@
   ],
   "lines": [
    {
-    "game": "Chiefs @ Bills",
-    "kick": "2026-11-27T01:20:00Z",
-    "spread": "BUF −3",
-    "total": "50.5",
-    "ml": "BUF −149 / KC +126",
-    "bills": true
-   },
-   {
     "game": "Michigan @ Ohio State",
     "kick": "2026-11-28T17:00:00Z",
     "spread": "OSU −10",
@@ -829,6 +814,6 @@
     "p": 90
    }
   ],
-  "sources": "S&P 500 close and movers: AP via WTOP and Baltimore Sun (Nov 25); odds: FanDuel via Fox Sports and DraftKings (Nov 23)."
+  "sources": "S&P 500 close and movers: AP via WTOP and Baltimore Sun (Nov 25; markets closed Thanksgiving); odds: FanDuel via Fox Sports (Nov 23). No published line yet for Bills at Patriots."
  }
 }
