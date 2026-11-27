@@ -139,3 +139,4 @@
 2026-11-27T07:05-05:00 | morning-text | OK | sent break text (0 due, 0 alerts) |
 2026-11-27T07:48-05:00 | health-check | RETRY morning-update | FAIL: Canvas key expired (MA376/EM481/MA481X/SS388 decks and due dates not refreshed) |
 2026-11-27T07:52-05:00 | morning-update | FAIL | health-check re-run: data from 06:36 run kept (still current: no games or market close since, place Easter Island, MA486 L36 deck), brief/alarm/tonight/song kept | Canvas key expired, make a new one (MA376/EM481/MA481X/SS388 decks and due dates not refreshed); flights skipped (laptop off); trip tracker skipped (Chrome off, trip.enc kept)
+2026-11-27T17:46-05:00 | nightly-prep | FAIL | No classes tomorrow (2026-11-28, Thanksgiving break); phone files rebuilt, night briefs written | Canvas key expired, make a new one (not needed tonight, but Monday prep will fail without it)
