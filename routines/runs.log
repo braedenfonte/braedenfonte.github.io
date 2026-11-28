@@ -144,3 +144,4 @@
 2026-11-27T18:44-05:00 | health-check | FAIL | nightly-prep checked; retry already done today (18:44), not retried again | nightly-prep failed twice: Canvas key expired: make a new token in Canvas (Account > Settings > New Access Token) and replace the 'Canvas' secret in the Routines environment
 2026-11-28T06:36-05:00 | morning-update | FAIL | Week 14 Fri recap, Bills bye (10-1), place Dubrovnik, S&P 500 +1.60% Fri, brief/alarm/tonight/song written; study.enc kept (MA486 L36 deck still current) | Canvas key expired, make a new one (MA376/EM481/MA481X/SS388 decks and due dates not refreshed); flights skipped (laptop off); trip tracker skipped (Chrome off, trip.enc kept)
 2026-11-28T07:05-05:00 | morning-text | OK | sent (0 due, 0 alerts; Thanksgiving break, header+song+quote only) |
+2026-11-28T07:46-05:00 | health-check | RETRY morning-update | FAIL: Canvas key expired (MA376/EM481/MA481X/SS388 decks and due dates not refreshed) |
