@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-27T06:55:00-05:00",
+ "updated": "2026-11-28T06:35:00-05:00",
  "flights": [
   {
    "from": "LGA",
@@ -453,134 +453,91 @@
   }
  ],
  "football": {
-  "label": "Week 13 recap",
+  "label": "Week 14 recap (Thursday–Friday games)",
   "results": [
    {
-    "away": "UCLA",
-    "home": "Michigan",
-    "as": 16,
-    "hs": 18,
-    "awayRank": 4,
-    "blurb": "Michigan handed unbeaten UCLA its first loss in a triple-overtime defensive grinder.",
-    "stats": [
-     "Savion Hiter: 26 car, 104 yds",
-     "Bryce Underwood: 11/24, 127 yds, TD",
-     "Ty Dieffenbach: 19/30, 188 yds, INT"
-    ]
-   },
-   {
-    "away": "Georgia",
-    "home": "South Carolina",
-    "as": 34,
-    "hs": 6,
-    "awayRank": 1,
-    "blurb": "Top-ranked Georgia rolled in Columbia behind an efficient Gunner Stockton.",
-    "stats": [
-     "Gunner Stockton: 19/23, 281 yds, TD",
-     "Nate Frazier: 23 car, 94 yds, 2 TD",
-     "LaNorris Sellers: 10/18, 87 yds, INT"
-    ]
-   },
-   {
-    "away": "Ohio State",
-    "home": "Nebraska",
+    "away": "West Virginia",
+    "home": "Utah",
     "as": 28,
-    "hs": 31,
-    "awayRank": 16,
-    "blurb": "Nebraska upset Ohio State in Lincoln despite a big day from Jeremiah Smith.",
-    "stats": [
-     "Anthony Colandrea: 19/28, 200 yds, 3 TD",
-     "Jeremiah Smith: 6 rec, 165 yds, 2 TD",
-     "Luke Fahey: 16/27, 259 yds, 2 TD, INT"
-    ]
-   },
-   {
-    "away": "Indiana",
-    "home": "Washington",
-    "as": 24,
-    "hs": 27,
-    "awayRank": 6,
-    "blurb": "Washington knocked off Indiana in overtime at Husky Stadium.",
-    "stats": [
-     "Demond Williams Jr.: 24/41, 227 yds, TD, INT; 88 rush yds, TD",
-     "Charlie Becker: 6 rec, 167 yds, TD"
-    ]
-   },
-   {
-    "away": "Utah",
-    "home": "TCU",
-    "as": 38,
-    "hs": 17,
-    "awayRank": 2,
-    "blurb": "Unbeaten Utah stayed perfect with a comfortable road win in Fort Worth.",
-    "stats": [
-     "Devon Dampier: 18/28, 278 yds, 2 TD; 2 rush TD",
-     "Larry Simmons: 3 rec, 114 yds, TD"
-    ]
-   },
-   {
-    "away": "Memphis",
-    "home": "Navy",
-    "as": 34,
-    "hs": 38,
-    "awayRank": 24,
-    "blurb": "Navy outlasted No. 24 Memphis in a shootout in Annapolis.",
-    "stats": [
-     "Jackson Gutierrez: 35 car, 241 yds, 2 TD; 4/11, 110 yds, TD",
-     "Jaylin Carter (MEM): 23 car, 229 yds, 3 TD"
-    ]
-   },
-   {
-    "away": "East Carolina",
-    "home": "Army",
-    "as": 10,
-    "hs": 6,
-    "blurb": "Army's offense was held without a touchdown in a home loss to East Carolina at Michie Stadium.",
-    "stats": [
-     "Cale Hellums: 19 car, 62 yds; 7/16, 65 yds, INT",
-     "TJ Engleman Jr. (ECU): 22 car, 113 yds"
-    ]
-   },
-   {
-    "away": "UTEP",
-    "home": "Air Force",
-    "as": 3,
     "hs": 52,
-    "blurb": "Air Force routed UTEP on Friday night at Falcon Stadium.",
+    "homeRank": 2,
+    "blurb": "Unbeaten Utah rolled West Virginia behind a near-perfect night from Devon Dampier.",
     "stats": [
-     "Evan Medders: 3/4, 122 yds, 2 TD",
-     "Connor Vasek: 3 sacks"
+     "Devon Dampier: 17/21, 393 yds, 5 TD",
+     "Braden Pegan: 5 rec, 134 yds, 2 TD",
+     "Scotty Fox Jr. (WVU): 15/27, 253 yds, 2 TD"
     ]
-   }
-  ],
-  "upcoming": [
-   {
-    "away": "Nebraska",
-    "home": "Iowa",
-    "kick": "2026-11-27T17:00:00Z",
-    "note": "Fri · CBS · Kinnick Stadium",
-    "homeRank": 13
-   },
-   {
-    "away": "Air Force",
-    "home": "New Mexico",
-    "kick": "2026-11-27T21:30:00Z",
-    "note": "Fri · CW · Albuquerque"
    },
    {
     "away": "Texas",
     "home": "Texas A&M",
-    "kick": "2026-11-28T00:30:00Z",
-    "note": "Fri · ABC · Kyle Field",
-    "awayRank": 5
+    "as": 16,
+    "hs": 6,
+    "awayRank": 5,
+    "blurb": "Texas held Texas A&M without a touchdown at Kyle Field.",
+    "stats": [
+     "Arch Manning: 18/34, 143 yds, TD, INT",
+     "Cam Coleman: 4 rec, 37 yds, TD",
+     "Aaron Gregory (A&M): 7 rec, 120 yds"
+    ]
    },
    {
-    "away": "West Virginia",
-    "home": "Utah",
-    "kick": "2026-11-28T02:00:00Z",
-    "note": "Fri · Fox · Rice-Eccles Stadium",
-    "homeRank": 2
+    "away": "Nebraska",
+    "home": "Iowa",
+    "as": 7,
+    "hs": 31,
+    "homeRank": 13,
+    "blurb": "Iowa routed Nebraska at Kinnick Stadium on Black Friday.",
+    "stats": [
+     "Hank Brown: 13/18, 173 yds, TD",
+     "Jamal Rule (NEB): 18 car, 106 yds, TD",
+     "Anthony Colandrea (NEB): 19/29, 153 yds, INT"
+    ]
    },
+   {
+    "away": "Florida",
+    "home": "Florida State",
+    "as": 26,
+    "hs": 10,
+    "blurb": "Florida beat rival Florida State in Tallahassee.",
+    "stats": [
+     "Jadan Baugh: 19 car, 77 yds, TD",
+     "Jayden Woods: 3 sacks",
+     "Ashton Daniels (FSU): 18/32, 183 yds, 2 INT"
+    ]
+   },
+   {
+    "away": "Mississippi State",
+    "home": "Ole Miss",
+    "as": 17,
+    "hs": 41,
+    "blurb": "Ole Miss won the Egg Bowl comfortably in Oxford.",
+    "stats": [
+     "Trinidad Chambliss: 23/36, 237 yds, 2 TD",
+     "Joshua Dye: 20 car, 91 yds, 2 TD"
+    ]
+   },
+   {
+    "away": "TCU",
+    "home": "Texas Tech",
+    "as": 27,
+    "hs": 48,
+    "blurb": "Texas Tech pulled away from TCU on Thursday night in Lubbock.",
+    "stats": []
+   },
+   {
+    "away": "Air Force",
+    "home": "New Mexico",
+    "as": 19,
+    "hs": 42,
+    "blurb": "Air Force fell at New Mexico on Friday in Albuquerque.",
+    "stats": [
+     "Evan Medders: 11/22, 193 yds, INT; 22 car, 57 yds, 2 TD",
+     "Kiefer Sibley (UNM): 16 car, 115 yds, 2 TD"
+    ]
+   }
+  ],
+  "upcoming": [
    {
     "away": "Notre Dame",
     "home": "Syracuse",
@@ -691,107 +648,124 @@
   "poll": "AP Top 25, Week 13 (Nov 22)"
  },
  "location": {
-  "name": "Easter Island",
-  "wiki": "Easter_Island",
-  "country": "Chile",
-  "region": "Valparaíso Region, South Pacific Ocean",
-  "lat": -27.12,
-  "lon": -109.35,
-  "tagline": "One of the most remote inhabited islands on Earth, watched over by giant stone heads",
-  "intro": "Easter Island, or Rapa Nui, is a small volcanic island in the southeastern Pacific, 3,512 km (2,182 mi) off the coast of Chile. Its Polynesian settlers carved nearly 1,000 monumental statues called moai. Much of the island is protected as Rapa Nui National Park, a UNESCO World Heritage Site since 1995.",
+  "name": "Dubrovnik",
+  "wiki": "Dubrovnik",
+  "country": "Croatia",
+  "region": "Dubrovnik-Neretva County, Dalmatian coast",
+  "lat": 42.6408,
+  "lon": 18.11,
+  "tagline": "The walled \"Pearl of the Adriatic,\" once a sea republic of its own",
+  "intro": "Dubrovnik is a port city on Croatia's southern Adriatic coast, ringed by stone walls built mostly between the 13th and 17th centuries. For centuries it was the capital of the Republic of Ragusa, a free maritime state, until French forces abolished it in 1808. Its Old City has been a UNESCO World Heritage Site since 1979.",
   "stats": [
    {
-    "label": "Area",
-    "value": "163.6 km² (63.2 sq mi)"
-   },
-   {
     "label": "Population",
-    "value": "7,750 (2017 census)"
+    "value": "41,562 (2021 census)"
    },
    {
-    "label": "Highest point",
-    "value": "507 m (1,663 ft)"
+    "label": "City walls",
+    "value": "about 1,940 m (6,360 ft) long"
+   },
+   {
+    "label": "Wall height",
+    "value": "up to about 25 m (82 ft)"
    },
    {
     "label": "World Heritage since",
-    "value": "1995"
+    "value": "1979"
    }
   ],
   "facts": [
-   "Its nearest inhabited neighbor is Pitcairn Island, 2,075 km (1,289 mi) away, home to only about 50 people.",
-   "It got its English name because Dutch navigator Jacob Roggeveen arrived on Easter Sunday, April 5, 1722.",
-   "All but 53 of the more than 900 known moai were carved from volcanic tuff at the Rano Raraku quarry, where 394 statues are still visible.",
-   "The tallest moai ever erected, Paro, stood almost 10 m (33 ft) high and weighed 82 tonnes; an unfinished one in the quarry would have been about 21 m (69 ft) tall.",
-   "Most moai face inland toward the villages, but the seven at Ahu Akivi face out to sea."
+   "The Republic of Ragusa abolished the slave trade in 1418.",
+   "Its Lazarete, founded in 1377, was one of the first quarantine hospitals, built to keep plague out of the city.",
+   "The pharmacy at the Franciscan monastery opened in 1317 and is called the oldest European pharmacy still in operation.",
+   "Parts of the landside wall are 4 to 6 m (13 to 20 ft) thick, and the walls largely survived the 1667 earthquake that killed over 5,000 people.",
+   "The Old Town stood in for King's Landing in Game of Thrones and also appears in Star Wars: The Last Jedi."
   ],
-  "bestTime": "January to March for warm summer weather; early February brings the Tapati Rapa Nui festival.",
-  "gettingThere": "Fly overnight from JFK to Santiago, Chile (about 11 hours), then take LATAM's flight to Mataveri Airport on the island (about 5 hours).",
-  "tip": "Buy your Rapa Nui National Park ticket before you go; it is required to visit the moai sites, and Rano Raraku and Orongo can only be entered once."
+  "bestTime": "May, June or September for warm sea and fewer crowds than July and August.",
+  "gettingThere": "United flies seasonal nonstops from Newark to Dubrovnik Airport, about 15.5 km (9.5 mi) from the city; otherwise connect through a European hub.",
+  "tip": "Walk the city walls early in the morning before the cruise crowds and the midday heat arrive."
  },
  "flightsNote": "Real fares from Kayak searches run Nov 9 with your exact pass window, JFK/LGA/EWR only. San Juan and Aguadilla are always included.",
  "markets": {
-  "asOf": "Wed Nov 25 close",
-  "story": "Stocks clawed back most of a steep early AI selloff (the S&P 500 was down as much as 3.2%) as Nvidia slid for a second day. A hot October PCE inflation reading and new tariff plans raised rate-hike worries, while Treasury yields fell.",
+  "asOf": "Fri Nov 27 close",
+  "story": "Stocks rallied in a shortened post-Thanksgiving session after several days of erratic swings for big tech companies, with chipmakers leading. The S&P 500 gained 5.6% for the week, its biggest weekly gain since April 2025.",
   "indices": [
    {
     "name": "S&P 500",
-    "value": "7,183",
-    "chg": -0.25
+    "value": "7,297",
+    "chg": 1.6
    }
   ],
   "movers": [
    {
-    "sym": "NVDA",
-    "move": "−3.9%",
+    "sym": "MRVL",
+    "move": "+7.3%",
+    "dir": 1,
+    "why": "Led a chip and networking rally as investors returned to AI suppliers"
+   },
+   {
+    "sym": "ANET",
+    "move": "+6.6%",
+    "dir": 1,
+    "why": "Rose with networking stocks in the AI-supplier rebound"
+   },
+   {
+    "sym": "ARM",
+    "move": "+6.2%",
+    "dir": 1,
+    "why": "Gained with the semiconductor group"
+   },
+   {
+    "sym": "TSM",
+    "move": "+3.2%",
+    "dir": 1,
+    "why": "Rose after a U.S. tariff plan spared chips"
+   },
+   {
+    "sym": "VRTX",
+    "move": "−5.2%",
     "dir": -1,
-    "why": "Second straight drop on AI-profit and governance worries after falling more than 9% intraday"
-   },
-   {
-    "sym": "META",
-    "move": "+3.4%",
-    "dir": 1,
-    "why": "Rose as the market recovered from its early slide"
-   },
-   {
-    "sym": "CRM",
-    "move": "+2%",
-    "dir": 1,
-    "why": "Gained as software held up better than chip stocks"
-   },
-   {
-    "sym": "MA",
-    "move": "+1.9%",
-    "dir": 1,
-    "why": "Payment and financial stocks helped limit the market's losses"
-   },
-   {
-    "sym": "MSFT",
-    "move": "−1.2%",
-    "dir": -1,
-    "why": "Pared a slide of more than 3% in the AI pullback"
+    "why": "Health care stocks lagged the broader market"
    }
   ],
   "lines": [
    {
     "game": "Michigan @ Ohio State",
     "kick": "2026-11-28T17:00:00Z",
-    "spread": "OSU −10",
-    "total": "38.5",
-    "ml": "OSU −395 / MICH +310"
+    "spread": "OSU −10.5",
+    "total": "37.5",
+    "ml": "OSU −425 / MICH +330"
+   },
+   {
+    "game": "Army @ Rice",
+    "kick": "2026-11-28T19:00:00Z",
+    "spread": "ARMY −4.5",
+    "total": "46.5",
+    "ml": "ARMY −198 / RICE +164"
    },
    {
     "game": "Auburn @ Alabama",
     "kick": "2026-11-29T00:30:00Z",
-    "spread": "ALA −16.5",
-    "total": "48.5",
-    "ml": "ALA −750 / AUB +525"
+    "spread": "ALA −14.5",
+    "total": "50.5",
+    "ml": "ALA −675 / AUB +490"
    }
   ],
   "probs": [
    {
+    "game": "Notre Dame @ Syracuse",
+    "fav": "Notre Dame",
+    "p": 95
+   },
+   {
     "game": "Purdue @ Indiana",
     "fav": "Indiana",
     "p": 95
+   },
+   {
+    "game": "Boise State @ Colorado State",
+    "fav": "Boise State",
+    "p": 94
    },
    {
     "game": "Sacramento State @ Hawaii",
@@ -799,21 +773,11 @@
     "p": 94
    },
    {
-    "game": "West Virginia @ Utah",
-    "fav": "Utah",
-    "p": 94
-   },
-   {
-    "game": "Temple @ Memphis",
-    "fav": "Memphis",
-    "p": 91
-   },
-   {
     "game": "Coastal Carolina @ James Madison",
     "fav": "James Madison",
     "p": 90
    }
   ],
-  "sources": "S&P 500 close and movers: AP via WTOP and Baltimore Sun (Nov 25; markets closed Thanksgiving); odds: FanDuel via Fox Sports (Nov 23). No published line yet for Bills at Patriots."
+  "sources": "S&P 500 close and story: AP via WTOP (Nov 27); movers: JournalArta market recap (Nov 28); odds: DraftKings via ESPN (Nov 28); win probabilities: ESPN FPI. Bills at Patriots line left out (published lines disagree)."
  }
 }
